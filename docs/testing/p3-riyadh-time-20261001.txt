@@ -1,0 +1,1941 @@
+# Package 3 — the Riyadh/UTC day boundary (branch p3/riyadh-time, base d80a414 = Package 3 integration head). Evidence recorded 2026-10-01.
+# Runner: work/node24/bin/node v24.14.0, sandboxed (local ports refused: listen EPERM). Synthetic in-memory databases only.
+#
+# The defect. Timestamps are stored as UTC ISO strings (app/db.mjs now()); "today", month starts and years are Riyadh calendar values
+# (UTC+3 all year, no daylight saving). A Riyadh date, month or year compared directly with a UTC timestamp — created_at>='2026-10-01',
+# substr(x_at,1,10)<=?, x_at.slice(0,10) — disagrees between 00:00 and 03:00 Riyadh every day, and at every month and year start.
+# The shared helper is app/riyadh-time.mjs: riyadhToday(now), riyadhMonth(now), riyadhDateOf(utcIso), riyadhDayRange(date),
+# riyadhMonthRange(month), riyadhYearRange(year) — ranges are half-open [start, end) UTC instants.
+#
+# ─── RED ───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+# RED 1 — the lead's measurement reproduced live: real clock 2026-09-30T23:07Z (02:07 Riyadh, 1 Oct), base code, unmodified tests
+#   (ai-governance-runtime, ai, attendance-rules, attendance, payroll-insurance-review): 39 tests, 32 pass, 7 fail —
+#   the six named by the lead, plus «the server allows geolocation for its own origin only» (listen EPERM, the sandbox).
+#
+# RED 2 — the same five files, unmodified, base code, with the process clock moved by a preload (--import, Date only; it keeps running
+#   from the given instant; SQLite's own 'now' is untouched):
+#   clock (UTC → Riyadh)                     ai ×3 (month cost)   attendance ×2   payroll «non-Saudi…»   geolocation
+#   2026-09-30T20:05Z → 23:05 Sep 30          pass                 pass            pass                   EPERM
+#   2026-09-30T23:05Z → 02:05 Oct 1 (gap)     FAIL                 FAIL            FAIL                   EPERM
+#   2026-10-01T09:00Z → 12:00 Oct 1           pass                 FAIL            FAIL                   EPERM
+#   2026-10-15T22:00Z → 01:00 Oct 16 (gap)    pass                 pass            FAIL                   EPERM
+#   So only the three AI failures are the UTC/Riyadh defect (app/ai.mjs:78 compared created_at with the text '2026-10-01'; it shows at a
+#   month start, and runs made between 00:00 and 03:00 Riyadh on the 1st stay out of that month's cost for the whole month).
+#   The two attendance tests fail for the whole first Riyadh day of a month (and on day 2–3 when the 1st follows a weekend): the HR board
+#   defaults to the current Riyadh month while the tests' past workdays fall in the previous month — a test fragility, fixed in the tests
+#   by reading the board for the month of the dated records. The payroll test fails from 1 October onward, inside or outside the gap: it
+#   prepares the hard-coded run '2026-09', and the GCC answer is recorded effective from the Riyadh day it is entered, so an answer given
+#   in October does not cover September. Fixed in the test (run for the current Riyadh month); the product question is in the report.
+#
+# RED 3 — the six tests, each also registered on three pinned clocks with node:test mock timers (tests/riyadh-clock.mjs), against the
+#   base app code (the test-side month fixes in place). Run at the real clock 23:46Z, inside the gap:
+#  ✖ الإيقاف أثناء انتظار brief_gaps يحفظ التكلفة دون الناتج أو المصادر
+#      error: Expected values to be strictly equal:  0 !== 200 
+#      code: 'ERR_ASSERTION'
+#      expected: 200
+#      actual: 0
+#  ✔ الإيقاف أثناء انتظار brief_gaps يحفظ التكلفة دون الناتج أو المصادر [قبل الحد 2026-09-30T20:05:00.000Z]
+#  ✖ الإيقاف أثناء انتظار brief_gaps يحفظ التكلفة دون الناتج أو المصادر [داخل الفجوة 2026-09-30T23:05:00.000Z]
+#      error: Expected values to be strictly equal:  0 !== 200 
+#      code: 'ERR_ASSERTION'
+#      expected: 200
+#      actual: 0
+#  ✔ الإيقاف أثناء انتظار brief_gaps يحفظ التكلفة دون الناتج أو المصادر [بعد الفجوة 2026-10-01T09:05:00.000Z]
+#  ✖ الإيقاف أثناء انتظار skills_path يحفظ التكلفة دون الناتج أو المصادر
+#      error: Expected values to be strictly equal:  0 !== 200 
+#      code: 'ERR_ASSERTION'
+#      expected: 200
+#      actual: 0
+#  ✔ الإيقاف أثناء انتظار skills_path يحفظ التكلفة دون الناتج أو المصادر [قبل الحد 2026-09-30T20:05:00.000Z]
+#  ✖ الإيقاف أثناء انتظار skills_path يحفظ التكلفة دون الناتج أو المصادر [داخل الفجوة 2026-09-30T23:05:00.000Z]
+#      error: Expected values to be strictly equal:  0 !== 200 
+#      code: 'ERR_ASSERTION'
+#      expected: 200
+#      actual: 0
+#  ✔ الإيقاف أثناء انتظار skills_path يحفظ التكلفة دون الناتج أو المصادر [بعد الفجوة 2026-10-01T09:05:00.000Z]
+#  ✖ a model run sends only what the user may see, keeps one client per run, prices by the configured rates, and is reviewed once by its owner
+#      error: 'Missing expected rejection.'
+#      code: 'ERR_ASSERTION'
+#  ✔ a model run sends only what the user may see, keeps one client per run, prices by the configured rates, and is reviewed once by its owner [قبل الحد 2026-09-30T20:05:00.000Z]
+#  ✖ a model run sends only what the user may see, keeps one client per run, prices by the configured rates, and is reviewed once by its owner [داخل الفجوة 2026-09-30T23:05:00.000Z]
+#      error: 'Missing expected rejection.'
+#      code: 'ERR_ASSERTION'
+#  ✔ a model run sends only what the user may see, keeps one client per run, prices by the configured rates, and is reviewed once by its owner [بعد الفجوة 2026-10-01T09:05:00.000Z]
+#  ✔ attendance exemptions: approved dated records, two people, and exempt days are judged neither late nor absent
+#  ✔ attendance exemptions: approved dated records, two people, and exempt days are judged neither late nor absent [قبل الحد 2026-09-30T20:05:00.000Z]
+#  ✔ attendance exemptions: approved dated records, two people, and exempt days are judged neither late nor absent [داخل الفجوة 2026-09-30T23:05:00.000Z]
+#  ✔ attendance exemptions: approved dated records, two people, and exempt days are judged neither late nor absent [بعد الفجوة 2026-10-01T09:05:00.000Z]
+#  ✖ the server allows geolocation for its own origin only
+#      error: 'listen EPERM: operation not permitted 127.0.0.1'
+#      code: 'EPERM'
+#  ✔ unpaid absence needs a working-time policy, a real empty workday, the employee statement window, and two different people
+#  ✔ unpaid absence needs a working-time policy, a real empty workday, the employee statement window, and two different people [قبل الحد 2026-09-30T20:05:00.000Z]
+#  ✔ unpaid absence needs a working-time policy, a real empty workday, the employee statement window, and two different people [داخل الفجوة 2026-09-30T23:05:00.000Z]
+#  ✔ unpaid absence needs a working-time policy, a real empty workday, the employee statement window, and two different people [بعد الفجوة 2026-10-01T09:05:00.000Z]
+#  ✔ a non-Saudi is not assumed to be outside the Gulf because nobody asked: the run refuses until the question is answered where nationality is recorded, and either answer is a record
+#  ✔ a non-Saudi is not assumed to be outside the Gulf because nobody asked: the run refuses until the question is answered where nationality is recorded, and either answer is a record [قبل الحد 2026-09-30T20:05:00.000Z]
+#  ✔ a non-Saudi is not assumed to be outside the Gulf because nobody asked: the run refuses until the question is answered where nationality is recorded, and either answer is a record [داخل الفجوة 2026-09-30T23:05:00.000Z]
+#  ✔ a non-Saudi is not assumed to be outside the Gulf because nobody asked: the run refuses until the question is answered where nationality is recorded, and either answer is a record [بعد الفجوة 2026-10-01T09:05:00.000Z]
+#  # tests 57
+#  # pass 50
+#  # fail 7
+#
+# RED 4 — tests/riyadh-time.test.mjs and the two module scenarios added to tests/project-intake.test.mjs and tests/benefits-portal.test.mjs,
+#   against the base app code (the helper module and the test files copied in). Every module scenario fails for the expected reason:
+#  ✔ riyadhToday and riyadhMonth read the Riyadh calendar at the edges: 20:59Z, 21:00Z, 23:59Z, 00:00Z, month end and year end
+#  ✔ the default clock is Date: riyadhToday() and riyadhMonth() follow a pinned clock on both sides of midnight UTC
+#  ✔ riyadhDateOf passes a bare date through, and returns null for nothing or an unreadable value
+#  ✔ the ranges are half-open UTC instants: a Riyadh day, month and year start at 21:00Z of the day before
+#  ✖ ai: at 02:05 Riyadh on the 1st the month cost and the runs of the day count what happened since Riyadh midnight, not since UTC midnight
+#      error: أكتوبر بتوقيت الرياض بدأ الساعة 21:00 UTC  0 !== 250 
+#      code: 'ERR_ASSERTION'
+#      expected: 250
+#      actual: 0
+#  ✖ finance grants: a grant from the 1st to the 31st is live from Riyadh midnight of the 1st and ends at Riyadh midnight after the 31st
+#      error: Expected values to be strictly deep-equal: + actual - expected  { +   valid_from: '2026-10-01T00:00:00.000Z', +   valid_until: '2026-10-31T23:59:59.999Z'
+#      code: 'ERR_ASSERTION'
+#      expected: valid_from: '2026-09-30T21:00:00.000Z' valid_until: '2026-10-31T20:59:59.999Z'
+#      actual: valid_from: '2026-10-01T00:00:00.000Z' valid_until: '2026-10-31T23:59:59.999Z'
+#  ✖ invoices: a tax invoice issued at 02:05 Riyadh on 1 January carries the new year in its number
+#      error: 'الإصدار الساعة 02:05 من 1 يناير 2027 بتوقيت الرياض'
+#      code: 'ERR_ASSERTION'
+#      expected: 
+#      actual: 'INV-2026-000001'
+#  ✖ career profile: at 02:05 Riyadh on 1 January a qualification obtained this year is accepted
+#      error: 'سنة الحصول غير صالحة'
+#      code: 'year'
+#  ✖ catalog admin: the board day that seasons are read on is the Riyadh day
+#      error: Expected values to be strictly equal: + actual - expected  + '2026-09-30' - '2026-10-01' ^
+#      code: 'ERR_ASSERTION'
+#      expected: '2026-10-01'
+#      actual: '2026-09-30'
+#  ✖ payroll payment: approved at 00:30 Riyadh on the 1st, it cannot be recorded as executed on the last day of the previous month
+#      error: 'Missing expected exception: الاعتماد يوم 1 أكتوبر بتوقيت الرياض'
+#      code: 'ERR_ASSERTION'
+#  ✖ wage protection: a file exported at 00:30 Riyadh on the 1st cannot be recorded as uploaded on the last day of the previous month
+#      error: 'Missing expected exception: التصدير يوم 1 أكتوبر بتوقيت الرياض'
+#      code: 'ERR_ASSERTION'
+#  ✖ expenses: a claim approved by finance at 02:05 Riyadh on the 1st cannot be reimbursed on the last day of the previous month
+#      error: 'Missing expected exception: الاعتماد المالي يوم 1 أكتوبر بتوقيت الرياض'
+#      code: 'ERR_ASSERTION'
+#  ✖ payables: a payment order approved at 02:05 Riyadh on the 1st cannot be recorded as executed on the last day of the previous month
+#      error: 'Missing expected exception: اعتماد الأمر يوم 1 أكتوبر بتوقيت الرياض'
+#      code: 'ERR_ASSERTION'
+#  ✖ pipeline: an opportunity created at 02:05 Riyadh on the 1st takes no activity dated the last day of the previous month
+#      error: 'Missing expected exception: الفرصة أُنشئت يوم 1 أكتوبر بتوقيت الرياض'
+#      code: 'ERR_ASSERTION'
+#  ✖ talent: results released at 02:05 Riyadh on the 1st can be appealed through the 15th, Riyadh time
+#      error: 'التظلم متاح إلى آخر 15 أكتوبر بتوقيت الرياض'
+#      code: 'ERR_ASSERTION'
+#      expected: true
+#      actual: false
+#  ✖ request intake: a request made at 00:30 Riyadh fourteen days before today is still inside the duplicate window at 02:05 Riyadh
+#      error: Expected values to be strictly deep-equal: + actual - expected  + [] - [ -   '5dbbcd2a-1614-4c90-a1d6-8a5cc980c828'
+#      code: 'ERR_ASSERTION'
+#      expected: 0: '5dbbcd2a-1614-4c90-a1d6-8a5cc980c828'
+#      actual: 
+#  ✖ feedback: a one-to-one held at 02:05 Riyadh on the 1st is dated the 1st and held zero days ago
+#      error: Expected values to be strictly equal: + actual - expected  + '2026-09-30' - '2026-10-01' ^
+#      code: 'ERR_ASSERTION'
+#      expected: '2026-10-01'
+#      actual: '2026-09-30'
+#  ✖ epmo report: a request opened at 00:30 Riyadh on the 1st is not open at the end of the previous month
+#      error: الطلب الثاني فُتح في أكتوبر بتوقيت الرياض  2 !== 1 
+#      code: 'ERR_ASSERTION'
+#      expected: 1
+#      actual: 2
+#  ✖ deferred revenue: a reversal and a draw recorded at 00:30 Riyadh on the 1st are not in the sheet as of the last day of the previous month
+#      error: آخر سبتمبر بتوقيت الرياض: قبل السحب والارتداد + actual - expected  [ +   550000, +   100000,
+#      code: 'ERR_ASSERTION'
+#      expected: 0: 600000 1: 0 2: 600000
+#      actual: 0: 550000 1: 100000 2: 450000
+#  ✖ custom fields: a field published at 02:05 Riyadh on the 1st is added after an opportunity closed on the last day of the previous month
+#      error: Expected values to be strictly equal: + actual - expected  + 'لم يُدخل قبل إقفال السجل' - 'أُضيف الحقل بعد إقفال السجل' 
+#      code: 'ERR_ASSERTION'
+#      expected: 'أُضيف الحقل بعد إقفال السجل'
+#      actual: 'لم يُدخل قبل إقفال السجل'
+#  ✔ guard patterns count the lines that broke on 1 October and not their corrected forms
+#  ✖ guard: no file reads a UTC timestamp as a Riyadh day more often than scripts/riyadh-time-baseline.json allows, and a new file starts at zero
+#      error: Expected values to be strictly deep-equal: + actual - expected  + [ +   'app/project-intake.mjs: أول أحرف طابع UTC بدل يوم الرياض 1 → 2 — البديل: riyadhDateOf(…) من app/riyadh-time.mjs', +   'app/expenses.mj
+#      code: 'ERR_ASSERTION'
+#      expected: 
+#      actual: 0: 'app/project-intake.mjs: أول أحرف طابع UTC بدل يوم الرياض 1 → 2 — البديل: riyadhDateOf(…) من app/riyadh-time.mjs' 1: 'app/expenses.mjs: أول أحرف طابع UTC بدل يوم الرياض 0 → 1 (ملف لم يكن في خط الأساس، وأ
+#  # tests 22
+#  # pass 5
+#  # fail 17
+#  ✖ ticket claim year at the Riyadh boundary: a claim made at 00:30 Riyadh on 1 January is that year's one claim
+#      error: 'Missing expected exception: طلب واحد في السنة'
+#      code: 'ERR_ASSERTION'
+#  ✖ PM-03 at the Riyadh day boundary: a change raised at 02:05 Riyadh on the 1st cannot be applied from the last day of the previous month
+#      error: 'Missing expected exception: رُفع الطلب يوم 1 أكتوبر بتوقيت الرياض'
+#      code: 'ERR_ASSERTION'
+#  # tests 2
+#  # pass 0
+#  # fail 2
+#
+# RED 5 — the coordinator's sites, red first at 00:30 Riyadh (21:30Z) before each fix: app/payroll-extras.mjs:343, app/wage-protection.mjs:303,
+#   and app/billing-recurring.mjs deferredRevenue (:331–332, the draw and reversal recorded at 00:30 Riyadh on the 1st):
+#  ✖ payroll payment: approved at 00:30 Riyadh on the 1st, it cannot be recorded as executed on the last day of the previous month
+#      error: 'Missing expected exception: الاعتماد يوم 1 أكتوبر بتوقيت الرياض'
+#      code: 'ERR_ASSERTION'
+#  ✖ wage protection: a file exported at 00:30 Riyadh on the 1st cannot be recorded as uploaded on the last day of the previous month
+#      error: 'Missing expected exception: التصدير يوم 1 أكتوبر بتوقيت الرياض'
+#      code: 'ERR_ASSERTION'
+#  # tests 2
+#  # pass 0
+#  # fail 2
+#  ✖ deferred revenue: a reversal and a draw recorded at 00:30 Riyadh on the 1st are not in the sheet as of the last day of the previous month
+#      error: آخر سبتمبر بتوقيت الرياض: قبل السحب والارتداد + actual - expected  [ +   550000, +   100000,
+#      code: 'ERR_ASSERTION'
+#      expected: 0: 600000 1: 0 2: 600000
+#      actual: 0: 550000 1: 100000 2: 450000
+#  # tests 1
+#  # pass 0
+#  # fail 1
+#
+# ─── GREEN ─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+# GREEN on the final tree (real clock unless stated):
+#  The six with the fix, each also on the three pinned clocks, run at the real clock 23:47Z (inside the gap): 57 tests, 56 pass,
+#    1 fail (geolocation: listen EPERM).
+#  tests/riyadh-time.test.mjs (22 tests: helper edges, 16 module scenarios, the guard) and the two scenarios in project-intake and
+#    benefits-portal: all pass (in the focused run below).
+#  Focused run below (30 files, real clock 2026-10-01T01:33Z = 04:33 Riyadh): 278 tests, 276 pass, 2 fail — both listen EPERM
+#    (attendance-rules «the server allows geolocation…», epmo-report «E01 routes…»).
+#  Full suite (node --test tests/*.test.mjs, 69 minutes, real clock 00:19–01:29Z, on the tree before the last two edits —
+#    deferredRevenue rewritten from UTC instants to date(x,'+3 hours') so the change stays inside that function, and one comment line
+#    in app/riyadh-time.mjs; both are covered by the focused run below): 2090 tests, 2047 pass, 43 fail.
+#    39 listen EPERM (sandbox): employee-ux ×7, service-targets-and-closure ×6, operations-http ×6, security-regressions ×2,
+#      notifications-email ×2, module-fixes-critical ×2, and one each in vendors-http, static-modules, service-quality, refusal,
+#      preferences, portal-audit-fixes, platform, obligations, leave-types, files-security, epmo-report, concurrency,
+#      catalog-quality-fixes, attendance-rules.
+#    4 fail identically on the extracted base d80a414: ui-golden «every operational screen…» ×2 (the file is imported by a second test
+#      file, so it runs twice; the same 12 changed screen hashes on the base and here), gate-schema-digest (scripts/gate-baseline.json
+#      predates the latest migrations), and traceability (the base stops at FIN-01; this tree stops first at HR-03, see below).
+#  scripts/check.mjs stops at traceability. Stale recorded test hashes added by this branch: HR-03 (tests/attendance.test.mjs) and
+#    DAT-07, DAT-08, DAT-09 (tests/ai.test.mjs). Already stale on the base: tests/finance.test.mjs, procurement.test.mjs,
+#    receivables.test.mjs, payables.test.mjs, procurement-multi-lines.test.mjs. Every test name the traceability cites is still found
+#    by its parser. The remaining check steps, run one by one: 709 modules syntax-checked, source hashes match, no eval and no
+#    credential pattern, index.html lang/dir, 151 migrations planned (highest 170).
+#  scripts/quality-ratchet.mjs: identical to the base — local primitives 111 (111), short refusals 1170 (1183), status literals 2 (2),
+#    direction isolation 0 (0), direct person-table reads 734 (737), links 148 checked, 0 unresolved. Nothing rose.
+#  scripts/riyadh-time-guard.mjs (new; its own baseline scripts/riyadh-time-baseline.json): utc_slice 82, utc_substr 23, utc_today 0,
+#    riyadh_text_bound 0, utc_midnight 2. The base tree counts utc_slice 90, utc_substr 27, utc_today 2, riyadh_text_bound 1
+#    (app/ai.mjs:78), utc_midnight 4 — so on the base the guard test fails, which is the point.
+#
+# Focused run below (real clock Thu Oct  1 01:33:26 UTC 2026): the new tests, the six, and the test files of every module changed here.
+TAP version 13
+# Subtest: المساعد المجرد غير النشط لا يرسل بيانات للمزود ولا يظهر متاحًا
+ok 1 - المساعد المجرد غير النشط لا يرسل بيانات للمزود ولا يظهر متاحًا
+  ---
+  duration_ms: 16551.271459
+  type: 'test'
+  ...
+# Subtest: إيقاف المساعد النشط يمنع التشغيل اللاحق مع بقاء الإعداد العام مفعلاً
+ok 2 - إيقاف المساعد النشط يمنع التشغيل اللاحق مع بقاء الإعداد العام مفعلاً
+  ---
+  duration_ms: 16553.492917
+  type: 'test'
+  ...
+# Subtest: الإيقاف أثناء انتظار brief_gaps يحفظ التكلفة دون الناتج أو المصادر
+ok 3 - الإيقاف أثناء انتظار brief_gaps يحفظ التكلفة دون الناتج أو المصادر
+  ---
+  duration_ms: 16019.010667
+  type: 'test'
+  ...
+# Subtest: الإيقاف أثناء انتظار brief_gaps يحفظ التكلفة دون الناتج أو المصادر [قبل الحد 2026-09-30T20:05:00.000Z]
+ok 4 - الإيقاف أثناء انتظار brief_gaps يحفظ التكلفة دون الناتج أو المصادر [قبل الحد 2026-09-30T20:05:00.000Z]
+  ---
+  duration_ms: 15318.30025
+  type: 'test'
+  ...
+# Subtest: الإيقاف أثناء انتظار brief_gaps يحفظ التكلفة دون الناتج أو المصادر [داخل الفجوة 2026-09-30T23:05:00.000Z]
+ok 5 - الإيقاف أثناء انتظار brief_gaps يحفظ التكلفة دون الناتج أو المصادر [داخل الفجوة 2026-09-30T23:05:00.000Z]
+  ---
+  duration_ms: 14851.810917
+  type: 'test'
+  ...
+# Subtest: الإيقاف أثناء انتظار brief_gaps يحفظ التكلفة دون الناتج أو المصادر [بعد الفجوة 2026-10-01T09:05:00.000Z]
+ok 6 - الإيقاف أثناء انتظار brief_gaps يحفظ التكلفة دون الناتج أو المصادر [بعد الفجوة 2026-10-01T09:05:00.000Z]
+  ---
+  duration_ms: 16134.399375
+  type: 'test'
+  ...
+# Subtest: الإيقاف أثناء انتظار skills_path يحفظ التكلفة دون الناتج أو المصادر
+ok 7 - الإيقاف أثناء انتظار skills_path يحفظ التكلفة دون الناتج أو المصادر
+  ---
+  duration_ms: 18419.325166
+  type: 'test'
+  ...
+# Subtest: الإيقاف أثناء انتظار skills_path يحفظ التكلفة دون الناتج أو المصادر [قبل الحد 2026-09-30T20:05:00.000Z]
+ok 8 - الإيقاف أثناء انتظار skills_path يحفظ التكلفة دون الناتج أو المصادر [قبل الحد 2026-09-30T20:05:00.000Z]
+  ---
+  duration_ms: 19068.511958
+  type: 'test'
+  ...
+# Subtest: الإيقاف أثناء انتظار skills_path يحفظ التكلفة دون الناتج أو المصادر [داخل الفجوة 2026-09-30T23:05:00.000Z]
+ok 9 - الإيقاف أثناء انتظار skills_path يحفظ التكلفة دون الناتج أو المصادر [داخل الفجوة 2026-09-30T23:05:00.000Z]
+  ---
+  duration_ms: 18558.803667
+  type: 'test'
+  ...
+# Subtest: الإيقاف أثناء انتظار skills_path يحفظ التكلفة دون الناتج أو المصادر [بعد الفجوة 2026-10-01T09:05:00.000Z]
+ok 10 - الإيقاف أثناء انتظار skills_path يحفظ التكلفة دون الناتج أو المصادر [بعد الفجوة 2026-10-01T09:05:00.000Z]
+  ---
+  duration_ms: 21556.770958
+  type: 'test'
+  ...
+# Subtest: غياب الجرد يمنع التشغيل، وجرد كيان آخر لا يفتح بوابة هذا الكيان
+ok 11 - غياب الجرد يمنع التشغيل، وجرد كيان آخر لا يفتح بوابة هذا الكيان
+  ---
+  duration_ms: 22961.3825
+  type: 'test'
+  ...
+# Subtest: AI is off until the first admin turns it on, model assistants stay unavailable without a provider key, and every instruction set refuses to treat data as commands
+ok 12 - AI is off until the first admin turns it on, model assistants stay unavailable without a provider key, and every instruction set refuses to treat data as commands
+  ---
+  duration_ms: 16722.816542
+  type: 'test'
+  ...
+# Subtest: policy answers quote the accepted paragraph with its policy and date, refuse when nothing matches, and respect the daily limit
+ok 13 - policy answers quote the accepted paragraph with its policy and date, refuse when nothing matches, and respect the daily limit
+  ---
+  duration_ms: 16868.099166
+  type: 'test'
+  ...
+# Subtest: a model run sends only what the user may see, keeps one client per run, prices by the configured rates, and is reviewed once by its owner
+ok 14 - a model run sends only what the user may see, keeps one client per run, prices by the configured rates, and is reviewed once by its owner
+  ---
+  duration_ms: 16500.034709
+  type: 'test'
+  ...
+# Subtest: a model run sends only what the user may see, keeps one client per run, prices by the configured rates, and is reviewed once by its owner [قبل الحد 2026-09-30T20:05:00.000Z]
+ok 15 - a model run sends only what the user may see, keeps one client per run, prices by the configured rates, and is reviewed once by its owner [قبل الحد 2026-09-30T20:05:00.000Z]
+  ---
+  duration_ms: 15164.749
+  type: 'test'
+  ...
+# Subtest: a model run sends only what the user may see, keeps one client per run, prices by the configured rates, and is reviewed once by its owner [داخل الفجوة 2026-09-30T23:05:00.000Z]
+ok 16 - a model run sends only what the user may see, keeps one client per run, prices by the configured rates, and is reviewed once by its owner [داخل الفجوة 2026-09-30T23:05:00.000Z]
+  ---
+  duration_ms: 14562.386417
+  type: 'test'
+  ...
+# Subtest: a model run sends only what the user may see, keeps one client per run, prices by the configured rates, and is reviewed once by its owner [بعد الفجوة 2026-10-01T09:05:00.000Z]
+ok 17 - a model run sends only what the user may see, keeps one client per run, prices by the configured rates, and is reviewed once by its owner [بعد الفجوة 2026-10-01T09:05:00.000Z]
+  ---
+  duration_ms: 16661.866375
+  type: 'test'
+  ...
+# Subtest: a provider failure is recorded as a failed run with no invented output
+ok 18 - a provider failure is recorded as a failed run with no invented output
+  ---
+  duration_ms: 18892.769291
+  type: 'test'
+  ...
+# ERROR: failed to copy trust settings of system certificate-25291
+# ERROR: failed to copy trust settings of system certificate-25291
+# ERROR: failed to copy trust settings of system certificate-25291
+# ERROR: failed to copy trust settings of system certificate-25291
+# Subtest: formula, haversine and zone classification are pure and match the regulation example
+ok 19 - formula, haversine and zone classification are pure and match the regulation example
+  ---
+  duration_ms: 11.291875
+  type: 'test'
+  ...
+# Subtest: GPS sampling takes the first fix within 20 m, else the best after the settle time, and reports denial
+ok 20 - GPS sampling takes the first fix within 20 m, else the best after the settle time, and reports denial
+  ---
+  duration_ms: 58.81275
+  type: 'test'
+  ...
+# Subtest: regulation values are a draft policy: nothing applies before the HR manager accepts it, and every value cites its article
+ok 21 - regulation values are a draft policy: nothing applies before the HR manager accepts it, and every value cites its article
+  ---
+  duration_ms: 16642.590667
+  type: 'test'
+  ...
+# Subtest: overtime: prior assignment by the manager, pre-approval by the authority holder, written HR budget, caps, suggested pay and time off in lieu
+ok 22 - overtime: prior assignment by the manager, pre-approval by the authority holder, written HR budget, caps, suggested pay and time off in lieu
+  ---
+  duration_ms: 16663.162125
+  type: 'test'
+  ...
+# Subtest: no overtime on a work-mission day, and no mission over overtime (Art. 77(9))
+ok 23 - no overtime on a work-mission day, and no mission over overtime (Art. 77(9))
+  ---
+  duration_ms: 16432.682583
+  type: 'test'
+  ...
+# Subtest: an approved permission removes the late or early flag for its period only; early leave without one is flagged; the monthly cap is enforced
+ok 24 - an approved permission removes the late or early flag for its period only; early leave without one is flagged; the monthly cap is enforced
+  ---
+  duration_ms: 15818.53825
+  type: 'test'
+  ...
+# Subtest: same-day late or absence notice (Art. 75): the manager may accept it as the excuse
+ok 25 - same-day late or absence notice (Art. 75): the manager may accept it as the excuse
+  ---
+  duration_ms: 14801.488833
+  type: 'test'
+  ...
+# Subtest: Ramadan hours from the accepted policy: lateness and early leave are measured against 6 hours inside the dated range only
+ok 26 - Ramadan hours from the accepted policy: lateness and early leave are measured against 6 hours inside the dated range only
+  ---
+  duration_ms: 16294.841334
+  type: 'test'
+  ...
+# Subtest: location is evidence, never a gate: server-side haversine, zone flags, privacy notice first, explanation and review
+ok 27 - location is evidence, never a gate: server-side haversine, zone flags, privacy notice first, explanation and review
+  ---
+  duration_ms: 19114.222875
+  type: 'test'
+  ...
+# Subtest: raw coordinates are purged by a queued job after the retention period and only the zone result stays
+ok 28 - raw coordinates are purged by a queued job after the retention period and only the zone result stays
+  ---
+  duration_ms: 19207.751375
+  type: 'test'
+  ...
+# Subtest: attendance exemptions: approved dated records, two people, and exempt days are judged neither late nor absent
+ok 29 - attendance exemptions: approved dated records, two people, and exempt days are judged neither late nor absent
+  ---
+  duration_ms: 19558.877875
+  type: 'test'
+  ...
+# Subtest: attendance exemptions: approved dated records, two people, and exempt days are judged neither late nor absent [قبل الحد 2026-09-30T20:05:00.000Z]
+ok 30 - attendance exemptions: approved dated records, two people, and exempt days are judged neither late nor absent [قبل الحد 2026-09-30T20:05:00.000Z]
+  ---
+  duration_ms: 22404.38325
+  type: 'test'
+  ...
+# Subtest: attendance exemptions: approved dated records, two people, and exempt days are judged neither late nor absent [داخل الفجوة 2026-09-30T23:05:00.000Z]
+ok 31 - attendance exemptions: approved dated records, two people, and exempt days are judged neither late nor absent [داخل الفجوة 2026-09-30T23:05:00.000Z]
+  ---
+  duration_ms: 22049.219084
+  type: 'test'
+  ...
+# Subtest: attendance exemptions: approved dated records, two people, and exempt days are judged neither late nor absent [بعد الفجوة 2026-10-01T09:05:00.000Z]
+ok 32 - attendance exemptions: approved dated records, two people, and exempt days are judged neither late nor absent [بعد الفجوة 2026-10-01T09:05:00.000Z]
+  ---
+  duration_ms: 23974.595917
+  type: 'test'
+  ...
+# Subtest: reports: R37 counts late days, the weekly shortfall subtracts approved permission, and the monthly workbook is a real xlsx
+ok 33 - reports: R37 counts late days, the weekly shortfall subtracts approved permission, and the monthly workbook is a real xlsx
+  ---
+  duration_ms: 24633.866083
+  type: 'test'
+  ...
+# Subtest: the generic catalog service routes a permission request to the attendance screen
+ok 34 - the generic catalog service routes a permission request to the attendance screen
+  ---
+  duration_ms: 24228.069167
+  type: 'test'
+  ...
+# Subtest: the server allows geolocation for its own origin only
+not ok 35 - the server allows geolocation for its own origin only
+  ---
+  duration_ms: 23049.226458
+  type: 'test'
+  location: '/Users/abdulaziz/Documents/Codex/2026-09-09/3-6t-360-codex-handoff-master/.claude/worktrees/p3-riyadh-time/tests/attendance-rules.test.mjs:326:1'
+  failureType: 'testCodeFailure'
+  error: 'listen EPERM: operation not permitted 127.0.0.1'
+  code: 'EPERM'
+  stack: |-
+    Server.setupListenHandle [as _listen2] (node:net:1926:21)
+    listenInCluster (node:net:2005:12)
+    node:net:2214:7
+    process.processTicksAndRejections (node:internal/process/task_queues:90:21)
+  ...
+# Subtest: HR-03: check-in uses server time once per day, and a missing or incomplete day only asks for clarification
+ok 36 - HR-03: check-in uses server time once per day, and a missing or incomplete day only asks for clarification
+  ---
+  duration_ms: 17289.707917
+  type: 'test'
+  ...
+# Subtest: a correction is decided by the line manager or HR, never by the employee, and keeps the previous times
+ok 37 - a correction is decided by the line manager or HR, never by the employee, and keeps the previous times
+  ---
+  duration_ms: 16771.169125
+  type: 'test'
+  ...
+# Subtest: unpaid absence needs a working-time policy, a real empty workday, the employee statement window, and two different people
+ok 38 - unpaid absence needs a working-time policy, a real empty workday, the employee statement window, and two different people
+  ---
+  duration_ms: 15930.238958
+  type: 'test'
+  ...
+# Subtest: unpaid absence needs a working-time policy, a real empty workday, the employee statement window, and two different people [قبل الحد 2026-09-30T20:05:00.000Z]
+ok 39 - unpaid absence needs a working-time policy, a real empty workday, the employee statement window, and two different people [قبل الحد 2026-09-30T20:05:00.000Z]
+  ---
+  duration_ms: 15202.491333
+  type: 'test'
+  ...
+# Subtest: unpaid absence needs a working-time policy, a real empty workday, the employee statement window, and two different people [داخل الفجوة 2026-09-30T23:05:00.000Z]
+ok 40 - unpaid absence needs a working-time policy, a real empty workday, the employee statement window, and two different people [داخل الفجوة 2026-09-30T23:05:00.000Z]
+  ---
+  duration_ms: 14600.616875
+  type: 'test'
+  ...
+# Subtest: unpaid absence needs a working-time policy, a real empty workday, the employee statement window, and two different people [بعد الفجوة 2026-10-01T09:05:00.000Z]
+ok 41 - unpaid absence needs a working-time policy, a real empty workday, the employee statement window, and two different people [بعد الفجوة 2026-10-01T09:05:00.000Z]
+  ---
+  duration_ms: 16209.6875
+  type: 'test'
+  ...
+# Subtest: without an accepted working-time policy no day is judged late or absent
+ok 42 - without an accepted working-time policy no day is judged late or absent
+  ---
+  duration_ms: 18051.579625
+  type: 'test'
+  ...
+# Subtest: eligibility: tenure is counted in calendar months, month ends clamp, and the day before the boundary is not yet eligible
+ok 43 - eligibility: tenure is counted in calendar months, month ends clamp, and the day before the boundary is not yet eligible
+  ---
+  duration_ms: 37.426375
+  type: 'test'
+  ...
+# Subtest: the employee view: what I have from the contract, my insurance with masked numbers, and when I become eligible
+ok 44 - the employee view: what I have from the contract, my insurance with masked numbers, and when I become eligible
+  ---
+  duration_ms: 17240.867375
+  type: 'test'
+  ...
+# Subtest: privacy: only the employee and the benefits capability see «مزاياي», dependants and benefit documents
+ok 45 - privacy: only the employee and the benefits capability see «مزاياي», dependants and benefit documents
+  ---
+  duration_ms: 16329.112459
+  type: 'test'
+  ...
+# Subtest: dependant add and remove: the employee requests, HR confirms, and medical dependants are updated through benefits.mjs
+ok 46 - dependant add and remove: the employee requests, HR confirms, and medical dependants are updated through benefits.mjs
+  ---
+  duration_ms: 16080.432417
+  type: 'test'
+  ...
+# Subtest: HR never decides their own benefit request, and the employee can withdraw only while it is pending
+ok 47 - HR never decides their own benefit request, and the employee can withdraw only while it is pending
+  ---
+  duration_ms: 15247.081083
+  type: 'test'
+  ...
+# Subtest: draft until accepted: nothing is claimable from a draft, the proposer never accepts, and the matrix needs a written basis
+ok 48 - draft until accepted: nothing is claimable from a draft, the proposer never accepts, and the matrix needs a written basis
+  ---
+  duration_ms: 14610.885583
+  type: 'test'
+  ...
+# Subtest: ticket claim chain: employee, then HR sets the class and amount, then a different person in finance confirms; money is only proposed
+ok 49 - ticket claim chain: employee, then HR sets the class and amount, then a different person in finance confirms; money is only proposed
+  ---
+  duration_ms: 16616.997125
+  type: 'test'
+  ...
+# Subtest: the ticket option waits for tenure, and class upgrade and education follow the accepted policy only
+ok 50 - the ticket option waits for tenure, and class upgrade and education follow the accepted policy only
+  ---
+  duration_ms: 18547.119083
+  type: 'test'
+  ...
+# Subtest: the screens render for every role without undefined values or inline styles, and every offered button opens a usable form
+ok 51 - the screens render for every role without undefined values or inline styles, and every offered button opens a usable form
+  ---
+  duration_ms: 19597.594583
+  type: 'test'
+  ...
+# Subtest: notifications open the right screen and the unread list reads them
+ok 52 - notifications open the right screen and the unread list reads them
+  ---
+  duration_ms: 18975.459125
+  type: 'test'
+  ...
+# Subtest: ticket claim year at the Riyadh boundary: a claim made at 00:30 Riyadh on 1 January is that year's one claim
+ok 53 - ticket claim year at the Riyadh boundary: a claim made at 00:30 Riyadh on 1 January is that year's one claim
+  ---
+  duration_ms: 21318.037958
+  type: 'test'
+  ...
+# Subtest: a recurring schedule prepares a draft for the period and never an issued invoice, and rerunning it changes nothing
+ok 54 - a recurring schedule prepares a draft for the period and never an issued invoice, and rerunning it changes nothing
+  ---
+  duration_ms: 15920.673083
+  type: 'test'
+  ...
+# Subtest: an advance is a liability whose receipt a second person confirms, and drawn amounts never exceed the paid balance
+ok 55 - an advance is a liability whose receipt a second person confirms, and drawn amounts never exceed the paid balance
+  ---
+  duration_ms: 16306.00775
+  type: 'test'
+  ...
+# Subtest: carry-forward and overage deduction are independent contract options that move entitlement only, never the invoice amount
+ok 56 - carry-forward and overage deduction are independent contract options that move entitlement only, never the invoice amount
+  ---
+  duration_ms: 15541.45925
+  type: 'test'
+  ...
+# Subtest: usage thresholds are configuration set by the contract owner, and each threshold alerts once per period
+ok 57 - usage thresholds are configuration set by the contract owner, and each threshold alerts once per period
+  ---
+  duration_ms: 14462.680708
+  type: 'test'
+  ...
+# Subtest: recurring billing is closed to accounts without the capability and never reaches another tenant
+ok 58 - recurring billing is closed to accounts without the capability and never reaches another tenant
+  ---
+  duration_ms: 13830.11675
+  type: 'test'
+  ...
+# Subtest: PRC-01/FIN-02: لا تسمح ترسية بشراء دون مخصص مشروع معتمد
+ok 59 - PRC-01/FIN-02: لا تسمح ترسية بشراء دون مخصص مشروع معتمد
+  ---
+  duration_ms: 17327.015708
+  type: 'test'
+  ...
+# Subtest: FIN-02/PRC-01: المخصص المشترك يمنع تجاوز طلبين للسقف ويحرر الحجز بالرفض
+ok 60 - FIN-02/PRC-01: المخصص المشترك يمنع تجاوز طلبين للسقف ويحرر الحجز بالرفض
+  ---
+  duration_ms: 16977.154042
+  type: 'test'
+  ...
+# Subtest: FIN-02/PLT-05: سحب النطاق المالي يمنع القراءة واعتماد أمر مبني عليه
+ok 61 - FIN-02/PLT-05: سحب النطاق المالي يمنع القراءة واعتماد أمر مبني عليه
+  ---
+  duration_ms: 16815.267292
+  type: 'test'
+  ...
+# Subtest: FIN-02: المراجعة لا تخفض السقف دون الالتزامات ولا تسمح بالاعتماد الذاتي
+ok 62 - FIN-02: المراجعة لا تخفض السقف دون الالتزامات ولا تسمح بالاعتماد الذاتي
+  ---
+  duration_ms: 14799.377125
+  type: 'test'
+  ...
+# Subtest: PRC-03: عرضان لا يكفيان للترسية وفق دليل الدورة الموحدة
+ok 63 - PRC-03: عرضان لا يكفيان للترسية وفق دليل الدورة الموحدة
+  ---
+  duration_ms: 15155.963375
+  type: 'test'
+  ...
+# Subtest: النطاق المالي للمشروع له سقف مدة، وهو أفق الصلاحية المالية نفسه
+ok 64 - النطاق المالي للمشروع له سقف مدة، وهو أفق الصلاحية المالية نفسه
+  ---
+  duration_ms: 16094.0005
+  type: 'test'
+  ...
+# Subtest: cash forecast: only an explicit capability opens it, and another tenant never appears in it
+ok 65 - cash forecast: only an explicit capability opens it, and another tenant never appears in it
+  ---
+  duration_ms: 14453.398375
+  type: 'test'
+  ...
+# Subtest: cash forecast: the horizon is thirteen rolling weeks and a claim lands in the week of its due date
+ok 66 - cash forecast: the horizon is thirteen rolling weeks and a claim lands in the week of its due date
+  ---
+  duration_ms: 17957.434833
+  type: 'test'
+  ...
+# Subtest: cash forecast: an issued invoice is confirmed, an unbilled entitlement is expected, and the two are never one number
+ok 67 - cash forecast: an issued invoice is confirmed, an unbilled entitlement is expected, and the two are never one number
+  ---
+  duration_ms: 18536.8775
+  type: 'test'
+  ...
+# Subtest: cash forecast: a recorded collection promise moves money to its promised date and stays expected
+ok 68 - cash forecast: a recorded collection promise moves money to its promised date and stays expected
+  ---
+  duration_ms: 18620.697083
+  type: 'test'
+  ...
+# Subtest: cash forecast: the opening balance is a manual input that is declared missing, and nothing the screen computes is stored
+ok 69 - cash forecast: the opening balance is a manual input that is declared missing, and nothing the screen computes is stored
+  ---
+  duration_ms: 21322.215875
+  type: 'test'
+  ...
+# Subtest: cash forecast: scenarios are manual inputs computed on the spot, never stored and never changing a document
+ok 70 - cash forecast: scenarios are manual inputs computed on the spot, never stored and never changing a document
+  ---
+  duration_ms: 22986.9455
+  type: 'test'
+  ...
+# Subtest: cash forecast: no collection rate is invented, and a small sample says so instead of pretending
+ok 71 - cash forecast: no collection rate is invented, and a small sample says so instead of pretending
+  ---
+  duration_ms: 23185.847042
+  type: 'test'
+  ...
+# Subtest: cash forecast: salaries are a total from live contracts, never a person, and what the platform cannot know is declared
+ok 72 - cash forecast: salaries are a total from live contracts, never a person, and what the platform cannot know is declared
+  ---
+  duration_ms: 23804.010875
+  type: 'test'
+  ...
+# Subtest: cash forecast: live contracts answer “do I cover payroll?” as a total only, with its pay-date assumption declared
+ok 73 - cash forecast: live contracts answer “do I cover payroll?” as a total only, with its pay-date assumption declared
+  ---
+  duration_ms: 24550.366292
+  type: 'test'
+  ...
+# Subtest: cash forecast screen: it renders from real board data under the strict content policy
+ok 74 - cash forecast screen: it renders from real board data under the strict content policy
+  ---
+  duration_ms: 23600.040125
+  type: 'test'
+  ...
+# Subtest: cash forecast: a contracted subscription is expected money on its own billing dates, counted once
+ok 75 - cash forecast: a contracted subscription is expected money on its own billing dates, counted once
+  ---
+  duration_ms: 23053.914584
+  type: 'test'
+  ...
+# Subtest: اللوح: لحامل «إعداد الخدمات» وحده، وأعداده من placementFor، والجمهوران الخارجيان صفرٌ بسببهما، وتسعة تبويبات و«التسمية» بنصّها
+ok 76 - اللوح: لحامل «إعداد الخدمات» وحده، وأعداده من placementFor، والجمهوران الخارجيان صفرٌ بسببهما، وتسعة تبويبات و«التسمية» بنصّها
+  ---
+  duration_ms: 19350.154292
+  type: 'test'
+  ...
+# Subtest: المرادفات: الإضافة والحذف بحدث تدقيق، والمكرر يُرفض، وصفوف الكود لا تُحذف من اللوح، والبحث يرى المضاف فورًا
+ok 77 - المرادفات: الإضافة والحذف بحدث تدقيق، والمكرر يُرفض، وصفوف الكود لا تُحذف من اللوح، والبحث يرى المضاف فورًا
+  ---
+  duration_ms: 20426.140375
+  type: 'test'
+  ...
+# Subtest: المرادفات السرّية: فعل شخصين — المقترَح لا يقرؤه البحث، والمقترِح لا يؤكّده، وحامل تصريح آخر يؤكّده فيدخل البحث
+ok 78 - المرادفات السرّية: فعل شخصين — المقترَح لا يقرؤه البحث، والمقترِح لا يؤكّده، وحامل تصريح آخر يؤكّده فيدخل البحث
+  ---
+  duration_ms: 20753.895625
+  type: 'test'
+  ...
+# Subtest: تقرير «بلا نتيجة»: لا سطر قبل ثلاث مرات، والثالثة تُظهره، وسؤالٌ أصاب سرّيًا لا يُسجَّل أصلًا
+ok 79 - تقرير «بلا نتيجة»: لا سطر قبل ثلاث مرات، والثالثة تُظهره، وسؤالٌ أصاب سرّيًا لا يُسجَّل أصلًا
+  ---
+  duration_ms: 24894.8995
+  type: 'test'
+  ...
+# Subtest: لوح الصحة: المقاييس المحسوبة وحدها، وكل غير محسوب صفٌّ «غير متاح» بنصّه، ولا ٪، وسابقة الأهلية «13 مفتاح ميزة في 26 صفًّا، كلها مسودات»
+ok 80 - لوح الصحة: المقاييس المحسوبة وحدها، وكل غير محسوب صفٌّ «غير متاح» بنصّه، ولا ٪، وسابقة الأهلية «13 مفتاح ميزة في 26 صفًّا، كلها مسودات»
+  ---
+  duration_ms: 23144.736334
+  type: 'test'
+  ...
+# Subtest: الشاشة: عدّاد الترويسة المرسوم = مجموع ما ترسمه بطاقات الفئات، لكل جمهور
+ok 81 - الشاشة: عدّاد الترويسة المرسوم = مجموع ما ترسمه بطاقات الفئات، لكل جمهور
+  ---
+  duration_ms: 20430.465875
+  type: 'test'
+  ...
+# Subtest: الشاشة: الموقوفة بـ129 تغيب عن الشبكة كلها، ويُذكر عددها رقمًا ثالثًا مستقلًا
+ok 82 - الشاشة: الموقوفة بـ129 تغيب عن الشبكة كلها، ويُذكر عددها رقمًا ثالثًا مستقلًا
+  ---
+  duration_ms: 19500.552125
+  type: 'test'
+  ...
+# Subtest: الشاشة: كل بطاقة خدمة تحمل زمنها **وسنده**، ولا «٪» التزام في أي مخرج
+ok 83 - الشاشة: كل بطاقة خدمة تحمل زمنها **وسنده**، ولا «٪» التزام في أي مخرج
+  ---
+  duration_ms: 23514.487542
+  type: 'test'
+  ...
+# Subtest: الشاشة: بطاقة المجموعة تطبع عدد بنودها ولا تطبع زمنًا، ومجموع بنود البطاقات = بنود الفئة
+ok 84 - الشاشة: بطاقة المجموعة تطبع عدد بنودها ولا تطبع زمنًا، ومجموع بنود البطاقات = بنود الفئة
+  ---
+  duration_ms: 22841.726041
+  type: 'test'
+  ...
+# Subtest: العدسة: تُحفظ للحساب وتعود به، وعدسة الرحلة تُرسم معطّلة بسببها لا زرًّا ميتًا
+ok 85 - العدسة: تُحفظ للحساب وتعود به، وعدسة الرحلة تُرسم معطّلة بسببها لا زرًّا ميتًا
+  ---
+  duration_ms: 24706.381042
+  type: 'test'
+  ...
+# Subtest: صفحة الفئة: الفرز يعيد الترتيب ولا يغيّر العدّ، وترتيبٌ مجهول يعود إلى ترتيب الشجرة
+ok 86 - صفحة الفئة: الفرز يعيد الترتيب ولا يغيّر العدّ، وترتيبٌ مجهول يعود إلى ترتيب الشجرة
+  ---
+  duration_ms: 25347.679125
+  type: 'test'
+  ...
+# Subtest: البحث في الشاشة: يجد البطاقة باسمها وبرمزها وباسم خيار داخل مجموعتها، والفارغة تقول ماذا يفعل
+ok 87 - البحث في الشاشة: يجد البطاقة باسمها وبرمزها وباسم خيار داخل مجموعتها، والفارغة تقول ماذا يفعل
+  ---
+  duration_ms: 23979.367583
+  type: 'test'
+  ...
+# Subtest: صفحة الخدمة: تسعة أقسام، كلٌّ من بياناته أو مكتوبٌ غيابُه وما يلزمه وعند من
+ok 88 - صفحة الخدمة: تسعة أقسام، كلٌّ من بياناته أو مكتوبٌ غيابُه وما يلزمه وعند من
+  ---
+  duration_ms: 24316.689625
+  type: 'test'
+  ...
+# Subtest: صفحة الخدمة: تردّ **رفضًا مكتوبًا** على رمزٍ ليس في دليل هذا الحساب، ويُرسم بـui.refusal
+ok 89 - صفحة الخدمة: تردّ **رفضًا مكتوبًا** على رمزٍ ليس في دليل هذا الحساب، ويُرسم بـui.refusal
+  ---
+  duration_ms: 23187.17225
+  type: 'test'
+  ...
+# Subtest: الرسم: لا نمط سطري ولا سكربت سطري في أي مخرج (CSP)، والهيكل يقول لقارئ الشاشة إنه يحمّل
+ok 90 - الرسم: لا نمط سطري ولا سكربت سطري في أي مخرج (CSP)، والهيكل يقول لقارئ الشاشة إنه يحمّل
+  ---
+  duration_ms: 23544.585042
+  type: 'test'
+  ...
+# Subtest: الوصول: البطاقة هدفان متتاليان، وغير المؤهلة تبقى مرسومة قابلة للقراءة بسببها لا مخفيّة
+ok 91 - الوصول: البطاقة هدفان متتاليان، وغير المؤهلة تبقى مرسومة قابلة للقراءة بسببها لا مخفيّة
+  ---
+  duration_ms: 22434.630291
+  type: 'test'
+  ...
+# Subtest: الشاشة: طلباتك المفتوحة وشريط الإعلان — كلاهما من بيانات القاعدة لا من نصّ مكتوب
+ok 92 - الشاشة: طلباتك المفتوحة وشريط الإعلان — كلاهما من بيانات القاعدة لا من نصّ مكتوب
+  ---
+  duration_ms: 21046.739584
+  type: 'test'
+  ...
+# Subtest: بطاقة المجموعة: كل عضو رابطٌ إلى صفحته من الفئة مباشرة، وعضو الوحدة المخصصة رابطُ شاشته
+ok 93 - بطاقة المجموعة: كل عضو رابطٌ إلى صفحته من الفئة مباشرة، وعضو الوحدة المخصصة رابطُ شاشته
+  ---
+  duration_ms: 19698.642959
+  type: 'test'
+  ...
+# Subtest: صفحة الخدمة: «خدمات قريبة» تسرد أخوة المجموعة أولًا ثم بطاقات الفئة، ستةً على الأكثر، بلا مجموعتها
+ok 94 - صفحة الخدمة: «خدمات قريبة» تسرد أخوة المجموعة أولًا ثم بطاقات الفئة، ستةً على الأكثر، بلا مجموعتها
+  ---
+  duration_ms: 19388.347667
+  type: 'test'
+  ...
+# Subtest: المخرج «لم تجد خدمتك؟»: اسم الخدمة من صفّها الحيّ في الحمولة، ولا اسم مكتوب في الشاشة، ومن لا يراها لا يُعطى رابطًا
+ok 95 - المخرج «لم تجد خدمتك؟»: اسم الخدمة من صفّها الحيّ في الحمولة، ولا اسم مكتوب في الشاشة، ومن لا يراها لا يُعطى رابطًا
+  ---
+  duration_ms: 18927.426167
+  type: 'test'
+  ...
+# Subtest: زرّ البدء في صفحة الخدمة يحمل معرّف **أحدث** نسخة: خدمةٌ لها نسختان بعد تحريرها
+ok 96 - زرّ البدء في صفحة الخدمة يحمل معرّف **أحدث** نسخة: خدمةٌ لها نسختان بعد تحريرها
+  ---
+  duration_ms: 17980.480459
+  type: 'test'
+  ...
+# Subtest: الأنماط: لا قاعدة .sc-* تثبّت عرضًا أكبر من 358 بكسل، وأهداف اللمس ≥44/56/64، وعمود واحد تحت 480
+ok 97 - الأنماط: لا قاعدة .sc-* تثبّت عرضًا أكبر من 358 بكسل، وأهداف اللمس ≥44/56/64، وعمود واحد تحت 480
+  ---
+  duration_ms: 150.481417
+  type: 'test'
+  ...
+# Subtest: ترتيب الشاشة: البحث أول عنصر بعد الرأس، ثم العدسات، ثم الشبكة، والإعلان تحت الشبكة
+ok 98 - ترتيب الشاشة: البحث أول عنصر بعد الرأس، ثم العدسات، ثم الشبكة، والإعلان تحت الشبكة
+  ---
+  duration_ms: 18193.109458
+  type: 'test'
+  ...
+# ERROR: failed to copy trust settings of system certificate-25291
+# ERROR: failed to copy trust settings of system certificate-25291
+# ERROR: failed to copy trust settings of system certificate-25291
+# ERROR: failed to copy trust settings of system certificate-25291
+# Subtest: custom fields: one validator judges them — the stored definition is the service-field shape plus «checks», adapted once for the platform’s existing validators
+ok 99 - custom fields: one validator judges them — the stored definition is the service-field shape plus «checks», adapted once for the platform’s existing validators
+  ---
+  duration_ms: 20300.634708
+  type: 'test'
+  ...
+# Subtest: custom fields: required-on-transition is the server’s judgement — the refusal names the field, the transition, its owner and the next step, and a request that skips the screen gets the same answer
+ok 100 - custom fields: required-on-transition is the server’s judgement — the refusal names the field, the transition, its owner and the next step, and a request that skips the screen gets the same answer
+  ---
+  duration_ms: 22732.639667
+  type: 'test'
+  ...
+# Subtest: custom fields: the registry extends the platform’s own stage gate — a required custom field joins the data-defined stage requirements in one refusal
+ok 101 - custom fields: the registry extends the platform’s own stage gate — a required custom field joins the data-defined stage requirements in one refusal
+  ---
+  duration_ms: 23325.086958
+  type: 'test'
+  ...
+# Subtest: custom fields: a field marked required is demanded when a record is created and whenever its custom values are entered, for whoever may edit it
+ok 102 - custom fields: a field marked required is demanded when a record is created and whenever its custom values are entered, for whoever may edit it
+  ---
+  duration_ms: 23347.062792
+  type: 'test'
+  ...
+# Subtest: custom fields: a masked field is absent for a reader who may not see it — through the function, the route, the list columns, the export, the search index and the value history
+ok 103 - custom fields: a masked field is absent for a reader who may not see it — through the function, the route, the list columns, the export, the search index and the value history
+  ---
+  duration_ms: 27917.0155
+  type: 'test'
+  ...
+# Subtest: custom fields: the registry subtracts from the code floor and never grants — declared cost and margin figures are withheld from a reader the definition masks them from
+ok 104 - custom fields: the registry subtracts from the code floor and never grants — declared cost and margin figures are withheld from a reader the definition masks them from
+  ---
+  duration_ms: 24004.32775
+  type: 'test'
+  ...
+# Subtest: custom fields: a national or iqama number typed into any custom text field is refused in Latin, Arabic-Indic and Persian digits, and a number field is no back door
+ok 105 - custom fields: a national or iqama number typed into any custom text field is refused in Latin, Arabic-Indic and Persian digits, and a number field is no back door
+  ---
+  duration_ms: 24209.087667
+  type: 'test'
+  ...
+# Subtest: custom fields: a record that is already final keeps the gap honest — «غير متاح — أُضيف الحقل بعد إقفال السجل», with no owner and no next step, never blank
+ok 106 - custom fields: a record that is already final keeps the gap honest — «غير متاح — أُضيف الحقل بعد إقفال السجل», with no owner and no next step, never blank
+  ---
+  duration_ms: 23374.819375
+  type: 'test'
+  ...
+# Subtest: custom fields: a retired option stays readable on the records that chose it and is no longer offered, and the count of records using it is known before retiring
+ok 107 - custom fields: a retired option stays readable on the records that chose it and is no longer offered, and the count of records using it is known before retiring
+  ---
+  duration_ms: 22322.658041
+  type: 'test'
+  ...
+# Subtest: custom fields: record-level authorisation is the module’s own — the generic endpoint opens nothing the screen would not
+ok 108 - custom fields: record-level authorisation is the module’s own — the generic endpoint opens nothing the screen would not
+  ---
+  duration_ms: 27076.57725
+  type: 'test'
+  ...
+# Subtest: custom fields: a national id smuggled past the guard with invisible separators, punctuation or full-width digits is refused before it is stored, indexed, exported or audited
+ok 109 - custom fields: a national id smuggled past the guard with invisible separators, punctuation or full-width digits is refused before it is stored, indexed, exported or audited
+  ---
+  duration_ms: 19926.997959
+  type: 'test'
+  ...
+# Subtest: delivery cycle: no step of the client chain opens before the step before it was approved by someone else
+ok 110 - delivery cycle: no step of the client chain opens before the step before it was approved by someone else
+  ---
+  duration_ms: 24896.145916
+  type: 'test'
+  ...
+# Subtest: delivery cycle: an entitlement is born from an accepted deliverable only — a submitted one is not enough
+ok 111 - delivery cycle: an entitlement is born from an accepted deliverable only — a submitted one is not enough
+  ---
+  duration_ms: 24253.762083
+  type: 'test'
+  ...
+# Subtest: delivery cycle: the customer invoice hangs on an approved entitlement, and the preparer never issues it
+ok 112 - delivery cycle: the customer invoice hangs on an approved entitlement, and the preparer never issues it
+  ---
+  duration_ms: 25221.437958
+  type: 'test'
+  ...
+# Subtest: delivery cycle: collection is recorded and matched by two people and never exceeds the entitlement
+ok 113 - delivery cycle: collection is recorded and matched by two people and never exceeds the entitlement
+  ---
+  duration_ms: 24102.799333
+  type: 'test'
+  ...
+# Subtest: delivery cycle: a client review stage closes only on an external approval documented against that very version
+ok 114 - delivery cycle: a client review stage closes only on an external approval documented against that very version
+  ---
+  duration_ms: 24978.187208
+  type: 'test'
+  ...
+# Subtest: delivery cycle: no supplier award without a comparison, a qualified vendor and an approved project budget
+ok 115 - delivery cycle: no supplier award without a comparison, a qualified vendor and an approved project budget
+  ---
+  duration_ms: 22573.990542
+  type: 'test'
+  ...
+# Subtest: delivery cycle: the supplier is not received, invoiced or paid before the purchase order, and the payment needs three separate people
+ok 116 - delivery cycle: the supplier is not received, invoiced or paid before the purchase order, and the payment needs three separate people
+  ---
+  duration_ms: 23032.20425
+  type: 'test'
+  ...
+# Subtest: delivery cycle: execution is blocked until the advance payment is confirmed
+ok 117 - delivery cycle: execution is blocked until the advance payment is confirmed
+  ---
+  duration_ms: 22332.274666
+  type: 'test'
+  ...
+# Subtest: delivery cycle: a supplier may not start before a purchase order AND a commencement authorisation
+ok 118 - delivery cycle: a supplier may not start before a purchase order AND a commencement authorisation
+  ---
+  duration_ms: 20891.173833
+  type: 'test'
+  ...
+# Subtest: delivery cycle: the customer purchase order is recorded against the commercial case before execution
+ok 119 - delivery cycle: the customer purchase order is recorded against the commercial case before execution
+  ---
+  duration_ms: 20128.80075
+  type: 'test'
+  ...
+# Subtest: delivery cycle: a project can be closed technically and then financially
+ok 120 - delivery cycle: a project can be closed technically and then financially
+  ---
+  duration_ms: 19835.162083
+  type: 'test'
+  ...
+# Subtest: delivery cycle: paying the supplier marks the purchase as paid, read from payment_orders not from a constant
+ok 121 - delivery cycle: paying the supplier marks the purchase as paid, read from payment_orders not from a constant
+  ---
+  duration_ms: 19174.547208
+  type: 'test'
+  ...
+# Subtest: delivery cycle: work packages can be planned for more than one department
+ok 122 - delivery cycle: work packages can be planned for more than one department
+  ---
+  duration_ms: 17896.820833
+  type: 'test'
+  ...
+# Subtest: delivery cycle: a finance delegation is granted, expires and is revoked through the platform, never by a direct insert
+ok 123 - delivery cycle: a finance delegation is granted, expires and is revoked through the platform, never by a direct insert
+  ---
+  duration_ms: 18207.575541
+  type: 'test'
+  ...
+# Subtest: delivery cycle: the completion certificate is a numbered, versioned record, and the client acceptance is employee-entered evidence with its stated limit, never a signature
+ok 124 - delivery cycle: the completion certificate is a numbered, versioned record, and the client acceptance is employee-entered evidence with its stated limit, never a signature
+  ---
+  duration_ms: 18513.972041
+  type: 'test'
+  ...
+# Subtest: التفويض المالي له سقف مدة، ورقمه هو ما تستعمله المنصة فعلًا لا رقم مستعار
+ok 125 - التفويض المالي له سقف مدة، ورقمه هو ما تستعمله المنصة فعلًا لا رقم مستعار
+  ---
+  duration_ms: 17118.7075
+  type: 'test'
+  ...
+# Subtest: the only built-in gateway is disconnected: it refuses all three calls, sends nothing, and says so
+ok 126 - the only built-in gateway is disconnected: it refuses all three calls, sends nothing, and says so
+  ---
+  duration_ms: 1.96575
+  type: 'test'
+  ...
+# Subtest: issuing a document archives it and queues it in the same statement, and the archive can never be edited or deleted
+ok 127 - issuing a document archives it and queues it in the same statement, and the archive can never be edited or deleted
+  ---
+  duration_ms: 23345.0515
+  type: 'test'
+  ...
+# Subtest: the counter never resets, never skips and never goes back, and the hash chain link is enforced by the database itself
+ok 128 - the counter never resets, never skips and never goes back, and the hash chain link is enforced by the database itself
+  ---
+  duration_ms: 24586.882708
+  type: 'test'
+  ...
+# Subtest: whoever classifies the channel never performs the attempt, the channel is fixed once set, and a stale version is refused
+ok 129 - whoever classifies the channel never performs the attempt, the channel is fixed once set, and a stale version is refused
+  ---
+  duration_ms: 22983.493292
+  type: 'test'
+  ...
+# Subtest: today an attempt sends nothing: the refusal is logged with its reason and the next attempt backs off exponentially
+ok 130 - today an attempt sends nothing: the refusal is logged with its reason and the next attempt backs off exponentially
+  ---
+  duration_ms: 23653.271458
+  type: 'test'
+  ...
+# Subtest: an injected gateway drives every queue state, a decision is final, and a rejected document keeps its number and its place in the counter
+ok 131 - an injected gateway drives every queue state, a decision is final, and a rejected document keeps its number and its place in the counter
+  ---
+  duration_ms: 23536.631834
+  type: 'test'
+  ...
+# Subtest: a buyer with missing tax data blocks the attempt until a documented override is recorded, and the override is permanent
+ok 132 - a buyer with missing tax data blocks the attempt until a documented override is recorded, and the override is permanent
+  ---
+  duration_ms: 22057.485541
+  type: 'test'
+  ...
+# Subtest: a complete buyer needs no override, and a credit note is archived with the reference of its original invoice
+ok 133 - a complete buyer needs no override, and a credit note is archived with the reference of its original invoice
+  ---
+  duration_ms: 21949.723042
+  type: 'test'
+  ...
+# Subtest: the screen needs the einvoice capability, and another tenant sees and touches nothing
+ok 134 - the screen needs the einvoice capability, and another tenant sees and touches nothing
+  ---
+  duration_ms: 19865.66
+  type: 'test'
+  ...
+# Subtest: employee assistant: answers leave balance for the asker only, explains how a service is requested and who approves it, quotes policy, and refuses the rest
+ok 135 - employee assistant: answers leave balance for the asker only, explains how a service is requested and who approves it, quotes policy, and refuses the rest
+  ---
+  duration_ms: 23849.549709
+  type: 'test'
+  ...
+# Subtest: employee assistant with a model: only the retrieved facts are sent, inside the data fence, and another person’s balance never leaves the database
+ok 136 - employee assistant with a model: only the retrieved facts are sent, inside the data fence, and another person’s balance never leaves the database
+  ---
+  duration_ms: 25753.776292
+  type: 'test'
+  ...
+# Subtest: career profile and development plan: the profile is the employee’s own, a qualification is verified by someone else, and the plan draft uses only that profile
+ok 137 - career profile and development plan: the profile is the employee’s own, a qualification is verified by someone else, and the plan draft uses only that profile
+  ---
+  duration_ms: 24183.836875
+  type: 'test'
+  ...
+# ERROR: failed to copy trust settings of system certificate-25291
+# ERROR: failed to copy trust settings of system certificate-25291
+# ERROR: failed to copy trust settings of system certificate-25291
+# ERROR: failed to copy trust settings of system certificate-25291
+# Subtest: E01 routes: run, snapshot, export and print all answer for a key that is not R\\d{2}
+not ok 138 - E01 routes: run, snapshot, export and print all answer for a key that is not R\\d{2}
+  ---
+  duration_ms: 23634.273583
+  type: 'test'
+  location: '/Users/abdulaziz/Documents/Codex/2026-09-09/3-6t-360-codex-handoff-master/.claude/worktrees/p3-riyadh-time/tests/epmo-report.test.mjs:77:1'
+  failureType: 'testCodeFailure'
+  error: 'listen EPERM: operation not permitted 127.0.0.1'
+  code: 'EPERM'
+  stack: |-
+    Server.setupListenHandle [as _listen2] (node:net:1926:21)
+    listenInCluster (node:net:2005:12)
+    node:net:2214:7
+    process.processTicksAndRejections (node:internal/process/task_queues:90:21)
+  ...
+# Subtest: E01 audience: the composite is classified executive, and every composite definition is classified somewhere
+ok 139 - E01 audience: the composite is classified executive, and every composite definition is classified somewhere
+  ---
+  duration_ms: 0.330333
+  type: 'test'
+  ...
+# Subtest: E01 snapshot: the digest seals words with numbers, the body cannot be rewritten, and the preparer never approves
+ok 140 - E01 snapshot: the digest seals words with numbers, the body cannot be rewritten, and the preparer never approves
+  ---
+  duration_ms: 22402.875041
+  type: 'test'
+  ...
+# Subtest: E01 snapshot: the partial index refuses a second approved snapshot for the same period
+ok 141 - E01 snapshot: the partial index refuses a second approved snapshot for the same period
+  ---
+  duration_ms: 23064.8685
+  type: 'test'
+  ...
+# Subtest: E01 schedule: a weekly schedule produces exactly one draft for the closed week, and running it again is a no-op
+ok 142 - E01 schedule: a weekly schedule produces exactly one draft for the closed week, and running it again is a no-op
+  ---
+  duration_ms: 21039.376458
+  type: 'test'
+  ...
+# Subtest: E01 figures: an indicator with no measurement is never serialised as 0 — not in JSON, not in CSV, not in the workbook
+ok 143 - E01 figures: an indicator with no measurement is never serialised as 0 — not in JSON, not in CSV, not in the workbook
+  ---
+  duration_ms: 20026.22475
+  type: 'test'
+  ...
+# Subtest: E01 export parity: screen totals equal the CSV equal the workbook, one sheet per section plus the declared-gaps sheet with owners and dates
+ok 144 - E01 export parity: screen totals equal the CSV equal the workbook, one sheet per section plus the declared-gaps sheet with owners and dates
+  ---
+  duration_ms: 19748.030792
+  type: 'test'
+  ...
+# Subtest: E01 printable: right-to-left Arabic on the platform stylesheet, with no script and no external origin
+ok 145 - E01 printable: right-to-left Arabic on the platform stylesheet, with no script and no external origin
+  ---
+  duration_ms: 18483.366875
+  type: 'test'
+  ...
+# Subtest: E01 screen: an unmeasured figure carries its Arabic phrase and never a bar, while a weak measured figure carries a full bar in the late tone
+ok 146 - E01 screen: an unmeasured figure carries its Arabic phrase and never a bar, while a weak measured figure carries a full bar in the late tone
+  ---
+  duration_ms: 18999.19
+  type: 'test'
+  ...
+# Subtest: E01 cycle: prepare, note, snapshot and approve — and verifyAudit still passes
+ok 147 - E01 cycle: prepare, note, snapshot and approve — and verifyAudit still passes
+  ---
+  duration_ms: 17972.5435
+  type: 'test'
+  ...
+# ERROR: failed to copy trust settings of system certificate-25291
+# ERROR: failed to copy trust settings of system certificate-25291
+# ERROR: failed to copy trust settings of system certificate-25291
+# ERROR: failed to copy trust settings of system certificate-25291
+# Subtest: ER-01: a case whose accepted terms require neither condition behaves exactly as before, and the terms say whether a customer PO is required
+ok 148 - ER-01: a case whose accepted terms require neither condition behaves exactly as before, and the terms say whether a customer PO is required
+  ---
+  duration_ms: 23616.589875
+  type: 'test'
+  ...
+# Subtest: ER-02: every paid-execution entry point is checked on the server at the moment of action
+ok 149 - ER-02: every paid-execution entry point is checked on the server at the moment of action
+  ---
+  duration_ms: 22458.594959
+  type: 'test'
+  ...
+# Subtest: ER-03: an exemption is requested by one person and authorised by another, with written reasons, and both sides are auditable
+ok 150 - ER-03: an exemption is requested by one person and authorised by another, with written reasons, and both sides are auditable
+  ---
+  duration_ms: 22763.08975
+  type: 'test'
+  ...
+# Subtest: ER-04: the exemption is rechecked at the moment of action — withdrawn, or held by someone who lost the authority, it no longer opens the gate
+ok 151 - ER-04: the exemption is rechecked at the moment of action — withdrawn, or held by someone who lost the authority, it no longer opens the gate
+  ---
+  duration_ms: 40040.872959
+  type: 'test'
+  ...
+# Subtest: ER-05: partial, duplicate and reversed receipts — only money that arrived once and stayed opens the gate
+ok 152 - ER-05: partial, duplicate and reversed receipts — only money that arrived once and stayed opens the gate
+  ---
+  duration_ms: 20129.132459
+  type: 'test'
+  ...
+# Subtest: ER-06: the customer PO is versioned and append-only — superseded, expired or unconfirmed versions never satisfy the gate
+ok 153 - ER-06: the customer PO is versioned and append-only — superseded, expired or unconfirmed versions never satisfy the gate
+  ---
+  duration_ms: 18680.439875
+  type: 'test'
+  ...
+# Subtest: ER-07: the order is checked against its own case — wrong client, opportunity, agreement, project or tenant is refused
+ok 154 - ER-07: the order is checked against its own case — wrong client, opportunity, agreement, project or tenant is refused
+  ---
+  duration_ms: 17620.974458
+  type: 'test'
+  ...
+# Subtest: ER-08: another tenant's receipt never satisfies the gate, and a bank reference is unique within a tenant only
+ok 155 - ER-08: another tenant's receipt never satisfies the gate, and a bank reference is unique within a tenant only
+  ---
+  duration_ms: 17888.6845
+  type: 'test'
+  ...
+# Subtest: ER-09: concurrency — the gate and the action share one write lock, so a reversal racing a delivery submission lands before it or after it, never between
+ok 156 - ER-09: concurrency — the gate and the action share one write lock, so a reversal racing a delivery submission lands before it or after it, never between
+  ---
+  duration_ms: 16838.334792
+  type: 'test'
+  ...
+# Subtest: ER-10: the actions are reachable over HTTP with the platform session, CSRF and idempotency, and the commercial screen names the blockers
+ok 157 - ER-10: the actions are reachable over HTTP with the platform session, CSRF and idempotency, and the commercial screen names the blockers
+  ---
+  duration_ms: 25353.907417
+  type: 'test'
+  ...
+# Subtest: ER-11: the billing screen asks for the bank reference, offers the reversal once, and links an advance to its project
+ok 158 - ER-11: the billing screen asks for the bank reference, offers the reversal once, and links an advance to its project
+  ---
+  duration_ms: 16493.501042
+  type: 'test'
+  ...
+# Subtest: E51: a receipt is claimed once, approved by the line manager then finance, and the claimant decides nothing
+ok 159 - E51: a receipt is claimed once, approved by the line manager then finance, and the claimant decides nothing
+  ---
+  duration_ms: 22770.564958
+  type: 'test'
+  ...
+# Subtest: E52: custody is issued by finance, settled by approved claims, and closes only when the remainder is returned exactly
+ok 160 - E52: custody is issued by finance, settled by approved claims, and closes only when the remainder is returned exactly
+  ---
+  duration_ms: 22788.602041
+  type: 'test'
+  ...
+# Subtest: E61: an asset is approved by a second person and depreciates straight-line once per month with no gaps, the last month absorbing rounding
+ok 161 - E61: an asset is approved by a second person and depreciates straight-line once per month with no gaps, the last month absorbing rounding
+  ---
+  duration_ms: 20260.268959
+  type: 'test'
+  ...
+# Subtest: ledger: expense, custody, depreciation and the year-end close all post from their documents and keep the balance sheet balanced
+ok 162 - ledger: expense, custody, depreciation and the year-end close all post from their documents and keep the balance sheet balanced
+  ---
+  duration_ms: 20637.591833
+  type: 'test'
+  ...
+# Subtest: one-to-one: the content belongs to the two parties, each private note to its writer alone, and HR sees that it happened and when — never what was said
+ok 163 - one-to-one: the content belongs to the two parties, each private note to its writer alone, and HR sees that it happened and when — never what was said
+  ---
+  duration_ms: 20198.91175
+  type: 'test'
+  ...
+# Subtest: one-to-one follow-up items belong to their owner: only the owner closes one, and open items surface on the owner’s own list
+ok 164 - one-to-one follow-up items belong to their owner: only the owner closes one, and open items surface on the owner’s own list
+  ---
+  duration_ms: 19534.24025
+  type: 'test'
+  ...
+# Subtest: a feedback note is owned by its author and its recipient: visibility alone decides who else reads it, and HR is no exception
+ok 165 - a feedback note is owned by its author and its recipient: visibility alone decides who else reads it, and HR is no exception
+  ---
+  duration_ms: 18448.4255
+  type: 'test'
+  ...
+# Subtest: feedback is requested with a specific question, and what the evaluator may see reaches the review cycle as evidence — never copied into it and never scored
+ok 166 - feedback is requested with a specific question, and what the evaluator may see reaches the review cycle as evidence — never copied into it and never scored
+  ---
+  duration_ms: 18335.554792
+  type: 'test'
+  ...
+# Subtest: 360: the panel is approved by a third party — not the subject, not the nominator, not the rater
+ok 167 - 360: the panel is approved by a third party — not the subject, not the nominator, not the rater
+  ---
+  duration_ms: 17527.87825
+  type: 'test'
+  ...
+# Subtest: 360: upward feedback is never revealed below the threshold the HR manager set, the threshold lives in the query, and no source is scored or ranked
+ok 168 - 360: upward feedback is never revealed below the threshold the HR manager set, the threshold lives in the query, and no source is scored or ranked
+  ---
+  duration_ms: 17632.769958
+  type: 'test'
+  ...
+# Subtest: criterion 7: an accepted deliverable is not billable until the receivable is approved, and both tax profiles exist
+ok 169 - criterion 7: an accepted deliverable is not billable until the receivable is approved, and both tax profiles exist
+  ---
+  duration_ms: 20593.946458
+  type: 'test'
+  ...
+# Subtest: issuing needs a second person, numbers run without gaps, and an issued invoice cannot be changed or deleted
+ok 170 - issuing needs a second person, numbers run without gaps, and an issued invoice cannot be changed or deleted
+  ---
+  duration_ms: 19274.323917
+  type: 'test'
+  ...
+# Subtest: a credit note corrects an issued invoice, never exceeds it, and carries its own sequence and reason
+ok 171 - a credit note corrects an issued invoice, never exceeds it, and carries its own sequence and reason
+  ---
+  duration_ms: 18686.602416
+  type: 'test'
+  ...
+# Subtest: zero-rated supplies need a written reason, access needs a finance grant, and tax data is replaced rather than edited
+ok 172 - zero-rated supplies need a written reason, access needs a finance grant, and tax data is replaced rather than edited
+  ---
+  duration_ms: 17841.757541
+  type: 'test'
+  ...
+# Subtest: the QR issue time carries no fractional seconds, while the record keeps its own precision
+ok 173 - the QR issue time carries no fractional seconds, while the record keeps its own precision
+  ---
+  duration_ms: 17843.719292
+  type: 'test'
+  ...
+# Subtest: the output-VAT rate is read from the dated legal schedule at the supply date, not written into the code
+ok 174 - the output-VAT rate is read from the dated legal schedule at the supply date, not written into the code
+  ---
+  duration_ms: 16932.915959
+  type: 'test'
+  ...
+# Subtest: a rate that is not the one in force on the supply date is refused, in either direction
+ok 175 - a rate that is not the one in force on the supply date is refused, in either direction
+  ---
+  duration_ms: 17646.619708
+  type: 'test'
+  ...
+# Subtest: the archived copy carries the document type, the tax category code, the payment means and a unit code on every line
+ok 176 - the archived copy carries the document type, the tax category code, the payment means and a unit code on every line
+  ---
+  duration_ms: 16997.575833
+  type: 'test'
+  ...
+# ERROR: failed to copy trust settings of system certificate-25291
+# ERROR: failed to copy trust settings of system certificate-25291
+# ERROR: failed to copy trust settings of system certificate-25291
+# ERROR: failed to copy trust settings of system certificate-25291
+# Subtest: registry: every existing source kind is held unchanged, the new kinds join it, and another file can register its own kind
+ok 177 - registry: every existing source kind is held unchanged, the new kinds join it, and another file can register its own kind
+  ---
+  duration_ms: 20492.78425
+  type: 'test'
+  ...
+# Subtest: supplier invoice: net per cost centre, input VAT from the verified record, the gross liability — one balanced journal in minor units
+ok 178 - supplier invoice: net per cost centre, input VAT from the verified record, the gross liability — one balanced journal in minor units
+  ---
+  duration_ms: 20081.754417
+  type: 'test'
+  ...
+# Subtest: supplier invoice: not ready until the VAT position is known, and a supplier outside the VAT register posts gross to cost
+ok 179 - supplier invoice: not ready until the VAT position is known, and a supplier outside the VAT register posts gross to cost
+  ---
+  duration_ms: 18672.737916
+  type: 'test'
+  ...
+# Subtest: supplier invoice: one payable, one journal — the old manual path is closed, its journals stay readable, and a trigger refuses a second path
+ok 180 - supplier invoice: one payable, one journal — the old manual path is closed, its journals stay readable, and a trigger refuses a second path
+  ---
+  duration_ms: 18339.499917
+  type: 'test'
+  ...
+# Subtest: customer advances: receipt, each draw application and reversal become journals, and the control reads net of reversals
+ok 181 - customer advances: receipt, each draw application and reversal become journals, and the control reads net of reversals
+  ---
+  duration_ms: 17591.254334
+  type: 'test'
+  ...
+# Subtest: migration 167 upgrade: draws applied before it become one opening event each, and later applications are captured by the trigger
+ok 182 - migration 167 upgrade: draws applied before it become one opening event each, and later applications are captured by the trigger
+  ---
+  duration_ms: 16506.132333
+  type: 'test'
+  ...
+# Subtest: pending sources: an unposted supplier liability is listed and blocks the monthly close pack like any other unposted document
+ok 183 - pending sources: an unposted supplier liability is listed and blocks the monthly close pack like any other unposted document
+  ---
+  duration_ms: 17941.141292
+  type: 'test'
+  ...
+# Subtest: control reconciliation: AR, AP, input VAT, output VAT and customer advances tie to their control accounts after a synthetic month, and the trial balance balances
+ok 184 - control reconciliation: AR, AP, input VAT, output VAT and customer advances tie to their control accounts after a synthetic month, and the trial balance balances
+  ---
+  duration_ms: 18224.816917
+  type: 'test'
+  ...
+# Subtest: control reconciliation: every difference is itemised to a document or a journal, and the items add up to the difference
+ok 185 - control reconciliation: every difference is itemised to a document or a journal, and the items add up to the difference
+  ---
+  duration_ms: 18524.635
+  type: 'test'
+  ...
+# Subtest: control reconciliation: read-only, finance-scoped and tenant-isolated
+ok 186 - control reconciliation: read-only, finance-scoped and tenant-isolated
+  ---
+  duration_ms: 17230.197083
+  type: 'test'
+  ...
+# Subtest: trace: a supplier invoice walks to its approvers, its posted journal, its payment, the bank line, and its reversal — with explicit no-link markers
+ok 187 - trace: a supplier invoice walks to its approvers, its posted journal, its payment, the bank line, and its reversal — with explicit no-link markers
+  ---
+  duration_ms: 16870.622458
+  type: 'test'
+  ...
+# Subtest: trace: an invoice reaches its receipt, the advance drawn on it and its credit note; a manual journal says it has no source document
+ok 188 - trace: an invoice reaches its receipt, the advance drawn on it and its credit note; a manual journal says it has no source document
+  ---
+  duration_ms: 16715.521083
+  type: 'test'
+  ...
+# Subtest: trace: finance-scoped, tenant-isolated, and it refuses what it cannot find instead of guessing
+ok 189 - trace: finance-scoped, tenant-isolated, and it refuses what it cannot find instead of guessing
+  ---
+  duration_ms: 15368.534584
+  type: 'test'
+  ...
+# Subtest: listFinance: no constant payment status; each payable carries its payment state from its payment order
+ok 190 - listFinance: no constant payment status; each payable carries its payment state from its payment order
+  ---
+  duration_ms: 14645.291833
+  type: 'test'
+  ...
+# Subtest: idempotency: two processes preparing the same supplier invoice at the same instant leave one journal, one payable link and one source link
+ok 191 - idempotency: two processes preparing the same supplier invoice at the same instant leave one journal, one payable link and one source link
+  ---
+  duration_ms: 19367.42525
+  type: 'test'
+  ...
+# Subtest: separation of duties: the preparer neither approves nor posts a sourced journal, a reversal needs another preparer, and a read-only holder prepares nothing
+ok 192 - separation of duties: the preparer neither approves nor posts a sourced journal, a reversal needs another preparer, and a read-only holder prepares nothing
+  ---
+  duration_ms: 13605.98125
+  type: 'test'
+  ...
+# Subtest: routes: GET /api/ledger/reconciliation and /api/ledger/trace answer a finance reader and refuse everyone else, writing nothing
+ok 193 - routes: GET /api/ledger/reconciliation and /api/ledger/trace answer a finance reader and refuse everyone else, writing nothing
+  ---
+  duration_ms: 16052.333542
+  type: 'test'
+  ...
+# Subtest: screens: the statements screen shows the control reconciliation and a trace action; the finance screen shows each payable’s real payment state
+ok 194 - screens: the statements screen shows the control reconciliation and a trace action; the finance screen shows each payable’s real payment state
+  ---
+  duration_ms: 13997.963417
+  type: 'test'
+  ...
+# Subtest: PRC-02: an unregistered or unqualified vendor never enters the payment cycle, and no bank account means no order
+ok 195 - PRC-02: an unregistered or unqualified vendor never enters the payment cycle, and no bank account means no order
+  ---
+  duration_ms: 54031.213875
+  type: 'test'
+  ...
+# Subtest: FIN-07/PRC-09: approved is not paid — three people prepare, approve and record the bank execution, and the bank-detail collector cannot record it
+ok 196 - FIN-07/PRC-09: approved is not paid — three people prepare, approve and record the bank execution, and the bank-detail collector cannot record it
+  ---
+  duration_ms: 17871.858958
+  type: 'test'
+  ...
+# Subtest: PRC-09: if the vendor bank account changes after the order was prepared, approval stops instead of silently paying the new account
+ok 197 - PRC-09: if the vendor bank account changes after the order was prepared, approval stops instead of silently paying the new account
+  ---
+  duration_ms: 17353.313792
+  type: 'test'
+  ...
+# Subtest: input VAT enters the summary only after a second person verifies the supplier tax invoice, and cannot exceed 15% of net
+ok 198 - input VAT enters the summary only after a second person verifies the supplier tax invoice, and cannot exceed 15% of net
+  ---
+  duration_ms: 16546.88775
+  type: 'test'
+  ...
+# Subtest: FIN-09: تمنع ضريبة الفاتورة المكررة عبر مرجع شراء آخر بعد توحيد شكل رقمها
+ok 199 - FIN-09: تمنع ضريبة الفاتورة المكررة عبر مرجع شراء آخر بعد توحيد شكل رقمها
+  ---
+  duration_ms: 16159.877875
+  type: 'test'
+  ...
+# Subtest: PRC-09: يظهر توقف المورد بعد الاعتماد ويُحفظ التحذير عند توثيق تنفيذ وقع فعلا
+ok 200 - PRC-09: يظهر توقف المورد بعد الاعتماد ويُحفظ التحذير عند توثيق تنفيذ وقع فعلا
+  ---
+  duration_ms: 15806.385458
+  type: 'test'
+  ...
+# Subtest: FIN-09: السجلات القديمة المكررة لا تعتمد، ويمكن رفض المكرر ثم اعتماد الأصل
+ok 201 - FIN-09: السجلات القديمة المكررة لا تعتمد، ويمكن رفض المكرر ثم اعتماد الأصل
+  ---
+  duration_ms: 15299.426959
+  type: 'test'
+  ...
+# Subtest: PRC-09: تغير الحساب البنكي بعد اعتماد الدفع يظهر للمالية دون كشف الآيبان
+ok 202 - PRC-09: تغير الحساب البنكي بعد اعتماد الدفع يظهر للمالية دون كشف الآيبان
+  ---
+  duration_ms: 15138.839542
+  type: 'test'
+  ...
+# Subtest: PAY-03: only approved adjustments enter the run, each exactly once, and a proposer or the employee cannot approve
+ok 203 - PAY-03: only approved adjustments enter the run, each exactly once, and a proposer or the employee cannot approve
+  ---
+  duration_ms: 18021.930375
+  type: 'test'
+  ...
+# Subtest: an approved advance is recovered in equal instalments through payroll and shows what is still outstanding
+ok 204 - an approved advance is recovered in equal instalments through payroll and shows what is still outstanding
+  ---
+  duration_ms: 16724.728042
+  type: 'test'
+  ...
+# Subtest: PAY-07: the transfer file needs a verified salary account for everyone, is released only after approval, and its execution is recorded by someone else
+ok 205 - PAY-07: the transfer file needs a verified salary account for everyone, is released only after approval, and its execution is recorded by someone else
+  ---
+  duration_ms: 16975.830917
+  type: 'test'
+  ...
+# Subtest: PAY-09: the settlement applies the accepted policy by termination class — resignation tiers differ from employer termination — and deducts outstanding advances
+ok 206 - PAY-09: the settlement applies the accepted policy by termination class — resignation tiers differ from employer termination — and deducts outstanding advances
+  ---
+  duration_ms: 15986.342792
+  type: 'test'
+  ...
+# Subtest: the case follows the join date the employee record holds, not the start of the contract he happens to be on now; and two recorded dates on opposite sides of the new law are named, never picked between
+ok 207 - the case follows the join date the employee record holds, not the start of the contract he happens to be on now; and two recorded dates on opposite sides of the new law are named, never picked between
+  ---
+  duration_ms: 17944.920042
+  type: 'test'
+  ...
+# Subtest: a non-Saudi is not assumed to be outside the Gulf because nobody asked: the run refuses until the question is answered where nationality is recorded, and either answer is a record
+ok 208 - a non-Saudi is not assumed to be outside the Gulf because nobody asked: the run refuses until the question is answered where nationality is recorded, and either answer is a record
+  ---
+  duration_ms: 17020.285458
+  type: 'test'
+  ...
+# Subtest: a non-Saudi is not assumed to be outside the Gulf because nobody asked: the run refuses until the question is answered where nationality is recorded, and either answer is a record [قبل الحد 2026-09-30T20:05:00.000Z]
+ok 209 - a non-Saudi is not assumed to be outside the Gulf because nobody asked: the run refuses until the question is answered where nationality is recorded, and either answer is a record [قبل الحد 2026-09-30T20:05:00.000Z]
+  ---
+  duration_ms: 17218.968
+  type: 'test'
+  ...
+# Subtest: a non-Saudi is not assumed to be outside the Gulf because nobody asked: the run refuses until the question is answered where nationality is recorded, and either answer is a record [داخل الفجوة 2026-09-30T23:05:00.000Z]
+ok 210 - a non-Saudi is not assumed to be outside the Gulf because nobody asked: the run refuses until the question is answered where nationality is recorded, and either answer is a record [داخل الفجوة 2026-09-30T23:05:00.000Z]
+  ---
+  duration_ms: 16815.526041
+  type: 'test'
+  ...
+# Subtest: a non-Saudi is not assumed to be outside the Gulf because nobody asked: the run refuses until the question is answered where nationality is recorded, and either answer is a record [بعد الفجوة 2026-10-01T09:05:00.000Z]
+ok 211 - a non-Saudi is not assumed to be outside the Gulf because nobody asked: the run refuses until the question is answered where nationality is recorded, and either answer is a record [بعد الفجوة 2026-10-01T09:05:00.000Z]
+  ---
+  duration_ms: 15802.8845
+  type: 'test'
+  ...
+# Subtest: the approval gate reads the rule in force, not the basis frozen on the line: a draft calculated before the rule was accepted, or before an exclusion was recorded, cannot be submitted or approved
+ok 212 - the approval gate reads the rule in force, not the basis frozen on the line: a draft calculated before the rule was accepted, or before an exclusion was recorded, cannot be submitted or approved
+  ---
+  duration_ms: 15819.572375
+  type: 'test'
+  ...
+# Subtest: an employee whose contract changed mid-month is charged on each part by its own wage and days, not on the newest contract for the whole month
+ok 213 - an employee whose contract changed mid-month is charged on each part by its own wage and days, not on the newest contract for the whole month
+  ---
+  duration_ms: 15267.904958
+  type: 'test'
+  ...
+# Subtest: a share clamped to what is left of the wage says so on the line, on the run and on the payslip: the percentage never prints next to an amount it does not produce
+ok 214 - a share clamped to what is left of the wage says so on the line, on the run and on the payslip: the percentage never prints next to an amount it does not produce
+  ---
+  duration_ms: 15415.313375
+  type: 'test'
+  ...
+# Subtest: accepting the insurance rule after a month was approved does not invent a retroactive wage difference with no stated reason
+ok 215 - accepting the insurance rule after a month was approved does not invent a retroactive wage difference with no stated reason
+  ---
+  duration_ms: 14617.815334
+  type: 'test'
+  ...
+# Subtest: the early-pay date is judged by the working week the tenant accepted, and a date confirmed by mistake is withdrawn with a written reason instead of standing for ever
+ok 216 - the early-pay date is judged by the working week the tenant accepted, and a date confirmed by mistake is withdrawn with a written reason instead of standing for ever
+  ---
+  duration_ms: 14176.765
+  type: 'test'
+  ...
+# Subtest: the basis of an exclusion refuses an identity number however it is written: Arabic-Indic and Persian digits and digits split by dots are numbers too
+ok 217 - the basis of an exclusion refuses an identity number however it is written: Arabic-Indic and Persian digits and digits split by dots are numbers too
+  ---
+  duration_ms: 15166.029292
+  type: 'test'
+  ...
+# Subtest: when the accepted rounding rule moves the deduction, the basis carries the amount that was actually withheld — and the HR manager may keep the employee share at the halala the brief recommends
+ok 218 - when the accepted rounding rule moves the deduction, the basis carries the amount that was actually withheld — and the HR manager may keep the employee share at the halala the brief recommends
+  ---
+  duration_ms: 13096.323875
+  type: 'test'
+  ...
+# Subtest: the occupational-hazards branch is in force under both laws, so a month before the date that was copied into its row still charges the company its two per cent
+ok 219 - the occupational-hazards branch is in force under both laws, so a month before the date that was copied into its row still charges the company its two per cent
+  ---
+  duration_ms: 12659.631958
+  type: 'test'
+  ...
+# Subtest: an age at first coverage is never applied as a figure the platform invented: nothing changes until the HR manager records a verified threshold, and then the run refuses instead of deducting
+ok 220 - an age at first coverage is never applied as a figure the platform invented: nothing changes until the HR manager records a verified threshold, and then the run refuses instead of deducting
+  ---
+  duration_ms: 12731.612958
+  type: 'test'
+  ...
+# Subtest: a run whose month the insurance rule never governed says the company share is unavailable, and never prints a zero it did not compute
+ok 221 - a run whose month the insurance rule never governed says the company share is unavailable, and never prints a zero it did not compute
+  ---
+  duration_ms: 12655.641458
+  type: 'test'
+  ...
+# Subtest: من اعتمد صرف الرواتب لا يسجّل تنفيذه، ولو حمل تصريح المراجعة
+ok 222 - من اعتمد صرف الرواتب لا يسجّل تنفيذه، ولو حمل تصريح المراجعة
+  ---
+  duration_ms: 16917.864167
+  type: 'test'
+  ...
+# Subtest: pipeline: stage probabilities are entered with their basis and approved by someone else, and nothing exists until the owner defines it
+ok 223 - pipeline: stage probabilities are entered with their basis and approved by someone else, and nothing exists until the owner defines it
+  ---
+  duration_ms: 17235.77275
+  type: 'test'
+  ...
+# Subtest: pipeline: a stage cannot be entered before its required fields are met, and the weighted forecast is labelled an estimate, not revenue
+ok 224 - pipeline: a stage cannot be entered before its required fields are met, and the weighted forecast is labelled an estimate, not revenue
+  ---
+  duration_ms: 16619.836375
+  type: 'test'
+  ...
+# Subtest: pipeline: an idle opportunity turns stale for its owner after the stage threshold, and a logged activity resets the counter
+ok 225 - pipeline: an idle opportunity turns stale for its owner after the stage threshold, and a logged activity resets the counter
+  ---
+  duration_ms: 15983.575291
+  type: 'test'
+  ...
+# Subtest: pipeline: closing lost demands a listed reason and a comment, a closed opportunity is final, and win/loss is reported by reason, sector and service
+ok 226 - pipeline: closing lost demands a listed reason and a comment, a closed opportunity is final, and win/loss is reported by reason, sector and service
+  ---
+  duration_ms: 15394.590625
+  type: 'test'
+  ...
+# Subtest: pipeline: capability, client team and tenant isolation, and optimistic versions
+ok 227 - pipeline: capability, client team and tenant isolation, and optimistic versions
+  ---
+  duration_ms: 15680.673583
+  type: 'test'
+  ...
+# Subtest: PM-01: the gate blocks paid execution until the advance is confirmed, and never blocks scoping
+ok 228 - PM-01: the gate blocks paid execution until the advance is confirmed, and never blocks scoping
+  ---
+  duration_ms: 16880.193541
+  type: 'test'
+  ...
+# Subtest: PM-01: each missing document refuses by name and says who must provide it
+ok 229 - PM-01: each missing document refuses by name and says who must provide it
+  ---
+  duration_ms: 15691.781125
+  type: 'test'
+  ...
+# Subtest: PM-01 gate guards project execution itself: tasks and templates refuse by document name, and the second reading only warns
+ok 230 - PM-01 gate guards project execution itself: tasks and templates refuse by document name, and the second reading only warns
+  ---
+  duration_ms: 15272.796792
+  type: 'test'
+  ...
+# Subtest: PM-02: kickoff minutes record attendance, the agreed scope and every policy the source lists, and fill their own checklist row
+ok 231 - PM-02: kickoff minutes record attendance, the agreed scope and every policy the source lists, and fill their own checklist row
+  ---
+  duration_ms: 15496.274875
+  type: 'test'
+  ...
+# Subtest: revision rounds are counted per deliverable from its own contract line, and the template default is not a company policy
+ok 232 - revision rounds are counted per deliverable from its own contract line, and the template default is not a company policy
+  ---
+  duration_ms: 15429.82725
+  type: 'test'
+  ...
+# Subtest: PM-03: the four classifications hold, our own error is never charged to the client, and exhausted rounds raise a priced quotation
+ok 233 - PM-03: the four classifications hold, our own error is never charged to the client, and exhausted rounds raise a priced quotation
+  ---
+  duration_ms: 14410.813834
+  type: 'test'
+  ...
+# Subtest: PM-03: an applied change moves budget, schedule and the deliverable, and reopens only the approvals it touches
+ok 234 - PM-03: an applied change moves budget, schedule and the deliverable, and reopens only the approvals it touches
+  ---
+  duration_ms: 13888.52625
+  type: 'test'
+  ...
+# Subtest: the change classification policy stays a draft until someone other than its author approves it
+ok 235 - the change classification policy stays a draft until someone other than its author approves it
+  ---
+  duration_ms: 14375.405916
+  type: 'test'
+  ...
+# Subtest: BD-04 is an electronic record: two separate parties approve it, one person cannot be both, and the money stays with finance
+ok 236 - BD-04 is an electronic record: two separate parties approve it, one person cannot be both, and the money stays with finance
+  ---
+  duration_ms: 13422.936541
+  type: 'test'
+  ...
+# Subtest: a departing project manager leaves the intake chain visible in the clearance list
+ok 237 - a departing project manager leaves the intake chain visible in the clearance list
+  ---
+  duration_ms: 13477.541291
+  type: 'test'
+  ...
+# Subtest: the intake records carry their catalogue form identity, and the catalogue refuses a second empty copy of it
+ok 238 - the intake records carry their catalogue form identity, and the catalogue refuses a second empty copy of it
+  ---
+  duration_ms: 13205.375875
+  type: 'test'
+  ...
+# Subtest: the financially approved pricing file is a reference to an approved pricing sheet, not a sentence someone typed
+ok 239 - the financially approved pricing file is a reference to an approved pricing sheet, not a sentence someone typed
+  ---
+  duration_ms: 12830.472541
+  type: 'test'
+  ...
+# Subtest: PM-03 at the Riyadh day boundary: a change raised at 02:05 Riyadh on the 1st cannot be applied from the last day of the previous month
+ok 240 - PM-03 at the Riyadh day boundary: a change raised at 02:05 Riyadh on the 1st cannot be applied from the last day of the previous month
+  ---
+  duration_ms: 11606.234875
+  type: 'test'
+  ...
+# Subtest: intake scales: the platform ships no impact scale of its own, and only the catalogue owner may define one
+ok 241 - intake scales: the platform ships no impact scale of its own, and only the catalogue owner may define one
+  ---
+  duration_ms: 17087.315167
+  type: 'test'
+  ...
+# Subtest: submission gate: blocks what an approver cannot fix, and only advises on the rest
+ok 242 - submission gate: blocks what an approver cannot fix, and only advises on the rest
+  ---
+  duration_ms: 16548.63425
+  type: 'test'
+  ...
+# Subtest: submission gate: money without a reason blocks, and a date that has already passed blocks
+ok 243 - submission gate: money without a reason blocks, and a date that has already passed blocks
+  ---
+  duration_ms: 15316.396375
+  type: 'test'
+  ...
+# Subtest: service level: a date sooner than the working-day target advises rather than blocks, and the tighter of service and priority wins
+ok 244 - service level: a date sooner than the working-day target advises rather than blocks, and the tighter of service and priority wins
+  ---
+  duration_ms: 15665.57225
+  type: 'test'
+  ...
+# Subtest: on behalf of: the beneficiary stays visible, and only their manager or HR may file for them
+ok 245 - on behalf of: the beneficiary stays visible, and only their manager or HR may file for them
+  ---
+  duration_ms: 15639.484709
+  type: 'test'
+  ...
+# Subtest: duplicates: an open request for the same service and the same beneficiary is surfaced, never blocked
+ok 246 - duplicates: an open request for the same service and the same beneficiary is surfaced, never blocked
+  ---
+  duration_ms: 14560.256667
+  type: 'test'
+  ...
+# Subtest: intake freezes with the submitted revision so the priority cannot shift under the approver
+ok 247 - intake freezes with the submitted revision so the priority cannot shift under the approver
+  ---
+  duration_ms: 14011.526083
+  type: 'test'
+  ...
+# Subtest: duplicates never reveal a request the reader cannot open: a confidential grievance stays hidden from the manager it is about
+ok 248 - duplicates never reveal a request the reader cannot open: a confidential grievance stays hidden from the manager it is about
+  ---
+  duration_ms: 15534.986792
+  type: 'test'
+  ...
+# Subtest: riyadhToday and riyadhMonth read the Riyadh calendar at the edges: 20:59Z, 21:00Z, 23:59Z, 00:00Z, month end and year end
+ok 249 - riyadhToday and riyadhMonth read the Riyadh calendar at the edges: 20:59Z, 21:00Z, 23:59Z, 00:00Z, month end and year end
+  ---
+  duration_ms: 1.999166
+  type: 'test'
+  ...
+# Subtest: the default clock is Date: riyadhToday() and riyadhMonth() follow a pinned clock on both sides of midnight UTC
+ok 250 - the default clock is Date: riyadhToday() and riyadhMonth() follow a pinned clock on both sides of midnight UTC
+  ---
+  duration_ms: 0.900875
+  type: 'test'
+  ...
+# Subtest: riyadhDateOf passes a bare date through, and returns null for nothing or an unreadable value
+ok 251 - riyadhDateOf passes a bare date through, and returns null for nothing or an unreadable value
+  ---
+  duration_ms: 0.264125
+  type: 'test'
+  ...
+# Subtest: the ranges are half-open UTC instants: a Riyadh day, month and year start at 21:00Z of the day before
+ok 252 - the ranges are half-open UTC instants: a Riyadh day, month and year start at 21:00Z of the day before
+  ---
+  duration_ms: 1.622875
+  type: 'test'
+  ...
+# Subtest: ai: at 02:05 Riyadh on the 1st the month cost and the runs of the day count what happened since Riyadh midnight, not since UTC midnight
+ok 253 - ai: at 02:05 Riyadh on the 1st the month cost and the runs of the day count what happened since Riyadh midnight, not since UTC midnight
+  ---
+  duration_ms: 16404.020916
+  type: 'test'
+  ...
+# Subtest: finance grants: a grant from the 1st to the 31st is live from Riyadh midnight of the 1st and ends at Riyadh midnight after the 31st
+ok 254 - finance grants: a grant from the 1st to the 31st is live from Riyadh midnight of the 1st and ends at Riyadh midnight after the 31st
+  ---
+  duration_ms: 15105.9395
+  type: 'test'
+  ...
+# Subtest: invoices: a tax invoice issued at 02:05 Riyadh on 1 January carries the new year in its number
+ok 255 - invoices: a tax invoice issued at 02:05 Riyadh on 1 January carries the new year in its number
+  ---
+  duration_ms: 15376.337208
+  type: 'test'
+  ...
+# Subtest: career profile: at 02:05 Riyadh on 1 January a qualification obtained this year is accepted
+ok 256 - career profile: at 02:05 Riyadh on 1 January a qualification obtained this year is accepted
+  ---
+  duration_ms: 15189.052792
+  type: 'test'
+  ...
+# Subtest: catalog admin: the board day that seasons are read on is the Riyadh day
+ok 257 - catalog admin: the board day that seasons are read on is the Riyadh day
+  ---
+  duration_ms: 14826.328667
+  type: 'test'
+  ...
+# Subtest: payroll payment: approved at 00:30 Riyadh on the 1st, it cannot be recorded as executed on the last day of the previous month
+ok 258 - payroll payment: approved at 00:30 Riyadh on the 1st, it cannot be recorded as executed on the last day of the previous month
+  ---
+  duration_ms: 14174.882625
+  type: 'test'
+  ...
+# Subtest: wage protection: a file exported at 00:30 Riyadh on the 1st cannot be recorded as uploaded on the last day of the previous month
+ok 259 - wage protection: a file exported at 00:30 Riyadh on the 1st cannot be recorded as uploaded on the last day of the previous month
+  ---
+  duration_ms: 15172.0045
+  type: 'test'
+  ...
+# Subtest: expenses: a claim approved by finance at 02:05 Riyadh on the 1st cannot be reimbursed on the last day of the previous month
+ok 260 - expenses: a claim approved by finance at 02:05 Riyadh on the 1st cannot be reimbursed on the last day of the previous month
+  ---
+  duration_ms: 13745.135041
+  type: 'test'
+  ...
+# Subtest: payables: a payment order approved at 02:05 Riyadh on the 1st cannot be recorded as executed on the last day of the previous month
+ok 261 - payables: a payment order approved at 02:05 Riyadh on the 1st cannot be recorded as executed on the last day of the previous month
+  ---
+  duration_ms: 13336.295083
+  type: 'test'
+  ...
+# Subtest: pipeline: an opportunity created at 02:05 Riyadh on the 1st takes no activity dated the last day of the previous month
+ok 262 - pipeline: an opportunity created at 02:05 Riyadh on the 1st takes no activity dated the last day of the previous month
+  ---
+  duration_ms: 13078.71925
+  type: 'test'
+  ...
+# Subtest: talent: results released at 02:05 Riyadh on the 1st can be appealed through the 15th, Riyadh time
+ok 263 - talent: results released at 02:05 Riyadh on the 1st can be appealed through the 15th, Riyadh time
+  ---
+  duration_ms: 12224.250459
+  type: 'test'
+  ...
+# Subtest: request intake: a request made at 00:30 Riyadh fourteen days before today is still inside the duplicate window at 02:05 Riyadh
+ok 264 - request intake: a request made at 00:30 Riyadh fourteen days before today is still inside the duplicate window at 02:05 Riyadh
+  ---
+  duration_ms: 11547.519083
+  type: 'test'
+  ...
+# Subtest: feedback: a one-to-one held at 02:05 Riyadh on the 1st is dated the 1st and held zero days ago
+ok 265 - feedback: a one-to-one held at 02:05 Riyadh on the 1st is dated the 1st and held zero days ago
+  ---
+  duration_ms: 10797.37525
+  type: 'test'
+  ...
+# Subtest: epmo report: a request opened at 00:30 Riyadh on the 1st is not open at the end of the previous month
+ok 266 - epmo report: a request opened at 00:30 Riyadh on the 1st is not open at the end of the previous month
+  ---
+  duration_ms: 9683.572916
+  type: 'test'
+  ...
+# Subtest: deferred revenue: a reversal and a draw recorded at 00:30 Riyadh on the 1st are not in the sheet as of the last day of the previous month
+ok 267 - deferred revenue: a reversal and a draw recorded at 00:30 Riyadh on the 1st are not in the sheet as of the last day of the previous month
+  ---
+  duration_ms: 9380.704625
+  type: 'test'
+  ...
+# Subtest: custom fields: a field published at 02:05 Riyadh on the 1st is added after an opportunity closed on the last day of the previous month
+ok 268 - custom fields: a field published at 02:05 Riyadh on the 1st is added after an opportunity closed on the last day of the previous month
+  ---
+  duration_ms: 9941.562417
+  type: 'test'
+  ...
+# Subtest: guard patterns count the lines that broke on 1 October and not their corrected forms
+ok 269 - guard patterns count the lines that broke on 1 October and not their corrected forms
+  ---
+  duration_ms: 2.040375
+  type: 'test'
+  ...
+# Subtest: guard: no file reads a UTC timestamp as a Riyadh day more often than scripts/riyadh-time-baseline.json allows, and a new file starts at zero
+ok 270 - guard: no file reads a UTC timestamp as a Riyadh day more often than scripts/riyadh-time-baseline.json allows, and a new file starts at zero
+  ---
+  duration_ms: 242.426667
+  type: 'test'
+  ...
+# Subtest: TAL-05: weights must total 100, the cycle opens one review per employee with an active manager, and scores stay hidden from the employee until release
+ok 271 - TAL-05: weights must total 100, the cycle opens one review per employee with an active manager, and scores stay hidden from the employee until release
+  ---
+  duration_ms: 14895.483958
+  type: 'test'
+  ...
+# Subtest: TAL-06: calibration is by a third person, a changed score needs a reason, release is not by the cycle creator, and one appeal is decided by someone who neither scored nor calibrated
+ok 272 - TAL-06: calibration is by a third person, a changed score needs a reason, release is not by the cycle creator, and one appeal is decided by someone who neither scored nor calibrated
+  ---
+  duration_ms: 14849.717
+  type: 'test'
+  ...
+# Subtest: TAL-07/08: training is approved by the manager and completed with evidence; a goal is closed by the manager, not by its owner
+ok 273 - TAL-07/08: training is approved by the manager and completed with evidence; a goal is closed by the manager, not by its owner
+  ---
+  duration_ms: 14358.281
+  type: 'test'
+  ...
+# Subtest: TAL-09: succession plans are visible only to their capability holders, never to the position holder or a listed candidate
+ok 274 - TAL-09: succession plans are visible only to their capability holders, never to the position holder or a listed candidate
+  ---
+  duration_ms: 14557.739458
+  type: 'test'
+  ...
+# Subtest: the wage file format is data the establishment account dictates: the recorder never confirms it, a confirmed definition is replaced by a new revision, and no column lives in the code
+ok 275 - the wage file format is data the establishment account dictates: the recorder never confirms it, a confirmed definition is replaced by a new revision, and no column lives in the code
+  ---
+  duration_ms: 14876.3715
+  type: 'test'
+  ...
+# Subtest: pre-export checks catch before the upload what would be rejected after it, and tell apart what blocks the file from what only warns
+ok 276 - pre-export checks catch before the upload what would be rejected after it, and tell apart what blocks the file from what only warns
+  ---
+  duration_ms: 14723.446125
+  type: 'test'
+  ...
+# Subtest: the manual upload is an admission a second person records once, because the platform neither uploads the file nor reads the authority reply
+ok 277 - the manual upload is an admission a second person records once, because the platform neither uploads the file nor reads the authority reply
+  ---
+  duration_ms: 13127.181042
+  type: 'test'
+  ...
+# Subtest: the file is assembled from the definition alone: fixed widths, the declared delimiter, and cells a spreadsheet cannot read as formulas
+ok 278 - the file is assembled from the definition alone: fixed widths, the declared delimiter, and cells a spreadsheet cannot read as formulas
+  ---
+  duration_ms: 0.318
+  type: 'test'
+  ...
+1..278
+# tests 278
+# suites 0
+# pass 276
+# fail 2
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 763262.433416

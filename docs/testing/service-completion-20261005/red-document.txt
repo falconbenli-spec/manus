@@ -1,0 +1,33 @@
+(node:23809) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+✖ طلب تجديد الوثيقة يحتاج وثيقة الموظف الجديدة والسارية دون ادعاء اتصال حكومي (5204.025541ms)
+ℹ tests 1
+ℹ suites 0
+ℹ pass 0
+ℹ fail 1
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 5414.632458
+
+✖ failing tests:
+
+test at tests/service-output-integrity.test.mjs:120:1
+✖ طلب تجديد الوثيقة يحتاج وثيقة الموظف الجديدة والسارية دون ادعاء اتصال حكومي (5204.025541ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  
+  false !== true
+  
+      at TestContext.<anonymous> (file:///Users/abdulaziz/Documents/Codex/2026-09-09/3-6t-live/tests/service-output-integrity.test.mjs:122:10)
+      at Test.runInAsyncScope (node:async_hooks:228:14)
+      at Test.run (node:internal/test_runner/test:1118:25)
+      at Test.start (node:internal/test_runner/test:1015:17)
+      at startSubtestAfterBootstrap (node:internal/test_runner/harness:358:17)
+      at process.processTicksAndRejections (node:internal/process/task_queues:104:5) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: false,
+    expected: true,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }

@@ -1,0 +1,171 @@
+Package 3 — general-ledger completeness: gap probe and red evidence (2026-09-30)
+
+Probe: a synthetic in-memory month on the Package 2 integration head d9a310d (code unchanged), built with the real
+procurement, payables, receivables and billing paths (tests/ledger-fixture.mjs, mapping only the purposes that existed).
+Runner: work/node24/bin/node v24.14.0. Amounts are minor units (halalas).
+
+G1 SOURCE_KINDS has supplier_invoice: false
+G1 journalFromSource(supplier_invoice): option_not_offered
+G1 createJournalFromPayable lines [account code, debit, credit]: [["5200",115000,0],["2000",0,115000]]
+G1 source builders (sourceDocument) that post a line to 'input_vat': 0
+G1 sourceInvariant forces two lines: true
+G2 pending sources kinds: ["supplier_payment"]
+G2 unposted count (two matched payables, one executed payment): 1
+G2 payable 2000 after posting the payment only [debit balance, credit balance]: [230000,0]
+G2 payable in balance sheet liabilities (negative = debit): -230000
+G2 unposted after posting the payment: 0
+G3 journalFromSource(advance_receipt): option_not_offered
+G3 journalFromSource(advance_draw): option_not_offered
+G3 journalFromSource(advance_reversal): option_not_offered
+G3 journalFromSource(customer_advance): option_not_offered
+G3 'customer_advances' purpose exists: false
+G3 accruals / bank lines kinds exist: []
+G4 ledger exports controlReconciliation: undefined
+G5 ledger exports traceAmount: undefined
+G5 bank_matches.source_kind CHECK: source_kind IN ('supplier_payment','ar_receipt','payroll_payment','expense_reimbursement','custody_issue','custody_return')
+G5 legacy payable journal identity [source_kind, source_id is payable]: ["procurement_payable",true]
+G5 payable journal found through finance_source_links: false
+G5 manual journal source [kind, id, reference]: ["manual","INV-2 تصحيح","INV-2 تصحيح"]
+G6 listFinance.payment_status with an executed payment order: not_paid
+G6 executed payment orders: 1
+
+Reading:
+  G1  the supplier invoice is no ledger source; the only path posts gross 1150.00 to one cost account and 2000 with no VAT line; no builder posts input_vat; sourceInvariant forces two lines.
+  G2  pendingSources lists supplier_payment but not payables: after posting only the payment, payable account 2000 carries a debit balance of 2300.00 and unposted reads 0.
+  G3  customer advances (receipt, draw, reversal) have no journal builder and no purpose; no accrual or bank-line kind exists.
+  G4/G5  no control tie-out and no trace API; bank_matches can only point at six document kinds; the payable journal is reachable only through finance_payable_links; a manual journal carries free text.
+  G6  listFinance.payment_status reads not_paid while a payment order is executed.
+
+Red stage (a) — new and updated tests before any implementation:
+not ok 1 - FIN-01/06/09: a balanced journal reaches an immutable local posting and a sourced trial balance
+ok 2 - FIN-01/06: unbalanced, floating, negative, empty or two-sided amounts cannot create a journal
+ok 3 - FIN-06: returned revisions require a fresh independent approval and cannot skip posting
+ok 4 - FIN-06/09: a closed period and deactivated reference block a pending posting
+ok 5 - FIN-06: an exact reversal is prepared and approved separately, then offsets the ledger once
+ok 6 - IT-02/PLT-05: financial reads and writes require current explicit unexpired grants
+ok 7 - FIN-06: posting checks whether the original approver still holds authority
+not ok 8 - FIN-05/06: the manual payable path is closed — a matched payable posts through the supplier-invoice source, and nothing is written here
+ok 9 - FIN-06 PLT-06/09: idempotent creation and rollback preserve one journal and its audit
+# Error [ERR_MODULE_NOT_FOUND]: Cannot find module 'tests/ledger-completeness.test.mjs
+not ok 2 - tests/ledger-completeness.test.mjs
+not ok 11 - demo chart of accounts: covers every posting purpose with an account of the right type, leaves every mapping awaiting a second person, and is repeatable
+# tests 11
+# pass 7
+# fail 4
+
+Red stage (b) — with only the empty registry module app/ledger-sources.mjs added (ledger.mjs, finance.mjs unchanged):
+not ok 1 - registry: every existing source kind is held unchanged, the new kinds join it, and another file can register its own kind
+not ok 2 - supplier invoice: net per cost centre, input VAT from the verified record, the gross liability — one balanced journal in minor units
+not ok 3 - supplier invoice: not ready until the VAT position is known, and a supplier outside the VAT register posts gross to cost
+not ok 4 - supplier invoice: one payable, one journal — the old manual path is closed, its journals stay readable, and a trigger refuses a second path
+not ok 5 - customer advances: receipt, each draw application and reversal become journals, and the control reads net of reversals
+not ok 6 - migration 167 upgrade: draws applied before it become one opening event each, and later applications are captured by the trigger
+not ok 7 - pending sources: an unposted supplier liability is listed and blocks the monthly close pack like any other unposted document
+not ok 8 - control reconciliation: AR, AP, input VAT, output VAT and customer advances tie to their control accounts after a synthetic month, and the trial balance balances
+not ok 9 - control reconciliation: every difference is itemised to a document or a journal, and the items add up to the difference
+not ok 10 - control reconciliation: read-only, finance-scoped and tenant-isolated
+not ok 11 - trace: a supplier invoice walks to its approvers, its posted journal, its payment, the bank line, and its reversal — with explicit no-link markers
+not ok 12 - trace: an invoice reaches its receipt, the advance drawn on it and its credit note; a manual journal says it has no source document
+not ok 13 - trace: finance-scoped, tenant-isolated, and it refuses what it cannot find instead of guessing
+not ok 14 - listFinance: no constant payment status; each payable carries its payment state from its payment order
+not ok 15 - idempotency: two processes preparing the same supplier invoice at the same instant leave one journal, one payable link and one source link
+not ok 16 - separation of duties: the preparer neither approves nor posts a sourced journal, a reversal needs another preparer, and a read-only holder prepares nothing
+# tests 16
+# pass 0
+# fail 16
+  (every test stops at option_not_offered for the missing purposes supplier_cost/customer_advances or kinds; the
+   migration test at the missing 167 file). Test titles above are as they stood at the time; the FIN-05/06 title was
+   later restored to its pinned name and its body kept the new-path assertions.
+
+Red on base with the final test files (d9a310d code + app/ledger-sources.mjs registry only; tests/ledger-completeness.test.mjs,
+tests/ledger-fixture.mjs, tests/ledger-completeness-worker.mjs and tests/finance.test.mjs as committed):
+not ok 1 - FIN-01/06/09: a balanced journal reaches an immutable local posting and a sourced trial balance
+ok 2 - FIN-01/06: unbalanced, floating, negative, empty or two-sided amounts cannot create a journal
+ok 3 - FIN-06: returned revisions require a fresh independent approval and cannot skip posting
+ok 4 - FIN-06/09: a closed period and deactivated reference block a pending posting
+ok 5 - FIN-06: an exact reversal is prepared and approved separately, then offsets the ledger once
+ok 6 - IT-02/PLT-05: financial reads and writes require current explicit unexpired grants
+ok 7 - FIN-06: posting checks whether the original approver still holds authority
+not ok 8 - FIN-05/06: a matched procurement reference creates one exact payable journal
+ok 9 - FIN-06 PLT-06/09: idempotent creation and rollback preserve one journal and its audit
+not ok 10 - registry: every existing source kind is held unchanged, the new kinds join it, and another file can register its own kind
+not ok 11 - supplier invoice: net per cost centre, input VAT from the verified record, the gross liability — one balanced journal in minor units
+not ok 12 - supplier invoice: not ready until the VAT position is known, and a supplier outside the VAT register posts gross to cost
+not ok 13 - supplier invoice: one payable, one journal — the old manual path is closed, its journals stay readable, and a trigger refuses a second path
+not ok 14 - customer advances: receipt, each draw application and reversal become journals, and the control reads net of reversals
+not ok 15 - migration 167 upgrade: draws applied before it become one opening event each, and later applications are captured by the trigger
+not ok 16 - pending sources: an unposted supplier liability is listed and blocks the monthly close pack like any other unposted document
+not ok 17 - control reconciliation: AR, AP, input VAT, output VAT and customer advances tie to their control accounts after a synthetic month, and the trial balance balances
+not ok 18 - control reconciliation: every difference is itemised to a document or a journal, and the items add up to the difference
+not ok 19 - control reconciliation: read-only, finance-scoped and tenant-isolated
+not ok 20 - trace: a supplier invoice walks to its approvers, its posted journal, its payment, the bank line, and its reversal — with explicit no-link markers
+not ok 21 - trace: an invoice reaches its receipt, the advance drawn on it and its credit note; a manual journal says it has no source document
+not ok 22 - trace: finance-scoped, tenant-isolated, and it refuses what it cannot find instead of guessing
+not ok 23 - listFinance: no constant payment status; each payable carries its payment state from its payment order
+not ok 24 - idempotency: two processes preparing the same supplier invoice at the same instant leave one journal, one payable link and one source link
+not ok 25 - separation of duties: the preparer neither approves nor posts a sourced journal, a reversal needs another preparer, and a read-only holder prepares nothing
+not ok 26 - routes: GET /api/ledger/reconciliation and /api/ledger/trace answer a finance reader and refuse everyone else, writing nothing
+not ok 27 - screens: the statements screen shows the control reconciliation and a trace action; the finance screen shows each payable’s real payment state
+# tests 27
+# pass 7
+# fail 20
+
+Probe source (run from the worktree root on d9a310d with the fixture file added; W = the worktree path):
+
+// Read-only probe of the measured gaps against the current ledger code, on a synthetic in-memory month.
+const W=process.cwd();
+const { ledgerMonth, OLD_PURPOSES } = await import(W+'/tests/ledger-fixture.mjs');
+const ledger = await import(W+'/app/ledger.mjs');
+const f = await import(W+'/app/finance.mjs');
+const { readFileSync } = await import('node:fs');
+const cleanups=[];const t={after:fn=>cleanups.push(fn)};
+const out=(k,v)=>console.log(`${k}: ${typeof v==='string'?v:JSON.stringify(v)}`);
+const tryCode=fn=>{try{fn();return 'no error';}catch(e){return e.code??e.message;}};
+const m=ledgerMonth(t,{purposes:OLD_PURPOSES});
+const {db,users,tx,accounts,centres,period,journal,post}=m;
+
+// Gap 1: the supplier invoice is not a ledger source; only createJournalFromPayable reaches the ledger, two lines, no VAT split.
+const {payable,invoice}=m.matchedPayable({gross:'1150.00'});
+m.inputTax(invoice.id,'150.00');
+out('G1 SOURCE_KINDS has supplier_invoice',ledger.SOURCE_KINDS.some(k=>k.key==='supplier_invoice'));
+out('G1 journalFromSource(supplier_invoice)',tryCode(()=>journal('supplier_invoice',payable.id)));
+const legacy=tx(()=>f.createJournalFromPayable(db,users.employee,{payable_id:payable.id,period_id:period.id,entry_date:m.day,description:'قيد المستحق المصدر',evidence:'ربط الاختبار',debit_account_id:accounts.supplier_cost.id,credit_account_id:accounts.payable.id,cost_center_id:centres['CC-A'].id}));
+out('G1 createJournalFromPayable lines [account code, debit, credit]',legacy.lines.map(l=>[db.prepare('SELECT code FROM finance_accounts WHERE id=?').get(l.account_id).code,l.debit_minor,l.credit_minor]));
+const src=readFileSync(W+'/app/ledger.mjs','utf8');
+const builders=src.slice(src.indexOf('function sourceDocument'),src.indexOf('export function journalFromSource'));
+out("G1 source builders (sourceDocument) that post a line to 'input_vat'",(builders.match(/'input_vat'/g)??[]).length);
+out('G1 sourceInvariant forces two lines',/lines\.length!==2/.test(readFileSync(W+'/app/finance.mjs','utf8')));
+
+// Gap 2: pendingSources omits payables but lists supplier_payment; the payable GL account can go debit.
+const second=m.matchedPayable({gross:'2300.00'});
+m.inputTax(second.invoice.id,'300.00');
+const order=m.pay(second.payable.id);
+let s=ledger.statements(db,users.manager);
+out('G2 pending sources kinds',[...new Set(s.sources.map(x=>x.source_kind))]);
+out('G2 unposted count (two matched payables, one executed payment)',s.unposted);
+post(journal('supplier_payment',order.id));
+s=ledger.statements(db,users.manager);
+const tb=f.listFinance(db,users.manager).trial_balance.rows.find(r=>r.code==='2000');
+out('G2 payable 2000 after posting the payment only [debit balance, credit balance]',[tb.balance_debit_minor,tb.balance_credit_minor]);
+out('G2 payable in balance sheet liabilities (negative = debit)',s.balance_sheet.liabilities.find(r=>r.code==='2000')?.amount_minor);
+out('G2 unposted after posting the payment',s.unposted);
+
+// Gap 3: customer advances have no builder.
+const adv=m.paidAdvance({amount:'5000.00'});
+for(const kind of ['advance_receipt','advance_draw','advance_reversal','customer_advance'])out(`G3 journalFromSource(${kind})`,tryCode(()=>journal(kind,adv.id)));
+out("G3 'customer_advances' purpose exists",ledger.PURPOSES.some(p=>p.key==='customer_advances'));
+out('G3 accruals / bank lines kinds exist',ledger.SOURCE_KINDS.filter(k=>/accru|amort|bank/.test(k.key)).map(k=>k.key));
+
+// Gap 4/5: no control tie-out and no trace API.
+out('G4 ledger exports controlReconciliation',typeof ledger.controlReconciliation);
+out('G5 ledger exports traceAmount',typeof ledger.traceAmount);
+out('G5 bank_matches.source_kind CHECK',db.prepare("SELECT sql FROM sqlite_master WHERE name='bank_matches'").get().sql.match(/source_kind IN \([^)]*\)/)[0]);
+out('G5 legacy payable journal identity [source_kind, source_id is payable]',(()=>{const j=db.prepare('SELECT source_kind,source_id FROM finance_journals WHERE id=?').get(legacy.id);return [j.source_kind,j.source_id===payable.id];})());
+out('G5 payable journal found through finance_source_links',!!db.prepare('SELECT 1 FROM finance_source_links WHERE journal_id=?').get(legacy.id));
+const manual=tx(()=>f.createJournal(db,users.employee,{period_id:period.id,entry_date:m.day,description:'تسوية يدوية مصطنعة',evidence:'مذكرة مصطنعة',currency:'SAR',source_reference:'INV-2 تصحيح',lines:[{account_id:accounts.supplier_cost.id,cost_center_id:centres.GEN.id,debit:'1.00',credit:'0',memo:'تصحيح'},{account_id:accounts.payable.id,cost_center_id:centres.GEN.id,debit:'0',credit:'1.00',memo:'تصحيح'}]}));
+out('G5 manual journal source [kind, id, reference]',(()=>{const j=db.prepare('SELECT source_kind,source_id,source_reference FROM finance_journals WHERE id=?').get(manual.id);return [j.source_kind,j.source_id,j.source_reference];})());
+
+// Gap 6: constant payment_status.
+out('G6 listFinance.payment_status with an executed payment order',f.listFinance(db,users.manager).payment_status);
+out('G6 executed payment orders',db.prepare("SELECT COUNT(*) n FROM payment_orders WHERE status='executed'").get().n);
+for(const fn of cleanups)fn();

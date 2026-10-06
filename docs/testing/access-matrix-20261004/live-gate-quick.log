@@ -1,0 +1,15 @@
+
+> 36t-local-platform@0.1.0 gate:quick
+> node scripts/gate.mjs --quick
+
+Quality ratchet: local primitives 83 (baseline 83) · short refusals 1170 (baseline 1170) · status literals outside the vocabulary 2 (baseline 2) · Latin values without direction isolation 0 (baseline 0) · direct person-table reads 734 (baseline 734) · links 163 checked, 0 unresolved · 229 ms
+
+✔ 2. فحوص المصدر (check.mjs): Syntax checked: 787 JavaScript modules. Source hashes match. Traceability: 220 requirements / 22 domains. Migrations: 165 planned, highest 204. (24.7s)
+✔ 3. المسنّنة: local primitives 83 (baseline 83) · short refusals 1170 (baseline 1170) · status literals outside the vocabulary 2 (baseline 2) · Latin values without direction isolation 0 (baseli (0.2s)
+✔ 4. الترحيلات من قاعدة فارغة: بلغت الترحيل 204 في 2347 مللي (2.3s)
+✔ 5. الترحيلات على نسخة من آخر نسخة احتياطية: /Users/abdulaziz/Documents/Codex/2026-09-09/3-6t-360-codex-handoff-master/work/backups/auto/36t-20261004T0930.sqlite → الترحيل 204 · سلامة ok · مراجع 0 · سلسلة التدقيق true (0.3s)
+✔ 6. بصمة المخطط: 6f57cbe1ae285047… · index 1514 · table 652 · trigger 1396 · view 5 (2.3s)
+✔ 7. لا تبعيات في package.json: صفر تبعية، كما هو مشترط (0s)
+✔ 8. إصدار Node: 24.21.0 مقابل >=24.14 <25 (0s)
+
+سريع: سبعة فحوص مرّت — والحزمة لم تُشغَّل، فهذه ليست البوابة.

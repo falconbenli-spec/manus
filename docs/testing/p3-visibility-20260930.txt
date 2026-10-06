@@ -1,0 +1,454 @@
+# P3 finance visibility and month proof — focused TAP (branch p3/visibility, base 641d647 = Package 3 integration head before migration 169)
+# Engine: v24.14.0 (work/node24). Synthetic data only: in-memory databases; the audit-package checker test writes two files under os.tmpdir() and removes them.
+# Contract words (Package 3): trace every amount to its source, approver, posting, settlement and reversal; close checklists, exception queues,
+# reconciliations, aging, margin, cash, commitments and audit export; payment execution and official invoicing local and explicitly simulated;
+# a complete synthetic month; finance and procurement owner-acceptance scripts, not signed for the owners.
+#
+# RED — each new or changed test run against the code before its change (captured runs, first failing line):
+#   tests/finance-readers.test.mjs          3/3 fail — "the statement counts executed payments that did not come back, through their lines, and lowers
+#                                           the balance by the supplier credit note"; "the reversed receipt is not money received, and the allocation from
+#                                           cash on account settles the claim"; the project closure journals line missed advance and return kinds.
+#   tests/bank-receivables-kinds.test.mjs   3/3 fail — receipt reversal / cash on account / its reversal not matchable (bank_matches CHECK); pre-171 upgrade.
+#   tests/trace-bank-step.test.mjs          tests 1–2 fail — "the second record of a grouped transfer is matched, and the trace says so";
+#                                           "the source document of a bank_line is the statement line itself".
+#                                           test 4 fail (later round) — "both lines of the split receipt, not its first line alone".
+#   tests/finance-visibility.test.mjs       4/4 fail — R41 not_found; R35 was not the close checks; margin took supplier cost gross of verified VAT;
+#                                           a typed opening balance was accepted although a reconciliation exists.
+#   tests/finance-exceptions.test.mjs       file fails to load (app/finance-exceptions.mjs absent); test 5 (later round) — "finance reading alone does not export".
+#   tests/audit-export.test.mjs             file fails to load (app/audit-export.mjs absent); test 5 (later round) — scripts/verify-audit-package.mjs absent.
+#   simulation labels                       5 fail — no contract status vocabulary on the integration map; no SIMULATED line in the payroll transfer file or
+#                                           the wage-protection file; no "داخلية — ما تبلّغت" watermark on the printable invoice.
+#   tests/synthetic-month.test.mjs          fail — "tax_invoice INV-2026-000002: its cash settlement is matched, or it has none": an invoice settled from cash on
+#                                           account had no bank step until the trace read the line of the receipt its allocation drew on.
+#
+# GREEN — the focused run below (64 tests). HTTP routes in these files run through the real handler with dispatch (no port).
+# Removed from the stream: repeated sandbox noise from child processes ("# ERROR: failed to copy trust settings of system certificate-25291"),
+# printed by Node's macOS certificate loader under the sandbox; it is not a test result.
+#
+# Focused files: finance-readers, trace-bank-step, bank-receivables-kinds, finance-visibility, finance-exceptions, audit-export, simulation-labels,
+# payroll-extras, wage-protection, integration-readiness, print-documents, synthetic-month, project-axes, cash-forecast.
+#
+TAP version 13
+# Subtest: audit export: a period package carries its journals, documents, approvals, settlements, reversals and the audit chain segment, and verifies after a round trip through a file
+ok 1 - audit export: a period package carries its journals, documents, approvals, settlements, reversals and the audit chain segment, and verifies after a round trip through a file
+  ---
+  duration_ms: 12470.597458
+  type: 'test'
+  ...
+# Subtest: audit export: a changed amount, an edited event or a removed event is caught on re-import
+ok 2 - audit export: a changed amount, an edited event or a removed event is caught on re-import
+  ---
+  duration_ms: 12317.039125
+  type: 'test'
+  ...
+# Subtest: audit export: only a finance reader who also holds the audit capability exports; another tenant's events appear as hashes only; the export itself is audited
+ok 3 - audit export: only a finance reader who also holds the audit capability exports; another tenant's events appear as hashes only; the export itself is audited
+  ---
+  duration_ms: 14324.845208
+  type: 'test'
+  ...
+# Subtest: audit export: the route answers a download with the package as an attachment, through the real handler
+ok 4 - audit export: the route answers a download with the package as an attachment, through the real handler
+  ---
+  duration_ms: 12423.022916
+  type: 'test'
+  ...
+# Subtest: audit export: a package saved to disk verifies with the command-line checker alone, and a changed file fails it with the reason
+ok 5 - audit export: a package saved to disk verifies with the command-line checker alone, and a changed file fails it with the reason
+  ---
+  duration_ms: 13413.535583
+  type: 'test'
+  ...
+# Subtest: receivables cash: a receipt reversal, cash on account and its reversal are cash records with their direction, matchable, and traced from the ledger to their line
+ok 6 - receivables cash: a receipt reversal, cash on account and its reversal are cash records with their direction, matchable, and traced from the ledger to their line
+  ---
+  duration_ms: 12339.563584
+  type: 'test'
+  ...
+# Subtest: receivables cash: two reversals in one bank debit are one grouped match, and a pending cash on account is not matchable
+ok 7 - receivables cash: two reversals in one bank debit are one grouped match, and a pending cash on account is not matchable
+  ---
+  duration_ms: 12188.853708
+  type: 'test'
+  ...
+# Subtest: migration 171: every match and item on a pre-171 database survives the rebuild column for column, the guards still hold, and the three receivables kinds are accepted
+ok 8 - migration 171: every match and item on a pre-171 database survives the rebuild column for column, the guards still hold, and the three receivables kinds are accepted
+  ---
+  duration_ms: 13269.818833
+  type: 'test'
+  ...
+# Subtest: cash forecast: only an explicit capability opens it, and another tenant never appears in it
+ok 9 - cash forecast: only an explicit capability opens it, and another tenant never appears in it
+  ---
+  duration_ms: 12127.426
+  type: 'test'
+  ...
+# Subtest: cash forecast: the horizon is thirteen rolling weeks and a claim lands in the week of its due date
+ok 10 - cash forecast: the horizon is thirteen rolling weeks and a claim lands in the week of its due date
+  ---
+  duration_ms: 11504.811084
+  type: 'test'
+  ...
+# Subtest: cash forecast: an issued invoice is confirmed, an unbilled entitlement is expected, and the two are never one number
+ok 11 - cash forecast: an issued invoice is confirmed, an unbilled entitlement is expected, and the two are never one number
+  ---
+  duration_ms: 13281.019375
+  type: 'test'
+  ...
+# Subtest: cash forecast: a recorded collection promise moves money to its promised date and stays expected
+ok 12 - cash forecast: a recorded collection promise moves money to its promised date and stays expected
+  ---
+  duration_ms: 10302.757625
+  type: 'test'
+  ...
+# Subtest: cash forecast: the opening balance is a manual input that is declared missing, and nothing the screen computes is stored
+ok 13 - cash forecast: the opening balance is a manual input that is declared missing, and nothing the screen computes is stored
+  ---
+  duration_ms: 11032.731708
+  type: 'test'
+  ...
+# Subtest: cash forecast: scenarios are manual inputs computed on the spot, never stored and never changing a document
+ok 14 - cash forecast: scenarios are manual inputs computed on the spot, never stored and never changing a document
+  ---
+  duration_ms: 11260.412958
+  type: 'test'
+  ...
+# Subtest: cash forecast: no collection rate is invented, and a small sample says so instead of pretending
+ok 15 - cash forecast: no collection rate is invented, and a small sample says so instead of pretending
+  ---
+  duration_ms: 10768.622333
+  type: 'test'
+  ...
+# Subtest: cash forecast: salaries are a total from live contracts, never a person, and what the platform cannot know is declared
+ok 16 - cash forecast: salaries are a total from live contracts, never a person, and what the platform cannot know is declared
+  ---
+  duration_ms: 11150.301
+  type: 'test'
+  ...
+# Subtest: cash forecast: live contracts answer “do I cover payroll?” as a total only, with its pay-date assumption declared
+ok 17 - cash forecast: live contracts answer “do I cover payroll?” as a total only, with its pay-date assumption declared
+  ---
+  duration_ms: 10630.209667
+  type: 'test'
+  ...
+# Subtest: cash forecast screen: it renders from real board data under the strict content policy
+ok 18 - cash forecast screen: it renders from real board data under the strict content policy
+  ---
+  duration_ms: 10978.56575
+  type: 'test'
+  ...
+# Subtest: cash forecast: a contracted subscription is expected money on its own billing dates, counted once
+ok 19 - cash forecast: a contracted subscription is expected money on its own billing dates, counted once
+  ---
+  duration_ms: 10777.740958
+  type: 'test'
+  ...
+# Subtest: exceptions: each kind is computed from its source with its owner, and what already waits as a decision elsewhere is listed but not counted in the inbox twice
+ok 20 - exceptions: each kind is computed from its source with its owner, and what already waits as a decision elsewhere is listed but not counted in the inbox twice
+  ---
+  duration_ms: 12549.2105
+  type: 'test'
+  ...
+# Subtest: acknowledgement: an append-only record by the owner, at the amount of the moment; it leaves the inbox, comes back when the amount changes, and is refused to anyone else
+ok 21 - acknowledgement: an append-only record by the owner, at the amount of the moment; it leaves the inbox, comes back when the amount changes, and is refused to anyone else
+  ---
+  duration_ms: 12951.738959
+  type: 'test'
+  ...
+# Subtest: overdue re-close: a reopened month past its re-close date is an exception for whoever manages the close
+ok 22 - overdue re-close: a reopened month past its re-close date is an exception for whoever manages the close
+  ---
+  duration_ms: 13589.32775
+  type: 'test'
+  ...
+# Subtest: screen and routes: the queue renders each exception with its owner and an acknowledge form, and the route acknowledges once per idempotency key through the real handler
+ok 23 - screen and routes: the queue renders each exception with its owner and an acknowledge form, and the route acknowledges once per idempotency key through the real handler
+  ---
+  duration_ms: 12714.421625
+  type: 'test'
+  ...
+# Subtest: audit package: the queue offers the period package as a download to whoever also holds the audit capability, and to no one else
+ok 24 - audit package: the queue offers the period package as a download to whoever also holds the audit capability, and to no one else
+  ---
+  duration_ms: 12999.775333
+  type: 'test'
+  ...
+# Subtest: suppliers: the ledger statement, R32, the executive pulse, the cash forecast and the project settlement axis all read payable_balances — a batch, a partial payment, a return and a supplier credit note included
+ok 25 - suppliers: the ledger statement, R32, the executive pulse, the cash forecast and the project settlement axis all read payable_balances — a batch, a partial payment, a return and a supplier credit note included
+  ---
+  duration_ms: 10577.836666
+  type: 'test'
+  ...
+# Subtest: customers: the ledger statement, R31 aging, the executive pulse and the cash forecast read ar_claim_collection — a reversed receipt is not collected, a credit note lowers the claim, an allocation settles it
+ok 26 - customers: the ledger statement, R31 aging, the executive pulse and the cash forecast read ar_claim_collection — a reversed receipt is not collected, a credit note lowers the claim, an allocation settles it
+  ---
+  duration_ms: 12426.846792
+  type: 'test'
+  ...
+# Subtest: project closure: the journals line counts the project's advance receipt, draw and reversal, a batch payment through its lines, and a returned supplier payment
+ok 27 - project closure: the journals line counts the project's advance receipt, draw and reversal, a batch payment through its lines, and a returned supplier payment
+  ---
+  duration_ms: 11787.440834
+  type: 'test'
+  ...
+# Subtest: trace: a batch payment settles every invoice it pays, by the part it paid, and the payment names each invoice it settles
+ok 28 - trace: a batch payment settles every invoice it pays, by the part it paid, and the payment names each invoice it settles
+  ---
+  duration_ms: 11664.6895
+  type: 'test'
+  ...
+# Subtest: AP aging: each open payable is aged from its due date — the verified tax invoice date plus the owner's payment term — at its outstanding balance, and without an adopted term it says so and ages from the invoice date
+ok 29 - AP aging: each open payable is aged from its due date — the verified tax invoice date plus the owner's payment term — at its outstanding balance, and without an adopted term it says so and ages from the invoice date
+  ---
+  duration_ms: 11117.749625
+  type: 'test'
+  ...
+# Subtest: R35 is the close checks themselves: unposted journals (never a rejected one), documents without a posted journal, an active bank account without an approved reconciliation, and each control difference, every row with an owner and a named item
+ok 30 - R35 is the close checks themselves: unposted journals (never a rejected one), documents without a posted journal, an active bank account without an approved reconciliation, and each control difference, every row with an owner and a named item
+  ---
+  duration_ms: 11334.172542
+  type: 'test'
+  ...
+# Subtest: margin: supplier cost enters the project margin net of verified input VAT and of approved supplier credit notes, against net revenue — and verifying the VAT later moves the figures an acceptance was taken on
+ok 31 - margin: supplier cost enters the project margin net of verified input VAT and of approved supplier credit notes, against net revenue — and verifying the VAT later moves the figures an acceptance was taken on
+  ---
+  duration_ms: 11314.96075
+  type: 'test'
+  ...
+# Subtest: cash forecast: the opening balance comes from the ledger balance of reconciled bank accounts plus final cash documents not yet posted; a typed figure is refused while a reconciliation exists, and stays labelled manual when none does
+ok 32 - cash forecast: the opening balance comes from the ledger balance of reconciled bank accounts plus final cash documents not yet posted; a typed figure is refused while a reconciliation exists, and stays labelled manual when none does
+  ---
+  duration_ms: 10685.59225
+  type: 'test'
+  ...
+# Subtest: خريطة التكاملات ترفض الدور المزور وتسحب الوصول فور تغيير الدور
+ok 33 - خريطة التكاملات ترفض الدور المزور وتسحب الوصول فور تغيير الدور
+  ---
+  duration_ms: 9515.162
+  type: 'test'
+  ...
+# Subtest: واجهة الربط تعرض الموانع وتهرب المحتوى ولا توهم باتصال ناجح
+ok 34 - واجهة الربط تعرض الموانع وتهرب المحتوى ولا توهم باتصال ناجح
+  ---
+  duration_ms: 0.35125
+  type: 'test'
+  ...
+# Subtest: PAY-03: only approved adjustments enter the run, each exactly once, and a proposer or the employee cannot approve
+ok 35 - PAY-03: only approved adjustments enter the run, each exactly once, and a proposer or the employee cannot approve
+  ---
+  duration_ms: 10947.968417
+  type: 'test'
+  ...
+# Subtest: an approved advance is recovered in equal instalments through payroll and shows what is still outstanding
+ok 36 - an approved advance is recovered in equal instalments through payroll and shows what is still outstanding
+  ---
+  duration_ms: 11211.776458
+  type: 'test'
+  ...
+# Subtest: PAY-07: the transfer file needs a verified salary account for everyone, is released only after approval, and its execution is recorded by someone else
+ok 37 - PAY-07: the transfer file needs a verified salary account for everyone, is released only after approval, and its execution is recorded by someone else
+  ---
+  duration_ms: 10207.963541
+  type: 'test'
+  ...
+# Subtest: PAY-09: the settlement applies the accepted policy by termination class — resignation tiers differ from employer termination — and deducts outstanding advances
+ok 38 - PAY-09: the settlement applies the accepted policy by termination class — resignation tiers differ from employer termination — and deducts outstanding advances
+  ---
+  duration_ms: 11067.859625
+  type: 'test'
+  ...
+# Subtest: printable invoice: an issued invoice carries its QR symbol and says plainly it was not reported to Fatoora; a draft carries neither number nor QR
+ok 39 - printable invoice: an issued invoice carries its QR symbol and says plainly it was not reported to Fatoora; a draft carries neither number nor QR
+  ---
+  duration_ms: 10.499583
+  type: 'test'
+  ...
+# Subtest: printable payslip: earnings, additions and deductions reconcile to the net shown
+ok 40 - printable payslip: earnings, additions and deductions reconcile to the net shown
+  ---
+  duration_ms: 0.267375
+  type: 'test'
+  ...
+# Subtest: AXIS-01: the eight axes are independent — moving one leaves the other seven where they were
+ok 41 - AXIS-01: the eight axes are independent — moving one leaves the other seven where they were
+  ---
+  duration_ms: 11441.945709
+  type: 'test'
+  ...
+# Subtest: AXIS-02: the advance gate blocks paid execution and never touches pre-sale scoping
+ok 42 - AXIS-02: the advance gate blocks paid execution and never touches pre-sale scoping
+  ---
+  duration_ms: 22954.6335
+  type: 'test'
+  ...
+# Subtest: AXIS-03: the advance is expected from the payment schedule, and confirmed only against a real receipt by a second person
+ok 43 - AXIS-03: the advance is expected from the payment schedule, and confirmed only against a real receipt by a second person
+  ---
+  duration_ms: 23293.61425
+  type: 'test'
+  ...
+# Subtest: AXIS-04: supplier start refuses without a purchase order and without a commencement authorisation
+ok 44 - AXIS-04: supplier start refuses without a purchase order and without a commencement authorisation
+  ---
+  duration_ms: 11398.355125
+  type: 'test'
+  ...
+# Subtest: AXIS-05: a multi-department project can be planned — work packages carry a department, a phase and an owner
+ok 45 - AXIS-05: a multi-department project can be planned — work packages carry a department, a phase and an owner
+  ---
+  duration_ms: 19638.680042
+  type: 'test'
+  ...
+# Subtest: AXIS-06: closure refuses by naming the exact outstanding item, and needs technical then financial
+ok 46 - AXIS-06: closure refuses by naming the exact outstanding item, and needs technical then financial
+  ---
+  duration_ms: 9345.583417
+  type: 'test'
+  ...
+# Subtest: AXIS-07: financial closure names every outstanding balance, and a decision is written not silent
+ok 47 - AXIS-07: financial closure names every outstanding balance, and a decision is written not silent
+  ---
+  duration_ms: 9393.230917
+  type: 'test'
+  ...
+# Subtest: AXIS-08: reopening a closure needs a capability and a reason, and leaves an audited record
+ok 48 - AXIS-08: reopening a closure needs a capability and a reason, and leaves an audited record
+  ---
+  duration_ms: 9616.823167
+  type: 'test'
+  ...
+# Subtest: AXIS-09: invoicing, collection and supplier settlement each read their own source and no other
+ok 49 - AXIS-09: invoicing, collection and supplier settlement each read their own source and no other
+  ---
+  duration_ms: 11781.893667
+  type: 'test'
+  ...
+# Subtest: AXIS-08: both locks in one hand are refused with a way out, and the way out is a capability plus a written reason
+ok 50 - AXIS-08: both locks in one hand are refused with a way out, and the way out is a capability plus a written reason
+  ---
+  duration_ms: 14192.741334
+  type: 'test'
+  ...
+# Subtest: AXIS-08: the same-person rule holds in both directions, and a reason is refused when the locks are in two hands
+ok 51 - AXIS-08: the same-person rule holds in both directions, and a reason is refused when the locks are in two hands
+  ---
+  duration_ms: 12574.809666
+  type: 'test'
+  ...
+# Subtest: AXIS-08: a reason on locks held by two people is refused, and the database refuses a silent same-person row from outside the code
+ok 52 - AXIS-08: a reason on locks held by two people is refused, and the database refuses a silent same-person row from outside the code
+  ---
+  duration_ms: 12765.609416
+  type: 'test'
+  ...
+# Subtest: integrations: every connection carries a status from the contract vocabulary with its basis, none is active, and the local simulations are named
+ok 53 - integrations: every connection carries a status from the contract vocabulary with its basis, none is active, and the local simulations are named
+  ---
+  duration_ms: 10859.960875
+  type: 'test'
+  ...
+# Subtest: e-invoicing: the board says the official channel is a local simulation, not connected, and a scripted success from a test gateway is still labelled as coming from that gateway
+ok 54 - e-invoicing: the board says the official channel is a local simulation, not connected, and a scripted success from a test gateway is still labelled as coming from that gateway
+  ---
+  duration_ms: 11986.477583
+  type: 'test'
+  ...
+# Subtest: the printable tax invoice carries a visible internal / not-reported watermark, issued or draft
+ok 55 - the printable tax invoice carries a visible internal / not-reported watermark, issued or draft
+  ---
+  duration_ms: 48.655917
+  type: 'test'
+  ...
+# Subtest: synthetic month: September 2026 runs end to end through the real paths — sales, procurement, advances, expenses, bank import with grouped and split matches and a posted fee, a zero-difference reconciliation, a green close, a controlled reopen, a dated adjustment and a re-close — and proves itself
+ok 56 - synthetic month: September 2026 runs end to end through the real paths — sales, procurement, advances, expenses, bank import with grouped and split matches and a posted fee, a zero-difference reconciliation, a green close, a controlled reopen, a dated adjustment and a re-close — and proves itself
+  ---
+  duration_ms: 12919.700167
+  type: 'test'
+  ...
+# Subtest: trace: a record inside a grouped match shows the bank line that carried it, and a record settled by two lines shows both
+ok 57 - trace: a record inside a grouped match shows the bank line that carried it, and a record settled by two lines shows both
+  ---
+  duration_ms: 11856.494208
+  type: 'test'
+  ...
+# Subtest: trace: a classified bank line is its own bank step, and a manual journal on the bank account shows the line it was matched to
+ok 58 - trace: a classified bank line is its own bank step, and a manual journal on the bank account shows the line it was matched to
+  ---
+  duration_ms: 10406.673833
+  type: 'test'
+  ...
+# Subtest: trace: another tenant traces nothing — neither the grouped record nor the classified line
+ok 59 - trace: another tenant traces nothing — neither the grouped record nor the classified line
+  ---
+  duration_ms: 10896.463875
+  type: 'test'
+  ...
+# Subtest: trace: an invoice shows every statement line that carried its cash — both lines of a split receipt, and the line of the on-account receipt its allocation drew on
+ok 60 - trace: an invoice shows every statement line that carried its cash — both lines of a split receipt, and the line of the on-account receipt its allocation drew on
+  ---
+  duration_ms: 10351.307
+  type: 'test'
+  ...
+# Subtest: the wage file format is data the establishment account dictates: the recorder never confirms it, a confirmed definition is replaced by a new revision, and no column lives in the code
+ok 61 - the wage file format is data the establishment account dictates: the recorder never confirms it, a confirmed definition is replaced by a new revision, and no column lives in the code
+  ---
+  duration_ms: 10668.511542
+  type: 'test'
+  ...
+# Subtest: pre-export checks catch before the upload what would be rejected after it, and tell apart what blocks the file from what only warns
+ok 62 - pre-export checks catch before the upload what would be rejected after it, and tell apart what blocks the file from what only warns
+  ---
+  duration_ms: 11014.587375
+  type: 'test'
+  ...
+# Subtest: the manual upload is an admission a second person records once, because the platform neither uploads the file nor reads the authority reply
+ok 63 - the manual upload is an admission a second person records once, because the platform neither uploads the file nor reads the authority reply
+  ---
+  duration_ms: 10034.686375
+  type: 'test'
+  ...
+# Subtest: the file is assembled from the definition alone: fixed widths, the declared delimiter, and cells a spreadsheet cannot read as formulas
+ok 64 - the file is assembled from the definition alone: fixed widths, the declared delimiter, and cells a spreadsheet cannot read as formulas
+  ---
+  duration_ms: 0.366875
+  type: 'test'
+  ...
+1..64
+# tests 64
+# suites 0
+# pass 64
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 253806.077834
+#
+# ─── Beyond the focused run (same engine, same commit 30b8c1b) ───
+# Targeted regression, 22 files that read the changed modules (ledger, ledger-reopen, finance, inbox, obligations, reports, reports-library,
+# report-figures, close-checklist, close-system-checks, payables, receivables, payment-release, profitability, einvoice-gateway, links, kit,
+# migrations, migration-plan, executive-scope, accruals-ledger, delivery-cycle): tests 151 · pass 150 · fail 1. The one failure is
+#   tests/obligations.test.mjs:104 "obligations: the nav badge endpoint serves the same number…" — listen EPERM (the sandbox refuses local ports).
+# Earlier regression on the checkpoint 2a642fe: bank-close-month, bank-matching-groups, bank-line-ledger, bank-reconciliation, ledger-completeness,
+#   receivables-settlement and the finance-readers/trace files: 69/69; again after the trace change: synthetic-month, finance-readers,
+#   receivables-settlement, ledger-completeness 42/42.
+# Tests that could not run here (listen EPERM): tests/obligations.test.mjs:104 (above); tests/static-modules.test.mjs:10 — replaced by the same
+#   scan through the real handler with dispatch: 136 modules and stylesheets wanted, 0 missing; tests/portal-audit-fixes.test.mjs:41 (B1 snapshot
+#   routes). Unrelated to this package and failing identically on the base 641d647: attendance-rules :272 and attendance :69 (date-dependent),
+#   attendance-rules :321 and catalog-quality-fixes :112 (EPERM).
+# A full-suite run (330 files) was started and stopped after 350 results because the machine was saturated (load ≈ 65 on 8 cores, 0.1 GB free)
+#   while other sessions were testing; its failures up to that point were only the ones listed above plus the golden test below.
+# tests/ui-golden.test.mjs moves, not updated (baseline file is not this package's to edit):
+#   added  employee|manager|hr|admin/finance-exceptions — the new screen;
+#   changed admin/security and admin/permissions-matrix — the new capability finance.audit.export; admin/reports — the new report R41;
+#   changed manager/hr-policies and hr/hr-policies — identical on the base 641d647, not from this branch.
+# scripts/check.mjs: syntax, source hashes and the migration plan pass; it stops at traceability because recorded test hashes are stale —
+#   from this branch: tests/payroll-extras.test.mjs (PAY-03, PAY-07, PAY-09) and tests/print-documents.test.mjs (PAY-08, FIN-08);
+#   already stale on the base: tests/finance.test.mjs, tests/receivables.test.mjs, tests/payables.test.mjs.
+# scripts/quality-ratchet.mjs: passes, nothing rose (primitives 111/111 · short refusals 1170/1183 · status literals 2/2 · bidi 0/0 ·
+#   person reads 734/737 · links 148 checked, 0 unresolved); not tightened.
+# scripts/gate.mjs --quick: 3 ratchet ✔, 5 upgrade on a copy of the newest backup → 171, integrity ok, foreign keys 0, audit chain true ✔,
+#   7 zero dependencies ✔, 8 Node 24.14.0 ✔; 2 check.mjs ✖ (traceability above), 4 fresh migrations reach 171 against a baseline of 165 ✖,
+#   6 schema digest 168108d2ca9104106cbc1f38caca788180b91f61f759f17a80a7d53394ca44db (3295 objects: index 1384, table 598, trigger 1308,
+#   view 5) against the recorded bc890b40… ✖ — both baselines predate migrations 166–171 and are not this package's to edit.
+#   Without 171 the fresh digest is f0134240b4a16350daae2e6fb328e58562946c2b55d6363a8429f020aa4e02f6 (3290 objects): 171 adds one table,
+#   two indexes (one automatic) and two triggers, and rebuilds bank_matches and bank_match_items with the same object count.

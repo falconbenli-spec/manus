@@ -1,0 +1,21 @@
+{
+ "ok": true,
+ "backup": "work/backups/pre-p2-deploy-20260930/36t-20260930T2017.sqlite",
+ "version_before": 159,
+ "version_after": 178,
+ "tables_before": 571,
+ "rows_before": 7306,
+ "dropped_tables": [],
+ "count_changes": [
+  {
+   "table": "schema_migrations",
+   "before": 141,
+   "after": 155
+  }
+ ],
+ "content_changes_same_count": [],
+ "lost_columns": [],
+ "integrity": "ok",
+ "foreign_key_violations": 0,
+ "audit_chain": true
+}

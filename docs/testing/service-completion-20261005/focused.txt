@@ -1,0 +1,32 @@
+✔ الالتزام واحد: الكامل يبدأ بالمختصر، وترويسة Markdown تحمل الاثنين نفسيهما، وتاريخ القياس واحد (0.642209ms)
+✔ الدرجات السبع عشرة والموانع متطابقة بين الملفين، والدرجة من السلّم الصحيح (0.301958ms)
+✔ المتوسط والرقم الحاكم محسوبان بالقاعدة المكتوبة لا منقولان، ويتفق عليهما الملفان (0.145416ms)
+✔ خط أساس البوابة والبطاقة يقولان الترحيل والبصمة والأرضية نفسها (0.532625ms)
+(node:20966) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ the governed scope is exactly the audited 42 deepen services and 12 existing-module connections (0.792292ms)
+✔ a deepen service cannot close until its tangible output is recorded and accepted by the requester (2778.451666ms)
+{"t":"2026-10-05T13:29:24.358Z","id":"066c4662","env":"local","m":"POST","p":"/api/login","s":200,"ms":260}
+{"t":"2026-10-05T13:29:24.620Z","id":"2c086201","env":"local","m":"POST","p":"/api/login","s":200,"ms":257}
+{"t":"2026-10-05T13:29:24.629Z","id":"054a36ab","env":"local","m":"POST","p":"/api/requests/b5a19d9f-81a4-4d62-8800-8780ba0ad4b7/outputs","s":201,"ms":8,"tx":1,"lock_ms":0}
+{"t":"2026-10-05T13:29:24.636Z","id":"d75bfadc","env":"local","m":"POST","p":"/api/service-outputs/b0befcb7-6588-452d-9762-1d74d5cfe0e9/accept","s":201,"ms":6,"tx":1,"lock_ms":0}
+{"t":"2026-10-05T13:29:24.638Z","id":"4ad0e5cc","env":"local","m":"GET","p":"/api/requests/b5a19d9f-81a4-4d62-8800-8780ba0ad4b7","s":200,"ms":1}
+✔ the HTTP workflow records and decides an output, then exposes the closure gate in request detail (3308.825834ms)
+✔ a connected service accepts only a real record from its existing module and tenant (2690.304292ms)
+(node:20967) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ لا يقرأ موظف آخر مخرجات طلب لا يملك حق الاطلاع عليه (2760.687208ms)
+✔ لا يقبل مخرج تغيير وظيفي يخص موظفًا آخر أو طلبًا آخر أو حركة ملغاة (2719.363042ms)
+✔ تغيير الحساب البنكي يحتاج حساب صاحب الطلب متحققًا لا سجلًا معلقًا (2710.19175ms)
+✔ يعاد فحص مخرج السجل عند قبوله وعند الإغلاق ولا يكفي قبوله قبل إلغائه (2627.5655ms)
+✔ طلب إقفال الحملة لا يسلم حملة ما زالت في التخطيط (2548.192458ms)
+✔ مسار المغادرة لا يقبل حزمة انضمام ولا حزمة تخص موظفًا آخر (2539.361333ms)
+✔ تسعير الفرصة لا يقبل سجلًا أوليًا لا يحمل تسعيرًا معتمدًا (2601.031292ms)
+ℹ tests 15
+ℹ suites 0
+ℹ pass 15
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 18681.472625

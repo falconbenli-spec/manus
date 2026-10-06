@@ -1,0 +1,37 @@
+
+> 36t-local-platform@0.1.0 test
+> node --test tests/*.test.mjs
+
+✔ F09: an unknown route is denied for every role (0.552541ms)
+✔ F09: known rules and explicit empty overrides keep their meaning (0.087125ms)
+✔ NFR-08: migration 002 preserves version 001 users and service records and runs once (56.3715ms)
+✔ PLT-04: request moves from employee to manager to executor with completion evidence (43.689667ms)
+✔ PLT-04: sequential approval cannot skip HR or overwrite an earlier submitted version (39.489208ms)
+✔ PLT-01/05/07: tenant, unrelated employee, and technical admin cannot read request, file or search title (38.131417ms)
+✔ PLT-04: creator cannot approve and client cannot choose approver, state, tenant or requester (37.981791ms)
+✔ PLT-04: self routing and ambiguous approval routing fail without partial records (37.650417ms)
+✔ PLT-04/09: stale duplicate decision fails and creates one blocked event (36.581916ms)
+✔ PLT-04: cancellation and rejection are terminal and cannot be executed (38.613333ms)
+✔ PLT-03: required fields and dates validated by server; new catalog service needs no new app (42.681917ms)
+✔ PLT-07: unsafe filename, wrong signature and post-submit attachment are rejected (42.046167ms)
+✔ PLT-06: audit and submitted snapshots cannot be changed or deleted (43.923125ms)
+✔ PMO-01 and access: project membership gates tasks and briefs, completion requires evidence (39.632458ms)
+✔ IT-02: password, CSRF, disabled users, expiration and logout are enforced (104.985042ms)
+✔ HTTP security and cross-department journey use real local endpoints (303.179834ms)
+✔ NFR-04/10: SQLite backup restores requests, attachment bytes, permissions and audit (40.633333ms)
+✔ SEC-02: revoked role removes request, search, attachment and notification access (44.969417ms)
+✔ SEC-03: changed reporting line revokes the old manager approval scope (36.3125ms)
+✔ SEC-03: HTTP approval rechecks current department with an existing session (98.795209ms)
+✔ SEC-05: settled decisions and step identity cannot be rewritten or deleted (37.995209ms)
+✔ SEC-04: concurrent HTTP retries create one record and keys cannot change content or bypass visibility (219.561542ms)
+✔ TRACE: all 220 original rows and acceptance criteria match the workbook and evidence (44.788333ms)
+✔ TRACE: changing acceptance or declaring partial work complete is rejected (17.010375ms)
+✔ SEC-01: reversed request responses cannot change the visible action or attachment target (47.138208ms)
+ℹ tests 25
+ℹ suites 0
+ℹ pass 25
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 1074.775541

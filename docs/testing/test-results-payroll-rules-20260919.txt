@@ -1,0 +1,12 @@
+✔ PAY-03: only approved adjustments enter the run, each exactly once, and a proposer or the employee cannot approve (1161.749083ms)
+✔ an approved advance is recovered in equal instalments through payroll and shows what is still outstanding (1223.267417ms)
+✔ PAY-07: the transfer file needs a verified salary account for everyone, is released only after approval, and its execution is recorded by someone else (1659.644ms)
+✔ PAY-09: the settlement applies the accepted policy by termination class — resignation tiers differ from employer termination — and deducts outstanding advances (1320.783083ms)
+ℹ tests 4
+ℹ suites 0
+ℹ pass 4
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 5569.470084

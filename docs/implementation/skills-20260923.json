@@ -1,0 +1,230 @@
+{
+  "date": "2026-09-23",
+  "download_sources": [
+    {
+      "repo": "obra/superpowers",
+      "commit": "5bf4e78011075bcfc0dc295f0724994cd123ee71",
+      "paths": [
+        "skills/brainstorming",
+        "skills/diagnosing-superpowers",
+        "skills/dispatching-parallel-agents",
+        "skills/executing-plans",
+        "skills/finishing-a-development-branch",
+        "skills/receiving-code-review",
+        "skills/requesting-code-review",
+        "skills/subagent-driven-development",
+        "skills/systematic-debugging",
+        "skills/test-driven-development",
+        "skills/using-git-worktrees",
+        "skills/using-superpowers",
+        "skills/verification-before-completion",
+        "skills/writing-plans",
+        "skills/writing-skills"
+      ],
+      "installed_now": [
+        "skills/brainstorming",
+        "skills/diagnosing-superpowers",
+        "skills/dispatching-parallel-agents",
+        "skills/executing-plans",
+        "skills/finishing-a-development-branch",
+        "skills/receiving-code-review",
+        "skills/requesting-code-review",
+        "skills/subagent-driven-development",
+        "skills/systematic-debugging",
+        "skills/test-driven-development",
+        "skills/using-git-worktrees",
+        "skills/using-superpowers",
+        "skills/verification-before-completion",
+        "skills/writing-plans",
+        "skills/writing-skills"
+      ]
+    },
+    {
+      "repo": "supabase/agent-skills",
+      "commit": "8331f910845103c08d51f6ca1d86ebb7d1f745e3",
+      "paths": [
+        "skills/supabase-postgres-best-practices"
+      ],
+      "installed_now": [
+        "skills/supabase-postgres-best-practices"
+      ]
+    }
+  ],
+  "new_skills": [
+    {
+      "name": "brainstorming",
+      "path": "/Users/abdulaziz/.codex/skills/brainstorming",
+      "validation_exit": 0,
+      "validation": "Skill is valid!",
+      "sha256": "a32d2255354775aa124855aa7100cf276bea096fff4ebb3a0edf57be216e6c72"
+    },
+    {
+      "name": "diagnosing-superpowers",
+      "path": "/Users/abdulaziz/.codex/skills/diagnosing-superpowers",
+      "validation_exit": 0,
+      "validation": "Skill is valid!",
+      "sha256": "5a652f8132cc901eb5ca61f89157839f87a2f20aed037fc7a2b51051bc37cd19"
+    },
+    {
+      "name": "dispatching-parallel-agents",
+      "path": "/Users/abdulaziz/.codex/skills/dispatching-parallel-agents",
+      "validation_exit": 0,
+      "validation": "Skill is valid!",
+      "sha256": "1968923066f3b707eb01d1992cdf4c42284c3855f70253b9cd5000ff45fca13c"
+    },
+    {
+      "name": "executing-plans",
+      "path": "/Users/abdulaziz/.codex/skills/executing-plans",
+      "validation_exit": 0,
+      "validation": "Skill is valid!",
+      "sha256": "f38e8f2ddcf079f65493adc713c1fed78421dfaf5f4dbf6b3a6b2b1d95466e71"
+    },
+    {
+      "name": "finishing-a-development-branch",
+      "path": "/Users/abdulaziz/.codex/skills/finishing-a-development-branch",
+      "validation_exit": 0,
+      "validation": "Skill is valid!",
+      "sha256": "8db5a922b242dd4e1bf824cb91c13b3e8d8e8a86d6ceaf7f0774eb9cce909d65"
+    },
+    {
+      "name": "receiving-code-review",
+      "path": "/Users/abdulaziz/.codex/skills/receiving-code-review",
+      "validation_exit": 0,
+      "validation": "Skill is valid!",
+      "sha256": "091df1629510af1b92fc4abd6f96732ebedb4cb2c0f3457e8f2740b0504a2438"
+    },
+    {
+      "name": "requesting-code-review",
+      "path": "/Users/abdulaziz/.codex/skills/requesting-code-review",
+      "validation_exit": 0,
+      "validation": "Skill is valid!",
+      "sha256": "cfcee1b06774e7c0517f1e09be1a11f2d5680257072723e709ddbcf7e08b795a"
+    },
+    {
+      "name": "subagent-driven-development",
+      "path": "/Users/abdulaziz/.codex/skills/subagent-driven-development",
+      "validation_exit": 0,
+      "validation": "Skill is valid!",
+      "sha256": "8dde5589ee083fb4999106d116f01c8fdaf3116a8a9813fdedeb80329de49046"
+    },
+    {
+      "name": "systematic-debugging",
+      "path": "/Users/abdulaziz/.codex/skills/systematic-debugging",
+      "validation_exit": 0,
+      "validation": "Skill is valid!",
+      "sha256": "808fc5717aa88ad65efff312b11c186294d3e6ee301afb584e2f86599b137787"
+    },
+    {
+      "name": "test-driven-development",
+      "path": "/Users/abdulaziz/.codex/skills/test-driven-development",
+      "validation_exit": 0,
+      "validation": "Skill is valid!",
+      "sha256": "64b03fce4aee5a97a93160cea8111f3ba13a17b7c001db4bd5836d67fd10705d"
+    },
+    {
+      "name": "using-git-worktrees",
+      "path": "/Users/abdulaziz/.codex/skills/using-git-worktrees",
+      "validation_exit": 0,
+      "validation": "Skill is valid!",
+      "sha256": "8cfb86f121269e8f7f12361e6795c4f6738828340e28964c9229d365666c9edd"
+    },
+    {
+      "name": "using-superpowers",
+      "path": "/Users/abdulaziz/.codex/skills/using-superpowers",
+      "validation_exit": 0,
+      "validation": "Skill is valid!",
+      "sha256": "82c5c8866ad7f5dd4440ce66bd7806ba48a2f13771beae5cf112e53f08fe36ba"
+    },
+    {
+      "name": "verification-before-completion",
+      "path": "/Users/abdulaziz/.codex/skills/verification-before-completion",
+      "validation_exit": 0,
+      "validation": "Skill is valid!",
+      "sha256": "2befe7fc55bcadaa3d97dd9e8efeb633d2561c0ebe74c5a8b17c4d9e7e4520b3"
+    },
+    {
+      "name": "writing-plans",
+      "path": "/Users/abdulaziz/.codex/skills/writing-plans",
+      "validation_exit": 0,
+      "validation": "Skill is valid!",
+      "sha256": "0bc3d36590f7b2c323ed3ec18ff77e9f8ed57af42f5680a02b11a2d20de265cf"
+    },
+    {
+      "name": "writing-skills",
+      "path": "/Users/abdulaziz/.codex/skills/writing-skills",
+      "validation_exit": 0,
+      "validation": "Skill is valid!",
+      "sha256": "bbdfe742f853562e643a3d40d64476359d47881e39cef80a189283fa26d11ab9"
+    },
+    {
+      "name": "supabase-postgres-best-practices",
+      "path": "/Users/abdulaziz/.codex/skills/supabase-postgres-best-practices",
+      "validation_exit": 0,
+      "validation": "Skill is valid!",
+      "sha256": "ad65e776f45e761bafc609d3f506c77c1032225aa65e0c4c02f241b8071e5855"
+    },
+    {
+      "name": "36t-erp-readiness",
+      "path": "/Users/abdulaziz/.codex/skills/36t-erp-readiness",
+      "validation_exit": 0,
+      "validation": "Skill is valid!",
+      "sha256": "42f1006a40e40c70476afcdb7336797beefbe5b0cbceb7596aa8eb51b37c2cbf"
+    },
+    {
+      "name": "36t-procurement-review",
+      "path": "/Users/abdulaziz/.codex/skills/36t-procurement-review",
+      "validation_exit": 0,
+      "validation": "Skill is valid!",
+      "sha256": "148c255ee8f2bcade79e3ba5d071562834fac1b43c80132b25a0993b0d08d57e"
+    },
+    {
+      "name": "36t-project-cash-review",
+      "path": "/Users/abdulaziz/.codex/skills/36t-project-cash-review",
+      "validation_exit": 0,
+      "validation": "Skill is valid!",
+      "sha256": "ded8c7cac687a20daec1a5e426f724d7b81b0213d7265639051392d970cf6677"
+    },
+    {
+      "name": "36t-separation-of-duties",
+      "path": "/Users/abdulaziz/.codex/skills/36t-separation-of-duties",
+      "validation_exit": 0,
+      "validation": "Skill is valid!",
+      "sha256": "b9b16bb71b74f138e8930ead27891512afb690f1b7c4d820e87497108ec40b9b"
+    },
+    {
+      "name": "36t-migration-recovery",
+      "path": "/Users/abdulaziz/.codex/skills/36t-migration-recovery",
+      "validation_exit": 0,
+      "validation": "Skill is valid!",
+      "sha256": "3d033533e1d64fbb35b5f6b1e1a16b07455f15542a18fa1e245b7d619d82130a"
+    }
+  ],
+  "already_available": [
+    "operations:process-optimization",
+    "operations:process-doc",
+    "product-management:write-spec",
+    "finance:reconciliation",
+    "finance:close-management",
+    "finance:audit-support",
+    "data-analytics:analyze-data-quality",
+    "data-analytics:design-kpis",
+    "design:design-critique",
+    "design:accessibility-review",
+    "design:design-system",
+    "operations:runbook",
+    "operations:risk-assessment",
+    "human-resources:org-planning",
+    "human-resources:onboarding"
+  ],
+  "external_plugins_pending": [
+    "Codex Security",
+    "Figma",
+    "Datadog"
+  ],
+  "notes": [
+    "المهارات الجديدة متاحة للاكتشاف في الرسالة التالية؛ قُرئت مهارات التشخيص والاختبار والتحقق مباشرة في هذه الجلسة.",
+    "حزمة Superpowers مثبتة كمهارات محلية؛ لا يدّعي ذلك تثبيت إضافة المتجر أو خطاطيفها.",
+    "مهارة PostgreSQL مثبتة فقط؛ لا تغيير لقاعدة SQLite ولا افتراض اعتماد Supabase.",
+    "الفحص البنيوي لا يثبت جودة قرارات كل مهارة؛ استُخدمت مهارات التشخيص والاختبار عمليًا في حزمة ترويسات النقل."
+  ]
+}

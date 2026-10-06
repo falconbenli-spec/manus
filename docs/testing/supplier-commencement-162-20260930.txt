@@ -1,0 +1,125 @@
+> node --test (أمر المباشرة للمورد، الترحيل 162 — الملفات المعدلة كاملة، Node v24.14.0, الفرع p2/supplier-commencement فوق d1b31f3)
+
+✔ delivery cycle: no step of the client chain opens before the step before it was approved by someone else (8275.910667ms)
+✔ delivery cycle: an entitlement is born from an accepted deliverable only — a submitted one is not enough (7484.594375ms)
+✔ delivery cycle: the customer invoice hangs on an approved entitlement, and the preparer never issues it (8064.559125ms)
+✔ delivery cycle: collection is recorded and matched by two people and never exceeds the entitlement (7774.434875ms)
+✔ delivery cycle: a client review stage closes only on an external approval documented against that very version (7293.666875ms)
+✔ delivery cycle: no supplier award without a comparison, a qualified vendor and an approved project budget (10539.966375ms)
+✔ delivery cycle: the supplier is not received, invoiced or paid before the purchase order, and the payment needs three separate people (11735.93675ms)
+﹣ delivery cycle: execution is blocked until the advance payment is confirmed (0.210791ms) # غير موجودة. لا كيان «دفعة مقدمة» على الملف التجاري ولا شرط عليها: بعد create_project يُقبل submit_delivery وbudget وprocurement بلا أي مقبوض. المطلوب: حالة «جاهزية البدء» على الملف التجاري تشترط دفعة مقدمة مؤكدة (ar_receipts.status=confirmed) أو إعفاءً مسجلًا. انظر الكسر B1 في تدقيق 2026-09-20.
+✔ delivery cycle: a supplier may not start before a purchase order AND a commencement authorisation (10033.436709ms)
+﹣ delivery cycle: the customer purchase order is recorded against the commercial case before execution (0.122625ms) # لا حقل ولا كيان لأمر شراء العميل في commercial.mjs ولا في contracts-register.mjs (سجل العقود لا يعرف الملف التجاري ولا المشروع، ولا FK بينهما). أقرب بديل اليوم: نص agreement_evidence الحر في register_contract. الكسر B3.
+﹣ delivery cycle: a project can be closed technically and then financially (0.034709ms) # لا إجراء إقفال ولا حالة: جدول projects لا يحمل عمود status أصلًا (id, tenant_id, name, brief, created_by, created_at فقط)، وحالة commercial_cases تقف عند project_active إلى الأبد حتى بعد التسليم والفوترة والتحصيل الكامل. الكسر B4/B5.
+✔ delivery cycle: paying the supplier marks the purchase as paid, read from payment_orders not from a constant (9489.606875ms)
+﹣ delivery cycle: work packages can be planned for more than one department (0.051208ms) # ممنوع اليوم: commercial.create_project يقبل أعضاء من إدارة الملف التجاري ومن يتبعون المدير مباشرة فقط، وprojects.createTask يشترط عضوية المشروع. موظف إدارة أخرى يُرفض بـassignee. لا مفهوم «حزمة عمل» بإدارة مسؤولة أصلًا: tasks جدول مسطح بلا إدارة ولا مرحلة. الكسر B7.
+✔ delivery cycle: a finance delegation is granted, expires and is revoked through the platform, never by a direct insert (12464.502667ms)
+﹣ delivery cycle: the completion certificate is a record with its own state, signed by the client (0.058458ms) # الموجود: accept_delivery يخزن acceptance_evidence وcustomer_representative نصًا داخل commercial_reviews، ويقوم مقام البوابة (الاستحقاق يشترطه). الغائب: مستند شهادة إنجاز مستقل له رقم وحالة وتوقيع الطرفين، ولا ربط له بتقرير الإنجاز ولا بمحضر التسليم. الكسر B9.
+✔ التفويض المالي له سقف مدة، ورقمه هو ما تستعمله المنصة فعلًا لا رقم مستعار (11161.125542ms)
+✔ FIN-01/06/09: a balanced journal reaches an immutable local posting and a sourced trial balance (8196.864333ms)
+✔ FIN-01/06: unbalanced, floating, negative, empty or two-sided amounts cannot create a journal (7290.447417ms)
+✔ FIN-06: returned revisions require a fresh independent approval and cannot skip posting (8334.5595ms)
+✔ FIN-06/09: a closed period and deactivated reference block a pending posting (7787.596334ms)
+✔ FIN-06: an exact reversal is prepared and approved separately, then offsets the ledger once (7744.682417ms)
+✔ IT-02/PLT-05: financial reads and writes require current explicit unexpired grants (10850.439292ms)
+✔ FIN-06: posting checks whether the original approver still holds authority (11127.2725ms)
+✔ FIN-05/06: a matched procurement reference creates one exact payable journal (10186.265875ms)
+✔ FIN-06 PLT-06/09: idempotent creation and rollback preserve one journal and its audit (9156.489583ms)
+✔ influencer roster: the platform reads nothing from any social platform — every number is a dated manual snapshot corrected by a newer one, and a licence is an alert with a written acknowledgement, never an automatic block (7995.471209ms)
+✔ influencer engagement: the person who prepares it never approves it, an expired or missing licence needs a written acknowledgement instead of a silent block, and an approved engagement keeps its deliverables, fee and usage rights (7723.1055ms)
+✔ influencer content and proof: internal approval by another person, a client approval recorded with its evidence, and a publication proof a human verifies — the platform never visits a platform and never verifies by itself (8131.805375ms)
+✔ influencer payment: it rides the existing payables path on the vendor file, is linked before finance approves it, and paying before a verified proof needs a written exception from someone other than the engagement owner (7734.178791ms)
+✔ migration 152: applies cleanly and leaves one match guard carrying the receipt condition (6801.600583ms)
+✔ migration 152: the guard alone refuses a payable approved by whoever recorded a receipt (7923.049917ms)
+✔ PRC-02: an unregistered or unqualified vendor never enters the payment cycle, and no bank account means no order (24199.768625ms)
+✔ FIN-07/PRC-09: approved is not paid — three people prepare, approve and record the bank execution, and the bank-detail collector cannot record it (8150.108208ms)
+✔ PRC-09: if the vendor bank account changes after the order was prepared, approval stops instead of silently paying the new account (8018.907625ms)
+✔ input VAT enters the summary only after a second person verifies the supplier tax invoice, and cannot exceed 15% of net (10658.83525ms)
+✔ FIN-09: تمنع ضريبة الفاتورة المكررة عبر مرجع شراء آخر بعد توحيد شكل رقمها (11441.552875ms)
+✔ PRC-09: يظهر توقف المورد بعد الاعتماد ويُحفظ التحذير عند توثيق تنفيذ وقع فعلا (9979.347625ms)
+✔ FIN-09: السجلات القديمة المكررة لا تعتمد، ويمكن رفض المكرر ثم اعتماد الأصل (9611.418333ms)
+✔ PRC-09: تغير الحساب البنكي بعد اعتماد الدفع يظهر للمالية دون كشف الآيبان (13466.535041ms)
+✔ PRC-07: an approved emergency allows an award on one quote, keeps independent approval, and demands a later review by an outside party (8928.011917ms)
+✔ PRC-08: the approved order is never rewritten; a date or terms change and a short close are separate records decided by someone else (8401.247125ms)
+✔ conflict of interest: an undecided disclosure or a recusal blocks that person from awarding to the vendor, and only the legal reviewer lifts it (8783.336667ms)
+✔ PRC-04/05/06: السطر الواحد الحالي يُحفظ بمعرّف ثابت وتتبعه الاستلامات والفاتورة والمطابقة (7825.119292ms)
+✔ PRC-05: القاعدة ترفض ربط استلام من طلب ببند أمر طلب آخر (7772.643167ms)
+✔ PRC-04: الطلب والعرض والأمر يحفظون عدة بنود بهويات وأسعار مستقلة (8422.721125ms)
+✔ PRC-04: تسعير العرض يرفض البند الناقص والمكرر والغريب (8053.445916ms)
+✔ PRC-05/06: الاستلام والفاتورة والمطابقة تتحقق من كل بند مستقلًا (8164.95ms)
+✔ واجهة المشتريات تجمع البنود والأسعار والكميات في جداول صفوف (0.65425ms)
+✔ PRC-01/03/04/05/06 and FIN-05/07/08: a purchase reaches two matched payables without payment or official issuance (8113.695041ms)
+✔ PRC-01/03: allocation, comparison and evidence are required before an award (7569.464042ms)
+✔ PRC-04/06: requesters cannot approve, skip an award, or match their own invoice (7761.834334ms)
+✔ PRC-01 and FIN-02: project membership, current team and a separate PM cost grant constrain every read and action (10596.933583ms)
+✔ PRC-04/05 and FIN-05: stale actions and repeated receipt or supplier invoice references create no second record (11403.462708ms)
+✔ PRC-05/06: excess quantities, mismatched amounts and unmatched receipts cannot become payables (9846.774667ms)
+✔ PRC-04/08 and PLT-06: submitted values, order versions and evidence records resist changes and deletion (9604.418542ms)
+✔ PRC-01/04: decimal strings, bounds, currency and unrecognized fields are checked on the server (12887.229708ms)
+✔ PRC-01 and PLT-09: creation retries return the current authorized record and rollback includes its audit (11078.118459ms)
+✔ PRC-04 and PLT-06: public writes require a transaction and failed audit rolls back the submitted version (8791.658416ms)
+✔ PRC-04/06: database constraints prevent an unbalanced payable and preserve receipt and invoice evidence (8527.586666ms)
+✔ PRC-04: cancellation and rejection are final and cannot generate an internal order (8714.333916ms)
+✔ PRC-01/04 UI: forms use authorized IDs, escape supplier evidence, and keep the opened version (8491.727416ms)
+✔ PRC-02/03: an entity with no vendor file is refused at the quote and never reaches an internal order (8581.657625ms)
+✔ PRC-05/06: whoever recorded a receipt cannot approve the match built on it, in code and in the database (8680.495334ms)
+✔ AXIS-01: the eight axes are independent — moving one leaves the other seven where they were (8047.545166ms)
+✔ AXIS-02: the advance gate blocks paid execution and never touches pre-sale scoping (19812.185667ms)
+✔ AXIS-03: the advance is expected from the payment schedule, and confirmed only against a real receipt by a second person (20463.487583ms)
+✔ AXIS-04: supplier start refuses without a purchase order and without a commencement authorisation (10932.761208ms)
+✔ AXIS-05: a multi-department project can be planned — work packages carry a department, a phase and an owner (22970.325ms)
+✔ AXIS-06: closure refuses by naming the exact outstanding item, and needs technical then financial (8505.099583ms)
+✔ AXIS-07: financial closure names every outstanding balance, and a decision is written not silent (9128.848041ms)
+✔ AXIS-08: reopening a closure needs a capability and a reason, and leaves an audited record (8712.970292ms)
+✔ AXIS-09: invoicing, collection and supplier settlement each read their own source and no other (8516.304042ms)
+✔ AXIS-08: both locks in one hand are refused with a way out, and the way out is a capability plus a written reason (8685.829125ms)
+✔ AXIS-08: the same-person rule holds in both directions, and a reason is refused when the locks are in two hands (8409.745875ms)
+✔ AXIS-08: a reason on locks held by two people is refused, and the database refuses a silent same-person row from outside the code (7838.984375ms)
+ERROR: failed to copy trust settings of system certificate-25291
+ERROR: failed to copy trust settings of system certificate-25291
+ERROR: failed to copy trust settings of system certificate-25291
+ERROR: failed to copy trust settings of system certificate-25291
+✔ commencement: only an independent reviewer in scope issues, replaces or withdraws it — never the requester, an outsider, another tenant or a conflicted reviewer (7517.89975ms)
+✔ commencement: it records issuer, dates, scope, order version, validity and evidence, and the receipt re-checks all of it when it is recorded (11270.380958ms)
+✔ commencement: withdrawal and replacement add records and never rewrite or delete the earlier ones (11673.4405ms)
+✔ commencement: a replayed or repeated request creates no second record, through the module and through the API route (11881.481417ms)
+✔ commencement: a receipt racing a withdrawal never lands after it — separate processes on one database file (15346.561791ms)
+ℹ orderings: fresh:receive+withdraw fresh:withdraw fresh:withdraw same:receive same:receive same:receive
+✔ commencement UI: the purchase shows the standing authorisation and its history, and every form posts to the procurement route with the opened version (12063.659167ms)
+✔ migration 162: an authorisation issued before it is carried as issued — no validity or evidence invented — and opens no receipt until replaced (8911.237708ms)
+✔ withholding: a recorded entry becomes one balanced journal that recognises the liability to the authority (10422.528333ms)
+✔ withholding: the journal is refused while the linked payment order still carries the full amount (11359.203541ms)
+✔ withholding: a cancelled entry carries no obligation and builds no journal (9668.002583ms)
+ℹ tests 85
+ℹ suites 0
+ℹ pass 80
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 5
+ℹ todo 0
+ℹ duration_ms 168885.276709
+
+────────
+
+> node --test tests/operations-http.test.mjs (الترحيل 162، الفرع p2/supplier-commencement فوق d1b31f3)
+> نُقل الطلب داخل العملية: صندوق الحماية الذي شُغّل فيه يمنع فتح أي منفذ (listen EPERM، ومقبس يونكس كذلك)، فاستُدعي معالج الطلبات الحقيقي بلا منفذ كما يفعل tests/ui-render.test.mjs. منطق الاختبار ونصه كما في الفرع. للتكرار خارج الصندوق: node --test tests/operations-http.test.mjs
+
+ERROR: failed to copy trust settings of system certificate-25291
+ERROR: failed to copy trust settings of system certificate-25291
+ERROR: failed to copy trust settings of system certificate-25291
+ERROR: failed to copy trust settings of system certificate-25291
+✔ WF-01/02/05 HTTP: a scoped commercial project funds a purchase that reaches an unpaid matched reference (12647.69925ms)
+✔ WF-08 HTTP: opening, reservation, two approvals and cancellation update the same employee year once (8919.418417ms)
+✔ PLT-04 HTTP: a temporary substitute loses the decision endpoint after revocation (8291.858292ms)
+✔ NFR-08: expanding synthetic fixtures twice preserves existing users, records and balances (3779.6185ms)
+✔ FIN-06 HTTP: explicit financial accounts prepare, independently approve and post without external execution (7607.603125ms)
+✔ TAL-01/02 HTTP: approved hiring scope admits one candidate and masks the profile from checklist outsiders (7054.340667ms)
+✔ STR-08/CRT-09 HTTP: project members produce an approved text version and an internal delivery manifest (9047.443666ms)
+ℹ tests 7
+ℹ suites 0
+ℹ pass 7
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 57845.055125

@@ -1,0 +1,235 @@
+جاهزية التنفيذ المدفوع (فرع p2/execution-readiness على d1b31f3) — دليل الأحمر ثم الأخضر
+
+=== الأحمر: الاختباران المحوَّلان من skip في tests/delivery-cycle.test.mjs، على الشيفرة قبل أي تعديل ===
+node --test --test-name-pattern="advance payment is confirmed|customer purchase order is recorded" tests/delivery-cycle.test.mjs
+
+✖ delivery cycle: execution is blocked until the advance payment is confirmed (4556.784167ms)
+✖ delivery cycle: the customer purchase order is recorded against the commercial case before execution (4923.59375ms)
+ℹ tests 2
+ℹ suites 0
+ℹ pass 0
+ℹ fail 2
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 9754.648833
+
+✖ failing tests:
+
+test at tests/delivery-cycle.test.mjs:321:1
+✖ delivery cycle: execution is blocked until the advance payment is confirmed (4556.784167ms)
+  AssertionError [ERR_ASSERTION]: نُفِّذ ما كان يجب أن يُرفض قبل اكتمال شروط البدء
+      at refusedBy (tests/delivery-cycle.test.mjs:311:82)
+      at TestContext.<anonymous> (tests/delivery-cycle.test.mjs:334:15)
+      at Test.runInAsyncScope (node:async_hooks:228:14)
+      at Test.run (node:internal/test_runner/test:1118:25)
+      at Test.start (node:internal/test_runner/test:1015:17)
+      at startSubtestAfterBootstrap (node:internal/test_runner/harness:358:17)
+      at process.processTicksAndRejections (node:internal/process/task_queues:104:5) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: undefined,
+    expected: undefined,
+    operator: 'fail',
+    diff: 'simple'
+  }
+
+test at tests/delivery-cycle.test.mjs:390:1
+✖ delivery cycle: the customer purchase order is recorded against the commercial case before execution (4923.59375ms)
+  AssertionError [ERR_ASSERTION]: نُفِّذ ما كان يجب أن يُرفض قبل اكتمال شروط البدء
+      at refusedBy (tests/delivery-cycle.test.mjs:311:82)
+      at TestContext.<anonymous> (tests/delivery-cycle.test.mjs:399:15)
+      at Test.runInAsyncScope (node:async_hooks:228:14)
+      at Test.run (node:internal/test_runner/test:1118:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:787:18)
+      at Test.postRun (node:internal/test_runner/test:1247:19)
+      at node:internal/test_runner/test:1052:31
+      at node:internal/process/task_queues:150:7
+      at AsyncResource.runInAsyncScope (node:async_hooks:228:14)
+      at AsyncResource.runMicrotask (node:internal/process/task_queues:147:8) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: undefined,
+    expected: undefined,
+    operator: 'fail',
+    diff: 'simple'
+  }
+
+=== الأخضر: الملفات المعنية بعد الإصلاح (الشيفرة النهائية) ===
+node --test --test-concurrency=2 tests/delivery-cycle.test.mjs tests/execution-readiness.test.mjs tests/commercial*.test.mjs tests/receivables*.test.mjs tests/contracts*.test.mjs tests/project-axes.test.mjs tests/billing-recurring.test.mjs tests/project-intake.test.mjs tests/procurement*.test.mjs tests/budgets.test.mjs
+
+✔ a recurring schedule prepares a draft for the period and never an issued invoice, and rerunning it changes nothing (4093.162709ms)
+✔ an advance is a liability whose receipt a second person confirms, and drawn amounts never exceed the paid balance (4279.779ms)
+✔ carry-forward and overage deduction are independent contract options that move entitlement only, never the invoice amount (4550.655584ms)
+✔ usage thresholds are configuration set by the contract owner, and each threshold alerts once per period (4179.617583ms)
+✔ recurring billing is closed to accounts without the capability and never reaches another tenant (4161.641ms)
+✔ PRC-01/FIN-02: لا تسمح ترسية بشراء دون مخصص مشروع معتمد (4181.95675ms)
+✔ FIN-02/PRC-01: المخصص المشترك يمنع تجاوز طلبين للسقف ويحرر الحجز بالرفض (4382.721083ms)
+✔ FIN-02/PLT-05: سحب النطاق المالي يمنع القراءة واعتماد أمر مبني عليه (4562.280084ms)
+✔ FIN-02: المراجعة لا تخفض السقف دون الالتزامات ولا تسمح بالاعتماد الذاتي (4268.760958ms)
+✔ PRC-03: عرضان لا يكفيان للترسية وفق دليل الدورة الموحدة (4631.936125ms)
+✔ النطاق المالي للمشروع له سقف مدة، وهو أفق الصلاحية المالية نفسه (4427.016333ms)
+✔ CRM-01/02/06/09: qualified lead becomes an approved quote, internal agreement and scoped project (4247.985ms)
+✔ CRM-01: normalized registration conflicts before saving and network retries use current access (4312.616916ms)
+✔ CRM-02/07: qualification and quote decisions require an independent current direct manager (4041.038708ms)
+✔ CRM-06: quote rejection preserves the old version and requires approval of the replacement (4590.076333ms)
+✔ CRM-06: decimal text, currency, dates, bounds and discounts are validated without floating arithmetic (4540.038083ms)
+✔ ACC-01: admin, unrelated employees, other managers and tenant IDs cannot read or mutate client files (4718.19975ms)
+✔ CRM-09/PMO-01: project creation rejects members outside the direct team and cannot precede agreement evidence (4780.850833ms)
+✔ ACC-01/08: member PM sees delivery scope without financial fields, and membership removal revokes access (4792.96725ms)
+✔ ACC-03/08: delivery acceptance uses the original contract line and independent evidence once (4764.888791ms)
+✔ ACC-06/PMO-02: additional work becomes one task only after approval and leaves the baseline fixed (4507.116042ms)
+✔ ACC-06: rejected changes cannot start and a supplied decision cannot target another file (5116.672125ms)
+✔ CRM-02: rejected qualification creates a new immutable submission before quoting (5232.665208ms)
+✔ CRM-01/06: a failed audit rolls back business records and public mutations require a caller transaction (4885.529917ms)
+✔ ACC-01: deactivated users and removed project owners cannot retain commercial mutation rights (5010.082791ms)
+✔ CRM-06 UI: the quote form captures the target version and preserves decimal text and all existing lines (4795.996708ms)
+✔ ACC-01 UI: PM rendering and submission use redacted data and escaped user content (4887.7375ms)
+✔ contracts register: the recorder is never the owner, a contract in force is amended by a numbered annex and never edited, and the annex only bites once its named approver confirms it (3997.843417ms)
+✔ contracts register: no alert exists until the owner enters the lead times, and the non-renewal notice deadline outranks the expiry date (4229.777416ms)
+✔ contract obligations are entered by a human clause by clause, and the evidence is verified by someone other than whoever completed it (4463.858375ms)
+✔ the contracts register screen renders for every role that reaches it and every button it offers opens a valid form (4531.645917ms)
+✔ delivery cycle: no step of the client chain opens before the step before it was approved by someone else (4918.81175ms)
+✔ delivery cycle: an entitlement is born from an accepted deliverable only — a submitted one is not enough (4627.292458ms)
+✔ delivery cycle: the customer invoice hangs on an approved entitlement, and the preparer never issues it (4932.967167ms)
+✔ delivery cycle: collection is recorded and matched by two people and never exceeds the entitlement (4724.442042ms)
+✔ delivery cycle: a client review stage closes only on an external approval documented against that very version (4983.695667ms)
+✔ delivery cycle: no supplier award without a comparison, a qualified vendor and an approved project budget (5377.96325ms)
+✔ delivery cycle: the supplier is not received, invoiced or paid before the purchase order, and the payment needs three separate people (5419.985208ms)
+✔ delivery cycle: execution is blocked until the advance payment is confirmed (5118.606042ms)
+﹣ delivery cycle: a supplier may not start before a purchase order AND a commencement authorisation (0.108292ms) # نصفها موجود: أمر الشراء (procurement approve_order) يمنع الاستلام قبله. أمر المباشرة (أمر بدء العمل) لا كيان له ولا مسار: POST /api/procurement/:id/commence يرد invalid_action. المطلوب: سجل مباشرة بتاريخه ومن أصدره، والاستلام يشترطه. الكسر B2.
+✔ delivery cycle: the customer purchase order is recorded against the commercial case before execution (5104.414791ms)
+﹣ delivery cycle: a project can be closed technically and then financially (0.201417ms) # لا إجراء إقفال ولا حالة: جدول projects لا يحمل عمود status أصلًا (id, tenant_id, name, brief, created_by, created_at فقط)، وحالة commercial_cases تقف عند project_active إلى الأبد حتى بعد التسليم والفوترة والتحصيل الكامل. الكسر B4/B5.
+✔ delivery cycle: paying the supplier marks the purchase as paid, read from payment_orders not from a constant (5077.28475ms)
+﹣ delivery cycle: work packages can be planned for more than one department (0.080542ms) # ممنوع اليوم: commercial.create_project يقبل أعضاء من إدارة الملف التجاري ومن يتبعون المدير مباشرة فقط، وprojects.createTask يشترط عضوية المشروع. موظف إدارة أخرى يُرفض بـassignee. لا مفهوم «حزمة عمل» بإدارة مسؤولة أصلًا: tasks جدول مسطح بلا إدارة ولا مرحلة. الكسر B7.
+✔ delivery cycle: a finance delegation is granted, expires and is revoked through the platform, never by a direct insert (5337.281959ms)
+﹣ delivery cycle: the completion certificate is a record with its own state, signed by the client (0.067833ms) # الموجود: accept_delivery يخزن acceptance_evidence وcustomer_representative نصًا داخل commercial_reviews، ويقوم مقام البوابة (الاستحقاق يشترطه). الغائب: مستند شهادة إنجاز مستقل له رقم وحالة وتوقيع الطرفين، ولا ربط له بتقرير الإنجاز ولا بمحضر التسليم. الكسر B9.
+✔ التفويض المالي له سقف مدة، ورقمه هو ما تستعمله المنصة فعلًا لا رقم مستعار (5040.584458ms)
+ERROR: failed to copy trust settings of system certificate-25291
+ERROR: failed to copy trust settings of system certificate-25291
+ERROR: failed to copy trust settings of system certificate-25291
+ERROR: failed to copy trust settings of system certificate-25291
+✔ ER-01: a case whose accepted terms require neither condition behaves exactly as before, and the terms say whether a customer PO is required (5314.189958ms)
+✔ ER-02: every paid-execution entry point is checked on the server at the moment of action (4846.58625ms)
+✔ ER-03: an exemption is requested by one person and authorised by another, with written reasons, and both sides are auditable (4185.924209ms)
+✔ ER-04: the exemption is rechecked at the moment of action — withdrawn, or held by someone who lost the authority, it no longer opens the gate (11346.849833ms)
+✔ ER-05: partial, duplicate and reversed receipts — only money that arrived once and stayed opens the gate (4842.50225ms)
+✔ ER-06: the customer PO is versioned and append-only — superseded, expired or unconfirmed versions never satisfy the gate (4090.611292ms)
+✔ ER-07: the order is checked against its own case — wrong client, opportunity, agreement, project or tenant is refused (4322.265834ms)
+✔ ER-08: another tenant's receipt never satisfies the gate, and a bank reference is unique within a tenant only (4350.067292ms)
+✔ ER-09: concurrency — the gate and the action share one write lock, so a reversal racing a delivery submission lands before it or after it, never between (4521.25625ms)
+✔ ER-10: the actions are reachable over HTTP with the platform session, CSRF and idempotency, and the commercial screen names the blockers (6860.220333ms)
+✔ ER-11: the billing screen asks for the bank reference, offers the reversal once, and links an advance to its project (4340.651042ms)
+✔ PRC-07: an approved emergency allows an award on one quote, keeps independent approval, and demands a later review by an outside party (5143.973208ms)
+✔ PRC-08: the approved order is never rewritten; a date or terms change and a short close are separate records decided by someone else (5637.772458ms)
+✔ conflict of interest: an undecided disclosure or a recusal blocks that person from awarding to the vendor, and only the legal reviewer lifts it (6461.599625ms)
+✔ PRC-04/05/06: السطر الواحد الحالي يُحفظ بمعرّف ثابت وتتبعه الاستلامات والفاتورة والمطابقة (4567.18975ms)
+✔ PRC-05: القاعدة ترفض ربط استلام من طلب ببند أمر طلب آخر (4258.968958ms)
+✔ PRC-04: الطلب والعرض والأمر يحفظون عدة بنود بهويات وأسعار مستقلة (4614.388083ms)
+✔ PRC-04: تسعير العرض يرفض البند الناقص والمكرر والغريب (4475.907833ms)
+✔ PRC-05/06: الاستلام والفاتورة والمطابقة تتحقق من كل بند مستقلًا (4491.284625ms)
+✔ واجهة المشتريات تجمع البنود والأسعار والكميات في جداول صفوف (0.554208ms)
+✔ PRC-01/03/04/05/06 and FIN-05/07/08: a purchase reaches two matched payables without payment or official issuance (4413.147458ms)
+✔ PRC-01/03: allocation, comparison and evidence are required before an award (4452.654292ms)
+✔ PRC-04/06: requesters cannot approve, skip an award, or match their own invoice (4325.100625ms)
+✔ PRC-01 and FIN-02: project membership, current team and a separate PM cost grant constrain every read and action (4448.190708ms)
+✔ PRC-04/05 and FIN-05: stale actions and repeated receipt or supplier invoice references create no second record (4360.044625ms)
+✔ PRC-05/06: excess quantities, mismatched amounts and unmatched receipts cannot become payables (7704.54175ms)
+✔ PRC-04/08 and PLT-06: submitted values, order versions and evidence records resist changes and deletion (8041.153ms)
+✔ PRC-01/04: decimal strings, bounds, currency and unrecognized fields are checked on the server (8438.824125ms)
+✔ PRC-01 and PLT-09: creation retries return the current authorized record and rollback includes its audit (8190.4375ms)
+✔ PRC-04 and PLT-06: public writes require a transaction and failed audit rolls back the submitted version (7951.316583ms)
+✔ PRC-04/06: database constraints prevent an unbalanced payable and preserve receipt and invoice evidence (10851.583792ms)
+✔ PRC-04: cancellation and rejection are final and cannot generate an internal order (12231.731625ms)
+✔ PRC-01/04 UI: forms use authorized IDs, escape supplier evidence, and keep the opened version (10560.515417ms)
+✔ PRC-02/03: an entity with no vendor file is refused at the quote and never reaches an internal order (9959.820875ms)
+✔ PRC-05/06: whoever recorded a receipt cannot approve the match built on it, in code and in the database (14007.844833ms)
+✔ AXIS-01: the eight axes are independent — moving one leaves the other seven where they were (4189.902792ms)
+✔ AXIS-02: the advance gate blocks paid execution and never touches pre-sale scoping (8963.27375ms)
+✔ AXIS-03: the advance is expected from the payment schedule, and confirmed only against a real receipt by a second person (16371.144958ms)
+✔ AXIS-04: supplier start refuses without a purchase order and without a commencement authorisation (8686.917291ms)
+✔ AXIS-05: a multi-department project can be planned — work packages carry a department, a phase and an owner (17138.798625ms)
+✔ AXIS-06: closure refuses by naming the exact outstanding item, and needs technical then financial (11874.2995ms)
+✔ AXIS-07: financial closure names every outstanding balance, and a decision is written not silent (11625.072084ms)
+✔ AXIS-08: reopening a closure needs a capability and a reason, and leaves an audited record (9703.88075ms)
+✔ AXIS-09: invoicing, collection and supplier settlement each read their own source and no other (11570.138666ms)
+✔ AXIS-08: both locks in one hand are refused with a way out, and the way out is a capability plus a written reason (14042.927667ms)
+✔ AXIS-08: the same-person rule holds in both directions, and a reason is refused when the locks are in two hands (9671.384166ms)
+✔ AXIS-08: a reason on locks held by two people is refused, and the database refuses a silent same-person row from outside the code (8562.82975ms)
+✔ PM-01: the gate blocks paid execution until the advance is confirmed, and never blocks scoping (10104.172ms)
+✔ PM-01: each missing document refuses by name and says who must provide it (8792.765458ms)
+✔ PM-01 gate guards project execution itself: tasks and templates refuse by document name, and the second reading only warns (8712.301959ms)
+✔ PM-02: kickoff minutes record attendance, the agreed scope and every policy the source lists, and fill their own checklist row (8960.695375ms)
+✔ revision rounds are counted per deliverable from its own contract line, and the template default is not a company policy (8430.776792ms)
+✔ PM-03: the four classifications hold, our own error is never charged to the client, and exhausted rounds raise a priced quotation (8673.598917ms)
+✔ PM-03: an applied change moves budget, schedule and the deliverable, and reopens only the approvals it touches (8483.381167ms)
+✔ the change classification policy stays a draft until someone other than its author approves it (7999.675667ms)
+✔ BD-04 is an electronic record: two separate parties approve it, one person cannot be both, and the money stays with finance (7129.451125ms)
+✔ a departing project manager leaves the intake chain visible in the clearance list (6919.13225ms)
+✔ the intake records carry their catalogue form identity, and the catalogue refuses a second empty copy of it (7285.665791ms)
+✔ the financially approved pricing file is a reference to an approved pricing sheet, not a sentence someone typed (5984.546833ms)
+✔ receivables: an issued credit note lowers the ceiling on receipts, the balance and the aging bucket (8870.343708ms)
+✔ receivables: a credit note for the whole invoice leaves nothing to collect and nothing owing (8774.315584ms)
+✔ FIN-03: المخرج المقبول ينشئ استحقاقًا واحدًا بلقطة مصدر ولا يتجاوز قيمة البند (8271.191ms)
+✔ FIN-03: إعداد واعتماد الاستحقاق مستقلان والنسخة المقدمة ثابتة (8915.520958ms)
+✔ FIN-03: كل قبض يصل إلى استحقاق ويحتاج مطابقة مستقلة ولا يتجاوز الرصيد (8152.392125ms)
+✔ FIN-04/08: العرض يفصل المتنازع عليه ولا يدعي فاتورة أو دفعًا خارجيًا (7894.3695ms)
+✔ المسودة والمراجعة والرفض لا تظهر كاستحقاق مسدد (6920.690917ms)
+✔ رفض قبض غير مطابق يحرر المبلغ لمراجعة سجل صحيح دون تغيير الرصيد المؤكد (7457.974917ms)
+✔ واجهة المستحقات توفر الرفض للمطابق المستقل وتمنعه عن صاحب القبض (3.909792ms)
+ℹ tests 115
+ℹ suites 0
+ℹ pass 111
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 4
+ℹ todo 0
+ℹ duration_ms 363615.915875
+exit=0
+
+=== الحزمة كاملة (node --test --test-reporter=tap tests/*.test.mjs) — ملخص الإخفاقات مصنَّفةً ===
+not ok total 41 | listen EPERM 39 | other 2
+OTHER ('333', '(أ) ست عمليات ترقّم معًا داخل معاملة: ستة أرقام متمايزة، ولا رقم مكرر', '|-', 'concurrency.test.mjs:39:1')
+OTHER ('675', 'خط الأساس يطابق المخطط الذي تنتجه الترحيلات، فلا يحرس رقمًا لقاعدة أخرى', '|-', 'gate-schema-digest.test.mjs:21:1')
+EPERM files: ['attendance-rules.test.mjs', 'catalog-quality-fixes.test.mjs', 'concurrency.test.mjs', 'employee-ux.test.mjs', 'epmo-report.test.mjs', 'files-security.test.mjs', 'leave-types.test.mjs', 'module-fixes-critical.test.mjs', 'notifications-email.test.mjs', 'obligations.test.mjs', 'operations-http.test.mjs', 'platform.test.mjs', 'portal-audit-fixes.test.mjs', 'preferences.test.mjs', 'refusal.test.mjs', 'security-regressions.test.mjs', 'service-quality.test.mjs', 'service-targets-and-closure.test.mjs', 'static-modules.test.mjs', 'vendors-http.test.mjs']
+# tests 1897
+# suites 0
+# pass 1852
+# fail 41
+# cancelled 0
+# skipped 4
+# todo 0
+
+=== إعادة ملفات «listen EPERM» داخل العملية (الصندوق الرملي يمنع فتح منفذ محلي؛ مُحمِّل اختبار مؤقت يوجّه fetch إلى الخادم نفسه كما يفعل dispatch في tests/definitions-fixture.mjs، ولم يُلتزم) ===
+ℹ tests 176
+ℹ pass 176
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+
+=== سباق الترقيم بست عمليات (tests/concurrency.test.mjs «(أ)») وحده، بلا حمل الحزمة ===
+✔ (أ) ست عمليات ترقّم معًا داخل معاملة: ستة أرقام متمايزة، ولا رقم مكرر (6303.180334ms)
+✔ (أ) والحماية من قفل الكاتب لا من MAX+1: بلا معاملة يقع التكرار (6286.87625ms)
+ℹ tests 2
+ℹ pass 2
+ℹ fail 0
+
+=== البصمات الذهبية على الشيفرة النهائية (tests/ui-golden.test.mjs) ===
+✔ golden: every operational screen renders to the same HTML for four seeded personas (15727.604792ms)
+✔ golden: moving the SQL wall clock a day forward moves no screen hash (22126.722042ms)
+✔ golden: the normaliser hides random identifiers but stays sensitive to order, count and text (0.394667ms)
+✔ golden: the page-editor trigger is outside every seeded persona’s screen, and appears only for a holder of the configure capability (7964.801875ms)
+ℹ tests 4
+ℹ pass 4
+ℹ fail 0
+
+=== البوابة السريعة (node scripts/gate.mjs --quick) على الشيفرة النهائية — الفحصان 4 و6 ينتظران إعادة قياس خط الأساس عند الدمج (160 والبصمة الجديدة)، وخط الأساس لا يُعدَّل في هذا الفرع ===
+✔ 2. فحوص المصدر (check.mjs): Syntax checked: 663 JavaScript modules. Source hashes match. Traceability: 220 requirements / 22 domains. Migrations: 141 planned, highest 160. (34.7s)
+✔ 3. المسنّنة: local primitives 111 (baseline 111) · short refusals 1184 (baseline 1184) · status literals outside the vocabulary 2 (baseline 2) · Latin values without direction isolation 0 (base (0.3s)
+✖ 4. الترحيلات من قاعدة فارغة: بلغت الترحيل 160 في 4420 مللي — خط الأساس 159 (4.4s)
+✔ 5. الترحيلات على نسخة من آخر نسخة احتياطية: <repo>/work/backups/pre-fleet-20260930/36t-20260930T1502.sqlite → الترحيل 160 · سلامة ok · مراجع 0 · سلسلة التدقيق true (1.5s)
+✖ 6. بصمة المخطط: 603f13463cf8c101… · index 1304 · table 574 · trigger 1184 · view 2 — خط الأساس a3998dfd9ad1d1fd… (4.1s)
+✔ 7. لا تبعيات في package.json: صفر تبعية، كما هو مشترط (0s)
+✔ 8. إصدار Node: 24.14.0 مقابل >=24.14 <25 (0s)
+سريع: 2 فحصًا لم يمرّ.
+البصمة الكاملة: 603f13463cf8c1011cbca1da77337a247fbd01973032fae856e8df5f0d147313 (3064 كائنًا)

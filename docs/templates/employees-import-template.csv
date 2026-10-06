@@ -1,0 +1,4 @@
+username,name,department_id,role,manager_username
+head-sales-ops,مدير عمليات المبيعات (مثال),growth,manager,
+a.example,موظف مثال أول,growth,employee,head-sales-ops
+b.example,موظفة مثال ثانية,growth,employee,head-sales-ops

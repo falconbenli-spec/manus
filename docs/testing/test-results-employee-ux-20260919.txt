@@ -1,0 +1,25 @@
+✔ PLT-04: request moves from employee to manager to executor with completion evidence (1090.698875ms)
+✔ PLT-04: sequential approval cannot skip HR or overwrite an earlier submitted version (1204.049875ms)
+✔ PLT-01/05/07: tenant, unrelated employee, and technical admin cannot read request, file or search title (1044.659666ms)
+✔ PLT-04: creator cannot approve and client cannot choose approver, state, tenant or requester (1040.503667ms)
+✔ PLT-04: self routing and ambiguous approval routing fail without partial records (1091.59775ms)
+✔ PLT-04/09: stale duplicate decision fails and creates one blocked event (1242.880166ms)
+✔ PLT-04: cancellation and rejection are terminal and cannot be executed (1173.02475ms)
+✔ PLT-03: required fields and dates validated by server; new catalog service needs no new app (1281.533458ms)
+✔ PLT-07: unsafe filename, wrong signature and post-submit attachment are rejected (1217.826541ms)
+✔ PLT-06: audit and submitted snapshots cannot be changed or deleted (1047.723167ms)
+✔ PMO-01 and access: project membership gates tasks and briefs, completion requires evidence (901.825042ms)
+✔ IT-02: password, CSRF, disabled users, expiration and logout are enforced (1250.630167ms)
+✔ HTTP security and cross-department journey use real local endpoints (1807.564292ms)
+✔ NFR-04/10: SQLite backup restores requests, attachment bytes, permissions and audit (1020.269ms)
+✔ جودة الخدمة: تقييم صاحب الطلب بعد الإغلاق فقط مع منع التكرار وتزوير النسخة (1200.48425ms)
+✔ البحث: تغطية كل إدارة وكل رمز خدمة مع مصادر ومعايير قبول دون ادعاء اكتمال (5.958791ms)
+✔ جودة الخدمة عبر HTTP: حماية الجلسة وCSRF وإتاحة التقييم في تفاصيل الطلب (1451.862416ms)
+ℹ tests 17
+ℹ suites 0
+ℹ pass 17
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 16777.984917

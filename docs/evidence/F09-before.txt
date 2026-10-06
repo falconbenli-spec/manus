@@ -1,0 +1,31 @@
+✖ F09: an unknown route is denied for every role (0.94725ms)
+✔ F09: known rules and explicit empty overrides keep their meaning (0.186667ms)
+ℹ tests 2
+ℹ suites 0
+ℹ pass 1
+ℹ fail 1
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 121.328334
+
+✖ failing tests:
+
+test at tests/legacy-access.test.mjs:5:1
+✖ F09: an unknown route is denied for every role (0.94725ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  
+  true !== false
+  
+      at TestContext.<anonymous> (file:///Users/abdulaziz/Documents/Codex/2026-09-09/3-6t-360-codex-handoff-master/tests/legacy-access.test.mjs:7:12)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.start (node:internal/test_runner/test:1262:17)
+      at startSubtestAfterBootstrap (node:internal/test_runner/harness:387:17) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: true,
+    expected: false,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }

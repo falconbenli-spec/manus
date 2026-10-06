@@ -1,0 +1,52 @@
+{
+  "measured_at": "2026-09-29",
+  "question": "هل غيّر استخراج reachesDepartment من جوف can() سلوكَ can()؟",
+  "method": "تُقرأ نسخة access.mjs قبل التعديل من git (HEAD) إلى وحدة مؤقتة، وتُستورد الوحدتان معًا، وتُقارن can() على كل تركيبة (مستخدم × تصريح × إدارة، ومعها «بلا إدارة»). الوحدة المؤقتة تُحذف فور القياس.",
+  "seed": "synthetic-equivalence (بيانات تجريبية، لا أسماء موظفين)",
+  "grants_applied": [
+    {
+      "user_id": "outsider",
+      "capability": "commercial.use",
+      "department_id": null
+    },
+    {
+      "user_id": "hr",
+      "capability": "commercial.use",
+      "department_id": "hr"
+    },
+    {
+      "user_id": "it",
+      "capability": "commercial.use",
+      "department_id": "creative"
+    },
+    {
+      "user_id": "employee",
+      "capability": "studio.use",
+      "department_id": "creative"
+    },
+    {
+      "user_id": "manager",
+      "capability": "finance.use",
+      "department_id": null
+    },
+    {
+      "user_id": "it",
+      "capability": "clients.manage",
+      "department_id": null
+    },
+    {
+      "user_id": "hr",
+      "capability": "projects.use",
+      "department_id": null
+    }
+  ],
+  "users": 7,
+  "capabilities": 101,
+  "departments": 5,
+  "can_comparisons": 4242,
+  "can_differences": 0,
+  "can_difference_samples": [],
+  "holdsIn_null_vs_holds_comparisons": 707,
+  "holdsIn_null_vs_holds_differences": 0,
+  "conclusion": "صفر فرق: الاستخراج لم يغيّر can()، وholdsIn بلا إدارة تساوي holds حرفيًا — فكل موضع لا يمرّر إدارة لم يتغيّر."
+}

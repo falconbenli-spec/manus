@@ -1,0 +1,134 @@
+Package 3 — receivables, settlement, credit notes, reversals: gap probe and red evidence (2026-09-30)
+
+Probe: a synthetic in-memory month on the Package 3 integration head 3d1d84c (code unchanged at probe time), built with the
+real commercial, receivables, invoicing and ledger paths (tests/ledger-fixture.mjs). No code was changed; every write went to a
+throwaway in-memory database, and the two destructive probes (the naive status flip, the direct cancel) ran inside SAVEPOINTs
+that were rolled back. Runner: work/node24/bin/node v24.14.0. Amounts are minor units (halalas).
+The probe script is not committed (it lived in the session scratchpad); its output follows verbatim.
+
+G1-3 app modules that INSERT INTO ar_adjustments: []
+G1-3 app modules that INSERT INTO ar_disputes: []
+G1-3 app modules that INSERT INTO ar_promises: []
+G1 app modules that write ar_receipts status 'reversed': []
+G1-4 receivables route lines: ["receivables.mjs","receivables.listReceivables","receivables.createClaim,receivables.listReceivables","receivables.claimAction","receivables.recordReceipt,receivables.getReceipt","receivables.receiptAction"]
+G1-4 receivables.mjs exports: ["claimAction","createClaim","getReceipt","listReceivables","receiptAction","recordReceipt"]
+G1 claim actions after a confirmed receipt (employee): []
+G1 claim actions after a confirmed receipt (manager): []
+G1 claim actions after a confirmed receipt (outsider): []
+G1 claim balance after the receipt: 0
+G1 receivable control before any reversal [subledger, ledger, balanced]: [0,0,true]
+G1 naive SQL flip to reversed: receivable control [subledger, ledger, difference, reasons]: [11500,0,11500,["no_document"]]
+G1 naive flip: claim balance reopens?: 11500
+G2 direct SQL cancel of an approved, invoiced, collected claim: no error
+G3 view fields for disputes/promises on a claim: ["disputed"]
+G4 one transfer SYN-TWO-CLAIMS of 150.00 on the first claim (100.00): over_allocation
+G4 the same transfer reference for the rest (50.00) on the second claim: duplicate_receipt_reference
+G4 a receipt needs a claim id (recordReceipt arity, first input after the claim id): 4
+G4 tables that can hold cash without a claim: ["ar_adjustments","ar_claim_decisions","ar_claim_versions","ar_claims","ar_disputes","ar_history","ar_promises","ar_receipt_decisions","ar_receipts"]
+G4 ar_receipts.claim_id NOT NULL: true
+G5 issued invoice keys about reporting/internal/simulation: ["reporting_status"]
+G5 issued invoice reporting_status: not_reported
+G5 list-level e_invoicing: not_connected
+G5 reporting_status on a non-issued document (same constant): not_reported
+G5 einvoice queue row for the issued invoice: {"status":"queued","attempts":0,"provider":""}
+G5 einvoice gateway module says connected: disconnected
+G6 readers of ar_receipts status='confirmed' (a reversed receipt would still count there): ["bank-reconciliation.mjs:103","cash-forecast.mjs:54","ledger.mjs:75","ledger.mjs:78","ledger.mjs:763","project-axes.mjs:522","project-axes.mjs:742","reports-more.mjs:43","reports.mjs:76"]
+
+Reading:
+  G1  No module in app/ writes ar_adjustments, ar_disputes or ar_promises, and no route names them: the only exports are
+      listReceivables, createClaim, claimAction, recordReceipt, getReceipt, receiptAction. After a confirmed receipt no
+      person is offered any action on it, so a bounced cheque or a returned transfer cannot be recorded. The schema does
+      allow flipping the receipt row to 'reversed' (ar_receipt_identity, migration 012), but doing so drops the receipt from
+      its sub-ledger while its posted journal stays: the receivable control shows 115.00 unexplained, reason no_document.
+      That is why the reversal is built as its own record and the receipt row is never edited.
+  G2  A direct UPDATE cancels an approved, invoiced and collected claim with no error: no independent approval and no check
+      of what stands on the claim.
+  G3  The claim view reads disputes only as a boolean («disputed»); promises are read only by app/cash-forecast.mjs. Both
+      tables are populated in the tree only by tests inserting rows.
+  G4  One transfer for two claims cannot be recorded: the whole amount on the first claim is over_allocation, and the rest
+      on the second claim under the same bank reference is duplicate_receipt_reference. ar_receipts.claim_id is NOT NULL
+      and no table holds cash without a claim, so a payment that arrives before its claim has nowhere to go.
+  G5  Nuance on the inventory: the invoices API already carries reporting_status = 'not_reported' — a column constant
+      (CHECK) that reads the same on a draft that was never issued. There is no internal/issued-internally label, no
+      simulation flag, and no link to the e-invoicing queue, whose row can be moved to «accepted» by an injected provider
+      (tests/einvoice-gateway.test.mjs does exactly that) while nothing is connected.
+  G6  Every reader that equates «confirmed» with collected would keep counting a reversed receipt: project-axes (collection
+      axis, refunds and the closure checklist), cash-forecast, reports R31 and R01, the ledger customer statement, and bank
+      matching candidates. Of these, only app/project-axes.mjs is in this package's scope; the others are listed in the
+      final report for their owners.
+
+Red stage — new and changed tests before any implementation (migration 170 held aside, app code at 3d1d84c):
+not ok 1 - invoices API: every issued document says it is internal and not reported while no e-invoicing gateway is connected; a draft says it is not issued
+  error: "Cannot read properties of undefined (reading 'status')"
+not ok 2 - invoices API: a queue status written by a simulated provider never reads as reported on the invoice
+  error: "Cannot read properties of undefined (reading 'status')"
+not ok 3 - reversal: a bounced receipt is reversed by a new record a third person approves; the receipt row stays as it was and the claim balance reopens
+  error: 'ar.requestReceiptReversal is not a function'
+not ok 4 - reversal: the database keeps the requester, the recorder and the matcher out of the approval, and the decision inside the tenant
+  error: 'ar.requestReceiptReversal is not a function'
+not ok 5 - reversal: what cannot be reversed is refused by name, and a rejected request leaves the money collected
+  error: |-
+not ok 6 - cancellation: an open claim is cancelled only by an independent approval, never while a receipt or an uncorrected invoice stands on it
+  error: |-
+not ok 7 - cancellation: the database refuses a cancellation nobody approved, a pending claim is returned instead, and a cancelled draft frees its delivery
+  error: 'Missing expected exception.'
+not ok 8 - disputes: an open dispute moves the claim to the disputed bucket and pauses follow-up until someone else resolves it with evidence
+  error: "Cannot read properties of undefined (reading 'state')"
+not ok 9 - promises: a promise to pay has an amount and a date; kept and broken are read from receipts, and a bounced receipt breaks a kept promise
+  error: |-
+not ok 10 - on account: one transfer for two claims is recorded once, matched by another person and allocated across both by someone other than its recorder
+  error: 'ar.recordAccountReceipt is not a function'
+not ok 11 - on account: a payment that arrives before its claim waits unapplied and is allocated once the claim is approved
+  error: 'ar.recordAccountReceipt is not a function'
+not ok 12 - on account: a bounced transfer is reversed only after its allocations are undone, by someone who neither recorded nor matched it
+  error: 'ar.recordAccountReceipt is not a function'
+not ok 13 - ledger: receipt → reversal → re-receipt and on account → allocation → reversal → reallocation keep AR and customer advances tied to their control accounts, every journal balanced
+  error: 'ar.requestReceiptReversal is not a function'
+not ok 14 - trace: an invoice walks to its receipt, the bounce and the allocation that settled it, each with who asked, who approved and the posted journal
+  error: 'ar.requestReceiptReversal is not a function'
+not ok 15 - tenant isolation: another tenant neither sees nor touches these claims, receipts or cash on account
+  error: 'ar.recordAccountReceipt is not a function'
+not ok 16 - idempotency: one key replays one cash-on-account record and one allocation; the same key with another body is refused
+  error: 'ar.recordAccountReceipt is not a function'
+not ok 17 - race: two processes asking for and approving the same reversal, and two allocating the same cash beyond it, leave one reversal and no over-allocation
+  error: 'ar.recordAccountReceipt is not a function'
+not ok 18 - project closure checklist stays true: a reversal reopens collection, pending decisions and open disputes are named, cash on account and the new documents are counted
+  error: 'ar.requestReceiptReversal is not a function'
+not ok 19 - inbox: each new decision reaches the person who must take it, labelled for what it is
+  error: 'ar.requestReceiptReversal is not a function'
+not ok 20 - screen: the receivables screen offers each settlement form to the right person, and the forms post where the routes listen
+  error: 'ar.requestReceiptReversal is not a function'
+not ok 21 - routes: the settlement endpoints answer through the real request handler, with session, CSRF, idempotency and written refusals
+  error: |-
+not ok 3 - tests/receivables.test.mjs
+  error: 'test failed'
+# tests 22
+# pass 0
+# fail 22
+
+The receivables.test.mjs failure is the whole file: it now imports requestClaimCancel and decideAdjustment, which did not
+exist, because its direct «UPDATE ar_claims SET status='cancelled'» shortcut is replaced by the real cancellation path.
+Test 7 fails with «Missing expected exception»: the database still accepted a cancellation nobody approved (gap G2).
+
+Green stage and verification (after implementation, same runner):
+  Focused tests: 108 tests, 107 pass; the single failure is the sandbox refusing server.listen() (EPERM) in obligations.test.mjs,
+    identical on the base. TAP: docs/testing/p3-receivables-settlement-20260930.txt.
+  Schema digest (sqlite_master fingerprint, scripts/gate.mjs schemaFingerprint, fresh in-memory build):
+    base 167  11c79622a463206f2d92149ff3dfeed6121079643b5646d5aa10f5be7b713d34  index 1356 · table 591 · trigger 1277 · view 4
+    with 170  8f9bf670d55171b2709e7ee84978be905374a178560db72f8444a12ec1ac91d6  index 1369 · table 594 · trigger 1294 · view 5
+    (+3 tables ar_account_receipts, ar_allocations, ar_account_reversals; +1 view ar_claim_collection; +17 triggers; +13 indexes
+    including 5 automatic ones for primary keys and UNIQUE; +1 column ar_adjustments.effective_on). scripts/gate-baseline.json is
+    not edited: its recorded digest is the Package 2 build (migration 165) and already differs on the base.
+  Upgrade rehearsal: a synthetic database built on the base tree (migration 167) with a posted invoice and receipt, a partial
+    receipt, a dispute row and a promise row, reopened with this branch: migration 170 applied, integrity_check ok, foreign_key_check
+    empty, audit chain intact, ar_claim_collection reads 115.00/115.00 and 115.00/50.00, the dispute and promise rows kept.
+  scripts/quality-ratchet.mjs (no --tighten): nothing rose; app/receivables.mjs short refusals 9 → 2; links 148 checked, 0 unresolved.
+  scripts/check.mjs: syntax and source hashes pass, then it stops at traceability — on the base already (FIN-01 ← tests/finance.test.mjs
+    and the payables entries, whose files differ from their recorded hashes at 3d1d84c). This change adds FIN-03 and FIN-04
+    (tests/receivables.test.mjs changed). Not re-recorded here, by instruction. The migration plan (149 files, highest 170) and the
+    ratchet were run separately and pass.
+  Full suite (tests/*.test.mjs, 2007 tests): 1957 pass, 50 fail — 39 × listen EPERM (sandbox); 7 × a window I caused by moving
+    migration 170 aside for the «before» digest while the suite ran (ENOENT on the migration file, then «no such table:
+    ar_claim_collection») — the seven files rerun green; 4 × identical on the untouched base (the gate's schema-digest baseline, the
+    traceability hashes, notifications «daily reminders» 0 !== 1, and payroll-insurance «a non-Saudi is not assumed…» 1 !== 0 —
+    the last two were not investigated: they are outside this package's files and fail the same way on the base, run the same hour).

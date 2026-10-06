@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<title>مسبار تخطيط الجوال — 3,6T</title>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<style>
+:root{color-scheme:light dark;--ok:#1f6a3b;--bad:#a13a22;--line:#d3d8d3}
+body{margin:0;padding:16px;font:15px/1.6 "IBM Plex Sans Arabic",Tahoma,system-ui,sans-serif;direction:rtl}
+h1{font-size:1.4rem;margin:0 0 .25rem}
+p.note{color:#586070;max-width:70ch}
+button{min-height:44px;padding:0 18px;border:1px solid var(--line);border-radius:6px;background:transparent;font:inherit;cursor:pointer}
+table{border-collapse:collapse;width:100%;margin-top:1rem;font-size:.9rem}
+th,td{border-bottom:1px solid var(--line);padding:6px 8px;text-align:start}
+td.num{font-variant-numeric:tabular-nums}
+td.ok{color:var(--ok)}td.bad{color:var(--bad);font-weight:600}
+#stage{position:fixed;inset-block-start:-10000px;inset-inline-start:-10000px}
+#stage iframe{border:0;height:900px}
+pre{background:#f3f4f1;padding:10px;border-radius:6px;overflow-x:auto;font-size:.8rem;max-height:40vh}
+@media (prefers-color-scheme:dark){body{background:#131719;color:#e6e9e6}pre{background:#1a1f22}p.note{color:#a1a9a6}}
+</style>
+</head>
+<body>
+<h1>مسبار تخطيط الجوال</h1>
+<p class="note">
+يفتح كل شاشة في إطار من الأصل نفسه بثلاثة عروض — <strong>360 و390 و414</strong> — ويقرأ
+<code>scrollWidth − clientWidth</code>. أي رقم فوق الصفر يعني أن الصفحة تُسحب جانبيًا عند ذلك العرض.
+<br>
+<strong>افتحه بجلسة مفتوحة</strong>: الإطارات تحمّل المنصة نفسها، وبلا جلسة تعرض كلها شاشة الدخول فيخرج القياس صفرًا كاذبًا.
+</p>
+<p><button id="run">ابدأ القياس</button> <span id="progress"></span></p>
+<div id="stage" aria-hidden="true"></div>
+<table id="out" hidden><thead><tr><th>الشاشة</th><th>360</th><th>390</th><th>414</th></tr></thead><tbody></tbody></table>
+<h2 id="jsonHead" hidden>الناتج</h2>
+<pre id="json" hidden></pre>
+<script type="module" src="/mobile-probe.mjs"></script>
+</body>
+</html>

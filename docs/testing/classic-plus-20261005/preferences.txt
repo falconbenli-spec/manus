@@ -1,0 +1,77 @@
+(node:14036) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ defaults: with no rows every user resolves to depth/dark, unlocked, source default — never auto (4302.798125ms)
+✔ resolution order: personal choice, then company default, then depth/dark; reset returns to the company default (3225.986459ms)
+✔ lock: the personal row is ignored but kept, the personal save is refused in clear Arabic, and the choice returns when the lock lifts (2951.92825ms)
+✔ invalid values are refused: unknown design or theme, extra or missing keys, wrong types, short reason, stale version, no change (2902.599416ms)
+✔ only the super admin sets the company default, inside a transaction, with a written reason — and every change is audited with before and after (2829.863167ms)
+✔ tenant isolation: a company default, a lock and a personal choice in one tenant never reach the other (2615.554458ms)
+{"t":"2026-10-05T12:06:19.499Z","id":"4f422656","env":"local","m":"POST","p":"/api/login","s":200,"ms":265}
+{"t":"2026-10-05T12:06:19.752Z","id":"cde8f3ab","env":"local","m":"POST","p":"/api/login","s":200,"ms":248}
+{"t":"2026-10-05T12:06:19.998Z","id":"39d9a6fb","env":"local","m":"POST","p":"/api/login","s":200,"ms":244}
+{"t":"2026-10-05T12:06:19.999Z","id":"67fc34ff","env":"local","m":"GET","p":"/api/me","s":200,"ms":0}
+{"t":"2026-10-05T12:06:20.000Z","id":"1d2c60ca","env":"local","m":"GET","p":"/api/appearance","s":401,"ms":0}
+{"t":"2026-10-05T12:06:20.001Z","id":"6cb1b95b","env":"local","m":"GET","p":"/api/appearance","s":200,"ms":1}
+{"t":"2026-10-05T12:06:20.006Z","id":"926b93e3","env":"local","m":"POST","p":"/api/account/appearance","s":201,"ms":4,"tx":1,"lock_ms":0}
+{"t":"2026-10-05T12:06:20.007Z","id":"9b160edf","env":"local","m":"GET","p":"/api/me","s":200,"ms":1}
+{"t":"2026-10-05T12:06:20.252Z","id":"ada99a5e","env":"local","m":"POST","p":"/api/login","s":200,"ms":244}
+{"t":"2026-10-05T12:06:20.253Z","id":"14dcdf4b","env":"local","m":"POST","p":"/api/account/appearance","s":403,"ms":0}
+{"t":"2026-10-05T12:06:20.255Z","id":"3ab7c4f2","env":"local","m":"POST","p":"/api/account/appearance","s":400,"ms":1,"tx":1,"lock_ms":0}
+{"t":"2026-10-05T12:06:20.256Z","id":"9479e9f3","env":"local","m":"POST","p":"/api/account/appearance","s":400,"ms":0,"tx":1,"lock_ms":0}
+{"t":"2026-10-05T12:06:20.257Z","id":"d6a077a7","env":"local","m":"POST","p":"/api/admin/appearance","s":403,"ms":0,"tx":1,"lock_ms":0}
+{"t":"2026-10-05T12:06:20.258Z","id":"f566cfa3","env":"local","m":"POST","p":"/api/admin/appearance","s":403,"ms":0,"tx":1,"lock_ms":0}
+{"t":"2026-10-05T12:06:20.266Z","id":"91828409","env":"local","m":"POST","p":"/api/admin/appearance","s":400,"ms":1,"tx":1,"lock_ms":0}
+{"t":"2026-10-05T12:06:20.267Z","id":"bd93d00a","env":"local","m":"POST","p":"/api/admin/appearance","s":201,"ms":1,"tx":1,"lock_ms":0}
+{"t":"2026-10-05T12:06:20.268Z","id":"2791e03c","env":"local","m":"POST","p":"/api/account/appearance","s":409,"ms":1,"tx":1,"lock_ms":0}
+{"t":"2026-10-05T12:06:20.268Z","id":"27b5a19e","env":"local","m":"GET","p":"/api/me","s":200,"ms":0}
+{"t":"2026-10-05T12:06:20.269Z","id":"531f003f","env":"local","m":"GET","p":"/api/appearance","s":200,"ms":0}
+{"t":"2026-10-05T12:06:20.270Z","id":"6174e26b","env":"local","m":"POST","p":"/api/admin/appearance","s":409,"ms":1,"tx":1,"lock_ms":0}
+{"t":"2026-10-05T12:06:20.270Z","id":"30be931b","env":"local","m":"POST","p":"/api/admin/appearance","s":201,"ms":0,"tx":1,"lock_ms":0}
+{"t":"2026-10-05T12:06:20.271Z","id":"ba204dc8","env":"local","m":"GET","p":"/api/me","s":200,"ms":0}
+{"t":"2026-10-05T12:06:20.272Z","id":"883161d1","env":"local","m":"GET","p":"/theme-boot.js","s":200,"ms":1}
+{"t":"2026-10-05T12:06:20.273Z","id":"2a7dd9ef","env":"local","m":"GET","p":"/appearance-ui.mjs","s":200,"ms":0}
+✔ HTTP: the three routes, CSRF, the payload field on /api/login and /api/me, and the two static files (3669.995458ms)
+✖ the screen: renders for employee and super admin, locked and unlocked, inside the strict CSP, and every offered button opens a valid form (2634.400875ms)
+✔ migration 095: depth and classic join the allowed designs, depth becomes the default, neon is still refused, and existing rows survive unchanged (2719.029208ms)
+✔ the client mirrors: the boot script and app.mjs fall back to depth, list the five designs, and the picker actions stay clear of the destructive tone (2.809791ms)
+✔ مدار: يحفظ الترحيل المظهر السابق والقفل ويقبل الاختيار الشخصي الجديد (2739.239084ms)
+ℹ tests 11
+ℹ suites 0
+ℹ pass 10
+ℹ fail 1
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 31037.87875
+
+✖ failing tests:
+
+test at tests/preferences.test.mjs:188:1
+✖ the screen: renders for employee and super admin, locked and unlocked, inside the strict CSP, and every offered button opens a valid form (2634.400875ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly deep-equal:
+  + actual - expected
+  
+    [
+      'choose:depth',
+  +   'choose:classicplus',
+      'choose:classic',
+      'choose:void',
+      'choose:field',
+      'choose:studio',
+      'choose:slate',
+  
+      at TestContext.<anonymous> (file:///Users/abdulaziz/Documents/Codex/2026-09-09/3-6t-live/tests/preferences.test.mjs:217:10)
+      at Test.runInAsyncScope (node:async_hooks:228:14)
+      at Test.run (node:internal/test_runner/test:1118:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:787:18)
+      at Test.postRun (node:internal/test_runner/test:1247:19)
+      at Test.run (node:internal/test_runner/test:1175:12)
+      at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:787:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: [ 'choose:depth', 'choose:classicplus', 'choose:classic', 'choose:void', 'choose:field', 'choose:studio', 'choose:slate', 'choose:riwaq', 'choose:yawm', 'choose:markaz', 'choose:depth:dark', 'choose:depth:light', 'choose:depth:auto' ],
+    expected: [ 'choose:depth', 'choose:classic', 'choose:void', 'choose:field', 'choose:studio', 'choose:slate', 'choose:riwaq', 'choose:yawm', 'choose:markaz', 'choose:depth:dark', 'choose:depth:light', 'choose:depth:auto' ],
+    operator: 'deepStrictEqual',
+    diff: 'simple'
+  }

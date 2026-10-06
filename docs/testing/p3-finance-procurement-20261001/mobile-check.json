@@ -1,0 +1,67 @@
+{
+ "measured_on_commit": "198a760",
+ "server": "synthetic in-memory preview (scratchpad p3-preview-server.mjs over tests/visibility-fixture.mjs: partial payment, grouped order, returned transfer, supplier credit, bounced receipt, on-account cash allocated) on 127.0.0.1:3613, served from the p3-design-projects worktree at 198a760 (same tree as p3/integration during its measurement); not port 3600, no live data",
+ "account": "manager (finance reader and approver in the synthetic month, plus finance.close.manage, finance.audit.export, bank.reconcile.approve, vendors.bank and procurement.use granted by the preview script)",
+ "method": "built-in browser at each width; each screen measured only after document.title or the main heading changed from the previous screen and #main stayed the same size for three 400 ms samples with no loading text; every <details> in #main expanded; overflow = documentElement.scrollWidth - clientWidth; a hidden action = a displayed button or a.btn in #main with zero size, or outside the viewport horizontally; error = a .error block in #main",
+ "screens": [
+  "payables",
+  "receivables",
+  "invoices",
+  "bank-reconciliation",
+  "close-checklist",
+  "finance-exceptions",
+  "options",
+  "statements",
+  "finance",
+  "billing-schedules",
+  "cash-forecast",
+  "procurement",
+  "vendors",
+  "budgets",
+  "accruals",
+  "reports"
+ ],
+ "results": {
+  "360": {
+   "overflow_total": 0,
+   "hidden_actions": 0,
+   "errors": 0
+  },
+  "390": {
+   "overflow_total": 0,
+   "hidden_actions": 0,
+   "errors": 0
+  },
+  "414": {
+   "overflow_total": 0,
+   "hidden_actions": 0,
+   "errors": 0
+  },
+  "1280": {
+   "overflow_total": 0,
+   "hidden_actions": 0,
+   "errors": 0
+  }
+ },
+ "buttons_per_screen_at_every_width": {
+  "payables": 0,
+  "receivables": 0,
+  "invoices": 1,
+  "bank-reconciliation": 0,
+  "close-checklist": 2,
+  "finance-exceptions": 1,
+  "options": 53,
+  "statements": 1,
+  "finance": 18,
+  "billing-schedules": 2,
+  "cash-forecast": 2,
+  "procurement": 1,
+  "vendors": 3,
+  "budgets": 3,
+  "accruals": 1,
+  "reports": 108
+ },
+ "notes": [
+  "A first 390 pass without the title check read billing-schedules while the finance ledger was still on screen (18 buttons instead of 2); the method was tightened to wait for the screen title to change, and all four widths were measured again with it. The table above is the tightened run: identical button counts at all four widths, equal to the 627816c reference."
+ ]
+}

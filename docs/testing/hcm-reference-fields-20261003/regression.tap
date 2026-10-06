@@ -1,0 +1,44 @@
+(node:90780) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ B1: policy validation — up to five steps, cross-department and executive steps, and a threshold that lives in settings, never in the service (3718.750458ms)
+✔ B1: an undefined threshold never skips its step; a defined, approved and effective one adds the step only at or above it (4478.123708ms)
+✔ B2: a direct service is approved on submission, its handlers are told at once, and catalog proposals apply only after a recorded adoption (4663.829541ms)
+✔ B3: in a sod service whoever approved any step of the current revision can neither claim nor complete; another member of the executing department can (3715.2725ms)
+✔ B4: when two steps resolve to one person the second rises to the escalation approver and the snapshot records it (3590.296042ms)
+✔ B4: a department head request uses two distinct executives instead of counting one decision twice (3622.6495ms)
+✔ B4: submission fails safely only when no distinct escalation or executive exists (3758.362917ms)
+✔ B5: the assigned HR approver can request a salary certificate for themselves through the fallback or the escalation approver (3654.259625ms)
+✔ B6: a confidential service is visible to the requester, its approvers, the assignee and the executing department head — not to the whole team (3869.873167ms)
+✔ B7: the registered beneficiary neither approves nor executes, and the job change no longer offers a pay change (3703.231375ms)
+✔ B8: every mapped screen exists, pending links wait for their screen, and the budget change points to media spend (0.294625ms)
+✔ B9: the catalog health check names services without an executor, unresolvable steps, undefined thresholds and sod without a second executor (3732.586ms)
+✔ service card labels describe cross-department, executive, conditional and direct steps (3459.713375ms)
+✔ approval settings screen renders the view and sends thresholds in halalas without float arithmetic (2761.667ms)
+(node:90781) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ the governed leave policy covers every leave family shown in the HCM reference without losing the richer statutory model (1.949333ms)
+✔ salary certificate offers the HCM bank and embassy directories as structured conditional fields (3738.321208ms)
+✔ migration 204 publishes the structured salary certificate form over a persisted legacy version (4377.921875ms)
+✔ an approved catalog request carries the selected bank into the employee letter record by code (4545.580458ms)
+(node:90782) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ regulation policies: seeded drafts cite their articles, stay inactive until the HR manager accepts them, and choices are made by the acceptor (3678.427708ms)
+✔ resignation: deemed accepted by the daily job after 30 days with no reply, the clock waits for the accepted rule, and deferral is limited to 60 days with a reason (4335.088ms)
+✔ resignation: an open investigation or suspension holds acceptance until it is decided, and never blocks the letter itself (Art. 37/5) (4501.159209ms)
+✔ resignation: acceptance by the authority holder opens the offboarding bundle from lifecycle, with its clearance items (3594.633375ms)
+✔ settlement: both Art. 36(2) readings side by side, no approval before the HR manager chooses, unpaid leave over 20 days excluded, dues deadline and death (3520.775833ms)
+✔ deduction caps: advance instalment ≤10%, court order ≤25%, fines ≤5 days a month — refused up front, and a run carrying a breach cannot move to review (3556.037125ms)
+✔ pay rules: a payday on a rest day or holiday moves to the previous working day, housing is checked at 25% of basic, and rounding up to the riyal applies only once accepted (3731.428708ms)
+✔ business travel: per-diem by grade with distance eligibility and the quarter/half reductions, extensions capped at two weeks by the authority holder, a proposed payroll adjustment and receipts through expenses (3589.257ms)
+✔ letter templates: bilingual starter drafts are offered, marked as needing HR approval, adopted by the preparer and approved by someone else (3719.148833ms)
+✔ letter wizard: each option path — type, addressee from the lists or validated free text, language, salary detail and period, purpose, delivery, copies, urgency — with a masked preview before submitting (3663.720667ms)
+✔ letter wizard end to end: HR prepares, another person issues, the employee is notified and downloads it with a QR code; printed copies are handed over; "request again" prefills the options (3580.664333ms)
+✔ catalog HR-SALARY-CERT routes to the letters module: the request cannot complete without an issued letter, and its options carry over (3697.402583ms)
+ℹ tests 30
+ℹ suites 0
+ℹ pass 30
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 48969.686375

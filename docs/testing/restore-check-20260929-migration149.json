@@ -1,0 +1,11 @@
+{
+ "backup": "/Users/abdulaziz/Documents/Codex/2026-09-09/3-6t-360-codex-handoff-master/work/backups/erp-gate4-20260929-012554/db.sqlite",
+ "checked_at": "2026-09-28T22:30:02.946Z",
+ "migration": 149,
+ "integrity_ok": true,
+ "foreign_key_violations": 0,
+ "tables": 565,
+ "triggers": 1143,
+ "commit": "63ff911",
+ "note": "استعادة مجرَّبة على المخطط الحالي (149). السابقة كانت على 104."
+}

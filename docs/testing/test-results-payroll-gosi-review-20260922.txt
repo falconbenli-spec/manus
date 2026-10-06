@@ -1,0 +1,82 @@
+✔ migration 127: a database with an adopted regulation policy and a child pointing at it upgrades in place, keeps every row, and opens the table to the social-insurance kind (1440.272625ms)
+✔ the case follows the join date the employee record holds, not the start of the contract he happens to be on now; and two recorded dates on opposite sides of the new law are named, never picked between (1359.888959ms)
+✔ a non-Saudi is not assumed to be outside the Gulf because nobody asked: the run refuses until the question is answered where nationality is recorded, and either answer is a record (1186.172ms)
+✔ the approval gate reads the rule in force, not the basis frozen on the line: a draft calculated before the rule was accepted, or before an exclusion was recorded, cannot be submitted or approved (1021.273625ms)
+✔ an employee whose contract changed mid-month is charged on each part by its own wage and days, not on the newest contract for the whole month (981.334083ms)
+✔ a share clamped to what is left of the wage says so on the line, on the run and on the payslip: the percentage never prints next to an amount it does not produce (956.855ms)
+✔ accepting the insurance rule after a month was approved does not invent a retroactive wage difference with no stated reason (950.83725ms)
+✔ the early-pay date is judged by the working week the tenant accepted, and a date confirmed by mistake is withdrawn with a written reason instead of standing for ever (979.830458ms)
+✔ the basis of an exclusion refuses an identity number however it is written: Arabic-Indic and Persian digits and digits split by dots are numbers too (951.669083ms)
+✔ when the accepted rounding rule moves the deduction, the basis carries the amount that was actually withheld — and the HR manager may keep the employee share at the halala the brief recommends (934.154084ms)
+✔ the occupational-hazards branch is in force under both laws, so a month before the date that was copied into its row still charges the company its two per cent (926.767458ms)
+✔ an age at first coverage is never applied as a figure the platform invented: nothing changes until the HR manager records a verified threshold, and then the run refuses instead of deducting (911.77625ms)
+✔ a run whose month the insurance rule never governed says the company share is unavailable, and never prints a zero it did not compute (915.020042ms)
+✔ every case in the law is deducted by its own rate: a Saudi under the previous law, a Saudi new entrant on the step in force, and a non-Saudi who pays nothing while the company still owes the hazards branch (1387.447833ms)
+✔ the contributory wage is clamped to the floor and the ceiling the law sets, and the rate is read from the payroll month so a step-up lands on the month it takes effect (1170.983417ms)
+✔ an employee with no recorded case is never guessed: the draft shows him as unavailable at zero and the run refuses to be submitted or approved, naming who is missing and who records it (1058.236125ms)
+✔ a Saudi who joined after the new law but already had a contribution period elsewhere is moved back to the previous law by a dated override, and withdrawing it restores the derived case (982.554458ms)
+✔ a Gulf national is excluded by the owner decision, so he has no applicable case and blocks approval like anyone else — he is never silently treated as Saudi or as non-Saudi (952.293416ms)
+✔ the old single-rate cycle policy keeps governing the months it governed: a month before the insurance rule took effect reproduces its recorded line, and the run says which basis it used (950.37225ms)
+✔ the insurance case reveals nationality, so it is read by the same rule: a manager without the workforce capability cannot open the screen, and no override is recorded without an HR role (931.754375ms)
+✔ a joiner mid-month is charged on the days of service by the divisor the HR manager chose, and both shares follow the rounding rule he accepted in the pay rules (953.342667ms)
+✔ the run totals and the wage-protection deduction never carry the employer share: it is stored on the line as the company cost and nowhere else (932.283458ms)
+✔ the pay date a run carries is the nominal day, the day Art. 48 shifts it to, and the date actually decided — and an early payment needs two people (1412.733958ms)
+✔ a holiday declared after the decision can only pull the pay date earlier, never past the date the regulation sets (1149.5445ms)
+✔ an early payment can be refused by the second person, and the month is then free for a new proposal (1022.164625ms)
+✔ PAY-04: a backdated raise leaves approved runs untouched and surfaces the exact difference per month, proposed once and approved by someone else (1483.12625ms)
+✔ PAY-04: a rejected retro movement frees the difference to be proposed again, and an overpayment becomes a proposed deduction (1181.245792ms)
+✔ PAY-01/03: the run applies the accepted cycle policy of that month, prorates a mid-month joiner and deducts only confirmed unpaid days (1300.261625ms)
+✔ PAY-05/06: three different people prepare, review and approve; unexplained variances block review; an approved run is locked (1157.422416ms)
+✔ PAY-08: a payslip exists only after approval, only for its owner, and every view is recorded (1060.876291ms)
+✔ no run without a payroll-cycle policy accepted by the HR manager, and an empty month cannot be submitted (984.450083ms)
+ℹ tests 31
+ℹ suites 0
+ℹ pass 31
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 12375.726709
+
+— npm test (كل الحزمة) على هذه الشيفرة:
+ℹ tests 1237
+ℹ pass 1190
+ℹ fail 41
+
+— الإخفاقات الـ41 كلها من سدّ المنفذ في البيئة المعزولة (listen EPERM)، لا من الشيفرة. الملفات المتأثرة:
+tests/attendance-rules.test.mjs
+tests/catalog-quality-fixes.test.mjs
+tests/employee-ux.test.mjs
+tests/epmo-report.test.mjs
+tests/files-security.test.mjs
+tests/leave-types.test.mjs
+tests/module-fixes-critical.test.mjs
+tests/notifications-email.test.mjs
+tests/obligations.test.mjs
+tests/operations-http.test.mjs
+tests/platform.test.mjs
+tests/portal-audit-fixes.test.mjs
+tests/preferences.test.mjs
+tests/refusal.test.mjs
+tests/security-regressions.test.mjs
+tests/service-quality.test.mjs
+tests/service-targets-and-closure.test.mjs
+tests/static-modules.test.mjs
+tests/ui-golden.test.mjs
+tests/ui-render.test.mjs
+tests/vendors-http.test.mjs
+
+— npm run check:
+Syntax checked: 486 JavaScript modules. Source hashes match. Traceability: 220 requirements / 22 domains.
+Quality ratchet: local primitives 114 (baseline 114) · short refusals 1308 (baseline 1308) · status literals outside the vocabulary 2 (baseline 2) · links 113 checked, 0 unresolved · 113 ms
+Checks cover syntax, source integrity, traceability and the quality ratchet. No TypeScript compiler or production bundle is configured for this JavaScript build.
+
+— البصمات الذهبية: لم تُعد كتابتها هنا، ولا يمكن.
+tests/ui-golden.test.mjs يشغّل خادمًا حقيقيًا على 127.0.0.1، والبيئة المعزولة ترد listen EPERM،
+فلا UPDATE_GOLDEN=1 يعمل فيها. tests/ui-golden.baseline.json لم يُمسّ بيد أحد (ولا يجوز أن يُمسّ بيد).
+الشاشات التي تغيّرت HTML الناتجة عنها قصدًا وتحتاج إعادة توليد بصماتها خارج العزل:
+  payroll            — لوحة التأمينات (الحصر، وبلا جواب الخليج، والسطر البائت)، وحقيقة حصة المنشأة
+                       «غير متاح» بدل ٠٫٠٠، وعمود سند القسيمة، وزر «سحب الصرف المبكر المؤكد»
+  payroll-insurance  — شريط «بلا جواب عن سؤال الخليج»، ووسم needs في صف الموظف، وزر «ليس مواطنًا خليجيًا»
+  hr-cases-comp      — حقل «هل هو مواطن خليجي؟» في نموذج تسجيل الجنسية (نموذج لا شاشة)
+ولا شاشة أخرى مسَّها هذا العمل.

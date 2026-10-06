@@ -1,0 +1,26 @@
+deployed_by: coordinator session, standing owner instruction to deploy finished work (2026-09-23/26) and «ايه كملها انت» (2026-10-01)
+deployed_at: 2026-10-01T07:49:25Z
+deployed_commit: 198a760476cb1ffec69090951a31fa9288a71210
+previous_live_commit: 627816ccfd30915ebe64e4df1e5d51629bc7d141
+live_commit: 198a760476cb1ffec69090951a31fa9288a71210
+live_branch: live-forms-wave1
+live_dirty: 0
+live_dirty_before_merge: 0
+merge: git merge --ff-only 198a760 in the serving checkout (fast-forward, 29 files)
+live_tree_source_digest: 79c14f9e67afe373b6ca9ae3540850c1317628f70cdfb2288a680aee6980c60c
+measured_tree_source_digest: 79c14f9e67afe373b6ca9ae3540850c1317628f70cdfb2288a680aee6980c60c
+files: 504
+service_restart: launchctl kickstart -k gui/UID/sa.36t.platform
+service_started: Thu Oct  1 10:49:25 2026
+service_state: running, last exit code 0
+root_http: 200
+health_anonymous_http: 401
+migration_before: 178
+migration_after: 178
+backup_name: work/backups/pre-deploy-198a760/36t-20261001T0749.sqlite
+backup_integrity: ok
+backup_fk_violations: 0
+backup_audit: true
+backup_invoice_chain: true
+backup_sha256: 5cbcfad2950a6c7443302c8348cb932eeb21f9055c0e040067b7a153fde262e4
+startup_warnings: two, both present before this deploy and unchanged by it — a second field-key file beside the serving checkout (the service uses the one under the handoff checkout), and LOCAL_BIND_HOST=0.0.0.0 refused so the service listens on 127.0.0.1 only

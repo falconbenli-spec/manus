@@ -1,0 +1,18 @@
+{
+ "measured_on_commit": "627816c",
+ "server": "synthetic in-memory preview (scratchpad p3-preview-server.mjs over tests/visibility-fixture.mjs: partial payment, grouped order, returned transfer, supplier credit, bounced receipt, on-account cash allocated) on 127.0.0.1:3613, served from the p3-integration worktree at 627816c; not port 3600, no live data",
+ "account": "manager (finance reader and approver in the synthetic month, plus finance.close.manage, finance.audit.export, bank.reconcile.approve, vendors.bank and procurement.use granted by the preview script)",
+ "method": "built-in browser at each width; every <details> in #main expanded; overflow = documentElement.scrollWidth - clientWidth; a hidden action = a button or a.btn in #main with zero size while displayed, or outside the viewport horizontally; error = a .error block in #main",
+ "screens": ["payables", "receivables", "invoices", "bank-reconciliation", "close-checklist", "finance-exceptions", "options", "statements", "finance", "billing-schedules", "cash-forecast", "procurement", "vendors", "budgets", "accruals", "reports"],
+ "results": {
+  "360": { "overflow_total": 0, "hidden_actions": 0, "errors": 0 },
+  "390": { "overflow_total": 0, "hidden_actions": 0, "errors": 0 },
+  "414": { "overflow_total": 0, "hidden_actions": 0, "errors": 0 },
+  "1280": { "overflow_total": 0, "hidden_actions": 0, "errors": 0 }
+ },
+ "buttons_per_screen_at_1280": { "payables": 0, "receivables": 0, "invoices": 1, "bank-reconciliation": 0, "close-checklist": 2, "finance-exceptions": 1, "options": 53, "statements": 1, "finance": 18, "billing-schedules": 2, "cash-forecast": 2, "procurement": 1, "vendors": 3, "budgets": 3, "accruals": 1, "reports": 108 },
+ "notes": [
+  "The first 390 pass read the finance ledger, and the first 414 pass read the month-end close, before they finished rendering (0 buttons). Both were measured again with a 6-second settle: finance 18 buttons and close-checklist 2 at those widths, overflow 0, hidden 0. The table above uses the settled readings.",
+  "payables, receivables and bank-reconciliation draw no action for this account in the synthetic month (the account approves; the preparer and treasurer act there). Layout is measured, not the reach of every role."
+ ]
+}

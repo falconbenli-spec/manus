@@ -1,0 +1,41 @@
+(node:59564) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ كل مسارات منصة HCM المرجعية ممثلة مرة واحدة وبحالة صريحة (0.798958ms)
+✔ مدير رأس المال البشري يرى تغطية HCM وفريقه بينما يرى الموظف صلاحياته فقط (2869.053667ms)
+✔ مدير رأس المال البشري يمنح ويسحب الحزمة التشغيلية المخصصة مع تدقيق وإلغاء الجلسات (2935.039041ms)
+✔ المدير لا يمنح قرارات الاعتماد ولا يستهدف خارج الموارد البشرية ولا يكتب جزءًا من طلب مرفوض (2816.977709ms)
+✔ منح الأدمن الأول يبقى مقفلاً ولا يسحبه مدير الموارد البشرية (2762.161792ms)
+✔ واجهة مركز الموارد البشرية تعرض خريطة HCM ونموذج الصلاحيات الشامل والمخصص (2597.021875ms)
+(node:59565) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+{"t":"2026-10-04T17:03:09.798Z","id":"3c8775bc","env":"local","m":"POST","p":"/api/login","s":200,"ms":282}
+{"t":"2026-10-04T17:03:10.073Z","id":"887da005","env":"local","m":"POST","p":"/api/login","s":200,"ms":268}
+{"t":"2026-10-04T17:03:10.353Z","id":"883e70c0","env":"local","m":"POST","p":"/api/login","s":200,"ms":278}
+{"t":"2026-10-04T17:03:10.620Z","id":"22c6f388","env":"local","m":"POST","p":"/api/login","s":200,"ms":266}
+{"t":"2026-10-04T17:03:10.621Z","id":"2e818178","env":"local","m":"GET","p":"/hr-operations-ui.mjs","s":200,"ms":0}
+{"t":"2026-10-04T17:03:10.629Z","id":"d3be4ed3","env":"local","m":"GET","p":"/api/hr/operations","s":200,"ms":4}
+{"t":"2026-10-04T17:03:10.631Z","id":"3008903e","env":"local","m":"GET","p":"/api/hr/operations","s":200,"ms":1}
+{"t":"2026-10-04T17:03:10.636Z","id":"416d08ad","env":"local","m":"POST","p":"/api/hr/competencies","s":201,"ms":4,"tx":1,"lock_ms":0}
+{"t":"2026-10-04T17:03:10.640Z","id":"0f1b52fb","env":"local","m":"GET","p":"/api/hr/operations","s":200,"ms":3}
+✔ مركز عمليات الموارد البشرية وخدمته الثابتة يعملان عبر الخادم المحلي (3975.811333ms)
+{"t":"2026-10-04T17:03:13.748Z","id":"84aa6204","env":"local","m":"POST","p":"/api/login","s":200,"ms":259}
+{"t":"2026-10-04T17:03:14.010Z","id":"8608fd32","env":"local","m":"POST","p":"/api/login","s":200,"ms":261}
+{"t":"2026-10-04T17:03:14.272Z","id":"80f31e3f","env":"local","m":"POST","p":"/api/login","s":200,"ms":261}
+{"t":"2026-10-04T17:03:14.532Z","id":"0e849d40","env":"local","m":"POST","p":"/api/login","s":200,"ms":259}
+{"t":"2026-10-04T17:03:14.535Z","id":"218fcfa4","env":"local","m":"GET","p":"/api/hr/operations","s":200,"ms":2}
+{"t":"2026-10-04T17:03:14.539Z","id":"b40ac114","env":"local","m":"POST","p":"/api/hr/team-access","s":201,"ms":3,"tx":1,"lock_ms":0}
+✔ مدير رأس المال البشري يحفظ صلاحيات موظفه عبر واجهة الخادم فقط (3898.787334ms)
+(node:59566) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ مركز عمليات الموارد البشرية يجمع الوحدات الفعلية ويمنع الحسابات غير المخولة (2863.59625ms)
+✔ قاموس الكفاءات يعتمد بفصل مهام وتعرض المصفوفة فجوة مثبتة بالدليل (2942.835458ms)
+✔ خطة تحسين الأداء تمر من اقتراح المدير إلى مراجعة الموارد البشرية ثم إقرار الموظف ونقاط المتابعة والإقفال (2824.999041ms)
+✔ الاستبانة العامة تثبت الأسئلة عند الفتح وتحمي الرد المجهول من الربط بصاحبه (2781.821084ms)
+ℹ tests 12
+ℹ suites 0
+ℹ pass 12
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 14138.929084

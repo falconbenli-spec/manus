@@ -1,0 +1,356 @@
+# P3 payment release — focused TAP (branch p3/payment-release, base d9a310d)
+# Engine: v24.14.0 (work/node24). Synthetic data only: in-memory databases, plus one temp-file database for the multi-process race.
+# Command: node --test --test-reporter=tap tests/payment-release.test.mjs tests/payables.test.mjs tests/vendors.test.mjs tests/payment-execution-third-party.test.mjs tests/options-conversions.test.mjs
+#
+# PROBE — the gaps measured on the unchanged code at d9a310d before building (read-only, in-memory):
+#   A1 change verified with effective_from=today (error?): null
+#   A2 bank rows after change: ["verified@2026-09-30","verified@2026-09-30"]
+#   A3 notifications created by the change: 0
+#   A4 outbox rows created by the change: 0
+#   B1 collector prepared an order to the changed account today: {"status":"pending","amount":57500}
+#   B2 verifier approved it: approved
+#   B3 executed to the changed account today, no release step: executed
+#   D1 executed order is final (trigger): a payment order keeps its payee and amount; executed orders are final
+#   D2 paymentAction has a return action: not_found
+#   D3 status name of executed order: نُفذ في البنك وموثق
+#   C1 live index: CREATE UNIQUE INDEX payment_orders_live ON payment_orders(payable_id) WHERE status IN ('pending','approved','executed')
+#   C2 partial amount refused: invalid_fields
+#   C3 payableBalance export: undefined
+#   E1 vendor spend after executed full payment: {"orders":1,"committed_minor":57500,"open_payables":1,"payable_minor":57500,"currency":"SAR"}
+#   F1 duplicate signal: ["bank_account/review"]
+#   F2 verification of an IBAN already on another active vendor: succeeded
+#
+# RED — the new and changed tests against the unchanged code at d9a310d (tests/payment-release.test.mjs + tests/payables.test.mjs at that point): 21 tests, 7 pass, 14 fail:
+#   not ok 3 - PRC-09: if the vendor bank account changes after the order was prepared, approval stops instead of silently paying the n
+#       why: a changed account is not paid on the day it changed | + undefined - 'bank_change_unadopted'
+#   not ok 9 - bank change: verifying a replacement supersedes the old account, records the change, tells finance in the platform and l
+#       why: no such table: vendor_bank_changes
+#   not ok 10 - bank change: while the owner has not adopted the cooling-off days or the first-payment cap, the changed account stays bl
+#       why: لا قيمة معتمدة بهذا المفتاح؛ القيم المسجّلة الآن: finance.vat_number_format، procurement.cost_center_closed، procurement.unit_closed، finance.vat_rate. قيمة جديدة يلزمها واصف في وحدتها
+#   not ok 11 - bank change: cooling-off counts from the verification day; afterwards the first payment is capped, released by a third p
+#       why: لا قيمة معتمدة بهذا المفتاح؛ القيم المسجّلة: finance.vat_number_format، procurement.cost_center_closed، procurement.unit_closed، finance.vat_rate
+#   not ok 12 - bank change window: the collector and the verifier cannot prepare, approve, release or record the first payment to that 
+#       why: لا قيمة معتمدة بهذا المفتاح؛ القيم المسجّلة: finance.vat_number_format، procurement.cost_center_closed، procurement.unit_closed، finance.vat_rate
+#   not ok 13 - shared IBAN: verification is refused while the IBAN sits on another active vendor, until a separate reasoned decision by
+#       why: لم يُرفض ما كان يجب رفضه
+#   not ok 14 - partial and batch: an order pays part of a payable or several payables of one vendor in one transfer; payableBalance tra
+#       why: payableBalance is exported | + 'undefined' - 'function'
+#   not ok 15 - returns: a bounced transfer is recorded once as its own record by a third person, the executed order is never edited, th
+#       why: payables.payableBalance is not a function
+#   not ok 16 - adjustments: supplier credit and debit notes are append-only, reasoned and approved by a second person; they move the ba
+#       why: payables.recordAdjustment is not a function
+#   not ok 17 - execution wording: every order says execution was recorded manually and simulated; the payload and the screen never clai
+#       why: Expected values to be strictly deep-equal: | +   undefined, +   undefined -   'recorded_manually', -   true
+#   not ok 18 - vendor centre: open payables count only what is still owed — a paid payable is not open, a return reopens it
+#       why: the paid payable is no longer open | +   2, +   57500 -   1, -   34500
+#   not ok 19 - tenant isolation: another tenant sees no balance, order, return or adjustment and cannot act on any of them
+#       why: payables.recordAdjustment is not a function
+#   not ok 20 - HTTP without a port: partial and batch orders, release, execution, return and adjustments go through the real handler; a
+#       why: لا قيمة معتمدة بهذا المفتاح؛ القيم المسجّلة: finance.vat_number_format، procurement.cost_center_closed، procurement.unit_closed، finance.vat_rate
+#   not ok 21 - race: processes writing the same database file at the same instant never release money twice — one order for a full bala
+#       why: لا قيمة معتمدة بهذا المفتاح؛ القيم المسجّلة: finance.vat_number_format، procurement.cost_center_closed، procurement.unit_closed، finance.vat_rate
+#
+# FULL SUITE on the branch (node --test tests/*.test.mjs, pinned engine, inside the sandbox that refuses listen):
+#   tests 1963
+#   pass 1919
+#   fail 44
+#   skipped 0
+#   39 of the failures are 'listen EPERM: operation not permitted 127.0.0.1' (the sandbox forbids opening a port) in 20 files.
+#   The other 5 fail identically on a clean copy of d9a310d: ui-golden (twice: its own file and catalog-golden's import — added project-participation x4, changed []),
+#   org-t1-nav (project-participation), traceability (GOV-09 digest of tests/procurement-extras.test.mjs), gate-schema-digest (baseline records migration 159).
+#
+# GREEN — the focused tests on the final branch code:
+TAP version 13
+# (node:94887) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: مركز التكلفة: قائمة مرآة لصفوف المالية، والطلب يحمل معرّف الصفّ لا نصًّا وحده
+ok 1 - مركز التكلفة: قائمة مرآة لصفوف المالية، والطلب يحمل معرّف الصفّ لا نصًّا وحده
+  ---
+  duration_ms: 7149.688666
+  type: 'test'
+  ...
+# Subtest: اليوم الأول لم يتغيّر: مركز خارج قائمة المالية يبقى مقبولًا نصًّا حتى يقرّر المالك إغلاق الحقل
+ok 2 - اليوم الأول لم يتغيّر: مركز خارج قائمة المالية يبقى مقبولًا نصًّا حتى يقرّر المالك إغلاق الحقل
+  ---
+  duration_ms: 6805.274416
+  type: 'test'
+  ...
+# Subtest: الطلب والمخصص يشيران إلى الصفّ نفسه، فالحجز يقع على المخصص المقصود
+ok 3 - الطلب والمخصص يشيران إلى الصفّ نفسه، فالحجز يقع على المخصص المقصود
+  ---
+  duration_ms: 6915.446292
+  type: 'test'
+  ...
+# Subtest: كل قائمة مسجّلة تحمل مالكًا وحوكمة، والمثبّتة نظامًا تحمل مادتها
+ok 4 - كل قائمة مسجّلة تحمل مالكًا وحوكمة، والمثبّتة نظامًا تحمل مادتها
+  ---
+  duration_ms: 6954.347625
+  type: 'test'
+  ...
+# Subtest: قيمة غير معروفة في قائمة معروفة تُرفض، والقيمة المخزَّنة قديمًا تبقى مقروءة
+ok 5 - قيمة غير معروفة في قائمة معروفة تُرفض، والقيمة المخزَّنة قديمًا تبقى مقروءة
+  ---
+  duration_ms: 6965.647875
+  type: 'test'
+  ...
+# Subtest: شاشة الموردين تعرض قوائمها المُدارة للقراءة: خياراتها وحالتها وسبب إقفال المقفلة منها
+ok 6 - شاشة الموردين تعرض قوائمها المُدارة للقراءة: خياراتها وحالتها وسبب إقفال المقفلة منها
+  ---
+  duration_ms: 6727.838083
+  type: 'test'
+  ...
+# Subtest: حمولة المدفوعات تحمل نسبة الضريبة بجدولها المؤرَّخ وحالات الأمر بقيدها
+ok 7 - حمولة المدفوعات تحمل نسبة الضريبة بجدولها المؤرَّخ وحالات الأمر بقيدها
+  ---
+  duration_ms: 6923.761042
+  type: 'test'
+  ...
+# Subtest: تشديد صيغة الرقم الضريبي يسري على الجديد ولا يجمّد ملفًا قائمًا كُتب قبله
+ok 8 - تشديد صيغة الرقم الضريبي يسري على الجديد ولا يجمّد ملفًا قائمًا كُتب قبله
+  ---
+  duration_ms: 6510.430792
+  type: 'test'
+  ...
+# Subtest: تعطيل تصنيف لا يجمّد ملفًا يحمله ولا يبدّل تصنيفه صامتًا في نموذج التحرير
+ok 9 - تعطيل تصنيف لا يجمّد ملفًا يحمله ولا يبدّل تصنيفه صامتًا في نموذج التحرير
+  ---
+  duration_ms: 8026.367791
+  type: 'test'
+  ...
+# Subtest: نوع وثيقة تفرضه مصفوفة المتطلبات لا يُعطَّل، والرفض يسمّي ما يفرضه ومن يملك تغييره
+ok 10 - نوع وثيقة تفرضه مصفوفة المتطلبات لا يُعطَّل، والرفض يسمّي ما يفرضه ومن يملك تغييره
+  ---
+  duration_ms: 6087.479208
+  type: 'test'
+  ...
+# Subtest: غرض معطَّل ما زال ربطه ساريًا يبقى في القوائم المالية موسومًا، لا يختفي منها
+ok 11 - غرض معطَّل ما زال ربطه ساريًا يبقى في القوائم المالية موسومًا، لا يختفي منها
+  ---
+  duration_ms: 5515.388416
+  type: 'test'
+  ...
+# Subtest: رموز الرفض بعد التحويل: option_not_offered على القيمة خارج القائمة، واسم الحقل حيث لم يتغيّر السبب
+ok 12 - رموز الرفض بعد التحويل: option_not_offered على القيمة خارج القائمة، واسم الحقل حيث لم يتغيّر السبب
+  ---
+  duration_ms: 5328.848375
+  type: 'test'
+  ...
+# Subtest: القائمة المقفلة بقيد في القاعدة ترفض كل كتابة، ويسمّي الرفض القيد وترحيله
+ok 13 - القائمة المقفلة بقيد في القاعدة ترفض كل كتابة، ويسمّي الرفض القيد وترحيله
+  ---
+  duration_ms: 5323.024125
+  type: 'test'
+  ...
+# (node:94888) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: PRC-02: an unregistered or unqualified vendor never enters the payment cycle, and no bank account means no order
+ok 14 - PRC-02: an unregistered or unqualified vendor never enters the payment cycle, and no bank account means no order
+  ---
+  duration_ms: 21885.67425
+  type: 'test'
+  ...
+# Subtest: FIN-07/PRC-09: approved is not paid — three people prepare, approve and record the bank execution, and the bank-detail collector cannot record it
+ok 15 - FIN-07/PRC-09: approved is not paid — three people prepare, approve and record the bank execution, and the bank-detail collector cannot record it
+  ---
+  duration_ms: 7263.961167
+  type: 'test'
+  ...
+# Subtest: PRC-09: if the vendor bank account changes after the order was prepared, approval stops instead of silently paying the new account
+ok 16 - PRC-09: if the vendor bank account changes after the order was prepared, approval stops instead of silently paying the new account
+  ---
+  duration_ms: 7343.095958
+  type: 'test'
+  ...
+# Subtest: input VAT enters the summary only after a second person verifies the supplier tax invoice, and cannot exceed 15% of net
+ok 17 - input VAT enters the summary only after a second person verifies the supplier tax invoice, and cannot exceed 15% of net
+  ---
+  duration_ms: 7568.251459
+  type: 'test'
+  ...
+# Subtest: FIN-09: تمنع ضريبة الفاتورة المكررة عبر مرجع شراء آخر بعد توحيد شكل رقمها
+ok 18 - FIN-09: تمنع ضريبة الفاتورة المكررة عبر مرجع شراء آخر بعد توحيد شكل رقمها
+  ---
+  duration_ms: 6670.432334
+  type: 'test'
+  ...
+# Subtest: PRC-09: يظهر توقف المورد بعد الاعتماد ويُحفظ التحذير عند توثيق تنفيذ وقع فعلا
+ok 19 - PRC-09: يظهر توقف المورد بعد الاعتماد ويُحفظ التحذير عند توثيق تنفيذ وقع فعلا
+  ---
+  duration_ms: 8476.405083
+  type: 'test'
+  ...
+# Subtest: FIN-09: السجلات القديمة المكررة لا تعتمد، ويمكن رفض المكرر ثم اعتماد الأصل
+ok 20 - FIN-09: السجلات القديمة المكررة لا تعتمد، ويمكن رفض المكرر ثم اعتماد الأصل
+  ---
+  duration_ms: 7055.698167
+  type: 'test'
+  ...
+# Subtest: PRC-09: تغير الحساب البنكي بعد اعتماد الدفع يظهر للمالية دون كشف الآيبان
+ok 21 - PRC-09: تغير الحساب البنكي بعد اعتماد الدفع يظهر للمالية دون كشف الآيبان
+  ---
+  duration_ms: 5969.750084
+  type: 'test'
+  ...
+# (node:94889) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: the database refuses a payment execution recorded by whoever prepared or approved the order
+ok 22 - the database refuses a payment execution recorded by whoever prepared or approved the order
+  ---
+  duration_ms: 7155.787292
+  type: 'test'
+  ...
+# ERROR: failed to copy trust settings of system certificate-25291
+# ERROR: failed to copy trust settings of system certificate-25291
+# ERROR: failed to copy trust settings of system certificate-25291
+# ERROR: failed to copy trust settings of system certificate-25291
+# (node:94890) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: bank change: verifying a replacement supersedes the old account, records the change, tells finance in the platform and leaves a simulated message for the previously trusted contact
+ok 23 - bank change: verifying a replacement supersedes the old account, records the change, tells finance in the platform and leaves a simulated message for the previously trusted contact
+  ---
+  duration_ms: 7597.393792
+  type: 'test'
+  ...
+# Subtest: bank change: while the owner has not adopted the cooling-off days or the first-payment cap, the changed account stays blocked with a refusal naming both decisions and their owner
+ok 24 - bank change: while the owner has not adopted the cooling-off days or the first-payment cap, the changed account stays blocked with a refusal naming both decisions and their owner
+  ---
+  duration_ms: 7264.78
+  type: 'test'
+  ...
+# Subtest: bank change: cooling-off counts from the verification day; afterwards the first payment is capped, released by a third person, and only then recorded as executed
+ok 25 - bank change: cooling-off counts from the verification day; afterwards the first payment is capped, released by a third person, and only then recorded as executed
+  ---
+  duration_ms: 7274.625792
+  type: 'test'
+  ...
+# Subtest: bank change window: the collector and the verifier cannot prepare, approve, release or record the first payment to that vendor — refused in code and in SQL — and a returned first payment reopens the window
+ok 26 - bank change window: the collector and the verifier cannot prepare, approve, release or record the first payment to that vendor — refused in code and in SQL — and a returned first payment reopens the window
+  ---
+  duration_ms: 7562.375542
+  type: 'test'
+  ...
+# Subtest: shared IBAN: verification is refused while the IBAN sits on another active vendor, until a separate reasoned decision by someone other than the collector allows it — and the decider does not verify
+ok 27 - shared IBAN: verification is refused while the IBAN sits on another active vendor, until a separate reasoned decision by someone other than the collector allows it — and the decider does not verify
+  ---
+  duration_ms: 7643.335875
+  type: 'test'
+  ...
+# Subtest: partial and batch: an order pays part of a payable or several payables of one vendor in one transfer; payableBalance tracks each step; over-allocation is refused in code and in SQL
+ok 28 - partial and batch: an order pays part of a payable or several payables of one vendor in one transfer; payableBalance tracks each step; over-allocation is refused in code and in SQL
+  ---
+  duration_ms: 7250.957083
+  type: 'test'
+  ...
+# Subtest: returns: a bounced transfer is recorded once as its own record by a third person, the executed order is never edited, the balance reopens and can be paid again exactly once
+ok 29 - returns: a bounced transfer is recorded once as its own record by a third person, the executed order is never edited, the balance reopens and can be paid again exactly once
+  ---
+  duration_ms: 6915.171667
+  type: 'test'
+  ...
+# Subtest: adjustments: supplier credit and debit notes are append-only, reasoned and approved by a second person; they move the balance, and a credit can never go below what is paid or on its way
+ok 30 - adjustments: supplier credit and debit notes are append-only, reasoned and approved by a second person; they move the balance, and a credit can never go below what is paid or on its way
+  ---
+  duration_ms: 8663.07375
+  type: 'test'
+  ...
+# Subtest: execution wording: every order says execution was recorded manually and simulated; the payload and the screen never claim the platform paid
+ok 31 - execution wording: every order says execution was recorded manually and simulated; the payload and the screen never claim the platform paid
+  ---
+  duration_ms: 6781.238834
+  type: 'test'
+  ...
+# Subtest: vendor centre: open payables count only what is still owed — a paid payable is not open, a return reopens it
+ok 32 - vendor centre: open payables count only what is still owed — a paid payable is not open, a return reopens it
+  ---
+  duration_ms: 6145.236416
+  type: 'test'
+  ...
+# Subtest: tenant isolation: another tenant sees no balance, order, return or adjustment and cannot act on any of them
+ok 33 - tenant isolation: another tenant sees no balance, order, return or adjustment and cannot act on any of them
+  ---
+  duration_ms: 5786.182958
+  type: 'test'
+  ...
+# Subtest: HTTP without a port: partial and batch orders, release, execution, return and adjustments go through the real handler; a replayed create returns the same record and a replayed step is refused
+ok 34 - HTTP without a port: partial and batch orders, release, execution, return and adjustments go through the real handler; a replayed create returns the same record and a replayed step is refused
+  ---
+  duration_ms: 8182.012959
+  type: 'test'
+  ...
+# Subtest: race: processes writing the same database file at the same instant never release money twice — one order for a full balance, one execution, one return, one re-payment, one first-payment release
+ok 35 - race: processes writing the same database file at the same instant never release money twice — one order for a full balance, one execution, one return, one re-payment, one first-payment release
+  ---
+  duration_ms: 20689.731708
+  type: 'test'
+  ...
+# Subtest: upgrade: a database that already holds orders before 166 gets one line per order and the same balances, loses the one-order index, and its legacy vendor with two verified accounts is settled at the next verification
+ok 36 - upgrade: a database that already holds orders before 166 gets one line per order and the same balances, loses the one-order index, and its legacy vendor with two verified accounts is settled at the next verification
+  ---
+  duration_ms: 5012.453625
+  type: 'test'
+  ...
+# (node:94891) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: PRC-02 criterion 19: a vendor is qualified by separate people and never becomes a platform user
+ok 37 - PRC-02 criterion 19: a vendor is qualified by separate people and never becomes a platform user
+  ---
+  duration_ms: 7120.727334
+  type: 'test'
+  ...
+# Subtest: criterion 19: matching entity identifiers raise a duplicate signal that must be reviewed with a reason
+ok 38 - criterion 19: matching entity identifiers raise a duplicate signal that must be reviewed with a reason
+  ---
+  duration_ms: 6897.57
+  type: 'test'
+  ...
+# Subtest: criterion 20: a bank change needs independent verification, an effective date and keeps the previous record
+ok 39 - criterion 20: a bank change needs independent verification, an effective date and keeps the previous record
+  ---
+  duration_ms: 7037.408333
+  type: 'test'
+  ...
+# Subtest: criterion 21: an expired qualifying document blocks a new award unless procurement grants a recorded exception
+ok 40 - criterion 21: an expired qualifying document blocks a new award unless procurement grants a recorded exception
+  ---
+  duration_ms: 7395.35375
+  type: 'test'
+  ...
+# Subtest: 6أ: document requirements follow the vendor type and identity numbers are refused
+ok 41 - 6أ: document requirements follow the vendor type and identity numbers are refused
+  ---
+  duration_ms: 6873.233542
+  type: 'test'
+  ...
+# Subtest: conditional approval carries conditions and an end date; needs_info returns the file without losing it
+ok 42 - conditional approval carries conditions and an end date; needs_info returns the file without losing it
+  ---
+  duration_ms: 6915.930084
+  type: 'test'
+  ...
+# Subtest: evaluation uses category weights, is corrected by a new record and never suspends by itself
+ok 43 - evaluation uses category weights, is corrected by a new record and never suspends by itself
+  ---
+  duration_ms: 6595.882542
+  type: 'test'
+  ...
+# Subtest: access: no grant means no vendor centre, other tenants see nothing, merged files keep their orders pointing to the survivor
+ok 44 - access: no grant means no vendor centre, other tenants see nothing, merged files keep their orders pointing to the survivor
+  ---
+  duration_ms: 6648.709208
+  type: 'test'
+  ...
+# Subtest: criterion 21: a supplier key with no vendor file is blocked at the gate, and has no file to except
+ok 45 - criterion 21: a supplier key with no vendor file is blocked at the gate, and has no file to except
+  ---
+  duration_ms: 8222.10225
+  type: 'test'
+  ...
+1..45
+# tests 45
+# suites 0
+# pass 45
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 113312.957458

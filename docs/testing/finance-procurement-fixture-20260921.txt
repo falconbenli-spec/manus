@@ -1,0 +1,11 @@
+✔ PRC-07: an approved emergency allows an award on one quote, keeps independent approval, and demands a later review by an outside party (2823.765ms)
+✔ PRC-08: the approved order is never rewritten; a date or terms change and a short close are separate records decided by someone else (3161.245833ms)
+✔ conflict of interest: an undecided disclosure or a recusal blocks that person from awarding to the vendor, and only the legal reviewer lifts it (2678.687042ms)
+ℹ tests 3
+ℹ suites 0
+ℹ pass 3
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 9003.228041

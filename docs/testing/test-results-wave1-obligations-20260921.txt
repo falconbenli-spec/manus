@@ -1,0 +1,20 @@
+✔ inbox: a manager sees every pending decision across modules in one place, the requester sees none of them, and a decision removes its item (1943.838917ms)
+✔ obligations: for six personas the home decisions card, counts.decide, the nav badge and the #work decisions list are one number (3061.733333ms)
+✔ obligations: the nav badge endpoint serves the same number, cached per user and cleared by a write (1994.188333ms)
+✔ obligations: card() throws when handed a number (0.311167ms)
+✔ obligations: every module that can emit an approve-type action has an inbox source or a written reason — the next missing queue fails loudly (21.672208ms)
+✔ obligations: whoever must accept a resignation is told — a queue that had no inbox source, so nobody was (1446.851792ms)
+✔ obligations: 100% of items carrying an id deep-link to that record, never to the bare screen (1888.283375ms)
+✔ obligations: no optional item is ever late or counted — a satisfaction survey, a reopen prompt and my own draft do not make a first-day employee overdue (1721.793833ms)
+✔ obligations: waiting age runs from when the step reached the person, in working days — pressing follow-up does not reset it (1439.35925ms)
+✔ obligations: honest time — no flat three calendar days: a weekend is not waiting, an approved holiday is not waiting, and a service target sets the due date (1486.713375ms)
+✔ obligations: the «مهامي» tile equals what #work shows — request tasks, project tasks with no cap, personal tasks, my commitments and the department queue (2231.327125ms)
+✔ obligations: the inbox counts before it slices, says «يُعرض 50 من N», and one tenant or one colleague never reads another’s obligations (1611.15825ms)
+ℹ tests 12
+ℹ suites 0
+ℹ pass 12
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 17361.014625

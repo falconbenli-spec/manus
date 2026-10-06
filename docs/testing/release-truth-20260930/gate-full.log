@@ -1,0 +1,13 @@
+Quality ratchet: local primitives 111 (baseline 111) · short refusals 1184 (baseline 1184) · status literals outside the vocabulary 2 (baseline 2) · Latin values without direction isolation 0 (baseline 0) · direct person-table reads 738 (baseline 738) · links 146 checked, 0 unresolved · 250 ms
+
+✔ 1. الحزمة كاملة: 1886 اختبارًا · 1880 ناجحًا · 0 فاشلًا · 6 متخطًّى (الحد الأدنى 1874) (1087.1s)
+✔ 2. فحوص المصدر (check.mjs): Syntax checked: 662 JavaScript modules. Source hashes match. Traceability: 220 requirements / 22 domains. Migrations: 140 planned, highest 159. (20s)
+✔ 3. المسنّنة: local primitives 111 (baseline 111) · short refusals 1184 (baseline 1184) · status literals outside the vocabulary 2 (baseline 2) · Latin values without direction isolation 0 (base (0.3s)
+✔ 4. الترحيلات من قاعدة فارغة: بلغت الترحيل 159 في 1972 مللي (2s)
+✔ 5. الترحيلات على نسخة من آخر نسخة احتياطية: /Users/abdulaziz/Documents/Codex/2026-09-09/3-6t-360-codex-handoff-master/work/backups/pre-fleet-20260930/36t-20260930T1502.sqlite → الترحيل 159 · سلامة ok · مراجع 0 · سلسلة التدقيق true (0.4s)
+✔ 6. بصمة المخطط: a3998dfd9ad1d1fd… · index 1298 · table 572 · trigger 1171 · view 2 (1.9s)
+✔ 7. لا تبعيات في package.json: صفر تبعية، كما هو مشترط (0s)
+✔ 8. إصدار Node: 24.14.0 مقابل >=24.14 <25 (0s)
+✔ 9. سقف الاختبارات المتخطّاة: 6 متخطًّى، والسقف 6 (0s)
+
+البوابة: تسعة فحوص، كلها مرّت.

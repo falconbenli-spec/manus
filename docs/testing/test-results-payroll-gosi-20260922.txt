@@ -1,0 +1,21 @@
+✔ migration 127: a database with an adopted regulation policy and a child pointing at it upgrades in place, keeps every row, and opens the table to the social-insurance kind (6658.9835ms)
+✔ every case in the law is deducted by its own rate: a Saudi under the previous law, a Saudi new entrant on the step in force, and a non-Saudi who pays nothing while the company still owes the hazards branch (6766.036917ms)
+✔ the contributory wage is clamped to the floor and the ceiling the law sets, and the rate is read from the payroll month so a step-up lands on the month it takes effect (6789.1795ms)
+✔ an employee with no recorded case is never guessed: the draft shows him as unavailable at zero and the run refuses to be submitted or approved, naming who is missing and who records it (7234.538667ms)
+✔ a Saudi who joined after the new law but already had a contribution period elsewhere is moved back to the previous law by a dated override, and withdrawing it restores the derived case (6399.123417ms)
+✔ a Gulf national is excluded by the owner decision, so he has no applicable case and blocks approval like anyone else — he is never silently treated as Saudi or as non-Saudi (7099.469291ms)
+✔ the old single-rate cycle policy keeps governing the months it governed: a month before the insurance rule took effect reproduces its recorded line, and the run says which basis it used (7525.457416ms)
+✔ the insurance case reveals nationality, so it is read by the same rule: a manager without the workforce capability cannot open the screen, and no override is recorded without an HR role (7124.214666ms)
+✔ a joiner mid-month is charged on the days of service by the divisor the HR manager chose, and both shares follow the rounding rule he accepted in the pay rules (6898.764417ms)
+✔ the run totals and the wage-protection deduction never carry the employer share: it is stored on the line as the company cost and nowhere else (6845.926667ms)
+✔ the pay date a run carries is the nominal day, the day Art. 48 shifts it to, and the date actually decided — and an early payment needs two people (7195.785666ms)
+✔ a holiday declared after the decision can only pull the pay date earlier, never past the date the regulation sets (6599.326375ms)
+✔ an early payment can be refused by the second person, and the month is then free for a new proposal (7310.838875ms)
+ℹ tests 13
+ℹ suites 0
+ℹ pass 13
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 63402.329416

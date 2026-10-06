@@ -1,0 +1,15 @@
+(node:77631) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+Quality ratchet: local primitives 97 (baseline 97) · short refusals 1170 (baseline 1170) · status literals outside the vocabulary 2 (baseline 2) · Latin values without direction isolation 0 (baseline 0) · direct person-table reads 734 (baseline 734) · links 150 checked, 0 unresolved · 229 ms
+
+✔ 1. الحزمة كاملة: 2156 اختبارًا · 2156 ناجحًا · 0 فاشلًا · 0 متخطًّى (الحد الأدنى 2156) (1164.8s)
+✔ 2. فحوص المصدر (check.mjs): Syntax checked: 732 JavaScript modules. Source hashes match. Traceability: 220 requirements / 22 domains. Migrations: 154 planned, highest 178. (21.5s)
+✔ 3. المسنّنة: local primitives 97 (baseline 97) · short refusals 1170 (baseline 1170) · status literals outside the vocabulary 2 (baseline 2) · Latin values without direction isolation 0 (baseli (0.2s)
+✔ 4. الترحيلات من قاعدة فارغة: بلغت الترحيل 178 في 2518 مللي (2.5s)
+✔ 5. الترحيلات على نسخة من آخر نسخة احتياطية: /Users/abdulaziz/Documents/Codex/2026-09-09/3-6t-360-codex-handoff-master/work/backups/pre-p2-deploy-20260930/36t-20260930T2017.sqlite → الترحيل 178 · سلامة ok · مراجع 0 · سلسلة التدقيق true (0.9s)
+✔ 6. بصمة المخطط: 1ce72b3eb7fe8e16… · index 1407 · table 607 · trigger 1341 · view 5 (2.5s)
+✔ 7. لا تبعيات في package.json: صفر تبعية، كما هو مشترط (0s)
+✔ 8. إصدار Node: 24.14.0 مقابل >=24.14 <25 (0s)
+✔ 9. سقف الاختبارات المتخطّاة: 0 متخطًّى، والسقف 0 (0s)
+
+البوابة: تسعة فحوص، كلها مرّت.

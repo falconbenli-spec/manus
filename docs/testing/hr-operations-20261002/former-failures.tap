@@ -1,0 +1,25 @@
+(node:18795) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ خط الأساس يطابق المخطط الذي تنتجه الترحيلات، فلا يحرس رقمًا لقاعدة أخرى (2678.096375ms)
+✔ والبصمة حتمية: بناءان متتاليان يعطيان القيمة نفسها (5347.401375ms)
+✔ الالتزام واحد: الكامل يبدأ بالمختصر، وترويسة Markdown تحمل الاثنين نفسيهما، وتاريخ القياس واحد (0.72775ms)
+✔ الدرجات السبع عشرة والموانع متطابقة بين الملفين، والدرجة من السلّم الصحيح (0.464792ms)
+✔ المتوسط والرقم الحاكم محسوبان بالقاعدة المكتوبة لا منقولان، ويتفق عليهما الملفان (0.390416ms)
+✔ خط أساس البوابة والبطاقة يقولان الترحيل والبصمة والأرضية نفسها (0.461083ms)
+(node:18797) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ golden: every operational screen renders to the same HTML for four seeded personas (6157.275917ms)
+✔ golden: moving the SQL wall clock a day forward moves no screen hash (9565.277708ms)
+✔ golden: the normaliser hides random identifiers but stays sensitive to order, count and text (0.322375ms)
+✔ golden: the page-editor trigger is outside every seeded persona’s screen, and appears only for a holder of the configure capability (3569.925042ms)
+(node:18798) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ every operational screen renders for every seeded role and every offered button opens a valid form (6545.067083ms)
+ℹ tests 11
+ℹ suites 0
+ℹ pass 11
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 19762.368666

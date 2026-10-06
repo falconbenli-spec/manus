@@ -1,0 +1,64 @@
+ERROR: failed to copy trust settings of system certificate-25291
+ERROR: failed to copy trust settings of system certificate-25291
+ERROR: failed to copy trust settings of system certificate-25291
+ERROR: failed to copy trust settings of system certificate-25291
+✔ formula, haversine and zone classification are pure and match the regulation example (3.408083ms)
+✔ GPS sampling takes the first fix within 20 m, else the best after the settle time, and reports denial (48.747667ms)
+✔ regulation values are a draft policy: nothing applies before the HR manager accepts it, and every value cites its article (4131.895458ms)
+✔ overtime: prior assignment by the manager, pre-approval by the authority holder, written HR budget, caps, suggested pay and time off in lieu (3779.994208ms)
+✔ no overtime on a work-mission day, and no mission over overtime (Art. 77(9)) (3817.103625ms)
+✔ an approved permission removes the late or early flag for its period only; early leave without one is flagged; the monthly cap is enforced (3377.405291ms)
+✔ same-day late or absence notice (Art. 75): the manager may accept it as the excuse (2567.965083ms)
+✔ Ramadan hours from the accepted policy: lateness and early leave are measured against 6 hours inside the dated range only (2984.752208ms)
+✔ location is evidence, never a gate: server-side haversine, zone flags, privacy notice first, explanation and review (3573.359083ms)
+✔ raw coordinates are purged by a queued job after the retention period and only the zone result stays (3294.199709ms)
+✔ attendance exemptions: approved dated records, two people, and exempt days are judged neither late nor absent (2693.336958ms)
+✔ reports: R37 counts late days, the weekly shortfall subtracts approved permission, and the monthly workbook is a real xlsx (2856.891416ms)
+✔ the generic catalog service routes a permission request to the attendance screen (3312.340625ms)
+✖ the server allows geolocation for its own origin only (2879.528708ms)
+✔ leave law 2025: every type cites the labor law beside the company regulation, and nothing the regulation grants is lowered (1.571667ms)
+✔ leave law 2025: Hajj leave — two years of service, once, ten to fifteen calendar days including Eid, with an electronic declaration (4083.3195ms)
+✔ leave law 2025: the yearly number of Hajj leaves is the company's to set — an open question until written, enforced once it is (3566.280834ms)
+✔ leave law 2025: exam leave without the company's approval comes from annual leave if there is any, otherwise it is unpaid as of right (Art. 115/2) (9716.556791ms)
+✔ leave law 2025: a pregnant widow extends iddah without pay, and birth leave past the seventh day warns the approvers without refusing (6388.170917ms)
+✔ leave law 2025: Eid days that fall on the weekly rest are compensated after the holiday (Executive Regulation Art. 24) (1.457792ms)
+✔ leave law 2025: the policy assistant reads the new types with their law articles, and the HR screen shows the parameters, the sources and what is not built (3451.9315ms)
+✔ leave law 2025: the draft form lets HR set the compensatory ratio and deadline, in hours per hour and days, within the legal bounds (2698.400125ms)
+✔ leave law 2025: exam days are never left without a door — in probation or at the split limit they still come from annual leave (Art. 115/2) (11303.007916ms)
+✔ PAY-03: only approved adjustments enter the run, each exactly once, and a proposer or the employee cannot approve (4280.528667ms)
+✔ an approved advance is recovered in equal instalments through payroll and shows what is still outstanding (3679.654208ms)
+✔ PAY-07: the transfer file needs a verified salary account for everyone, is released only after approval, and its execution is recorded by someone else (3894.205209ms)
+✔ PAY-09: the settlement applies the accepted policy by termination class — resignation tiers differ from employer termination — and deducts outstanding advances (3348.649625ms)
+✔ م81 (ص 28): every one of the four holidays falling on the weekly rest is compensated from the ACCEPTED workdays, the only exception is an Eid day that is National or Founding Day, and the basis names the page (4207.708667ms)
+✔ م84(1)–(2) (ص 29): an Eid starting on the second working day is brought forward to the end of the previous week, one ending the day before the last working day is pushed to the next week — both from the accepted workdays, and proposed as named holidays (3648.510541ms)
+✔ م76/م77 citations (ص 26–27): the authority holder is م77(3), the budget is م77(7), the manager writing the assignment is م77(2) with م76(1), and the hourly divisor comes from م50(1) and م73(2), not from م76/م77 (3914.454583ms)
+✔ م77(9) (ص 27): overtime and an official mission may not combine on ORDINARY WORKING DAYS only — a rest day or a public holiday inside the mission is outside the paragraph, and the refusal quotes its scope (3412.956333ms)
+✔ م77(6) (ص 27): overtime chosen as leave, never credited, is paid in cash when service ends for any reason — through the same proposal path, approved by the payroll approver, citing the article — and is never credited afterwards (2462.869209ms)
+✔ م73(2) وم74(2) (ص 25): the Ramadan 1448 window is prepared as a DRAFT copy of the accepted working-time policy by the HR preparer — six hours a day and at most thirty-six a week, provisional until the sighting — and only the HR manager can accept it (6109.63525ms)
+✔ م51 (ص 19): a deduction from wage needs the worker’s written consent — recorded by his own identity — or one of the six printed cases; the approver is stopped until then, and deductions from before the rule keep working (3436.4905ms)
+✔ the clock starts at adoption: a request returned sixty days ago is neither reminded nor lapsed on the first sweeps after the timers are adopted — it is counted from adoption, and the audit says so (4440.26125ms)
+✔ the clock starts at adoption for step escalation too, and the timers screen says so before anyone adopts a number (4133.863ms)
+✔ returned-by-me shows the counted days from adoption, never a retroactive «مضى ستون» (3833.904541ms)
+ℹ tests 37
+ℹ suites 0
+ℹ pass 36
+ℹ fail 1
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 41581.929958
+
+✖ failing tests:
+
+test at tests/attendance-rules.test.mjs:321:1
+✖ the server allows geolocation for its own origin only (2879.528708ms)
+  Error: listen EPERM: operation not permitted 127.0.0.1
+      at Server.setupListenHandle [as _listen2] (node:net:2306:21)
+      at listenInCluster (node:net:2437:12)
+      at node:net:2666:7
+      at process.processTicksAndRejections (node:internal/process/task_queues:90:21) {
+    code: 'EPERM',
+    errno: -1,
+    syscall: 'listen',
+    address: '127.0.0.1'
+  }

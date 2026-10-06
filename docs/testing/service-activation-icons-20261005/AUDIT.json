@@ -1,0 +1,2583 @@
+{
+  "assessed_at": "2026-10-05T07:15:37.028Z",
+  "database_classification": "local synthetic preview",
+  "totals": {
+    "services_total": 142,
+    "services_hidden": 1,
+    "benefits_total": 13,
+    "benefits_hidden": 0
+  },
+  "metadata": {
+    "of": 142,
+    "adopted_n": 0,
+    "published_n": 0,
+    "employees_n": 27,
+    "completed_n": 2,
+    "adopted": "صفر",
+    "published": "صفر",
+    "employees": "27 حسابًا نشطًا",
+    "completed": "2"
+  },
+  "workflow_health": {
+    "no_executor": 0,
+    "step_unresolvable": 0,
+    "threshold_undefined": 0,
+    "sod_no_executor": 0,
+    "no_substitute": 0,
+    "decider_is_executor": 111
+  },
+  "services": [
+    {
+      "code": "ACC-BRIEF-INTAKE",
+      "name": "استقبال تكليف من عميل",
+      "department": "إدارة الحسابات",
+      "available": true,
+      "fields": 5,
+      "approval_steps": 2,
+      "output_contract": null,
+      "dedicated_route": null,
+      "issues": [
+        {
+          "kind": "decider_is_executor",
+          "severity": "متوسطة",
+          "message": "فصل المهام مُطفأ: من يعتمد هذه الخدمة يملك استلامها وإغلاقها في «إدارة الحسابات»؛ يُسجَّل الجمع ويُعرض ولا يُمنع"
+        }
+      ]
+    },
+    {
+      "code": "ACC-CHANGE-REQUEST",
+      "name": "طلب تغيير من عميل",
+      "department": "إدارة الحسابات",
+      "available": true,
+      "fields": 6,
+      "approval_steps": 2,
+      "output_contract": {
+        "code": "ACC-CHANGE-REQUEST",
+        "module": "scope",
+        "output_label": "سجل تغيير نطاق",
+        "route": "#scope",
+        "requires_attachment": false
+      },
+      "dedicated_route": null,
+      "issues": [
+        {
+          "kind": "decider_is_executor",
+          "severity": "متوسطة",
+          "message": "فصل المهام مُطفأ: من يعتمد هذه الخدمة يملك استلامها وإغلاقها في «إدارة الحسابات»؛ يُسجَّل الجمع ويُعرض ولا يُمنع"
+        }
+      ]
+    },
+    {
+      "code": "ACC-CLIENT-COMPLAINT",
+      "name": "شكوى أو ملاحظة عميل",
+      "department": "إدارة الحسابات",
+      "available": true,
+      "fields": 5,
+      "approval_steps": 2,
+      "output_contract": null,
+      "dedicated_route": null,
+      "issues": [
+        {
+          "kind": "decider_is_executor",
+          "severity": "متوسطة",
+          "message": "فصل المهام مُطفأ: من يعتمد هذه الخدمة يملك استلامها وإغلاقها في «إدارة الحسابات»؛ يُسجَّل الجمع ويُعرض ولا يُمنع"
+        }
+      ]
+    },
+    {
+      "code": "ACC-ESCALATION",
+      "name": "تصعيد حساب عميل",
+      "department": "إدارة الحسابات",
+      "available": true,
+      "fields": 4,
+      "approval_steps": 2,
+      "output_contract": null,
+      "dedicated_route": null,
+      "issues": [
+        {
+          "kind": "decider_is_executor",
+          "severity": "متوسطة",
+          "message": "فصل المهام مُطفأ: من يعتمد هذه الخدمة يملك استلامها وإغلاقها في «إدارة الحسابات»؛ يُسجَّل الجمع ويُعرض ولا يُمنع"
+        }
+      ]
+    },
+    {
+      "code": "ACC-MEETING-MINUTES",
+      "name": "محضر اجتماع عميل وقراراته",
+      "department": "إدارة الحسابات",
+      "available": true,
+      "fields": 5,
+      "approval_steps": 2,
+      "output_contract": null,
+      "dedicated_route": null,
+      "issues": [
+        {
+          "kind": "decider_is_executor",
+          "severity": "متوسطة",
+          "message": "فصل المهام مُطفأ: من يعتمد هذه الخدمة يملك استلامها وإغلاقها في «إدارة الحسابات»؛ يُسجَّل الجمع ويُعرض ولا يُمنع"
+        }
+      ]
+    },
+    {
+      "code": "ACC-RENEWAL",
+      "name": "تجديد أو توسعة حساب عميل",
+      "department": "إدارة الحسابات",
+      "available": true,
+      "fields": 4,
+      "approval_steps": 2,
+      "output_contract": null,
+      "dedicated_route": null,
+      "issues": [
+        {
+          "kind": "decider_is_executor",
+          "severity": "متوسطة",
+          "message": "فصل المهام مُطفأ: من يعتمد هذه الخدمة يملك استلامها وإغلاقها في «إدارة الحسابات»؛ يُسجَّل الجمع ويُعرض ولا يُمنع"
+        }
+      ]
+    },
+    {
+      "code": "ACC-STATUS-REPORT",
+      "name": "تقرير حالة للعميل",
+      "department": "إدارة الحسابات",
+      "available": true,
+      "fields": 5,
+      "approval_steps": 2,
+      "output_contract": null,
+      "dedicated_route": null,
+      "issues": [
+        {
+          "kind": "decider_is_executor",
+          "severity": "متوسطة",
+          "message": "فصل المهام مُطفأ: من يعتمد هذه الخدمة يملك استلامها وإغلاقها في «إدارة الحسابات»؛ يُسجَّل الجمع ويُعرض ولا يُمنع"
+        }
+      ]
+    },
+    {
+      "code": "ADM-ACCESS-CARD",
+      "name": "بطاقة موظف أو بطاقة دخول",
+      "department": "مكتب الرئيس التنفيذي",
+      "available": true,
+      "fields": 4,
+      "approval_steps": 2,
+      "output_contract": null,
+      "dedicated_route": null,
+      "issues": [
+        {
+          "kind": "decider_is_executor",
+          "severity": "متوسطة",
+          "message": "فصل المهام مُطفأ: من يعتمد هذه الخدمة يملك استلامها وإغلاقها في «مكتب الرئيس التنفيذي»؛ يُسجَّل الجمع ويُعرض ولا يُمنع"
+        }
+      ]
+    },
+    {
+      "code": "ADM-COURIER",
+      "name": "إرسال شحنة أو مستند",
+      "department": "مكتب الرئيس التنفيذي",
+      "available": true,
+      "fields": 5,
+      "approval_steps": 1,
+      "output_contract": null,
+      "dedicated_route": null,
+      "issues": [
+        {
+          "kind": "decider_is_executor",
+          "severity": "متوسطة",
+          "message": "فصل المهام مُطفأ: من يعتمد هذه الخدمة يملك استلامها وإغلاقها في «مكتب الرئيس التنفيذي»؛ يُسجَّل الجمع ويُعرض ولا يُمنع"
+        }
+      ]
+    },
+    {
+      "code": "ADM-EXPENSE-CLAIM",
+      "name": "مطالبة مصروفات",
+      "department": "مكتب الرئيس التنفيذي",
+      "available": true,
+      "fields": 5,
+      "approval_steps": 2,
+      "output_contract": null,
+      "dedicated_route": "#expenses/new",
+      "issues": []
+    },
+    {
+      "code": "ADM-GOVT-SERVICES",
+      "name": "إنهاء معاملة حكومية",
+      "department": "مكتب الرئيس التنفيذي",
+      "available": true,
+      "fields": 4,
+      "approval_steps": 2,
+      "output_contract": null,
+      "dedicated_route": null,
+      "issues": [
+        {
+          "kind": "decider_is_executor",
+          "severity": "متوسطة",
+          "message": "فصل المهام مُطفأ: من يعتمد هذه الخدمة يملك استلامها وإغلاقها في «مكتب الرئيس التنفيذي»؛ يُسجَّل الجمع ويُعرض ولا يُمنع"
+        }
+      ]
+    },
+    {
+      "code": "ADM-MAINTENANCE",
+      "name": "صيانة وإصلاح",
+      "department": "مكتب الرئيس التنفيذي",
+      "available": true,
+      "fields": 4,
+      "approval_steps": 1,
+      "output_contract": null,
+      "dedicated_route": null,
+      "issues": [
+        {
+          "kind": "decider_is_executor",
+          "severity": "متوسطة",
+          "message": "فصل المهام مُطفأ: من يعتمد هذه الخدمة يملك استلامها وإغلاقها في «مكتب الرئيس التنفيذي»؛ يُسجَّل الجمع ويُعرض ولا يُمنع"
+        }
+      ]
+    },
+    {
+      "code": "ADM-OUTGOING-LETTER",
+      "name": "مراسلة رسمية صادرة",
+      "department": "مكتب الرئيس التنفيذي",
+      "available": true,
+      "fields": 4,
+      "approval_steps": 2,
+      "output_contract": null,
+      "dedicated_route": null,
+      "issues": [
+        {
+          "kind": "decider_is_executor",
+          "severity": "متوسطة",
+          "message": "فصل المهام مُطفأ: من يعتمد هذه الخدمة يملك استلامها وإغلاقها في «مكتب الرئيس التنفيذي»؛ يُسجَّل الجمع ويُعرض ولا يُمنع"
+        }
+      ]
+    },
+    {
+      "code": "ADM-ROOM-BOOKING",
+      "name": "حجز قاعة اجتماعات",
+      "department": "مكتب الرئيس التنفيذي",
+      "available": true,
+      "fields": 7,
+      "approval_steps": 1,
+      "output_contract": null,
+      "dedicated_route": null,
+      "issues": [
+        {
+          "kind": "decider_is_executor",
+          "severity": "متوسطة",
+          "message": "فصل المهام مُطفأ: من يعتمد هذه الخدمة يملك استلامها وإغلاقها في «مكتب الرئيس التنفيذي»؛ يُسجَّل الجمع ويُعرض ولا يُمنع"
+        }
+      ]
+    },
+    {
+      "code": "ADM-SAFETY",
+      "name": "بلاغ سلامة",
+      "department": "مكتب الرئيس التنفيذي",
+      "available": true,
+      "fields": 4,
+      "approval_steps": 0,
+      "output_contract": {
+        "code": "ADM-SAFETY",
+        "module": "request-evidence",
+        "output_label": "تقرير معالجة بلاغ السلامة",
+        "route": "#request",
+        "requires_attachment": true
+      },
+      "dedicated_route": null,
+      "issues": []
+    },
+    {
+      "code": "ADM-SUBSCRIPTION",
+      "name": "تجديد اشتراك أو عقد خدمة",
+      "department": "مكتب الرئيس التنفيذي",
+      "available": true,
+      "fields": 4,
+      "approval_steps": 2,
+      "output_contract": {
+        "code": "ADM-SUBSCRIPTION",
+        "module": "contracts-register",
+        "output_label": "عقد اشتراك مسجل",
+        "route": "#contracts-register",
+        "requires_attachment": false
+      },
+      "dedicated_route": null,
+      "issues": [
+        {
+          "kind": "decider_is_executor",
+          "severity": "متوسطة",
+          "message": "فصل المهام مُطفأ: من يعتمد هذه الخدمة يملك استلامها وإغلاقها في «مكتب الرئيس التنفيذي»؛ يُسجَّل الجمع ويُعرض ولا يُمنع"
+        }
+      ]
+    },
+    {
+      "code": "ADM-SUPPLIES",
+      "name": "قرطاسية ومستلزمات مكتبية",
+      "department": "مكتب الرئيس التنفيذي",
+      "available": true,
+      "fields": 4,
+      "approval_steps": 1,
+      "output_contract": null,
+      "dedicated_route": null,
+      "issues": [
+        {
+          "kind": "decider_is_executor",
+          "severity": "متوسطة",
+          "message": "فصل المهام مُطفأ: من يعتمد هذه الخدمة يملك استلامها وإغلاقها في «مكتب الرئيس التنفيذي»؛ يُسجَّل الجمع ويُعرض ولا يُمنع"
+        }
+      ]
+    },
+    {
+      "code": "ADM-TRAVEL",
+      "name": "سفر وانتداب",
+      "department": "مكتب الرئيس التنفيذي",
+      "available": true,
+      "fields": 7,
+      "approval_steps": 2,
+      "output_contract": {
+        "code": "ADM-TRAVEL",
+        "module": "travel",
+        "output_label": "قرار انتداب مسجل",
+        "route": "#travel",
+        "requires_attachment": false
+      },
+      "dedicated_route": null,
+      "issues": [
+        {
+          "kind": "decider_is_executor",
+          "severity": "متوسطة",
+          "message": "فصل المهام مُطفأ: من يعتمد هذه الخدمة يملك استلامها وإغلاقها في «مكتب الرئيس التنفيذي»؛ يُسجَّل الجمع ويُعرض ولا يُمنع"
+        }
+      ]
+    },
+    {
+      "code": "ADM-VEHICLE",
+      "name": "طلب سيارة أو توصيل",
+      "department": "مكتب الرئيس التنفيذي",
+      "available": true,
+      "fields": 6,
+      "approval_steps": 2,
+      "output_contract": null,
+      "dedicated_route": null,
+      "issues": [
+        {
+          "kind": "decider_is_executor",
+          "severity": "متوسطة",
+          "message": "فصل المهام مُطفأ: من يعتمد هذه الخدمة يملك استلامها وإغلاقها في «مكتب الرئيس التنفيذي»؛ يُسجَّل الجمع ويُعرض ولا يُمنع"
+        }
+      ]
+    },
+    {
+      "code": "ADM-VISITOR",
+      "name": "تصريح دخول زائر",
+      "department": "مكتب الرئيس التنفيذي",
+      "available": true,
+      "fields": 5,
+      "approval_steps": 2,
+      "output_contract": null,
+      "dedicated_route": null,
+      "issues": [
+        {
+          "kind": "decider_is_executor",
+          "severity": "متوسطة",
+          "message": "فصل المهام مُطفأ: من يعتمد هذه الخدمة يملك استلامها وإغلاقها في «مكتب الرئيس التنفيذي»؛ يُسجَّل الجمع ويُعرض ولا يُمنع"
+        }
+      ]
+    },
+    {
+      "code": "ADM-WORKSPACE",
+      "name": "مكتب أو مقعد عمل",
+      "department": "مكتب الرئيس التنفيذي",
+      "available": true,
+      "fields": 5,
+      "approval_steps": 2,
+      "output_contract": null,
+      "dedicated_route": null,
+      "issues": [
+        {
+          "kind": "decider_is_executor",
+          "severity": "متوسطة",
+          "message": "فصل المهام مُطفأ: من يعتمد هذه الخدمة يملك استلامها وإغلاقها في «مكتب الرئيس التنفيذي»؛ يُسجَّل الجمع ويُعرض ولا يُمنع"
+        }
+      ]
+    },
+    {
+      "code": "BRAND-ASSET-CREATE",
+      "name": "إنشاء أصل هوية",
+      "department": "إدارة العلامة التجارية",
+      "available": true,
+      "fields": 3,
+      "approval_steps": 1,
+      "output_contract": null,
+      "dedicated_route": null,
+      "issues": [
+        {
+          "kind": "decider_is_executor",
+          "severity": "متوسطة",
+          "message": "فصل المهام مُطفأ: من يعتمد هذه الخدمة يملك استلامها وإغلاقها في «إدارة العلامة التجارية»؛ يُسجَّل الجمع ويُعرض ولا يُمنع"
+        }
+      ]
+    },
+    {
+      "code": "BRAND-COMPLIANCE",
+      "name": "مراجعة التزام بالهوية",
+      "department": "إدارة العلامة التجارية",
+      "available": true,
+      "fields": 5,
+      "approval_steps": 1,
+      "output_contract": null,
+      "dedicated_route": null,
+      "issues": [
+        {
+          "kind": "decider_is_executor",
+          "severity": "متوسطة",
+          "message": "فصل المهام مُطفأ: من يعتمد هذه الخدمة يملك استلامها وإغلاقها في «إدارة العلامة التجارية»؛ يُسجَّل الجمع ويُعرض ولا يُمنع"
+        }
+      ]
+    },
+    {
+      "code": "BRAND-MERCH",
+      "name": "مطبوعات وهدايا دعائية",
+      "department": "إدارة العلامة التجارية",
+      "available": true,
+      "fields": 4,
+      "approval_steps": 2,
+      "output_contract": null,
+      "dedicated_route": null,
+      "issues": [
+        {
+          "kind": "decider_is_executor",
+          "severity": "متوسطة",
+          "message": "فصل المهام مُطفأ: من يعتمد هذه الخدمة يملك استلامها وإغلاقها في «إدارة العلامة التجارية»؛ يُسجَّل الجمع ويُعرض ولا يُمنع"
+        }
+      ]
+    },
+    {
+      "code": "BRAND-NAMING",
+      "name": "اعتماد اسم أو تسمية",
+      "department": "إدارة العلامة التجارية",
+      "available": true,
+      "fields": 4,
+      "approval_steps": 1,
+      "output_contract": null,
+      "dedicated_route": null,
+      "issues": [
+        {
+          "kind": "decider_is_executor",
+          "severity": "متوسطة",
+          "message": "فصل المهام مُطفأ: من يعتمد هذه الخدمة يملك استلامها وإغلاقها في «إدارة العلامة التجارية»؛ يُسجَّل الجمع ويُعرض ولا يُمنع"
+        }
+      ]
+    },
+    {
+      "code": "CREATIVE-BRIEF",
+      "name": "تكليف إبداعي داخلي",
+      "department": "إدارة الخدمات الإبداعية",
+      "available": false,
+      "fields": 3,
+      "approval_steps": 1,
+      "output_contract": null,
+      "dedicated_route": null,
+      "issues": [
+        {
+          "kind": "decider_is_executor",
+          "severity": "متوسطة",
+          "message": "فصل المهام مُطفأ: من يعتمدها بصفته مديرَ صاحب الطلب يملك استلامها وإغلاقها في «إدارة الخدمات الإبداعية»؛ يُسجَّل الجمع ويُعرض ولا يُمنع"
+        }
+      ]
+    },
+    {
+      "code": "CRM-HANDOVER",
+      "name": "تسليم فرصة للتشغيل",
+      "department": "إدارة الأعمال",
+      "available": true,
+      "fields": 5,
+      "approval_steps": 1,
+      "output_contract": {
+        "code": "CRM-HANDOVER",
+        "module": "commercial",
+        "output_label": "ملف فرصة مسلّم للتشغيل",
+        "route": "#commercial",
+        "requires_attachment": false
+      },
+      "dedicated_route": null,
+      "issues": [
+        {
+          "kind": "decider_is_executor",
+          "severity": "متوسطة",
+          "message": "فصل المهام مُطفأ: من يعتمد هذه الخدمة يملك استلامها وإغلاقها في «إدارة الأعمال»؛ يُسجَّل الجمع ويُعرض ولا يُمنع"
+        }
+      ]
+    },
+    {
+      "code": "CRM-LOSS",
+      "name": "تسجيل خسارة فرصة",
+      "department": "إدارة الأعمال",
+      "available": true,
+      "fields": 4,
+      "approval_steps": 1,
+      "output_contract": null,
+      "dedicated_route": null,
+      "issues": [
+        {
+          "kind": "decider_is_executor",
+          "severity": "متوسطة",
+          "message": "فصل المهام مُطفأ: من يعتمد هذه الخدمة يملك استلامها وإغلاقها في «إدارة الأعمال»؛ يُسجَّل الجمع ويُعرض ولا يُمنع"
+        }
+      ]
+    },
+    {
+      "code": "CRM-OPPORTUNITY",
+      "name": "تسجيل فرصة أو منافسة",
+      "department": "إدارة الأعمال",
+      "available": true,
+      "fields": 5,
+      "approval_steps": 1,
+      "output_contract": {
+        "code": "CRM-OPPORTUNITY",
+        "module": "commercial",
+        "output_label": "فرصة مسجلة",
+        "route": "#commercial",
+        "requires_attachment": false
+      },
+      "dedicated_route": null,
+      "issues": [
+        {
+          "kind": "decider_is_executor",
+          "severity": "متوسطة",
+          "message": "فصل المهام مُطفأ: من يعتمد هذه الخدمة يملك استلامها وإغلاقها في «إدارة الأعمال»؛ يُسجَّل الجمع ويُعرض ولا يُمنع"
+        }
+      ]
+    },
+    {
+      "code": "CRM-PRICING",
+      "name": "تسعير أو استثناء هامش",
+      "department": "إدارة الأعمال",
+      "available": true,
+      "fields": 4,
+      "approval_steps": 2,
+      "output_contract": {
+        "code": "CRM-PRICING",
+        "module": "commercial",
+        "output_label": "ملف تجاري بالتسعير المعتمد",
+        "route": "#commercial",
+        "requires_attachment": false
+      },
+      "dedicated_route": null,
+      "issues": [
+        {
+          "kind": "decider_is_executor",
+          "severity": "متوسطة",
+          "message": "فصل المهام مُطفأ: من يعتمد هذه الخدمة يملك استلامها وإغلاقها في «إدارة الأعمال»؛ يُسجَّل الجمع ويُعرض ولا يُمنع"
+        }
+      ]
+    },
+    {
+      "code": "CRT-ASSET-REQUEST",
+      "name": "طلب أصل من المكتبة الرقمية",
+      "department": "إدارة العلامة التجارية",
+      "available": true,
+      "fields": 3,
+      "approval_steps": 1,
+      "output_contract": null,
+      "dedicated_route": null,
+      "issues": []
+    },
+    {
+      "code": "CRT-CONTENT",
+      "name": "طلب كتابة محتوى",
+      "department": "إدارة الخدمات الإبداعية",
+      "available": true,
+      "fields": 5,
+      "approval_steps": 1,
+      "output_contract": null,
+      "dedicated_route": null,
+      "issues": [
+        {
+          "kind": "decider_is_executor",
+          "severity": "متوسطة",
+          "message": "فصل المهام مُطفأ: من يعتمدها بصفته مديرَ صاحب الطلب يملك استلامها وإغلاقها في «إدارة الخدمات الإبداعية»؛ يُسجَّل الجمع ويُعرض ولا يُمنع"
+        }
+      ]
+    },
+    {
+      "code": "CRT-DESIGN",
+      "name": "طلب تصميم",
+      "department": "إدارة الخدمات الإبداعية",
+      "available": true,
+      "fields": 6,
+      "approval_steps": 1,
+      "output_contract": {
+        "code": "CRT-DESIGN",
+        "module": "studio",
+        "output_label": "مساحة تصميم بمخرجها",
+        "route": "#studio",
+        "requires_attachment": false
+      },
+      "dedicated_route": null,
+      "issues": [
+        {
+          "kind": "decider_is_executor",
+          "severity": "متوسطة",
+          "message": "فصل المهام مُطفأ: من يعتمدها بصفته مديرَ صاحب الطلب يملك استلامها وإغلاقها في «إدارة الخدمات الإبداعية»؛ يُسجَّل الجمع ويُعرض ولا يُمنع"
+        }
+      ]
+    },
+    {
+      "code": "CRT-REVISION",
+      "name": "طلب تعديل على مخرج",
+      "department": "إدارة الخدمات الإبداعية",
+      "available": true,
+      "fields": 4,
+      "approval_steps": 1,
+      "output_contract": null,
+      "dedicated_route": null,
+      "issues": [
+        {
+          "kind": "decider_is_executor",
+          "severity": "متوسطة",
+          "message": "فصل المهام مُطفأ: من يعتمدها بصفته مديرَ صاحب الطلب يملك استلامها وإغلاقها في «إدارة الخدمات الإبداعية»؛ يُسجَّل الجمع ويُعرض ولا يُمنع"
+        }
+      ]
+    },
+    {
+      "code": "CRT-TRANSLATION",
+      "name": "ترجمة أو تدقيق لغوي",
+      "department": "إدارة الخدمات الإبداعية",
+      "available": true,
+      "fields": 4,
+      "approval_steps": 1,
+      "output_contract": null,
+      "dedicated_route": null,
+      "issues": [
+        {
+          "kind": "decider_is_executor",
+          "severity": "متوسطة",
+          "message": "فصل المهام مُطفأ: من يعتمدها بصفته مديرَ صاحب الطلب يملك استلامها وإغلاقها في «إدارة الخدمات الإبداعية»؛ يُسجَّل الجمع ويُعرض ولا يُمنع"
+        }
+      ]
+    },
+    {
+      "code": "DAT-AI-USE",
+      "name": "استخدام أداة ذكاء اصطناعي",
+      "department": "إدارة تدقيق الحملات",
+      "available": true,
+      "fields": 4,
+      "approval_steps": 1,
+      "output_contract": {
+        "code": "DAT-AI-USE",
+        "module": "ai-governance",
+        "output_label": "أصل ذكاء اصطناعي مقيم",
+        "route": "#ai-governance",
+        "requires_attachment": false
+      },
+      "dedicated_route": null,
+      "issues": [
+        {
+          "kind": "decider_is_executor",
+          "severity": "متوسطة",
+          "message": "فصل المهام مُطفأ: من يعتمد هذه الخدمة يملك استلامها وإغلاقها في «إدارة تدقيق الحملات»؛ يُسجَّل الجمع ويُعرض ولا يُمنع"
+        }
+      ]
+    },
+    {
+      "code": "DAT-DASHBOARD",
+      "name": "طلب تقرير أو لوحة مؤشرات",
+      "department": "إدارة تدقيق الحملات",
+      "available": true,
+      "fields": 5,
+      "approval_steps": 1,
+      "output_contract": {
+        "code": "DAT-DASHBOARD",
+        "module": "reports",
+        "output_label": "لقطة تقرير أو لوحة محفوظة",
+        "route": "#reports",
+        "requires_attachment": false
+      },
+      "dedicated_route": null,
+      "issues": [
+        {
+          "kind": "decider_is_executor",
+          "severity": "متوسطة",
+          "message": "فصل المهام مُطفأ: من يعتمد هذه الخدمة يملك استلامها وإغلاقها في «إدارة تدقيق الحملات»؛ يُسجَّل الجمع ويُعرض ولا يُمنع"
+        }
+      ]
+    },
+    {
+      "code": "DAT-DATA-ACCESS",
+      "name": "طلب وصول لبيانات",
+      "department": "إدارة تدقيق الحملات",
+      "available": true,
+      "fields": 4,
+      "approval_steps": 2,
+      "output_contract": null,
+      "dedicated_route": null,
+      "issues": []
+    },
+    {
+      "code": "DAT-DATA-QUALITY",
+      "name": "بلاغ خطأ في بيانات",
+      "department": "إدارة تدقيق الحملات",
+      "available": true,
+      "fields": 3,
+      "approval_steps": 1,
+      "output_contract": null,
+      "dedicated_route": null,
+      "issues": [
+        {
+          "kind": "decider_is_executor",
+          "severity": "متوسطة",
+          "message": "فصل المهام مُطفأ: من يعتمد هذه الخدمة يملك استلامها وإغلاقها في «إدارة تدقيق الحملات»؛ يُسجَّل الجمع ويُعرض ولا يُمنع"
+        }
+      ]
+    },
+    {
+      "code": "DAT-KNOWLEDGE",
+      "name": "إضافة محتوى لقاعدة المعرفة",
+      "department": "إدارة تدقيق الحملات",
+      "available": true,
+      "fields": 4,
+      "approval_steps": 1,
+      "output_contract": null,
+      "dedicated_route": null,
+      "issues": [
+        {
+          "kind": "decider_is_executor",
+          "severity": "متوسطة",
+          "message": "فصل المهام مُطفأ: من يعتمد هذه الخدمة يملك استلامها وإغلاقها في «إدارة تدقيق الحملات»؛ يُسجَّل الجمع ويُعرض ولا يُمنع"
+        }
+      ]
+    },
+    {
+      "code": "DAT-PROFITABILITY",
+      "name": "تحليل ربحية مشروع أو عميل",
+      "department": "إدارة تدقيق الحملات",
+      "available": true,
+      "fields": 3,
+      "approval_steps": 1,
+      "output_contract": null,
+      "dedicated_route": null,
+      "issues": [
+        {
+          "kind": "decider_is_executor",
+          "severity": "متوسطة",
+          "message": "فصل المهام مُطفأ: من يعتمد هذه الخدمة يملك استلامها وإغلاقها في «إدارة تدقيق الحملات»؛ يُسجَّل الجمع ويُعرض ولا يُمنع"
+        }
+      ]
+    },
+    {
+      "code": "DAT-ROI",
+      "name": "قياس عائد مبادرة",
+      "department": "إدارة تدقيق الحملات",
+      "available": true,
+      "fields": 5,
+      "approval_steps": 1,
+      "output_contract": null,
+      "dedicated_route": null,
+      "issues": [
+        {
+          "kind": "decider_is_executor",
+          "severity": "متوسطة",
+          "message": "فصل المهام مُطفأ: من يعتمد هذه الخدمة يملك استلامها وإغلاقها في «إدارة تدقيق الحملات»؛ يُسجَّل الجمع ويُعرض ولا يُمنع"
+        }
+      ]
+    },
+    {
+      "code": "DIG-AD-ACCOUNT",
+      "name": "وصول لحساب إعلاني",
+      "department": "إدارة التسويق الرقمي",
+      "available": true,
+      "fields": 5,
+      "approval_steps": 2,
+      "output_contract": null,
+      "dedicated_route": null,
+      "issues": []
+    },
+    {
+      "code": "DIG-BUDGET-CHANGE",
+      "name": "تعديل ميزانية أو تحسين حملة",
+      "department": "إدارة التسويق الرقمي",
+      "available": true,
+      "fields": 5,
+      "approval_steps": 2,
+      "output_contract": {
+        "code": "DIG-BUDGET-CHANGE",
+        "module": "media-spend",
+        "output_label": "نسخة خطة صرف إعلامي",
+        "route": "#media-spend",
+        "requires_attachment": false
+      },
+      "dedicated_route": null,
+      "issues": []
+    },
+    {
+      "code": "DIG-CAMPAIGN",
+      "name": "حملة رقمية أو شراء إعلامي",
+      "department": "إدارة التسويق الرقمي",
+      "available": true,
+      "fields": 6,
+      "approval_steps": 1,
+      "output_contract": {
+        "code": "DIG-CAMPAIGN",
+        "module": "campaigns",
+        "output_label": "حملة رقمية مسجلة",
+        "route": "#campaigns",
+        "requires_attachment": false
+      },
+      "dedicated_route": null,
+      "issues": [
+        {
+          "kind": "decider_is_executor",
+          "severity": "متوسطة",
+          "message": "فصل المهام مُطفأ: من يعتمد هذه الخدمة يملك استلامها وإغلاقها في «إدارة التسويق الرقمي»؛ يُسجَّل الجمع ويُعرض ولا يُمنع"
+        }
+      ]
+    },
+    {
+      "code": "DIG-CAMPAIGN-CLOSE",
+      "name": "إقفال حملة",
+      "department": "إدارة التسويق الرقمي",
+      "available": true,
+      "fields": 3,
+      "approval_steps": 1,
+      "output_contract": {
+        "code": "DIG-CAMPAIGN-CLOSE",
+        "module": "campaigns",
+        "output_label": "حملة مقفلة بنتيجتها",
+        "route": "#campaigns",
+        "requires_attachment": false
+      },
+      "dedicated_route": null,
+      "issues": [
+        {
+          "kind": "decider_is_executor",
+          "severity": "متوسطة",
+          "message": "فصل المهام مُطفأ: من يعتمد هذه الخدمة يملك استلامها وإغلاقها في «إدارة التسويق الرقمي»؛ يُسجَّل الجمع ويُعرض ولا يُمنع"
+        }
+      ]
+    },
+    {
+      "code": "DIG-PERFORMANCE-REPORT",
+      "name": "تقرير أداء حملة",
+      "department": "إدارة التسويق الرقمي",
+      "available": true,
+      "fields": 5,
+      "approval_steps": 1,
+      "output_contract": {
+        "code": "DIG-PERFORMANCE-REPORT",
+        "module": "reports",
+        "output_label": "لقطة تقرير أداء محفوظة",
+        "route": "#reports",
+        "requires_attachment": false
+      },
+      "dedicated_route": null,
+      "issues": [
+        {
+          "kind": "decider_is_executor",
+          "severity": "متوسطة",
+          "message": "فصل المهام مُطفأ: من يعتمد هذه الخدمة يملك استلامها وإغلاقها في «إدارة التسويق الرقمي»؛ يُسجَّل الجمع ويُعرض ولا يُمنع"
+        }
+      ]
+    },
+    {
+      "code": "DIG-SOCIAL-POST",
+      "name": "جدولة نشر على المنصات",
+      "department": "إدارة التسويق الرقمي",
+      "available": true,
+      "fields": 5,
+      "approval_steps": 1,
+      "output_contract": {
+        "code": "DIG-SOCIAL-POST",
+        "module": "content",
+        "output_label": "عنصر محتوى مجدول",
+        "route": "#content",
+        "requires_attachment": false
+      },
+      "dedicated_route": null,
+      "issues": [
+        {
+          "kind": "decider_is_executor",
+          "severity": "متوسطة",
+          "message": "فصل المهام مُطفأ: من يعتمد هذه الخدمة يملك استلامها وإغلاقها في «إدارة التسويق الرقمي»؛ يُسجَّل الجمع ويُعرض ولا يُمنع"
+        }
+      ]
+    },
+    {
+      "code": "EXP-ANNOUNCEMENT",
+      "name": "نشر تعميم داخلي",
+      "department": "التواصل الداخلي",
+      "available": true,
+      "fields": 4,
+      "approval_steps": 2,
+      "output_contract": null,
+      "dedicated_route": null,
+      "issues": [
+        {
+          "kind": "decider_is_executor",
+          "severity": "متوسطة",
+          "message": "فصل المهام مُطفأ: من يعتمد هذه الخدمة يملك استلامها وإغلاقها في «التواصل الداخلي»؛ يُسجَّل الجمع ويُعرض ولا يُمنع"
+        }
+      ]
+    },
+    {
+      "code": "EXP-FAREWELL",
+      "name": "توديع موظف",
+      "department": "التواصل الداخلي",
+      "available": true,
+      "fields": 4,
+      "approval_steps": 1,
+      "output_contract": null,
+      "dedicated_route": null,
+      "issues": [
+        {
+          "kind": "decider_is_executor",
+          "severity": "متوسطة",
+          "message": "فصل المهام مُطفأ: من يعتمد هذه الخدمة يملك استلامها وإغلاقها في «التواصل الداخلي»؛ يُسجَّل الجمع ويُعرض ولا يُمنع"
+        }
+      ]
+    },
+    {
+      "code": "EXP-INTERNAL-EVENT",
+      "name": "فعالية داخلية",
+      "department": "التواصل الداخلي",
+      "available": true,
+      "fields": 5,
+      "approval_steps": 2,
+      "output_contract": null,
+      "dedicated_route": null,
+      "issues": [
+        {
+          "kind": "decider_is_executor",
+          "severity": "متوسطة",
+          "message": "فصل المهام مُطفأ: من يعتمد هذه الخدمة يملك استلامها وإغلاقها في «التواصل الداخلي»؛ يُسجَّل الجمع ويُعرض ولا يُمنع"
+        }
+      ]
+    },
+    {
+      "code": "EXP-LEADERSHIP-MEETING",
+      "name": "طلب لقاء مع القيادة",
+      "department": "التواصل الداخلي",
+      "available": true,
+      "fields": 3,
+      "approval_steps": 1,
+      "output_contract": null,
+      "dedicated_route": null,
+      "issues": [
+        {
+          "kind": "decider_is_executor",
+          "severity": "متوسطة",
+          "message": "فصل المهام مُطفأ: من يعتمد هذه الخدمة يملك استلامها وإغلاقها في «التواصل الداخلي»؛ يُسجَّل الجمع ويُعرض ولا يُمنع"
+        }
+      ]
+    },
+    {
+      "code": "EXP-RECOGNITION",
+      "name": "ترشيح موظف الشهر",
+      "department": "التواصل الداخلي",
+      "available": true,
+      "fields": 4,
+      "approval_steps": 1,
+      "output_contract": null,
+      "dedicated_route": null,
+      "issues": [
+        {
+          "kind": "decider_is_executor",
+          "severity": "متوسطة",
+          "message": "فصل المهام مُطفأ: من يعتمد هذه الخدمة يملك استلامها وإغلاقها في «التواصل الداخلي»؛ يُسجَّل الجمع ويُعرض ولا يُمنع"
+        }
+      ]
+    },
+    {
+      "code": "EXP-SUGGESTION",
+      "name": "اقتراح تحسين",
+      "department": "التواصل الداخلي",
+      "available": true,
+      "fields": 3,
+      "approval_steps": 1,
+      "output_contract": null,
+      "dedicated_route": null,
+      "issues": [
+        {
+          "kind": "decider_is_executor",
+          "severity": "متوسطة",
+          "message": "فصل المهام مُطفأ: من يعتمد هذه الخدمة يملك استلامها وإغلاقها في «التواصل الداخلي»؛ يُسجَّل الجمع ويُعرض ولا يُمنع"
+        }
+      ]
+    },
+    {
+      "code": "EXP-SURVEY",
+      "name": "إطلاق استبيان",
+      "department": "التواصل الداخلي",
+      "available": true,
+      "fields": 5,
+      "approval_steps": 1,
+      "output_contract": null,
+      "dedicated_route": null,
+      "issues": [
+        {
+          "kind": "decider_is_executor",
+          "severity": "متوسطة",
+          "message": "فصل المهام مُطفأ: من يعتمد هذه الخدمة يملك استلامها وإغلاقها في «التواصل الداخلي»؛ يُسجَّل الجمع ويُعرض ولا يُمنع"
+        }
+      ]
+    },
+    {
+      "code": "EXP-WELCOME",
+      "name": "برنامج ترحيب بموظف جديد",
+      "department": "التواصل الداخلي",
+      "available": true,
+      "fields": 5,
+      "approval_steps": 1,
+      "output_contract": null,
+      "dedicated_route": null,
+      "issues": [
+        {
+          "kind": "decider_is_executor",
+          "severity": "متوسطة",
+          "message": "فصل المهام مُطفأ: من يعتمد هذه الخدمة يملك استلامها وإغلاقها في «التواصل الداخلي»؛ يُسجَّل الجمع ويُعرض ولا يُمنع"
+        }
+      ]
+    },
+    {
+      "code": "FIN-BUDGET-TRANSFER",
+      "name": "مناقلة ميزانية",
+      "department": "المالية",
+      "available": true,
+      "fields": 4,
+      "approval_steps": 2,
+      "output_contract": {
+        "code": "FIN-BUDGET-TRANSFER",
+        "module": "budgets",
+        "output_label": "نسخة مخصص مشروع مسجلة",
+        "route": "#budgets",
+        "requires_attachment": false
+      },
+      "dedicated_route": null,
+      "issues": []
+    },
+    {
+      "code": "FIN-CLIENT-INVOICE",
+      "name": "طلب إصدار فاتورة لعميل",
+      "department": "المالية",
+      "available": true,
+      "fields": 7,
+      "approval_steps": 1,
+      "output_contract": {
+        "code": "FIN-CLIENT-INVOICE",
+        "module": "receivables",
+        "output_label": "استحقاق عميل مسجل",
+        "route": "#receivables",
+        "requires_attachment": false
+      },
+      "dedicated_route": null,
+      "issues": [
+        {
+          "kind": "decider_is_executor",
+          "severity": "متوسطة",
+          "message": "فصل المهام مُطفأ: من يعتمد هذه الخدمة يملك استلامها وإغلاقها في «المالية»؛ يُسجَّل الجمع ويُعرض ولا يُمنع"
+        }
+      ]
+    },
+    {
+      "code": "FIN-COLLECTION-FOLLOWUP",
+      "name": "متابعة تحصيل متأخر",
+      "department": "المالية",
+      "available": true,
+      "fields": 5,
+      "approval_steps": 1,
+      "output_contract": null,
+      "dedicated_route": null,
+      "issues": [
+        {
+          "kind": "decider_is_executor",
+          "severity": "متوسطة",
+          "message": "فصل المهام مُطفأ: من يعتمد هذه الخدمة يملك استلامها وإغلاقها في «المالية»؛ يُسجَّل الجمع ويُعرض ولا يُمنع"
+        }
+      ]
+    },
+    {
+      "code": "FIN-CUSTODY",
+      "name": "عهدة نقدية أو تسويتها",
+      "department": "المالية",
+      "available": true,
+      "fields": 4,
+      "approval_steps": 2,
+      "output_contract": null,
+      "dedicated_route": "#expenses/custody",
+      "issues": []
+    },
+    {
+      "code": "FIN-PAYMENT-REQUEST",
+      "name": "طلب صرف لمورد",
+      "department": "المالية",
+      "available": true,
+      "fields": 7,
+      "approval_steps": 2,
+      "output_contract": {
+        "code": "FIN-PAYMENT-REQUEST",
+        "module": "payables",
+        "output_label": "أمر دفع مسجل",
+        "route": "#payables",
+        "requires_attachment": false
+      },
+      "dedicated_route": null,
+      "issues": []
+    },
+    {
+      "code": "FIN-REFUND",
+      "name": "طلب إشعار دائن أو استرداد",
+      "department": "المالية",
+      "available": true,
+      "fields": 4,
+      "approval_steps": 2,
+      "output_contract": {
+        "code": "FIN-REFUND",
+        "module": "invoices",
+        "output_label": "مستند فاتورة أو إشعار دائن",
+        "route": "#invoices",
+        "requires_attachment": false
+      },
+      "dedicated_route": null,
+      "issues": []
+    },
+    {
+      "code": "FIN-TAX-QUERY",
+      "name": "استفسار ضريبي أو فاتورة غير مطابقة",
+      "department": "المالية",
+      "available": true,
+      "fields": 3,
+      "approval_steps": 1,
+      "output_contract": {
+        "code": "FIN-TAX-QUERY",
+        "module": "einvoice-selfcheck",
+        "output_label": "سجل فاتورة ضريبية محل الفحص",
+        "route": "#einvoice-selfcheck",
+        "requires_attachment": false
+      },
+      "dedicated_route": null,
+      "issues": [
+        {
+          "kind": "decider_is_executor",
+          "severity": "متوسطة",
+          "message": "فصل المهام مُطفأ: من يعتمد هذه الخدمة يملك استلامها وإغلاقها في «المالية»؛ يُسجَّل الجمع ويُعرض ولا يُمنع"
+        }
+      ]
+    },
+    {
+      "code": "GOV-CONFLICT-DISCLOSURE",
+      "name": "إفصاح عن تضارب مصالح",
+      "department": "الحوكمة والالتزام والمخاطر",
+      "available": true,
+      "fields": 3,
+      "approval_steps": 1,
+      "output_contract": {
+        "code": "GOV-CONFLICT-DISCLOSURE",
+        "module": "procurement-extras",
+        "output_label": "إفصاح تضارب مصالح مسجل",
+        "route": "#procurement-extras",
+        "requires_attachment": false
+      },
+      "dedicated_route": null,
+      "issues": [
+        {
+          "kind": "decider_is_executor",
+          "severity": "متوسطة",
+          "message": "فصل المهام مُطفأ: من يعتمد هذه الخدمة يملك استلامها وإغلاقها في «الحوكمة والالتزام والمخاطر»؛ يُسجَّل الجمع ويُعرض ولا يُمنع"
+        }
+      ]
+    },
+    {
+      "code": "GOV-DECISION",
+      "name": "طلب قرار تنفيذي",
+      "department": "مكتب الرئيس التنفيذي",
+      "available": true,
+      "fields": 4,
+      "approval_steps": 2,
+      "output_contract": null,
+      "dedicated_route": null,
+      "issues": [
+        {
+          "kind": "decider_is_executor",
+          "severity": "متوسطة",
+          "message": "فصل المهام مُطفأ: من يعتمد هذه الخدمة يملك استلامها وإغلاقها في «مكتب الرئيس التنفيذي»؛ يُسجَّل الجمع ويُعرض ولا يُمنع"
+        }
+      ]
+    },
+    {
+      "code": "GOV-INITIATIVE",
+      "name": "تسجيل مبادرة إستراتيجية",
+      "department": "الإدارة التنفيذية للمشاريع",
+      "available": true,
+      "fields": 6,
+      "approval_steps": 2,
+      "output_contract": null,
+      "dedicated_route": null,
+      "issues": [
+        {
+          "kind": "decider_is_executor",
+          "severity": "متوسطة",
+          "message": "فصل المهام مُطفأ: من يعتمد هذه الخدمة يملك استلامها وإغلاقها في «الإدارة التنفيذية للمشاريع»؛ يُسجَّل الجمع ويُعرض ولا يُمنع"
+        }
+      ]
+    },
+    {
+      "code": "GOV-MEETING-ITEM",
+      "name": "إدراج بند في اجتماع",
+      "department": "مكتب الرئيس التنفيذي",
+      "available": true,
+      "fields": 4,
+      "approval_steps": 2,
+      "output_contract": null,
+      "dedicated_route": null,
+      "issues": [
+        {
+          "kind": "decider_is_executor",
+          "severity": "متوسطة",
+          "message": "فصل المهام مُطفأ: من يعتمد هذه الخدمة يملك استلامها وإغلاقها في «مكتب الرئيس التنفيذي»؛ يُسجَّل الجمع ويُعرض ولا يُمنع"
+        }
+      ]
+    },
+    {
+      "code": "GOV-OBJECTIVE",
+      "name": "اعتماد هدف أو مؤشر",
+      "department": "الإدارة التنفيذية للمشاريع",
+      "available": true,
+      "fields": 7,
+      "approval_steps": 1,
+      "output_contract": null,
+      "dedicated_route": null,
+      "issues": [
+        {
+          "kind": "decider_is_executor",
+          "severity": "متوسطة",
+          "message": "فصل المهام مُطفأ: من يعتمد هذه الخدمة يملك استلامها وإغلاقها في «الإدارة التنفيذية للمشاريع»؛ يُسجَّل الجمع ويُعرض ولا يُمنع"
+        }
+      ]
+    },
+    {
+      "code": "GOV-POLICY",
+      "name": "اعتماد سياسة أو إجراء",
+      "department": "الحوكمة والالتزام والمخاطر",
+      "available": true,
+      "fields": 5,
+      "approval_steps": 1,
+      "output_contract": {
+        "code": "GOV-POLICY",
+        "module": "policy-library",
+        "output_label": "وثيقة سياسة منشورة أو مسودة تنتظر اعتمادها",
+        "route": "#policy-library",
+        "requires_attachment": false
+      },
+      "dedicated_route": null,
+      "issues": [
+        {
+          "kind": "decider_is_executor",
+          "severity": "متوسطة",
+          "message": "فصل المهام مُطفأ: من يعتمد هذه الخدمة يملك استلامها وإغلاقها في «الحوكمة والالتزام والمخاطر»؛ يُسجَّل الجمع ويُعرض ولا يُمنع"
+        }
+      ]
+    },
+    {
+      "code": "GOV-RISK",
+      "name": "تسجيل خطر مؤسسي",
+      "department": "الحوكمة والالتزام والمخاطر",
+      "available": true,
+      "fields": 5,
+      "approval_steps": 1,
+      "output_contract": {
+        "code": "GOV-RISK",
+        "module": "risks",
+        "output_label": "خطر مؤسسي مسجل",
+        "route": "#risks",
+        "requires_attachment": false
+      },
+      "dedicated_route": null,
+      "issues": [
+        {
+          "kind": "decider_is_executor",
+          "severity": "متوسطة",
+          "message": "فصل المهام مُطفأ: من يعتمد هذه الخدمة يملك استلامها وإغلاقها في «الحوكمة والالتزام والمخاطر»؛ يُسجَّل الجمع ويُعرض ولا يُمنع"
+        }
+      ]
+    },
+    {
+      "code": "HR-ATTENDANCE-FIX",
+      "name": "تصحيح حضور أو استئذان",
+      "department": "رأس المال البشري",
+      "available": true,
+      "fields": 6,
+      "approval_steps": 2,
+      "output_contract": null,
+      "dedicated_route": "#attendance/correction",
+      "issues": [
+        {
+          "kind": "decider_is_executor",
+          "severity": "متوسطة",
+          "message": "فصل المهام مُطفأ: من يعتمد هذه الخدمة يملك استلامها وإغلاقها في «رأس المال البشري»؛ يُسجَّل الجمع ويُعرض ولا يُمنع"
+        }
+      ]
+    },
+    {
+      "code": "HR-BANK-CHANGE",
+      "name": "تغيير حساب الراتب البنكي",
+      "department": "رأس المال البشري",
+      "available": true,
+      "fields": 4,
+      "approval_steps": 2,
+      "output_contract": {
+        "code": "HR-BANK-CHANGE",
+        "module": "payroll-extras",
+        "output_label": "حساب راتب متحقق",
+        "route": "#payroll-extras",
+        "requires_attachment": false
+      },
+      "dedicated_route": null,
+      "issues": []
+    },
+    {
+      "code": "HR-BENEFIT-CLAIM",
+      "name": "مطالبة مزايا أو تأمين طبي",
+      "department": "رأس المال البشري",
+      "available": true,
+      "fields": 3,
+      "approval_steps": 2,
+      "output_contract": null,
+      "dedicated_route": null,
+      "issues": []
+    },
+    {
+      "code": "HR-DOC-RENEWAL",
+      "name": "تجديد إقامة أو رخصة",
+      "department": "رأس المال البشري",
+      "available": true,
+      "fields": 4,
+      "approval_steps": 2,
+      "output_contract": null,
+      "dedicated_route": null,
+      "issues": [
+        {
+          "kind": "decider_is_executor",
+          "severity": "متوسطة",
+          "message": "فصل المهام مُطفأ: من يعتمد هذه الخدمة يملك استلامها وإغلاقها في «رأس المال البشري»؛ يُسجَّل الجمع ويُعرض ولا يُمنع"
+        }
+      ]
+    },
+    {
+      "code": "HR-EXIT-INTERVIEW",
+      "name": "مقابلة خروج ونقل معرفة",
+      "department": "رأس المال البشري",
+      "available": true,
+      "fields": 3,
+      "approval_steps": 2,
+      "output_contract": {
+        "code": "HR-EXIT-INTERVIEW",
+        "module": "lifecycle",
+        "output_label": "حزمة مغادرة ونقل معرفة",
+        "route": "#lifecycle",
+        "requires_attachment": false
+      },
+      "dedicated_route": null,
+      "issues": []
+    },
+    {
+      "code": "HR-EXPERIENCE-CERT",
+      "name": "شهادة خبرة",
+      "department": "رأس المال البشري",
+      "available": true,
+      "fields": 3,
+      "approval_steps": 1,
+      "output_contract": null,
+      "dedicated_route": "#letters/new",
+      "issues": [
+        {
+          "kind": "decider_is_executor",
+          "severity": "متوسطة",
+          "message": "فصل المهام مُطفأ: من يعتمد هذه الخدمة يملك استلامها وإغلاقها في «رأس المال البشري»؛ يُسجَّل الجمع ويُعرض ولا يُمنع"
+        }
+      ]
+    },
+    {
+      "code": "HR-GOSI-CORRECTION",
+      "name": "تصحيح بيانات التأمينات الاجتماعية",
+      "department": "رأس المال البشري",
+      "available": true,
+      "fields": 4,
+      "approval_steps": 2,
+      "output_contract": {
+        "code": "HR-GOSI-CORRECTION",
+        "module": "payroll-insurance",
+        "output_label": "تصحيح تأمينات مسجل",
+        "route": "#payroll-insurance",
+        "requires_attachment": false
+      },
+      "dedicated_route": null,
+      "issues": []
+    },
+    {
+      "code": "HR-GRIEVANCE",
+      "name": "شكوى أو تظلم سري",
+      "department": "رأس المال البشري",
+      "available": true,
+      "fields": 3,
+      "approval_steps": 1,
+      "output_contract": null,
+      "dedicated_route": "#hr-cases/new",
+      "issues": []
+    },
+    {
+      "code": "HR-HIRING-NEED",
+      "name": "طلب احتياج وظيفي",
+      "department": "رأس المال البشري",
+      "available": true,
+      "fields": 5,
+      "approval_steps": 2,
+      "output_contract": {
+        "code": "HR-HIRING-NEED",
+        "module": "people",
+        "output_label": "احتياج وظيفي مسجل",
+        "route": "#people",
+        "requires_attachment": false
+      },
+      "dedicated_route": null,
+      "issues": [
+        {
+          "kind": "decider_is_executor",
+          "severity": "متوسطة",
+          "message": "فصل المهام مُطفأ: من يعتمد هذه الخدمة يملك استلامها وإغلاقها في «رأس المال البشري»؛ يُسجَّل الجمع ويُعرض ولا يُمنع"
+        }
+      ]
+    },
+    {
+      "code": "HR-JOB-CHANGE",
+      "name": "تغيير وظيفي",
+      "department": "رأس المال البشري",
+      "available": true,
+      "fields": 5,
+      "approval_steps": 2,
+      "output_contract": {
+        "code": "HR-JOB-CHANGE",
+        "module": "employees",
+        "output_label": "تغيير وظيفي مسجل",
+        "route": "#employees",
+        "requires_attachment": false
+      },
+      "dedicated_route": null,
+      "issues": []
+    },
+    {
+      "code": "HR-LETTER",
+      "name": "طلب خطاب وظيفي",
+      "department": "رأس المال البشري",
+      "available": true,
+      "fields": 2,
+      "approval_steps": 2,
+      "output_contract": null,
+      "dedicated_route": "#letters/new",
+      "issues": [
+        {
+          "kind": "decider_is_executor",
+          "severity": "متوسطة",
+          "message": "فصل المهام مُطفأ: من يعتمد هذه الخدمة يملك استلامها وإغلاقها في «رأس المال البشري»؛ يُسجَّل الجمع ويُعرض ولا يُمنع"
+        }
+      ]
+    },
+    {
+      "code": "HR-OVERTIME",
+      "name": "اعتماد عمل إضافي",
+      "department": "رأس المال البشري",
+      "available": true,
+      "fields": 4,
+      "approval_steps": 2,
+      "output_contract": null,
+      "dedicated_route": "#attendance/overtime",
+      "issues": [
+        {
+          "kind": "decider_is_executor",
+          "severity": "متوسطة",
+          "message": "فصل المهام مُطفأ: من يعتمد هذه الخدمة يملك استلامها وإغلاقها في «رأس المال البشري»؛ يُسجَّل الجمع ويُعرض ولا يُمنع"
+        }
+      ]
+    },
+    {
+      "code": "HR-PAYROLL-INQUIRY",
+      "name": "استفسار أو تصحيح في الراتب",
+      "department": "رأس المال البشري",
+      "available": true,
+      "fields": 4,
+      "approval_steps": 1,
+      "output_contract": null,
+      "dedicated_route": null,
+      "issues": []
+    },
+    {
+      "code": "HR-PROFILE-UPDATE",
+      "name": "تحديث البيانات والوثائق الشخصية",
+      "department": "رأس المال البشري",
+      "available": true,
+      "fields": 3,
+      "approval_steps": 1,
+      "output_contract": null,
+      "dedicated_route": null,
+      "issues": [
+        {
+          "kind": "decider_is_executor",
+          "severity": "متوسطة",
+          "message": "فصل المهام مُطفأ: من يعتمد هذه الخدمة يملك استلامها وإغلاقها في «رأس المال البشري»؛ يُسجَّل الجمع ويُعرض ولا يُمنع"
+        }
+      ]
+    },
+    {
+      "code": "HR-REFERRAL",
+      "name": "ترشيح مرشح لوظيفة",
+      "department": "رأس المال البشري",
+      "available": true,
+      "fields": 5,
+      "approval_steps": 1,
+      "output_contract": {
+        "code": "HR-REFERRAL",
+        "module": "people",
+        "output_label": "مرشح مسجل على احتياج",
+        "route": "#people",
+        "requires_attachment": false
+      },
+      "dedicated_route": null,
+      "issues": [
+        {
+          "kind": "decider_is_executor",
+          "severity": "متوسطة",
+          "message": "فصل المهام مُطفأ: من يعتمد هذه الخدمة يملك استلامها وإغلاقها في «رأس المال البشري»؛ يُسجَّل الجمع ويُعرض ولا يُمنع"
+        }
+      ]
+    },
+    {
+      "code": "HR-RESIGNATION",
+      "name": "استقالة وإخلاء طرف",
+      "department": "رأس المال البشري",
+      "available": true,
+      "fields": 3,
+      "approval_steps": 2,
+      "output_contract": null,
+      "dedicated_route": null,
+      "issues": [
+        {
+          "kind": "decider_is_executor",
+          "severity": "متوسطة",
+          "message": "فصل المهام مُطفأ: من يعتمد هذه الخدمة يملك استلامها وإغلاقها في «رأس المال البشري»؛ يُسجَّل الجمع ويُعرض ولا يُمنع"
+        }
+      ]
+    },
+    {
+      "code": "HR-RETRO-ADJUSTMENT",
+      "name": "تسوية مالية بأثر رجعي",
+      "department": "رأس المال البشري",
+      "available": true,
+      "fields": 4,
+      "approval_steps": 2,
+      "output_contract": {
+        "code": "HR-RETRO-ADJUSTMENT",
+        "module": "payroll-extras",
+        "output_label": "تسوية أثر رجعي مسجلة",
+        "route": "#payroll-extras",
+        "requires_attachment": false
+      },
+      "dedicated_route": null,
+      "issues": []
+    },
+    {
+      "code": "HR-SALARY-ADVANCE",
+      "name": "سلفة على الراتب",
+      "department": "رأس المال البشري",
+      "available": true,
+      "fields": 3,
+      "approval_steps": 2,
+      "output_contract": null,
+      "dedicated_route": null,
+      "issues": []
+    },
+    {
+      "code": "HR-SALARY-CERT",
+      "name": "تعريف بالراتب",
+      "department": "رأس المال البشري",
+      "available": true,
+      "fields": 8,
+      "approval_steps": 1,
+      "output_contract": null,
+      "dedicated_route": "#letters/new",
+      "issues": []
+    },
+    {
+      "code": "INF-CAMPAIGN",
+      "name": "حملة مؤثرين",
+      "department": "إدارة العلاقات العامة والمؤثرين",
+      "available": true,
+      "fields": 6,
+      "approval_steps": 1,
+      "output_contract": {
+        "code": "INF-CAMPAIGN",
+        "module": "influencers",
+        "output_label": "ارتباط حملة مؤثرين",
+        "route": "#influencers",
+        "requires_attachment": false
+      },
+      "dedicated_route": null,
+      "issues": [
+        {
+          "kind": "decider_is_executor",
+          "severity": "متوسطة",
+          "message": "فصل المهام مُطفأ: من يعتمد هذه الخدمة يملك استلامها وإغلاقها في «إدارة العلاقات العامة والمؤثرين»؛ يُسجَّل الجمع ويُعرض ولا يُمنع"
+        }
+      ]
+    },
+    {
+      "code": "INF-CONTENT-APPROVAL",
+      "name": "اعتماد محتوى مؤثر قبل النشر",
+      "department": "إدارة العلاقات العامة والمؤثرين",
+      "available": true,
+      "fields": 5,
+      "approval_steps": 1,
+      "output_contract": {
+        "code": "INF-CONTENT-APPROVAL",
+        "module": "influencers",
+        "output_label": "ارتباط مؤثر بمحتواه المعتمد",
+        "route": "#influencers",
+        "requires_attachment": false
+      },
+      "dedicated_route": null,
+      "issues": [
+        {
+          "kind": "decider_is_executor",
+          "severity": "متوسطة",
+          "message": "فصل المهام مُطفأ: من يعتمد هذه الخدمة يملك استلامها وإغلاقها في «إدارة العلاقات العامة والمؤثرين»؛ يُسجَّل الجمع ويُعرض ولا يُمنع"
+        }
+      ]
+    },
+    {
+      "code": "INF-CONTRACT",
+      "name": "عرض وعقد مؤثر",
+      "department": "إدارة العلاقات العامة والمؤثرين",
+      "available": true,
+      "fields": 7,
+      "approval_steps": 1,
+      "output_contract": {
+        "code": "INF-CONTRACT",
+        "module": "influencers",
+        "output_label": "ارتباط مؤثر بعقده",
+        "route": "#influencers",
+        "requires_attachment": false
+      },
+      "dedicated_route": null,
+      "issues": [
+        {
+          "kind": "decider_is_executor",
+          "severity": "متوسطة",
+          "message": "فصل المهام مُطفأ: من يعتمد هذه الخدمة يملك استلامها وإغلاقها في «إدارة العلاقات العامة والمؤثرين»؛ يُسجَّل الجمع ويُعرض ولا يُمنع"
+        }
+      ]
+    },
+    {
+      "code": "INF-PROOF-PAYMENT",
+      "name": "إثبات تنفيذ وسداد",
+      "department": "إدارة العلاقات العامة والمؤثرين",
+      "available": true,
+      "fields": 4,
+      "approval_steps": 2,
+      "output_contract": {
+        "code": "INF-PROOF-PAYMENT",
+        "module": "influencers",
+        "output_label": "ارتباط مؤثر بإثباته وسداده",
+        "route": "#influencers",
+        "requires_attachment": false
+      },
+      "dedicated_route": null,
+      "issues": []
+    },
+    {
+      "code": "IT-ACCESS",
+      "name": "طلب صلاحية نظام",
+      "department": "تقنية المعلومات",
+      "available": true,
+      "fields": 7,
+      "approval_steps": 2,
+      "output_contract": null,
+      "dedicated_route": null,
+      "issues": []
+    },
+    {
+      "code": "IT-CHANGE-REQUEST",
+      "name": "طلب نشر تغيير تقني",
+      "department": "تقنية المعلومات",
+      "available": true,
+      "fields": 6,
+      "approval_steps": 2,
+      "output_contract": null,
+      "dedicated_route": null,
+      "issues": []
+    },
+    {
+      "code": "IT-DEVICE",
+      "name": "طلب جهاز أو ملحقات",
+      "department": "تقنية المعلومات",
+      "available": true,
+      "fields": 4,
+      "approval_steps": 2,
+      "output_contract": null,
+      "dedicated_route": null,
+      "issues": [
+        {
+          "kind": "decider_is_executor",
+          "severity": "متوسطة",
+          "message": "فصل المهام مُطفأ: من يعتمد هذه الخدمة يملك استلامها وإغلاقها في «تقنية المعلومات»؛ يُسجَّل الجمع ويُعرض ولا يُمنع"
+        }
+      ]
+    },
+    {
+      "code": "IT-MEETING-SUPPORT",
+      "name": "دعم تقني لاجتماع",
+      "department": "تقنية المعلومات",
+      "available": true,
+      "fields": 4,
+      "approval_steps": 1,
+      "output_contract": null,
+      "dedicated_route": null,
+      "issues": [
+        {
+          "kind": "decider_is_executor",
+          "severity": "متوسطة",
+          "message": "فصل المهام مُطفأ: من يعتمد هذه الخدمة يملك استلامها وإغلاقها في «تقنية المعلومات»؛ يُسجَّل الجمع ويُعرض ولا يُمنع"
+        }
+      ]
+    },
+    {
+      "code": "IT-NEW-ACCOUNT",
+      "name": "تجهيز حسابات موظف جديد",
+      "department": "تقنية المعلومات",
+      "available": true,
+      "fields": 5,
+      "approval_steps": 2,
+      "output_contract": {
+        "code": "IT-NEW-ACCOUNT",
+        "module": "lifecycle",
+        "output_label": "حزمة انضمام مسجلة",
+        "route": "#lifecycle",
+        "requires_attachment": false
+      },
+      "dedicated_route": null,
+      "issues": []
+    },
+    {
+      "code": "IT-OUTAGE",
+      "name": "بلاغ توقف خدمة أو بطء",
+      "department": "تقنية المعلومات",
+      "available": true,
+      "fields": 4,
+      "approval_steps": 1,
+      "output_contract": {
+        "code": "IT-OUTAGE",
+        "module": "request-evidence",
+        "output_label": "تقرير سبب الانقطاع والمعالجة",
+        "route": "#request",
+        "requires_attachment": true
+      },
+      "dedicated_route": null,
+      "issues": [
+        {
+          "kind": "decider_is_executor",
+          "severity": "متوسطة",
+          "message": "فصل المهام مُطفأ: من يعتمد هذه الخدمة يملك استلامها وإغلاقها في «تقنية المعلومات»؛ يُسجَّل الجمع ويُعرض ولا يُمنع"
+        }
+      ]
+    },
+    {
+      "code": "IT-PASSWORD-UNLOCK",
+      "name": "استعادة كلمة المرور",
+      "department": "تقنية المعلومات",
+      "available": true,
+      "fields": 4,
+      "approval_steps": 1,
+      "output_contract": {
+        "code": "IT-PASSWORD-UNLOCK",
+        "module": "request-evidence",
+        "output_label": "محضر تحقق الاستعادة دون بيانات سرية",
+        "route": "#request",
+        "requires_attachment": true
+      },
+      "dedicated_route": null,
+      "issues": [
+        {
+          "kind": "decider_is_executor",
+          "severity": "متوسطة",
+          "message": "فصل المهام مُطفأ: من يعتمد هذه الخدمة يملك استلامها وإغلاقها في «تقنية المعلومات»؛ يُسجَّل الجمع ويُعرض ولا يُمنع"
+        }
+      ]
+    },
+    {
+      "code": "IT-PLATFORM-FEEDBACK",
+      "name": "اقتراح تحسين على المنصة",
+      "department": "تقنية المعلومات",
+      "available": true,
+      "fields": 3,
+      "approval_steps": 1,
+      "output_contract": {
+        "code": "IT-PLATFORM-FEEDBACK",
+        "module": "catalog-quality",
+        "output_label": "ملاحظة جودة كتالوج مسجلة",
+        "route": "#catalog-quality",
+        "requires_attachment": false
+      },
+      "dedicated_route": null,
+      "issues": [
+        {
+          "kind": "decider_is_executor",
+          "severity": "متوسطة",
+          "message": "فصل المهام مُطفأ: من يعتمد هذه الخدمة يملك استلامها وإغلاقها في «تقنية المعلومات»؛ يُسجَّل الجمع ويُعرض ولا يُمنع"
+        }
+      ]
+    },
+    {
+      "code": "IT-SECURITY-INCIDENT",
+      "name": "بلاغ أمني",
+      "department": "تقنية المعلومات",
+      "available": true,
+      "fields": 5,
+      "approval_steps": 1,
+      "output_contract": {
+        "code": "IT-SECURITY-INCIDENT",
+        "module": "request-evidence",
+        "output_label": "تقرير احتواء الحادث الأمني",
+        "route": "#request",
+        "requires_attachment": true
+      },
+      "dedicated_route": null,
+      "issues": [
+        {
+          "kind": "decider_is_executor",
+          "severity": "متوسطة",
+          "message": "فصل المهام مُطفأ: من يعتمد هذه الخدمة يملك استلامها وإغلاقها في «تقنية المعلومات»؛ يُسجَّل الجمع ويُعرض ولا يُمنع"
+        }
+      ]
+    },
+    {
+      "code": "IT-SOFTWARE",
+      "name": "طلب برنامج أو ترخيص",
+      "department": "تقنية المعلومات",
+      "available": true,
+      "fields": 6,
+      "approval_steps": 2,
+      "output_contract": null,
+      "dedicated_route": null,
+      "issues": [
+        {
+          "kind": "decider_is_executor",
+          "severity": "متوسطة",
+          "message": "فصل المهام مُطفأ: من يعتمد هذه الخدمة يملك استلامها وإغلاقها في «تقنية المعلومات»؛ يُسجَّل الجمع ويُعرض ولا يُمنع"
+        }
+      ]
+    },
+    {
+      "code": "IT-SUPPORT",
+      "name": "طلب دعم تقني",
+      "department": "تقنية المعلومات",
+      "available": true,
+      "fields": 2,
+      "approval_steps": 1,
+      "output_contract": null,
+      "dedicated_route": null,
+      "issues": []
+    },
+    {
+      "code": "LEG-CONSULTATION",
+      "name": "استشارة قانونية",
+      "department": "الحوكمة والالتزام والمخاطر",
+      "available": true,
+      "fields": 3,
+      "approval_steps": 1,
+      "output_contract": null,
+      "dedicated_route": null,
+      "issues": [
+        {
+          "kind": "decider_is_executor",
+          "severity": "متوسطة",
+          "message": "فصل المهام مُطفأ: من يعتمد هذه الخدمة يملك استلامها وإغلاقها في «الحوكمة والالتزام والمخاطر»؛ يُسجَّل الجمع ويُعرض ولا يُمنع"
+        }
+      ]
+    },
+    {
+      "code": "LEG-CONTRACT-REVIEW",
+      "name": "مراجعة عقد",
+      "department": "الحوكمة والالتزام والمخاطر",
+      "available": true,
+      "fields": 6,
+      "approval_steps": 1,
+      "output_contract": null,
+      "dedicated_route": null,
+      "issues": [
+        {
+          "kind": "decider_is_executor",
+          "severity": "متوسطة",
+          "message": "فصل المهام مُطفأ: من يعتمد هذه الخدمة يملك استلامها وإغلاقها في «الحوكمة والالتزام والمخاطر»؛ يُسجَّل الجمع ويُعرض ولا يُمنع"
+        }
+      ]
+    },
+    {
+      "code": "LEG-IP-RIGHTS",
+      "name": "حقوق ملكية فكرية أو علامة",
+      "department": "الحوكمة والالتزام والمخاطر",
+      "available": true,
+      "fields": 3,
+      "approval_steps": 1,
+      "output_contract": null,
+      "dedicated_route": null,
+      "issues": [
+        {
+          "kind": "decider_is_executor",
+          "severity": "متوسطة",
+          "message": "فصل المهام مُطفأ: من يعتمد هذه الخدمة يملك استلامها وإغلاقها في «الحوكمة والالتزام والمخاطر»؛ يُسجَّل الجمع ويُعرض ولا يُمنع"
+        }
+      ]
+    },
+    {
+      "code": "LEG-LICENSE-PERMIT",
+      "name": "ترخيص أو تصريح حكومي",
+      "department": "الحوكمة والالتزام والمخاطر",
+      "available": true,
+      "fields": 4,
+      "approval_steps": 1,
+      "output_contract": null,
+      "dedicated_route": null,
+      "issues": [
+        {
+          "kind": "decider_is_executor",
+          "severity": "متوسطة",
+          "message": "فصل المهام مُطفأ: من يعتمد هذه الخدمة يملك استلامها وإغلاقها في «الحوكمة والالتزام والمخاطر»؛ يُسجَّل الجمع ويُعرض ولا يُمنع"
+        }
+      ]
+    },
+    {
+      "code": "LEG-NDA",
+      "name": "اتفاقية عدم إفصاح",
+      "department": "الحوكمة والالتزام والمخاطر",
+      "available": true,
+      "fields": 4,
+      "approval_steps": 1,
+      "output_contract": null,
+      "dedicated_route": null,
+      "issues": [
+        {
+          "kind": "decider_is_executor",
+          "severity": "متوسطة",
+          "message": "فصل المهام مُطفأ: من يعتمد هذه الخدمة يملك استلامها وإغلاقها في «الحوكمة والالتزام والمخاطر»؛ يُسجَّل الجمع ويُعرض ولا يُمنع"
+        }
+      ]
+    },
+    {
+      "code": "LEG-PRIVACY-REQUEST",
+      "name": "طلب يتعلق بالبيانات الشخصية",
+      "department": "الحوكمة والالتزام والمخاطر",
+      "available": true,
+      "fields": 3,
+      "approval_steps": 2,
+      "output_contract": {
+        "code": "LEG-PRIVACY-REQUEST",
+        "module": "privacy",
+        "output_label": "طلب صاحب بيانات مسجل",
+        "route": "#privacy",
+        "requires_attachment": false
+      },
+      "dedicated_route": null,
+      "issues": []
+    },
+    {
+      "code": "LEG-WHISTLEBLOW",
+      "name": "بلاغ مخالفة أو نزاع",
+      "department": "الحوكمة والالتزام والمخاطر",
+      "available": true,
+      "fields": 3,
+      "approval_steps": 1,
+      "output_contract": {
+        "code": "LEG-WHISTLEBLOW",
+        "module": "hr-cases",
+        "output_label": "حالة مقيدة مسجلة",
+        "route": "#hr-cases",
+        "requires_attachment": false
+      },
+      "dedicated_route": null,
+      "issues": [
+        {
+          "kind": "decider_is_executor",
+          "severity": "متوسطة",
+          "message": "فصل المهام مُطفأ: من يعتمد هذه الخدمة يملك استلامها وإغلاقها في «الحوكمة والالتزام والمخاطر»؛ يُسجَّل الجمع ويُعرض ولا يُمنع"
+        }
+      ]
+    },
+    {
+      "code": "PMO-CLOSURE",
+      "name": "إقفال مشروع",
+      "department": "الإدارة التنفيذية للمشاريع",
+      "available": true,
+      "fields": 4,
+      "approval_steps": 1,
+      "output_contract": null,
+      "dedicated_route": null,
+      "issues": [
+        {
+          "kind": "decider_is_executor",
+          "severity": "متوسطة",
+          "message": "فصل المهام مُطفأ: من يعتمد هذه الخدمة يملك استلامها وإغلاقها في «الإدارة التنفيذية للمشاريع»؛ يُسجَّل الجمع ويُعرض ولا يُمنع"
+        }
+      ]
+    },
+    {
+      "code": "PMO-NEW-PROJECT",
+      "name": "طلب فتح مشروع",
+      "department": "الإدارة التنفيذية للمشاريع",
+      "available": true,
+      "fields": 8,
+      "approval_steps": 2,
+      "output_contract": {
+        "code": "PMO-NEW-PROJECT",
+        "module": "commercial",
+        "output_label": "ملف تجاري مرتبط بالمشروع",
+        "route": "#commercial",
+        "requires_attachment": false
+      },
+      "dedicated_route": null,
+      "issues": [
+        {
+          "kind": "decider_is_executor",
+          "severity": "متوسطة",
+          "message": "فصل المهام مُطفأ: من يعتمد هذه الخدمة يملك استلامها وإغلاقها في «الإدارة التنفيذية للمشاريع»؛ يُسجَّل الجمع ويُعرض ولا يُمنع"
+        }
+      ]
+    },
+    {
+      "code": "PMO-RESOURCE",
+      "name": "طلب موارد لمشروع",
+      "department": "الإدارة التنفيذية للمشاريع",
+      "available": true,
+      "fields": 6,
+      "approval_steps": 2,
+      "output_contract": null,
+      "dedicated_route": null,
+      "issues": [
+        {
+          "kind": "decider_is_executor",
+          "severity": "متوسطة",
+          "message": "فصل المهام مُطفأ: من يعتمد هذه الخدمة يملك استلامها وإغلاقها في «الإدارة التنفيذية للمشاريع»؛ يُسجَّل الجمع ويُعرض ولا يُمنع"
+        }
+      ]
+    },
+    {
+      "code": "PMO-RISK-ISSUE",
+      "name": "بلاغ خطر أو تأخر مشروع",
+      "department": "الإدارة التنفيذية للمشاريع",
+      "available": true,
+      "fields": 4,
+      "approval_steps": 1,
+      "output_contract": null,
+      "dedicated_route": null,
+      "issues": [
+        {
+          "kind": "decider_is_executor",
+          "severity": "متوسطة",
+          "message": "فصل المهام مُطفأ: من يعتمد هذه الخدمة يملك استلامها وإغلاقها في «الإدارة التنفيذية للمشاريع»؛ يُسجَّل الجمع ويُعرض ولا يُمنع"
+        }
+      ]
+    },
+    {
+      "code": "PMO-SUBCONTRACT",
+      "name": "إسناد عمل لطرف خارجي",
+      "department": "الإدارة التنفيذية للمشاريع",
+      "available": true,
+      "fields": 5,
+      "approval_steps": 2,
+      "output_contract": null,
+      "dedicated_route": null,
+      "issues": [
+        {
+          "kind": "decider_is_executor",
+          "severity": "متوسطة",
+          "message": "فصل المهام مُطفأ: من يعتمد هذه الخدمة يملك استلامها وإغلاقها في «الإدارة التنفيذية للمشاريع»؛ يُسجَّل الجمع ويُعرض ولا يُمنع"
+        }
+      ]
+    },
+    {
+      "code": "PMO-TIMESHEET",
+      "name": "تصحيح ساعات المشروع",
+      "department": "الإدارة التنفيذية للمشاريع",
+      "available": true,
+      "fields": 4,
+      "approval_steps": 2,
+      "output_contract": null,
+      "dedicated_route": "#timesheets",
+      "issues": [
+        {
+          "kind": "decider_is_executor",
+          "severity": "متوسطة",
+          "message": "فصل المهام مُطفأ: من يعتمد هذه الخدمة يملك استلامها وإغلاقها في «الإدارة التنفيذية للمشاريع»؛ يُسجَّل الجمع ويُعرض ولا يُمنع"
+        }
+      ]
+    },
+    {
+      "code": "PR-EVENT-MEDIA",
+      "name": "دعوات واعتمادات إعلامية",
+      "department": "إدارة العلاقات العامة والمؤثرين",
+      "available": true,
+      "fields": 4,
+      "approval_steps": 1,
+      "output_contract": null,
+      "dedicated_route": null,
+      "issues": [
+        {
+          "kind": "decider_is_executor",
+          "severity": "متوسطة",
+          "message": "فصل المهام مُطفأ: من يعتمد هذه الخدمة يملك استلامها وإغلاقها في «إدارة العلاقات العامة والمؤثرين»؛ يُسجَّل الجمع ويُعرض ولا يُمنع"
+        }
+      ]
+    },
+    {
+      "code": "PR-IMPACT-REPORT",
+      "name": "تقرير تغطية وأثر إعلامي",
+      "department": "إدارة العلاقات العامة والمؤثرين",
+      "available": true,
+      "fields": 4,
+      "approval_steps": 1,
+      "output_contract": null,
+      "dedicated_route": null,
+      "issues": [
+        {
+          "kind": "decider_is_executor",
+          "severity": "متوسطة",
+          "message": "فصل المهام مُطفأ: من يعتمد هذه الخدمة يملك استلامها وإغلاقها في «إدارة العلاقات العامة والمؤثرين»؛ يُسجَّل الجمع ويُعرض ولا يُمنع"
+        }
+      ]
+    },
+    {
+      "code": "PR-ISSUE-ALERT",
+      "name": "تنبيه قضية إعلامية",
+      "department": "إدارة العلاقات العامة والمؤثرين",
+      "available": true,
+      "fields": 4,
+      "approval_steps": 0,
+      "output_contract": {
+        "code": "PR-ISSUE-ALERT",
+        "module": "request-evidence",
+        "output_label": "تقرير معالجة القضية الإعلامية",
+        "route": "#request",
+        "requires_attachment": true
+      },
+      "dedicated_route": null,
+      "issues": []
+    },
+    {
+      "code": "PR-MEDIA-REQUEST",
+      "name": "بيان صحفي أو ظهور إعلامي",
+      "department": "إدارة العلاقات العامة والمؤثرين",
+      "available": true,
+      "fields": 7,
+      "approval_steps": 2,
+      "output_contract": null,
+      "dedicated_route": null,
+      "issues": [
+        {
+          "kind": "decider_is_executor",
+          "severity": "متوسطة",
+          "message": "فصل المهام مُطفأ: من يعتمد هذه الخدمة يملك استلامها وإغلاقها في «إدارة العلاقات العامة والمؤثرين»؛ يُسجَّل الجمع ويُعرض ولا يُمنع"
+        }
+      ]
+    },
+    {
+      "code": "PRC-EMERGENCY",
+      "name": "شراء طارئ",
+      "department": "المشتريات",
+      "available": true,
+      "fields": 4,
+      "approval_steps": 2,
+      "output_contract": {
+        "code": "PRC-EMERGENCY",
+        "module": "procurement-extras",
+        "output_label": "طلب شراء طارئ مسجل",
+        "route": "#procurement-extras",
+        "requires_attachment": false
+      },
+      "dedicated_route": null,
+      "issues": []
+    },
+    {
+      "code": "PRC-PO-CHANGE",
+      "name": "تعديل أمر شراء",
+      "department": "المشتريات",
+      "available": true,
+      "fields": 5,
+      "approval_steps": 2,
+      "output_contract": {
+        "code": "PRC-PO-CHANGE",
+        "module": "procurement-extras",
+        "output_label": "أمر شراء بسجل تعديله",
+        "route": "#procurement-extras",
+        "requires_attachment": false
+      },
+      "dedicated_route": null,
+      "issues": []
+    },
+    {
+      "code": "PRC-PURCHASE-REQUEST",
+      "name": "طلب شراء",
+      "department": "المشتريات",
+      "available": true,
+      "fields": 5,
+      "approval_steps": 2,
+      "output_contract": {
+        "code": "PRC-PURCHASE-REQUEST",
+        "module": "procurement",
+        "output_label": "طلب شراء مسجل",
+        "route": "#procurement",
+        "requires_attachment": false
+      },
+      "dedicated_route": null,
+      "issues": []
+    },
+    {
+      "code": "PRC-VENDOR-BANK",
+      "name": "تحديث حساب مورد البنكي",
+      "department": "المشتريات",
+      "available": true,
+      "fields": 3,
+      "approval_steps": 2,
+      "output_contract": null,
+      "dedicated_route": null,
+      "issues": []
+    },
+    {
+      "code": "PRC-VENDOR-EVALUATION",
+      "name": "تقييم أداء مورد",
+      "department": "المشتريات",
+      "available": true,
+      "fields": 4,
+      "approval_steps": 1,
+      "output_contract": {
+        "code": "PRC-VENDOR-EVALUATION",
+        "module": "vendors",
+        "output_label": "ملف مورد بتقييمه",
+        "route": "#vendors",
+        "requires_attachment": false
+      },
+      "dedicated_route": null,
+      "issues": [
+        {
+          "kind": "decider_is_executor",
+          "severity": "متوسطة",
+          "message": "فصل المهام مُطفأ: من يعتمد هذه الخدمة يملك استلامها وإغلاقها في «المشتريات»؛ يُسجَّل الجمع ويُعرض ولا يُمنع"
+        }
+      ]
+    },
+    {
+      "code": "PRC-VENDOR-REGISTRATION",
+      "name": "تسجيل مورد جديد",
+      "department": "المشتريات",
+      "available": true,
+      "fields": 5,
+      "approval_steps": 1,
+      "output_contract": {
+        "code": "PRC-VENDOR-REGISTRATION",
+        "module": "vendors",
+        "output_label": "ملف مورد مسجل",
+        "route": "#vendors",
+        "requires_attachment": false
+      },
+      "dedicated_route": null,
+      "issues": [
+        {
+          "kind": "decider_is_executor",
+          "severity": "متوسطة",
+          "message": "فصل المهام مُطفأ: من يعتمد هذه الخدمة يملك استلامها وإغلاقها في «المشتريات»؛ يُسجَّل الجمع ويُعرض ولا يُمنع"
+        }
+      ]
+    },
+    {
+      "code": "PRO-DELIVERY",
+      "name": "تسليم مخرج نهائي وأرشفته",
+      "department": "إدارة الإنتاج",
+      "available": true,
+      "fields": 5,
+      "approval_steps": 1,
+      "output_contract": {
+        "code": "PRO-DELIVERY",
+        "module": "studio",
+        "output_label": "حزمة تسليم نهائية",
+        "route": "#studio",
+        "requires_attachment": false
+      },
+      "dedicated_route": null,
+      "issues": [
+        {
+          "kind": "decider_is_executor",
+          "severity": "متوسطة",
+          "message": "فصل المهام مُطفأ: من يعتمد هذه الخدمة يملك استلامها وإغلاقها في «إدارة الإنتاج»؛ يُسجَّل الجمع ويُعرض ولا يُمنع"
+        }
+      ]
+    },
+    {
+      "code": "PRO-EDIT-REVIEW",
+      "name": "مونتاج أو مراجعة نسخة",
+      "department": "إدارة الإنتاج",
+      "available": true,
+      "fields": 4,
+      "approval_steps": 1,
+      "output_contract": null,
+      "dedicated_route": null,
+      "issues": [
+        {
+          "kind": "decider_is_executor",
+          "severity": "متوسطة",
+          "message": "فصل المهام مُطفأ: من يعتمد هذه الخدمة يملك استلامها وإغلاقها في «إدارة الإنتاج»؛ يُسجَّل الجمع ويُعرض ولا يُمنع"
+        }
+      ]
+    },
+    {
+      "code": "PRO-EQUIPMENT",
+      "name": "حجز معدات إنتاج",
+      "department": "إدارة الإنتاج",
+      "available": true,
+      "fields": 4,
+      "approval_steps": 1,
+      "output_contract": {
+        "code": "PRO-EQUIPMENT",
+        "module": "equipment",
+        "output_label": "حجز معدات مسجل",
+        "route": "#equipment",
+        "requires_attachment": false
+      },
+      "dedicated_route": null,
+      "issues": [
+        {
+          "kind": "decider_is_executor",
+          "severity": "متوسطة",
+          "message": "فصل المهام مُطفأ: من يعتمد هذه الخدمة يملك استلامها وإغلاقها في «إدارة الإنتاج»؛ يُسجَّل الجمع ويُعرض ولا يُمنع"
+        }
+      ]
+    },
+    {
+      "code": "PRO-EVENT",
+      "name": "تنظيم فعالية لعميل",
+      "department": "إدارة الإنتاج",
+      "available": true,
+      "fields": 7,
+      "approval_steps": 1,
+      "output_contract": null,
+      "dedicated_route": null,
+      "issues": [
+        {
+          "kind": "decider_is_executor",
+          "severity": "متوسطة",
+          "message": "فصل المهام مُطفأ: من يعتمد هذه الخدمة يملك استلامها وإغلاقها في «إدارة الإنتاج»؛ يُسجَّل الجمع ويُعرض ولا يُمنع"
+        }
+      ]
+    },
+    {
+      "code": "PRO-FREELANCER",
+      "name": "تعاقد مع مستقل أو طاقم",
+      "department": "إدارة الإنتاج",
+      "available": true,
+      "fields": 6,
+      "approval_steps": 1,
+      "output_contract": {
+        "code": "PRO-FREELANCER",
+        "module": "productions",
+        "output_label": "إنتاج مسجل بطاقمه",
+        "route": "#productions",
+        "requires_attachment": false
+      },
+      "dedicated_route": null,
+      "issues": [
+        {
+          "kind": "decider_is_executor",
+          "severity": "متوسطة",
+          "message": "فصل المهام مُطفأ: من يعتمد هذه الخدمة يملك استلامها وإغلاقها في «إدارة الإنتاج»؛ يُسجَّل الجمع ويُعرض ولا يُمنع"
+        }
+      ]
+    },
+    {
+      "code": "PRO-LOCATION",
+      "name": "موقع تصوير وتصريح",
+      "department": "إدارة الإنتاج",
+      "available": true,
+      "fields": 4,
+      "approval_steps": 1,
+      "output_contract": {
+        "code": "PRO-LOCATION",
+        "module": "productions",
+        "output_label": "إنتاج مسجل بموقعه",
+        "route": "#productions",
+        "requires_attachment": false
+      },
+      "dedicated_route": null,
+      "issues": [
+        {
+          "kind": "decider_is_executor",
+          "severity": "متوسطة",
+          "message": "فصل المهام مُطفأ: من يعتمد هذه الخدمة يملك استلامها وإغلاقها في «إدارة الإنتاج»؛ يُسجَّل الجمع ويُعرض ولا يُمنع"
+        }
+      ]
+    },
+    {
+      "code": "PRO-SHOOT",
+      "name": "تصوير أو إنتاج مرئي",
+      "department": "إدارة الإنتاج",
+      "available": true,
+      "fields": 6,
+      "approval_steps": 1,
+      "output_contract": {
+        "code": "PRO-SHOOT",
+        "module": "productions",
+        "output_label": "سجل إنتاج وتصوير",
+        "route": "#productions",
+        "requires_attachment": false
+      },
+      "dedicated_route": null,
+      "issues": [
+        {
+          "kind": "decider_is_executor",
+          "severity": "متوسطة",
+          "message": "فصل المهام مُطفأ: من يعتمد هذه الخدمة يملك استلامها وإغلاقها في «إدارة الإنتاج»؛ يُسجَّل الجمع ويُعرض ولا يُمنع"
+        }
+      ]
+    },
+    {
+      "code": "STR-CAMPAIGN-PLAN",
+      "name": "خطة حملة وقنوات",
+      "department": "إدارة الأعمال",
+      "available": true,
+      "fields": 5,
+      "approval_steps": 1,
+      "output_contract": null,
+      "dedicated_route": null,
+      "issues": [
+        {
+          "kind": "decider_is_executor",
+          "severity": "متوسطة",
+          "message": "فصل المهام مُطفأ: من يعتمد هذه الخدمة يملك استلامها وإغلاقها في «إدارة الأعمال»؛ يُسجَّل الجمع ويُعرض ولا يُمنع"
+        }
+      ]
+    },
+    {
+      "code": "STR-COMPETITOR",
+      "name": "تحليل منافسين",
+      "department": "إدارة الأعمال",
+      "available": true,
+      "fields": 4,
+      "approval_steps": 1,
+      "output_contract": null,
+      "dedicated_route": null,
+      "issues": [
+        {
+          "kind": "decider_is_executor",
+          "severity": "متوسطة",
+          "message": "فصل المهام مُطفأ: من يعتمد هذه الخدمة يملك استلامها وإغلاقها في «إدارة الأعمال»؛ يُسجَّل الجمع ويُعرض ولا يُمنع"
+        }
+      ]
+    },
+    {
+      "code": "STR-PITCH-SUPPORT",
+      "name": "دعم عرض أو منافسة",
+      "department": "إدارة الأعمال",
+      "available": true,
+      "fields": 4,
+      "approval_steps": 1,
+      "output_contract": null,
+      "dedicated_route": null,
+      "issues": [
+        {
+          "kind": "decider_is_executor",
+          "severity": "متوسطة",
+          "message": "فصل المهام مُطفأ: من يعتمد هذه الخدمة يملك استلامها وإغلاقها في «إدارة الأعمال»؛ يُسجَّل الجمع ويُعرض ولا يُمنع"
+        }
+      ]
+    },
+    {
+      "code": "STR-POST-CAMPAIGN",
+      "name": "مراجعة ما بعد الحملة",
+      "department": "إدارة الأعمال",
+      "available": true,
+      "fields": 3,
+      "approval_steps": 1,
+      "output_contract": null,
+      "dedicated_route": null,
+      "issues": [
+        {
+          "kind": "decider_is_executor",
+          "severity": "متوسطة",
+          "message": "فصل المهام مُطفأ: من يعتمد هذه الخدمة يملك استلامها وإغلاقها في «إدارة الأعمال»؛ يُسجَّل الجمع ويُعرض ولا يُمنع"
+        }
+      ]
+    },
+    {
+      "code": "STR-RESEARCH",
+      "name": "بحث أو تحليل سوق",
+      "department": "إدارة الأعمال",
+      "available": true,
+      "fields": 4,
+      "approval_steps": 1,
+      "output_contract": null,
+      "dedicated_route": null,
+      "issues": [
+        {
+          "kind": "decider_is_executor",
+          "severity": "متوسطة",
+          "message": "فصل المهام مُطفأ: من يعتمد هذه الخدمة يملك استلامها وإغلاقها في «إدارة الأعمال»؛ يُسجَّل الجمع ويُعرض ولا يُمنع"
+        }
+      ]
+    },
+    {
+      "code": "TAL-PERFORMANCE-REVIEW",
+      "name": "مراجعة تقييم الأداء",
+      "department": "رأس المال البشري",
+      "available": true,
+      "fields": 3,
+      "approval_steps": 2,
+      "output_contract": null,
+      "dedicated_route": "#performance",
+      "issues": [
+        {
+          "kind": "decider_is_executor",
+          "severity": "متوسطة",
+          "message": "فصل المهام مُطفأ: من يعتمد هذه الخدمة يملك استلامها وإغلاقها في «رأس المال البشري»؛ يُسجَّل الجمع ويُعرض ولا يُمنع"
+        }
+      ]
+    },
+    {
+      "code": "TAL-SUCCESSION",
+      "name": "ترشيح لمسار تعاقب أو ترقية",
+      "department": "رأس المال البشري",
+      "available": true,
+      "fields": 5,
+      "approval_steps": 1,
+      "output_contract": {
+        "code": "TAL-SUCCESSION",
+        "module": "growth",
+        "output_label": "خطة تعاقب مسجلة",
+        "route": "#growth",
+        "requires_attachment": false
+      },
+      "dedicated_route": null,
+      "issues": [
+        {
+          "kind": "decider_is_executor",
+          "severity": "متوسطة",
+          "message": "فصل المهام مُطفأ: من يعتمد هذه الخدمة يملك استلامها وإغلاقها في «رأس المال البشري»؛ يُسجَّل الجمع ويُعرض ولا يُمنع"
+        }
+      ]
+    },
+    {
+      "code": "TAL-TRAINING",
+      "name": "طلب تدريب أو شهادة مهنية",
+      "department": "رأس المال البشري",
+      "available": true,
+      "fields": 6,
+      "approval_steps": 2,
+      "output_contract": null,
+      "dedicated_route": "#growth/training",
+      "issues": [
+        {
+          "kind": "decider_is_executor",
+          "severity": "متوسطة",
+          "message": "فصل المهام مُطفأ: من يعتمد هذه الخدمة يملك استلامها وإغلاقها في «رأس المال البشري»؛ يُسجَّل الجمع ويُعرض ولا يُمنع"
+        }
+      ]
+    }
+  ]
+}

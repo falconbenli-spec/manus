@@ -1,0 +1,35 @@
+{
+ "ok": true,
+ "backup": "work/backups/pre-fleet-20260930/36t-20260930T1502.sqlite",
+ "backup_version_before": 158,
+ "backup_had_142": false,
+ "fresh": {
+  "version": 165,
+  "digest": "bc890b40dbc375527a07b126ecc5e28e12f129557dfa8cc29b5737e254f8fb6d",
+  "counts": {
+   "index": 1329,
+   "table": 583,
+   "trigger": 1240,
+   "view": 2
+  },
+  "objects": 3154
+ },
+ "upgraded": {
+  "version": 165,
+  "applied_versions": 147,
+  "digest": "bc890b40dbc375527a07b126ecc5e28e12f129557dfa8cc29b5737e254f8fb6d",
+  "counts": {
+   "index": 1329,
+   "table": 583,
+   "trigger": 1240,
+   "view": 2
+  },
+  "objects": 3154,
+  "integrity": "ok",
+  "foreign_key_violations": 0,
+  "audit_chain": true
+ },
+ "only_in_fresh": [],
+ "only_in_upgraded": [],
+ "differing_sql": []
+}

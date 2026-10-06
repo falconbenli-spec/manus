@@ -1,0 +1,21 @@
+{
+  "date": "2026-09-09",
+  "extraction": "Read-only extraction with pypdf and openpyxl from user-specified files. Generated JSON is not the missing handoff JSON.",
+  "files": {
+    "360_Integrated_System_Requirements.xlsx": "f4e27149f57ca23a4905cbc9e373ca5b2ab03b05a898b8eb34f89a7fbceb8d19",
+    "360_Integrated_System_Report.pdf": "98b5ce2ff6bf8a9d7d131b0b10d45a81f10ce513b4db8490b102e694a3a33a53",
+    "360_Codex_Master_Prompt.md": "32d1bbff06b83dee01a47878d797913159276427ad9148a0864686d2b1200042"
+  },
+  "missing": [
+    "360_codex_handoff/sources/requirements.source.json",
+    "360_codex_handoff/sources/workbook.source.json",
+    "360_codex_handoff/sources/company_context.md"
+  ],
+  "missing_at_initial_inspection": [
+    "360_codex_handoff/MASTER_PROMPT.md",
+    "360_codex_handoff/sources/requirements.source.json",
+    "360_codex_handoff/sources/workbook.source.json",
+    "360_codex_handoff/sources/company_context.md"
+  ],
+  "master_received": "2026-09-10; user supplied 360_Codex_Master_Prompt.md as the execution guide"
+}

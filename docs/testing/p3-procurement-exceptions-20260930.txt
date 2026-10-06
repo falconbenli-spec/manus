@@ -1,0 +1,1362 @@
+# P3 procurement exceptions — focused TAP (branch p3/procurement-exceptions, base 3d1d84c = Package 3 integration head)
+# Engine: v24.14.0 (work/node24). Synthetic data only: in-memory databases, plus one temp-file database for the multi-process race.
+# Contract words: partial receipt, returns, partial invoice, three-way match, mismatch decision, liability, and reversal.
+#
+# PROBE — the measured gaps confirmed on the unchanged code at 3d1d84c before building (read-only, in-memory; ledger-fixture world,
+# one purchase of 10 units at 100.00 SAR from LOCAL-A):
+#   G1 returns table exists: false
+#   G1 record_return action: invalid_action
+#   G2 invoice 6 units at 105.00 (order 100.00): invoice_mismatch
+#   G2 decision action on an invoice: invalid_action
+#   G3 void action: invalid_action
+#   G3 update invoice row: ERR_SQLITE_ERROR
+#   G3 procurement adjustments source kinds: []
+#   G4 budget after order+match (reserved/committed/available/matched): [0,100000,9900000,60000]
+#   G4 budget after close_short (committed/available): [100000,9900000]
+#   G4 releasePurchaseBudget once committed: committed_budget
+#   G5 award button with 2 quotes (server needs 3): true
+#   G5 award button with 1 quote + approved emergency: false
+#   G6 two pending partial orders: payableState order / paid: ["payment_pending",true,0]
+#   G6 after executing 100.00 of 600.00: payableState vs payableBalance: {"procurement":["paid",10000],"payables":["partially_paid",10000]}
+#   G7 settled in PAYMENT_STATUS_NAMES: false
+#
+# RED — the new and changed tests against the unchanged code (3d1d84c) plus a temporary stub app/procurement-exceptions.mjs that
+# exported exceptionAction/recordSupplierNote and threw (so each test fails on its own line instead of the file failing to load).
+# 32 tests, 17 pass (untouched procurement tests), 15 fail (13 new + 2 whose behaviour intentionally changes):
+#   not ok 1 - E2E P3 procurement: request → sourcing → award → order → commencement → partial receipt → return → partial inv…
+#       why: the order commits its whole value + actual - expected
+#   not ok 2 - returns: against receipt lines, by someone other than the requester, never more than was received; they shrink…
+#       why: Expected values to be strictly equal: + actual - expected
+#   not ok 3 - held invoices: a variance is never auto-accepted; an independent approver accepts only within an adopted toler…
+#       why: 'لا قيمة معتمدة بهذا المفتاح؛ القيم المسجّلة الآن: finance.vat_number_format، vendors.bank_change_cooling_off_days، procurement.cost_center_closed، procurement.unit_closed، finance.vat_rate، payables.bank_change_first_payment_cap.
+#   not ok 4 - supplier notes: credit and debit notes go through the payments API, a credit note answers its request and neve…
+#       why: 'قيمة فاتورة البند «وحدات طباعة مصطنعة» ما تطابق كميته وسعره المعتمد'
+#   not ok 5 - void: an unpaid invoice or payable is voided by a separate append-only record with its reason and an independe…
+#       why: 'not built at base 3d1d84c'
+#   not ok 6 - commitments: consumed at match, released on close_short, and the budget figures stay true (committed + consume…
+#       why: Expected values to be strictly deep-equal: + actual - expected
+#   not ok 7 - ledger: payable_adjustment builds per cost centre from the payable split, controls payable and input VAT, and …
+#       why: 'the kind is registered from the procurement module'
+#   not ok 8 - tenant isolation: another tenant sees no exception, cannot act on one, and the ledger kind lists nothing for i…
+#       why: 'FOREIGN KEY constraint failed'
+#   not ok 9 - UI: the award button follows the server — three quotes or an approved emergency — and the exception panels esc…
+#       why: two quotes: the server refuses, so the screen does not offer it 
+#   not ok 10 - payableState reads payable_balances: two partial orders, a batch, an executed part, a bank return and a credit…
+#       why: "Cannot read properties of undefined (reading 'length')"
+#   not ok 11 - HTTP without a port: returns, decisions, voids and supplier notes go through the real handler; a replayed step…
+#       why: {"error":{"code":"invalid_action","message":"ما فيه إجراء بهذا الاسم على طلب الشراء"}} 
+#   not ok 12 - race: processes writing one database file at the same instant never over-return, never record two credit notes…
+#       why: 'قيمة فاتورة البند «وحدات طباعة مصطنعة» ما تطابق كميته وسعره المعتمد'
+#   not ok 13 - migration 169: applies cleanly; the match guard keeps its independent-approval clauses; the new records keep t…
+#       why: Expected values to be strictly equal: 
+#   not ok 16 - PRC-05/06: الاستلام والفاتورة والمطابقة تتحقق من كل بند مستقلًا…
+#       why: 'قيمة فاتورة البند «بطاقات تعريف مطبوعة» ما تطابق كميته وسعره المعتمد'
+#   not ok 23 - PRC-05/06: excess quantities, mismatched amounts and unmatched receipts cannot become payables…
+#       why: 'قيمة فاتورة البند «خمس نسخ اختبار بالمواصفات المحددة» ما تطابق كميته وسعره المعتمد'
+#   note: RED of test 8 hit a fixture mistake of mine (a finance grant for the isolated tenant granted by a 36t user → FOREIGN KEY);
+#   corrected to an isolated-tenant grantor. Tests 2, 4 and 7 also received test-side corrections during GREEN (a view read as the
+#   requester instead of the reviewer, a self-approval probe on a user without approval authority, invoice references colliding with
+#   the ledger fixture's own INV-n numbering). None changed what is asserted about the product.
+#
+# GREEN — command below, on the final tree. Environmental notes: tests that open a real port fail in this sandbox with
+# `listen EPERM: operation not permitted 127.0.0.1` (here: obligations «nav badge endpoint»); they fail identically on the base tree.
+# ui-golden fails by design: the four */budgets fingerprints move fee84c2513c2b74d → b8b77080b0c861ad (the budget header now states
+# available = cap − reserved − committed − consumed); procurement and procurement-extras fingerprints do not move.
+#
+# Command (worktree root, commit 8896322): work/node24/bin/node --test --test-reporter=tap \
+#   tests/procurement-exceptions.test.mjs tests/procurement.test.mjs tests/procurement-multi-lines.test.mjs tests/procurement-lines.test.mjs
+#   tests/procurement-extras.test.mjs tests/budgets.test.mjs tests/payables.test.mjs tests/payment-release.test.mjs tests/ledger.test.mjs
+#   tests/ledger-completeness.test.mjs tests/withholding-ledger.test.mjs tests/supplier-commencement.test.mjs tests/migration-152.test.mjs
+#   tests/migration-141.test.mjs tests/migration-140.test.mjs tests/migration-140-141-live-upgrade.test.mjs tests/delivery-cycle.test.mjs
+#   tests/project-closure.test.mjs tests/project-axes.test.mjs tests/obligations.test.mjs tests/managed-options.test.mjs
+#   tests/options-conversions.test.mjs tests/ui-golden.test.mjs
+# Result: 188 tests, 186 pass, 2 fail, 0 skipped, 0 cancelled. The 13 new tests and both changed PRC-05/06 tests pass. The two failures:
+#   not ok 68  obligations «nav badge endpoint» — listen EPERM 127.0.0.1 (the sandbox refuses local ports); identical on the base tree.
+#   not ok 182 ui-golden — by design: employee/manager/hr/admin budgets fee84c2513c2b74d → b8b77080b0c861ad; nothing else added, changed or removed.
+#
+# WHOLE SUITE — every tests/*.test.mjs on 8896322, same engine: 1999 tests, 1949 pass, 50 fail, 0 skipped, 0 cancelled. Every failure classified:
+#   39 listen EPERM (need a real port): obligations 1, operations-http 6 (among them the WF-01/02/05 procurement HTTP flows), vendors-http 1,
+#      concurrency 1, files-security 1, catalog-quality-fixes 1, employee-ux 7, epmo-report 1, leave-types 1, module-fixes-critical 2,
+#      notifications-email 2, platform 1, portal-audit-fixes 1, preferences 1, refusal 1, security-regressions 2, attendance-rules 1,
+#      service-quality 1, service-targets-and-closure 6, static-modules 1.
+#    8 fail on the base tree 3d1d84c with the same names (re-run there with the same engine): ai-governance-runtime 2, ai 1,
+#      attendance-rules 1 (exemptions), attendance 1 (unpaid absence), notifications-email 1 (daily reminders), payroll-insurance-review 1,
+#      gate-schema-digest 1 (scripts/gate-baseline.json still records migration 165).
+#    1 traceability — FIN-01 stale on the base tree as well (see CHECK).
+#    2 ui-golden — the budgets move above; the golden test runs twice because tests/catalog-golden.test.mjs imports ui-golden.test.mjs.
+#
+# CHECK — node scripts/check.mjs stops at validateTraceability on the base tree and on this branch with the same first message,
+#   «FIN-01: test changed after recorded run» (tests/finance.test.mjs). Stale test hashes: base = tests/finance.test.mjs, tests/payables.test.mjs;
+#   this branch adds tests/procurement.test.mjs and tests/procurement-multi-lines.test.mjs (rows FIN-02, FIN-05, PRC-01, PRC-03, PRC-04,
+#   PRC-05, PRC-06, PLT-06, PLT-09). Not refreshed here: docs/traceability.json and REQUIREMENTS.json are outside this package's files.
+#   The remaining steps of check.mjs, run without the traceability step: 691 modules pass --check, source hashes match, 149 migrations
+#   planned, highest 169, no eval and no credential pattern.
+# RATCHET — node scripts/quality-ratchet.mjs (no --tighten): exit 0, and every figure equals the base tree's: local primitives 111,
+#   short refusals 1177 (baseline 1183), status literals outside the vocabulary 2, Latin values without isolation 0, direct person-table
+#   reads 737, links 148 checked / 0 unresolved.
+# SCHEMA — migrateFresh() from scripts/gate.mjs: base 167 11c79622a463206f2d92149ff3dfeed6121079643b5646d5aa10f5be7b713d34 (3228 objects)
+#   → 169 c2db47c187e2ffde3c5806f2a77c34dd04cb16ba65348569d3285558e75208af (3289: index 1378 · table 600 · trigger 1307 · view 4).
+#   Migration 169 adds 9 tables, 22 indexes (8 declared, 14 from keys and UNIQUE constraints) and 30 triggers (33 created, 3 of them
+#   redefinitions of existing guards: procurement_invoice_limit, procurement_lines_consistency, procurement_match_guard).
+#   scripts/gate-baseline.json is not edited here.
+#
+TAP version 13
+# (node:43670) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: PRC-01/FIN-02: لا تسمح ترسية بشراء دون مخصص مشروع معتمد
+ok 1 - PRC-01/FIN-02: لا تسمح ترسية بشراء دون مخصص مشروع معتمد
+  ---
+  duration_ms: 18619.373333
+  type: 'test'
+  ...
+# Subtest: FIN-02/PRC-01: المخصص المشترك يمنع تجاوز طلبين للسقف ويحرر الحجز بالرفض
+ok 2 - FIN-02/PRC-01: المخصص المشترك يمنع تجاوز طلبين للسقف ويحرر الحجز بالرفض
+  ---
+  duration_ms: 21507.278875
+  type: 'test'
+  ...
+# Subtest: FIN-02/PLT-05: سحب النطاق المالي يمنع القراءة واعتماد أمر مبني عليه
+ok 3 - FIN-02/PLT-05: سحب النطاق المالي يمنع القراءة واعتماد أمر مبني عليه
+  ---
+  duration_ms: 18137.375334
+  type: 'test'
+  ...
+# Subtest: FIN-02: المراجعة لا تخفض السقف دون الالتزامات ولا تسمح بالاعتماد الذاتي
+ok 4 - FIN-02: المراجعة لا تخفض السقف دون الالتزامات ولا تسمح بالاعتماد الذاتي
+  ---
+  duration_ms: 16494.724333
+  type: 'test'
+  ...
+# Subtest: PRC-03: عرضان لا يكفيان للترسية وفق دليل الدورة الموحدة
+ok 5 - PRC-03: عرضان لا يكفيان للترسية وفق دليل الدورة الموحدة
+  ---
+  duration_ms: 16656.872625
+  type: 'test'
+  ...
+# Subtest: النطاق المالي للمشروع له سقف مدة، وهو أفق الصلاحية المالية نفسه
+ok 6 - النطاق المالي للمشروع له سقف مدة، وهو أفق الصلاحية المالية نفسه
+  ---
+  duration_ms: 14435.691458
+  type: 'test'
+  ...
+# (node:43671) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: delivery cycle: no step of the client chain opens before the step before it was approved by someone else
+ok 7 - delivery cycle: no step of the client chain opens before the step before it was approved by someone else
+  ---
+  duration_ms: 18297.190667
+  type: 'test'
+  ...
+# Subtest: delivery cycle: an entitlement is born from an accepted deliverable only — a submitted one is not enough
+ok 8 - delivery cycle: an entitlement is born from an accepted deliverable only — a submitted one is not enough
+  ---
+  duration_ms: 20220.959125
+  type: 'test'
+  ...
+# Subtest: delivery cycle: the customer invoice hangs on an approved entitlement, and the preparer never issues it
+ok 9 - delivery cycle: the customer invoice hangs on an approved entitlement, and the preparer never issues it
+  ---
+  duration_ms: 16889.947583
+  type: 'test'
+  ...
+# Subtest: delivery cycle: collection is recorded and matched by two people and never exceeds the entitlement
+ok 10 - delivery cycle: collection is recorded and matched by two people and never exceeds the entitlement
+  ---
+  duration_ms: 15073.66475
+  type: 'test'
+  ...
+# Subtest: delivery cycle: a client review stage closes only on an external approval documented against that very version
+ok 11 - delivery cycle: a client review stage closes only on an external approval documented against that very version
+  ---
+  duration_ms: 17405.486583
+  type: 'test'
+  ...
+# Subtest: delivery cycle: no supplier award without a comparison, a qualified vendor and an approved project budget
+ok 12 - delivery cycle: no supplier award without a comparison, a qualified vendor and an approved project budget
+  ---
+  duration_ms: 14642.856
+  type: 'test'
+  ...
+# Subtest: delivery cycle: the supplier is not received, invoiced or paid before the purchase order, and the payment needs three separate people
+ok 13 - delivery cycle: the supplier is not received, invoiced or paid before the purchase order, and the payment needs three separate people
+  ---
+  duration_ms: 14669.876542
+  type: 'test'
+  ...
+# Subtest: delivery cycle: execution is blocked until the advance payment is confirmed
+ok 14 - delivery cycle: execution is blocked until the advance payment is confirmed
+  ---
+  duration_ms: 14651.446125
+  type: 'test'
+  ...
+# Subtest: delivery cycle: a supplier may not start before a purchase order AND a commencement authorisation
+ok 15 - delivery cycle: a supplier may not start before a purchase order AND a commencement authorisation
+  ---
+  duration_ms: 14476.950583
+  type: 'test'
+  ...
+# Subtest: delivery cycle: the customer purchase order is recorded against the commercial case before execution
+ok 16 - delivery cycle: the customer purchase order is recorded against the commercial case before execution
+  ---
+  duration_ms: 11971.958791
+  type: 'test'
+  ...
+# Subtest: delivery cycle: a project can be closed technically and then financially
+ok 17 - delivery cycle: a project can be closed technically and then financially
+  ---
+  duration_ms: 9956.369959
+  type: 'test'
+  ...
+# Subtest: delivery cycle: paying the supplier marks the purchase as paid, read from payment_orders not from a constant
+ok 18 - delivery cycle: paying the supplier marks the purchase as paid, read from payment_orders not from a constant
+  ---
+  duration_ms: 9797.83275
+  type: 'test'
+  ...
+# Subtest: delivery cycle: work packages can be planned for more than one department
+ok 19 - delivery cycle: work packages can be planned for more than one department
+  ---
+  duration_ms: 6669.028625
+  type: 'test'
+  ...
+# Subtest: delivery cycle: a finance delegation is granted, expires and is revoked through the platform, never by a direct insert
+ok 20 - delivery cycle: a finance delegation is granted, expires and is revoked through the platform, never by a direct insert
+  ---
+  duration_ms: 5536.684125
+  type: 'test'
+  ...
+# Subtest: delivery cycle: the completion certificate is a numbered, versioned record, and the client acceptance is employee-entered evidence with its stated limit, never a signature
+ok 21 - delivery cycle: the completion certificate is a numbered, versioned record, and the client acceptance is employee-entered evidence with its stated limit, never a signature
+  ---
+  duration_ms: 5284.553917
+  type: 'test'
+  ...
+# Subtest: التفويض المالي له سقف مدة، ورقمه هو ما تستعمله المنصة فعلًا لا رقم مستعار
+ok 22 - التفويض المالي له سقف مدة، ورقمه هو ما تستعمله المنصة فعلًا لا رقم مستعار
+  ---
+  duration_ms: 4597.416625
+  type: 'test'
+  ...
+# ERROR: failed to copy trust settings of system certificate-25291
+# ERROR: failed to copy trust settings of system certificate-25291
+# ERROR: failed to copy trust settings of system certificate-25291
+# ERROR: failed to copy trust settings of system certificate-25291
+# (node:43672) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: registry: every existing source kind is held unchanged, the new kinds join it, and another file can register its own kind
+ok 23 - registry: every existing source kind is held unchanged, the new kinds join it, and another file can register its own kind
+  ---
+  duration_ms: 19213.811333
+  type: 'test'
+  ...
+# Subtest: supplier invoice: net per cost centre, input VAT from the verified record, the gross liability — one balanced journal in minor units
+ok 24 - supplier invoice: net per cost centre, input VAT from the verified record, the gross liability — one balanced journal in minor units
+  ---
+  duration_ms: 20657.270833
+  type: 'test'
+  ...
+# Subtest: supplier invoice: not ready until the VAT position is known, and a supplier outside the VAT register posts gross to cost
+ok 25 - supplier invoice: not ready until the VAT position is known, and a supplier outside the VAT register posts gross to cost
+  ---
+  duration_ms: 18053.493666
+  type: 'test'
+  ...
+# Subtest: supplier invoice: one payable, one journal — the old manual path is closed, its journals stay readable, and a trigger refuses a second path
+ok 26 - supplier invoice: one payable, one journal — the old manual path is closed, its journals stay readable, and a trigger refuses a second path
+  ---
+  duration_ms: 16700.959334
+  type: 'test'
+  ...
+# Subtest: customer advances: receipt, each draw application and reversal become journals, and the control reads net of reversals
+ok 27 - customer advances: receipt, each draw application and reversal become journals, and the control reads net of reversals
+  ---
+  duration_ms: 16601.993042
+  type: 'test'
+  ...
+# Subtest: migration 167 upgrade: draws applied before it become one opening event each, and later applications are captured by the trigger
+ok 28 - migration 167 upgrade: draws applied before it become one opening event each, and later applications are captured by the trigger
+  ---
+  duration_ms: 14097.230792
+  type: 'test'
+  ...
+# Subtest: pending sources: an unposted supplier liability is listed and blocks the monthly close pack like any other unposted document
+ok 29 - pending sources: an unposted supplier liability is listed and blocks the monthly close pack like any other unposted document
+  ---
+  duration_ms: 14417.916209
+  type: 'test'
+  ...
+# Subtest: control reconciliation: AR, AP, input VAT, output VAT and customer advances tie to their control accounts after a synthetic month, and the trial balance balances
+ok 30 - control reconciliation: AR, AP, input VAT, output VAT and customer advances tie to their control accounts after a synthetic month, and the trial balance balances
+  ---
+  duration_ms: 16180.774125
+  type: 'test'
+  ...
+# Subtest: control reconciliation: every difference is itemised to a document or a journal, and the items add up to the difference
+ok 31 - control reconciliation: every difference is itemised to a document or a journal, and the items add up to the difference
+  ---
+  duration_ms: 14542.753875
+  type: 'test'
+  ...
+# Subtest: control reconciliation: read-only, finance-scoped and tenant-isolated
+ok 32 - control reconciliation: read-only, finance-scoped and tenant-isolated
+  ---
+  duration_ms: 11281.721792
+  type: 'test'
+  ...
+# Subtest: trace: a supplier invoice walks to its approvers, its posted journal, its payment, the bank line, and its reversal — with explicit no-link markers
+ok 33 - trace: a supplier invoice walks to its approvers, its posted journal, its payment, the bank line, and its reversal — with explicit no-link markers
+  ---
+  duration_ms: 11378.094959
+  type: 'test'
+  ...
+# Subtest: trace: an invoice reaches its receipt, the advance drawn on it and its credit note; a manual journal says it has no source document
+ok 34 - trace: an invoice reaches its receipt, the advance drawn on it and its credit note; a manual journal says it has no source document
+  ---
+  duration_ms: 7636.887709
+  type: 'test'
+  ...
+# Subtest: trace: finance-scoped, tenant-isolated, and it refuses what it cannot find instead of guessing
+ok 35 - trace: finance-scoped, tenant-isolated, and it refuses what it cannot find instead of guessing
+  ---
+  duration_ms: 6571.522708
+  type: 'test'
+  ...
+# Subtest: listFinance: no constant payment status; each payable carries its payment state from its payment order
+ok 36 - listFinance: no constant payment status; each payable carries its payment state from its payment order
+  ---
+  duration_ms: 5434.072417
+  type: 'test'
+  ...
+# Subtest: idempotency: two processes preparing the same supplier invoice at the same instant leave one journal, one payable link and one source link
+ok 37 - idempotency: two processes preparing the same supplier invoice at the same instant leave one journal, one payable link and one source link
+  ---
+  duration_ms: 8005.868291
+  type: 'test'
+  ...
+# Subtest: separation of duties: the preparer neither approves nor posts a sourced journal, a reversal needs another preparer, and a read-only holder prepares nothing
+ok 38 - separation of duties: the preparer neither approves nor posts a sourced journal, a reversal needs another preparer, and a read-only holder prepares nothing
+  ---
+  duration_ms: 4540.948375
+  type: 'test'
+  ...
+# Subtest: routes: GET /api/ledger/reconciliation and /api/ledger/trace answer a finance reader and refuse everyone else, writing nothing
+ok 39 - routes: GET /api/ledger/reconciliation and /api/ledger/trace answer a finance reader and refuse everyone else, writing nothing
+  ---
+  duration_ms: 5416.721125
+  type: 'test'
+  ...
+# Subtest: screens: the statements screen shows the control reconciliation and a trace action; the finance screen shows each payable’s real payment state
+ok 40 - screens: the statements screen shows the control reconciliation and a trace action; the finance screen shows each payable’s real payment state
+  ---
+  duration_ms: 5025.396166
+  type: 'test'
+  ...
+# (node:43673) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: an issued invoice becomes one balanced draft journal whose lines cannot be edited or posted twice
+ok 41 - an issued invoice becomes one balanced draft journal whose lines cannot be edited or posted twice
+  ---
+  duration_ms: 18745.48175
+  type: 'test'
+  ...
+# Subtest: statements come from posted journals only: invoice, credit note and receipt flow into income statement, balance sheet and the customer statement
+ok 42 - statements come from posted journals only: invoice, credit note and receipt flow into income statement, balance sheet and the customer statement
+  ---
+  duration_ms: 20429.814667
+  type: 'test'
+  ...
+# Subtest: a payroll run posts as totals only, and nothing posts without approved mappings recorded and approved by different people
+ok 43 - a payroll run posts as totals only, and nothing posts without approved mappings recorded and approved by different people
+  ---
+  duration_ms: 16625.382916
+  type: 'test'
+  ...
+# (node:43674) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: قائمة مبذورة بقيم اليوم: الخيارات هي مصفوفة الكود بترتيبها، وكل قيمة فيها مقبولة
+ok 44 - قائمة مبذورة بقيم اليوم: الخيارات هي مصفوفة الكود بترتيبها، وكل قيمة فيها مقبولة
+  ---
+  duration_ms: 16849.942333
+  type: 'test'
+  ...
+# Subtest: الإضافة تجعل الخيار قابلًا للاختيار، وتُسجَّل بفاعلها وسببها وتصنيفها
+ok 45 - الإضافة تجعل الخيار قابلًا للاختيار، وتُسجَّل بفاعلها وسببها وتصنيفها
+  ---
+  duration_ms: 18136.65875
+  type: 'test'
+  ...
+# Subtest: التعطيل يمنع الاستعمال الجديد ويترك السجل القديم مقروءًا، والمستعمَل لا يُحذف
+ok 46 - التعطيل يمنع الاستعمال الجديد ويترك السجل القديم مقروءًا، والمستعمَل لا يُحذف
+  ---
+  duration_ms: 18409.613625
+  type: 'test'
+  ...
+# Subtest: قيمة خارج القائمة تُرفض برفض يسمّي الحقل بالعربية ومالكه وخطوته التالية
+ok 47 - قيمة خارج القائمة تُرفض برفض يسمّي الحقل بالعربية ومالكه وخطوته التالية
+  ---
+  duration_ms: 14549.375209
+  type: 'test'
+  ...
+# Subtest: القائمة المثبّتة نظامًا: للقراءة فقط، وكل كتابة عليها تُرفض باسم مادتها
+ok 48 - القائمة المثبّتة نظامًا: للقراءة فقط، وكل كتابة عليها تُرفض باسم مادتها
+  ---
+  duration_ms: 16736.138959
+  type: 'test'
+  ...
+# Subtest: القائمة التي تفتح بوابة لا تتسع بيد واحدة: الخيار ينتظر شخصًا ثانيًا
+ok 49 - القائمة التي تفتح بوابة لا تتسع بيد واحدة: الخيار ينتظر شخصًا ثانيًا
+  ---
+  duration_ms: 14114.360375
+  type: 'test'
+  ...
+# Subtest: القائمة المحدودة بمحرس لا تنزل تحت حدّها، والرفض يسمّي المحرس
+ok 50 - القائمة المحدودة بمحرس لا تنزل تحت حدّها، والرفض يسمّي المحرس
+  ---
+  duration_ms: 13457.155541
+  type: 'test'
+  ...
+# Subtest: التصريح يحرس القائمة: من لا يحمله لا يغيّرها، والرفض يسمّي التصريح ومالك القائمة
+ok 51 - التصريح يحرس القائمة: من لا يحمله لا يغيّرها، والرفض يسمّي التصريح ومالك القائمة
+  ---
+  duration_ms: 14047.838125
+  type: 'test'
+  ...
+# Subtest: القيمة ذات الأساس المعتمد: افتراض الكود حتى يقررها إنسان ويعتمدها آخر، ثم تسري من تاريخها
+ok 52 - القيمة ذات الأساس المعتمد: افتراض الكود حتى يقررها إنسان ويعتمدها آخر، ثم تسري من تاريخها
+  ---
+  duration_ms: 14635.829917
+  type: 'test'
+  ...
+# Subtest: القيمة المثبّتة نظامًا جدول مؤرَّخ يُقرأ ولا يُقرَّر: النسبة بتاريخ الفاتورة، وأداتها بجوارها
+ok 53 - القيمة المثبّتة نظامًا جدول مؤرَّخ يُقرأ ولا يُقرَّر: النسبة بتاريخ الفاتورة، وأداتها بجوارها
+  ---
+  duration_ms: 12506.063958
+  type: 'test'
+  ...
+# Subtest: لوحة المالك تعرض القوائم وحوكمتها وسجل تغيّرها، وحمولة الوحدة تعرض قوائمها وحدها
+ok 54 - لوحة المالك تعرض القوائم وحوكمتها وسجل تغيّرها، وحمولة الوحدة تعرض قوائمها وحدها
+  ---
+  duration_ms: 10061.138875
+  type: 'test'
+  ...
+# Subtest: الخيار المشحون معطَّلًا في الكود لم يُعطَّل «منذ» تاريخ: الرفض يقول إنه لم يُفعَّل بعد
+ok 55 - الخيار المشحون معطَّلًا في الكود لم يُعطَّل «منذ» تاريخ: الرفض يقول إنه لم يُفعَّل بعد
+  ---
+  duration_ms: 10448.479125
+  type: 'test'
+  ...
+# Subtest: إعادة الترتيب وإعادة التسمية لا تفعّلان خيارًا شحنه الكود معطَّلًا
+ok 56 - إعادة الترتيب وإعادة التسمية لا تفعّلان خيارًا شحنه الكود معطَّلًا
+  ---
+  duration_ms: 7113.977959
+  type: 'test'
+  ...
+# Subtest: القائمة المرآة: ما يغيّر وجود الخيار أو اسمه يقع في جدولها لا في الطبقة
+ok 57 - القائمة المرآة: ما يغيّر وجود الخيار أو اسمه يقع في جدولها لا في الطبقة
+  ---
+  duration_ms: 6101.167875
+  type: 'test'
+  ...
+# Subtest: الشكل المعلَن يُفرض عند الإضافة: قيمة خارج قيد العمود وحقل إضافي ناقص يُرفضان رفضًا مكتوبًا
+ok 58 - الشكل المعلَن يُفرض عند الإضافة: قيمة خارج قيد العمود وحقل إضافي ناقص يُرفضان رفضًا مكتوبًا
+  ---
+  duration_ms: 4889.506666
+  type: 'test'
+  ...
+# Subtest: القيمة المعتمدة تُرفض إن خالف نوعها نوع القرار، والرفض يقول أي نوع يُنتظر
+ok 59 - القيمة المعتمدة تُرفض إن خالف نوعها نوع القرار، والرفض يقول أي نوع يُنتظر
+  ---
+  duration_ms: 5235.488625
+  type: 'test'
+  ...
+# Subtest: المثبّت نظامًا لا يُسجَّل بدعوى بلا مادة: إمّا استشهاد يجده القارئ، وإمّا إقرار صريح بمن يملك تسجيله
+ok 60 - المثبّت نظامًا لا يُسجَّل بدعوى بلا مادة: إمّا استشهاد يجده القارئ، وإمّا إقرار صريح بمن يملك تسجيله
+  ---
+  duration_ms: 4645.554667
+  type: 'test'
+  ...
+# Subtest: الاستشهاد المُقرّ بغيابه يُقال في الرفض ويُسمّى مالكه، فلا يُرسَل القارئ إلى إعادة صياغة للقاعدة
+ok 61 - الاستشهاد المُقرّ بغيابه يُقال في الرفض ويُسمّى مالكه، فلا يُرسَل القارئ إلى إعادة صياغة للقاعدة
+  ---
+  duration_ms: 4453.231333
+  type: 'test'
+  ...
+# (node:43675) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: الترحيلان 140/141: يترقيان فوق أرشيف a0d7898 المسجل فيه 135 و137 و138 دون تخطي أساس البنود
+ok 62 - الترحيلان 140/141: يترقيان فوق أرشيف a0d7898 المسجل فيه 135 و137 و138 دون تخطي أساس البنود
+  ---
+  duration_ms: 17378.343209
+  type: 'test'
+  ...
+# (node:43676) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: الترحيل 140: الطلب القديم يصبح بندًا واحدًا وتخصيصًا واحدًا دون تغيير كميته أو مخصصه أو حالته
+ok 63 - الترحيل 140: الطلب القديم يصبح بندًا واحدًا وتخصيصًا واحدًا دون تغيير كميته أو مخصصه أو حالته
+  ---
+  duration_ms: 17330.416584
+  type: 'test'
+  ...
+# (node:43712) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: الترحيل 141: العرض القديم يصبح له سعر بند دون تغيير رأسه أو اختلاق حدث بشري
+ok 64 - الترحيل 141: العرض القديم يصبح له سعر بند دون تغيير رأسه أو اختلاق حدث بشري
+  ---
+  duration_ms: 17692.259708
+  type: 'test'
+  ...
+# (node:43713) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: migration 152: applies cleanly and leaves one match guard carrying the receipt condition
+ok 65 - migration 152: applies cleanly and leaves one match guard carrying the receipt condition
+  ---
+  duration_ms: 16431.369083
+  type: 'test'
+  ...
+# Subtest: migration 152: the guard alone refuses a payable approved by whoever recorded a receipt
+ok 66 - migration 152: the guard alone refuses a payable approved by whoever recorded a receipt
+  ---
+  duration_ms: 19772.96625
+  type: 'test'
+  ...
+# ERROR: failed to copy trust settings of system certificate-25291
+# ERROR: failed to copy trust settings of system certificate-25291
+# ERROR: failed to copy trust settings of system certificate-25291
+# ERROR: failed to copy trust settings of system certificate-25291
+# (node:44166) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: obligations: for six personas the home decisions card, counts.decide, the nav badge and the \#work decisions list are one number
+ok 67 - obligations: for six personas the home decisions card, counts.decide, the nav badge and the \#work decisions list are one number
+  ---
+  duration_ms: 24145.762542
+  type: 'test'
+  ...
+# Subtest: obligations: the nav badge endpoint serves the same number, cached per user and cleared by a write
+not ok 68 - obligations: the nav badge endpoint serves the same number, cached per user and cleared by a write
+  ---
+  duration_ms: 16837.35175
+  type: 'test'
+  location: 'tests/obligations.test.mjs:104:1'
+  failureType: 'testCodeFailure'
+  error: 'listen EPERM: operation not permitted 127.0.0.1'
+  code: 'EPERM'
+  stack: |-
+    Server.setupListenHandle [as _listen2] (node:net:1926:21)
+    listenInCluster (node:net:2005:12)
+    node:net:2214:7
+    process.processTicksAndRejections (node:internal/process/task_queues:90:21)
+  ...
+# Subtest: obligations: card() throws when handed a number
+ok 69 - obligations: card() throws when handed a number
+  ---
+  duration_ms: 0.361542
+  type: 'test'
+  ...
+# Subtest: obligations: every module that can emit an approve-type action has an inbox source or a written reason — the next missing queue fails loudly
+ok 70 - obligations: every module that can emit an approve-type action has an inbox source or a written reason — the next missing queue fails loudly
+  ---
+  duration_ms: 130.098167
+  type: 'test'
+  ...
+# Subtest: obligations: whoever must accept a resignation is told — a queue that had no inbox source, so nobody was
+ok 71 - obligations: whoever must accept a resignation is told — a queue that had no inbox source, so nobody was
+  ---
+  duration_ms: 16556.847292
+  type: 'test'
+  ...
+# Subtest: obligations: 100% of items carrying an id deep-link to that record, never to the bare screen
+ok 72 - obligations: 100% of items carrying an id deep-link to that record, never to the bare screen
+  ---
+  duration_ms: 17398.747667
+  type: 'test'
+  ...
+# Subtest: obligations: no optional item is ever late or counted — a satisfaction survey, a reopen prompt and my own draft do not make a first-day employee overdue
+ok 73 - obligations: no optional item is ever late or counted — a satisfaction survey, a reopen prompt and my own draft do not make a first-day employee overdue
+  ---
+  duration_ms: 15817.479042
+  type: 'test'
+  ...
+# Subtest: obligations: waiting age runs from when the step reached the person, in working days — pressing follow-up does not reset it
+ok 74 - obligations: waiting age runs from when the step reached the person, in working days — pressing follow-up does not reset it
+  ---
+  duration_ms: 14958.543959
+  type: 'test'
+  ...
+# Subtest: obligations: honest time — no flat three calendar days: a weekend is not waiting, an approved holiday is not waiting, and a service target sets the due date
+ok 75 - obligations: honest time — no flat three calendar days: a weekend is not waiting, an approved holiday is not waiting, and a service target sets the due date
+  ---
+  duration_ms: 12740.529708
+  type: 'test'
+  ...
+# Subtest: obligations: the «مهامي» tile equals what \#work shows — request tasks, project tasks with no cap, personal tasks, my commitments and the department queue
+ok 76 - obligations: the «مهامي» tile equals what \#work shows — request tasks, project tasks with no cap, personal tasks, my commitments and the department queue
+  ---
+  duration_ms: 14065.684708
+  type: 'test'
+  ...
+# Subtest: obligations: the inbox counts before it slices, says «يُعرض 50 من N», and one tenant or one colleague never reads another’s obligations
+ok 77 - obligations: the inbox counts before it slices, says «يُعرض 50 من N», and one tenant or one colleague never reads another’s obligations
+  ---
+  duration_ms: 9113.262416
+  type: 'test'
+  ...
+# (node:44480) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: مركز التكلفة: قائمة مرآة لصفوف المالية، والطلب يحمل معرّف الصفّ لا نصًّا وحده
+ok 78 - مركز التكلفة: قائمة مرآة لصفوف المالية، والطلب يحمل معرّف الصفّ لا نصًّا وحده
+  ---
+  duration_ms: 14381.875333
+  type: 'test'
+  ...
+# Subtest: اليوم الأول لم يتغيّر: مركز خارج قائمة المالية يبقى مقبولًا نصًّا حتى يقرّر المالك إغلاق الحقل
+ok 79 - اليوم الأول لم يتغيّر: مركز خارج قائمة المالية يبقى مقبولًا نصًّا حتى يقرّر المالك إغلاق الحقل
+  ---
+  duration_ms: 17394.254792
+  type: 'test'
+  ...
+# Subtest: الطلب والمخصص يشيران إلى الصفّ نفسه، فالحجز يقع على المخصص المقصود
+ok 80 - الطلب والمخصص يشيران إلى الصفّ نفسه، فالحجز يقع على المخصص المقصود
+  ---
+  duration_ms: 14030.805709
+  type: 'test'
+  ...
+# Subtest: كل قائمة مسجّلة تحمل مالكًا وحوكمة، والمثبّتة نظامًا تحمل مادتها
+ok 81 - كل قائمة مسجّلة تحمل مالكًا وحوكمة، والمثبّتة نظامًا تحمل مادتها
+  ---
+  duration_ms: 13429.817875
+  type: 'test'
+  ...
+# Subtest: قيمة غير معروفة في قائمة معروفة تُرفض، والقيمة المخزَّنة قديمًا تبقى مقروءة
+ok 82 - قيمة غير معروفة في قائمة معروفة تُرفض، والقيمة المخزَّنة قديمًا تبقى مقروءة
+  ---
+  duration_ms: 14325.554334
+  type: 'test'
+  ...
+# Subtest: شاشة الموردين تعرض قوائمها المُدارة للقراءة: خياراتها وحالتها وسبب إقفال المقفلة منها
+ok 83 - شاشة الموردين تعرض قوائمها المُدارة للقراءة: خياراتها وحالتها وسبب إقفال المقفلة منها
+  ---
+  duration_ms: 14336.10225
+  type: 'test'
+  ...
+# Subtest: حمولة المدفوعات تحمل نسبة الضريبة بجدولها المؤرَّخ وحالات الأمر بقيدها
+ok 84 - حمولة المدفوعات تحمل نسبة الضريبة بجدولها المؤرَّخ وحالات الأمر بقيدها
+  ---
+  duration_ms: 11810.955959
+  type: 'test'
+  ...
+# Subtest: تشديد صيغة الرقم الضريبي يسري على الجديد ولا يجمّد ملفًا قائمًا كُتب قبله
+ok 85 - تشديد صيغة الرقم الضريبي يسري على الجديد ولا يجمّد ملفًا قائمًا كُتب قبله
+  ---
+  duration_ms: 10248.192167
+  type: 'test'
+  ...
+# Subtest: تعطيل تصنيف لا يجمّد ملفًا يحمله ولا يبدّل تصنيفه صامتًا في نموذج التحرير
+ok 86 - تعطيل تصنيف لا يجمّد ملفًا يحمله ولا يبدّل تصنيفه صامتًا في نموذج التحرير
+  ---
+  duration_ms: 9905.73125
+  type: 'test'
+  ...
+# Subtest: نوع وثيقة تفرضه مصفوفة المتطلبات لا يُعطَّل، والرفض يسمّي ما يفرضه ومن يملك تغييره
+ok 87 - نوع وثيقة تفرضه مصفوفة المتطلبات لا يُعطَّل، والرفض يسمّي ما يفرضه ومن يملك تغييره
+  ---
+  duration_ms: 6914.974041
+  type: 'test'
+  ...
+# Subtest: غرض معطَّل ما زال ربطه ساريًا يبقى في القوائم المالية موسومًا، لا يختفي منها
+ok 88 - غرض معطَّل ما زال ربطه ساريًا يبقى في القوائم المالية موسومًا، لا يختفي منها
+  ---
+  duration_ms: 6197.518792
+  type: 'test'
+  ...
+# Subtest: رموز الرفض بعد التحويل: option_not_offered على القيمة خارج القائمة، واسم الحقل حيث لم يتغيّر السبب
+ok 89 - رموز الرفض بعد التحويل: option_not_offered على القيمة خارج القائمة، واسم الحقل حيث لم يتغيّر السبب
+  ---
+  duration_ms: 4896.920084
+  type: 'test'
+  ...
+# Subtest: القائمة المقفلة بقيد في القاعدة ترفض كل كتابة، ويسمّي الرفض القيد وترحيله
+ok 90 - القائمة المقفلة بقيد في القاعدة ترفض كل كتابة، ويسمّي الرفض القيد وترحيله
+  ---
+  duration_ms: 4940.387625
+  type: 'test'
+  ...
+# (node:44486) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: PRC-02: an unregistered or unqualified vendor never enters the payment cycle, and no bank account means no order
+ok 91 - PRC-02: an unregistered or unqualified vendor never enters the payment cycle, and no bank account means no order
+  ---
+  duration_ms: 48145.758166
+  type: 'test'
+  ...
+# Subtest: FIN-07/PRC-09: approved is not paid — three people prepare, approve and record the bank execution, and the bank-detail collector cannot record it
+ok 92 - FIN-07/PRC-09: approved is not paid — three people prepare, approve and record the bank execution, and the bank-detail collector cannot record it
+  ---
+  duration_ms: 14602.995916
+  type: 'test'
+  ...
+# Subtest: PRC-09: if the vendor bank account changes after the order was prepared, approval stops instead of silently paying the new account
+ok 93 - PRC-09: if the vendor bank account changes after the order was prepared, approval stops instead of silently paying the new account
+  ---
+  duration_ms: 15213.309334
+  type: 'test'
+  ...
+# Subtest: input VAT enters the summary only after a second person verifies the supplier tax invoice, and cannot exceed 15% of net
+ok 94 - input VAT enters the summary only after a second person verifies the supplier tax invoice, and cannot exceed 15% of net
+  ---
+  duration_ms: 13645.98275
+  type: 'test'
+  ...
+# Subtest: FIN-09: تمنع ضريبة الفاتورة المكررة عبر مرجع شراء آخر بعد توحيد شكل رقمها
+ok 95 - FIN-09: تمنع ضريبة الفاتورة المكررة عبر مرجع شراء آخر بعد توحيد شكل رقمها
+  ---
+  duration_ms: 11568.005167
+  type: 'test'
+  ...
+# Subtest: PRC-09: يظهر توقف المورد بعد الاعتماد ويُحفظ التحذير عند توثيق تنفيذ وقع فعلا
+ok 96 - PRC-09: يظهر توقف المورد بعد الاعتماد ويُحفظ التحذير عند توثيق تنفيذ وقع فعلا
+  ---
+  duration_ms: 10334.435666
+  type: 'test'
+  ...
+# Subtest: FIN-09: السجلات القديمة المكررة لا تعتمد، ويمكن رفض المكرر ثم اعتماد الأصل
+ok 97 - FIN-09: السجلات القديمة المكررة لا تعتمد، ويمكن رفض المكرر ثم اعتماد الأصل
+  ---
+  duration_ms: 8835.460667
+  type: 'test'
+  ...
+# Subtest: PRC-09: تغير الحساب البنكي بعد اعتماد الدفع يظهر للمالية دون كشف الآيبان
+ok 98 - PRC-09: تغير الحساب البنكي بعد اعتماد الدفع يظهر للمالية دون كشف الآيبان
+  ---
+  duration_ms: 6742.147916
+  type: 'test'
+  ...
+# ERROR: failed to copy trust settings of system certificate-25291
+# ERROR: failed to copy trust settings of system certificate-25291
+# ERROR: failed to copy trust settings of system certificate-25291
+# ERROR: failed to copy trust settings of system certificate-25291
+# (node:45367) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: bank change: verifying a replacement supersedes the old account, records the change, tells finance in the platform and leaves a simulated message for the previously trusted contact
+ok 99 - bank change: verifying a replacement supersedes the old account, records the change, tells finance in the platform and leaves a simulated message for the previously trusted contact
+  ---
+  duration_ms: 15466.185208
+  type: 'test'
+  ...
+# Subtest: bank change: while the owner has not adopted the cooling-off days or the first-payment cap, the changed account stays blocked with a refusal naming both decisions and their owner
+ok 100 - bank change: while the owner has not adopted the cooling-off days or the first-payment cap, the changed account stays blocked with a refusal naming both decisions and their owner
+  ---
+  duration_ms: 15923.727084
+  type: 'test'
+  ...
+# Subtest: bank change: cooling-off counts from the verification day; afterwards the first payment is capped, released by a third person, and only then recorded as executed
+ok 101 - bank change: cooling-off counts from the verification day; afterwards the first payment is capped, released by a third person, and only then recorded as executed
+  ---
+  duration_ms: 14150.428667
+  type: 'test'
+  ...
+# Subtest: bank change window: the collector and the verifier cannot prepare, approve, release or record the first payment to that vendor — refused in code and in SQL — and a returned first payment reopens the window
+ok 102 - bank change window: the collector and the verifier cannot prepare, approve, release or record the first payment to that vendor — refused in code and in SQL — and a returned first payment reopens the window
+  ---
+  duration_ms: 11081.616791
+  type: 'test'
+  ...
+# Subtest: shared IBAN: verification is refused while the IBAN sits on another active vendor, until a separate reasoned decision by someone other than the collector allows it — and the decider does not verify
+ok 103 - shared IBAN: verification is refused while the IBAN sits on another active vendor, until a separate reasoned decision by someone other than the collector allows it — and the decider does not verify
+  ---
+  duration_ms: 11646.759333
+  type: 'test'
+  ...
+# Subtest: partial and batch: an order pays part of a payable or several payables of one vendor in one transfer; payableBalance tracks each step; over-allocation is refused in code and in SQL
+ok 104 - partial and batch: an order pays part of a payable or several payables of one vendor in one transfer; payableBalance tracks each step; over-allocation is refused in code and in SQL
+  ---
+  duration_ms: 7540.146583
+  type: 'test'
+  ...
+# Subtest: returns: a bounced transfer is recorded once as its own record by a third person, the executed order is never edited, the balance reopens and can be paid again exactly once
+ok 105 - returns: a bounced transfer is recorded once as its own record by a third person, the executed order is never edited, the balance reopens and can be paid again exactly once
+  ---
+  duration_ms: 6364.400375
+  type: 'test'
+  ...
+# Subtest: adjustments: supplier credit and debit notes are append-only, reasoned and approved by a second person; they move the balance, and a credit can never go below what is paid or on its way
+ok 106 - adjustments: supplier credit and debit notes are append-only, reasoned and approved by a second person; they move the balance, and a credit can never go below what is paid or on its way
+  ---
+  duration_ms: 5751.422417
+  type: 'test'
+  ...
+# Subtest: execution wording: every order says execution was recorded manually and simulated; the payload and the screen never claim the platform paid
+ok 107 - execution wording: every order says execution was recorded manually and simulated; the payload and the screen never claim the platform paid
+  ---
+  duration_ms: 4764.050708
+  type: 'test'
+  ...
+# Subtest: vendor centre: open payables count only what is still owed — a paid payable is not open, a return reopens it
+ok 108 - vendor centre: open payables count only what is still owed — a paid payable is not open, a return reopens it
+  ---
+  duration_ms: 5283.914667
+  type: 'test'
+  ...
+# Subtest: tenant isolation: another tenant sees no balance, order, return or adjustment and cannot act on any of them
+ok 109 - tenant isolation: another tenant sees no balance, order, return or adjustment and cannot act on any of them
+  ---
+  duration_ms: 4786.64275
+  type: 'test'
+  ...
+# Subtest: HTTP without a port: partial and batch orders, release, execution, return and adjustments go through the real handler; a replayed create returns the same record and a replayed step is refused
+ok 110 - HTTP without a port: partial and batch orders, release, execution, return and adjustments go through the real handler; a replayed create returns the same record and a replayed step is refused
+  ---
+  duration_ms: 7255.538875
+  type: 'test'
+  ...
+# Subtest: race: processes writing the same database file at the same instant never release money twice — one order for a full balance, one execution, one return, one re-payment, one first-payment release
+ok 111 - race: processes writing the same database file at the same instant never release money twice — one order for a full balance, one execution, one return, one re-payment, one first-payment release
+  ---
+  duration_ms: 20847.029041
+  type: 'test'
+  ...
+# Subtest: upgrade: a database that already holds orders before 166 gets one line per order and the same balances, loses the one-order index, and its legacy vendor with two verified accounts is settled at the next verification
+ok 112 - upgrade: a database that already holds orders before 166 gets one line per order and the same balances, loses the one-order index, and its legacy vendor with two verified accounts is settled at the next verification
+  ---
+  duration_ms: 4737.985583
+  type: 'test'
+  ...
+# ERROR: failed to copy trust settings of system certificate-25291
+# ERROR: failed to copy trust settings of system certificate-25291
+# ERROR: failed to copy trust settings of system certificate-25291
+# ERROR: failed to copy trust settings of system certificate-25291
+# (node:46142) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: E2E P3 procurement: request → sourcing → award → order → commencement → partial receipt → return → partial invoice with a price variance → held → decided → match → liability → credit note → partial payment → reversal path
+ok 113 - E2E P3 procurement: request → sourcing → award → order → commencement → partial receipt → return → partial invoice with a price variance → held → decided → match → liability → credit note → partial payment → reversal path
+  ---
+  duration_ms: 6769.99525
+  type: 'test'
+  ...
+# Subtest: returns: against receipt lines, by someone other than the requester, never more than was received; they shrink what can be matched, hold an invoice that billed the returned goods, and ask for a credit note on a matched liability
+ok 114 - returns: against receipt lines, by someone other than the requester, never more than was received; they shrink what can be matched, hold an invoice that billed the returned goods, and ask for a credit note on a matched liability
+  ---
+  duration_ms: 5146.369584
+  type: 'test'
+  ...
+# Subtest: held invoices: a variance is never auto-accepted; an independent approver accepts only within an adopted tolerance or with a finance override, asks for a credit note, or rejects
+ok 115 - held invoices: a variance is never auto-accepted; an independent approver accepts only within an adopted tolerance or with a finance override, asks for a credit note, or rejects
+  ---
+  duration_ms: 5501.5945
+  type: 'test'
+  ...
+# Subtest: supplier notes: credit and debit notes go through the payments API, a credit note answers its request and never exceeds it, and the disputed amount is held back from payment until the note is approved or the request is waived
+ok 116 - supplier notes: credit and debit notes go through the payments API, a credit note answers its request and never exceeds it, and the disputed amount is held back from payment until the note is approved or the request is waived
+  ---
+  duration_ms: 5280.985875
+  type: 'test'
+  ...
+# Subtest: void: an unpaid invoice or payable is voided by a separate append-only record with its reason and an independent approver, refused once a payment is in flight or executed, and releases its consumption
+ok 117 - void: an unpaid invoice or payable is voided by a separate append-only record with its reason and an independent approver, refused once a payment is in flight or executed, and releases its consumption
+  ---
+  duration_ms: 5089.570875
+  type: 'test'
+  ...
+# Subtest: commitments: consumed at match, released on close_short, and the budget figures stay true (committed + consumed + released = the order, available = cap − used)
+ok 118 - commitments: consumed at match, released on close_short, and the budget figures stay true (committed + consumed + released = the order, available = cap − used)
+  ---
+  duration_ms: 4509.516833
+  type: 'test'
+  ...
+# Subtest: ledger: payable_adjustment builds per cost centre from the payable split, controls payable and input VAT, and a return + credit note + void sequence keeps both control accounts at zero difference
+ok 119 - ledger: payable_adjustment builds per cost centre from the payable split, controls payable and input VAT, and a return + credit note + void sequence keeps both control accounts at zero difference
+  ---
+  duration_ms: 5357.889708
+  type: 'test'
+  ...
+# Subtest: tenant isolation: another tenant sees no exception, cannot act on one, and the ledger kind lists nothing for it
+ok 120 - tenant isolation: another tenant sees no exception, cannot act on one, and the ledger kind lists nothing for it
+  ---
+  duration_ms: 5931.784917
+  type: 'test'
+  ...
+# Subtest: UI: the award button follows the server — three quotes or an approved emergency — and the exception panels escape supplier text and post to the exception routes
+ok 121 - UI: the award button follows the server — three quotes or an approved emergency — and the exception panels escape supplier text and post to the exception routes
+  ---
+  duration_ms: 6656.754375
+  type: 'test'
+  ...
+# Subtest: payableState reads payable_balances: two partial orders, a batch, an executed part, a bank return and a credit-settled payable report their true state, and «settled» has its name
+ok 122 - payableState reads payable_balances: two partial orders, a batch, an executed part, a bank return and a credit-settled payable report their true state, and «settled» has its name
+  ---
+  duration_ms: 6702.7595
+  type: 'test'
+  ...
+# Subtest: HTTP without a port: returns, decisions, voids and supplier notes go through the real handler; a replayed step is refused and a replayed create returns the same note
+ok 123 - HTTP without a port: returns, decisions, voids and supplier notes go through the real handler; a replayed step is refused and a replayed create returns the same note
+  ---
+  duration_ms: 7132.466583
+  type: 'test'
+  ...
+# Subtest: race: processes writing one database file at the same instant never over-return, never record two credit notes for one request, and never void twice
+ok 124 - race: processes writing one database file at the same instant never over-return, never record two credit notes for one request, and never void twice
+  ---
+  duration_ms: 17485.958709
+  type: 'test'
+  ...
+# Subtest: migration 169: applies cleanly; the match guard keeps its independent-approval clauses; the new records keep their history
+ok 125 - migration 169: applies cleanly; the match guard keeps its independent-approval clauses; the new records keep their history
+  ---
+  duration_ms: 2963.30675
+  type: 'test'
+  ...
+# (node:46162) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: PRC-07: an approved emergency allows an award on one quote, keeps independent approval, and demands a later review by an outside party
+ok 126 - PRC-07: an approved emergency allows an award on one quote, keeps independent approval, and demands a later review by an outside party
+  ---
+  duration_ms: 5890.7795
+  type: 'test'
+  ...
+# Subtest: PRC-08: the approved order is never rewritten; a date or terms change and a short close are separate records decided by someone else
+ok 127 - PRC-08: the approved order is never rewritten; a date or terms change and a short close are separate records decided by someone else
+  ---
+  duration_ms: 5758.290333
+  type: 'test'
+  ...
+# Subtest: conflict of interest: an undecided disclosure or a recusal blocks that person from awarding to the vendor, and only the legal reviewer lifts it
+ok 128 - conflict of interest: an undecided disclosure or a recusal blocks that person from awarding to the vendor, and only the legal reviewer lifts it
+  ---
+  duration_ms: 5571.774667
+  type: 'test'
+  ...
+# (node:46197) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: PRC-04/05/06: السطر الواحد الحالي يُحفظ بمعرّف ثابت وتتبعه الاستلامات والفاتورة والمطابقة
+ok 129 - PRC-04/05/06: السطر الواحد الحالي يُحفظ بمعرّف ثابت وتتبعه الاستلامات والفاتورة والمطابقة
+  ---
+  duration_ms: 4922.389125
+  type: 'test'
+  ...
+# Subtest: PRC-05: القاعدة ترفض ربط استلام من طلب ببند أمر طلب آخر
+ok 130 - PRC-05: القاعدة ترفض ربط استلام من طلب ببند أمر طلب آخر
+  ---
+  duration_ms: 4534.51225
+  type: 'test'
+  ...
+# (node:46206) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: PRC-04: الطلب والعرض والأمر يحفظون عدة بنود بهويات وأسعار مستقلة
+ok 131 - PRC-04: الطلب والعرض والأمر يحفظون عدة بنود بهويات وأسعار مستقلة
+  ---
+  duration_ms: 5011.897625
+  type: 'test'
+  ...
+# Subtest: PRC-04: تسعير العرض يرفض البند الناقص والمكرر والغريب
+ok 132 - PRC-04: تسعير العرض يرفض البند الناقص والمكرر والغريب
+  ---
+  duration_ms: 4576.886625
+  type: 'test'
+  ...
+# Subtest: PRC-05/06: الاستلام والفاتورة والمطابقة تتحقق من كل بند مستقلًا
+ok 133 - PRC-05/06: الاستلام والفاتورة والمطابقة تتحقق من كل بند مستقلًا
+  ---
+  duration_ms: 4863.730709
+  type: 'test'
+  ...
+# Subtest: واجهة المشتريات تجمع البنود والأسعار والكميات في جداول صفوف
+ok 134 - واجهة المشتريات تجمع البنود والأسعار والكميات في جداول صفوف
+  ---
+  duration_ms: 0.619041
+  type: 'test'
+  ...
+# (node:46219) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: PRC-01/03/04/05/06 and FIN-05/07/08: a purchase reaches two matched payables without payment or official issuance
+ok 135 - PRC-01/03/04/05/06 and FIN-05/07/08: a purchase reaches two matched payables without payment or official issuance
+  ---
+  duration_ms: 4670.996041
+  type: 'test'
+  ...
+# Subtest: PRC-01/03: allocation, comparison and evidence are required before an award
+ok 136 - PRC-01/03: allocation, comparison and evidence are required before an award
+  ---
+  duration_ms: 4533.4495
+  type: 'test'
+  ...
+# Subtest: PRC-04/06: requesters cannot approve, skip an award, or match their own invoice
+ok 137 - PRC-04/06: requesters cannot approve, skip an award, or match their own invoice
+  ---
+  duration_ms: 4499.070792
+  type: 'test'
+  ...
+# Subtest: PRC-01 and FIN-02: project membership, current team and a separate PM cost grant constrain every read and action
+ok 138 - PRC-01 and FIN-02: project membership, current team and a separate PM cost grant constrain every read and action
+  ---
+  duration_ms: 5015.382166
+  type: 'test'
+  ...
+# Subtest: PRC-04/05 and FIN-05: stale actions and repeated receipt or supplier invoice references create no second record
+ok 139 - PRC-04/05 and FIN-05: stale actions and repeated receipt or supplier invoice references create no second record
+  ---
+  duration_ms: 7039.827084
+  type: 'test'
+  ...
+# Subtest: PRC-05/06: excess quantities, mismatched amounts and unmatched receipts cannot become payables
+ok 140 - PRC-05/06: excess quantities, mismatched amounts and unmatched receipts cannot become payables
+  ---
+  duration_ms: 6680.539542
+  type: 'test'
+  ...
+# Subtest: PRC-04/08 and PLT-06: submitted values, order versions and evidence records resist changes and deletion
+ok 141 - PRC-04/08 and PLT-06: submitted values, order versions and evidence records resist changes and deletion
+  ---
+  duration_ms: 5617.825583
+  type: 'test'
+  ...
+# Subtest: PRC-01/04: decimal strings, bounds, currency and unrecognized fields are checked on the server
+ok 142 - PRC-01/04: decimal strings, bounds, currency and unrecognized fields are checked on the server
+  ---
+  duration_ms: 5287.117541
+  type: 'test'
+  ...
+# Subtest: PRC-01 and PLT-09: creation retries return the current authorized record and rollback includes its audit
+ok 143 - PRC-01 and PLT-09: creation retries return the current authorized record and rollback includes its audit
+  ---
+  duration_ms: 6327.346459
+  type: 'test'
+  ...
+# Subtest: PRC-04 and PLT-06: public writes require a transaction and failed audit rolls back the submitted version
+ok 144 - PRC-04 and PLT-06: public writes require a transaction and failed audit rolls back the submitted version
+  ---
+  duration_ms: 5961.661417
+  type: 'test'
+  ...
+# Subtest: PRC-04/06: database constraints prevent an unbalanced payable and preserve receipt and invoice evidence
+ok 145 - PRC-04/06: database constraints prevent an unbalanced payable and preserve receipt and invoice evidence
+  ---
+  duration_ms: 4238.59575
+  type: 'test'
+  ...
+# Subtest: PRC-04: cancellation and rejection are final and cannot generate an internal order
+ok 146 - PRC-04: cancellation and rejection are final and cannot generate an internal order
+  ---
+  duration_ms: 3198.835167
+  type: 'test'
+  ...
+# Subtest: PRC-01/04 UI: forms use authorized IDs, escape supplier evidence, and keep the opened version
+ok 147 - PRC-01/04 UI: forms use authorized IDs, escape supplier evidence, and keep the opened version
+  ---
+  duration_ms: 3102.506667
+  type: 'test'
+  ...
+# Subtest: PRC-02/03: an entity with no vendor file is refused at the quote and never reaches an internal order
+ok 148 - PRC-02/03: an entity with no vendor file is refused at the quote and never reaches an internal order
+  ---
+  duration_ms: 3020.580625
+  type: 'test'
+  ...
+# Subtest: PRC-05/06: whoever recorded a receipt cannot approve the match built on it, in code and in the database
+ok 149 - PRC-05/06: whoever recorded a receipt cannot approve the match built on it, in code and in the database
+  ---
+  duration_ms: 2645.263041
+  type: 'test'
+  ...
+# (node:46224) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: AXIS-01: the eight axes are independent — moving one leaves the other seven where they were
+ok 150 - AXIS-01: the eight axes are independent — moving one leaves the other seven where they were
+  ---
+  duration_ms: 4508.106875
+  type: 'test'
+  ...
+# Subtest: AXIS-02: the advance gate blocks paid execution and never touches pre-sale scoping
+ok 151 - AXIS-02: the advance gate blocks paid execution and never touches pre-sale scoping
+  ---
+  duration_ms: 9887.605125
+  type: 'test'
+  ...
+# Subtest: AXIS-03: the advance is expected from the payment schedule, and confirmed only against a real receipt by a second person
+ok 152 - AXIS-03: the advance is expected from the payment schedule, and confirmed only against a real receipt by a second person
+  ---
+  duration_ms: 13057.46325
+  type: 'test'
+  ...
+# Subtest: AXIS-04: supplier start refuses without a purchase order and without a commencement authorisation
+ok 153 - AXIS-04: supplier start refuses without a purchase order and without a commencement authorisation
+  ---
+  duration_ms: 5948.003625
+  type: 'test'
+  ...
+# Subtest: AXIS-05: a multi-department project can be planned — work packages carry a department, a phase and an owner
+ok 154 - AXIS-05: a multi-department project can be planned — work packages carry a department, a phase and an owner
+  ---
+  duration_ms: 11311.232
+  type: 'test'
+  ...
+# Subtest: AXIS-06: closure refuses by naming the exact outstanding item, and needs technical then financial
+ok 155 - AXIS-06: closure refuses by naming the exact outstanding item, and needs technical then financial
+  ---
+  duration_ms: 6103.8615
+  type: 'test'
+  ...
+# Subtest: AXIS-07: financial closure names every outstanding balance, and a decision is written not silent
+ok 156 - AXIS-07: financial closure names every outstanding balance, and a decision is written not silent
+  ---
+  duration_ms: 4787.035583
+  type: 'test'
+  ...
+# Subtest: AXIS-08: reopening a closure needs a capability and a reason, and leaves an audited record
+ok 157 - AXIS-08: reopening a closure needs a capability and a reason, and leaves an audited record
+  ---
+  duration_ms: 3367.061792
+  type: 'test'
+  ...
+# Subtest: AXIS-09: invoicing, collection and supplier settlement each read their own source and no other
+ok 158 - AXIS-09: invoicing, collection and supplier settlement each read their own source and no other
+  ---
+  duration_ms: 2970.960125
+  type: 'test'
+  ...
+# Subtest: AXIS-08: both locks in one hand are refused with a way out, and the way out is a capability plus a written reason
+ok 159 - AXIS-08: both locks in one hand are refused with a way out, and the way out is a capability plus a written reason
+  ---
+  duration_ms: 3081.686834
+  type: 'test'
+  ...
+# Subtest: AXIS-08: the same-person rule holds in both directions, and a reason is refused when the locks are in two hands
+ok 160 - AXIS-08: the same-person rule holds in both directions, and a reason is refused when the locks are in two hands
+  ---
+  duration_ms: 2724.225667
+  type: 'test'
+  ...
+# Subtest: AXIS-08: a reason on locks held by two people is refused, and the database refuses a silent same-person row from outside the code
+ok 161 - AXIS-08: a reason on locks held by two people is refused, and the database refuses a silent same-person row from outside the code
+  ---
+  duration_ms: 2386.567208
+  type: 'test'
+  ...
+# ERROR: failed to copy trust settings of system certificate-25291
+# ERROR: failed to copy trust settings of system certificate-25291
+# ERROR: failed to copy trust settings of system certificate-25291
+# ERROR: failed to copy trust settings of system certificate-25291
+# (node:46225) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: closure (2): each technical blocker is named from its source, and only defects and tasks take a written exception
+ok 162 - closure (2): each technical blocker is named from its source, and only defects and tasks take a written exception
+  ---
+  duration_ms: 4502.443667
+  type: 'test'
+  ...
+# Subtest: closure (4): financial closure before technical closure is refused by name, in the code and in the database
+ok 163 - closure (4): financial closure before technical closure is refused by name, in the code and in the database
+  ---
+  duration_ms: 4648.623292
+  type: 'test'
+  ...
+# Subtest: closure (3): receivables, credits, refunds, journals and the margin are each read from their own source
+ok 164 - closure (3): receivables, credits, refunds, journals and the margin are each read from their own source
+  ---
+  duration_ms: 4700.303125
+  type: 'test'
+  ...
+# Subtest: closure (3): supplier liabilities and supplier taxes are read from procurement, payables and payment orders
+ok 165 - closure (3): supplier liabilities and supplier taxes are read from procurement, payables and payment orders
+  ---
+  duration_ms: 6961.0495
+  type: 'test'
+  ...
+# Subtest: closure (3): expenses, advances and company assets on the project are read from their own records
+ok 166 - closure (3): expenses, advances and company assets on the project are read from their own records
+  ---
+  duration_ms: 6422.953708
+  type: 'test'
+  ...
+# Subtest: closure (5): reopening is a new authorised record with a reason, ends the closures built on it, and every earlier closure stays
+ok 167 - closure (5): reopening is a new authorised record with a reason, ends the closures built on it, and every earlier closure stays
+  ---
+  duration_ms: 5513.574541
+  type: 'test'
+  ...
+# Subtest: closure: technical, margin and financial are different authorities, enforced on the server
+ok 168 - closure: technical, margin and financial are different authorities, enforced on the server
+  ---
+  duration_ms: 4595.690459
+  type: 'test'
+  ...
+# Subtest: closure: negative paths — stale checklist, bad decisions, stale margin, closed scopes — write nothing, and a replay writes nothing twice
+ok 169 - closure: negative paths — stale checklist, bad decisions, stale margin, closed scopes — write nothing, and a replay writes nothing twice
+  ---
+  duration_ms: 6582.538125
+  type: 'test'
+  ...
+# Subtest: closure: a closure racing a new receivable or journal refuses the stale review, and nothing new lands after it
+ok 170 - closure: a closure racing a new receivable or journal refuses the stale review, and nothing new lands after it
+  ---
+  duration_ms: 6039.39375
+  type: 'test'
+  ...
+# Subtest: closure: every closure act is in the audit chain with its record, and another tenant reaches nothing
+ok 171 - closure: every closure act is in the audit chain with its record, and another tenant reaches nothing
+  ---
+  duration_ms: 4442.141292
+  type: 'test'
+  ...
+# Subtest: closure: the routes carry the same rules over HTTP — the board, margin acceptance, and the refusals by name
+ok 172 - closure: the routes carry the same rules over HTTP — the board, margin acceptance, and the refusals by name
+  ---
+  duration_ms: 4195.359833
+  type: 'test'
+  ...
+# Subtest: closure: the commercial screen draws each closure button for its holder, and each form builds a payload the server accepts
+ok 173 - closure: the commercial screen draws each closure button for its holder, and each form builds a payload the server accepts
+  ---
+  duration_ms: 3028.873625
+  type: 'test'
+  ...
+# Subtest: migration 163: every lock closed before it becomes a carried record, the old rows are untouched, and legacy closures still reopen
+ok 174 - migration 163: every lock closed before it becomes a carried record, the old rows are untouched, and legacy closures still reopen
+  ---
+  duration_ms: 3113.03225
+  type: 'test'
+  ...
+# ERROR: failed to copy trust settings of system certificate-25291
+# ERROR: failed to copy trust settings of system certificate-25291
+# ERROR: failed to copy trust settings of system certificate-25291
+# ERROR: failed to copy trust settings of system certificate-25291
+# (node:46262) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: commencement: only an independent reviewer in scope issues, replaces or withdraws it — never the requester, an outsider, another tenant or a conflicted reviewer
+ok 175 - commencement: only an independent reviewer in scope issues, replaces or withdraws it — never the requester, an outsider, another tenant or a conflicted reviewer
+  ---
+  duration_ms: 5056.76675
+  type: 'test'
+  ...
+# Subtest: commencement: it records issuer, dates, scope, order version, validity and evidence, and the receipt re-checks all of it when it is recorded
+ok 176 - commencement: it records issuer, dates, scope, order version, validity and evidence, and the receipt re-checks all of it when it is recorded
+  ---
+  duration_ms: 6662.754958
+  type: 'test'
+  ...
+# Subtest: commencement: withdrawal and replacement add records and never rewrite or delete the earlier ones
+ok 177 - commencement: withdrawal and replacement add records and never rewrite or delete the earlier ones
+  ---
+  duration_ms: 6581.992916
+  type: 'test'
+  ...
+# Subtest: commencement: a replayed or repeated request creates no second record, through the module and through the API route
+ok 178 - commencement: a replayed or repeated request creates no second record, through the module and through the API route
+  ---
+  duration_ms: 6852.629375
+  type: 'test'
+  ...
+# Subtest: commencement: a receipt racing a withdrawal never lands after it — separate processes on one database file
+ok 179 - commencement: a receipt racing a withdrawal never lands after it — separate processes on one database file
+  ---
+  duration_ms: 8475.97575
+  type: 'test'
+  ...
+# orderings: fresh:receive+withdraw fresh:receive+withdraw fresh:withdraw same:receive same:receive same:receive
+# Subtest: commencement UI: the purchase shows the standing authorisation and its history, and every form posts to the procurement route with the opened version
+ok 180 - commencement UI: the purchase shows the standing authorisation and its history, and every form posts to the procurement route with the opened version
+  ---
+  duration_ms: 5169.436417
+  type: 'test'
+  ...
+# Subtest: migration 162: an authorisation issued before it is carried as issued — no validity or evidence invented — and opens no receipt until replaced
+ok 181 - migration 162: an authorisation issued before it is carried as issued — no validity or evidence invented — and opens no receipt until replaced
+  ---
+  duration_ms: 5209.564958
+  type: 'test'
+  ...
+# ERROR: failed to copy trust settings of system certificate-25291
+# ERROR: failed to copy trust settings of system certificate-25291
+# ERROR: failed to copy trust settings of system certificate-25291
+# ERROR: failed to copy trust settings of system certificate-25291
+# (node:46263) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: golden: every operational screen renders to the same HTML for four seeded personas
+not ok 182 - golden: every operational screen renders to the same HTML for four seeded personas
+  ---
+  duration_ms: 12987.479083
+  type: 'test'
+  location: 'tests/ui-golden.test.mjs:111:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    تغيّرت HTML شاشات. إن كان التغيير مقصودًا: UPDATE_GOLDEN=1 node --test tests/ui-golden.test.mjs ثم راجع git diff tests/ui-golden.baseline.json.
+    + actual - expected
+    
+      {
+        added: [],
+    +   changed: [
+    +     'employee/budgets: fee84c2513c2b74d → b8b77080b0c861ad',
+    +     'manager/budgets: fee84c2513c2b74d → b8b77080b0c861ad',
+    +     'hr/budgets: fee84c2513c2b74d → b8b77080b0c861ad',
+    +     'admin/budgets: fee84c2513c2b74d → b8b77080b0c861ad'
+    +   ],
+    -   changed: [],
+        removed: []
+      }
+    
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected:
+    changed:
+    added:
+    removed:
+  actual:
+    changed:
+      0: 'employee/budgets: fee84c2513c2b74d → b8b77080b0c861ad'
+      1: 'manager/budgets: fee84c2513c2b74d → b8b77080b0c861ad'
+      2: 'hr/budgets: fee84c2513c2b74d → b8b77080b0c861ad'
+      3: 'admin/budgets: fee84c2513c2b74d → b8b77080b0c861ad'
+    added:
+    removed:
+  operator: 'deepStrictEqual'
+  stack: |-
+    TestContext.<anonymous> (file:///<worktree>/tests/ui-golden.test.mjs:127:10)
+    process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+    async Test.run (node:internal/test_runner/test:1125:7)
+    async startSubtestAfterBootstrap (node:internal/test_runner/harness:358:3)
+  ...
+# Subtest: golden: moving the SQL wall clock a day forward moves no screen hash
+ok 183 - golden: moving the SQL wall clock a day forward moves no screen hash
+  ---
+  duration_ms: 21987.01325
+  type: 'test'
+  ...
+# Subtest: golden: the normaliser hides random identifiers but stays sensitive to order, count and text
+ok 184 - golden: the normaliser hides random identifiers but stays sensitive to order, count and text
+  ---
+  duration_ms: 0.522667
+  type: 'test'
+  ...
+# Subtest: golden: the page-editor trigger is outside every seeded persona’s screen, and appears only for a holder of the configure capability
+ok 185 - golden: the page-editor trigger is outside every seeded persona’s screen, and appears only for a holder of the configure capability
+  ---
+  duration_ms: 7803.567541
+  type: 'test'
+  ...
+# (node:46375) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: withholding: a recorded entry becomes one balanced journal that recognises the liability to the authority
+ok 186 - withholding: a recorded entry becomes one balanced journal that recognises the liability to the authority
+  ---
+  duration_ms: 6487.985458
+  type: 'test'
+  ...
+# Subtest: withholding: the journal is refused while the linked payment order still carries the full amount
+ok 187 - withholding: the journal is refused while the linked payment order still carries the full amount
+  ---
+  duration_ms: 5246.242334
+  type: 'test'
+  ...
+# Subtest: withholding: a cancelled entry carries no obligation and builds no journal
+ok 188 - withholding: a cancelled entry carries no obligation and builds no journal
+  ---
+  duration_ms: 5449.973917
+  type: 'test'
+  ...
+1..188
+# tests 188
+# suites 0
+# pass 186
+# fail 2
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 277382.506167

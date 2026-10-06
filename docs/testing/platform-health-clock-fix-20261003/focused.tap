@@ -1,0 +1,36 @@
+TAP version 13
+# (node:57772) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: missing, stale, and failed independent checks never report healthy
+ok 1 - missing, stale, and failed independent checks never report healthy
+  ---
+  duration_ms: 2573.241292
+  type: 'test'
+  ...
+# Subtest: platform health is read-only, aggregate, and strips unapproved build fields
+ok 2 - platform health is read-only, aggregate, and strips unapproved build fields
+  ---
+  duration_ms: 2502.019667
+  type: 'test'
+  ...
+# Subtest: platform health requires the platform operations capability
+ok 3 - platform health requires the platform operations capability
+  ---
+  duration_ms: 2519.80775
+  type: 'test'
+  ...
+# Subtest: platform health API stays separate from employee access
+ok 4 - platform health API stays separate from employee access
+  ---
+  duration_ms: 3016.381125
+  type: 'test'
+  ...
+1..4
+# tests 4
+# suites 0
+# pass 4
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 10935.613375

@@ -1,0 +1,468 @@
+/* عُمق 360 — DEPTH 360 (data-design=depth), rewritten after the owner's reference: the Dala site. A constellation on a black void.
+   The void is the design: pure #000 (day: pure #FFF), no panels, no borders, no shadows, no cards, no blur. Hierarchy comes from scale:
+   an oversized weight-400 headline, light airy body copy, one filled turquoise pill, a small mint (--eyebrow) eyebrow, and the particle
+   brain on the other half of every hero. Section gaps 60–120px. Guideline colours only: no yellow, violet or occasion hue decorates.
+   Two layers only: tokens (themed values, screen only) and depth (every structural rule, screen only). Owner: package depth-C.
+   Contract with the scene (depth-scene.mjs, mounted by signature.mjs on canvas.sig-depth, a full-viewport child of body: fixed for the dust and
+   the index, absolute at the top of the document for the brain's heroes, so the brain scrolls away with its hero — §1):
+   --scene-3d:1 selects the WebGL engine; it reads --brand-turquoise, --brand-turquoise-deep, --brand-sky, --brand-paper and --canvas
+   only; the login brain is seated by --ring-x/--ring-y/--ring-r, the home brain by the .sig-eye box. This file sizes and seats the canvas and
+   leaves the scene's half of each hero EMPTY. The scene dims to dust on work screens; only dense work (the ledger tier and the
+   sensitive routes) gets a near-opaque black backing (--depth-back) for readability — a backing, never a card.
+   The brand turquoise is never re-typed here: var(--brand-turquoise) / var(--brand-turquoise-deep) only.
+   Type: Alexandria. Headlines 400; body copy var(--fw-light,400) (200 once activated); quiet copy under 16px var(--fw-stage-body) (300).
+   Arabic is never tracked (negative tracking breaks the joins): -0.04em and 0.025em apply to Latin ([dir=ltr]) only.
+   No inline style anywhere; signature.mjs sets --i on index groups and --n / --orbit on .nav through the CSSOM; interact.mjs sets
+   html[data-ix] (this design, motion allowed) and --mx/--my, --ix-tx/--ix-ty, --ix-i, --ix-ink through the CSSOM (§14). */
+
+/* ---------- animatable tokens ---------- */
+@property --orbit{syntax:'<angle>';inherits:true;initial-value:0deg}
+@property --ix-rr{syntax:'<length>';inherits:false;initial-value:0px}      /* the tap ripple's radius */
+@property --ix-ra{syntax:'<number>';inherits:false;initial-value:0}        /* and its strength (0 = nothing painted) */
+
+/* ---------- keyframes (outside the layers, like the other packages). Every one ends at the element's natural state ---------- */
+@keyframes depth-rise{from{opacity:.001;translate:0 24px}to{opacity:1;translate:none}}
+@keyframes depth-vt-out{to{opacity:0;translate:0 -12px}}
+@keyframes depth-vt-in{from{opacity:0;translate:0 16px}}
+@keyframes depth-vt-fade{from{opacity:0}}
+@keyframes depth-bar-void{from{background-color:transparent}to{background-color:var(--canvas)}}   /* scroll-linked (§3), not motion */
+@keyframes ix-rise{from{opacity:.001;translate:0 10px}}
+@keyframes ix-ripple-a{from{--ix-rr:0px;--ix-ra:.34}to{--ix-rr:240px;--ix-ra:0}}
+@keyframes ix-ripple-b{from{--ix-rr:0px;--ix-ra:.34}to{--ix-rr:240px;--ix-ra:0}}
+
+/* =====================================================================================================================================
+   TOKENS. A night block and two identical day twins (auto + light). Screen only: print keeps paper.
+   Specificity: every block is html:root[data-design=depth]…:not(#_) = (1,2,1) or more, so it ties the (1,2,1) block
+   ":root:has(> body > #app > .login)" (login is always the void) and wins by source order: the login follows the depth tokens in both
+   modes without a :has() in a selector list. Day blocks are (1,3,1). Ratios in comments: on the void, and on the ledger backing over the
+   brightest particle (night: rgba(0,0,0,.92) over #FFFFFF = #141414; day: rgba(255,255,255,.92) over #000000 = #EBEBEB).
+   The pairs live in work/design-verify/contrast-designs.mjs.
+   ===================================================================================================================================== */
+@layer tokens{
+@media screen{
+
+/* --- night (default): the black void --- */
+html:root[data-design=depth]:not(#_){
+  color-scheme:dark;
+  --scene-3d:1;                     /* signature.mjs reads this to choose the WebGL engine */
+  --canvas:#000000;                 /* the void */
+  --ink-1:#FFFFFF;                  /* 21.00 · backing 18.1  headlines, figures, active */
+  --ink-2:#EBEBEB;                  /* 17.62 · backing 15.2  reading text */
+  --ink-3:#BDBDBD;                  /* 11.18 · backing  9.6  secondary (Dala silver mist) */
+  --ink-4:#9A9A9A;                  /*  7.46 · backing  6.4  labels, inactive nav (Dala ash) */
+  --ink-5:#858585;                  /*  5.83 · backing  5.0  floor: placeholder, disabled (#7A7A7A is 4.3 on the backing) */
+  --ink-display:#FFFFFF;
+  --logo:var(--ink-1);
+  --line:rgba(255,255,255,.14);     /* = #242424, a hairline: separator only */
+  --line-strong:rgba(255,255,255,.45); /* = #737373, 4.43: control edges, the writing line */
+  --focus:#FFFFFF;
+  --action:var(--brand-turquoise); --on-action:#000000;   /* the one filled pill: fill 6.40 on the void, label 6.40 */
+  --action-hover:#1BB899;           /* label 8.36 */
+  --action-press:#138D75;           /* label 5.09 */
+  --turn:var(--brand-turquoise);    /*  6.40 · backing 5.52 */
+  --spark:#F1C40F;                  /* 12.64 · backing 10.9  status only (due soon, needs info): never decoration
+  --eyebrow:#78F2D5;                /* 15.46 · backing 13.56 the eyebrow: the scene's mint glow (turquoise lifted in its own hue) */
+  --stop:#FF6B5B;                   /*  7.34 · backing 6.33  (#E74C3C is 4.74 on the backing) */
+  --ok:var(--ink-2);
+  --scrim:rgba(0,0,0,.88);
+  --select-bg:#FFFFFF; --select-ink:#000000;
+  --ring-a:var(--brand-turquoise); --ring-b:var(--brand-sky); --ring-c:#FFFFFF; --ring-d:#78F2D5;   /* 2D fallback ring: identity, sky, light, mint */
+  --ring-live:1;
+  --horizon:var(--brand-turquoise);
+  --ghost:#141414;
+  --select-arrow:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 8.62 10'%3E%3Cpath d='M0 0h8.62L2.29 10z' fill='%239A9A9A'/%3E%3C/svg%3E");
+  --condolence-block:#FFFFFF; --occasion-condolence-ink:#000000;
+  /* the Dala scale */
+  --fs-hero:clamp(48px,7.2vw,113px);          /* display: login, home greeting, portal headline — weight 400 */
+  --lh-hero:1.1;                              /* Arabic: 1.1 keeps the alef and the descenders of two lines apart; Latin tightens to 1.05 */
+  --fs-lede:18px; --lh-lede:1.5;              /* body copy */
+  --fs-nav:14px;                              /* nav and labels, 700 */
+  --gap-dala:clamp(60px,8vw,120px);           /* section gap on stage screens */
+  --depth-back:rgba(0,0,0,.92);               /* the ledger backing: dense work over the dust */
+}
+
+/* --- day: block 1 of 2 (must stay identical to block 2) — the white void --- */
+@media (prefers-color-scheme:light){html:root[data-design=depth][data-theme=auto]:not(#_){
+  color-scheme:light;
+  --canvas:#FFFFFF;
+  --ink-1:#000000; --ink-2:#262626; --ink-3:#4A4E52; --ink-4:#5A5F64; --ink-5:#5F6469;
+  --ink-display:#000000; --logo:var(--ink-1);
+  --line:rgba(0,0,0,.14); --line-strong:rgba(0,0,0,.55); --focus:#000000;
+  --action:var(--brand-turquoise); --on-action:#000000; --action-hover:#138D75; --action-press:#138D75;
+  --turn:#0E6B59; --spark:#7A5C00; --stop:#B03324; --ok:var(--ink-2); --eyebrow:#0E6B59;   /* 6.43 · backing 5.39 */
+  --scrim:rgba(255,255,255,.90); --select-bg:#000000; --select-ink:#FFFFFF;
+  --ring-a:var(--brand-turquoise-deep); --ring-b:var(--brand-charcoal); --ring-c:#0E6B59; --ring-d:var(--brand-turquoise); --horizon:var(--brand-turquoise-deep); --ghost:#EBEBEB;
+  --select-arrow:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 8.62 10'%3E%3Cpath d='M0 0h8.62L2.29 10z' fill='%235A5F64'/%3E%3C/svg%3E");
+  --condolence-block:#000000; --occasion-condolence-ink:#FFFFFF;
+  --depth-back:rgba(255,255,255,.92);
+}}
+/* --- day: block 2 of 2 --- */
+html:root[data-design=depth][data-theme=light]:not(#_){
+  color-scheme:light;
+  --canvas:#FFFFFF;
+  --ink-1:#000000; --ink-2:#262626; --ink-3:#4A4E52; --ink-4:#5A5F64; --ink-5:#5F6469;
+  --ink-display:#000000; --logo:var(--ink-1);
+  --line:rgba(0,0,0,.14); --line-strong:rgba(0,0,0,.55); --focus:#000000;
+  --action:var(--brand-turquoise); --on-action:#000000; --action-hover:#138D75; --action-press:#138D75;
+  --turn:#0E6B59; --spark:#7A5C00; --stop:#B03324; --ok:var(--ink-2); --eyebrow:#0E6B59;   /* 6.43 · backing 5.39 */
+  --scrim:rgba(255,255,255,.90); --select-bg:#000000; --select-ink:#FFFFFF;
+  --ring-a:var(--brand-turquoise-deep); --ring-b:var(--brand-charcoal); --ring-c:#0E6B59; --ring-d:var(--brand-turquoise); --horizon:var(--brand-turquoise-deep); --ghost:#EBEBEB;
+  --select-arrow:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 8.62 10'%3E%3Cpath d='M0 0h8.62L2.29 10z' fill='%235A5F64'/%3E%3C/svg%3E");
+  --condolence-block:#000000; --occasion-condolence-ink:#FFFFFF;
+  --depth-back:rgba(255,255,255,.92);
+}
+
+/* --- geometry: the login sculpture sits in the empty half (RTL: the left half), the stage screens breathe --- */
+html:root[data-design=depth]:not(#_){--ring-x:50%; --ring-y:clamp(128px,20dvh,178px); --ring-r:min(156px,38vw)}   /* phone: the brain's own stage above the copy */
+@media (min-width:760px){html:root[data-design=depth]:not(#_){--ring-y:clamp(150px,22dvh,220px); --ring-r:min(200px,26vw)}}
+@media (min-width:1024px){
+  html:root[data-design=depth]:not(#_){--ring-x:25vw; --ring-y:50vh; --ring-r:min(34vh,19vw)}
+  html:root[data-design=depth][dir=ltr]:not(#_){--ring-x:75vw}
+  html:root[data-design=depth][data-tier=stage]:not(#_){--gap-section:var(--gap-dala)}
+}
+
+/* --- more contrast: stronger lines, the quiet inks join ink-2, the backing turns solid --- */
+@media (prefers-contrast:more){
+  html:root[data-design=depth]:not(#_){--line:rgba(255,255,255,.45); --line-strong:rgba(255,255,255,.80); --ink-3:#EBEBEB; --ink-4:#EBEBEB; --ink-5:#BDBDBD; --depth-back:#000000}
+  html:root[data-design=depth][data-theme=light]:not(#_){--line:rgba(0,0,0,.55); --line-strong:rgba(0,0,0,.82); --ink-3:#262626; --ink-4:#262626; --ink-5:#4A4E52; --depth-back:#FFFFFF}
+}
+@media (prefers-contrast:more) and (prefers-color-scheme:light){
+  html:root[data-design=depth][data-theme=auto]:not(#_){--line:rgba(0,0,0,.55); --line-strong:rgba(0,0,0,.82); --ink-3:#262626; --ink-4:#262626; --ink-5:#4A4E52; --depth-back:#FFFFFF}
+}
+/* --- no transparency on request: the backing is the void itself. The [data-theme] twin is (1,3,1), so it outranks the day blocks --- */
+@media (prefers-reduced-transparency:reduce){
+  html:root[data-design=depth]:not(#_),html:root[data-design=depth][data-theme]:not(#_){--depth-back:var(--canvas)}
+}
+
+} /* end @media screen */
+} /* end @layer tokens */
+
+
+
+
+/* =====================================================================================================================================
+   DEPTH. Every selector starts with :root[data-design=depth]. Screen only. This layer sits above shell and below classic/fill: it can
+   re-seat any surface, and the single filled action keeps its fill (the fill layer wins over this one).
+   ===================================================================================================================================== */
+@layer depth{
+@media print{.sig-depth{display:none}}   /* the scene is never printed; nothing else from this file reaches print */
+@media screen{
+
+/* the 3D canvas belongs to this design only: in any other design the node, if it lingers, paints nothing */
+:root:not([data-design=depth]) .sig-depth{display:none}
+
+/* ---------- 1. the void and the scene ---------- */
+:root[data-design=depth]{background:var(--canvas)}
+:root[data-design=depth] body{background:transparent}
+:root[data-design=depth] .sig-depth{position:fixed;inset:0;z-index:var(--z-canvas);display:block;inline-size:100%;block-size:100%;pointer-events:none}   /* #app is z 1: the scene is always under every word */
+/* the brain belongs to its hero (login, home, «ملخصي»): there the canvas is one viewport tall at the top of the DOCUMENT, not of the
+   viewport, so the compositor scrolls it away with the hero — no scroll listener, no redraw, no lag — and it can never sit over the
+   content below. signature.mjs measures the scene against the canvas box, so the geometry is the same at any scroll position.
+   100vh is the large viewport on iOS: the toolbar collapsing does not resize (and clear) the canvas. The dust (off) and the index
+   stay fixed behind the whole screen */
+:root[data-design=depth]:is([data-scene=home],[data-scene=login]) .sig-depth{position:absolute;inset:0 0 auto;block-size:100vh;
+  /* its lower edge scrolls into view: the haze and the far dust fade out over 120px instead of stopping on a line (the brain
+     itself ends well above it at every size) */
+  -webkit-mask-image:linear-gradient(#000 calc(100% - 120px),transparent);mask-image:linear-gradient(#000 calc(100% - 120px),transparent)}
+:root[data-design=depth]:has(canvas.sig-depth) .sig-aurora{display:none}   /* the 2D ring steps aside only once the 3D field exists */
+:root[data-design=depth] .page-head::after{content:none}   /* no lattice: the constellation is the only imagery */
+
+/* ---------- 2. type: scale, not weight. Headlines 400, body light, labels 700. Arabic keeps letter-spacing 0 ---------- */
+:root[data-design=depth] :is(.story-copy h1,.sig-greeting,.journey-copy h1){
+  color:var(--ink-display);font-size:var(--fs-hero);font-weight:var(--fw-display);line-height:var(--lh-hero);letter-spacing:0;text-wrap:balance}
+:root[data-design=depth][dir=ltr] :is(.story-copy h1,.sig-greeting,.journey-copy h1){line-height:1.05;letter-spacing:-.04em}
+/* page titles on work screens: one step of the same voice. Long dynamic titles keep the step-down signature.mjs chose */
+:root[data-design=depth][data-tier=desk] #main h1:not(.is-long,.is-xlong),
+:root[data-design=depth][data-tier=stage] #main h1:not(.is-long,.is-xlong){font-size:clamp(36px,2.6vw + 18px,64px);line-height:1.15}
+:root[data-design=depth][data-tier=ledger] #main h1:not(.is-long,.is-xlong){font-size:clamp(28px,1.2vw + 20px,40px);line-height:1.25}
+:root[data-design=depth][dir=ltr] #main :is(h1,.dialog-head h2){letter-spacing:-.03em}
+:root[data-design=depth] .dialog-head h2{font-weight:var(--fw-display)}
+/* body copy: 18px, airy. var(--fw-light,400): 200 while the file is served, 400 otherwise */
+:root[data-design=depth] :is(.story-copy p,.sig-census,.journey-copy > p,.hr-hero-copy p,.ex-hero-copy > p,.empty > p){
+  font-size:var(--fs-lede);font-weight:var(--fw-light,400);line-height:var(--lh-lede)}
+:root[data-design=depth] :is(.story-copy p,.sig-census,.journey-copy > p){color:var(--ink-2)}
+/* quiet copy under 16px: 300 (200 is too thin that small) */
+:root[data-design=depth] :is(.page-head h1 + p,.vn-head > p,.panel-head p,.login-card > p,.login-note,.login-footer,.journey-heading p){font-weight:var(--fw-stage-body,400)}
+/* أرقام القيم مجدولة: تواريخ المسار ومبالغ العروض وأوقات اليوم في عمود واحد تتراصف خاناتها. Alexandria تحمل tnum
+   (قيس 1 أكتوبر بالخط المستضاف: عشرة آحاد 150px وعشرة أصفار 283px، ومع tabular-nums كلاهما 280px) — فلا يقفز الرقم حين يتغيّر. */
+:root[data-design=depth] dd{font-variant-numeric:tabular-nums lining-nums}
+/* the eyebrow: small, mint, 700. Latin eyebrows are uppercase with 0.025em */
+:root[data-design=depth] :is(.story-copy .eyebrow,.journey-greeting,:is([data-route=home],[data-route=portal]) #main .page-head h1){
+  color:var(--eyebrow,var(--turn));font-size:var(--fs-nav);font-weight:var(--fw-strong);line-height:1.4;letter-spacing:0}
+:root[data-design=depth] .hr-values > span + span::before{background-color:var(--eyebrow,var(--turn))}   /* the value separators: mint, not amber */
+:root[data-design=depth][dir=ltr] :is(.story-copy .eyebrow,.journey-greeting,:is([data-route=home],[data-route=portal]) #main .page-head h1){text-transform:uppercase;letter-spacing:.025em}
+/* nav and labels: 14px 700; grey, active white */
+:root[data-design=depth][dir=ltr] :is(.sig-tabs a,.sig-siblings :is(a,button),.top-index-label,.login-card .eyebrow){letter-spacing:.025em}
+
+/* ---------- 3. the top bar: transparent on the void, no border, no blur. Once the title scrolls under it, it turns to the void itself ---------- */
+:root[data-design=depth] .topbar{background:transparent;border-block-end:0}
+:root[data-design=depth] .topbar.is-condensed{background:var(--canvas)}
+/* the brain's heroes: the bar turns to the void over the first 24px of scroll, so the brain leaving with its hero passes UNDER the bar
+   and its icons, never behind them (it reaches the bar's edge after ~29px on phones, ~57px on the desktop). At rest the bar stays
+   clear, so the scene's faint haze runs to the top edge unbroken. A browser without scroll timelines keeps the void bar throughout */
+:root[data-design=depth][data-scene=home] .topbar{background:var(--canvas)}
+@supports (animation-timeline:scroll()){
+  :root[data-design=depth][data-scene=home] .topbar:not(.is-condensed){background:transparent;animation:depth-bar-void linear both;animation-timeline:scroll(root);animation-range:0 24px}
+}
+:root[data-design=depth] :is(.top-btn,.sig-appearance > button){color:var(--ink-3)}
+:root[data-design=depth] .sig-tabs{background:var(--canvas);border:0}   /* below 1024: the dock is the void, the words carry it */
+:root[data-design=depth] .sig-tabs .active::after{content:none}
+@media (min-width:1024px){
+  :root[data-design=depth] .sig-tabs{background:none}
+  :root[data-design=depth] .sig-tabs a{border-block-end-color:transparent;color:var(--ink-4);font-size:var(--fs-nav);font-weight:var(--fw-strong)}
+  :root[data-design=depth] .sig-tabs a.active{border-block-end-color:transparent;color:var(--ink-1)}
+  :root[data-design=depth] .sig-siblings{background:transparent;border-block-end:0}
+  :root[data-design=depth]:has(.topbar.is-condensed) .sig-siblings,:root[data-design=depth][data-scene=home] .sig-siblings{background:var(--canvas)}
+  @supports (animation-timeline:scroll()){
+    :root[data-design=depth][data-scene=home]:not(:has(.topbar.is-condensed)) .sig-siblings{background:transparent;animation:depth-bar-void linear both;animation-timeline:scroll(root);animation-range:0 24px}
+  }
+  :root[data-design=depth] .sig-siblings :is(a,button){color:var(--ink-4);font-size:var(--fs-nav)}
+  :root[data-design=depth] .sig-siblings a[aria-current]{border-block-end-color:transparent;color:var(--ink-1)}
+}
+@media (hover:hover){:root[data-design=depth] :is(.sig-tabs a,.sig-siblings :is(a,button),.top-btn,.sig-appearance > button):hover{color:var(--ink-1)}}
+
+/* ---------- 4. buttons: one filled pill (the fill layer), ghost text beside it in a hero. No raise, no shadow ---------- */
+:root[data-design=depth] :is(.journey-cta,.login-appearance) .btn:not(.primary,.dark){min-inline-size:0;padding-inline:0;border-color:transparent;background:none;color:var(--ink-3);text-decoration-line:underline;text-decoration-thickness:1px;text-underline-offset:6px}
+@media (hover:hover){:root[data-design=depth] .journey-cta .btn:not(.primary,.dark):hover{border-color:transparent;color:var(--ink-1)}}
+@media (min-width:760px){
+  :root[data-design=depth] :is(.journey-cta,.login-card,.password-form,.page-actions) .btn{--btn-h:48px}
+  :root[data-design=depth] :is(.login-card,.password-form) .btn{--btn-w:auto}
+}
+
+/* ---------- 5. login: two columns on the void. The copy, the bare fields and the one pill on the text side (RTL: right), the
+   sculpture alone in the other half. No card, no lens, no plate. Phones: the sculpture takes the top of the screen, the copy follows ---------- */
+:root[data-design=depth] .story-copy{position:static;inset:auto;inline-size:auto;max-inline-size:600px;margin:calc(var(--ring-y) + var(--ring-r) * .8) 0 0;translate:none;text-align:start}
+:root[data-design=depth] .story-copy .eyebrow{margin-block-end:var(--s4)}
+:root[data-design=depth] .story-copy h1.is-long{font-size:var(--fs-hero)}   /* the eye guard of the old ring does not apply: the title no longer sits in the ring */
+:root[data-design=depth] .login-card{inline-size:min(440px,100%);margin:var(--s10) 0 0;padding:0;border:0;background:none}
+:root[data-design=depth] .login-card h2{font-weight:var(--fw-display);font-size:clamp(22px,1vw + 14px,28px);line-height:1.3}
+:root[data-design=depth] :is(#login-form,#password-form){gap:var(--s4)}
+:root[data-design=depth] :is(#login-form,#password-form) input{min-block-size:48px;font-size:var(--fs-lede);font-weight:var(--fw-stage-body,400)}
+:root[data-design=depth] :is(#login-form,#password-form) > .btn{align-self:start;margin-block-start:var(--s4)}
+:root[data-design=depth] .login-footer{inline-size:auto;margin-inline:0}
+@media (max-width:759.98px){
+  :root[data-design=depth] :is(#login-form,#password-form) > .btn{align-self:stretch}
+  :root[data-design=depth] .login-card{margin-block-start:var(--s8)}
+}
+@media (max-height:600px){:root[data-design=depth] .story-copy{margin-block-start:calc(var(--s18) + var(--safe-t))}}
+@media (min-width:1024px) and (min-height:600.02px){
+  /* rows: brand · air · story · card · air · values · footer. Every item keeps to the text half; the other half stays empty */
+  :root[data-design=depth] .login{grid-template-rows:auto minmax(var(--s4),1fr) auto auto minmax(var(--s4),1fr) auto auto;row-gap:0;padding-block:calc(var(--s8) + var(--safe-t)) calc(var(--s6) + var(--safe-b))}
+  /* the card's intro repeats the story in a smaller voice: it leaves the eye (not the accessibility tree), as it already does on phones */
+  :root[data-design=depth] .login:not(.password-gate) .login-card > p:not(.login-note){position:absolute;inline-size:1px;block-size:1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap}
+  :root[data-design=depth] :is(.login-story,.login-form) > *{grid-column:1 / span 6}
+  :root[data-design=depth] .login-story .brand{grid-row:1}
+  :root[data-design=depth] .story-copy{grid-row:3;margin:0}
+  :root[data-design=depth] .story-copy p{position:static;inset:auto;max-inline-size:28em;margin-block-start:var(--s4)}   /* two short lines that stop before the sculpture */
+  :root[data-design=depth] :is(.login-card,.password-gate .login-card){grid-row:4;align-self:start;margin-block:var(--s6) 0}
+  :root[data-design=depth] .password-gate .login-card{margin-block-start:0}
+  :root[data-design=depth] .hr-values{grid-row:6;margin-block-start:var(--s4)}
+  :root[data-design=depth] .login-footer{grid-row:7;margin-block-start:var(--s3)}
+}
+
+/* ---------- 6. home and portal heroes: a two-column asymmetric band. The copy on the text side (max 560px), the eye alone in the
+   other half — signature.mjs hands the engine the eye's centre, so the ring grows in the empty half. No plate, no lens ---------- */
+:root[data-design=depth] .sig-eye{color:var(--ink-1)}
+:root[data-design=depth] .sig-eye b{font-weight:var(--fw-display)}
+/* the home copy reads as the reference hero at every size: date · greeting · eyebrow · body · the quiet description */
+:root[data-design=depth][data-scene=home] #main > .page-head{row-gap:0}
+:root[data-design=depth][data-scene=home] #main > .page-head .sig-date{grid-row:1;margin-block:0 var(--s4)}
+:root[data-design=depth][data-scene=home] #main > .page-head .sig-greeting{grid-row:2;margin:0}
+:root[data-design=depth][data-scene=home] #main > .page-head h1{grid-row:3;margin-block-start:var(--s8)}
+:root[data-design=depth][data-scene=home] #main > .page-head .sig-census{grid-row:4;min-block-size:0;margin-block-start:var(--s3)}
+:root[data-design=depth][data-scene=home] #main > .page-head h1 + p{grid-row:5;margin-block-start:var(--s8)}
+@media (min-width:760px) and (max-width:1023.98px){:root[data-design=depth][data-scene=home] #main > .page-head .sig-greeting{grid-column:1}}   /* the eye holds column 2, rows 1–3 */
+@media (min-width:1024px){
+  :root[data-design=depth][data-scene=home] #main > :is(.page-head,.journey-hero){
+    --hero-ring-r:min(170px,11.5vw,22dvh);
+    grid-template-columns:repeat(12,minmax(0,1fr));grid-auto-rows:auto;align-content:center;align-items:start;row-gap:0;column-gap:var(--s6);
+    min-block-size:clamp(480px,calc(100dvh - var(--topbar-h) - var(--siblings-h) - var(--s14)),760px);padding-block:var(--s10) var(--s14)}
+  /* the copy column */
+  :root[data-design=depth][data-scene=home] #main > .page-head > :not(.sig-eye,.page-actions),
+  :root[data-design=depth][data-scene=home] #main > .page-head > div:first-child > *{grid-column:1 / span 6;min-inline-size:0;max-inline-size:560px}
+  :root[data-design=depth][data-scene=home] #main > .page-head > .page-actions{grid-column:1 / span 6;grid-row:6;justify-content:flex-start;margin-block-start:var(--s8)}
+  /* portal: headline · eyebrow · body · the pill */
+  :root[data-design=depth][data-scene=home] #main > .journey-hero > .journey-copy{display:flex;flex-direction:column;align-items:flex-start;grid-column:1 / span 6;grid-row:1;align-self:center;max-inline-size:600px}
+  :root[data-design=depth] .journey-copy h1{order:1;margin:0}
+  :root[data-design=depth] .journey-copy > .journey-greeting{order:2;margin-block-start:var(--s8)}
+  :root[data-design=depth] .journey-copy > p{order:3;max-inline-size:32em;margin-block-start:var(--s3)}
+  :root[data-design=depth] .journey-copy > .journey-cta{order:4;margin-block-start:var(--s10)}
+  /* the eye: centred in the empty half */
+  :root[data-design=depth][data-scene=home] #main > :is(.page-head,.journey-hero) > .sig-eye{grid-column:7 / span 6;grid-row:1 / span 6;align-self:center;justify-self:center;margin:0}
+}
+/* phone: the ring gets its own open stage above the hero copy. The eye leaves the grid, sits centred in the stage, and signature.mjs
+   measures it there, so the 3D ring (engine: home ring = eye radius × HOME_GROW) floats whole above the text instead of at the screen edge */
+@media (max-width:759.98px){
+  :root[data-design=depth][data-scene=home] #main > :is(.page-head,.journey-hero){--eye-stage:clamp(220px,58vw,280px);grid-template-columns:minmax(0,1fr);padding-block-start:calc(var(--eye-stage) + var(--s6))}
+  :root[data-design=depth][data-scene=home] #main > :is(.page-head,.journey-hero) > *{grid-column:1 / -1}
+  :root[data-design=depth][data-scene=home] #main > :is(.page-head,.journey-hero) .sig-eye{grid-area:auto;position:absolute;inset-block-start:calc(var(--eye-stage) * .19);inset-inline:0;margin-inline:auto;inline-size:calc(var(--eye-stage) * .62);block-size:auto}
+}
+
+/* ---------- 7. work screens: the void with hairline rows (the base already draws them). The scene is dust here; dense work gets
+   a near-opaque backing on #app itself (z 1, above the scene, under every word): it covers the whole viewport evenly — no edge,
+   no radius — so it reads as the void, not as a card ---------- */
+:root[data-design=depth]:is([data-tier=ledger],[data-route=payroll],[data-route=hr-cases],[data-route=compensation],[data-route=security],[data-route=payroll-extras],[data-route=payroll-anomaly],[data-route=wps],[data-route=contracts],[data-route=wage-reconciliation],[data-route=benefits],[data-route=performance]) #app{min-block-size:100dvh;background-color:var(--depth-back)}
+:root[data-design=depth] :is(.vn-tile,.pt-tile) > strong{font-weight:var(--fw-display)}
+
+/* ---------- 8. the index. Below 1024 the sheet is the void. From 1024 (data-scene=index) the groups are bare typographic blocks on
+   the black, on an orbit when signature.mjs hands over --i/--n/--orbit, in a column otherwise. No glass, no card ---------- */
+@media (min-width:1024px){
+  :root[data-design=depth] .nav{margin-inline-end:calc((100vw - 2 * var(--shell-pad)) * .12)}
+  :root[data-design=depth] .nav > .hr-nav-group{position:relative}
+}
+/* the orbit: on only when the groups carry --i (set through the CSSOM, so the reflected style attribute holds it) and motion is allowed.
+   --n (default 8) and --orbit (registered: the JS may animate it) are read from .nav or any ancestor. The JS rests --orbit at exactly
+   -(i * 360deg / n) for the chosen group and turns it so a group that takes focus comes to the front. The ring is not preserve-3d
+   (.nav is a sticky scroller), so the groups are ordered by z-index from cos(angle); at rest one group is read, the ring shows while it turns */
+@media (min-width:1024px) and (prefers-reduced-motion:no-preference){
+  :root[data-design=depth]:not([data-motion=off]) .nav:has(> .hr-nav-group[style*="--i"]){
+    --orbit-w:min(520px,36vw);   /* a length, never a percentage: translateZ() takes lengths only */
+    --orbit-r:calc(var(--orbit-w) * .5 / tan(180deg / var(--n,8)) + var(--s6));
+    display:grid;grid-template-areas:"o";justify-items:center;align-items:start;overflow:visible;max-block-size:none;perspective:1800px}
+  :root[data-design=depth]:not([data-motion=off]) .nav:has(> .hr-nav-group[style*="--i"]) > .hr-nav-group{
+    --a:calc(var(--i,0) * 360deg / var(--n,8) + var(--orbit));
+    grid-area:o;inline-size:var(--orbit-w);max-block-size:calc(100dvh - var(--topbar-h) - var(--s14));overflow-y:auto;margin:0;padding-block:var(--s6) var(--s4);
+    transform:translateZ(calc(var(--orbit-r) * -1)) rotateY(var(--a)) translateZ(var(--orbit-r));
+    backface-visibility:hidden;opacity:clamp(0,(cos(var(--a)) - .766) / .234,1);z-index:calc(round(cos(var(--a)) * 100));   /* 0deg = 1, 20deg = .74, 40deg and beyond = 0 */
+    transition:opacity var(--d-state) var(--ease)}
+  :root[data-design=depth]:not([data-motion=off]) .nav:has(> .hr-nav-group[style*="--i"]) > .hr-nav-group:focus-within{opacity:1}
+  :root[data-design=depth]:not([data-motion=off]) .nav:has(> .hr-nav-group[style*="--i"]) .hr-nav-rows{columns:2 180px}
+}
+
+/* ---------- 9. floating layers: the void with a hairline, never glass ---------- */
+:root[data-design=depth] :is(#dialog,.journey-dialog,#design-menu){border-color:var(--line)}
+:root[data-design=depth] #toast{border-color:var(--line)}
+
+/* ---------- 10. entrance on stage screens: blocks rise out of the void as they scroll in, only where the browser has the timeline.
+   The resting state is the natural one; the from-state exists only inside the timeline's entry range ---------- */
+@supports (animation-timeline:view()){
+  @media (prefers-reduced-motion:no-preference){
+    :root[data-design=depth][data-tier=stage]:not([data-motion=off]) #main :is(.vn-block,.pt-tiles,.vn-tiles,.hm-strip,.journey-path,.pt-grid > *,.department-card,.service){
+      animation:depth-rise linear both;animation-timeline:view();animation-range:entry 0% entry 45%}
+  }
+}
+
+/* ---------- 11. page swap: a short fade and rise whenever the app runs a view transition; a plain fade on dense work ---------- */
+@media (prefers-reduced-motion:no-preference){
+  :root[data-design=depth]:not([data-motion=off])::view-transition-old(root){animation:depth-vt-out 200ms var(--ease) both}
+  :root[data-design=depth]:not([data-motion=off])::view-transition-new(root){animation:depth-vt-in 320ms var(--ease) both}
+  :root[data-design=depth][data-tier=ledger]:not([data-motion=off])::view-transition-old(root){animation:depth-vt-fade 160ms linear reverse both}
+  :root[data-design=depth][data-tier=ledger]:not([data-motion=off])::view-transition-new(root){animation:depth-vt-fade 160ms linear both}
+}
+
+/* ---------- 12. reduced motion (and the in-app "motion off"): no orbit, no entrance, no page swap ---------- */
+@media (prefers-reduced-motion:reduce){
+  :root[data-design=depth] .hr-nav-group{transform:none;transition:none}
+  :root[data-design=depth]::view-transition-group(*),:root[data-design=depth]::view-transition-old(*),:root[data-design=depth]::view-transition-new(*){animation:none}
+}
+:root[data-design=depth][data-motion=off] .hr-nav-group{transform:none}
+
+/* ---------- 13. forced colours: the scene and the backing drop; the system paints plain surfaces ---------- */
+@media (forced-colors:active){
+  :root[data-design=depth] .sig-depth{display:none}
+  :root[data-design=depth] #app{background-color:Canvas}
+  :root[data-design=depth] .hr-nav-group{transform:none;animation:none}
+}
+
+/* ---------- 14. interaction (interact.mjs). Everything keys on html[data-ix], which exists only in this design with motion allowed;
+   the resting state of every element is its natural one. Mouse: a soft light spot under the pointer on rows, cards and tiles, and the
+   filled pill leaning a few px toward the cursor. Touch: a ripple from the tap point. Press: .98. Figures: a count-up drawn in an
+   overlay whose alt text is empty, over the true number made transparent (same box, same tabular digits). Rows: a 28 ms stagger ---------- */
+@media (prefers-reduced-motion:no-preference){
+  @media (hover:hover){
+    :root[data-design=depth][data-ix]:not([data-motion=off]) #main :is(tbody tr,.vn-card,.wk-card,.ex-row,.vn-tile,.notification-row,.task-row,.pt-tile,.pt-row,.department-card,.rq-row,.rq-rail-item,.timeline-item,.service-row,.req-card,.project-card,.rq-card,.hm-strip-card,.hm-card,.hm-menu [role=menuitem]):hover{
+      background-image:radial-gradient(260px circle at var(--mx,50%) var(--my,50%),color-mix(in srgb,var(--brand-turquoise) 14%,transparent),transparent 72%);background-repeat:no-repeat}
+  }
+  :root[data-design=depth][data-ix]:not([data-motion=off]) .btn{translate:var(--ix-tx,0px) var(--ix-ty,0px);
+    transition:border-color var(--d-micro) var(--ease),color var(--d-micro) var(--ease),background-color var(--d-micro) var(--ease),scale var(--d-press) var(--ease-press),translate 240ms var(--ease)}
+  :root[data-design=depth][data-ix]:not([data-motion=off]) #main :is(tbody tr,.vn-card,.wk-card,.ex-row,.vn-tile,.notification-row,.task-row,.pt-tile,.pt-row,.department-card,.rq-row,.rq-rail-item,.service-row,.req-card,.project-card,.rq-card,.hm-strip-card,.hm-card,.hm-menu [role=menuitem]){transition:scale 120ms var(--ease)}
+  :root[data-design=depth][data-ix]:not([data-motion=off]) #main :is(tbody tr,.vn-card,.wk-card,.ex-row,.vn-tile,.notification-row,.task-row,.pt-tile,.pt-row,.department-card,.rq-row,.rq-rail-item,.service-row,.req-card,.project-card,.rq-card,.hm-strip-card,.hm-card,.hm-menu [role=menuitem]):active{scale:.98}
+  :root[data-design=depth][data-ix]:not([data-motion=off]) [data-ix-ripple]{
+    background-image:radial-gradient(circle var(--ix-rr) at var(--mx,50%) var(--my,50%),color-mix(in srgb,var(--brand-turquoise) calc(var(--ix-ra) * 100%),transparent) 55%,transparent 100%);background-repeat:no-repeat}
+  :root[data-design=depth][data-ix]:not([data-motion=off]) [data-ix-ripple=a]{animation:ix-ripple-a 560ms var(--ease) both}
+  :root[data-design=depth][data-ix]:not([data-motion=off]) [data-ix-ripple=b]{animation:ix-ripple-b 560ms var(--ease) both}
+  :root[data-design=depth][data-ix][data-ix-enter]:not([data-motion=off]) #main :is(tbody tr,.notification-row,.task-row,.ex-row,.pt-row,.rq-row,.service-row,.timeline-item,.rq-rail-item,.wk-card,.vn-card)[style*="--ix-i"]{
+    animation:ix-rise 420ms var(--ease) both;animation-delay:calc(var(--ix-i,0) * 28ms)}
+  :root[data-design=depth][data-ix] [data-ix-count]{position:relative;color:transparent}
+  :root[data-design=depth][data-ix] [data-ix-count]::after{content:attr(data-ix-shown) / "";position:absolute;inset:0;color:var(--ix-ink,var(--ink-1));white-space:nowrap;pointer-events:none}
+}
+/* focus: the ring glows (static, so it stays under reduced motion); forced colours keep the system outline */
+:root[data-design=depth] :focus-visible{outline:2px solid var(--focus);outline-offset:3px;
+  box-shadow:0 0 0 5px color-mix(in srgb,var(--brand-turquoise) 28%,transparent),0 0 22px 3px color-mix(in srgb,var(--brand-turquoise) 42%,transparent)}
+@media (forced-colors:active){:root[data-design=depth] :focus-visible{box-shadow:none}}
+
+
+/* ---------- 15. شريط البدء وبطاقة العمل: عُقَدٌ على الفراغ، لا صناديق ----------
+   ملاحظة المالك (30 سبتمبر 2026): «ابي شكل الطلب والانيميشن يكون جذاب واحترافي». وكان الشريط
+   والبطاقة يسقطان على القاعدة العامة في style.css — صناديق بحدٍّ وخلفية وظلّ، وهو نقضٌ لعقد هذا
+   التصميم نفسه («the void is the design: no panels, no borders, no shadows, no cards, no blur»)،
+   ولم تكن تصلهما حركةُ التصميم أصلًا لأن قوائم §10 و§14 لا تذكرهما. فهذه الفقرة شيئان:
+   أولًا شكلٌ من لغة الفراغ — العلامة حلقةٌ ذات هالة على السواد، والاسم وحده، بلا صندوق يحيط به؛
+   وثانيًا وصلُ الشريط والبطاقة بآلات الحركة القائمة: بقعة الضوء تحت المؤشّر، والضغط .98، والصعود
+   عند دخول الشاشة. لا آلة جديدة، ولا حركة دائمة، وكلها تسقط تحت prefers-reduced-motion وdata-motion=off. */
+
+/* الصندوق يزول: البطاقة سطحٌ على الفراغ، ويبقى هدف اللمس ونصف القطر لمساحة التركيز وحدهما. */
+:root[data-design=depth] .hm-strip > :is(.hm-strip-card,.hm-strip-new){border-color:transparent;box-shadow:none}
+:root[data-design=depth] .hm-strip > .hm-strip-card{background:none}
+:root[data-design=depth] .hm-strip > .hm-strip-card > :is(a,button,.eu-chip){border:0;background:none;box-shadow:none;color:inherit}
+/* الواحد الممتلئ يبقى واحدًا: «إنشاء» هي الحبّة الفيروزية في هذا التصميم، فلا تُنازعها بطاقةٌ أخرى. */
+:root[data-design=depth] .hm-strip > .hm-strip-new{background-color:var(--action);color:var(--on-action)}
+
+/* المقاس هو التدرّج في هذا التصميم («hierarchy comes from scale»): كانت البطاقة 128×162 بكسل تحمل
+   علامةً 40 واسمًا 12 — صندوقٌ كبير حول محتوًى صغير، وهو ما يجعلها تُقرأ فارغةً مهما نُظّفت حدودها.
+   فتتّسع البطاقة ليستقيم الاسم سطرًا أو سطرين، ويكبر الاسم والعلامة، ويتباعد ما بينها كما تتباعد
+   أقسام هذا التصميم، ويسقط الارتفاع الميت فيصير ارتفاع البطاقة ارتفاعَ ما فيها. */
+/* صفٌّ واحد ينزلق، لا صفّان: .eu-quick تلي .hm-strip في الورقة الأساسية بالنوعية نفسها فتغلبها بـwrap،
+   وكان الكلاسيكي واليوم يعيدان تثبيت nowrap بمحدِّدٍ أقوى ولا يفعل هذا التصميم — فينكسر «كل الخدمات» سطرًا ثانيًا. */
+:root[data-design=depth] .hm-strip{--hm-strip-w:172px;flex-wrap:nowrap;gap:var(--s5);align-items:start}
+:root[data-design=depth] .hm-strip > :is(.hm-strip-card,.hm-strip-new){
+  inline-size:var(--hm-strip-w);max-inline-size:var(--hm-strip-w);gap:var(--s2);padding:var(--s3) var(--s2)}
+:root[data-design=depth] .hm-strip > :is(.hm-strip-card,.hm-strip-new) strong{font-size:var(--fs-callout);line-height:1.35}
+:root[data-design=depth] .hm-strip > :is(.hm-strip-card,.hm-strip-new) small{font-size:var(--fs-cap);line-height:1.5}
+:root[data-design=depth] .hm-strip > .hm-strip-card > :is(a,button,.eu-chip){gap:var(--s2);padding:0}
+
+/* العلامة: حلقةٌ رفيعة وهالةٌ خافتة — نجمةٌ ساكنة، لا قرصٌ ممتلئ. */
+:root[data-design=depth] .hm-strip .hm-disc{
+  inline-size:52px;block-size:52px;border-radius:50%;
+  border:1px solid color-mix(in srgb,var(--brand-turquoise) 38%,transparent);
+  background:radial-gradient(circle at 50% 50%,color-mix(in srgb,var(--brand-turquoise) 15%,transparent),transparent 72%);
+  color:var(--brand-turquoise);font-size:var(--fs-title3);
+  transition:border-color var(--d-state) var(--ease),box-shadow var(--d-state) var(--ease),color var(--d-state) var(--ease)}
+:root[data-design=depth] .hm-strip > .hm-strip-new .hm-disc{
+  border-color:color-mix(in srgb,var(--on-action) 46%,transparent);
+  background:color-mix(in srgb,var(--on-action) 14%,transparent);color:var(--on-action)}
+/* ما لم يعد متاحًا لا يلمع: الحلقة محايدة وسببها مكتوب تحته كما هو. */
+:root[data-design=depth] .hm-strip > .hm-strip-card.is-old .hm-disc{
+  border-color:var(--line);background:none;color:var(--ink-4)}
+/* بابٌ لا خدمة: الحلقة متقطّعة فيُقرأ بابًا بلا كلمةٍ إضافية. */
+:root[data-design=depth] .hm-strip > .hm-strip-card.is-all .hm-disc{border-style:dashed}
+:root[data-design=depth] .hm-strip-card.is-all > .eu-chip{border-style:none}
+
+/* الاسم بخطّ العناوين لا بخطّ الجداول: التدرّج في هذا التصميم بالمقاس لا بالوزن. */
+:root[data-design=depth] .hm-strip > :is(.hm-strip-card,.hm-strip-new) strong{font-weight:var(--fw-display)}
+:root[data-design=depth] .hm-strip > .hm-strip-card small{color:var(--ink-4)}
+
+/* التحويم: النجمة تدخل في البؤرة — هالةٌ أوسع وحلقةٌ كاملة. لا رفعٌ ولا ظلّ (§4: no raise, no shadow). */
+@media (hover:hover) and (prefers-reduced-motion:no-preference){
+  :root[data-design=depth]:not([data-motion=off]) .hm-strip > .hm-strip-card:hover .hm-disc,
+  :root[data-design=depth]:not([data-motion=off]) .hm-strip > .hm-strip-card:focus-within .hm-disc{
+    border-color:var(--brand-turquoise);
+    box-shadow:0 0 0 4px color-mix(in srgb,var(--brand-turquoise) 12%,transparent),
+               0 0 22px 2px color-mix(in srgb,var(--brand-turquoise) 34%,transparent)}
+}
+
+/* بطاقة العمل على الفراغ: بلا صندوق، يفصلها خيطٌ واحد، وشريط حقائقها يقرأ على السواد. */
+:root[data-design=depth] #main .hm-card{
+  border:0;border-block-start:1px solid var(--line);border-radius:0;background:none;box-shadow:none;
+  padding-inline:0;padding-block:var(--s5)}
+:root[data-design=depth] #main .hm-card .hm-facts{border-block-start-color:var(--line)}
+:root[data-design=depth] #main .hm-card .hm-facts dt{color:var(--ink-4)}
+:root[data-design=depth] #main .hm-card .hm-facts dd{color:var(--ink-2)}
+:root[data-design=depth] #main .hm-card .hm-card-head strong{font-weight:var(--fw-display)}
+
+/* قائمة «إنشاء»: الفراغ بخيط، لا زجاج ولا سطح مرتفع — كالطبقات العائمة في §9. */
+:root[data-design=depth] #create-menu{background:var(--canvas);border-color:var(--line);box-shadow:none}
+:root[data-design=depth] #create-menu [role=menuitem] .hm-disc{color:var(--brand-turquoise)}
+
+} /* end @media screen */
+} /* end @layer depth */

@@ -1,0 +1,19 @@
+
+> 36t-local-platform@0.1.0 gate
+> node scripts/gate.mjs
+
+(node:28046) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+Quality ratchet: local primitives 83 (baseline 83) · short refusals 1170 (baseline 1170) · status literals outside the vocabulary 2 (baseline 2) · Latin values without direction isolation 0 (baseline 0) · direct person-table reads 734 (baseline 734) · links 159 checked, 0 unresolved · 488 ms
+
+✖ 1. الحزمة كاملة: 2231 اختبارًا · 2225 ناجحًا · 6 فاشلًا · 0 متخطًّى — الفاشل: navigation: an ordinary employee gets a short menu without development pages, gated by capability; other roles keep theirs | equivalence: with no escalation row, who may decide every (user, request, step) is exactly what the old predicate says | equivalence: the whole public surface — visibility, actions, pending steps, lists — is byte for byte the surface of 434b411 | LIFECYCLE: every service either closes normally or reaches its declared output-acceptance gate, and its other endings hold | links: the screen registries cannot drift from app.mjs | و1 أخرى (الحد الأدنى 2227) (1240.2s)
+✔ 2. فحوص المصدر (check.mjs): Syntax checked: 776 JavaScript modules. Source hashes match. Traceability: 220 requirements / 22 domains. Migrations: 161 planned, highest 200. (22.5s)
+✔ 3. المسنّنة: local primitives 83 (baseline 83) · short refusals 1170 (baseline 1170) · status literals outside the vocabulary 2 (baseline 2) · Latin values without direction isolation 0 (baseli (0.5s)
+✔ 4. الترحيلات من قاعدة فارغة: بلغت الترحيل 200 في 2538 مللي (2.5s)
+✔ 5. الترحيلات على نسخة من آخر نسخة احتياطية: /Users/abdulaziz/Documents/Codex/2026-09-09/3-6t-360-codex-handoff-master/work/backups/hr-operations-pre-200/36t-20261002T2057.sqlite → الترحيل 200 · سلامة ok · مراجع 0 · سلسلة التدقيق true (0.3s)
+✔ 6. بصمة المخطط: 30fd4ae12353b20d… · index 1484 · table 642 · trigger 1370 · view 5 (2.4s)
+✔ 7. لا تبعيات في package.json: صفر تبعية، كما هو مشترط (0s)
+✔ 8. إصدار Node: 24.14.0 مقابل >=24.14 <25 (0s)
+✔ 9. سقف الاختبارات المتخطّاة: 0 متخطًّى، والسقف 0 (0s)
+
+البوابة: 1 فحصًا لم يمرّ. لا تُنشر ولا تُدفع حتى يُصلَح.

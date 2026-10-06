@@ -1,0 +1,774 @@
+/* VOID 360 — package C: components (@layer components) and the single filled action (@layer fill).
+   Tokens, --c/--m state mapping, the write-line primitive and the global focus ring live in signature.css (A).
+   No literal colour here: every design (void, field, slate) and both modes arrive through tokens.
+   Owned elsewhere and never defined here: .page-head::after .empty-symbol .loading (E) · .dialog-head::before (E) ·
+   list rows, tables, forms, .details-grid (D) · shell and navigation (B). */
+
+@keyframes c-rise{from{opacity:0;transform:translateY(8px)}}
+@keyframes c-fade{from{opacity:0}}
+@keyframes c-sheet{from{transform:translateY(100%)}}
+@keyframes c-grow{from{max-inline-size:0}}
+@keyframes c-busy{50%{opacity:.25}}
+
+@layer components{
+
+/* ---------- 1. structure ---------- */
+.operations{display:flex;flex-direction:column;gap:var(--gap-section);min-inline-size:0}
+.panel,.panel-body{min-inline-size:0;margin:0;padding:0;border:0;border-radius:var(--r-0);background:transparent}
+.panel-head{display:flex;flex-wrap:wrap;align-items:baseline;justify-content:space-between;gap:var(--s2) var(--s6);margin-block-end:var(--s4)}
+.panel-head > div:first-child{flex:1 1 16em;min-inline-size:0}
+.panel-head h2,.vn-group > h2{margin:0;font-size:var(--fs-title);font-weight:var(--fw-label);line-height:var(--lh-title);color:var(--ink-1);text-wrap:balance}
+.panel-head p,.vn-group > p{margin:var(--s1) 0 0;font-size:var(--fs-meta);line-height:1.6;color:var(--ink-3);max-inline-size:72ch}
+.vn-group > h2{display:flex;flex-wrap:wrap;align-items:baseline;gap:var(--s2);margin-block-end:var(--s3)}
+.vn-group > h2 :is(span,small){font-size:var(--fs-meta);font-weight:var(--fw-body);color:var(--ink-4)}
+.vn-group > p{margin-block:0 var(--s3)}
+.vn-grid,.split{display:grid;gap:var(--gap-section) var(--s6);min-inline-size:0}
+:is(.vn-grid,.split) > *{min-inline-size:0}
+.split > div{display:flex;flex-direction:column;gap:var(--gap-section)}
+:where(.operation-actions){display:flex;flex-wrap:wrap;align-items:center;gap:var(--s2) var(--s6)}
+
+/* vn-head: actions first, the system's explanation whispers underneath */
+.vn-head{display:flex;flex-direction:column;gap:var(--s4)}
+.vn-head > .operation-actions{order:1}
+.vn-head > p{order:2;margin:0;font-size:var(--fs-label);line-height:1.6;color:var(--ink-4);max-inline-size:72ch;text-wrap:pretty}
+/* #home (spec 7.2 item 2): under the hero come the figures and the first list, so the head, which here is explanation only (home-ui emits no action or control in it),
+   drops whole and uncut under the boards. .operations is already a flex column; nothing focusable moves, so Tab order still follows the eye. */
+html[data-route=home] .operations > .vn-head{order:1}
+/* #home below 1024 (spec 7.2 item 2, 375: the first list comes straight after the hero and answers "what is waiting for me" on the first screen): in the personal
+   board the figures step down one place, under that first list. home-ui always emits the head first, hence `.vn-head + .vn-board` (the head is a section too, so
+   :first-of-type would never match the board). The board's rhythm comes from `* + *` margins, which follow DOM order, so here a flex gap carries it instead.
+   Tab order stays DOM order: the tile links are reached before the list that now sits above them. From 1024 the order is the markup's: figures, then lists. */
+@media (max-width:1023.98px){
+  html[data-route=home] .operations > .vn-head + .vn-board{display:flex;flex-direction:column;gap:var(--gap-section)}
+  html[data-route=home] .operations > .vn-head + .vn-board > *{margin-block-start:0}
+  html[data-route=home] .operations > .vn-head + .vn-board > .vn-tiles{order:1}
+  html[data-route=home] .operations > .vn-head + .vn-board > .vn-block ~ .vn-block{order:2}
+}
+
+/* vn-board: the screen's summary band; its direct parts keep the section rhythm, a label stays tight to its list */
+.vn-board{min-inline-size:0}
+.vn-board > * + *{margin-block-start:var(--gap-section)}
+.vn-board > :is(h2,h3) + *{margin-block-start:0}
+:is(.vn-block,.vn-board) > h2{margin:0 0 var(--s3);font-size:var(--fs-title);font-weight:var(--fw-label);line-height:var(--lh-title);color:var(--ink-1);text-wrap:balance}
+/* vn-block: a labelled section; a block that holds only "nothing yet" folds to one line */
+:is(.vn-block,.vn-board) > h3{margin:0 0 var(--s3);font-size:var(--fs-label);font-weight:var(--fw-label);line-height:1.4;color:var(--ink-4)}
+.vn-block > p.subtle{margin:0;font-size:var(--fs-meta);line-height:1.6;color:var(--ink-4)}
+.vn-block:not(:has(ul,ol,table,dl,.vn-tiles)):has(> :is(h3,.panel-head):first-child + p.subtle:last-child){display:flex;flex-wrap:wrap;align-items:baseline;justify-content:space-between;gap:0 var(--s6);min-block-size:var(--s10);padding-block:var(--s2);border-block-end:1px solid var(--line)}
+.vn-block:not(:has(ul,ol,table,dl,.vn-tiles)):has(> :is(h3,.panel-head):first-child + p.subtle:last-child) > :first-child{margin:0}
+
+/* ---------- 2. marks: one painter, colour and shape come from A's --c / --m ---------- */
+.vn-body,.vn-tiles,.vn-pipeline,.journey,.ex-flow,.stats,.pt-tiles,.acc-stats{--c:initial;--m:initial}   /* a state on an ancestor must not leak into unmarked children */
+:is(.vn-tile,.pt-tile,.stat,.acc-stats > article):is([class*="is-"],.warn)::before,
+.vn-card > summary::before,.vn-card > summary::after,:is(.vn-block,.vn-board) > h3::before,
+:is(.vn-alert,.notice,.error)::before,:is(.vn-step,.journey-step)::before,
+.vn-chips > span + span::before,.timeline-item::before,.empty > p::before,#toast::before,.ex-arrow{
+  content:"";flex:none;inline-size:var(--mk,8px);aspect-ratio:1.373;
+  background-color:var(--c,var(--c0,var(--ink-4)));
+  -webkit-mask:var(--m,var(--m0,var(--m-done))) center/contain no-repeat;mask:var(--m,var(--m0,var(--m-done))) center/contain no-repeat}
+
+/* ---------- 3. tiles: floating figures, the label above the number ---------- */
+.vn-tiles,.stats,.pt-tiles,.acc-stats,.hr-focus{display:flex;flex-wrap:wrap;gap:var(--s6) var(--s8);margin:0;padding:0;list-style:none}
+:is(.vn-tile,.pt-tile,.stat,.acc-stats > article,.hr-focus > a){flex:1 1 40%;min-inline-size:0;color:var(--ink-1);text-decoration:none}
+:is(.vn-tile,.pt-tile,.acc-stats > article){display:grid;grid-template:"m l" auto "n n" auto / auto minmax(0,1fr);align-items:center;row-gap:var(--s2)}
+:is(.vn-tile,.pt-tile,.acc-stats > article) > span{grid-area:l}
+:is(.vn-tile,.pt-tile,.acc-stats > article) > strong{grid-area:n}
+:is(.vn-tile,.pt-tile,.acc-stats > article)::before{grid-area:m;margin-inline-end:6px;--mk:12px}
+.stat,.hr-focus > a{display:flex;flex-direction:column;gap:var(--s2)}
+.stat::before{--mk:12px}
+.hr-focus .nav-icon{display:none}
+:is(.vn-tile,.pt-tile,.acc-stats > article,.hr-focus > a) > span,.stat-label,.stat > small:first-child{font-size:var(--fs-label);font-weight:var(--fw-label);line-height:1.4;color:var(--ink-4)}
+.stat > .stat-number ~ small{font-size:var(--fs-label);color:var(--ink-4)}
+:is(.vn-tile,.pt-tile,.stat,.acc-stats > article,.hr-focus > a) > strong,.figure b,.counts strong{font-size:var(--fs-figure-m);font-weight:var(--fw-display);line-height:var(--lh-figure);color:var(--ink-1);overflow-wrap:break-word}
+.vn-tiles > .vn-tile:first-child strong{font-size:var(--fs-figure-l)}   /* the one focal figure of the screen */
+:is(.vn-tile,.pt-tile,.stat)[class*="is-"] > span{color:var(--c,var(--ink-4))}
+:is(.vn-tile,.pt-tile,.stat):is(.is-late,.is-block,.is-ok,.is-old) > strong{color:var(--c,var(--ink-1))}
+.counts{display:flex;flex-wrap:wrap;align-items:baseline;gap:var(--s1) var(--s3)}
+.counts strong{font-size:var(--fs-figure-s)}
+.counts span{margin-inline-end:var(--s4);font-size:var(--fs-label);font-weight:var(--fw-label);color:var(--ink-4)}
+@media (hover:hover){a:is(.vn-tile,.pt-tile):hover strong,.hr-focus > a:hover strong{text-decoration-line:underline;text-decoration-thickness:2px;text-underline-offset:6px}}
+
+/* ---------- 4. the record card: details.vn-card ---------- */
+.vn-card{border:0;background:transparent}
+.vn-card > summary{display:grid;grid-template-columns:auto minmax(0,1fr) auto;align-items:center;gap:var(--s2) var(--s3);min-block-size:var(--summary-h);padding-block:var(--s3);border-block-end:1px solid var(--line);color:var(--ink-2);cursor:pointer;list-style:none;transition:border-color var(--d-micro) var(--ease),color var(--d-micro) var(--ease)}
+.vn-card > summary::-webkit-details-marker{display:none}
+.vn-card > summary::before{grid-area:1 / 1;--m0:none;--c0:transparent}          /* the record's own state; silent when the record carries none */
+.vn-card > summary::after{--c:var(--ink-4);--m:var(--m-wait);grid-area:1 / 3}   /* disclosure: hollow when shut, full when open */
+.vn-card[open] > summary::after{--m:var(--m-done)}
+.vn-name,.vn-flags{grid-column:1 / -1}
+.vn-code{grid-area:1 / 2;font-size:var(--fs-label);font-weight:var(--fw-label);color:var(--ink-4);direction:ltr;unicode-bidi:isolate;font-variant-numeric:tabular-nums lining-nums;white-space:nowrap}
+.vn-name{min-inline-size:0}
+.vn-name strong{display:block;font-size:var(--fs-row);font-weight:var(--fw-strong);line-height:1.5;color:var(--ink-1)}
+.vn-name small{display:block;font-size:var(--fs-meta);line-height:1.6;color:var(--ink-3)}
+.vn-flags{display:flex;flex-wrap:wrap;align-items:center;gap:var(--s1) var(--s4);min-inline-size:0}
+.vn-card > summary:focus-visible{outline-offset:-2px}
+.vn-card:focus-within > summary{border-block-end-color:var(--line-strong);color:var(--ink-1)}
+@media (hover:hover){.vn-card > summary:hover{border-block-end-color:var(--line-strong);color:var(--ink-1)}}
+.vn-body{display:flex;flex-direction:column;gap:var(--s6);padding-block:var(--s6) var(--s10);padding-inline-start:var(--s4);border-inline-start:2px solid var(--line-strong)}
+.vn-body > *{min-inline-size:0;margin-block:0}
+.vn-reqs strong{font-size:var(--fs-table);font-weight:var(--fw-strong)}
+.vn-reqs small{font-size:var(--fs-label);color:var(--ink-4)}
+.vn-chips{display:flex;flex-wrap:wrap;align-items:center;gap:var(--s1) var(--s2);margin:0;font-size:var(--fs-label);font-weight:var(--fw-label);color:var(--ink-3)}
+.vn-chips > span{display:inline-flex;align-items:center;gap:var(--s2)}
+.vn-chips > span + span::before{--mk:6px;--c0:var(--ink-5)}
+
+/* the injected filter: size and sticky rung only, the write line itself is A's */
+.sig-filter{display:flex;align-items:center;gap:var(--s3);min-block-size:var(--tap);background:var(--canvas)}
+.sig-filter .glyph{flex:none;inline-size:18px;block-size:18px;color:var(--ink-4)}
+.sig-filter input{flex:1 1 auto;min-inline-size:0;min-block-size:var(--tap)}
+.sig-filter output{flex:none;font-size:var(--fs-label);color:var(--ink-4)}
+
+/* ---------- 5. alerts: three degrees, no background ---------- */
+.vn-alert,.notice,.error{position:relative;margin:0;padding-block:var(--s1);padding-inline-start:calc(var(--s4) + 20px);border-inline-start:2px solid transparent;font-size:var(--fs-meta);line-height:1.6;color:var(--ink-3)}
+.vn-alert:is(.is-late,.is-due,.is-warn,.is-block),.error{border-inline-start-color:var(--c);color:var(--ink-2)}   /* grade, colour and mask are A's (state layer); C only paints */
+:is(.vn-alert,.notice,.error)::before{position:absolute;inset-block-start:calc(var(--s1) + .45em);inset-inline-start:var(--s4);--mk:12px}
+:is(.vn-alert,.notice) > strong,.error{font-size:var(--fs-table);font-weight:var(--fw-strong)}
+:is(.vn-alert,.notice) > strong{color:var(--ink-2)}
+.vn-alert:is(.is-late,.is-due,.is-warn,.is-block) > strong,.error{color:var(--c)}
+:is(.vn-alert,.notice) :is(p,ul){margin:var(--s1) 0 0;max-inline-size:72ch}   /* measure: 97-114 chars a line on #commercial at desktop */
+.vn-alert ul{padding-inline-start:var(--s4)}
+.notice{padding-block:var(--s4);border-block-start:1px solid var(--line)}
+.notice::before{inset-block-start:calc(var(--s4) + .45em)}
+.error + .btn{margin-block-start:var(--s4)}
+#dialog-error:empty{display:none}
+
+/* ---------- 6. routes and pipelines: mark + name + note, joined by a hairline ---------- */
+.vn-pipeline,.journey,.journey-path{display:flex;flex-direction:column;margin:0;padding:0;list-style:none}
+.vn-step,.journey-step{display:grid;grid-template-columns:auto minmax(0,1fr);align-items:baseline;gap:0 var(--s2);padding-block:var(--s2);padding-inline-start:var(--s4);border-inline-start:1px solid var(--line)}
+:is(.vn-step,.journey-step) > *{grid-column:2}
+:is(.vn-step,.journey-step)::before{--c0:var(--ink-5);--m0:var(--m-wait);--mk:10px}
+.vn-step > span,.journey-step strong{font-size:var(--fs-meta);font-weight:var(--fw-strong);color:var(--ink-2)}
+:is(.vn-step,.journey-step) :is(small,p){display:block;margin:0;font-size:var(--fs-label);line-height:1.5;color:var(--ink-4)}
+.vn-step:is(.is-passed,.is-ok,.is-met,.is-verified){border-inline-start-color:var(--line-strong)}
+.vn-step:is(.is-now,.is-mine,.is-decision,.is-active)::before{--mk:16px}
+.vn-step:is(.is-now,.is-mine,.is-decision,.is-active) > span{font-size:var(--fs-row);color:var(--ink-1)}
+/* the approval route carries its state in a badge, not in a class */
+.journey-step{grid-template-columns:auto auto minmax(0,1fr);gap:0 var(--s3)}
+.journey-step > .step-no{grid-column:2;font-size:var(--fs-figure-s);font-weight:var(--fw-display);line-height:var(--lh-figure);color:var(--ink-4)}
+.journey-step > div{grid-column:3;display:flex;flex-direction:column;align-items:flex-start;gap:var(--s1);min-inline-size:0}
+.journey-step:has(.badge:is(.approved,.completed)){--c:var(--ink-2);--m:var(--m-done);border-inline-start-color:var(--line-strong)}
+.journey-step:has(.badge:is(.rejected,.cancelled)){--c:var(--stop);--m:var(--m-stop)}
+.journey-step:has(.badge:is(.returned,.needs_info)){--c:var(--spark);--m:var(--m-wait)}
+.journey-step:has(.badge.pending):not(.journey-step:has(.badge.pending) ~ *){--c:var(--turn);--m:var(--m-turn)}
+.journey-step:has(.badge.pending):not(.journey-step:has(.badge.pending) ~ *)::before{--mk:16px}
+.journey-step:has(.badge.pending):not(.journey-step:has(.badge.pending) ~ *) :is(strong,.step-no){font-size:var(--fs-row);color:var(--ink-1)}
+/* attendance days: the markup carries a full date and a sentence per day, so each day is a record, never a 28px cell */
+.vn-days .vn-step > span{direction:ltr;unicode-bidi:isolate;text-align:end;font-size:var(--fs-label);font-variant-numeric:tabular-nums lining-nums}
+/* executive flow and portal stops */
+.ex-flow{display:flex;flex-direction:column;gap:var(--s4)}
+.ex-step{display:flex;flex-direction:column-reverse;gap:var(--s1)}
+.ex-step strong{font-size:var(--fs-figure-s);font-weight:var(--fw-display);line-height:var(--lh-figure);color:var(--ink-4)}
+.ex-step span{font-size:var(--fs-meta);font-weight:var(--fw-strong);color:var(--ink-2)}
+.ex-arrow{display:none;font-size:0;--mk:10px;--c0:var(--ink-4);--m0:var(--m-turn)}
+html[dir=ltr] .ex-arrow{transform:scaleX(-1)}
+.journey-path{gap:var(--s6)}
+.journey-stop{display:flex;flex-direction:column;gap:var(--s2);color:var(--ink-2);text-decoration:none}
+.journey-stop > span{font-size:var(--fs-display-m);font-weight:var(--fw-display);line-height:var(--lh-figure);color:var(--ink-4)}
+.journey-stop > span::after{content:"";display:block;inline-size:var(--s6);block-size:2px;margin-block-start:var(--s3);background:var(--horizon);transition:inline-size var(--d-state) var(--ease)}
+.journey-stop > div{display:flex;flex-direction:column;gap:var(--s1)}
+.journey-stop strong{font-size:var(--fs-row);font-weight:var(--fw-strong);color:var(--ink-1)}
+.journey-stop small{font-size:var(--fs-label);color:var(--ink-4)}
+.journey-stop > b{display:none}
+@media (hover:hover){.journey-stop:hover > span::after{inline-size:var(--s14)}}
+
+/* ---------- 7. bars: a 2px ink line over a hairline track, never turquoise ---------- */
+.vn-bars > li{overflow:hidden}
+.vn-bar{position:relative;grid-column:1 / -1;inline-size:0;max-inline-size:100%;block-size:2px;margin-block-start:var(--s2);background:var(--c,var(--ink-1));animation:c-grow var(--d-scene) var(--ease)}
+.vn-bar::after{content:"";position:absolute;inset-block:0;inset-inline-start:100%;inline-size:100vw;background:var(--line)}
+.ex-bar{display:inline-block;inline-size:96px;max-inline-size:40%;block-size:2px;margin-inline-end:var(--s2);vertical-align:middle;background:var(--line)}
+.ex-bar > i{display:block;inline-size:0;max-inline-size:100%;block-size:100%;background:var(--c,var(--ink-1));animation:c-grow var(--d-scene) var(--ease)}
+
+/* ---------- 8. buttons: an edged pill by default; the fill is granted only in @layer fill ---------- */
+.btn{--btn-h:48px;position:relative;display:inline-flex;align-items:center;justify-content:center;gap:var(--s2);min-block-size:var(--tap);min-inline-size:var(--tap);margin:0;padding:0 var(--s6);border:1px solid var(--line-strong);border-radius:var(--r-pill);background:transparent;color:var(--ink-1);font:var(--fw-strong) var(--fs-table)/1.3 var(--font);text-align:center;text-decoration:none;cursor:pointer;-webkit-tap-highlight-color:transparent;transition:border-color var(--d-micro) var(--ease),color var(--d-micro) var(--ease),background-color var(--d-micro) var(--ease),scale var(--d-press) var(--ease-press)}
+:root[data-tier=stage] .btn,[data-operation^="punch_"]{--btn-h:var(--s14)}
+.btn:focus-visible,.text-button:focus-visible,.sig-more > summary:focus-visible{outline:2px solid var(--focus);outline-offset:3px}
+.btn.danger{border-color:var(--stop);color:var(--stop)}
+.btn.small{min-block-size:36px;padding-inline:var(--s4);font-size:var(--fs-label)}
+.btn.small::after{content:"";position:absolute;inset-block:-5px;inset-inline:0}   /* 36px pill, 44px target: the inset counts from the padding box, inside the 1px edge */
+.btn:is(:disabled,[aria-disabled=true]){border-color:var(--line);color:var(--ink-5);cursor:not-allowed;transform:none}
+.text-button,.journey-tool,.sig-more > summary,.timeline details > summary{display:inline-flex;align-items:center;min-block-size:var(--tap);min-inline-size:var(--tap);margin:0;padding:0;border:0;border-radius:var(--r-0);background:transparent;color:var(--ink-3);font:var(--fw-strong) var(--fs-meta)/1.3 var(--font);text-decoration-line:underline;text-decoration-thickness:1px;text-underline-offset:5px;cursor:pointer;list-style:none;transition:color var(--d-micro) var(--ease)}
+:is(.sig-more,.timeline details) > summary::-webkit-details-marker{display:none}
+.text-button:disabled{color:var(--ink-5);cursor:not-allowed}
+@media (hover:hover){
+  .btn:hover{--btn-bg:var(--action-hover);border-color:var(--ink-1)}
+  .btn.danger:not(.sig-more > *):hover{border-color:var(--stop);border-width:2px;padding-inline:calc(var(--s6) - 1px)}
+  .btn.danger.small:not(.sig-more > *):hover{padding-inline:calc(var(--s4) - 1px)}
+  .btn:is(:disabled,[aria-disabled=true]):hover{border-color:var(--line)}
+  :is(.text-button,.journey-tool,.sig-more > summary,.timeline details > summary):hover{color:var(--ink-1)}
+}
+.btn:active{--btn-bg:var(--action-press);scale:var(--press-scale)}
+:is(.vn-head,.vn-body) > .operation-actions > .btn:first-child{min-block-size:var(--tap);padding-inline:var(--s6);font-size:var(--fs-table)}   /* A2: the first action is a full 44px edged pill even when the markup says small; size only, never a fill */
+/* A2 action bars (vn-head, the card's own bar, form-actions used outside a dialog): the first is an edged pill, the rest are text, the destructive one sits at the far end */
+:is(.vn-head > .operation-actions,.vn-body > .operation-actions,#main .form-actions) > .btn:not(:first-child),.sig-more > .btn{min-block-size:var(--tap);padding:0;border:0;border-radius:var(--r-0);font-size:var(--fs-label);text-decoration-line:underline;text-decoration-thickness:1px;text-underline-offset:5px}
+:is(.vn-head > .operation-actions,.vn-body > .operation-actions,#main .form-actions) > .btn:not(:first-child,.danger),.sig-more > .btn:not(.danger){color:var(--ink-3)}
+:is(.vn-head > .operation-actions,.vn-body > .operation-actions,#main .form-actions) > .btn.danger:not(:first-child){margin-inline-start:auto}
+@media (hover:hover){:is(.vn-head > .operation-actions,.vn-body > .operation-actions,#main .form-actions,.sig-more) > .btn:not(:first-child,.danger):hover{color:var(--ink-1)}}
+.sig-more[open]{flex:1 1 100%}
+.sig-more > .btn{margin-inline-end:var(--s6)}
+/* app.mjs disables a submit button only while its request is in flight, so disabled there means busy */
+:is(.form-actions,.login-card,.password-form) [type=submit]:disabled::after,.btn[aria-busy=true]::after{content:"";flex:none;inline-size:30px;block-size:8px;background-color:currentColor;-webkit-mask:var(--m-turn) 0 50%/10px 8px repeat-x;mask:var(--m-turn) 0 50%/10px 8px repeat-x;animation:c-busy 900ms var(--ease) infinite}
+
+/* ---------- 9. dialog: a scene change; square window from 760px, a sheet with two top corners below ---------- */
+dialog{color:var(--ink-2)}
+dialog::backdrop{background:var(--scrim);animation:c-fade var(--d-state) var(--ease)}
+#dialog,.journey-dialog{position:fixed;inset-block:auto 0;inset-inline:0;inline-size:100%;max-inline-size:100%;max-block-size:calc(100dvh - var(--s3) - var(--safe-t));margin:0;padding:0;border:0;border-block-start:1px solid var(--line-strong);border-start-start-radius:var(--r-float);border-start-end-radius:var(--r-float);background:var(--canvas);color:var(--ink-2);overscroll-behavior:contain;transform:translateY(var(--drag,0px))}
+#dialog[open]{display:flex;flex-direction:column;overflow:hidden}
+.journey-dialog{overflow-y:auto;padding:0 var(--gutter) calc(var(--s6) + var(--safe-b))}
+:is(#dialog,.journey-dialog)[open]{animation:c-sheet var(--d-scene) var(--ease)}
+:is(#dialog,.journey-dialog):not(.is-dragging){transition:transform var(--d-state) var(--ease)}
+:is(#dialog,.journey-dialog).is-dragging{animation:none}
+.dialog-head,.journey-dialog > header{position:sticky;inset-block-start:0;z-index:3;flex:none;display:flex;align-items:flex-start;justify-content:space-between;gap:var(--s4);padding-block:var(--s6) var(--s3);background:var(--canvas);touch-action:none}
+.dialog-head{padding-inline:var(--gutter)}
+.dialog-head h2,.journey-dialog > header h2{min-inline-size:0;margin:0;font-size:var(--fs-display-m);font-weight:var(--fw-display);line-height:var(--lh-display);color:var(--ink-1);text-wrap:balance}
+.sheet-close,.journey-tool[data-journey-action=close]{flex:none;display:grid;place-items:center;inline-size:var(--tap);block-size:var(--tap);margin:0;padding:0;border:0;border-radius:var(--r-0);background:transparent;color:var(--ink-3);font-size:var(--fs-title);text-decoration-line:none;cursor:pointer}
+.sheet-close .glyph{inline-size:20px;block-size:20px}
+.sheet-close:focus-visible{outline:2px solid var(--focus);outline-offset:-2px}
+@media (hover:hover){.sheet-close:hover{color:var(--ink-1)}}
+.dialog-body{flex:1 1 auto;min-block-size:0;display:flex;flex-direction:column;overflow-y:auto;overscroll-behavior:contain;padding-inline:var(--gutter)}
+.dialog-body::after{content:"";flex:none;block-size:calc(var(--s6) + var(--safe-b))}
+.dialog-body > form > p,.dialog-body > p{margin-block:0 var(--s4);font-size:var(--fs-meta);line-height:1.6;color:var(--ink-3);max-inline-size:72ch}
+#dialog-error{order:-1;position:sticky;inset-block-start:0;z-index:2;padding-block:var(--s2);background:var(--canvas)}
+.form-actions{display:flex;flex-direction:column-reverse;gap:var(--s3);margin-block-start:var(--s6)}
+#dialog .form-actions{position:sticky;inset-block-end:0;z-index:2;padding-block:var(--s4);border-block-start:1px solid var(--line);background:var(--canvas)}
+#dialog .form-actions .btn{min-block-size:52px}
+/* WCAG 2.4.11: the bar above is stuck to the end of the scroller and is opaque, so a field focused near the fold would sit under it. The scroller keeps the bar's
+   height clear: two stacked 52px buttons + their gap + the bar's padding and edge, and s4 of air (165px). From 760 the bar is one row (section 14). */
+#dialog .dialog-body:has(.form-actions){scroll-padding-block-end:calc(52px * 2 + var(--s3) + var(--s4) * 3 + 1px)}
+#main .form-actions{flex-direction:row;flex-wrap:wrap;align-items:center;gap:var(--s2) var(--s6);margin-block-start:var(--s4)}
+/* browsers that do not let ::backdrop inherit custom properties would leave the page undimmed */
+@supports not (transition-behavior:allow-discrete){:is(#dialog,.journey-dialog)[open]{outline:100vmax solid var(--scrim)}}
+
+/* journey dialog (jump and tour) */
+#journey-search{inline-size:100%;min-block-size:var(--tap);margin-block-end:var(--s3)}
+.journey-results{display:flex;flex-direction:column}
+.journey-results a{display:flex;align-items:center;justify-content:space-between;gap:var(--s4);min-block-size:52px;border-block-end:1px solid var(--line);color:var(--ink-2);font-size:var(--fs-row);text-decoration-line:none;transition:border-color var(--d-micro) var(--ease),color var(--d-micro) var(--ease)}
+.journey-results a:focus-visible{outline-offset:-2px}
+.journey-results a > small{display:none}
+@media (hover:hover){.journey-results a:hover{border-block-end-color:var(--line-strong);color:var(--ink-1)}}
+.journey-help,.journey-empty{margin:var(--s3) 0 0;font-size:var(--fs-label);line-height:1.6;color:var(--ink-4)}
+.journey-tour-counter{display:block;font-size:var(--fs-figure-s);font-weight:var(--fw-display);line-height:1.3;color:var(--ink-4)}
+.journey-tour-copy{margin-block:var(--s3) var(--s6);font-size:var(--fs-body);line-height:var(--lh-body);color:var(--ink-2);max-inline-size:36em}
+.journey-tour-controls{display:flex;flex-wrap:wrap;gap:var(--s3)}
+.journey-tools,.journey-mobile-menu,.journey-sidebar-close{display:none!important}
+
+/* ---------- 10. toast: the one floating pill ---------- */
+#toast{position:fixed;z-index:var(--z-toast);inset-inline:0;inset-block-end:calc(var(--tabbar-h) + var(--safe-b) + var(--s3));display:flex;align-items:center;gap:var(--s2);inline-size:max-content;max-inline-size:calc(100% - var(--s8));margin-inline:auto;padding:var(--s3) var(--s6);border:1px solid var(--line-strong);border-radius:var(--r-pill);background:var(--canvas);color:var(--ink-1);font-size:var(--fs-table);font-weight:var(--fw-strong);line-height:1.4;opacity:0;transform:translateY(8px);pointer-events:none;transition:opacity var(--d-exit) var(--ease-exit),transform var(--d-exit) var(--ease-exit)}
+#toast.show{opacity:1;transform:none;transition:opacity var(--d-state) var(--ease),transform var(--d-state) var(--ease)}   /* enters over 200ms, leaves softer over 150ms (better-ui) */
+#toast:empty{display:none}
+#toast::before{--c:var(--ink-1);--m:var(--m-done);--mk:12px}
+
+/* ---------- 11. empty states and the page-level error: stage moments ---------- */
+.empty{position:relative;display:flex;flex-direction:column;align-items:flex-start;gap:var(--s4);padding-block:var(--s10);color:var(--ink-3)}
+.empty > strong{font-size:var(--fs-display-m);font-weight:var(--fw-display);line-height:var(--lh-display);color:var(--ink-1);text-wrap:balance;max-inline-size:18em}
+/* page level = the .empty is the whole answer of the screen: bare under #main / .operations, or alone in the one .panel app.mjs wraps it in */
+:is(#main,#main > .operations) > .empty > strong,#main > .panel > .empty:only-child > strong,#main > .error:is(:only-child,:first-child:has(+ .btn:last-child)){font-size:var(--fs-display-l)}
+/* #inbox with nothing pending: inbox-ui emits the sentence as bare text in the section that replaces the groups. It is the good emptiness (spec 7.2 item 4),
+   so it takes the display scale (36 → 72 through the token's clamp). inbox-ui adds .vn-none only when nothing follows it: a reply still waiting or a «تعذر قراءة» line keeps it quiet, since then "nothing" is not certain.
+   position:relative is the anchor for E's filled comma on ::before. */
+html[data-route=inbox] .operations > .panel.panel-body.vn-none{position:relative;max-inline-size:18em;padding-block:var(--s10);font-size:var(--fs-display-l);font-weight:var(--fw-display);line-height:var(--lh-display);color:var(--ink-1);text-wrap:balance}
+.empty > p{margin:0;font-size:var(--fs-body);line-height:var(--lh-body);color:var(--ink-3);max-inline-size:30em;text-wrap:pretty}
+:is(.vn-block,.vn-board) > h3::before,.empty > p::before{display:inline-block;margin-inline-end:var(--s2)}
+.empty > p::before{--c:var(--spark);--m:var(--m-wait);--mk:10px}   /* default: something is still missing */
+html:is([data-route=inbox],[data-route=notifications],[data-route=work]) .empty > p::before{--c:var(--ink-4);--m:var(--m-done)}   /* the good emptiness: nothing is waiting */
+#main > .error:is(:only-child,:first-child:has(+ .btn:last-child)){display:flow-root;max-inline-size:18em;margin-block-start:var(--s10);padding-block:0 var(--s4);font-weight:var(--fw-display);line-height:var(--lh-display);color:var(--ink-1);text-wrap:balance}
+#main > .error:is(:only-child,:first-child:has(+ .btn:last-child))::before{inset-block-start:.5em;--mk:16px}
+#main > .error:is(:only-child,:first-child:has(+ .btn:last-child))::after{content:"";display:block;inline-size:min(40vw,240px);aspect-ratio:.862;margin-block-start:var(--s8);background-color:var(--ghost);-webkit-mask:var(--m-wait) center/contain no-repeat;mask:var(--m-wait) center/contain no-repeat}
+
+/* ---------- 12. timeline, files, long text ---------- */
+.timeline{--c:initial;--m:initial;padding-inline-start:var(--s6);border-inline-start:1px solid var(--line)}
+.timeline-item{position:relative;padding-block:var(--s3)}
+.timeline-item::before{position:absolute;inset-block-start:calc(var(--s3) + .5em);inset-inline-start:calc(var(--s6) * -1 - 4.5px);--c0:var(--ink-4)}
+.timeline-item strong{display:block;font-size:var(--fs-table);font-weight:var(--fw-strong);color:var(--ink-1)}
+.timeline-item small{display:block;font-size:var(--fs-label);color:var(--ink-4);font-variant-numeric:tabular-nums lining-nums}
+.timeline-item p{margin:var(--s1) 0 0;font-size:var(--fs-table);line-height:1.6;color:var(--ink-2)}
+.timeline details{margin-block-start:var(--s2)}
+.file{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:var(--s1) var(--s4);min-block-size:48px;padding-block:var(--s2);border-block-end:1px solid var(--line)}
+.file > div{min-inline-size:0}
+.file span,.file strong{font-size:var(--fs-table);font-weight:var(--fw-strong);color:var(--ink-1);overflow-wrap:break-word}
+.file small{font-size:var(--fs-label);color:var(--ink-4)}
+.file > a{display:inline-flex;align-items:center;min-block-size:var(--tap);font-size:var(--fs-label);font-weight:var(--fw-label);color:var(--ink-3)}
+.ai-output{max-inline-size:36em;margin:0;padding-inline-start:var(--s6);border-inline-start:1px solid var(--line-strong);font-size:var(--fs-body-l);line-height:1.9;color:var(--ink-2);text-wrap:pretty}
+
+/* ---------- 13. screen change: one quiet entrance per tier ---------- */
+#main.journey-enter{animation:c-rise var(--d-state) var(--ease)}
+:root:is([data-tier=ledger],[data-route=payroll],[data-route=hr-cases],[data-route=compensation],[data-route=security],[data-route=payroll-extras],[data-route=payroll-anomaly],[data-route=wps],[data-route=contracts],[data-route=wage-reconciliation],[data-route=benefits],[data-route=performance]) #main.journey-enter{animation:c-fade var(--d-micro) linear}
+
+/* ---------- 14. from 760px ---------- */
+@media (min-width:760px){
+  .panel .panel{padding-inline-start:var(--s6)}
+  .vn-tiles,.stats,.pt-tiles,.acc-stats,.hr-focus{gap:var(--s8) var(--s14)}
+  :is(.vn-tile,.pt-tile,.stat,.acc-stats > article,.hr-focus > a){flex:0 1 auto;min-inline-size:160px;max-inline-size:100%}
+  .vn-card > summary{grid-template-columns:auto minmax(72px,auto) minmax(0,1fr) auto auto;column-gap:var(--s4)}
+  .vn-name{grid-area:1 / 3}
+  .vn-flags{grid-area:1 / 4}
+  .vn-card > summary::after{grid-area:1 / 5}
+  .vn-flags{justify-content:flex-end}
+  .vn-card[open] > summary{position:sticky;inset-block-start:var(--stick-2);z-index:2;block-size:var(--summary-h);padding-block:0;background:var(--canvas)}
+  .vn-card[open] > summary :is(.vn-name strong,.vn-name small){white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .vn-card[open] > summary .vn-flags{flex-wrap:nowrap;overflow:hidden}
+  /* WCAG 2.4.11: html's scroll-padding clears the topbar only (sticky-top + s4). A control focused inside an open card must also clear
+     the filter row and the stuck summary, and from 1024 the th that journey.css sticks at --stick-3. The s4 of the scroll-padding stays as air. */
+  .vn-card[open] > :not(summary) :is(a,button,input,select,textarea,summary,[tabindex]),.vn-card[open] > :is(a,button,input,select,textarea,[tabindex]){scroll-margin-block-start:calc(var(--filter-h) + var(--summary-h))}
+  .vn-body{padding-inline-start:var(--s18)}
+  .sig-filter{position:sticky;inset-block-start:var(--stick-1);z-index:3;block-size:var(--filter-h)}
+  .vn-pipeline:not(.vn-days),.ex-flow,.journey-path{flex-direction:row;align-items:stretch}
+  .vn-pipeline:not(.vn-days) > .vn-step{flex:1 1 0;min-inline-size:0;padding-block:var(--s3) 0;padding-inline:0 var(--s4);border-inline-start:0;border-block-start:1px solid var(--line)}
+  .vn-pipeline:not(.vn-days) > .vn-step:is(.is-passed,.is-ok,.is-met,.is-verified){border-block-start-color:var(--line-strong)}
+  .vn-days{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));column-gap:var(--s8)}
+  .ex-flow{align-items:center;gap:var(--s6)}
+  .ex-arrow{display:block}
+  .journey-path{gap:var(--s14)}
+  .journey-stop{flex:1 1 0;min-inline-size:0}
+  #dialog,.journey-dialog{inset-block:0;inline-size:min(640px,calc(100% - calc(var(--s8) * 2)));max-block-size:min(86dvh,900px);margin:auto;border:1px solid var(--line-strong);border-radius:var(--r-0);transform:none}
+  #dialog.launcher{inline-size:min(1040px,calc(100% - calc(var(--s8) * 2)))}
+  :is(#dialog,.journey-dialog)[open]{animation:c-rise 240ms var(--ease)}
+  .dialog-head,.dialog-body{padding-inline:var(--s8)}
+  .journey-dialog{padding-inline:var(--s8)}
+  .dialog-head,.journey-dialog > header{touch-action:auto}
+  .form-actions{flex-direction:row;flex-wrap:wrap;justify-content:flex-end;align-items:center}
+  #dialog .form-actions .btn{min-block-size:var(--tap)}
+  #dialog .dialog-body:has(.form-actions){scroll-padding-block-end:calc(var(--s14) + var(--s4) * 3 + 1px)}   /* one row: the filled action at its tallest (56px in the stage tier) + the bar's padding and edge + s4 of air */
+}
+@media (max-width:759.98px){
+  :root :is(.page-actions .btn.primary,.journey-cta .btn.primary,[data-operation^="punch_"],.login-card .btn,.password-form .btn){--btn-h:52px;--btn-w:100%}
+  :root .form-actions .btn{--btn-h:52px}
+}
+@media (min-width:1024px){
+  /* #inbox with items (spec 7.2 item 4): a statement column 5/12 that stays put (the focal figures) beside a work column 7/12 (the rows). Built inside .operations,
+     which this layer owns: #main's display and .page-head's position and columns are set in @layer shell and cannot be outranked from here, so the h1 stays above.
+     The board spans every row so its sticky range is the whole list (49 sources + requests + head + note < 64); rows carry no gap, the rhythm is on margins.
+     The head holds one <p> and nothing focusable, so dropping it under the groups moves no Tab stop. With no group the zero state keeps the full width. */
+  html[data-route=inbox] .operations:has(> .vn-group){display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:0 calc(var(--s8) * 2);align-items:start}
+  html[data-route=inbox] .operations:has(> .vn-group) > *{grid-column:2}
+  html[data-route=inbox] .operations:has(> .vn-group) > .vn-board{grid-column:1;grid-row:1 / span 64;position:sticky;inset-block-start:calc(var(--sticky-top) + var(--s4))}
+  html[data-route=inbox] .operations:has(> .vn-group) > .vn-head{order:1}
+  html[data-route=inbox] .operations:has(> .vn-group) > :is(.vn-group ~ *,.vn-head){margin-block-start:var(--gap-section)}
+  .vn-grid,.split{grid-template-columns:minmax(0,7fr) minmax(0,5fr);column-gap:calc(var(--s8) * 2)}
+  #toast{inset-block-end:calc(var(--s8) + var(--safe-b))}
+  .vn-card[open] .table-wrap:not(.is-wide) td :is(a,button,input,select,textarea,summary,[tabindex]){scroll-margin-block-start:calc(var(--filter-h) + var(--summary-h) + var(--row-h))}
+}
+
+/* marks are painted with background-color, which forced colours would erase */
+@media (forced-colors:active){
+  :is(.vn-tile,.pt-tile,.stat,.acc-stats > article)::before,.vn-card > summary::before,.vn-card > summary::after,:is(.vn-block,.vn-board) > h3::before,:is(.vn-alert,.notice,.error)::before,:is(.vn-step,.journey-step)::before,.vn-chips > span + span::before,.timeline-item::before,.empty > p::before,#toast::before,.ex-arrow,:is(.form-actions,.login-card,.password-form) [type=submit]:disabled::after{forced-color-adjust:none;background-color:CanvasText}
+  .vn-card > summary::before{background-color:var(--c,transparent)}
+  .vn-bar,.ex-bar > i{forced-color-adjust:none;background:CanvasText}
+}
+} /* end @layer components */
+
+/* ===== the single filled action: an attribute whitelist, never a positional promotion =====
+   Zero specificity is enough: the layer wins over row actions (surfaces) and page-head rules (shell).
+   One light per scene: a later primary, punch_out beside punch_in, and submit/claim/complete beside a stronger
+   transition are excluded in the list itself. The first #inbox row is NOT here: app/inbox.mjs does not sort oldest
+   first (groups follow source order), so the condition in the spec is unmet and every inbox link stays text.
+   A disabled action loses its fill: turquoise shows only when the act is possible. The three submit
+   buttons keep it, because app.mjs disables them only while the request is in flight. */
+@layer fill{
+:where(
+  .page-actions .btn.primary:not(.btn.primary ~ *),
+  .journey-cta .btn.primary,
+  [data-operation="punch_in"],
+  [data-operation="punch_out"]:not([data-operation="punch_in"] ~ *),
+  [data-transition=approve],
+  .panel-body:not(:has([data-transition=approve])) > [data-transition=submit],
+  .panel-body:not(:has([data-transition=approve],[data-transition=submit])) > [data-transition=claim],
+  .panel-body:not(:has([data-transition=approve],[data-transition=submit],[data-transition=claim])) > [data-transition=complete]
+):not(:disabled,[aria-disabled=true]),
+:where(.form-actions .btn:is(.dark,.primary)[type=submit],.login-card .btn.dark,.password-form .btn.primary){
+  min-block-size:var(--btn-h,48px);inline-size:var(--btn-w,auto);padding:0 var(--s8);
+  border:1px solid transparent;border-radius:var(--r-pill);
+  background-color:var(--btn-bg,var(--action));color:var(--on-action);
+  font-size:var(--fs-table);text-decoration-line:none}
+}
+
+/* ===== مكتبة السياسات (ترحيل 110) =====
+   خمس قطع لا يغطيها المشترك: حقل بحث فوق الصفحة، بطاقات الأبواب، متن المادة المرقّم، الكلمة الموسومة في
+   المقتطف، وسطر المقارنة. كل ما عداها (اللوحات والقوائم والشارات والأزرار) من أصناف المنصة كما هي.
+   الوحدات نسبية والتخطيط شبكة تلقائية، فيطوي نفسه على الجوال بلا استعلام وسائط خاص. */
+@layer policy-library{
+.policy-search input[type=search]{inline-size:100%;min-block-size:3rem;padding-inline:.75rem;border-radius:var(--r-pill,999px);
+  border:1px solid currentColor;background:transparent;color:inherit;font-size:1.05rem}
+.policy-filters{display:grid;grid-template-columns:repeat(auto-fit,minmax(11rem,1fr));gap:.5rem;margin-block-start:.75rem}
+.policy-filters label{display:grid;gap:.25rem;font-size:.85rem}
+.policy-chapters{display:grid;grid-template-columns:repeat(auto-fill,minmax(14rem,1fr));gap:.6rem}
+.policy-chapter{display:grid;gap:.15rem;padding:.75rem;border:1px solid currentColor;border-radius:var(--r-card,12px);
+  text-decoration-line:none;color:inherit}
+.policy-chapter strong{font-size:1rem}
+.policy-chapter span,.policy-chapter small{opacity:.75;font-size:.8rem}
+/* المتن: كل فقرة سطر مستقل مرقّم، والمطابقة تُبرز حتى يجدها القارئ دون أن يمسح المادة كلها. */
+.policy-text{display:grid;gap:.6rem;padding-inline-start:1.25rem;line-height:1.9}
+.policy-text > li.is-match{background:color-mix(in oklab,currentColor 8%,transparent);border-radius:.35rem;padding:.25rem .4rem}
+.policy-excerpt{display:block;opacity:.85;line-height:1.8}
+.policy-excerpt mark,.policy-text mark{background:color-mix(in oklab,currentColor 18%,transparent);color:inherit;border-radius:.2rem;padding-inline:.15rem}
+.policy-index-list{display:grid;gap:.3rem;padding-inline-start:1rem;margin:0}
+.policy-index-list > li.is-current{font-weight:700}
+.policy-diff > li{display:grid;grid-template-columns:auto 1fr;gap:.5rem;align-items:baseline}
+.policy-diff > li > small{opacity:.6;font-variant-numeric:tabular-nums;white-space:nowrap}
+}
+
+/* رابط السجل (الموجة 1 «ما عليّ»): ‎#screen?focus=<id>‎ يقف عند السجل ويعلّمه بحلقة التركيز نفسها — رمز --focus لا لون جديد.
+   خارج الطبقات عمدًا حتى تظهر العلامة في كل تصميم دون أن يعيد كل تصميم تعريفها. */
+.is-focused{outline:2px solid var(--focus,currentColor);outline-offset:2px;scroll-margin-block:96px}
+/* «العمل اليومي»: السلال الثلاث صف واحد، و«طلباتي المفتوحة» (ما أتابعه عند غيري) صف كامل تحتها. */
+.wk-top > .wk-wide{grid-column:1/-1}
+
+/* ملف الموظف الموحّد (app/static/employee-profile-ui.mjs): أربع تبويبات بلا سطر برمجي واحد.
+   أربعة أزرار اختيار مخفية بصريًا لا وظيفيًا (تبقى في ترتيب لوحة المفاتيح وفي شجرة إمكانية الوصول)، ولكل منها ملصق يراه
+   القارئ ولوح يظهر حين يُختار. سياسة الأمان تمنع <script> في الصفحة، والأسهم تتنقل بين أزرار المجموعة أصلًا بلا كود. */
+.ep-tabs{display:grid;gap:var(--s4,1rem)}
+.ep-tabs > .ep-tab-input{position:absolute;inline-size:1px;block-size:1px;margin:0;opacity:0;clip-path:inset(50%)}
+.ep-tablist{display:flex;flex-wrap:wrap;gap:var(--s2,.5rem);border-block-end:1px solid var(--line,currentColor)}
+.ep-tab{display:inline-flex;align-items:center;min-block-size:44px;padding-inline:var(--s4,1rem);
+  border-block-end:2px solid transparent;color:var(--ink-3,inherit);font-weight:500;cursor:pointer}
+.ep-panel{display:none}
+#ep-tab-overview:checked ~ #ep-panel-overview,#ep-tab-contract:checked ~ #ep-panel-contract,
+#ep-tab-experience:checked ~ #ep-panel-experience,#ep-tab-benefits:checked ~ #ep-panel-benefits,
+#ep-tab-important-documents:checked ~ #ep-panel-important-documents{display:grid;gap:var(--s4,1rem)}
+#ep-tab-overview:checked ~ .ep-tablist [for=ep-tab-overview],#ep-tab-contract:checked ~ .ep-tablist [for=ep-tab-contract],
+#ep-tab-experience:checked ~ .ep-tablist [for=ep-tab-experience],#ep-tab-benefits:checked ~ .ep-tablist [for=ep-tab-benefits],
+#ep-tab-important-documents:checked ~ .ep-tablist [for=ep-tab-important-documents]{
+  border-block-end-color:currentColor;color:var(--ink-1,inherit)}
+#ep-tab-overview:focus-visible ~ .ep-tablist [for=ep-tab-overview],#ep-tab-contract:focus-visible ~ .ep-tablist [for=ep-tab-contract],
+#ep-tab-experience:focus-visible ~ .ep-tablist [for=ep-tab-experience],#ep-tab-benefits:focus-visible ~ .ep-tablist [for=ep-tab-benefits],
+#ep-tab-important-documents:focus-visible ~ .ep-tablist [for=ep-tab-important-documents]{
+  outline:2px solid var(--focus,currentColor);outline-offset:2px;border-radius:var(--r-pill,999px)}
+/* البند وحالته: «غير متاح» و«لا يُسجَّل في المنصة» يُقرآن نصًّا كاملًا لا لونًا وحده، فيصلان لمن لا يميز الألوان. */
+.ep-facts{display:grid;grid-template-columns:repeat(auto-fit,minmax(16rem,1fr));gap:var(--s4,1rem);margin:0}
+.ep-fact{display:grid;gap:.15rem;min-inline-size:0}
+.ep-fact > dt{color:var(--ink-3,inherit);font-size:var(--fs-label,.85rem)}
+.ep-fact > dd{margin:0;display:grid;gap:.15rem;min-inline-size:0;overflow-wrap:anywhere}
+.ep-fact small{color:var(--ink-3,inherit);font-size:var(--fs-foot,.8rem);line-height:1.6}
+.ep-fact.is-unavailable > dd > strong,.ep-fact.is-not_stored > dd > strong{font-weight:500;opacity:.85}
+.ep-meter{display:grid;gap:.35rem;margin-block-start:var(--s4,1rem)}
+.ep-meter > .vn-bar{block-size:6px;border-radius:3px;background:currentColor}
+.ep-identity{display:flex;flex-wrap:wrap;align-items:center;gap:var(--s4,1rem)}
+.ep-identity h2,.ep-identity p{margin:0}
+.ep-avatar{display:inline-flex;align-items:center;justify-content:center;inline-size:3rem;block-size:3rem;
+  border:1px solid var(--line,currentColor);border-radius:50%;font-weight:600}
+.ep-state,.ep-next{margin:.35rem 0}
+.ep-doc-summary{display:grid;grid-template-columns:minmax(0,1fr) minmax(16rem,.7fr);gap:var(--s4,1rem);align-items:end}
+.ep-doc-summary :is(h2,p){margin-block:.2rem}
+.ep-doc-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,18rem),1fr));gap:var(--s4,1rem)}
+.ep-doc-card{display:flex;flex-direction:column;gap:var(--s3,.75rem);min-inline-size:0;padding:var(--s4,1rem);
+  border:1px solid var(--line,currentColor);border-radius:var(--r-lg,12px);background:var(--surface,var(--canvas,transparent))}
+.ep-doc-card.is-needs_setup{border-style:dashed}
+.ep-doc-card.is-pending_approval{border-block-start:3px solid var(--icon-warning,currentColor)}
+.ep-doc-card.is-needs_update{border-block-start:3px double var(--icon-negative,currentColor)}
+.ep-doc-card.is-available{border-block-start:3px solid var(--icon-positive,currentColor)}
+.ep-doc-head{display:grid;grid-template-columns:auto minmax(0,1fr);gap:var(--s3,.75rem);align-items:start}
+.ep-doc-head h3,.ep-doc-head small,.ep-doc-card > p{margin:0}
+.ep-doc-head h3{font-size:var(--fs-row,1rem);line-height:1.5}
+.ep-doc-head small,.ep-doc-card > p,.ep-doc-meta{color:var(--ink-3,inherit);font-size:var(--fs-meta,.9rem);line-height:1.65}
+.ep-doc-icon{display:grid;place-items:center;inline-size:2.75rem;block-size:2.75rem;border:1px solid var(--line,currentColor);border-radius:28%}
+.ep-doc-icon .glyph{inline-size:1.35rem;block-size:1.35rem}
+.ep-doc-meta{display:grid;gap:var(--s2,.5rem);margin:0}
+.ep-doc-meta > div{display:grid;grid-template-columns:minmax(5rem,.38fr) minmax(0,1fr);gap:var(--s2,.5rem)}
+.ep-doc-meta :is(dt,dd){margin:0;overflow-wrap:anywhere}
+.ep-doc-meta dt{font-weight:var(--fw-strong,600);color:var(--ink-2,inherit)}
+.ep-doc-status{display:inline-flex;align-items:center;min-block-size:1.75rem;padding-inline:var(--s2,.5rem);border:1px solid currentColor;border-radius:var(--r-pill,999px);color:var(--ink-1,inherit)}
+.ep-doc-next{margin:0;padding-block-start:var(--s2,.5rem);border-block-start:1px solid var(--line,currentColor);font-size:var(--fs-meta,.9rem);line-height:1.65}
+.ep-doc-actions{margin:auto 0 0!important;padding-block-start:var(--s2,.5rem)}
+.ep-doc-actions .btn{display:inline-flex;align-items:center;justify-content:center;min-block-size:44px}
+@media (max-width:480px){
+  .ep-tablist{flex-wrap:nowrap;overflow-x:auto;scrollbar-width:none}
+  .ep-tab{flex:0 0 auto;padding-inline:var(--s3,.75rem)}
+  .ep-facts{grid-template-columns:1fr}
+  .ep-doc-summary,.ep-doc-grid{grid-template-columns:1fr}
+  .ep-doc-card{padding:var(--s3,.75rem)}
+  .ep-doc-actions .btn{inline-size:100%}
+}
+/* مرشّحات دليل الموظفين: صف يلتف، وكل عنصر 44 بكسل على الأقل ليُلمس على الهاتف. */
+.emp-filters{display:flex;flex-wrap:wrap;align-items:end;gap:var(--s3,.75rem);margin-block:var(--s3,.75rem)}
+.emp-filter{display:grid;gap:.2rem;flex:1 1 12rem;min-inline-size:0;font-size:var(--fs-label,.85rem)}
+.emp-filter :is(select,input){min-block-size:44px;min-inline-size:0;max-inline-size:100%}
+.emp-count{flex:1 1 100%;margin:0;color:var(--ink-3,inherit);font-size:var(--fs-foot,.8rem)}
+/* مركز الخدمات (الدفعة الثانية): بطاقة الدليل وشبكتها، وهيكل التحميل، وأقسام صفحة الخدمة وشريطها الملتصق.
+   بلا لون حرفي: كل قيمة من الرموز مع قيمة احتياطية، كما في كتلتَي .ep-* و.emp-* أعلاه. ولا نمط سطري في
+   أي ترميز (CSP): عرض الأشرطة وحده يُرسم من app.mjs عبر data-width، ولا شريط في هذه الشاشات.
+   الهدف الملموس ≥44 بكسل في كل ما يُنقر، ورأس القسم ≥48، وشريط البدء ≥56 مع مساحة الحافة الآمنة. */
+.sc-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,20rem),1fr));gap:var(--s3,.75rem);min-inline-size:0}
+.sc-grid > *{min-inline-size:0}
+.sc-card{display:flex;flex-direction:column;gap:var(--s2,.5rem);min-inline-size:0;padding:var(--s4,1rem);
+  border:1px solid var(--line,currentColor);border-radius:var(--r-lg,12px)}
+/* «لا تنطبق عليك الآن» تُحمل على الحدّ والنصّ والأيقونة لا على الشفافية: خفض التعتيم يكسر 4.5:1. */
+.sc-card.is-blocked{border-style:dashed}
+.sc-open{display:flex;align-items:flex-start;gap:var(--s2,.5rem);min-block-size:44px;min-inline-size:0;color:inherit;text-decoration:none}
+.sc-open .rq-row-text{display:grid;gap:.15rem;min-inline-size:0}
+.sc-desc{display:-webkit-box;-webkit-line-clamp:2;line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;
+  color:var(--ink-3,inherit);font-size:var(--fs-meta,.9rem);line-height:1.6;overflow-wrap:anywhere}
+.sc-chips{display:flex;flex-wrap:wrap;align-items:center;gap:var(--s1,.25rem) var(--s2,.5rem);margin:0}
+/* الشارة ليست هدفًا: لا تسرق النقرة من جسم البطاقة. */
+.sc-chips > *{pointer-events:none}
+.sc-actions{display:flex;flex-wrap:wrap;gap:var(--s2,.5rem);align-items:center;margin:auto 0 0}
+.sc-actions :is(.btn,[aria-disabled]){min-block-size:44px;display:inline-flex;align-items:center;gap:.25rem}
+/* أعضاء المجموعة روابط لا تُقصّ: رابطٌ مقصوص هدفٌ مخفيّ. وكل رابط هدف لمس بسطر ≥1.9 من حجمه. */
+.sc-members{color:var(--ink-3,inherit);font-size:var(--fs-meta,.9rem);line-height:1.9;overflow-wrap:anywhere}
+.sc-members a{color:inherit;text-decoration:underline;text-underline-offset:.2em;display:inline-block;padding-block:.55rem}
+/* روابط النص داخل البطاقات أهدافُ لمسٍ ≥44: 14px×1.9 + 2×.55rem ≈ 44 لأعضاء المجموعة؛ والسبب والجواب والمخرج بخطٍّ أصغر فتزيد حشوتها. */
+.sc-why a,.sc-answer strong a,.sc-feedback a{display:inline-block;min-block-size:44px;padding-block:.7rem;line-height:1.6}
+/* البحث أول عنصر وأكبره: الحقل ≥56 بكسل، أعلى من أي هدف آخر في الشاشة. */
+.sc-search .rq-search input{min-block-size:56px}
+/* بطاقة الفئة ≥64 بكسل للمس (الشبكة نفسها rq-dept-grid: عمود واحد تحت 480 بقاعدة minmax القائمة). */
+.sc-cat{min-block-size:64px}
+.sc-lens,.sc-sort{display:flex;flex-wrap:wrap;align-items:center;gap:var(--s2,.5rem);margin-block:var(--s3,.75rem)}
+/* صفيحة الطلب: سطرٌ واحد فوق الأفعال يقول إن المسودة لا تصل أحدًا حتى تُقدَّم. */
+@layer components{.rq-draft-note{margin:var(--s3,.75rem) 0 0;font-size:var(--fs-meta,.9rem);line-height:1.6;color:var(--ink-3,inherit)}}
+.sc-lens > *,.sc-sort > :is(a,strong){min-block-size:44px;display:inline-flex;align-items:center}
+/* التبويب المختار يُرى ولا يُقرأ بالسمة وحدها: في «كوكبة 360» و«الفراغ» و«الرواق» و«اليوم» كان (btn dark) مطابقًا بالقياس لأخويه —
+   الأرضية والحبر والحدّ نفسها. حلقةٌ داخلية بلون الحبر تُضاف إلى أي شكل يرسمه التصميم، ولا تغيّر المقاس. */
+@layer components{.sc-lens > [role=tab][aria-selected=true]{box-shadow:inset 0 0 0 2px currentColor}}   /* في طبقة المكوّنات: التصميم الذي يرسم المختار تعبئةً ويصفّر الظل (مركز الأثر) يبقى على رسمه */
+.sc-counts{margin:var(--s2,.5rem) 0 0;color:var(--ink-3,inherit);font-size:var(--fs-meta,.9rem)}
+.sc-found{display:grid;gap:.25rem;min-inline-size:0}
+.sc-sections{display:grid;gap:var(--gap-section,1.5rem);min-inline-size:0}
+.sc-sections > *{min-inline-size:0}
+.sc-sections details.vn-card > summary{min-block-size:48px}
+/* رأس القسم <h2> داخل <summary>: يأخذ هيئة اسم البطاقة (vn-name strong) فلا يكسر شبكة الملخّص، ويبقى عنوانًا لقارئ الشاشة. */
+.sc-fold > summary .vn-name h2{margin:0;font-size:var(--fs-row);font-weight:var(--fw-strong);line-height:1.5;color:var(--ink-1)}
+.sc-fold > .panel-body,.sc-fold > .vn-list{padding-block-start:var(--s3,.75rem)}
+.sc-gap{display:grid;gap:.15rem;margin-block-end:var(--s3,.75rem)}
+.sc-gap small{color:var(--ink-3,inherit);font-size:var(--fs-foot,.8rem);line-height:1.6}
+/* هيكل التحميل: مستطيلات بارتفاع البطاقة الحقيقي فلا تقفز الصفحة، بلا دوّار وبلا نصّ متحرك. */
+.sc-skeleton{display:grid;align-content:center;gap:var(--s2,.5rem);min-block-size:64px;padding:var(--s4,1rem);
+  border:1px solid var(--line,currentColor);border-radius:var(--r-lg,12px);animation:c-busy 1.2s ease-in-out infinite}
+.sc-skeleton > span{display:block;block-size:.75rem;border-radius:var(--r-pill,999px);background:currentColor;opacity:.18}
+.sc-skeleton > span:first-child{inline-size:55%}
+.sc-skeleton > span:last-child{inline-size:85%}
+/* الشريط الملتصق يقف **فوق** شريط التبويب السفلي الثابت على الجوال (hr-design.css .sig-tabs: fixed أسفل الشاشة دون 760)
+   لا خلفه: inset-block-end بارتفاع الشريط والمنطقة الآمنة، وz-index دون z-index الشريط. وفوق 760 يصير الشريط علويًا فيعود الصفر. */
+.sc-sticky{position:sticky;inset-block-end:calc(var(--tabbar-h,64px) + var(--safe-b,0px));z-index:calc(var(--z-tabs,35) - 1);display:flex;flex-wrap:wrap;gap:var(--s2,.5rem);
+  margin-block-start:var(--gap-section,1.5rem);padding-block:var(--s2,.5rem);
+  padding-block-end:calc(var(--s2,.5rem) + env(safe-area-inset-bottom));background:var(--canvas,inherit)}
+.sc-sticky .btn{min-block-size:56px;display:inline-flex;flex:1 1 12rem;align-items:center;justify-content:center}
+@media (prefers-reduced-motion:reduce){.sc-skeleton{animation:none}}
+@media (min-width:760px){.sc-sticky{inset-block-end:0}}
+@media (max-width:480px){
+  .sc-grid{grid-template-columns:1fr}
+  .sc-card{padding:var(--s3,.75rem)}
+  .sc-sticky .btn{flex:1 1 100%}
+}
+/* الدفعة الثالثة: خطّ المحطّات الخمس في «أين طلبي»، ونتيجة البحث المجمَّعة بجوابها المباشر، والخطأ تحت الحقل.
+   المحطّة تتميّز بالشكل (● ◍ ○ ✕ حروفٌ في الترميز) لا باللون؛ الصفّ كلّه هدف اللمس ≥48. أفقيّ فوق 760 ورأسيّ دونها. */
+.rq-stations{display:flex;flex-wrap:wrap;gap:var(--s3,.75rem) var(--s4,1rem);margin:var(--s3,.75rem) 0;padding:0;list-style:none}
+.rq-stations > li{display:grid;grid-template-columns:1.25rem minmax(0,1fr);column-gap:var(--s2,.5rem);align-items:baseline;min-block-size:48px;min-inline-size:0;flex:1 1 9rem}
+.rq-stations > li::before,.rq-stations > li::after{content:none}
+.rq-stations .rq-station-mark{grid-row:1 / span 2;font-size:1.1rem;line-height:1.4}
+.rq-stations > li.is-now .rq-station-mark{font-weight:700}
+.rq-stations > li.is-ahead,.rq-stations > li.is-skipped{color:var(--ink-3,inherit)}
+.rq-stations > li.is-ended strong{text-decoration:line-through;text-decoration-thickness:1px}
+.rq-stations > li > span{grid-column:2;font-size:var(--fs-foot,.8rem);color:var(--ink-3,inherit)}
+@media (max-width:759.98px){.rq-stations{flex-direction:column;gap:var(--s2,.5rem)}.rq-stations > li{flex:0 0 auto}}
+/* الجواب المباشر فوق النتائج: ما تستطيع المنصة قوله بصدق للنتيجة الأولى (المسار والزمن بسنده)، لا مادة سياسة لم تُربط. */
+.sc-answer{display:grid;gap:.25rem;margin:0 0 var(--s3,.75rem);padding:var(--s3,.75rem);border:1px solid var(--line,currentColor);border-radius:var(--r-lg,12px)}
+.sc-answer small{color:var(--ink-3,inherit);font-size:var(--fs-foot,.8rem);line-height:1.6}
+.sc-group-head{margin:var(--s4,1rem) 0 var(--s2,.5rem);font-size:var(--fs-meta,.9rem);color:var(--ink-3,inherit)}
+.sc-via{display:block;color:var(--ink-3,inherit);font-size:var(--fs-foot,.8rem)}
+/* الخطأ تحت حقله: رمز «!» ونصّ، لا لون وحده. الحقل المرفوض يحمل aria-invalid فيقرؤه قارئ الشاشة مع الحقل. */
+.field-error{display:block;margin-block-start:.25rem;font-size:var(--fs-meta,.9rem);line-height:1.6;color:var(--danger,#b3261e)}
+.field-error::before{content:"! ";font-weight:700}
+[aria-invalid="true"]{outline:2px solid var(--danger,#b3261e);outline-offset:1px}
+.rq-gaps{margin:var(--s3,.75rem) 0 0;padding:0;list-style:none;display:grid;gap:.25rem;color:var(--ink-3,inherit);font-size:var(--fs-foot,.8rem);line-height:1.6}
+.rq-review{margin-block-end:var(--s3,.75rem)}
+/* «لك» وعدسة الرحلة وصفحة تتبع الرحلة (مركز الخدمات، الدفعة الرابعة). الزرّ «لا تقترح هذه عليّ» هدفٌ مستقل ≥44 وبينه وبين جسم البطاقة فراغ. */
+.sc-foryou .panel-head{flex-wrap:wrap;gap:var(--s2,.5rem)}
+.sc-foryou .panel-head .btn{margin-inline-start:auto;min-block-size:44px}
+.sc-why{margin:0;color:var(--ink-3,inherit);font-size:var(--fs-foot,.8rem);line-height:1.6}
+.sc-suggested{display:grid;gap:var(--s2,.5rem)}
+.sc-hide{min-block-size:44px;min-inline-size:44px;justify-self:start;margin-block-start:var(--s2,.5rem)}
+.sc-foryou-off .btn,.sc-dismissed > summary{min-block-size:44px;display:inline-flex;align-items:center}
+.sc-season{border-style:dashed}
+.sc-journey{display:flex;flex-direction:column;gap:var(--s2,.5rem);min-inline-size:0;padding:var(--s4,1rem);
+  border:1px solid var(--line,currentColor);border-radius:var(--r-lg,12px)}
+.sc-journey .rq-trail{margin:0}
+.sc-steps{padding-inline-start:0}
+
+/* ===== الشاشة الرئيسية الجديدة (‎.hm-*‎) — افتراضات محايدة =====
+   مظهر «اليوم» (yawm.css) يرسم هذه الأصناف بهيئته الكاملة. وهذه الكتلة تضمن أن الرئيسية تبقى
+   سليمة ومقروءة في المظاهر السبعة الأخرى: بنية وتخطيط، وهدف لمس، وسلوك تمرير الشريط، ولا أكثر.
+   ثلاث قواعد التزمتها هنا:
+   1) لا صنف قائم يُمسّ: كل محدِّد في هذه الكتلة يبدأ بـ‎.hm-‎.
+   2) لا لون حرفي ولا لوحة جديدة: ألوان الحالة من رموز signature.css المشتركة وحدها
+      (‎--spark‎ انتباه، ‎--stop‎ متعثّر/مرفوض، ‎--turn‎ دورك، ‎--ok‎ منتهٍ صامت)، وكل رمز بقيمة احتياطية
+      فلا تنكسر القاعدة في مظهر لا يعرّفه.
+   3) الحالة تُقرأ بالشكل قبل اللون: هندسة كل حالة في القرص مرسومة هنا لا في yawm.css وحده،
+      فيصل الفرق إلى المظاهر كلها وإلى من لا يميّز الألوان.
+   القرص يُرسم على ‎::before‎ لا على العنصر نفسه، فلا يقصّ ‎clip-path‎ ما بداخله من حرف أو عدد،
+   ويبقى صندوقه مربعًا بمقاس واحد فتستوي الصفوف مهما اختلفت الحالة. */
+@layer components{
+
+/* ---------- المقدمة الشخصية والسؤال ---------- */
+.hm-welcome{position:relative;isolation:isolate;display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:center;gap:var(--s5,1.25rem);overflow:hidden;
+  margin:0;padding:clamp(20px,3vw,36px);border:1px solid color-mix(in srgb,var(--icon-tint) 22%,var(--line,currentColor));border-radius:clamp(24px,3vw,36px);
+  background:radial-gradient(circle at 92% 2%,color-mix(in srgb,var(--icon-tint) 18%,transparent),transparent 42%),
+    linear-gradient(135deg,color-mix(in srgb,var(--canvas) 88%,transparent),color-mix(in srgb,var(--icon-tint) 7%,var(--canvas)));
+  box-shadow:var(--shadow-border,0 18px 50px rgba(0,0,0,.08));-webkit-backdrop-filter:blur(20px);backdrop-filter:blur(20px)}
+.hm-welcome::after{content:"";position:absolute;z-index:-1;inset:auto -9% -70% auto;inline-size:220px;aspect-ratio:1;border-radius:50%;
+  background:color-mix(in srgb,var(--icon-positive) 10%,transparent);filter:blur(8px);pointer-events:none}
+.hm-welcome-copy{min-inline-size:0}
+.hm-welcome-kicker{margin:0 0 var(--s2,.5rem);color:var(--icon-tint);font-size:var(--fs-label,.8rem);font-weight:var(--fw-strong,700);line-height:1.4}
+.hm-welcome h2{margin:0;color:var(--ink-1,inherit);font-size:clamp(25px,3.1vw,42px);font-weight:var(--fw-display,500);line-height:1.24;text-wrap:balance;overflow-wrap:anywhere}
+.hm-welcome h2 strong{font-weight:var(--fw-strong,700)}
+.hm-welcome-date{display:flex;flex-wrap:wrap;align-items:center;gap:var(--s2,.5rem);margin:var(--s3,.75rem) 0 0;color:var(--ink-3,inherit);font-size:var(--fs-row,1rem);line-height:1.5}
+.hm-welcome-date > span[aria-hidden]{opacity:.48}
+.hm-welcome-date bdi{font:inherit}
+.hm-welcome-mark{display:grid;place-items:center;inline-size:clamp(58px,8vw,78px);aspect-ratio:1;border:1px solid color-mix(in srgb,var(--icon-tint) 24%,transparent);border-radius:28%;
+  background:linear-gradient(145deg,color-mix(in srgb,var(--icon-tint) 17%,var(--canvas)),color-mix(in srgb,var(--icon-tint) 6%,var(--canvas)));
+  box-shadow:inset 0 1px 0 color-mix(in srgb,var(--canvas) 72%,transparent),0 16px 34px color-mix(in srgb,var(--icon-tint) 14%,transparent);transform:rotate(-3deg)}
+.hm-welcome-mark .glyph{inline-size:clamp(28px,4vw,38px);block-size:clamp(28px,4vw,38px);filter:drop-shadow(0 6px 10px color-mix(in srgb,var(--icon-tint) 24%,transparent))}
+/* signature.mjs يرسم تحية عامة في بعض المظاهر؛ المقدمة الشخصية هي المصدر المرئي الوحيد في الرئيسية. */
+#main:has(.hm-welcome) > .page-head > :is(.sig-date,.sig-greeting){display:none}
+.hm-ask{margin:var(--s1,.25rem) 0 0;font-size:var(--fs-display-m,clamp(30px,1.31vw + 25.1px,44px));font-weight:var(--fw-display,400);line-height:1.2;color:var(--ink-1,inherit);text-wrap:balance;overflow-wrap:break-word}
+.hm-sub{margin:var(--s2,.5rem) 0 0;max-inline-size:64ch;font-size:var(--fs-row,1rem);line-height:1.7;color:var(--ink-3,inherit);text-wrap:pretty}
+
+@media (hover:hover){
+  .hm-welcome{transition:border-color var(--d-hover,150ms) ease,box-shadow var(--d-hover,150ms) ease}
+  .hm-welcome:hover{border-color:color-mix(in srgb,var(--icon-tint) 42%,var(--line,currentColor));box-shadow:var(--shadow-border-hover,var(--shadow-border))}
+  .hm-welcome-mark{transition:transform var(--d-swap,300ms) var(--ease-swap,ease)}
+  .hm-welcome:hover .hm-welcome-mark{transform:rotate(0deg) translateY(-2px)}
+}
+@media (max-width:480px){
+  .hm-welcome{gap:var(--s3,.75rem);padding:var(--s5,1.25rem);border-radius:24px}
+  .hm-welcome-mark{inline-size:54px;border-radius:18px}
+  .hm-welcome h2{font-size:clamp(23px,7vw,30px)}
+  .hm-welcome-date{font-size:var(--fs-label,.8rem)}
+}
+@media (prefers-reduced-motion:reduce){.hm-welcome,.hm-welcome-mark{transition:none!important;transform:none!important}}
+
+/* ---------- الشريط: ينزلق بمحاذاة، ويمتدّ إلى حافة الشاشة بهوامش سالبة تُلغي حشوَه بالضبط،
+     فلا يفيض عن أرض الصفحة ولا يجرّ الصفحة أفقيًا. الفيض محبوس في الشريط نفسه. ---------- */
+.hm-strip{display:flex;flex-wrap:nowrap;gap:var(--s3,.75rem);margin:var(--s6,1.5rem) calc(var(--hm-bleed,var(--gutter,16px)) * -1) 0;padding:0 var(--hm-bleed,var(--gutter,16px)) var(--s2,.5rem);
+  overflow-x:auto;overflow-y:hidden;scroll-snap-type:inline mandatory;scroll-padding-inline:var(--hm-bleed,var(--gutter,16px));
+  overscroll-behavior-inline:contain;scrollbar-width:none;-ms-overflow-style:none}
+.hm-strip::-webkit-scrollbar{display:none;inline-size:0;block-size:0}
+.hm-strip-new,.hm-strip-card{flex:none;scroll-snap-align:start;display:flex;flex-direction:column;align-items:flex-start;gap:var(--s1,.25rem);
+  inline-size:var(--hm-strip-w,128px);min-block-size:var(--tap,44px);padding:var(--s4,1rem);
+  border:1px solid var(--line,currentColor);border-radius:var(--r-lg,12px);text-decoration-line:none;color:inherit}
+.hm-strip-new{border-color:transparent;background-color:var(--action,transparent);color:var(--on-action,inherit)}
+.hm-strip-card > :is(a,button){display:flex;flex-direction:column;align-items:flex-start;gap:var(--s1,.25rem);
+  inline-size:100%;min-inline-size:0;min-block-size:0;margin:0;padding:0;border:0;border-radius:0;background:none;
+  color:inherit;cursor:pointer;font-family:inherit;font-size:var(--fs-cap,.75rem);font-weight:var(--fw-strong,700);line-height:1.45;text-align:start;text-decoration-line:none}
+.hm-strip-new .hm-disc,.hm-strip-card .hm-disc{margin-block-end:var(--s2,.5rem)}
+.hm-strip .hm-disc{--disc:46px;border-radius:15px;background:color-mix(in srgb,currentColor 9%,transparent);
+  box-shadow:inset 0 0 0 1px color-mix(in srgb,currentColor 30%,transparent),0 8px 20px color-mix(in srgb,var(--canvas) 18%,transparent)}
+.hm-strip .hm-disc::before{content:none}
+.hm-strip .hm-disc .glyph{inline-size:21px;block-size:21px}
+.hm-strip-card .hm-disc{--hm-c:var(--icon-tint)}
+.hm-strip-new .hm-disc{--hm-c:currentColor}
+.hm-strip-new > strong,.hm-strip-card > strong{display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:2;line-clamp:2;overflow:hidden;
+  font-size:var(--fs-cap,.75rem);font-weight:var(--fw-strong,700);line-height:1.45}
+.hm-strip-new > small,.hm-strip-card > small{font-size:var(--fs-cap,.75rem);line-height:1.4}
+.hm-strip-card > small{color:var(--ink-4,inherit)}
+.hm-strip-new > small{opacity:.82}
+
+/* ---------- صف البلاطات: عمودان على الجوال وأربعة حين تتّسع الشاشة، بلا استعلام وسائط.
+     الشبكة تقبل البنيتين — قرص ورقم وتسمية مسطّحة، أو قرص وغلاف يضمّ السطرين. ---------- */
+.hm-stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:var(--s3,.75rem);margin:var(--s6,1.5rem) 0 0;padding:0;list-style:none}
+.hm-stat{display:grid;grid-template-columns:auto minmax(0,1fr);grid-template-rows:auto auto;align-items:center;align-content:center;
+  column-gap:var(--s3,.75rem);min-inline-size:0;padding:var(--s4,1rem);border:1px solid var(--line,currentColor);border-radius:var(--r-lg,12px);
+  color:inherit;text-decoration-line:none}
+.hm-stat{grid-template-areas:none}
+.hm-stat::before{content:none}
+.hm-stat > .hm-disc{grid-area:1 / 1 / span 2 / span 1}
+.hm-stat > strong{grid-area:1 / 2}
+.hm-stat > span{grid-area:2 / 2}
+.hm-stat > :nth-child(2):last-child{grid-row:1 / span 2;min-inline-size:0}
+.hm-stat strong,.hm-stat dd{margin:0;font-size:var(--fs-figure-s,1.5rem);font-weight:var(--fw-display,400);line-height:1.05;font-variant-numeric:tabular-nums;color:var(--ink-1,inherit)}
+.hm-stat :is(span,small,dt):not(.hm-disc,.hm-disc *){font-size:var(--fs-label,.8rem);line-height:1.4;color:var(--ink-4,inherit)}
+
+/* ---------- كتلة مسمّاة: عنوان وعدده، سطر تحته، ثم قائمة بلا نقاط ---------- */
+.hm-block{margin-block-start:var(--s10,2.5rem)}
+.hm-block > :is(h2,h3){display:flex;flex-wrap:wrap;align-items:baseline;gap:var(--s2,.5rem);margin:0;font-size:var(--fs-title,1.25rem);font-weight:var(--fw-strong,700);line-height:1.35;color:var(--ink-1,inherit);text-wrap:balance}
+.hm-block > :is(h2,h3) :is(span,small,b){font-size:var(--fs-label,.8rem);font-weight:var(--fw-body,400);color:var(--ink-4,inherit);font-variant-numeric:tabular-nums}
+.hm-block > p{margin:var(--s1,.25rem) 0 0;max-inline-size:64ch;font-size:var(--fs-label,.8rem);line-height:1.6;color:var(--ink-4,inherit)}
+.hm-block > :is(ul,ol){display:grid;grid-template-columns:minmax(0,1fr);gap:var(--s3,.75rem);margin:var(--s4,1rem) 0 0;padding:0;list-style:none;border:0;background:none;box-shadow:none}
+.hm-block > :is(ul,ol) > li + li::before{content:none}
+
+/* ---------- بطاقة المهمة ---------- */
+.hm-card{display:flex;flex-direction:column;gap:var(--s3,.75rem);min-inline-size:0;padding:var(--s4,1rem);border:1px solid var(--line,currentColor);border-radius:var(--r-lg,12px)}
+.hm-card-head{display:flex;align-items:center;gap:var(--s3,.75rem) var(--s4,1rem);min-inline-size:0}
+.hm-card-head > :is(div,a,p){flex:1 1 auto;min-inline-size:0}
+.hm-card-head > a{text-decoration-line:none}
+/* عنوان البطاقة والصف رابطٌ بارتفاع سطره (24–28px بعرض 390، قيس 1 أكتوبر): على اللمس يمدّ حشوٌ رأسيّ يقابله هامشٌ سالب
+   منطقةَ النقر إلى 44px فأكثر ولا يحرّك سطرًا. «الرواق» و«اليوم» يمدّان الصف كله بـ::after في طبقتيهما فلا يمسّهما سطر الصفوف. */
+@media (pointer:coarse){
+  :is(.hm-card-head,.eu-facts > li) > a:not(.btn),
+  :root:not([data-design=riwaq],[data-design=yawm]) .vn-list > li > a:not(.btn){padding-block:10px;margin-block:-10px}
+}
+.hm-card-head :is(h2,h3,h4,strong){margin:0;min-inline-size:0;font-size:var(--fs-table,.95rem);font-weight:var(--fw-strong,700);line-height:1.4;color:var(--ink-1,inherit);overflow-wrap:break-word}
+.hm-card-head + .hm-card-meta{margin-block-start:calc(.15rem - var(--s3,.75rem))}
+.hm-card-meta{margin:.15rem 0 0;font-size:var(--fs-cap,.75rem);line-height:1.5;color:var(--ink-4,inherit);overflow-wrap:break-word}
+.hm-card-note{margin:0;font-size:var(--fs-table,.95rem);line-height:1.7;color:var(--ink-3,inherit);text-wrap:pretty}
+/* شريط الحقائق: اسمٌ فوق قيمته، عمودان على السعة وعمود واحد على الجوال. كل زوج كتلة واحدة
+   لا تنكسر بين الاسم وقيمته، والقيم رقمية الأعمدة فتصطفّ المواعيد تحت بعضها. */
+.hm-facts{display:grid;grid-template-columns:repeat(auto-fit,minmax(11rem,1fr));gap:var(--s2,.5rem) var(--s4,1rem);
+  margin:0;padding:var(--s3,.75rem) 0 0;border-block-start:1px solid var(--line,currentColor)}
+.hm-facts > div{display:grid;gap:.1rem;min-inline-size:0;break-inside:avoid}
+.hm-facts dt{margin:0;font-size:var(--fs-cap,.75rem);line-height:1.4;color:var(--ink-4,inherit)}
+.hm-facts dd{margin:0;min-inline-size:0;font-size:var(--fs-table,.95rem);line-height:1.5;color:var(--ink-2,inherit);
+  overflow-wrap:break-word;font-variant-numeric:tabular-nums}
+.hm-card.is-late .hm-facts dd{color:inherit}
+.hm-card-actions{display:flex;flex-wrap:wrap;align-items:center;gap:var(--s2,.5rem);margin-block-start:var(--s1,.25rem)}
+.hm-card-actions > :is(a,button){display:inline-flex;align-items:center;justify-content:center;gap:var(--s2,.5rem);
+  min-block-size:max(var(--tap,44px),44px);max-inline-size:100%;padding-inline:var(--s5,1.25rem);border-radius:var(--r-pill,999px);
+  font-size:var(--fs-table,.95rem);font-weight:var(--fw-label,600);text-decoration-line:none}
+
+/* ---------- مؤشّر الخطوات: يلتفّ، والمنجزة بعلامة صحّ مرسومة بحدّين، والفاصل مثلث بحدود
+     منطقية فينقلب مع اتجاه القراءة وحده بلا استعلام اتجاه. علامة الصحّ بحدود مادية: شكلها ثابت لا يُقلب. ---------- */
+.hm-steps{display:flex;flex-wrap:wrap;align-items:center;gap:var(--s1,.25rem) var(--s2,.5rem);margin:0;padding:0;list-style:none;font-size:var(--fs-cap,.75rem);line-height:1.6;color:var(--ink-4,inherit)}
+.hm-step{display:inline-flex;align-items:center;gap:var(--s1,.25rem);min-inline-size:0}
+.hm-step:not(:last-child)::after{content:"";flex:none;inline-size:0;block-size:0;margin-inline-start:var(--s1,.25rem);
+  border-block:3px solid transparent;border-inline-end:0;border-inline-start:4px solid currentColor;opacity:.45}
+.hm-step.is-done{color:var(--ok,inherit);font-weight:var(--fw-label,600)}
+.hm-step.is-done::before{content:"";flex:none;inline-size:.34em;block-size:.62em;margin-inline-end:.22em;
+  border:2px solid currentColor;border-top:0;border-left:0;transform:rotate(45deg) translate(-.06em,-.1em)}
+.hm-step.is-now{padding:.1rem var(--s2,.5rem);border-radius:var(--r-check,4px);font-weight:var(--fw-label,600);color:var(--turn,inherit);border:1px solid currentColor}
+.hm-step:empty{inline-size:var(--s3,.75rem);block-size:3px;padding:0;border:0;border-radius:var(--r-pill,999px);background:currentColor;opacity:.26}
+.hm-step:empty::before,.hm-step:empty::after{content:none}
+.hm-step:empty.is-done{background:var(--ok,currentColor);opacity:.8}
+.hm-step:empty.is-now{inline-size:var(--s6,1.5rem);background:var(--turn,currentColor);opacity:1}
+/* رابط «كل طلباتي» في آخر الشاشة */
+.hm-all{display:flex;justify-content:center;margin:var(--s10,2.5rem) 0 0}
+
+/* ---------- القرص: لكل حالة هندسة تُقرأ وحدها، واللون يؤكّدها ولا يحملها ---------- */
+.hm-disc{--hm-c:var(--ink-4,currentColor);position:relative;isolation:isolate;flex:none;
+  inline-size:var(--disc,40px);block-size:var(--disc,40px);display:grid;place-items:center;
+  margin:0;padding:0;border:0;border-radius:0;background:none;
+  color:var(--hm-c);font-size:calc(var(--disc,40px) / 2.4);font-weight:var(--fw-label,600);line-height:1;font-variant-numeric:tabular-nums}
+.hm-disc::before{content:"";position:absolute;z-index:-1;inset:0;border:2px solid currentColor;border-radius:var(--r-md,12px);background-color:transparent}
+.hm-disc > *{grid-area:1 / 1}
+.hm-disc.is-decide{--hm-c:var(--spark,currentColor)}                 /* معيّن: مربع واقف على زاويته */
+.hm-disc.is-decide::before{border-radius:var(--r-check,4px);transform:rotate(45deg) scale(.72)}
+.hm-disc.is-return{--hm-c:var(--stop,currentColor)}                  /* مثلث تنبيه */
+.hm-disc.is-return::before{border:0;border-radius:0;background-color:currentColor;opacity:.22;clip-path:polygon(50% 2%,98% 94%,2% 94%)}
+.hm-disc.is-return{padding-block-start:.5em}
+.hm-disc.is-do{--hm-c:var(--turn,currentColor)}                      /* مربع قائم بحدّ صلب */
+.hm-disc.is-do::before{border-style:solid}
+.hm-disc.is-run{--hm-c:var(--ink-4,currentColor)}                    /* حلقة متقطعة: يدور بنفسه */
+.hm-disc.is-run::before{border-radius:var(--r-pill,999px);border-style:dashed}
+.hm-disc.is-done{--hm-c:var(--ok,currentColor)}                      /* حلقة متّصلة صامتة */
+.hm-disc.is-done::before{border-radius:var(--r-pill,999px);border-style:solid}
+.hm-disc.is-reject{--hm-c:var(--stop,currentColor)}                  /* مثمّن كإشارة القف */
+.hm-disc.is-reject::before{border:0;border-radius:0;background-color:currentColor;opacity:.22;
+  clip-path:polygon(31% 2%,69% 2%,98% 31%,98% 69%,69% 98%,31% 98%,2% 69%,2% 31%)}
+
+/* عمودان للكتلة على الشاشة الواسعة، كما في النموذج المرجعي */
+@media (min-width:1024px){.hm-block > :is(ul,ol){grid-template-columns:repeat(2,minmax(0,1fr))}}
+}
+
+/* ---------- قائمة «+ إنشاء»: طبقة عليا بجوار زرّها ----------
+   app.mjs ينقلها إلى <body> ويكتب top/left بـCSSOM؛ فلا display هنا — سمة hidden وحدها
+   (أو popover) هي ما يخفيها، وإلا لظلّت مخفيةً بعد الفتح في المتصفح الذي لا يدعم popover. */
+#create-menu{position:fixed;inset:auto;z-index:var(--z-cmd,60);box-sizing:border-box;
+  inline-size:max-content;min-inline-size:15rem;max-inline-size:min(22rem,calc(100vw - var(--s4,1rem)));
+  max-block-size:min(70vh,32rem);overflow-y:auto;overscroll-behavior:contain;
+  margin:0;padding:var(--s1,.25rem);border:1px solid var(--line,currentColor);border-radius:var(--r-lg,12px);
+  background:var(--surface,var(--canvas,Canvas));color:var(--ink-2,inherit);box-shadow:var(--shadow-float,0 14px 38px rgb(0 0 0/.2))}
+#create-menu [role=menuitem]{display:flex;align-items:center;gap:var(--s3,.75rem);inline-size:100%;
+  min-block-size:max(var(--tap,44px),44px);padding-inline:var(--s3,.75rem);border-radius:var(--r-md,10px);
+  color:inherit;font-size:var(--fs-table,.95rem);text-align:start;text-decoration-line:none}
+#create-menu [role=menuitem] > b{display:grid;gap:.1rem;min-inline-size:0;font-weight:var(--fw-label,600)}
+#create-menu [role=menuitem] > b > small{font-size:var(--fs-cap,.75rem);font-weight:var(--fw-body,400);
+  line-height:1.4;color:var(--ink-4,inherit);text-wrap:pretty}
+#create-menu a[role=menuitem]:hover{background:var(--fill-3,rgb(128 128 128/.08))}
+#create-menu [role=menuitem]:focus-visible{outline:2px solid var(--focus,currentColor);outline-offset:-2px}
+#create-menu [aria-disabled=true]{color:var(--ink-4,inherit);cursor:default}
+/* باب «كل الخدمات»: آخر الشريط، بحدٍّ متقطّع فيُقرأ بابًا لا خدمةً سادسة. */
+.hm-strip-card.is-all > .eu-chip{border-style:dashed}

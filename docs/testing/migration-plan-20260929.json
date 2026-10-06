@@ -1,0 +1,36 @@
+{
+  "measured_at": "2026-09-29",
+  "question": "ماذا يفعل openDb حين يتقاسم ملفان رقم ترحيل، وحين لا يطابق ملفٌ مرشّحه؟",
+  "method": "مجلد ترحيلات اصطناعي في مجلد مؤقت، ونسخة حرفية من حلقة app/db.mjs قبل الإصلاح، ثم migrationPlan بعده. لا مساس بمجلد الترحيلات الحقيقي ولا بقاعدة التشغيل.",
+  "before_fix": {
+    "files_on_disk": [
+      "001-base.sql",
+      "002-appearance.sql",
+      "002-timers.sql",
+      "003b-hotfix.sql"
+    ],
+    "files_the_old_filter_picked": [
+      "001-base.sql",
+      "002-appearance.sql",
+      "002-timers.sql"
+    ],
+    "silently_skipped": [
+      "003b-hotfix.sql"
+    ],
+    "error_thrown": "Applied migration changed: 002-timers.sql",
+    "tables_created": [
+      "a",
+      "b"
+    ],
+    "versions_recorded": [
+      1,
+      2
+    ]
+  },
+  "after_fix": {
+    "refused": true,
+    "message": "Migrations cannot be applied; nothing was migrated:\n  duplicate migration number 002: 002-appearance.sql and 002-timers.sql — renumber one of them above the highest number already applied\n  unreadable migration name: 003b-hotfix.sql — a migration must be NNN-name.sql with exactly three digits, or it is never applied"
+  },
+  "reading": "قبل الإصلاح: «003b-hotfix.sql» لم يُطبَّق ولم يُذكر — صمتٌ تام؛ والرقم المكرَّر طبّق الأول وسجّله ثم رمى خطأً يسمّي السبب الخطأ، فالقاعدة مُرحَّلة جزئيًا (جدولان ونسخة مسجَّلة) والخدمة لا تقلع. بعد الإصلاح: تُرفض الخطة كاملةً قبل أن يُطبَّق ترحيل واحد، وتُسمّى العلّتان معًا في رسالة واحدة.",
+  "live_relevance": "فرعان غير مدمجين (wave2/no-request-lost وسليفه preserve/wf_325c332e-f82-1-20260925) يحملان app/migrations/120-workflow-timers-and-escalations.sql والرقم 120 مشغول في خط التطوير بـ120-appearance-studio.sql. ولا يُدمجان أصلًا: عملهما وصل عند الترحيل 126 في صورة أوسع."
+}

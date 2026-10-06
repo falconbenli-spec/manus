@@ -1,0 +1,144 @@
+TAP version 13
+# (node:24797) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: بوابة الموظف تحمل كل خدمة يحق للحساب طلبها، بلا نسخة يدوية ناقصة
+ok 1 - بوابة الموظف تحمل كل خدمة يحق للحساب طلبها، بلا نسخة يدوية ناقصة
+  ---
+  duration_ms: 6514.38
+  type: 'test'
+  ...
+# Subtest: بوابة الموظف تعرض خدمات الموارد البشرية أولًا وتفتحها بمسار الطلب الموحد
+ok 2 - بوابة الموظف تعرض خدمات الموارد البشرية أولًا وتفتحها بمسار الطلب الموحد
+  ---
+  duration_ms: 5694.893208
+  type: 'test'
+  ...
+# Subtest: مسار بوابة الموظف مستقل، ولا يعاد توجيهه إلى الرئيسية
+ok 3 - مسار بوابة الموظف مستقل، ولا يعاد توجيهه إلى الرئيسية
+  ---
+  duration_ms: 3.06425
+  type: 'test'
+  ...
+# (node:24798) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: تجربة الإجازات تحفظ ترتيب HCM ولونًا ثابتًا لكل نوع وتضيف التعويضية
+ok 4 - تجربة الإجازات تحفظ ترتيب HCM ولونًا ثابتًا لكل نوع وتضيف التعويضية
+  ---
+  duration_ms: 1.035416
+  type: 'test'
+  ...
+# Subtest: نموذج الطلب يرتب الأنواع مثل HCM ويحتفظ بالأنواع النظامية الإضافية
+ok 5 - نموذج الطلب يرتب الأنواع مثل HCM ويحتفظ بالأنواع النظامية الإضافية
+  ---
+  duration_ms: 0.55725
+  type: 'test'
+  ...
+# Subtest: بوابة الموظف تقرأ الرصيد النظامي والتعويضي من وحدة الإجازات وتعرض مداخل HCM
+ok 6 - بوابة الموظف تقرأ الرصيد النظامي والتعويضي من وحدة الإجازات وتعرض مداخل HCM
+  ---
+  duration_ms: 7109.980417
+  type: 'test'
+  ...
+# (node:24799) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: answers come from the platform’s own text: a direct line, the paragraph quoted with its article and link, and a plain refusal when no text answers
+ok 7 - answers come from the platform’s own text: a direct line, the paragraph quoted with its article and link, and a plain refusal when no text answers
+  ---
+  duration_ms: 7080.318
+  type: 'test'
+  ...
+# Subtest: a conflict between two articles states which one is in force and links the amendment
+ok 8 - a conflict between two articles states which one is in force and links the amendment
+  ---
+  duration_ms: 5503.827083
+  type: 'test'
+  ...
+# Subtest: a calculation reads the asker’s own grade and contract, calls the travel module’s own function, and refuses a rate that is not accepted
+ok 9 - a calculation reads the asker’s own grade and contract, calls the travel module’s own function, and refuses a rate that is not accepted
+  ---
+  duration_ms: 11017.203
+  type: 'test'
+  ...
+# Subtest: personal questions are answered from the asker’s own records only, and a manager cannot ask about a named employee
+ok 10 - personal questions are answered from the asker’s own records only, and a manager cannot ask about a named employee
+  ---
+  duration_ms: 5297.635542
+  type: 'test'
+  ...
+# Subtest: “how do I submit X” is built from the catalogue itself: screen, fields, approvers, SLA and a deep link
+ok 11 - “how do I submit X” is built from the catalogue itself: screen, fields, approvers, SLA and a deep link
+  ---
+  duration_ms: 5585.695791
+  type: 'test'
+  ...
+# Subtest: the skills path is built only from the asker’s own record, promises nothing, and hands the goals to the existing goals screen
+ok 12 - the skills path is built only from the asker’s own record, promises nothing, and hands the goals to the existing goals screen
+  ---
+  duration_ms: 5275.676333
+  type: 'test'
+  ...
+# Subtest: salary, family and appraisal details are masked before the provider call and restored only for their owner, and the daily limit still holds
+ok 13 - salary, family and appraisal details are masked before the provider call and restored only for their owner, and the daily limit still holds
+  ---
+  duration_ms: 4959.235792
+  type: 'test'
+  ...
+# Subtest: the golden set runs on retrieval alone, with the provider stubbed, and reports what the text still lacks
+ok 14 - the golden set runs on retrieval alone, with the provider stubbed, and reports what the text still lacks
+  ---
+  duration_ms: 5008.144958
+  type: 'test'
+  ...
+# Subtest: the semantic layer masks the question before it leaves the machine, exactly as the provider path does
+ok 15 - the semantic layer masks the question before it leaves the machine, exactly as the provider path does
+  ---
+  duration_ms: 4574.46775
+  type: 'test'
+  ...
+# (node:24800) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: CATALOG: installs every proposed department, one head each, and all services once
+ok 16 - CATALOG: installs every proposed department, one head each, and all services once
+  ---
+  duration_ms: 7002.006292
+  type: 'test'
+  ...
+# Subtest: CATALOG: refuses a non-synthetic tenant and an existing account with a different role
+ok 17 - CATALOG: refuses a non-synthetic tenant and an existing account with a different role
+  ---
+  duration_ms: 10226.750625
+  type: 'test'
+  ...
+# Subtest: CATALOG: every service accepts a complete request and routes to its approvers
+ok 18 - CATALOG: every service accepts a complete request and routes to its approvers
+  ---
+  duration_ms: 6826.001542
+  type: 'test'
+  ...
+# Subtest: CATALOG: department head approves and executes travel, then reaches the independent output-acceptance gate
+ok 19 - CATALOG: department head approves and executes travel, then reaches the independent output-acceptance gate
+  ---
+  duration_ms: 5043.029625
+  type: 'test'
+  ...
+# Subtest: CATALOG: number fields reject non-numeric values and a head cannot approve their own request
+ok 20 - CATALOG: number fields reject non-numeric values and a head cannot approve their own request
+  ---
+  duration_ms: 5475.535
+  type: 'test'
+  ...
+# Subtest: CATALOG UI: the department directory lists new departments, their services and bound workspaces
+ok 21 - CATALOG UI: the department directory lists new departments, their services and bound workspaces
+  ---
+  duration_ms: 5472.347166
+  type: 'test'
+  ...
+1..21
+# tests 21
+# suites 0
+# pass 21
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 54662.162833

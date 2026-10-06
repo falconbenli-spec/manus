@@ -1,0 +1,34 @@
+import test from 'node:test';
+import assert from 'node:assert/strict';
+import { openDb, transaction, verifyAudit } from '../app/db.mjs';
+import { seed } from '../scripts/seed.mjs';
+import { centresBoard, proposeCentre, centreAction, PROPOSED } from '../app/centres.mjs';
+
+const code=value=>error=>error.code===value;
+test('centres: the four proposed centres stay invisible to employees until one has a named owner, a parent department and at least one linked service',t=>{
+  const db=openDb(':memory:');seed(db,'synthetic-centres');t.after(()=>db.close());
+  const users=Object.fromEntries(db.prepare('SELECT * FROM users').all().map(u=>[u.id,u])),tx=f=>transaction(db,f);
+  assert.equal(PROPOSED.length,4);
+  assert.throws(()=>tx(()=>proposeCentre(db,users.manager,{key:'data_knowledge'})),code('not_permitted'));
+  const id=tx(()=>proposeCentre(db,users.admin,{key:'data_knowledge'})).id;
+  assert.throws(()=>tx(()=>proposeCentre(db,users.admin,{key:'data_knowledge'})),code('duplicate_centre'));
+  const centre=()=>centresBoard(db,users.admin).centres.find(c=>c.id===id),act=(action,values)=>tx(()=>centreAction(db,users.admin,id,action,{version:centre().version,...values}));
+  assert.equal(centresBoard(db,users.employee).centres.length,0,'a proposal is not an organisational fact');
+  assert.equal(centre().actions.includes('activate_centre'),false);assert.ok(centre().missing.includes('مالك مسمى'));
+  assert.throws(()=>act('activate_centre',{note:'تفعيل قبل تسمية المالك'}),code('invalid_state'));
+  const service=db.prepare("SELECT code FROM services WHERE tenant_id='36t' AND active=1 LIMIT 1").get().code;
+  assert.throws(()=>act('link_services',{service_codes:['NOT-A-SERVICE']}),code('service_codes'));
+  act('link_services',{service_codes:[service]});
+  act('edit_centre',{name:centre().name,scope_note:centre().scope_note,department_id:'creative',owner_id:'manager'});
+  assert.deepEqual(centre().missing,[]);
+  act('activate_centre',{note:'قرار إدارة مصطنع بتفعيل المركز وتسمية مالكه'});
+  const seen=centresBoard(db,users.employee).centres;
+  assert.equal(seen.length,1);assert.equal(seen[0].owner_name,users.manager.name);assert.deepEqual(seen[0].actions,[]);assert.equal(seen[0].services[0].code,service);
+  assert.throws(()=>act('edit_centre',{name:centre().name,scope_note:centre().scope_note,department_id:'creative',owner_id:''}),code('active_needs_owner'));
+  const other=tx(()=>proposeCentre(db,users.admin,{key:'admin_facilities'})).id,otherView=()=>centresBoard(db,users.admin).centres.find(c=>c.id===other);
+  assert.throws(()=>tx(()=>centreAction(db,users.admin,other,'link_services',{version:otherView().version,service_codes:[service]})),code('service_in_other_centre'),'one service, one centre');
+  act('retire_centre',{note:'دُمج نطاقه في إدارة قائمة بقرار مصطنع'});
+  assert.equal(centresBoard(db,users.employee).centres.length,0);
+  assert.throws(()=>db.prepare('DELETE FROM service_centres').run(),/retired, not deleted/);
+  assert.ok(verifyAudit(db));
+});

@@ -1,0 +1,7 @@
+{
+  "migration": 206,
+  "before": "6f57cbe1ae28504715b84bd62beff6c19b909ccf0f0c03d265ab623ca59b9e80",
+  "after": "4c9e1185724a391c9a567b39a87e8605f33ebfbdcdc5437b7f49f8fa2f8d15bf",
+  "tests_floor_unchanged": true,
+  "skipped_ceiling_unchanged": true
+}

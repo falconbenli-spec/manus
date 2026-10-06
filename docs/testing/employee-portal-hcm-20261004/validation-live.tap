@@ -1,0 +1,351 @@
+TAP version 13
+# (node:24797) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: بوابة الموظف تحمل كل خدمة يحق للحساب طلبها، بلا نسخة يدوية ناقصة
+ok 1 - بوابة الموظف تحمل كل خدمة يحق للحساب طلبها، بلا نسخة يدوية ناقصة
+  ---
+  duration_ms: 6514.38
+  type: 'test'
+  ...
+# Subtest: بوابة الموظف تعرض خدمات الموارد البشرية أولًا وتفتحها بمسار الطلب الموحد
+ok 2 - بوابة الموظف تعرض خدمات الموارد البشرية أولًا وتفتحها بمسار الطلب الموحد
+  ---
+  duration_ms: 5694.893208
+  type: 'test'
+  ...
+# Subtest: مسار بوابة الموظف مستقل، ولا يعاد توجيهه إلى الرئيسية
+ok 3 - مسار بوابة الموظف مستقل، ولا يعاد توجيهه إلى الرئيسية
+  ---
+  duration_ms: 3.06425
+  type: 'test'
+  ...
+# (node:24798) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: تجربة الإجازات تحفظ ترتيب HCM ولونًا ثابتًا لكل نوع وتضيف التعويضية
+ok 4 - تجربة الإجازات تحفظ ترتيب HCM ولونًا ثابتًا لكل نوع وتضيف التعويضية
+  ---
+  duration_ms: 1.035416
+  type: 'test'
+  ...
+# Subtest: نموذج الطلب يرتب الأنواع مثل HCM ويحتفظ بالأنواع النظامية الإضافية
+ok 5 - نموذج الطلب يرتب الأنواع مثل HCM ويحتفظ بالأنواع النظامية الإضافية
+  ---
+  duration_ms: 0.55725
+  type: 'test'
+  ...
+# Subtest: بوابة الموظف تقرأ الرصيد النظامي والتعويضي من وحدة الإجازات وتعرض مداخل HCM
+ok 6 - بوابة الموظف تقرأ الرصيد النظامي والتعويضي من وحدة الإجازات وتعرض مداخل HCM
+  ---
+  duration_ms: 7109.980417
+  type: 'test'
+  ...
+# (node:24799) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: answers come from the platform’s own text: a direct line, the paragraph quoted with its article and link, and a plain refusal when no text answers
+ok 7 - answers come from the platform’s own text: a direct line, the paragraph quoted with its article and link, and a plain refusal when no text answers
+  ---
+  duration_ms: 7080.318
+  type: 'test'
+  ...
+# Subtest: a conflict between two articles states which one is in force and links the amendment
+ok 8 - a conflict between two articles states which one is in force and links the amendment
+  ---
+  duration_ms: 5503.827083
+  type: 'test'
+  ...
+# Subtest: a calculation reads the asker’s own grade and contract, calls the travel module’s own function, and refuses a rate that is not accepted
+ok 9 - a calculation reads the asker’s own grade and contract, calls the travel module’s own function, and refuses a rate that is not accepted
+  ---
+  duration_ms: 11017.203
+  type: 'test'
+  ...
+# Subtest: personal questions are answered from the asker’s own records only, and a manager cannot ask about a named employee
+ok 10 - personal questions are answered from the asker’s own records only, and a manager cannot ask about a named employee
+  ---
+  duration_ms: 5297.635542
+  type: 'test'
+  ...
+# Subtest: “how do I submit X” is built from the catalogue itself: screen, fields, approvers, SLA and a deep link
+ok 11 - “how do I submit X” is built from the catalogue itself: screen, fields, approvers, SLA and a deep link
+  ---
+  duration_ms: 5585.695791
+  type: 'test'
+  ...
+# Subtest: the skills path is built only from the asker’s own record, promises nothing, and hands the goals to the existing goals screen
+ok 12 - the skills path is built only from the asker’s own record, promises nothing, and hands the goals to the existing goals screen
+  ---
+  duration_ms: 5275.676333
+  type: 'test'
+  ...
+# Subtest: salary, family and appraisal details are masked before the provider call and restored only for their owner, and the daily limit still holds
+ok 13 - salary, family and appraisal details are masked before the provider call and restored only for their owner, and the daily limit still holds
+  ---
+  duration_ms: 4959.235792
+  type: 'test'
+  ...
+# Subtest: the golden set runs on retrieval alone, with the provider stubbed, and reports what the text still lacks
+ok 14 - the golden set runs on retrieval alone, with the provider stubbed, and reports what the text still lacks
+  ---
+  duration_ms: 5008.144958
+  type: 'test'
+  ...
+# Subtest: the semantic layer masks the question before it leaves the machine, exactly as the provider path does
+ok 15 - the semantic layer masks the question before it leaves the machine, exactly as the provider path does
+  ---
+  duration_ms: 4574.46775
+  type: 'test'
+  ...
+# (node:24800) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: CATALOG: installs every proposed department, one head each, and all services once
+ok 16 - CATALOG: installs every proposed department, one head each, and all services once
+  ---
+  duration_ms: 7002.006292
+  type: 'test'
+  ...
+# Subtest: CATALOG: refuses a non-synthetic tenant and an existing account with a different role
+ok 17 - CATALOG: refuses a non-synthetic tenant and an existing account with a different role
+  ---
+  duration_ms: 10226.750625
+  type: 'test'
+  ...
+# Subtest: CATALOG: every service accepts a complete request and routes to its approvers
+ok 18 - CATALOG: every service accepts a complete request and routes to its approvers
+  ---
+  duration_ms: 6826.001542
+  type: 'test'
+  ...
+# Subtest: CATALOG: department head approves and executes travel, then reaches the independent output-acceptance gate
+ok 19 - CATALOG: department head approves and executes travel, then reaches the independent output-acceptance gate
+  ---
+  duration_ms: 5043.029625
+  type: 'test'
+  ...
+# Subtest: CATALOG: number fields reject non-numeric values and a head cannot approve their own request
+ok 20 - CATALOG: number fields reject non-numeric values and a head cannot approve their own request
+  ---
+  duration_ms: 5475.535
+  type: 'test'
+  ...
+# Subtest: CATALOG UI: the department directory lists new departments, their services and bound workspaces
+ok 21 - CATALOG UI: the department directory lists new departments, their services and bound workspaces
+  ---
+  duration_ms: 5472.347166
+  type: 'test'
+  ...
+1..21
+# tests 21
+# suites 0
+# pass 21
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 54662.162833
+TAP version 13
+# (node:24893) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# {"t":"2026-10-03T23:56:22.535Z","id":"41bfeaee","env":"local","m":"POST","p":"/api/login","s":200,"ms":381}
+# {"t":"2026-10-03T23:56:22.915Z","id":"d6af8bcf","env":"local","m":"POST","p":"/api/login","s":200,"ms":366}
+# {"t":"2026-10-03T23:56:23.298Z","id":"7f4af39d","env":"local","m":"POST","p":"/api/login","s":200,"ms":381}
+# {"t":"2026-10-03T23:56:23.687Z","id":"83c24593","env":"local","m":"POST","p":"/api/login","s":200,"ms":388}
+# {"t":"2026-10-03T23:56:24.305Z","id":"b068cf28","env":"local","m":"POST","p":"/api/login","s":200,"ms":615}
+# {"t":"2026-10-03T23:56:24.718Z","id":"10861a24","env":"local","m":"POST","p":"/api/login","s":200,"ms":408}
+# {"t":"2026-10-03T23:56:25.095Z","id":"4c5df8e8","env":"local","m":"POST","p":"/api/login","s":200,"ms":377}
+# {"t":"2026-10-03T23:56:25.439Z","id":"032d6ea6","env":"local","m":"POST","p":"/api/login","s":200,"ms":343}
+# {"t":"2026-10-03T23:56:25.837Z","id":"ba33b156","env":"local","m":"POST","p":"/api/login","s":200,"ms":396}
+# {"t":"2026-10-03T23:56:25.852Z","id":"65dc06fa","env":"local","m":"POST","p":"/api/commercial","s":201,"ms":11,"tx":1,"lock_ms":0}
+# {"t":"2026-10-03T23:56:25.861Z","id":"49dd128e","env":"local","m":"POST","p":"/api/commercial","s":201,"ms":3,"tx":1,"lock_ms":0}
+# {"t":"2026-10-03T23:56:25.862Z","id":"443e2baa","env":"local","m":"POST","p":"/api/commercial","s":409,"ms":1,"tx":1,"lock_ms":0}
+# {"t":"2026-10-03T23:56:25.863Z","id":"492bdeec","env":"local","m":"POST","p":"/api/commercial/ffe003f4-ebfc-4bc2-a0cc-9b0d2e71c80f/qualify","s":403,"ms":1}
+# {"t":"2026-10-03T23:56:25.869Z","id":"1f8e8a73","env":"local","m":"POST","p":"/api/commercial/ffe003f4-ebfc-4bc2-a0cc-9b0d2e71c80f/qualify","s":201,"ms":6,"tx":1,"lock_ms":0}
+# {"t":"2026-10-03T23:56:25.878Z","id":"ffed98fc","env":"local","m":"POST","p":"/api/commercial/ffe003f4-ebfc-4bc2-a0cc-9b0d2e71c80f/approve_qualification","s":201,"ms":8,"tx":1,"lock_ms":0}
+# {"t":"2026-10-03T23:56:25.886Z","id":"c961607b","env":"local","m":"POST","p":"/api/commercial/ffe003f4-ebfc-4bc2-a0cc-9b0d2e71c80f/save_quote","s":201,"ms":6,"tx":1,"lock_ms":0}
+# {"t":"2026-10-03T23:56:25.890Z","id":"df69aa1c","env":"local","m":"POST","p":"/api/commercial/ffe003f4-ebfc-4bc2-a0cc-9b0d2e71c80f/submit_quote","s":201,"ms":3,"tx":1,"lock_ms":0}
+# {"t":"2026-10-03T23:56:25.894Z","id":"399e2adf","env":"local","m":"POST","p":"/api/commercial/ffe003f4-ebfc-4bc2-a0cc-9b0d2e71c80f/approve_quote","s":201,"ms":3,"tx":1,"lock_ms":0}
+# {"t":"2026-10-03T23:56:25.899Z","id":"3c348040","env":"local","m":"POST","p":"/api/commercial/ffe003f4-ebfc-4bc2-a0cc-9b0d2e71c80f/register_contract","s":201,"ms":4,"tx":1,"lock_ms":0}
+# {"t":"2026-10-03T23:56:25.906Z","id":"1fbb1b89","env":"local","m":"POST","p":"/api/commercial/ffe003f4-ebfc-4bc2-a0cc-9b0d2e71c80f/create_project","s":201,"ms":5,"tx":1,"lock_ms":0}
+# {"t":"2026-10-03T23:56:25.908Z","id":"d9c360c8","env":"local","m":"GET","p":"/api/projects","s":200,"ms":1}
+# {"t":"2026-10-03T23:56:25.910Z","id":"f425793f","env":"local","m":"POST","p":"/api/projects/e8072fd7-129f-42bb-b170-1774d83cc1b3/finance-scope","s":201,"ms":2,"tx":1,"lock_ms":0}
+# {"t":"2026-10-03T23:56:25.912Z","id":"1d74a11d","env":"local","m":"POST","p":"/api/projects/e8072fd7-129f-42bb-b170-1774d83cc1b3/finance-scope","s":201,"ms":1,"tx":1,"lock_ms":0}
+# {"t":"2026-10-03T23:56:25.920Z","id":"a2190c76","env":"local","m":"POST","p":"/api/budgets","s":201,"ms":6,"tx":1,"lock_ms":0}
+# {"t":"2026-10-03T23:56:25.925Z","id":"a526a2a6","env":"local","m":"POST","p":"/api/budgets/90ac0b4b-37b8-4feb-8a7e-079e130866c2/submit","s":201,"ms":3,"tx":1,"lock_ms":0}
+# {"t":"2026-10-03T23:56:25.929Z","id":"0c1bbc2b","env":"local","m":"POST","p":"/api/budgets/90ac0b4b-37b8-4feb-8a7e-079e130866c2/approve","s":201,"ms":3,"tx":1,"lock_ms":0}
+# {"t":"2026-10-03T23:56:25.940Z","id":"83b2d37f","env":"local","m":"POST","p":"/api/procurement","s":201,"ms":9,"tx":1,"lock_ms":0}
+# {"t":"2026-10-03T23:56:25.948Z","id":"c1a41169","env":"local","m":"POST","p":"/api/procurement/fad0d6c1-632e-46c8-a586-7b4a09825329/submit","s":201,"ms":6,"tx":1,"lock_ms":0}
+# {"t":"2026-10-03T23:56:26.099Z","id":"23218a6d","env":"local","m":"POST","p":"/api/procurement/fad0d6c1-632e-46c8-a586-7b4a09825329/add_quote","s":201,"ms":3,"tx":1,"lock_ms":0}
+# {"t":"2026-10-03T23:56:26.103Z","id":"cf45baca","env":"local","m":"POST","p":"/api/procurement/fad0d6c1-632e-46c8-a586-7b4a09825329/add_quote","s":201,"ms":3,"tx":1,"lock_ms":0}
+# {"t":"2026-10-03T23:56:26.109Z","id":"a289dcc5","env":"local","m":"POST","p":"/api/procurement/fad0d6c1-632e-46c8-a586-7b4a09825329/add_quote","s":201,"ms":4,"tx":1,"lock_ms":0}
+# {"t":"2026-10-03T23:56:26.130Z","id":"dd0bcf56","env":"local","m":"POST","p":"/api/procurement/fad0d6c1-632e-46c8-a586-7b4a09825329/award","s":403,"ms":1,"tx":1,"lock_ms":0}
+# {"t":"2026-10-03T23:56:26.140Z","id":"e16be6ed","env":"local","m":"POST","p":"/api/procurement/fad0d6c1-632e-46c8-a586-7b4a09825329/award","s":201,"ms":7,"tx":1,"lock_ms":0}
+# {"t":"2026-10-03T23:56:26.152Z","id":"819e323a","env":"local","m":"POST","p":"/api/procurement/fad0d6c1-632e-46c8-a586-7b4a09825329/approve_order","s":201,"ms":10,"tx":1,"lock_ms":0}
+# {"t":"2026-10-03T23:56:26.154Z","id":"c801ec6a","env":"local","m":"POST","p":"/api/procurement/fad0d6c1-632e-46c8-a586-7b4a09825329/commence","s":403,"ms":1,"tx":1,"lock_ms":0}
+# {"t":"2026-10-03T23:56:26.167Z","id":"b9e4b016","env":"local","m":"POST","p":"/api/procurement/fad0d6c1-632e-46c8-a586-7b4a09825329/commence","s":201,"ms":11,"tx":1,"lock_ms":0}
+# {"t":"2026-10-03T23:56:26.174Z","id":"c105f6c7","env":"local","m":"POST","p":"/api/procurement/fad0d6c1-632e-46c8-a586-7b4a09825329/receive","s":201,"ms":6,"tx":1,"lock_ms":0}
+# {"t":"2026-10-03T23:56:26.194Z","id":"f2d5a22f","env":"local","m":"POST","p":"/api/procurement/fad0d6c1-632e-46c8-a586-7b4a09825329/record_invoice","s":201,"ms":19,"tx":1,"lock_ms":0}
+# {"t":"2026-10-03T23:56:26.210Z","id":"3fb07caa","env":"local","m":"POST","p":"/api/procurement/fad0d6c1-632e-46c8-a586-7b4a09825329/match","s":201,"ms":14,"tx":1,"lock_ms":0}
+# {"t":"2026-10-03T23:56:26.211Z","id":"bac2b7db","env":"local","m":"GET","p":"/api/commercial","s":200,"ms":0}
+# {"t":"2026-10-03T23:56:26.214Z","id":"b6e65027","env":"local","m":"GET","p":"/api/procurement","s":200,"ms":1}
+# {"t":"2026-10-03T23:56:26.215Z","id":"6abc8056","env":"local","m":"POST","p":"/api/procurement/fad0d6c1-632e-46c8-a586-7b4a09825329/match","s":404,"ms":1,"tx":1,"lock_ms":0}
+# {"t":"2026-10-03T23:56:26.219Z","id":"ab2dc459","env":"local","m":"GET","p":"/api/commercial","s":200,"ms":3}
+# {"t":"2026-10-03T23:56:26.221Z","id":"f2a8ea3e","env":"local","m":"GET","p":"/api/procurement","s":200,"ms":1}
+# {"t":"2026-10-03T23:56:26.225Z","id":"2395c80a","env":"local","m":"POST","p":"/api/procurement/fad0d6c1-632e-46c8-a586-7b4a09825329/match","s":404,"ms":2,"tx":1,"lock_ms":0}
+# {"t":"2026-10-03T23:56:26.227Z","id":"8d6bff60","env":"local","m":"GET","p":"/api/commercial","s":200,"ms":1}
+# {"t":"2026-10-03T23:56:26.229Z","id":"5292107e","env":"local","m":"GET","p":"/api/procurement","s":200,"ms":1}
+# {"t":"2026-10-03T23:56:26.232Z","id":"f3c3ba9b","env":"local","m":"POST","p":"/api/procurement/fad0d6c1-632e-46c8-a586-7b4a09825329/match","s":404,"ms":1,"tx":1,"lock_ms":0}
+# {"t":"2026-10-03T23:56:26.234Z","id":"30e1f615","env":"local","m":"GET","p":"/api/integrations","s":200,"ms":0}
+# Subtest: WF-01/02/05 HTTP: a scoped commercial project funds a purchase that reaches an unpaid matched reference
+ok 1 - WF-01/02/05 HTTP: a scoped commercial project funds a purchase that reaches an unpaid matched reference
+  ---
+  duration_ms: 8591.434833
+  type: 'test'
+  ...
+# {"t":"2026-09-30T06:00:00.000Z","id":"cb69bcd5","env":"local","m":"POST","p":"/api/login","s":200,"ms":0}
+# {"t":"2026-09-30T06:00:00.000Z","id":"0793c683","env":"local","m":"POST","p":"/api/login","s":200,"ms":0}
+# {"t":"2026-09-30T06:00:00.000Z","id":"064bde34","env":"local","m":"POST","p":"/api/login","s":200,"ms":0}
+# {"t":"2026-09-30T06:00:00.000Z","id":"088af4b4","env":"local","m":"POST","p":"/api/login","s":200,"ms":0}
+# {"t":"2026-09-30T06:00:00.000Z","id":"eefabc72","env":"local","m":"POST","p":"/api/login","s":200,"ms":0}
+# {"t":"2026-09-30T06:00:00.000Z","id":"6fcefd40","env":"local","m":"POST","p":"/api/login","s":200,"ms":0}
+# {"t":"2026-09-30T06:00:00.000Z","id":"0705b872","env":"local","m":"POST","p":"/api/login","s":200,"ms":0}
+# {"t":"2026-09-30T06:00:00.000Z","id":"1cfbf7f7","env":"local","m":"POST","p":"/api/login","s":200,"ms":0}
+# {"t":"2026-09-30T06:00:00.000Z","id":"381648d8","env":"local","m":"POST","p":"/api/login","s":200,"ms":0}
+# {"t":"2026-09-30T06:00:00.000Z","id":"783f6a90","env":"local","m":"GET","p":"/api/leave","s":403,"ms":0}
+# {"t":"2026-09-30T06:00:00.000Z","id":"1e3781ab","env":"local","m":"POST","p":"/api/leave/openings","s":403,"ms":0,"tx":1,"lock_ms":0}
+# {"t":"2026-09-30T06:00:00.000Z","id":"ce844f6f","env":"local","m":"POST","p":"/api/leave/openings","s":201,"ms":0,"tx":1,"lock_ms":0}
+# {"t":"2026-09-30T06:00:00.000Z","id":"c8a0d6a0","env":"local","m":"POST","p":"/api/leave/openings","s":201,"ms":0,"tx":1,"lock_ms":0}
+# {"t":"2026-09-30T06:00:00.000Z","id":"41237ca8","env":"local","m":"POST","p":"/api/leave/requests","s":201,"ms":0,"tx":1,"lock_ms":0}
+# {"t":"2026-09-30T06:00:00.000Z","id":"3c4514ef","env":"local","m":"POST","p":"/api/leave/requests","s":201,"ms":0,"tx":1,"lock_ms":0}
+# {"t":"2026-09-30T06:00:00.000Z","id":"a9f18c1d","env":"local","m":"POST","p":"/api/leave/requests/4252b1f0-f2a9-48d4-9a3e-713363434eac/approve","s":403,"ms":0,"tx":1,"lock_ms":0}
+# {"t":"2026-09-30T06:00:00.000Z","id":"3e24f2e1","env":"local","m":"POST","p":"/api/leave/requests/4252b1f0-f2a9-48d4-9a3e-713363434eac/approve","s":201,"ms":0,"tx":1,"lock_ms":0}
+# {"t":"2026-09-30T06:00:00.000Z","id":"71f91b35","env":"local","m":"POST","p":"/api/leave/requests/4252b1f0-f2a9-48d4-9a3e-713363434eac/approve","s":201,"ms":0,"tx":1,"lock_ms":0}
+# {"t":"2026-09-30T06:00:00.000Z","id":"e12fbacb","env":"local","m":"GET","p":"/api/leave","s":200,"ms":0}
+# {"t":"2026-09-30T06:00:00.000Z","id":"3ddcd027","env":"local","m":"POST","p":"/api/leave/requests/4252b1f0-f2a9-48d4-9a3e-713363434eac/cancel","s":404,"ms":0,"tx":1,"lock_ms":0}
+# {"t":"2026-09-30T06:00:00.000Z","id":"caaaceee","env":"local","m":"POST","p":"/api/leave/requests/4252b1f0-f2a9-48d4-9a3e-713363434eac/cancel","s":201,"ms":0,"tx":1,"lock_ms":0}
+# {"t":"2026-09-30T06:00:00.000Z","id":"3d469f6f","env":"local","m":"POST","p":"/api/leave/requests/4252b1f0-f2a9-48d4-9a3e-713363434eac/cancel","s":403,"ms":0,"tx":1,"lock_ms":0}
+# {"t":"2026-09-30T06:00:00.000Z","id":"7b57c7f7","env":"local","m":"GET","p":"/api/leave","s":200,"ms":0}
+# Subtest: WF-08 HTTP: opening, reservation, two approvals and cancellation update the same employee year once
+ok 2 - WF-08 HTTP: opening, reservation, two approvals and cancellation update the same employee year once
+  ---
+  duration_ms: 8146.917917
+  type: 'test'
+  ...
+# {"t":"2026-10-03T23:56:39.669Z","id":"c8d9896a","env":"local","m":"POST","p":"/api/login","s":200,"ms":401}
+# {"t":"2026-10-03T23:56:40.062Z","id":"fe3d8e42","env":"local","m":"POST","p":"/api/login","s":200,"ms":390}
+# {"t":"2026-10-03T23:56:40.451Z","id":"396e08d7","env":"local","m":"POST","p":"/api/login","s":200,"ms":387}
+# {"t":"2026-10-03T23:56:40.827Z","id":"68a3d145","env":"local","m":"POST","p":"/api/login","s":200,"ms":374}
+# {"t":"2026-10-03T23:56:41.345Z","id":"753e0ef2","env":"local","m":"POST","p":"/api/login","s":200,"ms":517}
+# {"t":"2026-10-03T23:56:41.737Z","id":"50f0fff1","env":"local","m":"POST","p":"/api/login","s":200,"ms":391}
+# {"t":"2026-10-03T23:56:42.171Z","id":"15d6f620","env":"local","m":"POST","p":"/api/login","s":200,"ms":433}
+# {"t":"2026-10-03T23:56:42.657Z","id":"e06ccf0f","env":"local","m":"POST","p":"/api/login","s":200,"ms":485}
+# {"t":"2026-10-03T23:56:43.010Z","id":"018224e8","env":"local","m":"POST","p":"/api/login","s":200,"ms":349}
+# {"t":"2026-10-03T23:56:43.013Z","id":"66e61d19","env":"local","m":"GET","p":"/api/catalog","s":200,"ms":2}
+# {"t":"2026-10-03T23:56:43.022Z","id":"f2139716","env":"local","m":"POST","p":"/api/requests","s":201,"ms":6,"tx":1,"lock_ms":0}
+# {"t":"2026-10-03T23:56:43.036Z","id":"4edef8a5","env":"local","m":"POST","p":"/api/requests/f76a6687-7459-4c41-9f30-c428f5ed55ae/submit","s":201,"ms":13,"tx":1,"lock_ms":0}
+# {"t":"2026-10-03T23:56:43.040Z","id":"9551dc24","env":"local","m":"POST","p":"/api/delegations","s":201,"ms":2,"tx":1,"lock_ms":0}
+# {"t":"2026-10-03T23:56:43.041Z","id":"076bad55","env":"local","m":"POST","p":"/api/delegations","s":201,"ms":0,"tx":1,"lock_ms":0}
+# {"t":"2026-10-03T23:56:43.048Z","id":"c598de23","env":"local","m":"GET","p":"/api/requests/f76a6687-7459-4c41-9f30-c428f5ed55ae","s":200,"ms":6}
+# {"t":"2026-10-03T23:56:43.050Z","id":"25c63244","env":"local","m":"POST","p":"/api/delegations/8955d637-5e56-4ef6-92c0-f8ab4d716014/revoke","s":201,"ms":1,"tx":1,"lock_ms":0}
+# {"t":"2026-10-03T23:56:43.051Z","id":"58e300f6","env":"local","m":"GET","p":"/api/requests/f76a6687-7459-4c41-9f30-c428f5ed55ae","s":404,"ms":0}
+# {"t":"2026-10-03T23:56:43.065Z","id":"0dc06740","env":"local","m":"POST","p":"/api/requests/f76a6687-7459-4c41-9f30-c428f5ed55ae/approve","s":404,"ms":11,"tx":1,"lock_ms":0}
+# Subtest: PLT-04 HTTP: a temporary substitute loses the decision endpoint after revocation
+ok 3 - PLT-04 HTTP: a temporary substitute loses the decision endpoint after revocation
+  ---
+  duration_ms: 8681.575625
+  type: 'test'
+  ...
+# Subtest: NFR-08: expanding synthetic fixtures twice preserves existing users, records and balances
+ok 4 - NFR-08: expanding synthetic fixtures twice preserves existing users, records and balances
+  ---
+  duration_ms: 4624.982708
+  type: 'test'
+  ...
+# {"t":"2026-10-03T23:56:52.648Z","id":"57e7d513","env":"local","m":"POST","p":"/api/login","s":200,"ms":383}
+# {"t":"2026-10-03T23:56:53.014Z","id":"a1f65e81","env":"local","m":"POST","p":"/api/login","s":200,"ms":363}
+# {"t":"2026-10-03T23:56:53.393Z","id":"53fb8672","env":"local","m":"POST","p":"/api/login","s":200,"ms":378}
+# {"t":"2026-10-03T23:56:53.793Z","id":"56b09dbf","env":"local","m":"POST","p":"/api/login","s":200,"ms":399}
+# {"t":"2026-10-03T23:56:54.248Z","id":"b80e1c7f","env":"local","m":"POST","p":"/api/login","s":200,"ms":452}
+# {"t":"2026-10-03T23:56:54.656Z","id":"40c43387","env":"local","m":"POST","p":"/api/login","s":200,"ms":407}
+# {"t":"2026-10-03T23:56:55.074Z","id":"f6b2c18b","env":"local","m":"POST","p":"/api/login","s":200,"ms":417}
+# {"t":"2026-10-03T23:56:55.465Z","id":"e0cc6229","env":"local","m":"POST","p":"/api/login","s":200,"ms":389}
+# {"t":"2026-10-03T23:56:55.887Z","id":"267a4882","env":"local","m":"POST","p":"/api/login","s":200,"ms":418}
+# {"t":"2026-10-03T23:56:55.889Z","id":"cead8491","env":"local","m":"GET","p":"/api/finance","s":200,"ms":1}
+# {"t":"2026-10-03T23:56:55.890Z","id":"4604f6a1","env":"local","m":"GET","p":"/api/me","s":200,"ms":0}
+# {"t":"2026-10-03T23:56:55.891Z","id":"b1d47e93","env":"local","m":"GET","p":"/api/me","s":200,"ms":0}
+# {"t":"2026-10-03T23:56:55.892Z","id":"2d4f38bf","env":"local","m":"GET","p":"/api/finance","s":403,"ms":1}
+# {"t":"2026-10-03T23:56:55.893Z","id":"f5e54eee","env":"local","m":"GET","p":"/api/finance","s":403,"ms":1}
+# {"t":"2026-10-03T23:56:55.896Z","id":"b97ca915","env":"local","m":"POST","p":"/api/finance/journals","s":201,"ms":2,"tx":1,"lock_ms":0}
+# {"t":"2026-10-03T23:56:55.900Z","id":"b7b85787","env":"local","m":"POST","p":"/api/finance/journals","s":201,"ms":3,"tx":1,"lock_ms":0}
+# {"t":"2026-10-03T23:56:55.906Z","id":"2755fbdf","env":"local","m":"POST","p":"/api/finance/journals/b6c6f88b-505b-4dbc-bba5-c6ed1ecaea3d/submit","s":201,"ms":4,"tx":1,"lock_ms":0}
+# {"t":"2026-10-03T23:56:55.910Z","id":"66a80b25","env":"local","m":"GET","p":"/api/overview","s":200,"ms":3}
+# {"t":"2026-10-03T23:56:55.914Z","id":"6d0a529c","env":"local","m":"POST","p":"/api/finance/journals/b6c6f88b-505b-4dbc-bba5-c6ed1ecaea3d/approve","s":403,"ms":2,"tx":1,"lock_ms":0}
+# {"t":"2026-10-03T23:56:55.920Z","id":"3823b6cf","env":"local","m":"POST","p":"/api/finance/journals/b6c6f88b-505b-4dbc-bba5-c6ed1ecaea3d/approve","s":201,"ms":2,"tx":1,"lock_ms":0}
+# {"t":"2026-10-03T23:56:55.922Z","id":"33e8ea7e","env":"local","m":"POST","p":"/api/finance/journals/b6c6f88b-505b-4dbc-bba5-c6ed1ecaea3d/post","s":201,"ms":2,"tx":1,"lock_ms":0}
+# {"t":"2026-10-03T23:56:55.924Z","id":"f724679e","env":"local","m":"GET","p":"/api/finance","s":200,"ms":1}
+# Subtest: FIN-06 HTTP: explicit financial accounts prepare, independently approve and post without external execution
+ok 5 - FIN-06 HTTP: explicit financial accounts prepare, independently approve and post without external execution
+  ---
+  duration_ms: 8243.703333
+  type: 'test'
+  ...
+# {"t":"2026-10-03T23:57:00.988Z","id":"5ce7c1bc","env":"local","m":"POST","p":"/api/login","s":200,"ms":392}
+# {"t":"2026-10-03T23:57:01.386Z","id":"619c2b2b","env":"local","m":"POST","p":"/api/login","s":200,"ms":395}
+# {"t":"2026-10-03T23:57:01.770Z","id":"f65e894f","env":"local","m":"POST","p":"/api/login","s":200,"ms":384}
+# {"t":"2026-10-03T23:57:02.160Z","id":"949f0a1b","env":"local","m":"POST","p":"/api/login","s":200,"ms":389}
+# {"t":"2026-10-03T23:57:02.569Z","id":"f08a6e98","env":"local","m":"POST","p":"/api/login","s":200,"ms":408}
+# {"t":"2026-10-03T23:57:02.935Z","id":"dc9577f0","env":"local","m":"POST","p":"/api/login","s":200,"ms":363}
+# {"t":"2026-10-03T23:57:03.334Z","id":"a2f99b4b","env":"local","m":"POST","p":"/api/login","s":200,"ms":396}
+# {"t":"2026-10-03T23:57:03.718Z","id":"ab44f83e","env":"local","m":"POST","p":"/api/login","s":200,"ms":382}
+# {"t":"2026-10-03T23:57:04.110Z","id":"43b4927b","env":"local","m":"POST","p":"/api/login","s":200,"ms":392}
+# {"t":"2026-10-03T23:57:04.113Z","id":"f7b2ac01","env":"local","m":"GET","p":"/api/people","s":200,"ms":2}
+# {"t":"2026-10-03T23:57:04.120Z","id":"58dc9990","env":"local","m":"POST","p":"/api/people/requisitions","s":201,"ms":4,"tx":1,"lock_ms":0}
+# {"t":"2026-10-03T23:57:04.125Z","id":"25860356","env":"local","m":"GET","p":"/api/overview","s":200,"ms":5}
+# {"t":"2026-10-03T23:57:04.128Z","id":"bcc805dc","env":"local","m":"POST","p":"/api/people/04d3fe7b-0e6c-4538-b4b9-5eda68b34786/approve_need","s":403,"ms":2,"tx":1,"lock_ms":0}
+# {"t":"2026-10-03T23:57:04.129Z","id":"33a6c970","env":"local","m":"POST","p":"/api/people/04d3fe7b-0e6c-4538-b4b9-5eda68b34786/approve_need","s":201,"ms":1,"tx":1,"lock_ms":0}
+# {"t":"2026-10-03T23:57:04.136Z","id":"5310b855","env":"local","m":"POST","p":"/api/people/04d3fe7b-0e6c-4538-b4b9-5eda68b34786/add_candidate","s":201,"ms":5,"tx":1,"lock_ms":0}
+# {"t":"2026-10-03T23:57:04.138Z","id":"dc85bbfa","env":"local","m":"POST","p":"/api/people/04d3fe7b-0e6c-4538-b4b9-5eda68b34786/add_candidate","s":201,"ms":0,"tx":1,"lock_ms":0}
+# {"t":"2026-10-03T23:57:04.139Z","id":"ab859408","env":"local","m":"GET","p":"/api/people","s":200,"ms":0}
+# {"t":"2026-10-03T23:57:04.140Z","id":"96127472","env":"local","m":"GET","p":"/api/people","s":200,"ms":0}
+# {"t":"2026-10-03T23:57:04.140Z","id":"0641e39f","env":"local","m":"GET","p":"/api/people","s":403,"ms":0}
+# Subtest: TAL-01/02 HTTP: approved hiring scope admits one candidate and masks the profile from checklist outsiders
+ok 6 - TAL-01/02 HTTP: approved hiring scope admits one candidate and masks the profile from checklist outsiders
+  ---
+  duration_ms: 8203.706875
+  type: 'test'
+  ...
+# {"t":"2026-10-03T23:57:09.100Z","id":"ec156a3c","env":"local","m":"POST","p":"/api/login","s":200,"ms":356}
+# {"t":"2026-10-03T23:57:09.458Z","id":"65c311d9","env":"local","m":"POST","p":"/api/login","s":200,"ms":356}
+# {"t":"2026-10-03T23:57:09.818Z","id":"318093f2","env":"local","m":"POST","p":"/api/login","s":200,"ms":359}
+# {"t":"2026-10-03T23:57:10.254Z","id":"d1d74199","env":"local","m":"POST","p":"/api/login","s":200,"ms":435}
+# {"t":"2026-10-03T23:57:10.615Z","id":"aac7bd54","env":"local","m":"POST","p":"/api/login","s":200,"ms":359}
+# {"t":"2026-10-03T23:57:10.996Z","id":"31209f97","env":"local","m":"POST","p":"/api/login","s":200,"ms":380}
+# {"t":"2026-10-03T23:57:11.386Z","id":"66495f8d","env":"local","m":"POST","p":"/api/login","s":200,"ms":389}
+# {"t":"2026-10-03T23:57:11.776Z","id":"5a3dcd2d","env":"local","m":"POST","p":"/api/login","s":200,"ms":386}
+# {"t":"2026-10-03T23:57:12.170Z","id":"1e5d7154","env":"local","m":"POST","p":"/api/login","s":200,"ms":393}
+# {"t":"2026-10-03T23:57:12.174Z","id":"2252d502","env":"local","m":"POST","p":"/api/projects","s":201,"ms":3,"tx":1,"lock_ms":0}
+# {"t":"2026-10-03T23:57:12.180Z","id":"3d28bddf","env":"local","m":"POST","p":"/api/studio","s":201,"ms":4,"tx":1,"lock_ms":0}
+# {"t":"2026-10-03T23:57:12.186Z","id":"bad79bae","env":"local","m":"POST","p":"/api/studio/6f41005d-3f9a-4f87-b193-1368509913e1/submit_brief","s":201,"ms":3,"tx":1,"lock_ms":0}
+# {"t":"2026-10-03T23:57:12.192Z","id":"f36a0fb1","env":"local","m":"GET","p":"/api/overview","s":200,"ms":5}
+# {"t":"2026-10-03T23:57:12.196Z","id":"40d260b0","env":"local","m":"POST","p":"/api/studio/6f41005d-3f9a-4f87-b193-1368509913e1/approve_brief","s":201,"ms":2,"tx":1,"lock_ms":0}
+# {"t":"2026-10-03T23:57:12.200Z","id":"c80b2b6c","env":"local","m":"POST","p":"/api/studio/6f41005d-3f9a-4f87-b193-1368509913e1/add_asset","s":201,"ms":2,"tx":1,"lock_ms":0}
+# {"t":"2026-10-03T23:57:12.203Z","id":"a26c4b6d","env":"local","m":"POST","p":"/api/studio/6f41005d-3f9a-4f87-b193-1368509913e1/inspect_asset","s":201,"ms":2,"tx":1,"lock_ms":0}
+# {"t":"2026-10-03T23:57:12.206Z","id":"f4b7421e","env":"local","m":"POST","p":"/api/studio/6f41005d-3f9a-4f87-b193-1368509913e1/create_output","s":201,"ms":2,"tx":1,"lock_ms":0}
+# {"t":"2026-10-03T23:57:12.209Z","id":"49737f3a","env":"local","m":"POST","p":"/api/studio/6f41005d-3f9a-4f87-b193-1368509913e1/submit_output","s":201,"ms":2,"tx":1,"lock_ms":0}
+# {"t":"2026-10-03T23:57:12.211Z","id":"38bfdcc3","env":"local","m":"POST","p":"/api/studio/6f41005d-3f9a-4f87-b193-1368509913e1/approve_output","s":201,"ms":2,"tx":1,"lock_ms":0}
+# {"t":"2026-10-03T23:57:12.217Z","id":"e5e03147","env":"local","m":"POST","p":"/api/studio/6f41005d-3f9a-4f87-b193-1368509913e1/issue_package","s":201,"ms":4,"tx":1,"lock_ms":0}
+# {"t":"2026-10-03T23:57:12.224Z","id":"95d3882c","env":"local","m":"POST","p":"/api/studio/6f41005d-3f9a-4f87-b193-1368509913e1/accept_package","s":201,"ms":5,"tx":1,"lock_ms":0}
+# {"t":"2026-10-03T23:57:12.225Z","id":"a4bb782f","env":"local","m":"GET","p":"/api/studio","s":200,"ms":0}
+# Subtest: STR-08/CRT-09 HTTP: project members produce an approved text version and an internal delivery manifest
+ok 7 - STR-08/CRT-09 HTTP: project members produce an approved text version and an internal delivery manifest
+  ---
+  duration_ms: 8086.465292
+  type: 'test'
+  ...
+1..7
+# tests 7
+# suites 0
+# pass 7
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 54983.42675

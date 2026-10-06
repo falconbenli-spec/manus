@@ -1,0 +1,31 @@
+(node:51462) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ المساعد المجرد غير النشط لا يرسل بيانات للمزود ولا يظهر متاحًا (10273.801792ms)
+✔ إيقاف المساعد النشط يمنع التشغيل اللاحق مع بقاء الإعداد العام مفعلاً (18440.487458ms)
+✖ الإيقاف أثناء انتظار المزود يحفظ التكلفة دون الناتج أو المصادر (12575.226584ms)
+✔ غياب الجرد يحافظ على السلوك السابق وجرد كيان آخر لا يوقف هذا الكيان (10973.706875ms)
+ℹ tests 4
+ℹ suites 0
+ℹ pass 3
+ℹ fail 1
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 52941.089459
+
+✖ failing tests:
+
+test at tests/ai-governance-runtime.test.mjs:42:1
+✖ الإيقاف أثناء انتظار المزود يحفظ التكلفة دون الناتج أو المصادر (12575.226584ms)
+  AssertionError [ERR_ASSERTION]: يبقى سجل الاستهلاك بعد رفض الطلب
+      at TestContext.<anonymous> (file:///Users/abdulaziz/Documents/Codex/2026-09-24/36t-integration/tests/ai-governance-runtime.test.mjs:50:10)
+      at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+      at async Test.run (node:internal/test_runner/test:1125:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:787:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: undefined,
+    expected: true,
+    operator: '==',
+    diff: 'simple'
+  }

@@ -1,0 +1,492 @@
+{
+  "audit": {
+    "audited_on": "2026-10-03",
+    "root_url": "https://drive.google.com/drive/folders/1goNlHLt5ZLFTdqauSZKKcjTzQ_4kj9yx",
+    "unified_index": {
+      "id": "1ZgyWtFzawO_o7HEkBVLOtjTjIUzfmQHu",
+      "name": "نماذج_آلية_العمل_المالية.xlsx",
+      "url": "https://drive.google.com/file/d/1ZgyWtFzawO_o7HEkBVLOtjTjIUzfmQHu/view",
+      "modified_at": "2026-09-07T08:50:33.000Z",
+      "records": 41,
+      "note": "فهرس موحد من 41 نموذجًا ومستندًا؛ ليس 41 خدمة مستقلة."
+    },
+    "coverage": {
+      "source_register": 65,
+      "wave1": 24,
+      "wave1_built": 24,
+      "wave1_readable_sources": 23,
+      "wave1_missing_source": 1,
+      "generic_catalogue": 32,
+      "specialised_documents": 18,
+      "later_models_not_built": 39,
+      "later_models_with_readable_source": 10,
+      "later_models_waiting_for_source": 29
+    },
+    "canonical_sources": [
+      {
+        "code": "BD-01",
+        "form_key": "FORM-BD-QUALIFY",
+        "id": "1iYJRF4vLEC3hXIgGhSk5TyDk5qGvZQJr",
+        "file": "MOD-BD-01_تأهيل_العميل_المحتمل.docx",
+        "status": "readable",
+        "url": "https://drive.google.com/file/d/1iYJRF4vLEC3hXIgGhSk5TyDk5qGvZQJr/view"
+      },
+      {
+        "code": "BD-04",
+        "form_key": "FORM-BD-HANDOVER",
+        "id": "11Aqyxe6XcaYrPc7seR2LRPpngsTXfIZa",
+        "file": "MOD-BD-04_محضر_تسليم_المشروع.docx",
+        "status": "readable",
+        "url": "https://drive.google.com/file/d/11Aqyxe6XcaYrPc7seR2LRPpngsTXfIZa/view"
+      },
+      {
+        "code": "PM-01",
+        "form_key": "FORM-PM-RECEIPT",
+        "id": "11uv7TS5tNEL0K9DIbDzl2KdDp4kfnghs",
+        "file": "MOD-PM-01_محضر_استلام_المشروع.docx",
+        "status": "readable",
+        "url": "https://drive.google.com/file/d/11uv7TS5tNEL0K9DIbDzl2KdDp4kfnghs/view"
+      },
+      {
+        "code": "PM-02",
+        "form_key": "FORM-PM-KICKOFF",
+        "id": "1jDIy12v27PlBTUNpujGPtuLMmBDWpLmp",
+        "file": "MOD-PM-02_محضر_Kickoff_مع_العميل.docx",
+        "status": "readable",
+        "url": "https://drive.google.com/file/d/1jDIy12v27PlBTUNpujGPtuLMmBDWpLmp/view"
+      },
+      {
+        "code": "PM-03",
+        "form_key": "FORM-PM-CHANGE",
+        "id": "1cBr9E50I7ZOMEbBprNJ6gJDBV1dXt70Z",
+        "file": "MOD-PM-03_التقرير_الأسبوعي.docx",
+        "status": "readable",
+        "url": "https://drive.google.com/file/d/1cBr9E50I7ZOMEbBprNJ6gJDBV1dXt70Z/view"
+      },
+      {
+        "code": "CR-01",
+        "form_key": "FORM-CR-BRIEF",
+        "id": "1qMJXVIGQsjJMhuNJZCuGOgHd1Ll5y39X",
+        "file": "MOD-CR-01_Creative_Brief.docx",
+        "status": "readable",
+        "url": "https://drive.google.com/file/d/1qMJXVIGQsjJMhuNJZCuGOgHd1Ll5y39X/view"
+      },
+      {
+        "code": "CR-02",
+        "form_key": "FORM-CR-CONCEPT",
+        "id": "1BWZr35la4_ggaz_eW8bG1VZibnvZDh3Q",
+        "file": "MOD-CR-02_موافقة_الفكرة.docx",
+        "status": "readable",
+        "url": "https://drive.google.com/file/d/1BWZr35la4_ggaz_eW8bG1VZibnvZDh3Q/view"
+      },
+      {
+        "code": "PROD-01",
+        "form_key": "FORM-PROD-BRIEF",
+        "id": "1qiq22OWgrsdakaasVBxoyd2fXudpl1YC",
+        "file": "MOD-VD-01_Production_Brief.docx",
+        "status": "readable",
+        "url": "https://drive.google.com/file/d/1qiq22OWgrsdakaasVBxoyd2fXudpl1YC/view"
+      },
+      {
+        "code": "PROD-02",
+        "form_key": "FORM-PROD-SCRIPT",
+        "id": "1wc93jf98iFiziIZoqQHQGxQZ5DRNtr-M",
+        "file": "MOD-VD-02_اعتماد_السكريبت.docx",
+        "status": "readable",
+        "url": "https://drive.google.com/file/d/1wc93jf98iFiziIZoqQHQGxQZ5DRNtr-M/view"
+      },
+      {
+        "code": "AD-01",
+        "form_key": "FORM-AD-REQUEST",
+        "id": "1E96COrYZCdgC0a07JpkJo4SkKgvlA6SW",
+        "file": "MOD-AD-01_طلب_الحملة_v2.docx",
+        "status": "readable",
+        "url": "https://drive.google.com/file/d/1E96COrYZCdgC0a07JpkJo4SkKgvlA6SW/view"
+      },
+      {
+        "code": "AD-02",
+        "form_key": "FORM-AD-MEDIAPLAN",
+        "id": "1wQ3xnlgx4tyjvWMNLpS-kACccMAY3H0V",
+        "file": "MOD-AD-02_Media_Plan.docx",
+        "status": "readable",
+        "url": "https://drive.google.com/file/d/1wQ3xnlgx4tyjvWMNLpS-kACccMAY3H0V/view"
+      },
+      {
+        "code": "AD-03",
+        "form_key": "FORM-AD-SETUP",
+        "id": "1hnSkL1crKgC83UhR2EskZiKfc_8GxlV-",
+        "file": "MOD-AD-03_Setup_Checklist.docx",
+        "status": "readable",
+        "url": "https://drive.google.com/file/d/1hnSkL1crKgC83UhR2EskZiKfc_8GxlV-/view"
+      },
+      {
+        "code": "DS-01",
+        "form_key": "FORM-DS-BRIEF",
+        "id": "10EB4V8rBo7ZL8duF_OATDQDHekWGT7_I",
+        "file": "MOD-DS-01_Design_Brief.docx",
+        "status": "readable",
+        "url": "https://drive.google.com/file/d/10EB4V8rBo7ZL8duF_OATDQDHekWGT7_I/view"
+      },
+      {
+        "code": "DS-02",
+        "form_key": "FORM-DS-QA",
+        "id": "16Iu3so2HaX43srxO6c4lgYAAruxizge8",
+        "file": "MOD-DS-02_QA_Checklist.docx",
+        "status": "readable",
+        "url": "https://drive.google.com/file/d/16Iu3so2HaX43srxO6c4lgYAAruxizge8/view"
+      },
+      {
+        "code": "DS-03",
+        "form_key": "FORM-DS-REVISIONS",
+        "id": "1vLcHbTt5jz9mPrv3-Oz5kQZ5MLx-3WxM",
+        "file": "MOD-DS-03_سجل_التعديلات.docx",
+        "status": "readable",
+        "url": "https://drive.google.com/file/d/1vLcHbTt5jz9mPrv3-Oz5kQZ5MLx-3WxM/view"
+      },
+      {
+        "code": "PR-01",
+        "form_key": "FORM-PR-CAMPAIGN",
+        "id": "1mU39r1Xww0edNiBP9wMsSsOmPO--YirS",
+        "file": "MOD-AD-01_Campaign_Request.docx",
+        "status": "readable",
+        "url": "https://drive.google.com/file/d/1mU39r1Xww0edNiBP9wMsSsOmPO--YirS/view"
+      },
+      {
+        "code": "PR-02",
+        "form_key": "FORM-PR-INFLUENCERS",
+        "id": "1ngmFGEOj30-YBfIQlU_8_Ddkb55MS5Rd",
+        "file": "MOD-PR-02_اعتماد_المؤثرين.docx",
+        "status": "readable",
+        "url": "https://drive.google.com/file/d/1ngmFGEOj30-YBfIQlU_8_Ddkb55MS5Rd/view"
+      },
+      {
+        "code": "PR-03",
+        "form_key": "FORM-PR-CONTRACT",
+        "id": "1-8nkDge8cQGuuNO1b6z-kVmln7GRAeSu",
+        "file": "MOD-PR-03_عقد_المؤثر.docx",
+        "status": "readable",
+        "url": "https://drive.google.com/file/d/1-8nkDge8cQGuuNO1b6z-kVmln7GRAeSu/view"
+      },
+      {
+        "code": "PR-04",
+        "form_key": "FORM-PR-BRIEFING",
+        "id": "1enkqbqf7nVJibJroezDAEe-sKxDTL4EJ",
+        "file": "MOD-PR-04_Briefing_Document.docx",
+        "status": "readable",
+        "url": "https://drive.google.com/file/d/1enkqbqf7nVJibJroezDAEe-sKxDTL4EJ/view"
+      },
+      {
+        "code": "PR-05",
+        "form_key": "FORM-PR-RELEASE",
+        "id": "1QKXXDt67otwLlZV2w7jFyVVWzgdoTGj7",
+        "file": "MOD-PR-05_البيان_الصحفي.docx",
+        "status": "readable",
+        "url": "https://drive.google.com/file/d/1QKXXDt67otwLlZV2w7jFyVVWzgdoTGj7/view"
+      },
+      {
+        "code": "PR-06",
+        "form_key": "FORM-PR-PERFORMANCE",
+        "id": null,
+        "file": null,
+        "status": "missing_source",
+        "url": null
+      },
+      {
+        "code": "PR-08",
+        "form_key": "FORM-PR-BUDGET",
+        "id": "1TNd18MJHWZeZG4wLGsNcxepBtNnbRPbo",
+        "file": "MOD-PR-08_اعتماد_الميزانية.docx",
+        "status": "readable",
+        "url": "https://drive.google.com/file/d/1TNd18MJHWZeZG4wLGsNcxepBtNnbRPbo/view"
+      },
+      {
+        "code": "CW-01",
+        "form_key": "FORM-CW-BRIEF",
+        "id": "1814RuCZesyTSOK6cAHAYbGJRa1y_eyYf",
+        "file": "MOD-CW-01_نموذج_طلب_المحتوى.docx",
+        "status": "readable",
+        "url": "https://drive.google.com/file/d/1814RuCZesyTSOK6cAHAYbGJRa1y_eyYf/view"
+      },
+      {
+        "code": "CW-02",
+        "form_key": "FORM-CW-STYLE",
+        "id": "19Th7ZPMHa4kP1cPV7jOUgMxbkKgFGK26",
+        "file": "MOD-VD-02_Style_Guide.docx",
+        "status": "readable",
+        "url": "https://drive.google.com/file/d/19Th7ZPMHa4kP1cPV7jOUgMxbkKgFGK26/view"
+      }
+    ],
+    "blockers": [
+      {
+        "code": "MOD-PR-07",
+        "name": "خطة إدارة الأزمة الإعلامية",
+        "kind": "required_missing_source",
+        "effect": "مطلوب في سجل النماذج، ولا يوجد له ملف مصدر أو تعريف قابل للاعتماد؛ لا يجوز اختراع حقوله."
+      },
+      {
+        "code": "PR-06",
+        "name": "تقرير أداء العلاقات العامة",
+        "kind": "built_waiting_source",
+        "effect": "التعريف موجود كمسودة، لكن لا ملف مصدر له في المجلد؛ لا يصبح تعريفًا مقبولًا قبل اعتماد مالكه."
+      },
+      {
+        "code": "F-03/F-04",
+        "name": "طلب عرض السعر والتحقق المالي",
+        "kind": "specialised_partial",
+        "effect": "المشتريات والتسعير والمطابقة موجودة كوحدات متخصصة، لكن النموذج المقروء الجديد لم يتحول إلى سجل RFQ مستقل بحقول F-03 وF-04."
+      },
+      {
+        "code": "TECH-PROPOSAL-QA",
+        "name": "قائمة تحقق مراجعة العروض الفنية",
+        "kind": "not_integrated",
+        "effect": "المصدر كامل ومقروء، لكنه ليس نموذجًا إلكترونيًا مرتبطًا بعرض ومراجع وإقفال ملاحظات داخل المنصة."
+      }
+    ],
+    "hygiene": [
+      {
+        "kind": "archive_versions",
+        "count": 6,
+        "item": "ملفات SLA",
+        "action": "اختيار نسخة حاكمة واحدة بعد اعتماد المالك؛ نسخة «بعد تعديل المشتريات» تختلف فعليًا في صفوف المشتريات."
+      },
+      {
+        "kind": "temporary_files",
+        "count": 3,
+        "item": "ملفات Excel تبدأ بـ ~$ في مجلد KPIs",
+        "action": "لا تُستورد ولا تُعرض؛ ملفات قفل مؤقتة وليست مصادر."
+      },
+      {
+        "kind": "language_variants",
+        "count": 12,
+        "item": "نسخ عربية وإنجليزية للنموذج نفسه",
+        "action": "تعريف إلكتروني واحد متعدد اللغة، لا خدمتان."
+      },
+      {
+        "kind": "historical_reports",
+        "count": null,
+        "item": "تقارير أسبوعية ونسخ داخل مجلد duplictaed",
+        "action": "أدلة تاريخية لا قوالب خدمات؛ تحفظ في الأرشيف ولا تدخل كخدمات."
+      },
+      {
+        "kind": "visual_references",
+        "count": 9,
+        "item": "صور شاشة لحزم MOD",
+        "action": "مراجع شكلية فقط؛ لا تُعامل كنماذج مستقلة."
+      }
+    ],
+    "report_file": "docs/product/workflow/DRIVE-FORMS-READINESS-20261003.md"
+  },
+  "inventory": {
+    "register": 65,
+    "wave1": 24,
+    "catalogue": 32,
+    "wave1_built": 24,
+    "outside_wave": 41,
+    "disabled": 0,
+    "deleted": 0
+  },
+  "wave1": [
+    {
+      "code": "MOD-BD-01",
+      "platform": "built",
+      "catalogue_key": "FORM-BD-QUALIFY",
+      "drive_status": "readable",
+      "drive_file": "MOD-BD-01_تأهيل_العميل_المحتمل.docx",
+      "drive_id": "1iYJRF4vLEC3hXIgGhSk5TyDk5qGvZQJr"
+    },
+    {
+      "code": "MOD-BD-04",
+      "platform": "built",
+      "catalogue_key": "FORM-BD-HANDOVER",
+      "drive_status": "readable",
+      "drive_file": "MOD-BD-04_محضر_تسليم_المشروع.docx",
+      "drive_id": "11Aqyxe6XcaYrPc7seR2LRPpngsTXfIZa"
+    },
+    {
+      "code": "MOD-PM-01",
+      "platform": "built",
+      "catalogue_key": "FORM-PM-RECEIPT",
+      "drive_status": "readable",
+      "drive_file": "MOD-PM-01_محضر_استلام_المشروع.docx",
+      "drive_id": "11uv7TS5tNEL0K9DIbDzl2KdDp4kfnghs"
+    },
+    {
+      "code": "MOD-PM-02",
+      "platform": "built",
+      "catalogue_key": "FORM-PM-KICKOFF",
+      "drive_status": "readable",
+      "drive_file": "MOD-PM-02_محضر_Kickoff_مع_العميل.docx",
+      "drive_id": "1jDIy12v27PlBTUNpujGPtuLMmBDWpLmp"
+    },
+    {
+      "code": "MOD-PM-03",
+      "platform": "built",
+      "catalogue_key": "FORM-PM-CHANGE",
+      "drive_status": "readable",
+      "drive_file": "MOD-PM-03_التقرير_الأسبوعي.docx",
+      "drive_id": "1cBr9E50I7ZOMEbBprNJ6gJDBV1dXt70Z"
+    },
+    {
+      "code": "MOD-AD-01",
+      "platform": "built",
+      "catalogue_key": "FORM-AD-REQUEST",
+      "drive_status": "readable",
+      "drive_file": "MOD-AD-01_طلب_الحملة_v2.docx",
+      "drive_id": "1E96COrYZCdgC0a07JpkJo4SkKgvlA6SW"
+    },
+    {
+      "code": "MOD-AD-02",
+      "platform": "built",
+      "catalogue_key": "FORM-AD-MEDIAPLAN",
+      "drive_status": "readable",
+      "drive_file": "MOD-AD-02_Media_Plan.docx",
+      "drive_id": "1wQ3xnlgx4tyjvWMNLpS-kACccMAY3H0V"
+    },
+    {
+      "code": "MOD-AD-03",
+      "platform": "built",
+      "catalogue_key": "FORM-AD-SETUP",
+      "drive_status": "readable",
+      "drive_file": "MOD-AD-03_Setup_Checklist.docx",
+      "drive_id": "1hnSkL1crKgC83UhR2EskZiKfc_8GxlV-"
+    },
+    {
+      "code": "MOD-CW-01",
+      "platform": "built",
+      "catalogue_key": "FORM-CW-BRIEF",
+      "drive_status": "readable",
+      "drive_file": "MOD-CW-01_نموذج_طلب_المحتوى.docx",
+      "drive_id": "1814RuCZesyTSOK6cAHAYbGJRa1y_eyYf"
+    },
+    {
+      "code": "MOD-CW-02",
+      "platform": "built",
+      "catalogue_key": "FORM-CW-STYLE",
+      "drive_status": "readable",
+      "drive_file": "MOD-VD-02_Style_Guide.docx",
+      "drive_id": "19Th7ZPMHa4kP1cPV7jOUgMxbkKgFGK26"
+    },
+    {
+      "code": "MOD-CR-01",
+      "platform": "built",
+      "catalogue_key": "FORM-CR-BRIEF",
+      "drive_status": "readable",
+      "drive_file": "MOD-CR-01_Creative_Brief.docx",
+      "drive_id": "1qMJXVIGQsjJMhuNJZCuGOgHd1Ll5y39X"
+    },
+    {
+      "code": "MOD-CR-02",
+      "platform": "built",
+      "catalogue_key": "FORM-CR-CONCEPT",
+      "drive_status": "readable",
+      "drive_file": "MOD-CR-02_موافقة_الفكرة.docx",
+      "drive_id": "1BWZr35la4_ggaz_eW8bG1VZibnvZDh3Q"
+    },
+    {
+      "code": "MOD-DS-01",
+      "platform": "built",
+      "catalogue_key": "FORM-DS-BRIEF",
+      "drive_status": "readable",
+      "drive_file": "MOD-DS-01_Design_Brief.docx",
+      "drive_id": "10EB4V8rBo7ZL8duF_OATDQDHekWGT7_I"
+    },
+    {
+      "code": "MOD-DS-02",
+      "platform": "built",
+      "catalogue_key": "FORM-DS-QA",
+      "drive_status": "readable",
+      "drive_file": "MOD-DS-02_QA_Checklist.docx",
+      "drive_id": "16Iu3so2HaX43srxO6c4lgYAAruxizge8"
+    },
+    {
+      "code": "MOD-DS-03",
+      "platform": "built",
+      "catalogue_key": "FORM-DS-REVISIONS",
+      "drive_status": "readable",
+      "drive_file": "MOD-DS-03_سجل_التعديلات.docx",
+      "drive_id": "1vLcHbTt5jz9mPrv3-Oz5kQZ5MLx-3WxM"
+    },
+    {
+      "code": "MOD-PROD-01",
+      "platform": "built",
+      "catalogue_key": "FORM-PROD-BRIEF",
+      "drive_status": "readable",
+      "drive_file": "MOD-VD-01_Production_Brief.docx",
+      "drive_id": "1qiq22OWgrsdakaasVBxoyd2fXudpl1YC"
+    },
+    {
+      "code": "MOD-PROD-02",
+      "platform": "built",
+      "catalogue_key": "FORM-PROD-SCRIPT",
+      "drive_status": "readable",
+      "drive_file": "MOD-VD-02_اعتماد_السكريبت.docx",
+      "drive_id": "1wc93jf98iFiziIZoqQHQGxQZ5DRNtr-M"
+    },
+    {
+      "code": "MOD-PR-01",
+      "platform": "built",
+      "catalogue_key": "FORM-PR-CAMPAIGN",
+      "drive_status": "readable",
+      "drive_file": "MOD-AD-01_Campaign_Request.docx",
+      "drive_id": "1mU39r1Xww0edNiBP9wMsSsOmPO--YirS"
+    },
+    {
+      "code": "MOD-PR-02",
+      "platform": "built",
+      "catalogue_key": "FORM-PR-INFLUENCERS",
+      "drive_status": "readable",
+      "drive_file": "MOD-PR-02_اعتماد_المؤثرين.docx",
+      "drive_id": "1ngmFGEOj30-YBfIQlU_8_Ddkb55MS5Rd"
+    },
+    {
+      "code": "MOD-PR-03",
+      "platform": "built",
+      "catalogue_key": "FORM-PR-CONTRACT",
+      "drive_status": "readable",
+      "drive_file": "MOD-PR-03_عقد_المؤثر.docx",
+      "drive_id": "1-8nkDge8cQGuuNO1b6z-kVmln7GRAeSu"
+    },
+    {
+      "code": "MOD-PR-04",
+      "platform": "built",
+      "catalogue_key": "FORM-PR-BRIEFING",
+      "drive_status": "readable",
+      "drive_file": "MOD-PR-04_Briefing_Document.docx",
+      "drive_id": "1enkqbqf7nVJibJroezDAEe-sKxDTL4EJ"
+    },
+    {
+      "code": "MOD-PR-05",
+      "platform": "built",
+      "catalogue_key": "FORM-PR-RELEASE",
+      "drive_status": "readable",
+      "drive_file": "MOD-PR-05_البيان_الصحفي.docx",
+      "drive_id": "1QKXXDt67otwLlZV2w7jFyVVWzgdoTGj7"
+    },
+    {
+      "code": "MOD-PR-06",
+      "platform": "built",
+      "catalogue_key": "FORM-PR-PERFORMANCE",
+      "drive_status": "missing_source",
+      "drive_file": null,
+      "drive_id": null
+    },
+    {
+      "code": "MOD-PR-08",
+      "platform": "built",
+      "catalogue_key": "FORM-PR-BUDGET",
+      "drive_status": "readable",
+      "drive_file": "MOD-PR-08_اعتماد_الميزانية.docx",
+      "drive_id": "1TNd18MJHWZeZG4wLGsNcxepBtNnbRPbo"
+    }
+  ],
+  "checks": {
+    "wave1_complete": true,
+    "source_files": 23,
+    "source_gaps": [
+      "MOD-PR-06"
+    ],
+    "required_unbuilt": [
+      "MOD-PR-07"
+    ]
+  }
+}

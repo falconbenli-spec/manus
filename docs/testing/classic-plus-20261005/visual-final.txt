@@ -1,0 +1,23 @@
+(node:18071) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ المحرّك يقرأ الرموز فعلًا قبل أن يحكم — لا خريطة فارغة تمرّ صامتة (694.377333ms)
+✔ كل زوج نص/خلفية يعبر 4.5:1 — في التصاميم الثمانية والأوضاع الأربعة (778.6295ms)
+✔ مؤشّر البؤرة وحدود المكوّنات تعبر 3:1 (WCAG 1.4.11) (816.69575ms)
+✔ حبر الفيروزي وأحبار الحالات تعبر 4.5:1 على كل سطح — في التصاميم التسعة والأوضاع الأربعة (745.3825ms)
+✔ الأدوار --color-*: كل نصٍّ على كل خلفية يعبر 4.5:1، والحدّ والبؤرة 3:1 — في التصاميم التسعة والأوضاع الأربعة (1417.06875ms)
+✔ مؤشّر البؤرة مصمت لا شفاف — الشفافية تُذيبه في الخلفية مهما كانت نسبته (624.4535ms)
+✔ لكل تصميم لوحة معاينة خاصة به في شاشة المظهر — لا تصميم يستعير صورة غيره (1.227ms)
+(node:18072) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ golden: every operational screen renders to the same HTML for four seeded personas (11314.520584ms)
+✔ golden: moving the SQL wall clock a day forward moves no screen hash (18287.77925ms)
+✔ golden: the normaliser hides random identifiers but stays sensitive to order, count and text (0.512458ms)
+✔ golden: the page-editor trigger is outside every seeded persona’s screen, and appears only for a holder of the configure capability (6714.859917ms)
+ℹ tests 11
+ℹ suites 0
+ℹ pass 11
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 36899.718834

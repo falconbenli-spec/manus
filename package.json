@@ -1,0 +1,22 @@
+{
+  "name": "36t-local-platform",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": ">=24.14 <25"
+  },
+  "scripts": {
+    "start": "node app/server.mjs",
+    "setup": "node scripts/seed.mjs",
+    "test": "node --test tests/*.test.mjs",
+    "check": "node scripts/check.mjs",
+    "options-sweep": "node scripts/options-sweep.mjs",
+    "readiness": "node scripts/remote-readiness.mjs",
+    "trace": "node scripts/trace.mjs",
+    "audit:drive-forms": "node scripts/drive-forms-audit.mjs",
+    "gate": "node scripts/gate.mjs",
+    "gate:quick": "node scripts/gate.mjs --quick",
+    "mobile-probe": "node scripts/mobile-probe.mjs"
+  }
+}

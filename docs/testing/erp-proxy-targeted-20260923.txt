@@ -1,0 +1,22 @@
+✔ SEC-PROXY-01: ترويسة HTTPS من عميل بعيد لا تغير حقيقة النقل (14.239459ms)
+✔ SEC-PROXY-02: ترويسة HTTPS تقبل من وكيل استرجاع مصرح فقط (0.386ms)
+✔ SEC-PROXY-03: عناوين الاسترجاع المشوهة لا تمنح الثقة (0.124416ms)
+✔ SEC-PROXY-04: الترويسات المتعددة أو الغامضة لا تثبت HTTPS (0.094834ms)
+✔ SEC-PROXY-05: التشفير الفعلي ومعاينة HTTPS الصريحة يبقيان موثوقين (0.068958ms)
+✔ SEC-PROXY-06: استجابة الخادم لا ترسل HSTS بناء على ترويسة عميل بعيد (26.273791ms)
+✔ REMOTE: the session cookie carries Secure when the request arrived over the tunnel, and does not over plain local HTTP (2979.095583ms)
+✔ REMOTE: the forwarded address is read only from a loopback peer under TRUST_PROXY, the last hop is taken, and anything else falls back to the peer (0.459209ms)
+✔ REMOTE: failures are counted against the employee’s own address, so one employee cannot lock out the company (3346.207875ms)
+✔ REMOTE: with TRUST_PROXY off every employee collapses onto the tunnel address — which is exactly why it must be set (2802.898208ms)
+✔ REMOTE: the audit row and the session record carry the derived address, and a forged header from a distant peer is not believed (2708.318333ms)
+✔ REMOTE: a tunnel hostname set through LOCAL_ALLOWED_HOST is accepted while a lookalike is refused (2616.818167ms)
+✔ REMOTE: behind the tunnel the browser’s https Origin is accepted, and it is not accepted when the transport is plain (2679.193625ms)
+✔ REMOTE: the readiness check reports the configuration as it is, including what is not ready (2558.867208ms)
+ℹ tests 14
+ℹ suites 0
+ℹ pass 14
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 20311.556459

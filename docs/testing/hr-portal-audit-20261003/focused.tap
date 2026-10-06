@@ -1,0 +1,121 @@
+(node:30399) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ B1: policy validation — up to five steps, cross-department and executive steps, and a threshold that lives in settings, never in the service (4455.567875ms)
+✔ B1: an undefined threshold never skips its step; a defined, approved and effective one adds the step only at or above it (4468.126625ms)
+✔ B2: a direct service is approved on submission, its handlers are told at once, and catalog proposals apply only after a recorded adoption (3921.862959ms)
+✔ B3: in a sod service whoever approved any step of the current revision can neither claim nor complete; another member of the executing department can (3760.039ms)
+✔ B4: when two steps resolve to one person the second rises to the escalation approver and the snapshot records it (2955.326625ms)
+✔ B4: a department head request uses two distinct executives instead of counting one decision twice (3022.004042ms)
+✔ B4: submission fails safely only when no distinct escalation or executive exists (3070.446083ms)
+✔ B5: the assigned HR approver can request a salary certificate for themselves through the fallback or the escalation approver (2851.646667ms)
+✔ B6: a confidential service is visible to the requester, its approvers, the assignee and the executing department head — not to the whole team (2743.5775ms)
+✔ B7: the registered beneficiary neither approves nor executes, and the job change no longer offers a pay change (2713.504583ms)
+✔ B8: every mapped screen exists, pending links wait for their screen, and the budget change points to media spend (0.264375ms)
+✔ B9: the catalog health check names services without an executor, unresolvable steps, undefined thresholds and sod without a second executor (2819.592208ms)
+✔ service card labels describe cross-department, executive, conditional and direct steps (2724.991208ms)
+✔ approval settings screen renders the view and sends thresholds in halalas without float arithmetic (2612.359417ms)
+(node:30400) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ بوابة الموظف تحمل كل خدمة يحق للحساب طلبها، بلا نسخة يدوية ناقصة (4304.059709ms)
+✔ بوابة الموظف تعرض خدمات الموارد البشرية أولًا وتفتحها بمسار الطلب الموحد (4306.221833ms)
+✔ مسار بوابة الموظف مستقل، ولا يعاد توجيهه إلى الرئيسية (2.209666ms)
+(node:30401) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+{"t":"2026-10-02T22:13:40.034Z","id":"d9d4fe44","env":"local","m":"POST","p":"/api/login","s":200,"ms":480}
+{"t":"2026-10-02T22:13:40.520Z","id":"9bdd2ba9","env":"local","m":"POST","p":"/api/login","s":200,"ms":465}
+{"t":"2026-10-02T22:13:40.537Z","id":"5c7748f5","env":"local","m":"GET","p":"/api/my-requests","s":200,"ms":15}
+{"t":"2026-10-02T22:13:40.554Z","id":"78459a37","env":"local","m":"GET","p":"/api/my-requests","s":200,"ms":15}
+{"t":"2026-10-02T22:13:40.555Z","id":"af808649","env":"local","m":"GET","p":"/api/my-requests","s":401,"ms":0}
+✔ my requests: one list of the employee's own requests from every module, and nobody else's (5422.3125ms)
+{"t":"2026-10-02T22:13:44.895Z","id":"b46601fe","env":"local","m":"POST","p":"/api/login","s":200,"ms":333}
+{"t":"2026-10-02T22:13:45.253Z","id":"13c57d98","env":"local","m":"POST","p":"/api/login","s":200,"ms":355}
+{"t":"2026-10-02T22:13:45.570Z","id":"20d94366","env":"local","m":"POST","p":"/api/login","s":200,"ms":314}
+{"t":"2026-10-02T22:13:45.574Z","id":"0652b4e9","env":"local","m":"GET","p":"/api/profile","s":200,"ms":4}
+{"t":"2026-10-02T22:13:45.576Z","id":"67f8db87","env":"local","m":"GET","p":"/api/profile/employee","s":404,"ms":1}
+{"t":"2026-10-02T22:13:45.585Z","id":"dabb7cf1","env":"local","m":"GET","p":"/api/profile/employee","s":200,"ms":8}
+✔ my profile: numbers are masked, the owner and HR can open it, the line manager and colleagues cannot (5016.501791ms)
+✔ deep links: each quick action opens a form, parameters only prefill known fields, and other routes are left alone (1.380125ms)
+✔ home: the Today card and quick actions are built for the employee, and an action the module cannot take is shown disabled with its reason (3878.215667ms)
+{"t":"2026-10-02T22:13:52.955Z","id":"44074b17","env":"local","m":"POST","p":"/api/login","s":200,"ms":269}
+{"t":"2026-10-02T22:13:52.970Z","id":"7c97d3fc","env":"local","m":"GET","p":"/api/catalog","s":200,"ms":9}
+✔ catalog dedup: duplicated catalog services open their module form, keep their codes, and fall back to a request when the module cannot take it (3498.036292ms)
+{"t":"2026-10-02T22:13:56.178Z","id":"e1f28da7","env":"local","m":"POST","p":"/api/login","s":200,"ms":290}
+{"t":"2026-10-02T22:13:56.450Z","id":"39b47561","env":"local","m":"POST","p":"/api/login","s":200,"ms":271}
+{"t":"2026-10-02T22:13:56.451Z","id":"443c9714","env":"local","m":"GET","p":"/api/requirements","s":403,"ms":1}
+{"t":"2026-10-02T22:13:56.452Z","id":"6ae27e43","env":"local","m":"GET","p":"/api/service-benchmark","s":403,"ms":1}
+{"t":"2026-10-02T22:13:56.463Z","id":"535be4b9","env":"local","m":"GET","p":"/api/requirements","s":200,"ms":10}
+{"t":"2026-10-02T22:13:56.472Z","id":"14afb11b","env":"local","m":"GET","p":"/api/requirements","s":200,"ms":8}
+{"t":"2026-10-02T22:13:56.474Z","id":"e9b200af","env":"local","m":"GET","p":"/api/notifications/count","s":200,"ms":0}
+✔ navigation: an ordinary employee gets a short menu without development pages, gated by capability; other roles keep theirs (3502.090583ms)
+{"t":"2026-10-02T22:13:59.498Z","id":"6787d8cd","env":"local","m":"GET","p":"/manifest.webmanifest","s":200,"ms":1}
+{"t":"2026-10-02T22:13:59.500Z","id":"07619444","env":"local","m":"GET","p":"/icons/icon-192.png","s":200,"ms":1}
+{"t":"2026-10-02T22:13:59.501Z","id":"643a71ca","env":"local","m":"GET","p":"/icons/icon-512.png","s":200,"ms":0}
+{"t":"2026-10-02T22:13:59.502Z","id":"eea1502a","env":"local","m":"GET","p":"/icons/icon-maskable-512.png","s":200,"ms":0}
+{"t":"2026-10-02T22:13:59.503Z","id":"c243b8d2","env":"local","m":"GET","p":"/icons/apple-touch-icon.png","s":200,"ms":0}
+{"t":"2026-10-02T22:13:59.504Z","id":"ab7f215a","env":"local","m":"GET","p":"/sw.js","s":200,"ms":0}
+✔ PWA: the manifest, icons and service worker are served with the right types, and the worker never caches /api (3029.692875ms)
+✔ PWA: run inside a simulated worker, sw.js lets /api pass untouched, caches only static files, and serves an offline page for navigation (2.359333ms)
+{"t":"2026-10-02T22:14:02.710Z","id":"3839672b","env":"local","m":"POST","p":"/api/login","s":200,"ms":267}
+{"t":"2026-10-02T22:14:02.719Z","id":"c2abb091","env":"local","m":"GET","p":"/api/catalog/variants","s":200,"ms":8}
+{"t":"2026-10-02T22:14:02.733Z","id":"c1c8e2aa","env":"local","m":"POST","p":"/api/requests","s":201,"ms":11,"tx":1,"lock_ms":0}
+{"t":"2026-10-02T22:14:02.736Z","id":"4cc7ba8f","env":"local","m":"POST","p":"/api/requests","s":400,"ms":2,"tx":1,"lock_ms":0}
+✔ variants: the chosen option decides the service, the approval route and the due date (3229.392375ms)
+✔ variants: each option previews its own chain and service level before submit (3004.353542ms)
+✔ variants: old service codes stay searchable and land on their card with the option preselected (2713.021167ms)
+{"t":"2026-10-02T22:14:11.505Z","id":"c1a9a01f","env":"local","m":"POST","p":"/api/login","s":200,"ms":272}
+{"t":"2026-10-02T22:14:11.517Z","id":"e3b480b4","env":"local","m":"POST","p":"/api/requests","s":201,"ms":8,"tx":1,"lock_ms":0}
+✔ variants: option fields are validated on the server; fixed values cannot be changed from the browser (3065.013542ms)
+✔ integration: #letters/new?type= opens the letter wizard on that type, and never on another type (3.649208ms)
+✔ integration: the benefits card offers «مزاياي» and #my-benefits/new?option= opens that option only (2738.919542ms)
+(node:30402) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ equivalence: the old predicate is kept byte for byte under its new name (2.22175ms)
+✔ equivalence: ordinary steps keep the old decision rule while a duplicate route has one distinct executive (5382.273917ms)
+✔ equivalence: the public surface matches the distinct-approver baseline (4668.551459ms)
+(node:30403) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ LIFECYCLE: every service either closes normally or reaches its declared output-acceptance gate, and its other endings hold (14231.592125ms)
+(node:30404) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ links: every #view/intent literal in app/static resolves to a registered screen and a registered intent (291.786542ms)
+✔ links: the catalogue card «طلب إجازة» and the search shortcuts are among what is checked, and they resolve (0.599834ms)
+✔ links: the scanner treats every quoted #word as a link unless it is provably something else, so a typo cannot pass as a selector (16.460083ms)
+✔ links: the screen registries cannot drift from app.mjs (0.536291ms)
+✔ no dead click: a new employee reaches the leave form or a stated reason from all four routes (4653.188458ms)
+✔ no dead click: when the form can open, every route opens it (44.496208ms)
+✔ no dead click: the class of bug, not the instance — every silent path now states a reason (81.41775ms)
+✔ home chips: a chip that is not ready is disabled with its reason, a ready chip is a link, and an empty reason is never left blank (2.334041ms)
+✔ home quick actions use rounded local SVG icons instead of font glyphs (0.287583ms)
+✔ home SVG icons use adaptive system colours in light and dark themes (3.230583ms)
+✔ a non-JSON response becomes a readable Arabic message, not a parser error (0.830334ms)
+(node:30405) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ لا مدخلان في قائمة حساب واحد يفتحان الوجهة نفسها (6048.447958ms)
+✔ ولا مدخل بلا وجهة: كل مفتاح في القائمة مسجَّل في سجل الوجهات (5318.723708ms)
+✔ وقائمة الموظف العادي تبقى في حدود ما يستعمله (4873.31175ms)
+(node:30408) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ ق-ت1-1: each account gets at most eight section rows, «إدارة المنصة» and «فريقي» keep their audience, and no «أخرى» (4075.327125ms)
+✔ ق-ت1-2: every screen the old menu reached is still reached, and has a place the account can open from its menu (or is tagged internal with a reason) (4067.75475ms)
+✔ ق-ت1-3: each old route resolves to its new home, the address shows it, and the deep link still opens the launcher (3285.63025ms)
+✔ ق-ت1-4: a screen seen by more than one role keeps one label per lens, and pages take their title from it (2908.381542ms)
+✔ hubs: «فريقي» و«المنظمة» و«إدارة المنصة» list every placed screen, and «ملفي» keeps five clear groups after its main content (2958.901167ms)
+✔ globals: the reach list and the account are published for the department page, and the shell keeps every old condition (3027.796417ms)
+(node:30409) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ «طلباتي» carries the resignation, the travel decision and the benefit request, each read by its own module and nobody else’s (3878.483291ms)
+✔ resignation and travel notify: a submit receipt, every decision, deemed acceptance, the last working day, travel approval and its extension (6539.198875ms)
+✔ the benefit letter is generated, not recorded: it opens a real letter request and the employee downloads an issued document with its QR verification code (2964.315834ms)
+✔ the discipline panel renders where the employee looks: on home when a case or a penalty exists, and never for someone with neither (3166.503834ms)
+✔ an approved class upgrade changes the tier in the insurance register, with an audit line and a notice that the insurer must still be told (2830.988208ms)
+✔ البحث داخل درج الطلب يغير نتائجه وحدها ولو بقي الدليل خلفه (1.533333ms)
+✔ البحث في الصفحة يعمل عند إغلاق الدرج (0.66425ms)
+✔ اختصار البحث يركز الدرج المفتوح دون حقل الخلفية (0.687125ms)
+ℹ tests 63
+ℹ suites 0
+ℹ pass 63
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 42468.571

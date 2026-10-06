@@ -1,0 +1,14 @@
+#!/bin/sh
+# TP2.1 — بوابة التحقق قبل الدفع.
+#
+# التركيب (مرة واحدة لكل نسخة عمل):  git config core.hooksPath .githooks
+# التخطّي في حالة مضطرة:              git push --no-verify   (ويُكتب سببه في رسالة الالتزام التالية)
+#
+# البوابة تأخذ دقائق لأنها تشغّل الحزمة كاملة ومنها اختبارات HTTP. هذا مقصود: الدفع فعلٌ يخرج العمل من
+# هذا الجهاز، والوقت الذي يوفّره تخطّي الفحص يُدفع أضعافًا حين يُكتشف العطل بعد النشر.
+set -e
+root=$(git rev-parse --show-toplevel)
+node="$root/work/node24/bin/node"
+[ -x "$node" ] || node=$(command -v node) || { echo "pre-push: لم أجد محرك Node."; exit 1; }
+echo "pre-push: بوابة التحقق (scripts/gate.mjs) — تسعة فحوص..."
+"$node" "$root/scripts/gate.mjs"

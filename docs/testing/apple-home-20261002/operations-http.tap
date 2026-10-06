@@ -1,0 +1,170 @@
+(node:36465) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+{"t":"2026-10-01T22:47:04.042Z","id":"40c18b47","env":"local","m":"POST","p":"/api/login","s":200,"ms":253}
+{"t":"2026-10-01T22:47:04.297Z","id":"a38cc93f","env":"local","m":"POST","p":"/api/login","s":200,"ms":251}
+{"t":"2026-10-01T22:47:04.548Z","id":"7e60f234","env":"local","m":"POST","p":"/api/login","s":200,"ms":249}
+{"t":"2026-10-01T22:47:04.797Z","id":"0724af74","env":"local","m":"POST","p":"/api/login","s":200,"ms":248}
+{"t":"2026-10-01T22:47:05.048Z","id":"be59e45b","env":"local","m":"POST","p":"/api/login","s":200,"ms":250}
+{"t":"2026-10-01T22:47:05.298Z","id":"0f68cb1f","env":"local","m":"POST","p":"/api/login","s":200,"ms":249}
+{"t":"2026-10-01T22:47:05.554Z","id":"c0fa6a56","env":"local","m":"POST","p":"/api/login","s":200,"ms":255}
+{"t":"2026-10-01T22:47:05.807Z","id":"4693b48b","env":"local","m":"POST","p":"/api/login","s":200,"ms":252}
+{"t":"2026-10-01T22:47:06.057Z","id":"84c1df3e","env":"local","m":"POST","p":"/api/login","s":200,"ms":248}
+{"t":"2026-10-01T22:47:06.064Z","id":"3fb9492a","env":"local","m":"POST","p":"/api/commercial","s":201,"ms":5,"tx":1,"lock_ms":0}
+{"t":"2026-10-01T22:47:06.066Z","id":"4f65b8cb","env":"local","m":"POST","p":"/api/commercial","s":201,"ms":1,"tx":1,"lock_ms":0}
+{"t":"2026-10-01T22:47:06.067Z","id":"b0857e84","env":"local","m":"POST","p":"/api/commercial","s":409,"ms":0,"tx":1,"lock_ms":0}
+{"t":"2026-10-01T22:47:06.068Z","id":"5aefcc78","env":"local","m":"POST","p":"/api/commercial/51fda9a1-e9c0-4801-83b6-cf9c338109e8/qualify","s":403,"ms":0}
+{"t":"2026-10-01T22:47:06.071Z","id":"821743ab","env":"local","m":"POST","p":"/api/commercial/51fda9a1-e9c0-4801-83b6-cf9c338109e8/qualify","s":201,"ms":3,"tx":1,"lock_ms":0}
+{"t":"2026-10-01T22:47:06.074Z","id":"da9de07e","env":"local","m":"POST","p":"/api/commercial/51fda9a1-e9c0-4801-83b6-cf9c338109e8/approve_qualification","s":201,"ms":2,"tx":1,"lock_ms":0}
+{"t":"2026-10-01T22:47:06.076Z","id":"7cc70ec6","env":"local","m":"POST","p":"/api/commercial/51fda9a1-e9c0-4801-83b6-cf9c338109e8/save_quote","s":201,"ms":1,"tx":1,"lock_ms":0}
+{"t":"2026-10-01T22:47:06.077Z","id":"bab89409","env":"local","m":"POST","p":"/api/commercial/51fda9a1-e9c0-4801-83b6-cf9c338109e8/submit_quote","s":201,"ms":1,"tx":1,"lock_ms":0}
+{"t":"2026-10-01T22:47:06.080Z","id":"9455e008","env":"local","m":"POST","p":"/api/commercial/51fda9a1-e9c0-4801-83b6-cf9c338109e8/approve_quote","s":201,"ms":2,"tx":1,"lock_ms":0}
+{"t":"2026-10-01T22:47:06.082Z","id":"ae3ecf94","env":"local","m":"POST","p":"/api/commercial/51fda9a1-e9c0-4801-83b6-cf9c338109e8/register_contract","s":201,"ms":1,"tx":1,"lock_ms":0}
+{"t":"2026-10-01T22:47:06.084Z","id":"7897941b","env":"local","m":"POST","p":"/api/commercial/51fda9a1-e9c0-4801-83b6-cf9c338109e8/create_project","s":201,"ms":1,"tx":1,"lock_ms":0}
+{"t":"2026-10-01T22:47:06.085Z","id":"9f8ae5b3","env":"local","m":"GET","p":"/api/projects","s":200,"ms":1}
+{"t":"2026-10-01T22:47:06.086Z","id":"adaa075a","env":"local","m":"POST","p":"/api/projects/2d9c7bd7-3e87-40cf-947f-9f30c98bc343/finance-scope","s":201,"ms":1,"tx":1,"lock_ms":0}
+{"t":"2026-10-01T22:47:06.087Z","id":"8907df68","env":"local","m":"POST","p":"/api/projects/2d9c7bd7-3e87-40cf-947f-9f30c98bc343/finance-scope","s":201,"ms":1,"tx":1,"lock_ms":0}
+{"t":"2026-10-01T22:47:06.089Z","id":"3184fd6b","env":"local","m":"POST","p":"/api/budgets","s":201,"ms":2,"tx":1,"lock_ms":0}
+{"t":"2026-10-01T22:47:06.091Z","id":"cdfe9668","env":"local","m":"POST","p":"/api/budgets/5f54108e-6adc-4729-82ee-1eae4dfff50e/submit","s":201,"ms":1,"tx":1,"lock_ms":0}
+{"t":"2026-10-01T22:47:06.092Z","id":"b8451bbd","env":"local","m":"POST","p":"/api/budgets/5f54108e-6adc-4729-82ee-1eae4dfff50e/approve","s":201,"ms":1,"tx":1,"lock_ms":0}
+{"t":"2026-10-01T22:47:06.097Z","id":"f2a04dcc","env":"local","m":"POST","p":"/api/procurement","s":201,"ms":4,"tx":1,"lock_ms":0}
+{"t":"2026-10-01T22:47:06.099Z","id":"300de511","env":"local","m":"POST","p":"/api/procurement/ac3d9548-1369-4354-aff0-30fa762cd63e/submit","s":201,"ms":2,"tx":1,"lock_ms":0}
+{"t":"2026-10-01T22:47:06.167Z","id":"2d397073","env":"local","m":"POST","p":"/api/procurement/ac3d9548-1369-4354-aff0-30fa762cd63e/add_quote","s":201,"ms":2,"tx":1,"lock_ms":0}
+{"t":"2026-10-01T22:47:06.170Z","id":"b5c4c259","env":"local","m":"POST","p":"/api/procurement/ac3d9548-1369-4354-aff0-30fa762cd63e/add_quote","s":201,"ms":2,"tx":1,"lock_ms":0}
+{"t":"2026-10-01T22:47:06.173Z","id":"a9c2091f","env":"local","m":"POST","p":"/api/procurement/ac3d9548-1369-4354-aff0-30fa762cd63e/add_quote","s":201,"ms":2,"tx":1,"lock_ms":0}
+{"t":"2026-10-01T22:47:06.184Z","id":"68d5b493","env":"local","m":"POST","p":"/api/procurement/ac3d9548-1369-4354-aff0-30fa762cd63e/award","s":403,"ms":1,"tx":1,"lock_ms":0}
+{"t":"2026-10-01T22:47:06.187Z","id":"d83589e2","env":"local","m":"POST","p":"/api/procurement/ac3d9548-1369-4354-aff0-30fa762cd63e/award","s":201,"ms":3,"tx":1,"lock_ms":0}
+{"t":"2026-10-01T22:47:06.191Z","id":"961485ba","env":"local","m":"POST","p":"/api/procurement/ac3d9548-1369-4354-aff0-30fa762cd63e/approve_order","s":201,"ms":3,"tx":1,"lock_ms":0}
+{"t":"2026-10-01T22:47:06.192Z","id":"a40803e9","env":"local","m":"POST","p":"/api/procurement/ac3d9548-1369-4354-aff0-30fa762cd63e/commence","s":403,"ms":0,"tx":1,"lock_ms":0}
+{"t":"2026-10-01T22:47:06.197Z","id":"a5083889","env":"local","m":"POST","p":"/api/procurement/ac3d9548-1369-4354-aff0-30fa762cd63e/commence","s":201,"ms":4,"tx":1,"lock_ms":0}
+{"t":"2026-10-01T22:47:06.201Z","id":"30ac8da2","env":"local","m":"POST","p":"/api/procurement/ac3d9548-1369-4354-aff0-30fa762cd63e/receive","s":201,"ms":3,"tx":1,"lock_ms":0}
+{"t":"2026-10-01T22:47:06.206Z","id":"f3023222","env":"local","m":"POST","p":"/api/procurement/ac3d9548-1369-4354-aff0-30fa762cd63e/record_invoice","s":201,"ms":4,"tx":1,"lock_ms":0}
+{"t":"2026-10-01T22:47:06.213Z","id":"90df6e42","env":"local","m":"POST","p":"/api/procurement/ac3d9548-1369-4354-aff0-30fa762cd63e/match","s":201,"ms":6,"tx":1,"lock_ms":0}
+{"t":"2026-10-01T22:47:06.215Z","id":"11177fc9","env":"local","m":"GET","p":"/api/commercial","s":200,"ms":1}
+{"t":"2026-10-01T22:47:06.215Z","id":"6fb09109","env":"local","m":"GET","p":"/api/procurement","s":200,"ms":0}
+{"t":"2026-10-01T22:47:06.216Z","id":"3d4bb0a0","env":"local","m":"POST","p":"/api/procurement/ac3d9548-1369-4354-aff0-30fa762cd63e/match","s":404,"ms":0,"tx":1,"lock_ms":0}
+{"t":"2026-10-01T22:47:06.217Z","id":"d1f73544","env":"local","m":"GET","p":"/api/commercial","s":200,"ms":0}
+{"t":"2026-10-01T22:47:06.217Z","id":"7df38b0d","env":"local","m":"GET","p":"/api/procurement","s":200,"ms":0}
+{"t":"2026-10-01T22:47:06.218Z","id":"e9dd3933","env":"local","m":"POST","p":"/api/procurement/ac3d9548-1369-4354-aff0-30fa762cd63e/match","s":404,"ms":0,"tx":1,"lock_ms":0}
+{"t":"2026-10-01T22:47:06.219Z","id":"897c37c8","env":"local","m":"GET","p":"/api/commercial","s":200,"ms":0}
+{"t":"2026-10-01T22:47:06.219Z","id":"4b9be784","env":"local","m":"GET","p":"/api/procurement","s":200,"ms":0}
+{"t":"2026-10-01T22:47:06.220Z","id":"1ea99d55","env":"local","m":"POST","p":"/api/procurement/ac3d9548-1369-4354-aff0-30fa762cd63e/match","s":404,"ms":0,"tx":1,"lock_ms":0}
+{"t":"2026-10-01T22:47:06.221Z","id":"266d8cd2","env":"local","m":"GET","p":"/api/integrations","s":200,"ms":1}
+✔ WF-01/02/05 HTTP: a scoped commercial project funds a purchase that reaches an unpaid matched reference (4944.293291ms)
+{"t":"2026-10-01T22:47:08.894Z","id":"cdec778a","env":"local","m":"POST","p":"/api/login","s":200,"ms":249}
+{"t":"2026-10-01T22:47:09.144Z","id":"4c1dbae9","env":"local","m":"POST","p":"/api/login","s":200,"ms":249}
+{"t":"2026-10-01T22:47:09.393Z","id":"469a78f7","env":"local","m":"POST","p":"/api/login","s":200,"ms":249}
+{"t":"2026-10-01T22:47:09.642Z","id":"b14258d8","env":"local","m":"POST","p":"/api/login","s":200,"ms":248}
+{"t":"2026-10-01T22:47:09.898Z","id":"90a2a001","env":"local","m":"POST","p":"/api/login","s":200,"ms":255}
+{"t":"2026-10-01T22:47:10.148Z","id":"f9b2d77b","env":"local","m":"POST","p":"/api/login","s":200,"ms":249}
+{"t":"2026-10-01T22:47:10.399Z","id":"f3457d35","env":"local","m":"POST","p":"/api/login","s":200,"ms":250}
+{"t":"2026-10-01T22:47:10.649Z","id":"3a55da01","env":"local","m":"POST","p":"/api/login","s":200,"ms":250}
+{"t":"2026-10-01T22:47:10.899Z","id":"c47fc71b","env":"local","m":"POST","p":"/api/login","s":200,"ms":250}
+{"t":"2026-10-01T22:47:10.900Z","id":"3e4858cc","env":"local","m":"GET","p":"/api/leave","s":403,"ms":1}
+{"t":"2026-10-01T22:47:10.901Z","id":"c6101319","env":"local","m":"POST","p":"/api/leave/openings","s":403,"ms":1,"tx":1,"lock_ms":0}
+{"t":"2026-10-01T22:47:10.902Z","id":"2a516d54","env":"local","m":"POST","p":"/api/leave/openings","s":201,"ms":1,"tx":1,"lock_ms":0}
+{"t":"2026-10-01T22:47:10.903Z","id":"146995f2","env":"local","m":"POST","p":"/api/leave/openings","s":201,"ms":0,"tx":1,"lock_ms":0}
+{"t":"2026-10-01T22:47:10.906Z","id":"6fa88abb","env":"local","m":"POST","p":"/api/leave/requests","s":201,"ms":2,"tx":1,"lock_ms":0}
+{"t":"2026-10-01T22:47:10.909Z","id":"8f20d698","env":"local","m":"POST","p":"/api/leave/requests","s":201,"ms":1,"tx":1,"lock_ms":0}
+{"t":"2026-10-01T22:47:10.911Z","id":"853fe108","env":"local","m":"POST","p":"/api/leave/requests/6c83075a-2ace-4f9c-9234-620211b0dc87/approve","s":403,"ms":1,"tx":1,"lock_ms":0}
+{"t":"2026-10-01T22:47:10.913Z","id":"4243e848","env":"local","m":"POST","p":"/api/leave/requests/6c83075a-2ace-4f9c-9234-620211b0dc87/approve","s":201,"ms":2,"tx":1,"lock_ms":0}
+{"t":"2026-10-01T22:47:10.915Z","id":"ed30c91c","env":"local","m":"POST","p":"/api/leave/requests/6c83075a-2ace-4f9c-9234-620211b0dc87/approve","s":201,"ms":2,"tx":1,"lock_ms":0}
+{"t":"2026-10-01T22:47:10.917Z","id":"4a353bb6","env":"local","m":"GET","p":"/api/leave","s":200,"ms":2}
+{"t":"2026-10-01T22:47:10.918Z","id":"980d5115","env":"local","m":"POST","p":"/api/leave/requests/6c83075a-2ace-4f9c-9234-620211b0dc87/cancel","s":404,"ms":1,"tx":1,"lock_ms":0}
+{"t":"2026-10-01T22:47:10.919Z","id":"ea4c2497","env":"local","m":"POST","p":"/api/leave/requests/6c83075a-2ace-4f9c-9234-620211b0dc87/cancel","s":201,"ms":1,"tx":1,"lock_ms":0}
+{"t":"2026-10-01T22:47:10.920Z","id":"a22663bc","env":"local","m":"POST","p":"/api/leave/requests/6c83075a-2ace-4f9c-9234-620211b0dc87/cancel","s":403,"ms":0,"tx":1,"lock_ms":0}
+{"t":"2026-10-01T22:47:10.922Z","id":"dd02c3af","env":"local","m":"GET","p":"/api/leave","s":200,"ms":1}
+✔ WF-08 HTTP: opening, reservation, two approvals and cancellation update the same employee year once (4698.67275ms)
+{"t":"2026-10-01T22:47:13.613Z","id":"144daf54","env":"local","m":"POST","p":"/api/login","s":200,"ms":250}
+{"t":"2026-10-01T22:47:13.871Z","id":"039c4812","env":"local","m":"POST","p":"/api/login","s":200,"ms":249}
+{"t":"2026-10-01T22:47:14.122Z","id":"4e93e84d","env":"local","m":"POST","p":"/api/login","s":200,"ms":250}
+{"t":"2026-10-01T22:47:14.373Z","id":"6c6b4305","env":"local","m":"POST","p":"/api/login","s":200,"ms":250}
+{"t":"2026-10-01T22:47:14.624Z","id":"b920389a","env":"local","m":"POST","p":"/api/login","s":200,"ms":250}
+{"t":"2026-10-01T22:47:14.876Z","id":"376ee329","env":"local","m":"POST","p":"/api/login","s":200,"ms":249}
+{"t":"2026-10-01T22:47:15.127Z","id":"f35b730b","env":"local","m":"POST","p":"/api/login","s":200,"ms":250}
+{"t":"2026-10-01T22:47:15.376Z","id":"ebe84f7b","env":"local","m":"POST","p":"/api/login","s":200,"ms":249}
+{"t":"2026-10-01T22:47:15.626Z","id":"e471ab76","env":"local","m":"POST","p":"/api/login","s":200,"ms":250}
+{"t":"2026-10-01T22:47:15.628Z","id":"753c240b","env":"local","m":"GET","p":"/api/catalog","s":200,"ms":1}
+{"t":"2026-10-01T22:47:15.632Z","id":"da06d27a","env":"local","m":"POST","p":"/api/requests","s":201,"ms":2,"tx":1,"lock_ms":0}
+{"t":"2026-10-01T22:47:15.639Z","id":"0417d4f8","env":"local","m":"POST","p":"/api/requests/e4b6462c-0dbf-4d53-aed6-3bd176880d8e/submit","s":201,"ms":6,"tx":1,"lock_ms":0}
+{"t":"2026-10-01T22:47:15.640Z","id":"a8564c24","env":"local","m":"POST","p":"/api/delegations","s":201,"ms":1,"tx":1,"lock_ms":0}
+{"t":"2026-10-01T22:47:15.641Z","id":"000df8f1","env":"local","m":"POST","p":"/api/delegations","s":201,"ms":0,"tx":1,"lock_ms":0}
+{"t":"2026-10-01T22:47:15.644Z","id":"a9702838","env":"local","m":"GET","p":"/api/requests/e4b6462c-0dbf-4d53-aed6-3bd176880d8e","s":200,"ms":2}
+{"t":"2026-10-01T22:47:15.645Z","id":"58b5274e","env":"local","m":"POST","p":"/api/delegations/0138d760-cbb5-4ae2-8966-9747ff8196f2/revoke","s":201,"ms":1,"tx":1,"lock_ms":0}
+{"t":"2026-10-01T22:47:15.646Z","id":"cf8d530c","env":"local","m":"GET","p":"/api/requests/e4b6462c-0dbf-4d53-aed6-3bd176880d8e","s":404,"ms":0}
+{"t":"2026-10-01T22:47:15.652Z","id":"4459ea18","env":"local","m":"POST","p":"/api/requests/e4b6462c-0dbf-4d53-aed6-3bd176880d8e/approve","s":404,"ms":4,"tx":1,"lock_ms":0}
+✔ PLT-04 HTTP: a temporary substitute loses the decision endpoint after revocation (4729.731916ms)
+✔ NFR-08: expanding synthetic fixtures twice preserves existing users, records and balances (2413.642125ms)
+{"t":"2026-10-01T22:47:20.724Z","id":"6b3e99de","env":"local","m":"POST","p":"/api/login","s":200,"ms":250}
+{"t":"2026-10-01T22:47:20.974Z","id":"921f001d","env":"local","m":"POST","p":"/api/login","s":200,"ms":249}
+{"t":"2026-10-01T22:47:21.223Z","id":"733f4dc1","env":"local","m":"POST","p":"/api/login","s":200,"ms":248}
+{"t":"2026-10-01T22:47:21.471Z","id":"2cae45c4","env":"local","m":"POST","p":"/api/login","s":200,"ms":247}
+{"t":"2026-10-01T22:47:21.721Z","id":"af107485","env":"local","m":"POST","p":"/api/login","s":200,"ms":249}
+{"t":"2026-10-01T22:47:21.971Z","id":"4bdf5135","env":"local","m":"POST","p":"/api/login","s":200,"ms":249}
+{"t":"2026-10-01T22:47:22.221Z","id":"33c2fa5d","env":"local","m":"POST","p":"/api/login","s":200,"ms":249}
+{"t":"2026-10-01T22:47:22.473Z","id":"1cfd2dc2","env":"local","m":"POST","p":"/api/login","s":200,"ms":252}
+{"t":"2026-10-01T22:47:22.722Z","id":"e6af509c","env":"local","m":"POST","p":"/api/login","s":200,"ms":248}
+{"t":"2026-10-01T22:47:22.724Z","id":"46402aa7","env":"local","m":"GET","p":"/api/finance","s":200,"ms":1}
+{"t":"2026-10-01T22:47:22.725Z","id":"dfd73986","env":"local","m":"GET","p":"/api/me","s":200,"ms":1}
+{"t":"2026-10-01T22:47:22.725Z","id":"02f2d472","env":"local","m":"GET","p":"/api/me","s":200,"ms":0}
+{"t":"2026-10-01T22:47:22.726Z","id":"12bc1241","env":"local","m":"GET","p":"/api/finance","s":403,"ms":0}
+{"t":"2026-10-01T22:47:22.726Z","id":"6b7b9cb5","env":"local","m":"GET","p":"/api/finance","s":403,"ms":0}
+{"t":"2026-10-01T22:47:22.728Z","id":"fd8382d0","env":"local","m":"POST","p":"/api/finance/journals","s":201,"ms":1,"tx":1,"lock_ms":0}
+{"t":"2026-10-01T22:47:22.730Z","id":"cdc23ac7","env":"local","m":"POST","p":"/api/finance/journals","s":201,"ms":1,"tx":1,"lock_ms":0}
+{"t":"2026-10-01T22:47:22.731Z","id":"0269f4d8","env":"local","m":"POST","p":"/api/finance/journals/8481223a-4e2a-43ec-833d-d2fd025dd087/submit","s":201,"ms":1,"tx":1,"lock_ms":0}
+{"t":"2026-10-01T22:47:22.733Z","id":"394a2f0b","env":"local","m":"GET","p":"/api/overview","s":200,"ms":1}
+{"t":"2026-10-01T22:47:22.734Z","id":"3a33cd01","env":"local","m":"POST","p":"/api/finance/journals/8481223a-4e2a-43ec-833d-d2fd025dd087/approve","s":403,"ms":0,"tx":1,"lock_ms":0}
+{"t":"2026-10-01T22:47:22.736Z","id":"5a5cf74e","env":"local","m":"POST","p":"/api/finance/journals/8481223a-4e2a-43ec-833d-d2fd025dd087/approve","s":201,"ms":1,"tx":1,"lock_ms":0}
+{"t":"2026-10-01T22:47:22.737Z","id":"66c9f24a","env":"local","m":"POST","p":"/api/finance/journals/8481223a-4e2a-43ec-833d-d2fd025dd087/post","s":201,"ms":0,"tx":1,"lock_ms":0}
+{"t":"2026-10-01T22:47:22.738Z","id":"c08b0a0b","env":"local","m":"GET","p":"/api/finance","s":200,"ms":0}
+✔ FIN-06 HTTP: explicit financial accounts prepare, independently approve and post without external execution (4672.601625ms)
+{"t":"2026-10-01T22:47:25.410Z","id":"91eea0cd","env":"local","m":"POST","p":"/api/login","s":200,"ms":250}
+{"t":"2026-10-01T22:47:25.664Z","id":"780f9053","env":"local","m":"POST","p":"/api/login","s":200,"ms":253}
+{"t":"2026-10-01T22:47:25.913Z","id":"252c6ad8","env":"local","m":"POST","p":"/api/login","s":200,"ms":249}
+{"t":"2026-10-01T22:47:26.168Z","id":"90c0d138","env":"local","m":"POST","p":"/api/login","s":200,"ms":254}
+{"t":"2026-10-01T22:47:26.417Z","id":"33e78746","env":"local","m":"POST","p":"/api/login","s":200,"ms":248}
+{"t":"2026-10-01T22:47:26.667Z","id":"e3284638","env":"local","m":"POST","p":"/api/login","s":200,"ms":249}
+{"t":"2026-10-01T22:47:26.917Z","id":"d2496bd9","env":"local","m":"POST","p":"/api/login","s":200,"ms":249}
+{"t":"2026-10-01T22:47:27.166Z","id":"ab90b31e","env":"local","m":"POST","p":"/api/login","s":200,"ms":249}
+{"t":"2026-10-01T22:47:27.416Z","id":"152ba3cf","env":"local","m":"POST","p":"/api/login","s":200,"ms":249}
+{"t":"2026-10-01T22:47:27.417Z","id":"0dca4849","env":"local","m":"GET","p":"/api/people","s":200,"ms":0}
+{"t":"2026-10-01T22:47:27.419Z","id":"dd3af4cd","env":"local","m":"POST","p":"/api/people/requisitions","s":201,"ms":1,"tx":1,"lock_ms":0}
+{"t":"2026-10-01T22:47:27.421Z","id":"8afa8c19","env":"local","m":"GET","p":"/api/overview","s":200,"ms":2}
+{"t":"2026-10-01T22:47:27.422Z","id":"17936023","env":"local","m":"POST","p":"/api/people/cfcad118-22f5-46f9-ba54-d68a1dd48d16/approve_need","s":403,"ms":0,"tx":1,"lock_ms":0}
+{"t":"2026-10-01T22:47:27.424Z","id":"d3cd0186","env":"local","m":"POST","p":"/api/people/cfcad118-22f5-46f9-ba54-d68a1dd48d16/approve_need","s":201,"ms":1,"tx":1,"lock_ms":0}
+{"t":"2026-10-01T22:47:27.425Z","id":"5055720f","env":"local","m":"POST","p":"/api/people/cfcad118-22f5-46f9-ba54-d68a1dd48d16/add_candidate","s":201,"ms":1,"tx":1,"lock_ms":0}
+{"t":"2026-10-01T22:47:27.427Z","id":"4c06f68a","env":"local","m":"POST","p":"/api/people/cfcad118-22f5-46f9-ba54-d68a1dd48d16/add_candidate","s":201,"ms":1,"tx":1,"lock_ms":0}
+{"t":"2026-10-01T22:47:27.427Z","id":"1fd664a9","env":"local","m":"GET","p":"/api/people","s":200,"ms":0}
+{"t":"2026-10-01T22:47:27.429Z","id":"d0d95b71","env":"local","m":"GET","p":"/api/people","s":200,"ms":1}
+{"t":"2026-10-01T22:47:27.429Z","id":"aba52b6d","env":"local","m":"GET","p":"/api/people","s":403,"ms":0}
+✔ TAL-01/02 HTTP: approved hiring scope admits one candidate and masks the profile from checklist outsiders (4691.16825ms)
+{"t":"2026-10-01T22:47:30.096Z","id":"d5517d0b","env":"local","m":"POST","p":"/api/login","s":200,"ms":249}
+{"t":"2026-10-01T22:47:30.350Z","id":"63ed9bae","env":"local","m":"POST","p":"/api/login","s":200,"ms":253}
+{"t":"2026-10-01T22:47:30.600Z","id":"32d7f59e","env":"local","m":"POST","p":"/api/login","s":200,"ms":249}
+{"t":"2026-10-01T22:47:30.851Z","id":"e0611c66","env":"local","m":"POST","p":"/api/login","s":200,"ms":250}
+{"t":"2026-10-01T22:47:31.101Z","id":"38b25ed0","env":"local","m":"POST","p":"/api/login","s":200,"ms":250}
+{"t":"2026-10-01T22:47:31.359Z","id":"6521f33e","env":"local","m":"POST","p":"/api/login","s":200,"ms":258}
+{"t":"2026-10-01T22:47:31.609Z","id":"af5eab45","env":"local","m":"POST","p":"/api/login","s":200,"ms":249}
+{"t":"2026-10-01T22:47:31.859Z","id":"c7f3150c","env":"local","m":"POST","p":"/api/login","s":200,"ms":249}
+{"t":"2026-10-01T22:47:32.109Z","id":"7ebcf448","env":"local","m":"POST","p":"/api/login","s":200,"ms":249}
+{"t":"2026-10-01T22:47:32.112Z","id":"81c50888","env":"local","m":"POST","p":"/api/projects","s":201,"ms":2,"tx":1,"lock_ms":0}
+{"t":"2026-10-01T22:47:32.115Z","id":"2ccad773","env":"local","m":"POST","p":"/api/studio","s":201,"ms":2,"tx":1,"lock_ms":0}
+{"t":"2026-10-01T22:47:32.116Z","id":"9f1ff11e","env":"local","m":"POST","p":"/api/studio/0f2f5e9c-b2a7-4bd0-b26b-e59a6c907ada/submit_brief","s":201,"ms":1,"tx":1,"lock_ms":0}
+{"t":"2026-10-01T22:47:32.119Z","id":"37681d26","env":"local","m":"GET","p":"/api/overview","s":200,"ms":2}
+{"t":"2026-10-01T22:47:32.120Z","id":"995ff94a","env":"local","m":"POST","p":"/api/studio/0f2f5e9c-b2a7-4bd0-b26b-e59a6c907ada/approve_brief","s":201,"ms":1,"tx":1,"lock_ms":0}
+{"t":"2026-10-01T22:47:32.121Z","id":"ee911bcc","env":"local","m":"POST","p":"/api/studio/0f2f5e9c-b2a7-4bd0-b26b-e59a6c907ada/add_asset","s":201,"ms":1,"tx":1,"lock_ms":0}
+{"t":"2026-10-01T22:47:32.122Z","id":"aea8c5f4","env":"local","m":"POST","p":"/api/studio/0f2f5e9c-b2a7-4bd0-b26b-e59a6c907ada/inspect_asset","s":201,"ms":1,"tx":1,"lock_ms":0}
+{"t":"2026-10-01T22:47:32.124Z","id":"9206f9a3","env":"local","m":"POST","p":"/api/studio/0f2f5e9c-b2a7-4bd0-b26b-e59a6c907ada/create_output","s":201,"ms":1,"tx":1,"lock_ms":0}
+{"t":"2026-10-01T22:47:32.126Z","id":"643d8619","env":"local","m":"POST","p":"/api/studio/0f2f5e9c-b2a7-4bd0-b26b-e59a6c907ada/submit_output","s":201,"ms":1,"tx":1,"lock_ms":0}
+{"t":"2026-10-01T22:47:32.127Z","id":"5cd05cc3","env":"local","m":"POST","p":"/api/studio/0f2f5e9c-b2a7-4bd0-b26b-e59a6c907ada/approve_output","s":201,"ms":1,"tx":1,"lock_ms":0}
+{"t":"2026-10-01T22:47:32.130Z","id":"6f90e138","env":"local","m":"POST","p":"/api/studio/0f2f5e9c-b2a7-4bd0-b26b-e59a6c907ada/issue_package","s":201,"ms":1,"tx":1,"lock_ms":0}
+{"t":"2026-10-01T22:47:32.132Z","id":"8b9813b4","env":"local","m":"POST","p":"/api/studio/0f2f5e9c-b2a7-4bd0-b26b-e59a6c907ada/accept_package","s":201,"ms":1,"tx":1,"lock_ms":0}
+{"t":"2026-10-01T22:47:32.133Z","id":"0410f5b9","env":"local","m":"GET","p":"/api/studio","s":200,"ms":0}
+✔ STR-08/CRT-09 HTTP: project members produce an approved text version and an internal delivery manifest (4703.201834ms)
+ℹ tests 7
+ℹ suites 0
+ℹ pass 7
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 31105.684583

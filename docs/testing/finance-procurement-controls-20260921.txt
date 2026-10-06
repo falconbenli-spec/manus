@@ -1,0 +1,16 @@
+✔ PRC-02: an unregistered or unqualified vendor never enters the payment cycle, and no bank account means no order (14449.916458ms)
+✔ FIN-07/PRC-09: approved is not paid — three people prepare, approve and record the bank execution, and the bank-detail collector cannot record it (5069.083084ms)
+✔ PRC-09: if the vendor bank account changes after the order was prepared, approval stops instead of silently paying the new account (6135.493125ms)
+✔ input VAT enters the summary only after a second person verifies the supplier tax invoice, and cannot exceed 15% of net (5895.714375ms)
+✔ FIN-09: تمنع ضريبة الفاتورة المكررة عبر مرجع شراء آخر بعد توحيد شكل رقمها (3662.736167ms)
+✔ PRC-09: يظهر توقف المورد بعد الاعتماد ويُحفظ التحذير عند توثيق تنفيذ وقع فعلا (3498.67625ms)
+✔ FIN-09: السجلات القديمة المكررة لا تعتمد، ويمكن رفض المكرر ثم اعتماد الأصل (3777.087792ms)
+✔ PRC-09: تغير الحساب البنكي بعد اعتماد الدفع يظهر للمالية دون كشف الآيبان (3382.803542ms)
+ℹ tests 8
+ℹ suites 0
+ℹ pass 8
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 46293.401708

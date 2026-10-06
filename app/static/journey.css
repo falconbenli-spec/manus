@@ -1,0 +1,698 @@
+/* VOID 360 — package D: data surfaces. Lists, tables, forms, details and the screen families.
+   Every rule lives in @layer surfaces (contract 5). Tokens come from signature.css (contract 1); state colour and mask
+   arrive as --c / --m from package A and are only painted here. No colour literal, no design-specific rule, logical
+   properties only, and no motion beyond the 120ms row tint and the rq-enter fade. Do not run a formatter on this file. */
+@layer surfaces{
+
+/* ===== 1. rows: ul.vn-list and everything that inherits the row format (spec 6.3) ===== */
+:where(.vn-list,.ex-rows,.pt-rows,.task-list,.requirements-list,.compact-services,.acc-gap-list,.wk-stack){
+  display:flex; flex-direction:column; margin:0; padding:0; list-style:none;}
+:where(.vn-list > li,.pt-row,.ex-row,.notification-row,.req-card,.task-row,.task,.service-row,.acc-gap,.rq-workspace){
+  position:relative; box-sizing:border-box; min-block-size:var(--row-h); padding-block:var(--s3);
+  border-block-end:1px solid var(--line); color:var(--ink-2);
+  transition:border-color var(--d-micro) var(--ease);}
+/* leading ruler, outdented into the gutter: focus and "stopped" rows. A line, never a wash. */
+:where(.vn-list > li,.pt-row,.ex-row,.notification-row,.req-card,.task-row,.task,.service-row,.acc-gap,.rq-workspace,.wk-card)::after{
+  content:""; position:absolute; inset-block:0; inset-inline-start:calc(var(--s3) * -1); inline-size:2px;
+  background:transparent; pointer-events:none;}
+:where(.vn-list > li,.pt-row,.ex-row,.notification-row,.req-card,.task-row,.task,.service-row,.acc-gap,.rq-workspace,.wk-card):focus-within{
+  border-block-end-color:var(--line-strong); --row-ink:var(--ink-1);}
+:where(.vn-list > li,.pt-row,.ex-row,.notification-row,.req-card,.task-row,.task,.service-row,.acc-gap,.rq-workspace,.wk-card):focus-within::after{background:var(--ink-1);}
+:where(.vn-list > li,.pt-row,.ex-row,.wk-card):is(.is-late,.is-block,.is-failed)::after{background:var(--stop);}
+@media (hover:hover){
+  :where(.vn-list > li,.pt-row,.ex-row,.notification-row,.req-card,.task-row,.task,.service-row,.acc-gap,.rq-workspace,.rq-row,.wk-card):hover{
+    border-block-end-color:var(--line-strong); --row-ink:var(--ink-1);}
+}
+
+.vn-list > li{display:grid; grid-template-columns:minmax(0,1fr) auto; column-gap:var(--s6); align-items:start;}
+.vn-list > li > *{grid-column:1; min-inline-size:0;}
+.vn-list > li > strong,.vn-list > li > a > strong,.pt-row-main strong,.ex-row > span,.notification-row strong,.task-row strong,.task-info strong,.service-row strong,.acc-gap strong,.rq-workspace strong{
+  display:block; color:var(--ink-1); font-size:var(--fs-row); font-weight:var(--fw-strong); line-height:1.5;}
+.vn-list > li > span:not(.badge,.pill,.vn-flag),.rq-workspace span,.task-info p,.task-row p,.req-card p{
+  display:block; max-inline-size:72ch; margin:0; color:var(--row-ink,var(--ink-3)); font-size:var(--fs-meta); font-weight:var(--fw-body); line-height:1.6; text-wrap:pretty;}
+.vn-list > li > small,.pt-row-main small,.notification-row small,.task-row small,.task-info small,.service-row small{
+  display:block; color:var(--row-ink,var(--ink-4)); font-size:var(--fs-label); font-weight:var(--fw-body); line-height:1.5;}
+.vn-list > li > a{color:inherit; text-decoration-line:none;}
+.vn-list > li > .badge{grid-column:2; grid-row:1; justify-self:end; margin-block-start:3px;}
+.vn-list > li > :is(.operation-actions,.btn){grid-column:2; grid-row:1 / span 6; justify-self:end; align-self:center;}
+.vn-list > li:has(> .badge) > :is(.operation-actions,.btn){grid-row:2 / span 5; align-self:start;}
+/* one link in the row and nothing else to press: the whole row is the target */
+.vn-list > li:not(:has(button,input,select,.operation-actions)) > a:only-of-type{position:static;}
+.vn-list > li:not(:has(button,input,select,.operation-actions)) > a:only-of-type::after{content:""; position:absolute; inset:0;}
+/* nested lists: indent, never a colour */
+.vn-list .vn-list{grid-column:1 / -1; padding-inline-start:var(--s6);}
+.vn-list .vn-list > li{min-block-size:var(--tap); padding-block:var(--s2);}
+.vn-list .vn-list > li:last-child{border-block-end:0;}
+:is(.vn-list > li,.pt-row,.ex-row,.wk-card,.task):is(.is-old,.is-inactive,.completed) :is(strong,span,small){color:var(--ink-4);}
+
+/* state marks on rows: shape from --m, colour from --c (package A owns the map; this file only paints) */
+:is(.vn-list > li,.pt-row,.ex-row,.wk-card:not(.is-personal),.org-unit):is(.is-late,.is-block,.is-failed,.is-expired,.is-missing,.is-due,.is-warn,.is-expiring,.is-needs_info,.is-pending,.is-mine,.is-now,.is-decision,.is-old,.is-inactive){
+  padding-inline-start:22px;}
+:is(.vn-list > li,.pt-row,.ex-row,.wk-card:not(.is-personal),.org-unit):is(.is-late,.is-block,.is-failed,.is-expired,.is-missing,.is-due,.is-warn,.is-expiring,.is-needs_info,.is-pending,.is-mine,.is-now,.is-decision,.is-old,.is-inactive)::before,
+.notification-row::before,.wk-card.is-personal .wk-meta::before,.rq-trail > li::before,.rq-go::before,.rq-rail-item.active::before,
+.required::before,.rq-tip::before,.ex-note::before,.department-section-title::before,.rq-chip + .rq-chip::before,
+.rq-dept-sections i + i::before,.department-summary > * + *::before,.org-unit footer span + span::before,
+tbody tr:is(.is-late,.is-block,.is-due,.is-warn,.is-old,.is-ok) > td:first-child::before,
+input[type=checkbox]:checked::before,.task.completed .square::before,html[data-route=inbox] .vn-list > li::before{
+  content:""; flex:none; display:inline-block; inline-size:12px; block-size:12px;
+  background-color:var(--c,var(--ink-4));
+  -webkit-mask:var(--m,var(--m-done)) center/contain no-repeat; mask:var(--m,var(--m-done)) center/contain no-repeat;}
+:is(.vn-list > li,.pt-row,.ex-row,.wk-card,.org-unit)::before{position:absolute; inset-inline-start:0; inset-block-start:calc(var(--s3) + 6px);}
+.vn-list .vn-list > li::before{inset-block-start:calc(var(--s2) + 6px);}
+html[data-route=inbox] .vn-list > li{min-block-size:72px; padding-inline-start:22px;}
+html[data-route=inbox] .vn-list > li:not([class*="is-"])::before{--c:var(--turn); --m:var(--m-turn);}
+
+/* ===== 2. row actions: text, underlined, 44px target (spec 6.5). The fill whitelist lives in @layer fill and still wins. ===== */
+:is(li,td,.acc-actions,.task,.task-row-end,.notification-row,.ex-row,.acc-gap,.filters,.wk-add,.service footer,.department-card) > .btn,
+:is(li,td) .operation-actions .btn,.rows-field > [data-action=row-add]{
+  position:relative; display:inline-flex; align-items:center; gap:var(--s1); inline-size:auto; min-block-size:20px; block-size:auto;
+  margin:0; padding:0; border:0; border-radius:var(--r-0); background:none; color:var(--row-ink,var(--ink-3));
+  font-size:var(--fs-label); font-weight:var(--fw-label); line-height:1.4; white-space:nowrap; cursor:pointer;
+  text-decoration-line:underline; text-decoration-thickness:1px; text-underline-offset:5px;}
+:is(li,td,.acc-actions,.task,.task-row-end,.notification-row,.ex-row,.acc-gap,.filters,.wk-add,.service footer,.department-card) > .btn::after,
+:is(li,td) .operation-actions .btn::after,.rows-field > [data-action=row-add]::after{
+  content:""; position:absolute; inset-block:-12px; inset-inline:-6px;}
+:is(li,td,.acc-actions,.task,.task-row-end,.notification-row,.ex-row,.acc-gap,.service footer) > .btn.danger,:is(li,td) .operation-actions .btn.danger{
+  margin-inline-start:auto; color:var(--stop);}
+:is(li,td,.acc-actions,.task,.task-row-end,.notification-row,.ex-row,.acc-gap,.filters,.wk-add,.service footer) > .btn:disabled,:is(li,td) .operation-actions .btn:disabled{
+  color:var(--ink-5); text-decoration-line:none; cursor:not-allowed;}
+@media (hover:hover){
+  :is(li,td,.acc-actions,.task,.task-row-end,.notification-row,.ex-row,.acc-gap,.filters,.wk-add,.service footer,.department-card) > .btn:hover,
+  :is(li,td) .operation-actions .btn:hover,.rows-field > [data-action=row-add]:hover{color:var(--ink-1); text-decoration-thickness:2px;}
+}
+:is(li,td) .operation-actions,.acc-actions,.task-row-end{display:flex; flex-wrap:wrap; align-items:center; gap:var(--s2) 20px;}
+td.acc-actions{display:table-cell;}
+td.acc-actions > .btn{margin-inline-end:20px;}
+.rows-field > [data-action=row-add]{align-self:start; min-block-size:var(--tap);}
+.rows-field > [data-action=row-add]::before{content:"+";}
+
+/* ===== 3. row families ===== */
+.pt-row,.ex-row,.acc-gap{display:flex; align-items:center; justify-content:space-between; gap:var(--s4); color:inherit; text-decoration-line:none;}
+.pt-row-main{flex:1; min-inline-size:0;}
+.pt-due{flex:none; color:var(--ink-4); font-size:var(--fs-label); font-weight:var(--fw-label); font-variant-numeric:tabular-nums lining-nums;}
+.pt-row.is-late .pt-due{color:var(--stop);}
+.ex-row > span,.acc-gap > span{flex:1; min-inline-size:0;}
+.acc-gap > span{color:var(--ink-2); font-size:var(--fs-meta); line-height:1.6;}
+.acc-gap strong{display:inline;}
+
+.notification-row{display:grid; grid-template-columns:12px minmax(0,1fr) auto auto; align-items:center; column-gap:var(--s4); min-block-size:56px;}
+.notification-row .avatar{position:absolute; clip-path:inset(50%);}   /* "!" and "✓" are not icons; the mark below says read or unread */
+.notification-row::before{--c:var(--ink-5); --m:var(--m-idle);}
+.notification-row:has([data-action=read-notification])::before{--c:var(--ink-1); --m:var(--m-turn);}
+.notification-row:not(:has([data-action=read-notification])) strong{color:var(--ink-3); font-weight:var(--fw-body);}
+.notification-row .text-button{justify-self:end;}
+
+.req-card{display:block;}
+.req-card code{color:var(--ink-4); font-size:var(--fs-cap); font-weight:var(--fw-label);}
+.req-card h3{margin:var(--s1) 0; color:var(--ink-1); font-size:var(--fs-row); font-weight:var(--fw-strong); line-height:1.5;}
+
+.task-row{display:flex; align-items:start; justify-content:space-between; gap:var(--s4);}
+.task-row > div:first-child{flex:1; min-inline-size:0;}
+.task-row small{display:inline;}
+.task-row-end{flex:none; justify-content:end;}
+
+/* #projects (live screen, spec 6.13) */
+.project-card{padding-block:var(--s6); border-block-start:1px solid var(--line);}
+.project-top{display:flex; flex-wrap:wrap; align-items:baseline; justify-content:space-between; gap:var(--s2) var(--s6);}
+.project-top h2{margin:0; color:var(--ink-1); font-size:var(--fs-title); font-weight:var(--fw-label); line-height:var(--lh-title);}
+.project-top p{max-inline-size:72ch; margin:var(--s1) 0 0; color:var(--ink-3); font-size:var(--fs-meta); line-height:1.6;}
+.project-card > small{display:block; margin-block:var(--s2) var(--s3); color:var(--ink-4); font-size:var(--fs-label);}
+.task{display:grid; grid-template-columns:22px minmax(0,1fr) auto; align-items:start; column-gap:var(--s3);}
+.task > .badge{margin-block-start:3px;}
+.square{display:grid; place-content:center; box-sizing:border-box; inline-size:22px; block-size:22px; margin-block-start:1px;
+  border:1.5px solid var(--line-strong); border-radius:var(--r-check); font-size:0;}   /* the "✓" glyph is never shown */
+.task.completed .square{border-color:var(--ink-1); background:var(--ink-1);}
+.task.completed .square::before,input[type=checkbox]:checked::before{--c:var(--canvas); --m:var(--m-done); block-size:9px;}
+
+.compact-services,.departments-entry{border-block-start:1px solid var(--line);}
+.service-row{display:flex; align-items:center; justify-content:space-between; gap:var(--s4); color:inherit; text-decoration-line:none;}
+.departments-entry{display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:var(--s3) var(--s6); padding-block:var(--s4);}
+.hr-hero{display:flex; flex-direction:column; gap:var(--s6); padding-block:var(--s8);}
+.hr-hero-copy time{color:var(--ink-4); font-size:var(--fs-label); font-weight:var(--fw-label);}
+.hr-hero-copy h2{margin:var(--s2) 0; color:var(--ink-1); font-size:var(--fs-display-m); font-weight:var(--fw-display); line-height:var(--lh-display); text-wrap:balance;}
+.hr-hero-copy p{max-inline-size:30em; margin:0; color:var(--ink-3); font-size:var(--fs-body-l); font-weight:var(--fw-stage-body); line-height:var(--lh-body-l);}
+
+/* inner empties: one quiet line led by a dash */
+.pt-empty,.wk-empty,.rq-empty{margin:0; padding-block:var(--s3); color:var(--ink-4); font-size:var(--fs-meta); line-height:1.6;}
+:is(.pt-empty,.wk-empty,.rq-empty)::before{content:"—"; margin-inline-end:var(--s2);}
+.rq-empty strong{color:var(--ink-2); font-size:var(--fs-row); font-weight:var(--fw-strong);}
+.rq-empty p{max-inline-size:60ch; margin:var(--s1) 0 0;}
+
+@media (max-width:759.98px){
+  .vn-list > li,.task{grid-template-columns:minmax(0,1fr);}
+  .vn-list > li > .badge,.vn-list > li > :is(.operation-actions,.btn),.vn-list > li:has(> .badge) > :is(.operation-actions,.btn){
+    grid-column:1; grid-row:auto; justify-self:start; align-self:start; margin-block-start:var(--s3);}
+  .task{grid-template-columns:22px minmax(0,1fr);}
+  .task > :is(.btn,.badge){grid-column:2; justify-self:start; margin-block-start:var(--s3);}
+  .task-row,.ex-row,.acc-gap{flex-direction:column; align-items:stretch;}
+  .task-row-end{justify-content:start;}
+  .notification-row{grid-template-columns:12px minmax(0,1fr);}
+  .notification-row > :is(.btn,.text-button){grid-column:2; justify-self:start; margin-block-start:var(--s3);}
+}
+
+/* ===== 4. tables (spec 6.10): no wrapper, no zebra, no vertical lines ===== */
+.table-wrap{max-inline-size:100%; overflow-x:auto; overscroll-behavior-x:contain;}
+table{inline-size:100%; border-collapse:collapse; border-spacing:0;}
+th,td{box-sizing:border-box; padding:var(--s2) var(--s4); border-block-end:1px solid var(--line); text-align:start; vertical-align:middle;}
+:is(th,td):first-child{padding-inline-start:0;}
+:is(th,td):last-child{padding-inline-end:0;}
+th{border-block-end-color:var(--line-strong); background:var(--canvas); color:var(--ink-4); font-size:var(--fs-label); font-weight:var(--fw-label); line-height:1.4; vertical-align:bottom;}
+td{block-size:var(--row-h); color:var(--row-ink,var(--ink-2)); font-size:var(--fs-table); font-weight:var(--fw-body); line-height:var(--lh-table);
+  font-variant-numeric:tabular-nums lining-nums; transition:border-color var(--d-micro) var(--ease);}
+/* numeric columns keep the natural alignment: in RTL the start edge lines the decimals up. No text-align:end anywhere. */
+td:first-child,td:first-child strong{color:var(--ink-1); font-weight:var(--fw-strong);}
+td a{color:inherit; text-decoration-line:none;}
+td a strong,td a small,td > strong + small{display:block;}   /* the two-line identity, with or without a link (payroll prints strong+small bare) */
+td small{color:var(--ink-4); font-size:var(--fs-label); font-weight:var(--fw-body);}
+td code{color:var(--ink-4); font-size:var(--fs-cap);}
+tbody tr:focus-within > td{border-block-end-color:var(--line-strong); --row-ink:var(--ink-1);}
+@media (hover:hover){tbody tr:hover > td{border-block-end-color:var(--line-strong); --row-ink:var(--ink-1);}}
+tr:is(.is-inactive,.is-old) > td,tr:is(.is-inactive,.is-old) > td:first-child strong{color:var(--ink-4);}
+tbody tr:is(.is-late,.is-block,.is-due,.is-warn,.is-old,.is-ok) > td:first-child::before{margin-inline-end:var(--s2); vertical-align:-1px;}
+tbody tr[hidden]{display:none;}
+tfoot :is(td,th){border-block-start:1px solid var(--line-strong); border-block-end:0; color:var(--ink-1); font-size:var(--fs-figure-s); font-weight:var(--fw-display); line-height:var(--lh-figure);}
+tfoot :is(td,th):first-child{color:var(--ink-4); font-size:var(--fs-label); font-weight:var(--fw-label);}
+td[colspan]:only-child{color:var(--ink-4); font-weight:var(--fw-body);}
+td[colspan]:only-child::before{content:"—"; margin-inline-end:var(--s2);}
+:root[data-tier=ledger] :is(th,td){padding-inline:var(--s3);}
+:root[data-tier=ledger] :is(th,td):first-child{padding-inline-start:0;}
+:root[data-tier=ledger] :is(th,td):last-child{padding-inline-end:0;}
+.ex-table td:has(.ex-bar){white-space:nowrap;}
+.ex-table td b{margin-inline-start:var(--s2); color:var(--ink-1); font-weight:var(--fw-strong);}
+/* the duplicate "open" column in #requests stays for assistive tech and for the keyboard, not for the eye */
+html[data-route=requests] td:last-child > a.btn:not(:focus-visible){position:absolute; inline-size:1px; block-size:1px; min-inline-size:0; min-block-size:0;
+  margin:-1px; padding:0; border:0; overflow:hidden; clip-path:inset(50%); white-space:nowrap;}   /* .btn's 44px minimums are released, or the hidden link is really 44x20 and can push the page sideways */
+html[data-route=requests] td:last-child{position:relative;}   /* the hidden link's containing block stays inside .table-wrap, so a table that scrolls in its wrapper cannot widen the page */
+html[data-route=requests] td:first-child a{display:block; padding-block:var(--s1);}
+
+/* sticky header: fixes the live bug where the scrolling wrapper captured position:sticky */
+@media (min-width:1024px){
+  .table-wrap:not(.is-wide){overflow:visible;}
+  .table-wrap:not(.is-wide) th{position:sticky; inset-block-start:var(--stick-2); z-index:2;}
+  .vn-card[open] .table-wrap:not(.is-wide) th{inset-block-start:var(--stick-3);}
+}
+/* a dialog is its own scroll container, and a repeating-rows editor never sticks */
+#dialog .table-wrap,#dialog .table-wrap:not(.is-wide){overflow-x:auto;}
+#dialog .table-wrap th,#dialog .vn-card[open] .table-wrap th{inset-block-start:0;}
+.rows-field .table-wrap th,#dialog .rows-field .table-wrap th{position:static;}
+@media (min-width:1024px){
+  /* overflow-x:auto makes the wrapper the sticky reference, so inside a dialog (report results, A8) the wrapper is also the
+     vertical scroller: the header then really holds at its top edge, wide table or not */
+  #dialog .table-wrap:not(.rows-field *){max-block-size:60dvh; overflow-y:auto; overscroll-behavior:contain;}
+  #dialog .table-wrap:not(.rows-field *) th{position:sticky; inset-block-start:0; z-index:2;}
+}
+
+@media (max-width:759.98px){
+  /* up to six columns: every row becomes a record. Title line, then "label: value" pairs that wrap, then the action. Nothing is cut. */
+  .table-wrap:has(> table[data-cols]):not(.rows-field *){overflow-x:visible;}
+  table[data-cols]:not(.rows-field *){display:block;}
+  table[data-cols]:not(.rows-field *) > thead{
+    position:absolute; inline-size:1px; block-size:1px; overflow:hidden; clip-path:inset(50%); white-space:nowrap;}
+  table[data-cols]:not(.rows-field *) > :is(tbody,tfoot){display:block;}
+  table[data-cols]:not(.rows-field *) > * > tr{
+    display:flex; flex-wrap:wrap; align-items:baseline; gap:var(--s1) var(--s3); padding-block:14px; border-block-end:1px solid var(--line);}
+  table[data-cols]:not(.rows-field *) > * > tr[hidden]{display:none;}
+  table[data-cols]:not(.rows-field *) td{
+    display:block; block-size:auto; min-inline-size:0; padding:0; border:0; overflow-wrap:anywhere;}   /* a flex item: without min 0 one unbroken token (file name, URL) holds the cell at its min-content and the page scrolls sideways */
+  table[data-cols]:not(.rows-field *) td:empty{display:none;}
+  table[data-cols]:not(.rows-field *) td:first-child{
+    flex:0 0 100%; font-size:var(--fs-row); line-height:1.5;}
+  table[data-cols]:not(.rows-field *) td[data-label]:not(:first-child,[data-label=""],[colspan])::before{
+    content:attr(data-label) ":"; margin-inline-end:6px; color:var(--ink-4); font-size:var(--fs-label); font-weight:var(--fw-label);}
+  table[data-cols]:not(.rows-field *) td[data-label]:not(:first-child,:empty):has(~ td[data-label]:not(:empty))::after{
+    content:""; display:inline-block; inline-size:6px; block-size:6px; margin-inline-start:var(--s3); background-color:var(--ink-5);
+    -webkit-mask:var(--m-done) center/contain no-repeat; mask:var(--m-done) center/contain no-repeat;}
+  table[data-cols]:not(.rows-field *) td:last-child:is(.acc-actions,:has(> .btn,> .operation-actions)){
+    flex:0 0 100%; display:flex; flex-wrap:wrap; align-items:center; gap:var(--s2) 20px; min-block-size:var(--tap);}
+  /* wider tables, and tables the enhancer has not counted: scroll inside the wrapper, first column pinned, end edge faded.
+     The pinned column wraps and is capped under half the scrollport, so the figures beside it can always be scrolled into view. */
+  table:not([data-cols],.rows-field *):has(> thead) :is(th,td){white-space:nowrap;}
+  table:not([data-cols],.rows-field *):has(> thead) :is(th,td):first-child:not([colspan]){
+    position:sticky; inset-inline-start:0; z-index:1; min-inline-size:min(38vw,10rem); max-inline-size:min(38vw,10rem); padding-inline-end:var(--s3);
+    background:var(--canvas); white-space:normal; overflow-wrap:break-word;}
+  /* a headless table (label and amount, #statements) is never counted by the enhancer: the label wraps, the figure stays whole, nothing is pinned */
+  table:not([data-cols],.rows-field *):not(:has(> thead)) :is(th,td){white-space:normal; overflow-wrap:anywhere;}
+  table:not([data-cols],.rows-field *):not(:has(> thead)) td:last-child:not(:first-child){white-space:nowrap;}
+  .table-wrap.is-wide > table:not([data-cols]) :is(th,td):last-child{padding-inline-end:var(--s6);}   /* the last column clears the fade when scrolled to the end */
+  .table-wrap.is-wide:has(> table:not([data-cols])):not(.rows-field *){
+    -webkit-mask:linear-gradient(90deg,transparent,#000 24px); mask:linear-gradient(90deg,transparent,#000 24px);}
+  html[dir=ltr] .table-wrap.is-wide:has(> table:not([data-cols])):not(.rows-field *){
+    -webkit-mask:linear-gradient(270deg,transparent,#000 24px); mask:linear-gradient(270deg,transparent,#000 24px);}
+}
+
+/* ===== 5. forms (spec 6.6). "Writing frame" for work forms; the "writing line" primitive belongs to package A — size and place only here. ===== */
+form:where(:not(#login-form,#password-form)) label,label:has(> #benchmark-search),.rows-field,.department-search{
+  display:flex; flex-direction:column; gap:var(--s2); min-inline-size:0;
+  color:var(--ink-3); font-size:var(--fs-label); font-weight:var(--fw-label); line-height:1.4;}
+form:where(:not(#login-form,#password-form)) label:focus-within{color:var(--ink-1);}
+form:where(:not(#login-form,#password-form,.filters,.wk-add)) :where(input:not([type=checkbox],[type=radio],[type=hidden]),select,textarea){
+  box-sizing:border-box; inline-size:100%; min-block-size:48px; margin:0; padding:0 14px;
+  border:1px solid var(--line-strong); border-radius:var(--r-0); background-color:transparent;
+  color:var(--ink-1); font:inherit; font-size:var(--fs-body); font-weight:var(--fw-body); line-height:1.5; caret-color:var(--ink-1);}
+form:where(:not(#login-form,#password-form,.filters,.wk-add)) :where(input:not([type=checkbox],[type=radio],[type=hidden]),select,textarea):focus-visible{
+  padding-inline-start:13px; border-width:2px; border-color:var(--focus); outline:2px solid var(--focus); outline-offset:2px;}
+form:where(:not(#login-form,#password-form,.filters,.wk-add)) :where(input,select,textarea):disabled{border-color:var(--line); color:var(--ink-5); cursor:not-allowed;}
+form:where(:not(#login-form,#password-form,.filters,.wk-add)) :where(input,textarea)::placeholder{color:var(--ink-5); opacity:1;}
+@media (hover:hover){
+  form:where(:not(#login-form,#password-form,.filters,.wk-add)) :where(input:not([type=checkbox],[type=radio]),select,textarea):hover:not(:focus-visible,:disabled){border-color:var(--ink-3);}
+}
+/* own rule on purpose: a browser without :user-invalid drops only this line */
+form:where(:not(#login-form,#password-form,.filters,.wk-add)) :where(input,select,textarea):user-invalid{border-width:2px; border-color:var(--stop);}
+/* spec 6.6 + 8: the error is shape + word + colour, never the hue alone. An input carries no pseudo-element, so its label does: ::before is the
+   --m-stop mark, ::after the word (13px label weight, inherited). Own rules again: without :has or :user-invalid only these lines drop. */
+form:where(:not(#login-form,#password-form,.filters,.wk-add)) label:has(> :where(input:not([type=checkbox],[type=radio],[type=hidden]),select,textarea):user-invalid){position:relative;}
+form:where(:not(#login-form,#password-form,.filters,.wk-add)) label:has(> :where(input:not([type=checkbox],[type=radio],[type=hidden]),select,textarea):user-invalid)::after{
+  content:"غير صحيح"; padding-inline-start:20px; color:var(--stop);}
+form:where(:not(#login-form,#password-form,.filters,.wk-add)) label:has(> :where(input:not([type=checkbox],[type=radio],[type=hidden]),select,textarea):required:user-invalid)::after{content:"مطلوب أو غير صحيح";}
+html[dir=ltr] form:where(:not(#login-form,#password-form,.filters,.wk-add)) label:has(> :where(input:not([type=checkbox],[type=radio],[type=hidden]),select,textarea):user-invalid)::after{content:"Not valid";}
+html[dir=ltr] form:where(:not(#login-form,#password-form,.filters,.wk-add)) label:has(> :where(input:not([type=checkbox],[type=radio],[type=hidden]),select,textarea):required:user-invalid)::after{content:"Required or not valid";}
+form:where(:not(#login-form,#password-form,.filters,.wk-add)) label:has(> :where(input:not([type=checkbox],[type=radio],[type=hidden]),select,textarea):user-invalid)::before{
+  content:""; position:absolute; inset-inline-start:0; inset-block-end:5px; inline-size:13px; block-size:8px; background-color:var(--stop);
+  -webkit-mask:var(--m-stop) center/contain no-repeat; mask:var(--m-stop) center/contain no-repeat;}
+textarea{min-block-size:120px; padding-block:var(--s3); line-height:var(--lh-body); resize:vertical;}
+form:where(:not(#login-form,#password-form)) textarea{padding-block:var(--s3);}
+select:where(:not(.filters select)){-webkit-appearance:none; appearance:none; padding-inline-end:36px; background-image:var(--select-arrow); background-repeat:no-repeat;
+  background-size:9px 10px; background-position:14px 50%; cursor:pointer;}   /* 14px from the physical start of an RTL line = the inline end */
+html[dir=ltr] select:where(:not(.filters select)){background-position:calc(100% - 14px) 50%;}
+input[type=file]{padding-block:10px;}
+input[type=file]::file-selector-button{margin-inline-end:var(--s3); padding:0; padding-inline-end:var(--s3); border:0; border-inline-end:1px solid var(--line-strong);
+  background:none; color:var(--ink-1); font:inherit; font-size:var(--fs-label); font-weight:var(--fw-label); cursor:pointer;}
+label > small.subtle,.rows-field > small.subtle,.checks-field > small.subtle{color:var(--ink-4); font-size:var(--fs-label); font-weight:var(--fw-body); line-height:1.5;}   /* the hint is always visible (WCAG 3.3.2) */
+.required{font-size:0;}
+.required::before{inline-size:6px; block-size:7px; margin-inline-start:var(--s1); vertical-align:1px;}
+
+.form-grid{display:grid; grid-template-columns:repeat(auto-fit,minmax(min(260px,100%),1fr)); gap:28px var(--s10); max-inline-size:720px;}
+.launcher .form-grid{max-inline-size:none;}
+.form-grid > .full{grid-column:1 / -1;}
+fieldset:where(.builder-field,.checks-field){min-inline-size:0; margin:0; padding:0; border:0;}
+.builder-field{margin-block-start:var(--s14); padding-block-start:var(--s6); border-block-start:1px solid var(--line);}
+.builder-field > legend{float:inline-start; inline-size:100%; margin-block-end:var(--s6); padding:0; color:var(--ink-1); font-size:var(--fs-title); font-weight:var(--fw-label); line-height:var(--lh-title);}
+.builder-field > legend + *{clear:both;}
+.checks-field > legend{margin-block-end:var(--s2); padding:0; color:var(--ink-3); font-size:var(--fs-label); font-weight:var(--fw-label);}
+.checks{display:grid; grid-template-columns:repeat(auto-fit,minmax(min(260px,100%),1fr)); column-gap:var(--s10);}
+form:where(:not(#login-form,#password-form)) :is(.checks label,label.check),.wk-check{
+  flex-direction:row; align-items:center; gap:var(--s3); min-block-size:48px; color:var(--ink-2);
+  font-size:var(--fs-body); font-weight:var(--fw-body); line-height:1.5; cursor:pointer;}
+.checks label{flex-wrap:wrap; border-block-end:1px solid var(--line);}
+.checks label > small{flex:0 0 100%; padding-inline-start:34px; padding-block-end:var(--s2);}
+/* the checked box fills with ink, never turquoise; the comma is cut in the canvas colour */
+input[type=checkbox]{-webkit-appearance:none; appearance:none; flex:none; display:inline-grid; place-content:center; box-sizing:border-box;
+  inline-size:22px; block-size:22px; min-block-size:0; margin:0; padding:0;
+  border:1.5px solid var(--line-strong); border-radius:var(--r-check); background:transparent; cursor:pointer;}
+input[type=checkbox]:checked{border-color:var(--ink-1); background:var(--ink-1);}
+input[type=checkbox]:disabled{border-color:var(--line); cursor:not-allowed;}
+
+/* repeating rows: a table on the desk, labelled vertical blocks on the phone */
+.rows-field > span{color:var(--ink-3);}
+.rows-field table{min-inline-size:560px;}
+.rows-field :is(th,td){padding:var(--s2); border-block-end-color:var(--line);}
+.rows-field td{block-size:auto;}
+.rows-field td :is(input,select){min-block-size:var(--tap);}
+.rows-field td.rows-remove{inline-size:var(--tap); padding-inline:0;}
+.rows-field td.rows-remove > .btn{justify-content:center; inline-size:var(--tap); block-size:var(--tap); color:var(--ink-4); font-size:var(--fs-body); text-decoration-line:none;}
+.rows-field td.rows-remove > .btn::after{inset:0;}
+@media (max-width:759.98px){
+  form:where(:not(#login-form,#password-form,.filters,.wk-add)) :where(input:not([type=checkbox],[type=radio],[type=hidden]),select,textarea){min-block-size:52px;}
+  .form-grid{grid-template-columns:minmax(0,1fr); gap:var(--s6);}
+  .rows-field .table-wrap{overflow-x:visible;}
+  .rows-field table{display:block; min-inline-size:0;}
+  .rows-field thead{position:absolute; inline-size:1px; block-size:1px; overflow:hidden; clip-path:inset(50%); white-space:nowrap;}
+  .rows-field tbody{display:block;}
+  .rows-field tr[data-row]{display:grid; gap:var(--s4); padding-block:20px; border-block-end:1px solid var(--line);}
+  .rows-field td{display:flex; flex-direction:column; gap:var(--s2); padding:0; border:0;}
+  .rows-field td[data-label]:not([data-label=""])::before{content:attr(data-label); color:var(--ink-4); font-size:var(--fs-label); font-weight:var(--fw-label);}   /* a visible label, never a placeholder */
+  .rows-field td.rows-remove{inline-size:auto; align-items:end;}
+  .rows-field td :is(input,select){min-block-size:52px;}
+}
+
+/* writing-line placements owned here: size and position only */
+.filters,.acc-filter{display:flex; flex-wrap:wrap; align-items:center; gap:var(--s2) var(--s6); min-block-size:var(--tap); margin-block-end:var(--s4); background:var(--canvas);}
+.filters :is(input,select),.acc-filter input,.wk-add input{box-sizing:border-box; min-inline-size:0; block-size:var(--tap); font-size:var(--fs-body);}
+.filters input,.acc-filter input{flex:1 1 240px;}
+.filters select{flex:0 1 220px; padding-inline-end:20px;}   /* room for the arrow package A paints at the inline end */
+.filters > .btn{min-block-size:var(--tap);}
+.acc-filter{max-inline-size:none;}
+.department-search{max-inline-size:560px; margin-block:var(--s6) var(--s2);}
+#department-search,#benchmark-search{box-sizing:border-box; inline-size:100%; block-size:56px; font-size:var(--fs-body-l);}
+label:has(> #benchmark-search){max-inline-size:560px; margin-block-start:var(--s4);}
+#department-search-status,#benchmark-search-status{min-block-size:1.5em; margin:0 0 var(--s4); color:var(--ink-4); font-size:var(--fs-label);}
+[data-benchmark-search][hidden]{display:none;}
+.wk-add{display:flex; align-items:center; gap:var(--s4); margin-block-start:var(--s3);}
+.wk-add input{flex:1;}
+@media (min-width:760px){
+  .filters,.acc-filter{flex-wrap:nowrap; block-size:var(--tap);}
+  /* accounts-ui wraps its filter alone in a .panel-body: the wrapper sticks (it can travel the whole section), the label cannot */
+  .filters,.acc-filter:not(.panel-body > *),.panel-body:has(> .acc-filter:only-child){position:sticky; inset-block-start:var(--stick-1); z-index:4;}
+  .panel-body:has(> .acc-filter:only-child){background:var(--canvas);}
+}
+
+/* ===== 6. details ===== */
+.vn-facts,.detail-data{display:grid; grid-template-columns:repeat(auto-fit,minmax(min(180px,100%),1fr)); gap:var(--s6) var(--s10); margin:0;}
+:is(.vn-facts,.detail-data) > div{min-inline-size:0;}
+:is(.vn-facts,.detail-data) dt{margin-block-end:var(--s1); color:var(--ink-4); font-size:var(--fs-label); font-weight:var(--fw-label); line-height:1.4;}
+:is(.vn-facts,.detail-data) dd{margin:0; color:var(--ink-2); font-size:var(--fs-body); font-weight:var(--fw-body); line-height:1.6; overflow-wrap:break-word;}
+html[data-route=leave] .detail-data:not(details *) dd{color:var(--ink-1); font-size:var(--fs-figure-s); line-height:1.3;}
+html[data-route=letters] .vn-list small{color:var(--ink-2); font-size:var(--fs-table); line-height:1.7;}   /* A13: letter text is reading text */
+@media (max-width:759.98px){.vn-facts,.detail-data{grid-template-columns:repeat(auto-fit,minmax(min(140px,100%),1fr));}}
+
+/* A5 — request details, CSS only. `order` is used here and nowhere else in this file; Tab order is checked by hand. */
+.details-grid{display:flex; flex-direction:column; gap:var(--gap-section);}
+.details-grid > div{display:contents;}
+/* :where() keeps the sibling test at zero weight, so the phone bar's order:99 below still wins for the same panel */
+.details-grid section.panel:where(:has(+ section.panel > .journey)),.details-grid section.panel:has([data-transition]){order:-3;}
+.details-grid section.panel:has(> .journey){order:-2;}
+.details-grid section.panel:has([data-transition]) .panel-body{display:flex; flex-wrap:wrap; align-items:center; gap:var(--s3);}
+.details-grid section.panel:has([data-transition]) .panel-body > .subtle{flex:0 0 100%; margin:0;}
+.details-grid section.panel:has([data-transition]) .btn{--btn-h:var(--s14);}   /* the lit action is 56px here; package C's fill layer reads the hook */
+section.panel:has(> .sig-arc){display:grid; grid-template-columns:112px minmax(0,1fr); column-gap:var(--s6); align-items:start;}
+section.panel:has(> .sig-arc) > .panel-head{grid-column:1 / -1;}
+.sig-arc{inline-size:112px; block-size:112px; overflow:visible; color:var(--ink-2);}
+@media (min-width:1024px){
+  .details-grid{display:grid; grid-template-columns:5fr 7fr; gap:var(--s18);}   /* columns stretch on purpose: a sticky panel only travels inside a column as tall as the row */
+  .details-grid > div{display:flex; flex-direction:column; gap:var(--gap-section); min-inline-size:0;}
+  .details-grid > div:nth-child(2){order:-1;}
+  /* only the decision panel sticks; the rest of the column scrolls, so its foot is never out of reach */
+  .details-grid section.panel:has([data-transition]){position:sticky; inset-block-start:calc(var(--sticky-top) + var(--s6)); z-index:1; padding-block-end:var(--s4); background:var(--canvas);}
+  .details-grid section.panel:has([data-transition]) .panel-body{flex-direction:column; align-items:stretch;}
+  .details-grid section.panel:has([data-transition]) .btn{--btn-w:100%;}
+  .details-grid section.panel:has([data-transition]) .panel-body > .btn.danger{align-self:start;}
+}
+@media (max-width:759.98px){
+  /* the sticky decision bar: danger above and away from the thumb, then the lit action with the first outline, then the rest */
+  .details-grid section.panel:has([data-transition]){order:99; position:sticky; inset-block-end:calc(var(--tabbar-h) + var(--safe-b)); z-index:20;
+    max-block-size:40dvh; overflow-y:auto; margin-inline:calc(var(--gutter) * -1); padding:var(--s3) var(--gutter);
+    border-block-start:1px solid var(--line-strong); background:var(--canvas);}
+  .details-grid section.panel:has([data-transition]) :is(.panel-head,.subtle){position:absolute; inline-size:1px; block-size:1px; overflow:hidden; clip-path:inset(50%);}
+  .details-grid section.panel:has([data-transition]) .panel-body{gap:var(--s2) var(--s3);}
+  .details-grid section.panel:has([data-transition]) .panel-body::before,.details-grid section.panel:has([data-transition]) .panel-body::after{content:""; flex:0 0 100%; block-size:0;}
+  .details-grid section.panel:has([data-transition]) .panel-body::before{order:-1;}
+  .details-grid section.panel:has([data-transition]) .panel-body:not(:has(.btn.danger))::before{display:none;}
+  .details-grid section.panel:has([data-transition]) .panel-body::after{order:1;}
+  .details-grid section.panel:has([data-transition]) .btn{--btn-h:52px; flex:1 1 0; min-block-size:52px;}
+  .details-grid section.panel:has([data-transition]) .btn:is(.dark,.primary){flex-grow:2;}
+  .details-grid section.panel:has([data-transition]) .btn.danger{order:-2; flex:0 0 auto; min-block-size:var(--tap); margin-inline-start:auto;}
+  .details-grid section.panel:has([data-transition]) .btn.outline ~ .btn.outline{order:2; flex:0 1 auto; min-block-size:var(--tap);}
+  /* keyboard open: the bar stops sticking, so it leaves the viewport without removing the actions */
+  html.is-kbd .details-grid section.panel:has([data-transition]){position:static; max-block-size:none;}
+  /* WCAG 2.4.11: a control scrolled or focused into view clears the bar (up to 40dvh). The page's scroll-padding lives in
+     @layer shell, which this layer cannot outrank, so the room is reserved on the controls themselves. Off while the bar is unpinned. */
+  html:not(.is-kbd) .details-grid:has(section.panel [data-transition]) section.panel:not(:has([data-transition])) :is(a,button,input,select,textarea,summary,label,[tabindex]){
+    scroll-margin-block-end:40dvh;}
+}
+
+/* ===== 7. screen families ===== */
+/* أقراص ملونة بأسلوب iOS لإدارات المنتقي الثماني وفئات الدليل (أيقونات Apple ملونة) */
+[class*="tone-"]{--tone:#8e8e93;}
+.tone-1{--tone:#0a84ff;}.tone-2{--tone:#5e5ce6;}.tone-3{--tone:#ff9f0a;}.tone-4{--tone:#30d158;}
+.tone-5{--tone:#bf5af2;}.tone-6{--tone:#ff453a;}.tone-7{--tone:#ff375f;}.tone-8{--tone:#64d2ff;}
+/* the launcher glyphs are a real icon set now (SF-style line SVGs from hr-design); show them quietly, monochrome */
+.rq-rail-icon,.rq-dept-icon,.rq-row-icon,.service-icon{display:grid; place-items:center; flex:none; inline-size:34px; block-size:34px; border-radius:9px; background:var(--tone,#8e8e93); color:#fff;}
+/* فئات مركز الخدمات الثماني بلا صنف tone: تلوَّن بترتيبها على لوحة iOS نفسها */
+.rq-dept-grid > .sc-cat:nth-child(8n+1){--tone:#0a84ff;}.rq-dept-grid > .sc-cat:nth-child(8n+2){--tone:#5e5ce6;}
+.rq-dept-grid > .sc-cat:nth-child(8n+3){--tone:#30d158;}.rq-dept-grid > .sc-cat:nth-child(8n+4){--tone:#ff9f0a;}
+.rq-dept-grid > .sc-cat:nth-child(8n+5){--tone:#bf5af2;}.rq-dept-grid > .sc-cat:nth-child(8n+6){--tone:#64d2ff;}
+.rq-dept-grid > .sc-cat:nth-child(8n+7){--tone:#ff375f;}.rq-dept-grid > .sc-cat:nth-child(8n+8){--tone:#ff453a;}
+.rq-rail-icon .glyph,.rq-dept-icon .glyph,.rq-row-icon .glyph,.service-icon .glyph{inline-size:58%; block-size:58%;}
+.rq-pill > span[aria-hidden]{display:inline-flex;}
+.rq-pill > span[aria-hidden] .glyph{inline-size:13px; block-size:13px;}
+
+/* rq-* — launcher and catalogue (hero and search belong to package E) */
+.rq{display:flex; flex-direction:column; gap:var(--gap-section);}
+.rq-body{display:grid; grid-template-columns:minmax(0,1fr); gap:var(--s8);}
+.rq-rail{display:flex; gap:var(--s4); min-inline-size:0;}
+.rq-rail-group{display:flex; gap:var(--s2);}
+.rq-rail-label,.rq-workspaces-label,.pt-label,.rq-found-dept,.rq-crumbs,.org-exec-role,.rq-compose-side h4,.wk-column header,.department-section-title{
+  margin:0; color:var(--ink-4); font-size:var(--fs-label); font-weight:var(--fw-label); line-height:1.4;}
+.rq-rail-item{position:relative; display:flex; align-items:center; gap:var(--s2); box-sizing:border-box; min-block-size:var(--tap); padding:0; border:0; background:none;
+  color:var(--ink-3); font:inherit; font-size:var(--fs-table); font-weight:var(--fw-body); text-align:start; white-space:nowrap; cursor:pointer;}
+.rq-rail-item > span:not(.rq-rail-icon){flex:1;}
+.rq-rail-item em{margin-inline-start:var(--s1); color:var(--ink-4); font-size:var(--fs-label); font-style:normal;}
+.rq-rail-item small{color:var(--ink-4); font-size:var(--fs-label); font-variant-numeric:tabular-nums lining-nums;}
+.rq-rail-item.active{color:var(--ink-1); font-weight:var(--fw-strong);}
+.rq-rail-item.active::before{--c:var(--ink-1); --m:var(--m-done); inline-size:8px; block-size:8px;}
+@media (hover:hover){.rq-rail-item:hover{color:var(--ink-1);}}
+.rq-results{display:flex; flex-direction:column; min-inline-size:0;}
+.rq-results-head{display:flex; flex-wrap:wrap; align-items:baseline; gap:var(--s1) var(--s4); margin-block:var(--s8) var(--s3);}
+.rq-results-head:first-child{margin-block-start:0;}
+.rq-results-head h3,.rq-section h4 > span:not(.rq-section-no),.department-card h2,.service h3,.org-unit h3,.wk-title{
+  margin:0; color:var(--ink-1); font-size:var(--fs-title); font-weight:var(--fw-label); line-height:var(--lh-title);}
+.rq-results-head p{margin:0; color:var(--ink-4); font-size:var(--fs-label);}
+.rq-list{display:flex; flex-direction:column;}
+.rq-found-dept{display:block; padding-block-start:var(--s3);}
+/* .rq-row stays the only class on the element (tests match class="rq-row" literally) */
+.rq-row{display:grid; grid-template-columns:minmax(0,1fr) auto; align-items:center; column-gap:var(--s6); box-sizing:border-box; inline-size:100%; min-block-size:64px;
+  padding:var(--s2) 0; border:0; border-block-end:1px solid var(--line); border-radius:var(--r-0); background:none; color:inherit; font:inherit; text-align:start;
+  transition:border-color var(--d-micro) var(--ease);}
+button.rq-row{cursor:pointer;}
+
+/* بطاقة الخيارات المفتوحة في صفحة الإدارة (30 سبتمبر 2026): الخيارات تُعرض ولا تُخبَّأ خلف زرّ.
+   الصفّ يعلو ليسع قائمةً، فالمحاذاة تصير إلى الأعلى بدل التوسيط، وإلا طفا العدّاد في فراغ. */
+.rq-row.is-open{align-items:start; padding-block:var(--s4);}
+.rq-opt-list{display:grid; gap:var(--s2); margin:var(--s3) 0 0; padding:0; list-style:none;}
+.rq-opt{display:grid; grid-template-columns:minmax(0,1fr) auto auto; align-items:center; column-gap:var(--s3);
+  padding:var(--s2) var(--s3); border:1px solid var(--line); border-radius:var(--r-md,10px); background:var(--surface,transparent);}
+.rq-opt-name{min-inline-size:0; color:var(--ink-1); font-weight:var(--fw-strong); text-decoration-line:none; overflow-wrap:break-word;}
+a.rq-opt-name:hover{text-decoration-line:underline;}
+.rq-opt .btn{white-space:nowrap;}
+/* الجوال: الخيار يصير سطرين — الاسم ثم زمنه وزرّه — فلا يُسحب الصفّ جانبيًا. */
+@media (max-width:480px){
+  .rq-opt{grid-template-columns:minmax(0,1fr) auto; row-gap:var(--s2);}
+  .rq-opt-name{grid-column:1 / -1;}
+}
+.rq-row-text{min-inline-size:0;}
+.rq-row-text strong{display:block; color:var(--ink-1); font-size:var(--fs-row); font-weight:var(--fw-strong); line-height:1.5;}
+.rq-row-text span{display:block; overflow:hidden; color:var(--row-ink,var(--ink-3)); font-size:var(--fs-meta); line-height:1.6; white-space:nowrap; text-overflow:ellipsis;}   /* the full sentence is in the row's aria-label and on the phone it wraps */
+.rq-row-meta{display:flex; flex-wrap:wrap; align-items:center; justify-content:end; gap:var(--s1) var(--s2); color:var(--ink-4); font-size:var(--fs-label); font-weight:var(--fw-label);}
+.rq-row-meta code{color:var(--ink-5); font-size:var(--fs-cap);}
+.rq-chip{display:inline-flex; align-items:center; gap:var(--s2);}
+.rq-chip.is-time{font-variant-numeric:tabular-nums lining-nums;}
+.rq-chip + .rq-chip::before,.rq-dept-sections i + i::before,.department-summary > * + *::before,.org-unit footer span + span::before{--c:var(--ink-5); --m:var(--m-done); inline-size:6px; block-size:6px;}
+.rq-go{position:relative; inset-inline-start:0; display:inline-flex; margin-inline-start:var(--s2); font-size:0; transition:inset-inline-start var(--d-micro) var(--ease);}
+.rq-go::before{--c:var(--row-ink,var(--ink-4)); --m:var(--m-turn); inline-size:8px; block-size:10px;}
+@media (hover:hover){.rq-row:hover .rq-go{inset-inline-start:var(--s1);}}
+.rq-popular,.pt-quicks,.pt-chips{display:flex; flex-wrap:wrap; gap:var(--s2) var(--s3);}
+/* interactive chips: an edged pill, 44px. The static ones are plain text. */
+button:is(.rq-pill,.pt-quick,.pt-chip),a:is(.pt-chip,.pt-quick){display:inline-flex; align-items:center; gap:var(--s2); box-sizing:border-box; min-block-size:var(--tap); padding:0 20px;
+  border:1px solid var(--line-strong); border-radius:var(--r-pill); background:none; color:var(--ink-1); font:inherit; font-size:var(--fs-meta); font-weight:var(--fw-strong);
+  text-decoration-line:none; cursor:pointer; transition:border-color var(--d-micro) var(--ease);}
+span.rq-pill{color:var(--ink-3); font-size:var(--fs-label); font-weight:var(--fw-label);}
+.pt-quick strong{font-weight:var(--fw-strong);}
+.pt-quick small{color:var(--ink-4); font-size:var(--fs-label); font-weight:var(--fw-body);}
+@media (hover:hover){button:is(.rq-pill,.pt-quick,.pt-chip):hover,a:is(.pt-chip,.pt-quick):hover{border-color:var(--ink-1);}}
+.pt-label{margin-block:var(--s6) var(--s3);}
+.rq-dept-grid,.department-grid,.service-grid,.org-grid{display:grid; grid-template-columns:repeat(auto-fill,minmax(min(280px,100%),1fr)); gap:0 var(--s14);}
+.rq-dept{display:flex; flex-direction:column; gap:var(--s1); box-sizing:border-box; padding:var(--s4) 0 var(--s6); border:0; border-block-start:1px solid var(--line); border-radius:var(--r-0);
+  background:none; color:inherit; font:inherit; text-align:start; cursor:pointer; transition:border-color var(--d-micro) var(--ease);}
+.rq-dept strong{color:var(--ink-1); font-size:var(--fs-title); font-weight:var(--fw-label); line-height:var(--lh-title);}
+.rq-dept-tag{color:var(--ink-3); font-size:var(--fs-meta); line-height:1.6;}
+.rq-dept-sections{display:flex; flex-wrap:wrap; gap:var(--s1) var(--s2); color:var(--ink-4); font-size:var(--fs-label);}
+.rq-dept-sections i{display:inline-flex; align-items:center; gap:var(--s2); font-style:normal;}
+.rq-dept-count{margin-block-start:var(--s2); color:var(--ink-4); font-size:var(--fs-figure-s); font-weight:var(--fw-display); line-height:1.3;}
+.rq-dept.is-live,.rq-dept:focus-visible{border-block-start-color:var(--line-strong);}
+@media (hover:hover){.rq-dept:hover{border-block-start-color:var(--line-strong);} .rq-dept:hover .rq-dept-count{color:var(--ink-1);}}
+.rq-dept-head{padding-block-end:var(--s6); border-block-end:1px solid var(--line);}
+.rq-dept-head h3{margin:var(--s1) 0; color:var(--ink-1); font-size:var(--fs-display-s); font-weight:var(--fw-display); line-height:1.3; text-wrap:balance;}
+.rq-dept-head p:not(.rq-crumbs),.rq-compose-title p:not(.rq-crumbs){max-inline-size:60ch; margin:0; color:var(--ink-3); font-size:var(--fs-meta); line-height:1.6;}
+.rq-section{margin-block-start:var(--s8);}
+.rq-section h4{display:flex; align-items:baseline; gap:var(--s3); margin:0 0 var(--s2);}
+.rq-section-no,.department-number{color:var(--ink-4); font-size:var(--fs-figure-s); font-weight:var(--fw-display); line-height:var(--lh-figure); font-variant-numeric:tabular-nums lining-nums;}
+.rq-section h4 small{color:var(--ink-4); font-size:var(--fs-label); font-weight:var(--fw-body);}
+.rq-workspaces{display:flex; flex-direction:column; margin-block-start:var(--s6);}
+.rq-workspace{display:block; color:inherit; text-decoration-line:none;}
+.rq-compose{display:flex; flex-direction:column; gap:var(--s8);}
+.rq-compose-head{display:flex; flex-direction:column; gap:var(--s2);}
+.rq-back{align-self:start; min-block-size:var(--tap); padding:0; border:0; background:none; color:var(--ink-3); font:inherit; font-size:var(--fs-meta); font-weight:var(--fw-strong);
+  text-decoration-line:underline; text-decoration-thickness:1px; text-underline-offset:5px; cursor:pointer;}
+.rq-compose-title h3{margin:var(--s1) 0; color:var(--ink-1); font-size:var(--fs-title); font-weight:var(--fw-label); line-height:var(--lh-title);}
+.rq-compose-body{display:grid; grid-template-columns:minmax(0,1fr); gap:var(--s8);}
+.rq-compose-main{display:flex; flex-direction:column; gap:28px; min-inline-size:0;}
+.rq-fields{display:grid; grid-template-columns:repeat(auto-fit,minmax(min(260px,100%),1fr)); gap:28px var(--s10);}
+.rq-fields > .full{grid-column:1 / -1;}
+/* إرشاد الحقل: التلميح، ثم لماذا يُسأل، ثم مثاله — سطرًا تحت سطر حتى يُقرأ قبل الكتابة لا بعد الرد. */
+.field-guidance{display:flex; flex-direction:column; gap:2px; max-inline-size:60ch; margin-block-start:var(--s2); line-height:1.6;}
+.rq-fields > label[hidden]{display:none;}
+/* شاشة التبني: المسار قبل المقترح وبعده سطرين، والتحذير سطرًا قائمًا بنفسه فوق الزر. */
+.proposal-chain{display:flex; flex-direction:column; gap:2px; margin-block-start:var(--s2); color:var(--ink-3); font-size:var(--fs-meta);}
+.proposal-warning{display:block; margin-block-start:var(--s2); max-inline-size:70ch; color:var(--ink-2); line-height:1.6;}
+.rq-compose-side{order:0; min-inline-size:0;}
+.rq-help{margin-block-start:var(--s4); color:var(--ink-3); font-size:var(--fs-meta);}
+.rq-help > summary{cursor:pointer; min-block-size:44px; display:list-item; align-content:center;}
+.rq-trail{display:flex; flex-wrap:wrap; gap:var(--s2) var(--s4); margin:var(--s3) 0; padding:0; list-style:none;}
+.rq-trail > li{display:grid; grid-template-columns:16px minmax(0,1fr); column-gap:var(--s2); align-items:baseline;}
+.rq-trail > li::before{--c:var(--ink-5); --m:var(--m-wait); grid-row:1 / span 2; align-self:start; margin-block-start:5px;}
+.rq-trail > li.is-now::before{--c:var(--turn); --m:var(--m-turn); inline-size:16px; block-size:16px; margin-block-start:3px;}
+.rq-trail strong{color:var(--ink-2); font-size:var(--fs-meta); font-weight:var(--fw-strong);}
+.rq-trail li.is-now strong{color:var(--ink-1); font-size:var(--fs-row);}
+.rq-trail span{grid-column:2; color:var(--ink-4); font-size:var(--fs-label);}
+.rq-tip,.ex-note{display:flex; align-items:baseline; gap:var(--s2); max-inline-size:60ch; margin:var(--s4) 0 0; color:var(--ink-3); font-size:var(--fs-meta); line-height:1.6;}
+.rq-tip::before,.ex-note::before{inline-size:8px; block-size:8px;}
+/* entrance: opacity and 8px, staggered by --rq-delay from motion-cards.mjs. --mx/--my/--tilt-* are set by that module and deliberately unused. */
+.rq-enter{opacity:0; transform:translateY(8px);}
+.rq-enter.rq-shown{opacity:1; transform:none; transition:opacity 160ms var(--ease) var(--rq-delay,0ms),transform 160ms var(--ease) var(--rq-delay,0ms),border-color var(--d-micro) var(--ease);}
+@media (min-width:1024px){
+  .rq-body{grid-template-columns:240px minmax(0,1fr); gap:var(--s14); align-items:start;}
+  .rq-rail{flex-direction:column; gap:var(--s6);}
+  .rq-rail-group{flex-direction:column; gap:0;}
+  .rq-rail-label{margin-block-end:var(--s1);}
+  .rq-compose-body{grid-template-columns:7fr 5fr; gap:var(--s18); align-items:start;}
+  .rq-compose-side{order:0; position:sticky; inset-block-start:var(--s6);}
+  .rq-trail{flex-direction:column; gap:var(--s4);}
+}
+@media (max-width:1023.98px){
+  /* the rail becomes a horizontal text strip with snap and a faded end edge */
+  .rq-rail{align-items:center; overflow-x:auto; overscroll-behavior-x:contain; scroll-snap-type:inline proximity; scrollbar-width:none;
+    padding-inline-end:var(--s8); -webkit-mask:linear-gradient(90deg,transparent,#000 32px); mask:linear-gradient(90deg,transparent,#000 32px);}
+  html[dir=ltr] .rq-rail{-webkit-mask:linear-gradient(270deg,transparent,#000 32px); mask:linear-gradient(270deg,transparent,#000 32px);}
+  .rq-rail-group{align-items:center; gap:var(--s4);}
+  .rq-rail-item,.rq-rail-label{flex:none; scroll-snap-align:start;}
+  .rq-rail-label{color:var(--ink-5);}
+}
+@media (max-width:759.98px){
+  .rq-row{grid-template-columns:minmax(0,1fr);}
+  .rq-row-text span{white-space:normal;}
+  .rq-row-meta{justify-content:start; margin-block-start:var(--s1);}
+}
+
+/* departments: a typographic index, no cards. .department-card stays the only class on the element. */
+.department-summary{display:flex; flex-wrap:wrap; align-items:center; gap:var(--s2) var(--s3); color:var(--ink-4); font-size:var(--fs-label); font-weight:var(--fw-label);}
+.department-summary > *{display:inline-flex; align-items:center; gap:var(--s3);}
+.department-summary a{min-block-size:var(--tap); color:var(--ink-1);}
+.department-card,.service,.org-unit{position:relative; display:flex; flex-direction:column; gap:var(--s2); box-sizing:border-box; padding-block:var(--s4) var(--s8); border-block-start:1px solid var(--line);}
+.department-card[hidden]{display:none;}
+.department-card-top{display:flex; align-items:baseline; justify-content:space-between; gap:var(--s3);}
+.department-card h2 a{color:inherit; text-decoration-line:none;}
+.department-card h2 a::after{content:""; position:absolute; inset:0;}   /* the whole entry opens the department */
+.department-card > .btn{z-index:1; align-self:start; margin-block-start:auto;}
+.department-card p,.service p{margin:0; color:var(--ink-3); font-size:var(--fs-meta); line-height:1.6;}
+.department-card ul{margin:0; padding:0; list-style:none; color:var(--ink-3); font-size:var(--fs-meta); line-height:1.9;}
+.department-card .more,.service small{color:var(--ink-4); font-size:var(--fs-label);}
+.department-section{margin-block-start:var(--s10);}
+.department-section-title{display:flex; align-items:center; gap:var(--s2); margin-block-end:var(--s3);}
+.department-section-title::before{--c:var(--ink-4); --m:var(--m-done); inline-size:8px; block-size:8px;}
+.department-section-title small{font-weight:var(--fw-body);}
+.service h3{font-size:var(--fs-row); font-weight:var(--fw-strong); line-height:1.5;}
+.service footer{display:flex; align-items:center; min-block-size:var(--tap); margin-block-start:auto;}
+
+/* portal and executive (heroes and figures belong to package E, tiles and flows to package C) */
+.journey-heading{display:flex; flex-wrap:wrap; align-items:baseline; gap:var(--s1) var(--s4); margin-block:var(--gap-section) var(--s4);}
+.journey-heading h2{margin:0; color:var(--ink-1); font-size:var(--fs-title); font-weight:var(--fw-label); line-height:var(--lh-title);}
+.journey-heading p{margin:0; color:var(--ink-3); font-size:var(--fs-meta);}
+.pt-grid,.ex-grid{display:grid; grid-template-columns:minmax(0,1fr); gap:var(--gap-section) var(--s18); align-items:start;}
+@media (min-width:1024px){.pt-grid,.ex-grid{grid-template-columns:7fr 5fr;}}
+.ex-attention{display:flex; flex-direction:column; gap:var(--s2);}
+.ex-note{margin-block-start:var(--s4);}
+
+/* wk-* — the daily board: columns without backgrounds */
+.wk-top,.wk-board{display:grid; grid-template-columns:minmax(0,1fr); gap:var(--gap-section) calc(var(--s6) * 2);}
+.wk-title{margin-block:var(--gap-section) var(--s4);}
+.wk-column{min-inline-size:0;}
+.wk-column header{display:flex; align-items:baseline; justify-content:space-between; gap:var(--s3); padding-block-end:var(--s2);}
+.wk-column header h3{margin:0; font:inherit; color:inherit;}
+.wk-card{position:relative; display:block; box-sizing:border-box; padding-block:var(--s3); border-block-start:1px solid var(--line); color:inherit; text-decoration-line:none;
+  transition:border-color var(--d-micro) var(--ease);}
+.wk-card:focus-within,.wk-card:hover{border-block-end-color:transparent; border-block-start-color:var(--line-strong);}
+.wk-card > strong{display:block; color:var(--ink-1); font-size:var(--fs-row); font-weight:var(--fw-strong); line-height:1.5;}
+.wk-card > small{display:block; color:var(--ink-3); font-size:var(--fs-meta); line-height:1.6;}
+.wk-meta{display:flex; align-items:center; gap:var(--s2); color:var(--ink-4); font-size:var(--fs-label);}
+.wk-card.is-personal .wk-meta::before{inline-size:8px; block-size:10px;}
+.wk-card.is-late .wk-meta{color:var(--stop);}
+.wk-check{display:flex;}
+.wk-check span{color:var(--ink-1); font-weight:var(--fw-strong);}
+.wk-check input:checked + span,.wk-done p{color:var(--ink-4); text-decoration-line:line-through;}
+.wk-x{display:inline-grid; place-content:center; inline-size:var(--tap); block-size:var(--tap); margin-inline-start:auto; padding:0; border:0; background:none; color:var(--ink-4); font:inherit; font-size:var(--fs-body); cursor:pointer;}
+@media (hover:hover){.wk-x:hover{color:var(--ink-1);}}
+.wk-done{margin-block-start:var(--s8); border-block-start:1px solid var(--line);}
+.wk-done summary{display:flex; align-items:center; min-block-size:var(--tap); color:var(--ink-3); font-size:var(--fs-label); font-weight:var(--fw-label); cursor:pointer;}
+.wk-done p{margin:0; padding-block:var(--s2); font-size:var(--fs-meta);}
+@media (min-width:1024px){.wk-top,.wk-board{grid-template-columns:repeat(3,minmax(0,1fr));}}
+@media (max-width:759.98px){
+  .wk-board{grid-template-columns:none; grid-auto-flow:column; grid-auto-columns:88%; gap:var(--s6); overflow-x:auto; overscroll-behavior-x:contain; scroll-snap-type:inline mandatory; padding-block-end:var(--s3);}
+  .wk-column{scroll-snap-align:start; padding-inline-start:var(--s3);}
+}
+
+/* org-* and acc-* */
+.org-top{display:flex; flex-wrap:wrap; gap:var(--s6) var(--s14); padding-block-end:var(--s8); border-block-end:1px solid var(--line);}
+.org-exec{display:flex; flex-direction:column; gap:var(--s1);}
+.org-exec strong{color:var(--ink-1); font-size:var(--fs-display-s); font-weight:var(--fw-display); line-height:1.3;}
+.org-exec small,.org-unit footer{color:var(--ink-4); font-size:var(--fs-label);}
+#main{counter-reset:org-sector;}
+.org-sector{margin-block-start:var(--gap-section); counter-increment:org-sector;}
+.org-sector > h2{display:flex; flex-wrap:wrap; align-items:baseline; gap:var(--s3); margin:0 0 var(--s4); color:var(--ink-1); font-size:var(--fs-title); font-weight:var(--fw-label); line-height:var(--lh-title);}
+.org-sector > h2::before{content:counter(org-sector,decimal-leading-zero); color:var(--ink-4); font-size:var(--fs-figure-s); font-weight:var(--fw-display); line-height:var(--lh-figure); font-variant-numeric:tabular-nums lining-nums;}
+.org-sector > h2 small{color:var(--ink-4); font-size:var(--fs-label); font-weight:var(--fw-body);}
+.org-unit{padding-block-end:var(--s6);}
+.org-unit header{display:flex; flex-wrap:wrap; align-items:baseline; justify-content:space-between; gap:var(--s2);}
+.org-unit h3{font-size:var(--fs-row); font-weight:var(--fw-strong); line-height:1.5;}
+.org-unit dl{display:grid; gap:var(--s1); margin:0;}
+.org-unit dl > div{display:flex; gap:var(--s2); align-items:baseline;}
+.org-unit dt{flex:none; color:var(--ink-4); font-size:var(--fs-label); font-weight:var(--fw-label);}
+.org-unit dd{margin:0; color:var(--ink-2); font-size:var(--fs-meta);}
+.org-unit footer{display:flex; flex-wrap:wrap; align-items:center; gap:var(--s1) var(--s2);}
+.org-unit footer span{display:inline-flex; align-items:center; gap:var(--s2);}
+.acc-gaps{padding-inline-start:var(--s4); border-inline-start:2px solid var(--spark);}   /* warning tier: a ruler, no background */
+.acc-gap-list > .acc-gap:last-child{border-block-end:0;}
+
+/* ===== 8. forced colours: the UA repaints background-color, so the mask painters opt out (package A lists the shared ones) ===== */
+@media (forced-colors:active){
+  :is(.vn-list > li,.pt-row,.ex-row,.wk-card,.org-unit,.notification-row,.rq-trail > li,.rq-go,.rq-rail-item.active,.required,.rq-tip,.ex-note,.department-section-title)::before,
+  .wk-card.is-personal .wk-meta::before,.rq-chip + .rq-chip::before,.rq-dept-sections i + i::before,.department-summary > * + *::before,.org-unit footer span + span::before,
+  tbody tr > td:first-child::before,td[data-label]::after,.task.completed .square::before{forced-color-adjust:none; background-color:CanvasText;}
+  label:has(> :user-invalid)::before{forced-color-adjust:none; background-color:CanvasText;}   /* own rule: an unknown pseudo-class must not void the list above */
+  input[type=checkbox]{-webkit-appearance:auto; appearance:auto;}
+  input[type=checkbox]:checked::before{display:none;}
+  .task.completed .square{forced-color-adjust:none; background:CanvasText;}
+  .task.completed .square::before{background-color:Canvas;}
+  .acc-gaps{border-inline-start-color:CanvasText;}
+}
+}
+
+/* ===== 9. employee first (docs/implementation/handoff/employee-ux.md): the Today card, quick actions, my requests,
+   my profile and the variant picker. Tokens only; logical properties only; every target is at least 44px. ===== */
+@layer surfaces{
+.eu-today .panel-head{align-items:flex-start;}
+.eu-today-body{display:grid; gap:var(--s4,16px); grid-template-columns:minmax(0,1fr);}
+@media (min-width:760px){.eu-today-body{grid-template-columns:minmax(220px,1fr) minmax(0,1.4fr);}}
+.eu-punch-box{display:flex; flex-direction:column; gap:var(--s3,12px);}
+.eu-punch{min-block-size:52px; inline-size:100%; font-size:var(--fs-body,17px); font-weight:700; justify-content:center;}
+.eu-done{margin:0; min-block-size:44px; display:flex; align-items:center; font-weight:600; color:var(--ok,var(--green-ink,currentColor));}
+.eu-times{display:grid; grid-template-columns:1fr 1fr; gap:var(--s2,8px); margin:0;}
+.eu-times > div{padding-block:var(--s2,8px); border-block-start:1px solid var(--line,var(--separator));}
+.eu-times dt{font-size:var(--fs-meta,var(--fs-foot,13px)); color:var(--ink-3,var(--label-2));}
+.eu-times dd{margin:0; font-size:var(--fs-figure-s,22px); font-weight:600; font-variant-numeric:tabular-nums;}
+.eu-status{margin:0 0 var(--s2,8px);}
+.eu-status.is-leave,.eu-status.is-holiday{color:var(--accent-ink,var(--tint,currentColor));}
+.eu-facts{display:flex; flex-direction:column; margin:0; padding:0; list-style:none;}
+.eu-facts > li{display:grid; gap:2px; min-block-size:44px; padding-block:var(--s2,8px); border-block-end:1px solid var(--line,var(--separator));}
+.eu-facts > li > span{font-size:var(--fs-meta,var(--fs-foot,13px)); color:var(--ink-3,var(--label-2));}
+.eu-facts > li > small{color:var(--ink-3,var(--label-2));}
+.eu-facts > li.is-late > small{color:var(--stop,var(--red-ink,currentColor));}
+.eu-quick{display:flex; flex-wrap:wrap; gap:var(--s2,8px); margin-block:var(--s3,12px) var(--s4,16px);}
+.eu-chip{display:inline-flex; align-items:center; gap:var(--s2,8px); min-block-size:44px; padding-inline:var(--s3,12px) var(--s4,16px);
+  border-radius:var(--r-pill,999px); border:1px solid var(--line-strong,var(--separator)); color:inherit; text-decoration:none; font-weight:600;}
+.eu-chip > span{display:inline-grid; place-items:center; inline-size:26px; block-size:26px; border-radius:50%; background:var(--tint,currentColor); color:var(--on-action,Canvas); font-size:13px;}
+.eu-chip:focus-visible{outline:2px solid var(--focus,currentColor); outline-offset:2px;}
+/* م0 «السور»: الشريحة غير الجاهزة تبقى ظاهرة معطّلة وسببها مكتوب فيها، بدل أن تختفي بلا تفسير. الألوان من رموز التصميم القائمة وحدها. */
+.eu-chip.is-disabled{cursor:not-allowed; border-style:dashed; color:var(--ink-3,var(--label-2)); padding-block:var(--s1,4px);}
+.eu-chip.is-disabled > span{background:var(--ink-3,var(--label-2));}
+.eu-chip-text{display:grid; font-weight:600; text-align:start;}
+.eu-chip-text > small{font-weight:400; font-size:var(--fs-meta,var(--fs-foot,13px)); color:var(--ink-3,var(--label-2));}
+.eu-chips{display:flex; flex-wrap:wrap; gap:6px; margin-block:4px;}
+.eu-group > summary{cursor:pointer; min-block-size:44px; display:flex; align-items:center;}
+.eu-group > summary > h2{display:inline; margin:0;}
+.eu-mask{font-variant-numeric:tabular-nums; letter-spacing:.04em; unicode-bidi:isolate;}
+.rq-options{margin:0 0 var(--s3,12px); padding:0; border:0;}
+.rq-options > legend{font-weight:700; margin-block-end:var(--s2,8px);}
+.rq-option-list{display:grid; gap:var(--s2,8px); grid-template-columns:repeat(auto-fill,minmax(132px,1fr));}
+.rq-option{display:flex; flex-direction:column; align-items:flex-start; gap:2px; min-block-size:52px; padding:var(--s2,8px) var(--s3,12px);
+  border:1px solid var(--line-strong,var(--separator)); border-radius:var(--r-float,14px); background:transparent; color:inherit; text-align:start; cursor:pointer; font:inherit;}
+.rq-option small{color:var(--ink-3,var(--label-2));}
+.rq-option.is-selected,.rq-option[aria-checked="true"]{border-color:var(--tint,currentColor); box-shadow:inset 0 0 0 1px var(--tint,currentColor);}
+.rq-option:focus-visible{outline:2px solid var(--focus,currentColor); outline-offset:2px;}
+.rq-preview{margin:var(--s3,12px) 0 0; padding:var(--s2,8px) var(--s3,12px); border-inline-start:2px solid var(--tint,currentColor); font-weight:600;}
+.rq-docs{margin:var(--s2,8px) 0 0; color:var(--ink-2,var(--label));}
+}
+
+/* صفوف صفحات الأقسام: أيقونة الشاشة بقرصها ثم التسمية ثم السهم */
+.hub-link{display:flex;align-items:center;gap:10px;}
+.hub-link .nav-icon{flex:none;}
+.hub-link .hub-link-label{flex:1;min-inline-size:0;}

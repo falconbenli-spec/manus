@@ -1,0 +1,51 @@
+{
+  "checkedAt": "2026-09-14T23:18:30.267Z",
+  "origin": "https://bike-absolute-rhode-bass.trycloudflare.com",
+  "results": [
+    {
+      "path": "/",
+      "status": 200
+    },
+    {
+      "path": "/hr-design.css",
+      "status": 200
+    },
+    {
+      "path": "/hr-design.mjs",
+      "status": 200
+    },
+    {
+      "path": "/api/me",
+      "status": 401
+    },
+    {
+      "path": "/.env",
+      "status": 401
+    },
+    {
+      "path": "/work/local.sqlite",
+      "status": 401
+    },
+    {
+      "path": "login",
+      "status": 200,
+      "secureCookie": true
+    },
+    {
+      "path": "/api/me",
+      "status": 200
+    },
+    {
+      "path": "/api/overview",
+      "status": 200
+    },
+    {
+      "path": "/api/catalog",
+      "status": 200
+    },
+    {
+      "path": "foreign-origin",
+      "status": 403
+    }
+  ]
+}

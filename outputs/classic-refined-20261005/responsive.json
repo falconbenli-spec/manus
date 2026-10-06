@@ -1,0 +1,27 @@
+[
+  {
+    "route": "#home",
+    "scroll": 390,
+    "width": 390
+  },
+  {
+    "route": "#portal",
+    "scroll": 390,
+    "width": 390
+  },
+  {
+    "route": "#request",
+    "scroll": 390,
+    "width": 390
+  },
+  {
+    "route": "#approvals",
+    "scroll": 390,
+    "width": 390
+  },
+  {
+    "route": "#executive",
+    "scroll": 390,
+    "width": 390
+  }
+]

@@ -1,0 +1,36 @@
+TAP version 13
+# (node:7270) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: the automated inventory keeps all 65 source forms, finds every one of the 24 wave-one forms built, and deletes nothing
+ok 1 - the automated inventory keeps all 65 source forms, finds every one of the 24 wave-one forms built, and deletes nothing
+  ---
+  duration_ms: 4.547384
+  type: 'test'
+  ...
+# Subtest: PR-04 is built but carries its pending governing-version status instead of being presented as confirmed
+ok 2 - PR-04 is built but carries its pending governing-version status instead of being presented as confirmed
+  ---
+  duration_ms: 0.713478
+  type: 'test'
+  ...
+# Subtest: engagement rate is computed from totals, and zero or missing reach reads as not computed, never as zero or success
+ok 3 - engagement rate is computed from totals, and zero or missing reach reads as not computed, never as zero or success
+  ---
+  duration_ms: 0.526573
+  type: 'test'
+  ...
+# Subtest: PR-06 is seeded as an unaccepted draft with stable id and aliases, and a filled log shows its computed rate through the normal approval chain
+ok 4 - PR-06 is seeded as an unaccepted draft with stable id and aliases, and a filled log shows its computed rate through the normal approval chain
+  ---
+  duration_ms: 2304.083155
+  type: 'test'
+  ...
+1..4
+# tests 4
+# suites 0
+# pass 4
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 2628.852872

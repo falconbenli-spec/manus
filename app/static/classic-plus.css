@@ -1,0 +1,54 @@
+/* مظهر إضافي مبني على الكلاسيكي؛ لا يغيّر المظهر الأصلي أو محتوى الخدمات. */
+@media screen{
+:root[data-design=classicplus]{
+  & .hm-welcome{background:transparent;border:0;border-bottom:var(--hair) solid var(--separator);border-radius:0;padding:24px 0;margin-block:8px 24px;box-shadow:none}
+  & .hm-welcome h2{font-size:clamp(24px,2.4vw,34px);line-height:1.5;letter-spacing:0}
+  & .hm-welcome-kicker{color:var(--tint)}
+  & .hm-welcome-mark{inline-size:56px;block-size:56px;background:color-mix(in srgb,var(--tint) 15%,var(--surface));border:var(--hair) solid color-mix(in srgb,var(--tint) 35%,var(--separator));border-radius:18px;color:var(--tint)}
+  & .hm-ask{margin-block:24px 8px}
+  & .hm-sub{margin-block:0 18px;color:var(--label-2)}
+  & .hm-strip{display:grid;grid-template-columns:repeat(auto-fit,minmax(110px,1fr));gap:16px 12px;overflow:visible;padding-block:8px 24px}
+  & .hm-strip-card{background:transparent;border:0;border-radius:0;box-shadow:none;min-block-size:108px;padding:0}
+  & .hm-strip-card :is(.eu-chip,button.text-button){display:flex;flex-direction:column;align-items:center;justify-content:flex-start;gap:10px;inline-size:100%;padding:10px 5px;background:transparent;border:0;border-radius:12px;text-align:center;min-block-size:104px}
+  & .hm-strip-card :is(.eu-chip,button.text-button) > :is(strong,b.eu-chip-text){font-size:13px;line-height:1.5;font-weight:600}
+  & .hm-strip-card .hm-disc{inline-size:48px;block-size:48px;border-radius:15px;background:linear-gradient(150deg,color-mix(in srgb,var(--tint) 24%,var(--surface-raised)),color-mix(in srgb,var(--tint) 12%,var(--surface)));color:var(--tint);border:var(--hair) solid color-mix(in srgb,var(--tint) 28%,var(--separator));box-shadow:0 3px 8px rgba(0,0,0,.1);margin:0}
+  & .hm-strip-card .hm-disc .glyph{inline-size:24px;block-size:24px}
+  & .hm-strip-card small{font-size:12px;color:var(--label-2);line-height:1.45}
+  & .hm-strip-card .is-disabled{opacity:.65}
+  & .hm-strip-card :is(.eu-chip,button.text-button):hover{background:var(--fill-3)}
+  & .hm-strip-new{min-block-size:104px;border-radius:16px;background:var(--tint-fill);color:var(--on-tint);align-self:start}
+  & .hm-strip .hm-menu{grid-column:1/-1}
+  & .eu-today{border:var(--hair) solid var(--separator);border-radius:20px;background:var(--surface)}
+  & .hm-now{border-inline-start:3px solid var(--tint);padding-inline-start:20px;margin-block:24px}
+  & .hm-cards{display:grid;grid-template-columns:1fr;gap:0}
+  & .hm-card{border:0;border-bottom:var(--hair) solid var(--separator);border-radius:0;background:transparent;padding:20px 0;box-shadow:none}
+  & .hm-card:last-child{border-bottom:0}
+  & .hm-card-head{gap:12px}
+  & .hm-card-meta{color:var(--label-2);font-size:13px;line-height:1.7}
+  & .hm-block{background:transparent;border:0;box-shadow:none}
+  & .hm-facts{gap:8px 24px}
+  & .hm-card-actions .btn{min-block-size:44px}
+  & .employee-request-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0 24px}
+  & .employee-request-card{background:transparent;border:0;border-bottom:var(--hair) solid var(--separator);border-radius:0;box-shadow:none;min-block-size:90px}
+  & .portal-assistant{background:color-mix(in srgb,var(--tint) 7%,var(--surface));border:var(--hair) solid var(--separator);border-radius:18px;padding:20px;gap:16px}
+  & .portal-assistant-mark{inline-size:40px;block-size:40px;border-radius:50%;background:color-mix(in srgb,var(--tint) 18%,var(--surface));color:var(--tint)}
+  & .portal-assistant-copy h2{font-size:20px}
+  & .portal-assistant-copy strong{font-size:14px;line-height:1.7}
+  & .portal-assistant-copy small{font-size:12px;line-height:1.7}
+  & .vn-grid{gap:20px}
+  & :is(.executive-cockpit,.admin-cockpit) .panel{border-radius:18px}
+}
+@media(max-width:700px){:root[data-design=classicplus]{
+  & .hm-strip{grid-template-columns:repeat(3,minmax(0,1fr));gap:14px 6px}
+  & .hm-welcome{padding:16px 0;margin-block-end:20px}
+  & .hm-welcome h2{font-size:24px}
+  & .hm-welcome-mark{inline-size:44px;block-size:44px;border-radius:14px;flex-shrink:0}
+  & .hm-strip-card :is(.eu-chip,button.text-button){padding:8px 2px;min-block-size:108px}
+  & .hm-strip-card :is(.eu-chip,button.text-button) > :is(strong,b.eu-chip-text){font-size:12px}
+  & .hm-now{padding-inline-start:12px}
+  & .employee-request-grid{grid-template-columns:1fr}
+  & .portal-assistant{grid-template-columns:40px minmax(0,1fr)}
+  & .portal-assistant-action{grid-column:1/-1;min-block-size:44px}
+}}
+}
+.swatch-classicplus{background:linear-gradient(135deg,#1a1a1a 60%,var(--brand-turquoise-deep) 60%)}

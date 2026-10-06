@@ -1,0 +1,11 @@
+run=2026-09-24T13:43:18Z sha=1427fdf48d88e92d3af608e5686e58542ba7aed1 node=v24.14.0 scope=tests/traceability.test.mjs وحده — بعد تسجيل النتائج، للتحقق أن الإخفاق كان بصمةً قديمة لا عيبًا
+✔ TRACE: all 220 original rows and acceptance criteria match the workbook and evidence (617.564458ms)
+✔ TRACE: changing acceptance or declaring partial work complete is rejected (19.383167ms)
+ℹ tests 2
+ℹ suites 0
+ℹ pass 2
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 703.478583

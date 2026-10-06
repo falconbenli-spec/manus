@@ -1,0 +1,31 @@
+measured_by: measure-p2.sh
+started_at: 2026-09-30T18:21:49Z
+commit_before: b4302eb8bf8105e2e2d8745519ef869a720548b0
+branch: p2/integration
+dirty_before: 0
+node: v24.14.0
+worktrees: 81
+live_commit: 5da652dd907b100f7d1303f039000cbd6ab36e92
+live_dirty: 0
+service_pid_present: yes
+service_started: Wed Sep 30 18:02:04 2026    
+service_root_http: 200
+service_health_anonymous_http: 401
+build_fingerprint_worktree: {"commit":"b4302eb8bf8105e2e2d8745519ef869a720548b0","source_digest":"fb7b88a07becc7e86ec9f7172789769f0c7bb02151a952e74f33c65ec09e8f1a","files":489}
+build_fingerprint_live_tree: {"commit":"5da652dd907b100f7d1303f039000cbd6ab36e92","source_digest":"1c4a280d902077f92d75c8e0995b61da5974f9cdafc663d03ff099802af25495","files":477}
+check_started: 2026-09-30T18:21:49Z
+check_exit: 0
+gate_quick_started: 2026-09-30T18:22:20Z
+gate_quick_exit: 0
+upgrade_parity_started: 2026-09-30T18:23:07Z
+upgrade_parity_exit: 0
+focused_started: 2026-09-30T18:23:14Z
+focused_exit: 0
+gate_full_started: 2026-09-30T18:26:42Z
+gate_full_exit: 0
+suite_started: 2026-09-30T19:14:38Z
+suite_exit: 1
+commit_after: b4302eb8bf8105e2e2d8745519ef869a720548b0
+dirty_after: 0
+finished_at: 2026-09-30T19:42:02Z
+MEASURE_DONE

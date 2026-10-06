@@ -1,0 +1,73 @@
+(node:29402) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ criterion 1: a client file is visible only to its account team, even to someone holding the clients capability (7099.809292ms)
+✔ E44: retainer usage is counted per deliverable type, and going over the balance needs a written basis (7660.807833ms)
+✔ commercial catalogue: a package lists countable deliverables, carries no invented price, is approved by someone else and revised by a new revision (6599.669291ms)
+✔ E21: a project template creates dated tasks through the project rules, once per project (6878.535375ms)
+✔ time: hours are logged against own projects in 15-minute steps, approved by the line manager, and capacity is planning data not a target (6556.61375ms)
+(node:29403) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ delivery cycle: no step of the client chain opens before the step before it was approved by someone else (7845.929875ms)
+✔ delivery cycle: an entitlement is born from an accepted deliverable only — a submitted one is not enough (7404.380541ms)
+✔ delivery cycle: the customer invoice hangs on an approved entitlement, and the preparer never issues it (6398.754166ms)
+✔ delivery cycle: collection is recorded and matched by two people and never exceeds the entitlement (6828.378208ms)
+✔ delivery cycle: a client review stage closes only on an external approval documented against that very version (6542.132833ms)
+✔ delivery cycle: no supplier award without a comparison, a qualified vendor and an approved project budget (6190.167959ms)
+✔ delivery cycle: the supplier is not received, invoiced or paid before the purchase order, and the payment needs three separate people (5903.939792ms)
+﹣ delivery cycle: execution is blocked until the advance payment is confirmed (0.082417ms) # غير موجودة. لا كيان «دفعة مقدمة» على الملف التجاري ولا شرط عليها: بعد create_project يُقبل submit_delivery وbudget وprocurement بلا أي مقبوض. المطلوب: حالة «جاهزية البدء» على الملف التجاري تشترط دفعة مقدمة مؤكدة (ar_receipts.status=confirmed) أو إعفاءً مسجلًا. انظر الكسر B1 في تدقيق 2026-09-20.
+﹣ delivery cycle: a supplier may not start before a purchase order AND a commencement authorisation (0.051334ms) # نصفها موجود: أمر الشراء (procurement approve_order) يمنع الاستلام قبله. أمر المباشرة (أمر بدء العمل) لا كيان له ولا مسار: POST /api/procurement/:id/commence يرد invalid_action. المطلوب: سجل مباشرة بتاريخه ومن أصدره، والاستلام يشترطه. الكسر B2.
+﹣ delivery cycle: the customer purchase order is recorded against the commercial case before execution (0.085958ms) # لا حقل ولا كيان لأمر شراء العميل في commercial.mjs ولا في contracts-register.mjs (سجل العقود لا يعرف الملف التجاري ولا المشروع، ولا FK بينهما). أقرب بديل اليوم: نص agreement_evidence الحر في register_contract. الكسر B3.
+﹣ delivery cycle: a project can be closed technically and then financially (0.059125ms) # لا إجراء إقفال ولا حالة: جدول projects لا يحمل عمود status أصلًا (id, tenant_id, name, brief, created_by, created_at فقط)، وحالة commercial_cases تقف عند project_active إلى الأبد حتى بعد التسليم والفوترة والتحصيل الكامل. الكسر B4/B5.
+✔ delivery cycle: paying the supplier marks the purchase as paid, read from payment_orders not from a constant (5765.642125ms)
+✔ delivery cycle: work packages can be planned for more than one department (5341.843833ms)
+✔ delivery cycle: a finance delegation is granted, expires and is revoked through the platform, never by a direct insert (5125.050209ms)
+﹣ delivery cycle: the completion certificate is a record with its own state, signed by the client (0.051291ms) # الموجود: accept_delivery يخزن acceptance_evidence وcustomer_representative نصًا داخل commercial_reviews، ويقوم مقام البوابة (الاستحقاق يشترطه). الغائب: مستند شهادة إنجاز مستقل له رقم وحالة وتوقيع الطرفين، ولا ربط له بتقرير الإنجاز ولا بمحضر التسليم. الكسر B9.
+✔ التفويض المالي له سقف مدة، ورقمه هو ما تستعمله المنصة فعلًا لا رقم مستعار (5047.34975ms)
+(node:29404) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ الترحيل 142 بعد 153 يحفظ روابط الإدارات السابقة ويصف مصدرها من دون اختلاق قرار أو حدث بشري (7640.916833ms)
+(node:29405) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ AXIS-01: the eight axes are independent — moving one leaves the other seven where they were (8207.216125ms)
+✔ AXIS-02: the advance gate blocks paid execution and never touches pre-sale scoping (14252.842917ms)
+✔ AXIS-03: the advance is expected from the payment schedule, and confirmed only against a real receipt by a second person (13513.61575ms)
+✔ AXIS-04: supplier start refuses without a purchase order and without a commencement authorisation (6317.935333ms)
+✔ AXIS-05: a multi-department project can be planned — work packages carry a department, a phase and an owner (11457.397583ms)
+✔ AXIS-06: closure refuses by naming the exact outstanding item, and needs technical then financial (5276.204625ms)
+✔ AXIS-07: financial closure names every outstanding balance, and a decision is written not silent (5119.700834ms)
+✔ AXIS-08: reopening a closure needs a capability and a reason, and leaves an audited record (5054.425167ms)
+✔ AXIS-09: invoicing, collection and supplier settlement each read their own source and no other (4565.385875ms)
+✔ AXIS-08: both locks in one hand are refused with a way out, and the way out is a capability plus a written reason (4522.645875ms)
+✔ AXIS-08: the same-person rule holds in both directions, and a reason is refused when the locks are in two hands (5135.343959ms)
+✔ AXIS-08: a reason on locks held by two people is refused, and the database refuses a silent same-person row from outside the code (4365.380792ms)
+✔ project participation UI shows the receiving decision, returned history and honest legacy provenance (1.752584ms)
+✔ project participation UI builds guarded request and decision payloads (1.297625ms)
+ERROR: failed to copy trust settings of system certificate-25291
+ERROR: failed to copy trust settings of system certificate-25291
+ERROR: failed to copy trust settings of system certificate-25291
+ERROR: failed to copy trust settings of system certificate-25291
+(node:29407) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ AXIS-05: asking for another department stays pending until its current head acts (7498.802333ms)
+✔ returned participation stays in history and a fresh request can later be accepted (7190.32075ms)
+✔ department decisions recheck the actor, tenant, routing and active state at decision time (6416.422583ms)
+✔ one project manager of record governs tasks and project axes without role-wide escalation (7059.480042ms)
+✔ صاحب طلب المشاركة لا يعتمد طلبه حتى إذا انتقل إلى رئاسة الإدارة المستقبلة (6455.6905ms)
+✔ قاعدة البيانات ترفض اختلاق قرار مشاركة مباشرة عند الإنشاء (5999.492625ms)
+✔ رابط المشاركة يحتاج قرارًا مقبولًا مطابقًا ولا يقبل اختلاق سجل قديم (5571.681958ms)
+✔ مسار HTTP يرفض الاعتماد الذاتي حتى مع جلسة صالحة وCSRF صحيح (6201.228042ms)
+(node:29408) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ الحزمة تحفظ معايير قبولها ومخرجاتها ومرجع مخصصها — والمخصص من المشروع نفسه وحده (7523.373458ms)
+✔ التكليف عبر الإدارات لمساهمٍ مسجّل، ولا يمنح تصريحًا واحدًا — لا مالية ولا رواتب ولا موردين ولا عملاء (7454.206333ms)
+✔ التبعية بلا حلقة: الحلقة تُرفض باسم مسارها في الكود، وفي القاعدة لو التفّ عليها أحد (6499.833541ms)
+✔ لا إنجاز بلا دليل: التسليم يسمّي كل ناقص، ولا يسبق ما يعتمد عليه، والقاعدة ترفضه بلا دليل (7026.685875ms)
+✔ العزل: حزمة كيانٍ لا يمسّها حسابُ كيانٍ آخر، ولا تعتمد حزمةٌ على حزمة مشروعٍ آخر (6533.748667ms)
+ℹ tests 49
+ℹ suites 0
+ℹ pass 44
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 5
+ℹ todo 0
+ℹ duration_ms 88200.55975

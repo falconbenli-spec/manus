@@ -1,0 +1,14 @@
+{
+  "archive": "outputs/platform-source.zip",
+  "files": 117,
+  "independent_directory_check_exit": 0,
+  "check_output": "\n> 36t-local-platform@0.1.0 check\n> node scripts/check.mjs\n\nSyntax checked: 48 JavaScript modules. Source hashes match. Traceability: 220 requirements / 22 domains.\nChecks cover syntax, source integrity and traceability. No TypeScript compiler or production bundle is configured for this JavaScript build.\n",
+  "check_error": "",
+  "environment": "المجلد المستقل على الجهاز نفسه وبنفس Node؛ ليس تحققًا على نظام تشغيل ثانٍ.",
+  "excluded": [
+    "قواعد البيانات والمرفقات المحلية",
+    "بيانات الدخول",
+    "حزمة التصميم التاريخية",
+    "بيانات Git"
+  ]
+}

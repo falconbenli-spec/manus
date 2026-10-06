@@ -1,0 +1,371 @@
+{
+  "review_date": "2026-09-21",
+  "scope": "خريطة إضافية من 36 قدرة؛ لا تستبدل المتطلبات الأصلية ولا تعتبر الجرد قبولًا",
+  "capabilities": [
+    {
+      "id": "FP-01",
+      "capability": "طلب شراء مرتبط بمشروع ومركز تكلفة",
+      "local_evidence": "app/procurement.mjs",
+      "assessment": "موجود جزئيًا؛ دورة مترابطة",
+      "implementation_status": "يتطلب تحققًا وقبولًا مستقلًا",
+      "source_requirement_ids": [],
+      "reference_document": "docs/research/finance-procurement-benchmark-20260921.md",
+      "owner_acceptance": null
+    },
+    {
+      "id": "FP-02",
+      "capability": "حجز المخصص والالتزام ومنع التجاوز",
+      "local_evidence": "app/budgets.mjs",
+      "assessment": "موجود جزئيًا؛ لا إعادة كتابة",
+      "implementation_status": "يتطلب تحققًا وقبولًا مستقلًا",
+      "source_requirement_ids": [],
+      "reference_document": "docs/research/finance-procurement-benchmark-20260921.md",
+      "owner_acceptance": null
+    },
+    {
+      "id": "FP-03",
+      "capability": "تأهيل المورد والوثائق",
+      "local_evidence": "app/vendors.mjs",
+      "assessment": "موجود جزئيًا؛ مراجعة الصلاحية عبر دورة الدفع",
+      "implementation_status": "يتطلب تحققًا وقبولًا مستقلًا",
+      "source_requirement_ids": [],
+      "reference_document": "docs/research/finance-procurement-benchmark-20260921.md",
+      "owner_acceptance": null
+    },
+    {
+      "id": "FP-04",
+      "capability": "استقلال التحقق من الحساب البنكي",
+      "local_evidence": "app/vendors.mjs، app/payables.mjs",
+      "assessment": "موجود؛ يضاف تنبيه تغير المستفيد بعد الاعتماد",
+      "implementation_status": "يتطلب تحققًا وقبولًا مستقلًا",
+      "source_requirement_ids": [],
+      "reference_document": "docs/research/finance-procurement-benchmark-20260921.md",
+      "owner_acceptance": null
+    },
+    {
+      "id": "FP-05",
+      "capability": "جمع العروض والترسية المستقلة",
+      "local_evidence": "app/procurement.mjs",
+      "assessment": "موجود جزئيًا؛ لا بوابة عروض خارجية مثبتة",
+      "implementation_status": "يتطلب تحققًا وقبولًا مستقلًا",
+      "source_requirement_ids": [],
+      "reference_document": "docs/research/finance-procurement-benchmark-20260921.md",
+      "owner_acceptance": null
+    },
+    {
+      "id": "FP-06",
+      "capability": "تعارض المصالح",
+      "local_evidence": "app/procurement-extras.mjs",
+      "assessment": "موجود جزئيًا؛ يبقى القرار لصاحب الصلاحية",
+      "implementation_status": "يتطلب تحققًا وقبولًا مستقلًا",
+      "source_requirement_ids": [],
+      "reference_document": "docs/research/finance-procurement-benchmark-20260921.md",
+      "owner_acceptance": null
+    },
+    {
+      "id": "FP-07",
+      "capability": "شراء طارئ ومراجعة لاحقة",
+      "local_evidence": "app/procurement-extras.mjs",
+      "assessment": "موجود جزئيًا",
+      "implementation_status": "يتطلب تحققًا وقبولًا مستقلًا",
+      "source_requirement_ids": [],
+      "reference_document": "docs/research/finance-procurement-benchmark-20260921.md",
+      "owner_acceptance": null
+    },
+    {
+      "id": "FP-08",
+      "capability": "تعديل شروط الأمر والإقفال الجزئي",
+      "local_evidence": "app/procurement-guards.mjs",
+      "assessment": "موجود جزئيًا؛ الأصل محفوظ",
+      "implementation_status": "يتطلب تحققًا وقبولًا مستقلًا",
+      "source_requirement_ids": [],
+      "reference_document": "docs/research/finance-procurement-benchmark-20260921.md",
+      "owner_acceptance": null
+    },
+    {
+      "id": "FP-09",
+      "capability": "استلام جزئي ومطابقة تراكمية",
+      "local_evidence": "app/procurement.mjs",
+      "assessment": "موجود؛ الكمية لا تتجاوز المستلم والأمر",
+      "implementation_status": "يتطلب تحققًا وقبولًا مستقلًا",
+      "source_requirement_ids": [],
+      "reference_document": "docs/research/finance-procurement-benchmark-20260921.md",
+      "owner_acceptance": null
+    },
+    {
+      "id": "FP-10",
+      "capability": "فروقات السعر والرسوم والخصم",
+      "local_evidence": "app/procurement.mjs",
+      "assessment": "المطابقة الحالية صارمة؛ يلزم مسار استثناء معتمد وحدود سماح",
+      "implementation_status": "يتطلب تحققًا وقبولًا مستقلًا",
+      "source_requirement_ids": [],
+      "reference_document": "docs/research/finance-procurement-benchmark-20260921.md",
+      "owner_acceptance": null
+    },
+    {
+      "id": "FP-11",
+      "capability": "أوامر متعددة البنود والتوزيع",
+      "local_evidence": "app/procurement.mjs",
+      "assessment": "نموذج الكمية/السعر الحالي محدود؛ يلزم تصميم سطور وتوزيع مراكز تكلفة",
+      "implementation_status": "يتطلب تحققًا وقبولًا مستقلًا",
+      "source_requirement_ids": [],
+      "reference_document": "docs/research/finance-procurement-benchmark-20260921.md",
+      "owner_acceptance": null
+    },
+    {
+      "id": "FP-12",
+      "capability": "اتفاقيات إطارية وكتالوج مورد",
+      "local_evidence": "لا دليل كامل في القراءة الحالية",
+      "assessment": "غير مثبت؛ حزمة التوريد",
+      "implementation_status": "يتطلب تحققًا وقبولًا مستقلًا",
+      "source_requirement_ids": [],
+      "reference_document": "docs/research/finance-procurement-benchmark-20260921.md",
+      "owner_acceptance": null
+    },
+    {
+      "id": "FP-13",
+      "capability": "مناقصة إلكترونية ومظاريف وتقييم موزون",
+      "local_evidence": "جمع عروض داخلي فقط",
+      "assessment": "غير مثبت؛ معايير التقييم يقرها المالك قبل البناء",
+      "implementation_status": "يتطلب تحققًا وقبولًا مستقلًا",
+      "source_requirement_ids": [],
+      "reference_document": "docs/research/finance-procurement-benchmark-20260921.md",
+      "owner_acceptance": null
+    },
+    {
+      "id": "FP-14",
+      "capability": "بوابة المورد والخدمة الذاتية",
+      "local_evidence": "لا تحقق من دخول مورد خارجي",
+      "assessment": "غير مثبت؛ يحتاج نموذج هوية وعزل قبل الفتح",
+      "implementation_status": "يتطلب تحققًا وقبولًا مستقلًا",
+      "source_requirement_ids": [],
+      "reference_document": "docs/research/finance-procurement-benchmark-20260921.md",
+      "owner_acceptance": null
+    },
+    {
+      "id": "FP-15",
+      "capability": "قياس أداء المورد ومخاطره",
+      "local_evidence": "app/vendors.mjs",
+      "assessment": "جزئي؛ يلزم تحديد مؤشرات ومصادر وفترات ومالك",
+      "implementation_status": "يتطلب تحققًا وقبولًا مستقلًا",
+      "source_requirement_ids": [],
+      "reference_document": "docs/research/finance-procurement-benchmark-20260921.md",
+      "owner_acceptance": null
+    },
+    {
+      "id": "FP-16",
+      "capability": "منع تكرار فاتورة الشراء",
+      "local_evidence": "app/procurement.mjs",
+      "assessment": "منع المرجع نفسه وتنبيه تشابه؛ ليس كشف احتيال كاملًا",
+      "implementation_status": "يتطلب تحققًا وقبولًا مستقلًا",
+      "source_requirement_ids": [],
+      "reference_document": "docs/research/finance-procurement-benchmark-20260921.md",
+      "owner_acceptance": null
+    },
+    {
+      "id": "FP-17",
+      "capability": "منع تكرار الفاتورة الضريبية عبر مراجع شراء",
+      "local_evidence": "app/payables.mjs",
+      "assessment": "إصلاح هذه الحزمة: هوية المورد الضريبية + رقم فاتورته، مع توحيد الشكل",
+      "implementation_status": "منفذ في الحزمة الحالية",
+      "source_requirement_ids": [
+        "FIN-05",
+        "FIN-08"
+      ],
+      "reference_document": "docs/research/finance-procurement-benchmark-20260921.md",
+      "owner_acceptance": null
+    },
+    {
+      "id": "FP-18",
+      "capability": "إشعار دائن ومرتجع مورد",
+      "local_evidence": "لا دورة كاملة مثبتة",
+      "assessment": "مطلوب ربطه بالفاتورة والاستلام والضريبة والدفع",
+      "implementation_status": "يتطلب تحققًا وقبولًا مستقلًا",
+      "source_requirement_ids": [],
+      "reference_document": "docs/research/finance-procurement-benchmark-20260921.md",
+      "owner_acceptance": null
+    },
+    {
+      "id": "FP-19",
+      "capability": "دفعات جزئية وسلف مورد وتسوية",
+      "local_evidence": "app/payables.mjs",
+      "assessment": "أمر واحد بكامل المستحق؛ الدفعات والتسويات المتعددة غير مثبتة",
+      "implementation_status": "يتطلب تحققًا وقبولًا مستقلًا",
+      "source_requirement_ids": [],
+      "reference_document": "docs/research/finance-procurement-benchmark-20260921.md",
+      "owner_acceptance": null
+    },
+    {
+      "id": "FP-20",
+      "capability": "آجال الدفع والخصم المبكر وأعمار الدائنين",
+      "local_evidence": "app/payables.mjs",
+      "assessment": "لا تقويم استحقاق تعاقدي كامل مثبت؛ لا نخترع آجالًا",
+      "implementation_status": "يتطلب تحققًا وقبولًا مستقلًا",
+      "source_requirement_ids": [],
+      "reference_document": "docs/research/finance-procurement-benchmark-20260921.md",
+      "owner_acceptance": null
+    },
+    {
+      "id": "FP-21",
+      "capability": "دفتر عام وفترات ومراجعة وترحيل",
+      "local_evidence": "app/finance.mjs، app/ledger.mjs",
+      "assessment": "موجود جزئيًا؛ القوائم تعتمد على قيود مرحلة",
+      "implementation_status": "يتطلب تحققًا وقبولًا مستقلًا",
+      "source_requirement_ids": [],
+      "reference_document": "docs/research/finance-procurement-benchmark-20260921.md",
+      "owner_acceptance": null
+    },
+    {
+      "id": "FP-22",
+      "capability": "الذمم المدينة والتحصيل والنزاع",
+      "local_evidence": "app/receivables.mjs",
+      "assessment": "موجود جزئيًا؛ مراجعة دورة تسوية العميل لاحقًا",
+      "implementation_status": "يتطلب تحققًا وقبولًا مستقلًا",
+      "source_requirement_ids": [],
+      "reference_document": "docs/research/finance-procurement-benchmark-20260921.md",
+      "owner_acceptance": null
+    },
+    {
+      "id": "FP-23",
+      "capability": "الفوترة الدورية",
+      "local_evidence": "app/billing-recurring.mjs",
+      "assessment": "موجود جزئيًا؛ لا تعني إصدارًا رسميًا تلقائيًا",
+      "implementation_status": "يتطلب تحققًا وقبولًا مستقلًا",
+      "source_requirement_ids": [],
+      "reference_document": "docs/research/finance-procurement-benchmark-20260921.md",
+      "owner_acceptance": null
+    },
+    {
+      "id": "FP-24",
+      "capability": "الاعتراف بالإيراد والإيراد المؤجل",
+      "local_evidence": "لا دورة محاسبية كاملة مثبتة",
+      "assessment": "يحتاج سياسة مالية واعتماد المختص",
+      "implementation_status": "يتطلب تحققًا وقبولًا مستقلًا",
+      "source_requirement_ids": [],
+      "reference_document": "docs/research/finance-procurement-benchmark-20260921.md",
+      "owner_acceptance": null
+    },
+    {
+      "id": "FP-25",
+      "capability": "المصروفات والعهد",
+      "local_evidence": "app/expenses.mjs",
+      "assessment": "موجود جزئيًا؛ مراجعة ربطها بالسداد والإقفال",
+      "implementation_status": "يتطلب تحققًا وقبولًا مستقلًا",
+      "source_requirement_ids": [],
+      "reference_document": "docs/research/finance-procurement-benchmark-20260921.md",
+      "owner_acceptance": null
+    },
+    {
+      "id": "FP-26",
+      "capability": "الأصول والإهلاك",
+      "local_evidence": "app/assets.mjs",
+      "assessment": "موجود جزئيًا؛ لا اعتماد لسياسة إهلاك عامة",
+      "implementation_status": "يتطلب تحققًا وقبولًا مستقلًا",
+      "source_requirement_ids": [],
+      "reference_document": "docs/research/finance-procurement-benchmark-20260921.md",
+      "owner_acceptance": null
+    },
+    {
+      "id": "FP-27",
+      "capability": "استيراد كشف البنك والمطابقة",
+      "local_evidence": "app/bank-reconciliation.mjs",
+      "assessment": "موجود؛ لا يعادل ربطًا مصرفيًا مباشرًا",
+      "implementation_status": "يتطلب تحققًا وقبولًا مستقلًا",
+      "source_requirement_ids": [],
+      "reference_document": "docs/research/finance-procurement-benchmark-20260921.md",
+      "owner_acceptance": null
+    },
+    {
+      "id": "FP-28",
+      "capability": "توقع نقدي 13 أسبوعًا",
+      "local_evidence": "app/cash-forecast.mjs",
+      "assessment": "موجود؛ يميز المؤكد والمتوقع والافتراضات",
+      "implementation_status": "يتطلب تحققًا وقبولًا مستقلًا",
+      "source_requirement_ids": [],
+      "reference_document": "docs/research/finance-procurement-benchmark-20260921.md",
+      "owner_acceptance": null
+    },
+    {
+      "id": "FP-29",
+      "capability": "إقفال شهري بدليل ومراجع",
+      "local_evidence": "app/close-checklist.mjs",
+      "assessment": "موجود جزئيًا؛ القالب مسؤولية مالك الإجراء",
+      "implementation_status": "يتطلب تحققًا وقبولًا مستقلًا",
+      "source_requirement_ids": [],
+      "reference_document": "docs/research/finance-procurement-benchmark-20260921.md",
+      "owner_acceptance": null
+    },
+    {
+      "id": "FP-30",
+      "capability": "ضريبة وتقارير مستندة إلى المصادر",
+      "local_evidence": "app/payables.mjs، app/ledger.mjs",
+      "assessment": "جزئي؛ ليس إقرارًا ضريبيًا معتمدًا",
+      "implementation_status": "يتطلب تحققًا وقبولًا مستقلًا",
+      "source_requirement_ids": [],
+      "reference_document": "docs/research/finance-procurement-benchmark-20260921.md",
+      "owner_acceptance": null
+    },
+    {
+      "id": "FP-31",
+      "capability": "تعدد العملات وإعادة التقييم",
+      "local_evidence": "المخصصات والدفع الحاليان SAR",
+      "assessment": "غير مثبت؛ يحتاج أسعار صرف مؤرخة وفروق تقييم",
+      "implementation_status": "يتطلب تحققًا وقبولًا مستقلًا",
+      "source_requirement_ids": [],
+      "reference_document": "docs/research/finance-procurement-benchmark-20260921.md",
+      "owner_acceptance": null
+    },
+    {
+      "id": "FP-32",
+      "capability": "توحيد كيانات وتسويات بين الشركات",
+      "local_evidence": "عزل كيانات لا يكفي",
+      "assessment": "غير مثبت؛ يحتاج سياسة ملكية وحسابات متقابلة",
+      "implementation_status": "يتطلب تحققًا وقبولًا مستقلًا",
+      "source_requirement_ids": [],
+      "reference_document": "docs/research/finance-procurement-benchmark-20260921.md",
+      "owner_acceptance": null
+    },
+    {
+      "id": "FP-33",
+      "capability": "التقاط فواتير عربي ومراجعة بشرية",
+      "local_evidence": "لا مسار مالي متحقق في هذه القراءة",
+      "assessment": "مطلوب؛ الاستخراج اقتراح لا قيد أو اعتماد تلقائي",
+      "implementation_status": "يتطلب تحققًا وقبولًا مستقلًا",
+      "source_requirement_ids": [],
+      "reference_document": "docs/research/finance-procurement-benchmark-20260921.md",
+      "owner_acceptance": null
+    },
+    {
+      "id": "FP-34",
+      "capability": "تكامل البنك وفاتورة",
+      "local_evidence": "app/einvoice-gateway.mjs",
+      "assessment": "وجود محوّل لا يثبت وصولًا؛ معطل دون إعداد ودليل مستقل",
+      "implementation_status": "يتطلب تحققًا وقبولًا مستقلًا",
+      "source_requirement_ids": [],
+      "reference_document": "docs/research/finance-procurement-benchmark-20260921.md",
+      "owner_acceptance": null
+    },
+    {
+      "id": "FP-35",
+      "capability": "تقارير وإنفاق وربحية",
+      "local_evidence": "app/reports.mjs، app/reports-more.mjs",
+      "assessment": "موجود جزئيًا؛ توحيد تعريف المؤشرات وربطها بالمصدر",
+      "implementation_status": "يتطلب تحققًا وقبولًا مستقلًا",
+      "source_requirement_ids": [],
+      "reference_document": "docs/research/finance-procurement-benchmark-20260921.md",
+      "owner_acceptance": null
+    },
+    {
+      "id": "FP-36",
+      "capability": "رقابة المستفيد بعد اعتماد الدفع",
+      "local_evidence": "app/payables.mjs",
+      "assessment": "إضافة هذه الحزمة؛ تحذير حي وأثر تدقيق عند تسجيل التنفيذ الفعلي",
+      "implementation_status": "منفذ في الحزمة الحالية",
+      "source_requirement_ids": [
+        "PRC-09"
+      ],
+      "reference_document": "docs/research/finance-procurement-benchmark-20260921.md",
+      "owner_acceptance": null
+    }
+  ]
+}

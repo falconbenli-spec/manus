@@ -1,0 +1,167 @@
+{
+  "note": "ملخص مسح دليل الخدمات بعد إصلاح العطوب العشرة — 21 سبتمبر 2026. يُنتَج بـnode scripts/qa-catalog-sweep.mjs، والقاعدة المؤقتة تُحذف.",
+  "modes": {
+    "ships": {
+      "summary": {
+        "mode": "ships",
+        "started": "2026-09-21T16:30:02.625Z",
+        "finished": "2026-09-21T16:30:20.583Z",
+        "port": 3771,
+        "services": 142,
+        "passed": 137,
+        "failed": 5,
+        "submitted": 142,
+        "approved": 142,
+        "executed": 142,
+        "closed": 137,
+        "executed_by_decider": 98,
+        "by_execution_basis": {
+          "native": 142
+        },
+        "no_executor": 0,
+        "insider": {
+          "services": 22,
+          "closed": 21,
+          "no_executor": 0,
+          "executed_by_decider": 0,
+          "by_execution_basis": {
+            "native": 5,
+            "escalation": 17
+          },
+          "stopped": [
+            {
+              "code": "PRC-VENDOR-BANK",
+              "requester": "insider.procurement",
+              "stage": "close",
+              "code_error": "vendor_not_registered"
+            }
+          ]
+        },
+        "fallback_executions": []
+      },
+      "health": {
+        "services_checked": 142,
+        "summary": {
+          "no_executor": 0,
+          "step_unresolvable": 0,
+          "threshold_undefined": 0,
+          "sod_no_executor": 0,
+          "no_substitute": 0,
+          "decider_is_executor": 116
+        },
+        "decider_is_executor": {
+          "count": 116,
+          "sensitive": 0
+        }
+      },
+      "deliberate_stops": [
+        {
+          "code": "HR-EXPERIENCE-CERT",
+          "stage": "close",
+          "code_error": "letter_template_required"
+        },
+        {
+          "code": "HR-LETTER",
+          "stage": "close",
+          "code_error": "letter_template_required"
+        },
+        {
+          "code": "HR-RESIGNATION",
+          "stage": "close",
+          "code_error": "resignation_open"
+        },
+        {
+          "code": "HR-SALARY-CERT",
+          "stage": "close",
+          "code_error": "letter_template_required"
+        },
+        {
+          "code": "PRC-VENDOR-BANK",
+          "stage": "close",
+          "code_error": "vendor_not_registered"
+        }
+      ]
+    },
+    "enabled": {
+      "summary": {
+        "mode": "enabled",
+        "started": "2026-09-21T16:30:22.116Z",
+        "finished": "2026-09-21T16:30:40.823Z",
+        "port": 3771,
+        "services": 142,
+        "passed": 137,
+        "failed": 5,
+        "submitted": 142,
+        "approved": 142,
+        "executed": 142,
+        "closed": 137,
+        "executed_by_decider": 97,
+        "by_execution_basis": {
+          "native": 142
+        },
+        "no_executor": 0,
+        "insider": {
+          "services": 22,
+          "closed": 21,
+          "no_executor": 0,
+          "executed_by_decider": 0,
+          "by_execution_basis": {
+            "native": 2,
+            "escalation": 20
+          },
+          "stopped": [
+            {
+              "code": "PRC-VENDOR-BANK",
+              "requester": "insider.procurement",
+              "stage": "close",
+              "code_error": "vendor_not_registered"
+            }
+          ]
+        },
+        "fallback_executions": []
+      },
+      "health": {
+        "services_checked": 142,
+        "summary": {
+          "no_executor": 0,
+          "step_unresolvable": 0,
+          "threshold_undefined": 0,
+          "sod_no_executor": 0,
+          "no_substitute": 0,
+          "decider_is_executor": 114
+        },
+        "decider_is_executor": {
+          "count": 114,
+          "sensitive": 0
+        }
+      },
+      "deliberate_stops": [
+        {
+          "code": "HR-EXPERIENCE-CERT",
+          "stage": "close",
+          "code_error": "letter_template_required"
+        },
+        {
+          "code": "HR-LETTER",
+          "stage": "close",
+          "code_error": "letter_template_required"
+        },
+        {
+          "code": "HR-RESIGNATION",
+          "stage": "close",
+          "code_error": "resignation_open"
+        },
+        {
+          "code": "HR-SALARY-CERT",
+          "stage": "close",
+          "code_error": "letter_template_required"
+        },
+        {
+          "code": "PRC-VENDOR-BANK",
+          "stage": "close",
+          "code_error": "vendor_not_registered"
+        }
+      ]
+    }
+  }
+}

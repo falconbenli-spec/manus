@@ -1,0 +1,22 @@
+(node:49878) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ golden: every operational screen renders to the same HTML for four seeded personas (9860.355291ms)
+✔ golden: moving the SQL wall clock a day forward moves no screen hash (17197.315417ms)
+✔ golden: the normaliser hides random identifiers but stays sensitive to order, count and text (0.601834ms)
+✔ golden: the page-editor trigger is outside every seeded persona’s screen, and appears only for a holder of the configure capability (4235.354291ms)
+✔ بصمات مركز الخدمات: الشاشات الأربع لجمهورَي الموظف والمدير تُرسم إلى HTML نفسها (3744.88025ms)
+✔ بصمات مركز الخدمات: رسمان من بذرتين متطابقتين يعطيان البصمات نفسها (لا معرّف عشوائي يتسرّب) (9113.865667ms)
+(node:49879) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ golden: every operational screen renders to the same HTML for four seeded personas (9923.701375ms)
+✔ golden: moving the SQL wall clock a day forward moves no screen hash (17107.389292ms)
+✔ golden: the normaliser hides random identifiers but stays sensitive to order, count and text (0.919542ms)
+✔ golden: the page-editor trigger is outside every seeded persona’s screen, and appears only for a holder of the configure capability (4131.057125ms)
+ℹ tests 10
+ℹ suites 0
+ℹ pass 10
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 44933.636583

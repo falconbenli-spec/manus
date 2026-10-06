@@ -1,0 +1,29 @@
+measured_by: work/evidence/measure-p1.sh
+started_at: 2026-09-30T15:32:25Z
+commit_before: d1b31f33c1420aa3fa8852e6dcebc3603d11300d
+branch: release/truth-20260930
+dirty_before: 0
+node: v24.14.0
+worktrees: 73
+live_commit: 5da652dd907b100f7d1303f039000cbd6ab36e92
+live_dirty: 0
+service_pid_present: yes
+service_started: Wed Sep 30 18:02:04 2026    
+service_root_http: 200
+service_health_anonymous_http: 401
+build_fingerprint_worktree: {"commit":"d1b31f33c1420aa3fa8852e6dcebc3603d11300d","source_digest":"57442e5d399f6ae66a2062d2074ae9ebf77167518d4c3ee584c2efb4a3d6a031","files":478}
+build_fingerprint_live_tree: {"commit":"5da652dd907b100f7d1303f039000cbd6ab36e92","source_digest":"1c4a280d902077f92d75c8e0995b61da5974f9cdafc663d03ff099802af25495","files":477}
+check_started: 2026-09-30T15:32:26Z
+check_exit: 0
+gate_quick_started: 2026-09-30T15:32:44Z
+gate_quick_exit: 0
+focused_started: 2026-09-30T15:33:07Z
+focused_exit: 0
+gate_full_started: 2026-09-30T15:33:28Z
+gate_full_exit: 0
+suite_started: 2026-09-30T15:52:00Z
+suite_exit: 0
+commit_after: d1b31f33c1420aa3fa8852e6dcebc3603d11300d
+dirty_after: 0
+finished_at: 2026-09-30T16:09:46Z
+MEASURE_DONE

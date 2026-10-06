@@ -1,0 +1,19 @@
+
+> 36t-local-platform@0.1.0 gate
+> node scripts/gate.mjs
+
+(node:20533) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+Quality ratchet: local primitives 83 (baseline 83) · short refusals 1170 (baseline 1170) · status literals outside the vocabulary 2 (baseline 2) · Latin values without direction isolation 0 (baseline 0) · direct person-table reads 734 (baseline 734) · links 158 checked, 0 unresolved · 232 ms
+
+✔ 1. الحزمة كاملة: 2227 اختبارًا · 2227 ناجحًا · 0 فاشلًا · 0 متخطًّى (الحد الأدنى 2222) (1247.7s)
+✔ 2. فحوص المصدر (check.mjs): Syntax checked: 774 JavaScript modules. Source hashes match. Traceability: 220 requirements / 22 domains. Migrations: 161 planned, highest 200. (22.2s)
+✔ 3. المسنّنة: local primitives 83 (baseline 83) · short refusals 1170 (baseline 1170) · status literals outside the vocabulary 2 (baseline 2) · Latin values without direction isolation 0 (baseli (0.2s)
+✔ 4. الترحيلات من قاعدة فارغة: بلغت الترحيل 200 في 2420 مللي (2.4s)
+✔ 5. الترحيلات على نسخة من آخر نسخة احتياطية: /Users/abdulaziz/Documents/Codex/2026-09-09/3-6t-360-codex-handoff-master/work/backups/auto/36t-20261002T0930.sqlite → الترحيل 200 · سلامة ok · مراجع 0 · سلسلة التدقيق true (0.4s)
+✔ 6. بصمة المخطط: 30fd4ae12353b20d… · index 1484 · table 642 · trigger 1370 · view 5 (2.4s)
+✔ 7. لا تبعيات في package.json: صفر تبعية، كما هو مشترط (0s)
+✔ 8. إصدار Node: 24.14.0 مقابل >=24.14 <25 (0s)
+✔ 9. سقف الاختبارات المتخطّاة: 0 متخطًّى، والسقف 0 (0s)
+
+البوابة: تسعة فحوص، كلها مرّت.

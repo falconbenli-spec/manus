@@ -1,0 +1,26 @@
+(node:52513) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ المساعد المجرد غير النشط لا يرسل بيانات للمزود ولا يظهر متاحًا (11902.550084ms)
+✔ إيقاف المساعد النشط يمنع التشغيل اللاحق مع بقاء الإعداد العام مفعلاً (8195.214042ms)
+✔ الإيقاف أثناء انتظار brief_gaps يحفظ التكلفة دون الناتج أو المصادر (9100.204208ms)
+✔ الإيقاف أثناء انتظار skills_path يحفظ التكلفة دون الناتج أو المصادر (7710.512083ms)
+✔ غياب الجرد يحافظ على السلوك السابق وجرد كيان آخر لا يوقف هذا الكيان (7402.091ms)
+(node:52514) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ AI is off until the first admin turns it on, model assistants stay unavailable without a provider key, and every instruction set refuses to treat data as commands (12412.289333ms)
+✔ policy answers quote the accepted paragraph with its policy and date, refuse when nothing matches, and respect the daily limit (8282.273625ms)
+✔ a model run sends only what the user may see, keeps one client per run, prices by the configured rates, and is reviewed once by its owner (8935.284417ms)
+✔ a provider failure is recorded as a failed run with no invented output (7727.077417ms)
+(node:52515) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ ai inventory: the initial list is a proposal derived from the code, and nothing runs before it is activated (12114.936958ms)
+✔ ai inventory: activation needs a named owner and a risk assessment approved by someone other than its author or the owner (8265.645708ms)
+✔ ai inventory: the owner can suspend, an overdue review raises an alert and blocks reactivation, and a new assessment keeps the old one (8924.362791ms)
+ℹ tests 12
+ℹ suites 0
+ℹ pass 12
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 45228.984375

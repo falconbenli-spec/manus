@@ -1,0 +1,91 @@
+Package 3 — bank reconciliation and month-end close: gap probe and red evidence (2026-09-30)
+
+Probe: docs/testing/p3-bank-close-probe-20260930.mjs on the integration head 3d1d84c, code unchanged (run before migration 168 or
+any edit existed). Synthetic in-memory databases only, built with the real finance, bank, payables, close and accruals paths
+(tests/ledger-fixture.mjs for the payment return and the advance). Runner: work/node24/bin/node v24.14.0. Amounts in halalas.
+
+G1 ledger kinds for a classified bank line: []
+G1 PURPOSES has bank_charges / interest_income: [false,false]
+G1 before posting the charge [unmatched_bank, book, difference]: [-2500,1000000,0]
+G1 after posting the charge in the GL [unmatched_bank, book, difference]: [-2500,997500,2500]
+G2 1500 line against a 1000 record: refused:amount_mismatch
+G2 suggestions for the 1500 line: 1
+G2 manual bank journal as a match: refused:kind
+G2 advance_receipt as a match kind: refused:source_kind
+G2 SOURCE_KINDS: ["supplier_payment","ar_receipt","payroll_payment","expense_reimbursement","custody_issue","custody_return"]
+G2 bank_matches CHECK: source_kind IN ('supplier_payment','ar_receipt','payroll_payment','expense_reimbursement','custody_issue','custody_return')
+G3 payment_returns rows: 1
+G3 cashRecords kinds: ["supplier_payment"]
+G3 supplier_payment_return registered as a ledger kind: false
+G4 finance period after approve_close: {"status":"closed","version":2}
+G4 financeReferenceAction reopen: refused:transition_denied
+G4 direct UPDATE closed→open: refused:ERR_SQLITE_ERROR (financial period can only be closed with evidence)
+G4 checklist after approve_reopen [status, ledger_locked]: ["open",true]
+G4 finance period after the checklist reopen: closed
+G4 adjustment dated inside the reopened month: refused:period_closed
+G5 unposted journals dated in the month: 1
+G5 active bank accounts with an approved reconciliation: 0
+G5 approve_close with an unposted journal and an unreconciled bank account: ok
+G5 close period carries system checks: []
+G6 approved entry [status, posting_status]: ["approved","not_posted"]
+G6 the code path for posting_status: constant 'not_posted' in entryView
+G6 amortization entry registered as a ledger kind: false
+
+Reading:
+  G1  no ledger kind reads a classified bank line and the ledger has no bank-charge or interest purpose. Before the charge is
+      posted the reconciliation balances (unmatched bank −2500, book 1,000,000, difference 0); after a charge journal is posted
+      in the GL the classified line is still subtracted as unmatched bank, so the difference becomes exactly the charge (2500).
+  G2  matching is one line to one record at the same amount: a 1,500.00 bulk transfer cannot be matched to its two custody
+      records (amount_mismatch), a posted manual journal on the bank account cannot be matched at all (kind), advance
+      receipts are refused as a kind, and the bank_matches CHECK allows six kinds only.
+  G3  a returned supplier payment is recorded (payment_returns has the row) but cashRecords does not list it — nor the advance
+      receipt — and supplier_payment_return is not a ledger kind.
+  G4  the ledger period never reopens: finance refuses reopen (transition_denied), the finance_period_identity trigger refuses a
+      direct update, and the checklist's approved reopen leaves the month open with ledger_locked=true and the finance period
+      closed, so an adjustment dated inside the month is refused with period_closed.
+  G5  approve_close approves a month holding an unposted journal and an active bank account with no approved reconciliation;
+      the close period carries no system checks at all.
+  G6  an approved amortization entry reports posting_status 'not_posted' because entryView writes the constant, and no ledger
+      kind exists for amortization entries.
+
+Red stage — the new and updated tests before any implementation (migration 168 moved aside, app/ unchanged):
+not ok 1 - an approved monthly entry is a ledger source: the schedule’s own accounts and centre, at its month end, in halalas that add up
+not ok 2 - the entry reports its real posting state from the ledger: waiting, in the ledger, posted, reversed
+ok 3 - accruals: the accountant sets the period and the system splits it to the last halala, adding the remainder to the last month
+ok 4 - accruals: the capability opens it, the accounts are the accountant’s choice, and the platform assumes none
+ok 5 - accruals: whoever prepared the schedule never approves its monthly entry, and an entry is decided once
+ok 6 - accruals: an entry is not approved before its month ends, nor inside a close that is already approved
+ok 7 - accruals: a wrong schedule is cancelled with a reason, never rewritten, and approved months survive it
+ok 8 - accruals screen: it renders from real board data under the strict content policy
+not ok 3 - tests/bank-close-month.test.mjs
+not ok 4 - tests/bank-close-race.test.mjs
+not ok 11 - the ledger knows two new purposes, and a classified bank line posts nothing until they are mapped by two people
+not ok 12 - a classified bank fee is one balanced journal on the bank account’s own ledger account; interest runs the other way; a transfer or an unknown line is not a source
+not ok 13 - a posted classified line counts as reconciled: posting the charge leaves no difference, and reversing its journal brings the bank-side item back
+not ok 14 - a returned supplier payment: Dr bank for what came back, Dr bank charges for the shortfall, Cr payable for the order — the payable ties out and the payment’s trace shows the return
+not ok 15 - source kinds read their own tenant only: another entity cannot build a journal from this bank line
+not ok 16 - grouped match: one bank line settles two platform records only when the sums agree to the halala, and whoever prepares it never approves it
+not ok 17 - split match: two bank lines settle one record exactly, the header keeps the record, and a many-to-many match is refused
+not ok 18 - a posted manual journal on the bank account is matchable; a draft or another account’s journal is not; an unmatched one is outstanding in the reconciliation
+not ok 19 - widened kinds: an advance receipt, its reversal and a returned supplier payment are cash records with their direction, matchable, and traced from the ledger
+not ok 20 - rejecting a grouped match releases its line and records for a new match, and the rejected members stay as history
+not ok 21 - the database balances every approved match to the halala, whoever writes it
+ok 22 - csv reader: quoted fields, thousands separators and a trailing row survive the bank export format
+ok 23 - statement import: the file is the only source, its content digest blocks a second import, and a file that does not add up is refused
+ok 24 - an imported bank line is never edited: correction is cancelling the whole batch, and only before a match on it is approved
+ok 25 - suggestion explains itself in words and stays a suggestion: nothing is matched without a human, and the preparer never approves
+ok 26 - tenant isolation and capability: a user of another entity and a user without the capability see and touch nothing
+ok 27 - a bank rule only suggests: it names an account and an owner and posts nothing
+ok 28 - period reconciliation: every line is decided first, the difference is shown, and an approved reconciliation is locked
+ok 29 - a non-zero difference is never stored or approved without a written explanation
+not ok 8 - tests/close-checklist.test.mjs
+not ok 9 - tests/close-system-checks.test.mjs
+ok 32 - finance periods: a monthly close never rides on a year-long accounting period, and the rest of the year stays postable
+ok 33 - finance periods: the database itself refuses a close period bound to an accounting period that is not exactly its month
+ok 34 - finance periods: a month approved with no accounting period is not called locked, because its entries are not
+not ok 11 - tests/ledger-reopen.test.mjs
+# tests 35
+# pass 17
+# fail 18
+(Files whose imports did not exist yet — RECLOSE_DAYS, closeChecks, CHECKS, the race fixture — fail as a whole: close-checklist,
+close-system-checks, ledger-reopen, bank-close-race, bank-close-month. Every other new test fails on its assertion.)

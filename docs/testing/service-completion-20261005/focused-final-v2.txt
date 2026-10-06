@@ -1,0 +1,40 @@
+(node:23892) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ closure needs evidence: a request closes only with a description of what was delivered, and its requester is told (6105.846583ms)
+✔ reopening: the window is a setting owned by the procedure owner, never a constant, and without it reopening is simply unavailable (5699.329541ms)
+✔ reopening keeps the first closure: a second round is linked to it, so the record shows the service was not delivered first time (5845.72425ms)
+✔ reopening closes with its window, counted in working days; a request closed without evidence has nothing to reopen (7358.797375ms)
+✔ الالتزام واحد: الكامل يبدأ بالمختصر، وترويسة Markdown تحمل الاثنين نفسيهما، وتاريخ القياس واحد (1.508541ms)
+✔ الدرجات السبع عشرة والموانع متطابقة بين الملفين، والدرجة من السلّم الصحيح (0.836667ms)
+✔ المتوسط والرقم الحاكم محسوبان بالقاعدة المكتوبة لا منقولان، ويتفق عليهما الملفان (0.354209ms)
+✔ خط أساس البوابة والبطاقة يقولان الترحيل والبصمة والأرضية نفسها (0.818291ms)
+(node:23894) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ the governed scope is exactly the audited 42 deepen services and 12 existing-module connections (0.598625ms)
+✔ a deepen service cannot close until its tangible output is recorded and accepted by the requester (6215.20825ms)
+{"t":"2026-10-05T13:39:00.168Z","id":"9818396b","env":"local","m":"POST","p":"/api/login","s":200,"ms":505}
+{"t":"2026-10-05T13:39:00.673Z","id":"c9f4b62a","env":"local","m":"POST","p":"/api/login","s":200,"ms":493}
+{"t":"2026-10-05T13:39:00.691Z","id":"2aa6546c","env":"local","m":"POST","p":"/api/requests/fc09c4b6-46dd-4944-8e32-96ad25cced7d/outputs","s":201,"ms":17,"tx":1,"lock_ms":0}
+{"t":"2026-10-05T13:39:00.722Z","id":"fc4c2d7d","env":"local","m":"POST","p":"/api/service-outputs/09f48fd5-5a74-4c00-ae8a-ecb673303a31/accept","s":201,"ms":19,"tx":1,"lock_ms":0}
+{"t":"2026-10-05T13:39:00.725Z","id":"546e4b8f","env":"local","m":"GET","p":"/api/requests/fc09c4b6-46dd-4944-8e32-96ad25cced7d","s":200,"ms":2}
+✔ the HTTP workflow records and decides an output, then exposes the closure gate in request detail (6974.752083ms)
+✔ a connected service accepts only a real record from its existing module and tenant (6232.24775ms)
+(node:23895) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ لا يقرأ موظف آخر مخرجات طلب لا يملك حق الاطلاع عليه (5928.325292ms)
+✔ لا يقبل مخرج تغيير وظيفي يخص موظفًا آخر أو طلبًا آخر أو حركة ملغاة (5677.31125ms)
+✔ تغيير الحساب البنكي يحتاج حساب صاحب الطلب متحققًا لا سجلًا معلقًا (5872.947459ms)
+✔ يعاد فحص مخرج السجل عند قبوله وعند الإغلاق ولا يكفي قبوله قبل إلغائه (7014.756958ms)
+✔ طلب إقفال الحملة لا يسلم حملة ما زالت في التخطيط (4551.607ms)
+✔ مسار المغادرة لا يقبل حزمة انضمام ولا حزمة تخص موظفًا آخر (5579.371542ms)
+✔ تسعير الفرصة لا يقبل سجلًا أوليًا لا يحمل تسعيرًا معتمدًا (5570.704125ms)
+✔ طلب السلفة لا يغلق قبل سلفة معتمدة تخص صاحبه وتطابق المبلغ المطلوب (4388.673ms)
+✔ طلب تجديد الوثيقة يحتاج وثيقة الموظف الجديدة والسارية دون ادعاء اتصال حكومي (4692.926625ms)
+ℹ tests 21
+ℹ suites 0
+ℹ pass 21
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 49671.735333

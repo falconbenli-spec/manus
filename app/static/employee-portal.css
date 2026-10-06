@@ -1,0 +1,142 @@
+/* بوابة الموظف والإجازات: طبقة تجربة مستقلة تعمل مع كل المظاهر، ومنها الكلاسيكي. */
+.employee-portal-dock{
+  display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin:0 0 22px;
+}
+.employee-portal-item{
+  min-width:0;display:flex;align-items:center;gap:12px;padding:14px;border:1px solid color-mix(in srgb,var(--border,#333) 82%,transparent);
+  border-radius:18px;background:color-mix(in srgb,var(--panel,#171717) 88%,transparent);color:inherit;text-decoration:none;
+  box-shadow:0 1px 0 rgb(255 255 255 / .04) inset,0 12px 30px rgb(0 0 0 / .12);
+  transition:transform .2s ease,border-color .2s ease,background .2s ease;
+}
+.employee-portal-item>span{
+  width:42px;height:42px;display:grid;place-items:center;flex:0 0 42px;border-radius:13px;
+  background:color-mix(in srgb,var(--brand-turquoise,#33cdb3) 14%,transparent);
+  color:var(--brand-turquoise,#33cdb3);font-size:21px;font-weight:700;
+}
+.employee-portal-item div{min-width:0;display:grid;gap:4px}
+.employee-portal-item strong{font-size:14px}
+.employee-portal-item small{color:var(--muted,#999);font-size:12px;line-height:1.55}
+.employee-portal-item:hover,.employee-portal-item:focus-visible{
+  transform:translateY(-2px);border-color:color-mix(in srgb,var(--brand-turquoise,#33cdb3) 48%,transparent);
+  background:color-mix(in srgb,var(--panel,#171717) 94%,var(--brand-turquoise,#33cdb3) 6%);
+}
+.portal-assistant{
+  position:relative;overflow:hidden;display:grid;grid-template-columns:auto minmax(0,1fr) auto;align-items:center;gap:18px;
+  margin:0 0 22px;padding:24px;border:1px solid color-mix(in srgb,var(--brand-turquoise,#33cdb3) 35%,var(--border,#333));
+  border-radius:24px;background:linear-gradient(135deg,color-mix(in srgb,var(--brand-turquoise,#33cdb3) 13%,var(--panel,#171717)),color-mix(in srgb,var(--panel,#171717) 94%,transparent));
+  box-shadow:0 1px 0 rgb(255 255 255 / .07) inset,0 22px 60px rgb(0 0 0 / .16);
+}
+.portal-assistant::after{
+  content:"";position:absolute;inset-inline-end:-70px;top:-100px;width:240px;height:240px;border-radius:50%;pointer-events:none;
+  background:color-mix(in srgb,var(--brand-turquoise,#33cdb3) 18%,transparent);filter:blur(12px);
+}
+.portal-assistant-mark{
+  position:relative;z-index:1;width:58px;height:58px;display:grid;place-items:center;border-radius:18px;font-size:28px;
+  color:var(--brand-turquoise,#33cdb3);background:color-mix(in srgb,var(--brand-turquoise,#33cdb3) 18%,transparent);
+  box-shadow:0 0 0 1px color-mix(in srgb,var(--brand-turquoise,#33cdb3) 30%,transparent) inset;
+}
+.portal-assistant-copy{position:relative;z-index:1;display:grid;gap:6px;min-width:0}
+.portal-assistant-copy>p,.employee-requests .eyebrow{margin:0;color:var(--brand-turquoise,#33cdb3);font-size:12px;font-weight:800}
+.portal-assistant-copy h2{margin:0;font-size:25px;line-height:1.2}
+.portal-assistant-copy>strong{font-size:14px;line-height:1.65}
+.portal-assistant-copy>small{max-width:720px;color:var(--muted,#999);font-size:12px;line-height:1.75}
+.portal-assistant-prompts{display:flex;flex-wrap:wrap;gap:7px;margin-top:5px}
+.portal-assistant-prompts span,.employee-request-choices span{
+  display:inline-flex;align-items:center;min-height:25px;padding:3px 9px;border:1px solid color-mix(in srgb,var(--brand-turquoise,#33cdb3) 24%,var(--border,#333));
+  border-radius:999px;background:color-mix(in srgb,var(--panel,#171717) 72%,transparent);color:var(--muted,#aaa);font-size:12px;line-height:1.5;
+}
+.portal-assistant-action{position:relative;z-index:1;white-space:nowrap}
+.employee-requests{margin-bottom:22px}
+.employee-requests .panel-head>div{display:grid;gap:5px}
+.employee-requests .panel-head h2,.employee-requests .panel-head p{margin:0}
+.employee-requests .panel-head>div>p:last-child{color:var(--muted,#999);font-size:12px;line-height:1.7}
+.employee-request-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+.employee-request-card{
+  min-width:0;display:grid;grid-template-columns:auto minmax(0,1fr) auto;align-items:start;gap:12px;padding:15px;text-align:start;
+  border:1px solid color-mix(in srgb,var(--border,#333) 88%,transparent);border-radius:18px;
+  background:color-mix(in srgb,var(--panel,#171717) 94%,transparent);color:inherit;text-decoration:none;cursor:pointer;font:inherit;
+  transition:transform .2s ease,border-color .2s ease,background .2s ease,box-shadow .2s ease;
+}
+.employee-request-card:hover,.employee-request-card:focus-visible{
+  transform:translateY(-2px);border-color:color-mix(in srgb,var(--brand-turquoise,#33cdb3) 48%,transparent);
+  background:color-mix(in srgb,var(--panel,#171717) 94%,var(--brand-turquoise,#33cdb3) 6%);box-shadow:0 14px 32px rgb(0 0 0 / .12);
+}
+.employee-request-icon{
+  width:42px;height:42px;display:grid;place-items:center;border-radius:13px;font-size:21px;color:var(--brand-turquoise,#33cdb3);
+  background:color-mix(in srgb,var(--brand-turquoise,#33cdb3) 13%,transparent);
+}
+.employee-request-copy{min-width:0;display:grid;gap:5px}
+.employee-request-copy>strong{font-size:13px;line-height:1.5}
+.employee-request-copy>small{min-height:36px;color:var(--muted,#999);font-size:12px;line-height:1.65}
+.employee-request-card>b{display:grid;place-items:center;width:24px;height:24px;color:var(--muted,#999)}
+.employee-request-choices{grid-column:1/-1;display:flex;flex-wrap:wrap;gap:5px;margin-top:3px}
+.employee-request-choices span{padding:2px 7px;font-size:12px}
+.employee-leave-summary{margin-bottom:24px}
+.leave-type-grid,.leave-balance-grid{
+  display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;
+}
+.leave-type-card,.leave-balance-card{
+  --leave-color:#64748B;position:relative;overflow:hidden;min-width:0;display:grid;
+  grid-template-columns:auto minmax(0,1fr);align-items:center;gap:11px;padding:15px;
+  border:1px solid color-mix(in srgb,var(--leave-color) 34%,var(--border,#333));
+  border-radius:18px;background:linear-gradient(145deg,color-mix(in srgb,var(--leave-color) 10%,var(--panel,#171717)),color-mix(in srgb,var(--panel,#171717) 96%,transparent));
+}
+.leave-type-card::before,.leave-balance-card::before{
+  content:"";position:absolute;inset-inline-start:0;top:16px;bottom:16px;width:3px;border-radius:99px;background:var(--leave-color);
+}
+.leave-type-icon{
+  width:42px;height:42px;display:grid;place-items:center;border-radius:13px;
+  background:color-mix(in srgb,var(--leave-color) 16%,transparent);color:var(--leave-color);
+  font-size:21px;font-weight:700;
+}
+.leave-type-card>div,.leave-balance-card>div{min-width:0;display:grid;gap:4px}
+.leave-type-card strong,.leave-balance-card strong{font-size:13px;line-height:1.55}
+.leave-type-card small,.leave-balance-card small{color:var(--muted,#999);font-size:12px;line-height:1.55}
+.leave-type-card>b,.leave-balance-card>b{
+  grid-column:1 / -1;color:var(--leave-color);font-size:15px;font-variant-numeric:tabular-nums;
+}
+.leave-type-card>.btn,.leave-balance-card>.btn{grid-column:1 / -1;justify-self:start}
+.leave-balance-details{margin-top:14px}
+.leave-balance-details>summary{cursor:pointer;color:var(--muted,#aaa);font-size:12px;padding:8px 0}
+.lv-type-annual{--leave-color:#15A085}
+.lv-type-sick{--leave-color:#EF4444}
+.lv-type-maternity{--leave-color:#EC4899}
+.lv-type-birth{--leave-color:#3B82F6}
+.lv-type-hajj{--leave-color:#F59E0B}
+.lv-type-marriage{--leave-color:#8B5CF6}
+.lv-type-death_close{--leave-color:#6B7280}
+.lv-type-death_sibling{--leave-color:#475569}
+.lv-type-exam{--leave-color:#10B981}
+.lv-type-iddah{--leave-color:#D946EF}
+.lv-type-compensatory{--leave-color:#06B6D4}
+.lv-type-emergency{--leave-color:#F97316}
+.lv-type-maternity_ext_unpaid{--leave-color:#DB2777}
+.lv-type-maternity_ext_sick_child{--leave-color:#A855F7}
+.lv-type-companion{--leave-color:#14B8A6}
+.lv-type-unpaid{--leave-color:#78716C}
+.lv-type-dialysis{--leave-color:#0EA5E9}
+.lv-type-iddah_ext_pregnant{--leave-color:#C026D3}
+@media (max-width:980px){
+  .employee-portal-dock{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .employee-request-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .leave-type-grid,.leave-balance-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+@media (max-width:560px){
+  .employee-portal-dock{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;margin-inline:-4px;padding:4px 4px 10px}
+  .employee-portal-item{flex:0 0 78%;scroll-snap-align:start}
+  .leave-type-grid,.leave-balance-grid{grid-template-columns:1fr}
+  .portal-assistant{grid-template-columns:auto minmax(0,1fr);padding:18px;border-radius:20px}
+  .portal-assistant-action{grid-column:1/-1;width:100%;justify-content:center}
+  .portal-assistant-prompts{display:none}
+  .employee-request-grid{grid-template-columns:1fr}
+  .leave-type-card,.leave-balance-card{border-radius:16px}
+}
+@media (prefers-reduced-motion:reduce){
+  .employee-portal-item,.employee-request-card{transition:none}
+}
+
+/* بوابة الموظف تستخدم مكتبة الأيقونات الموحدة بمقاس بصري ثابت. */
+:is(.employee-request-icon,.leave-type-icon,.employee-portal-item>span) .glyph{inline-size:24px;block-size:24px;flex-shrink:0}
+.portal-assistant-mark .glyph{inline-size:30px;block-size:30px}
+.employee-request-card>b .glyph{inline-size:16px;block-size:16px}
+:is(.employee-portal-item>span,.employee-request-icon,.portal-assistant-mark){color:var(--icon-tint,var(--brand-turquoise));background:color-mix(in srgb,var(--icon-tint,var(--brand-turquoise)) 14%,transparent)}

@@ -1,0 +1,31 @@
+(node:76834) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ employee-profile: every field the reference shows has a real source or says «غير متاح» with a reason, an owner and a next step (2721.2205ms)
+✔ employee-profile: رقم الهوية الوطنية is never stored — no column carries it, and a number typed into any free-text field is refused (2669.415208ms)
+✔ employee-profile: العمر is derived from تاريخ الميلاد and never stored (2633.757709ms)
+✔ employee-profile: إجمالي الخبرة says it is unknown instead of silently equalling the internal experience (2671.388292ms)
+✔ employee-profile: a contract with no end date shows «غير محدد المدة» and computes no percentage (2653.76475ms)
+✔ employee-profile: an employee can never read another employee’s profile, and the refusal names who to ask (2650.6795ms)
+✔ employee-profile: a line manager sees work data but never a birth date, an age or a marital status (2647.356334ms)
+✔ employee-profile: the personal record is version-checked, validated against its enumerations and append-only (2662.060458ms)
+✔ NFR-08: migration 121 upgrades a pre-121 database without touching its rows, and applies once (3531.172625ms)
+✔ employee-profile: the platform administrator reads no employee’s birth date, marital status, gender or nationality (2655.131625ms)
+✔ employee-profile: the employee-records capability alone does not unlock gender and nationality (2654.114959ms)
+✔ employee-profile: reading a colleague’s profile leaves an append-only record of who read it (2651.999625ms)
+✔ employee-profile: the attendance-exemption reason reaches only the readers the attendance screen itself allows (2658.622916ms)
+✔ employee-profile: an indefinite contract never borrows an end date from the employment record, and a clash is disclosed (5326.614875ms)
+✔ employee-profile: a contract recorded as ended is not described as still running (2652.5915ms)
+✔ employee-profile: a start date that has not arrived yet is said so, not reported as a missing date (2657.914667ms)
+✔ employee-profile: the directory withholds gender and nationality by their own capability and names the column (2639.819041ms)
+✔ employee-profile: the screen draws the contract badge, the hidden benefits and the Arabic count (2662.263958ms)
+✔ employee-profile: «مستندات تهمني» is a truthful ten-card library with no invented download (2725.535375ms)
+✔ employee-profile: important documents keep coworker privacy and manager payloads free of contract secrets (2661.141583ms)
+✔ employee-profile: a rejected amendment never hides the standing active contract in important documents (2696.582167ms)
+ℹ tests 21
+ℹ suites 0
+ℹ pass 21
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 59636.574917

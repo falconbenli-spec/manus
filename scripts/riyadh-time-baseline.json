@@ -1,0 +1,56 @@
+{
+ "note": "خط أساس حارس حدّ اليوم بين الرياض وUTC (scripts/riyadh-time-guard.mjs). العدّ ينزل فقط، والملف الجديد يبدأ من صفر. يُنزَل بـ --tighten ولا يُحرَّر باليد.",
+ "totals": {
+  "utc_slice": 58,
+  "utc_substr": 1,
+  "utc_today": 0,
+  "riyadh_text_bound": 0,
+  "utc_midnight": 2
+ },
+ "utc_slice": {
+  "app/bank-reconciliation.mjs": 1,
+  "app/catalog-home.mjs": 3,
+  "app/letters.mjs": 1,
+  "app/master-data.mjs": 1,
+  "app/media-spend.mjs": 1,
+  "app/production.mjs": 1,
+  "app/project-closure-guard.mjs": 1,
+  "app/project-intake.mjs": 1,
+  "app/receivables.mjs": 1,
+  "app/server.mjs": 1,
+  "app/service-availability.mjs": 1,
+  "app/static/ai-ui.mjs": 2,
+  "app/static/appearance-ui.mjs": 1,
+  "app/static/approval-settings-ui.mjs": 5,
+  "app/static/approvals-ui.mjs": 2,
+  "app/static/benefits-portal-ui.mjs": 1,
+  "app/static/campaigns-ui.mjs": 1,
+  "app/static/catalog-quality-ui.mjs": 1,
+  "app/static/commercial-ui.mjs": 2,
+  "app/static/discipline-ui.mjs": 1,
+  "app/static/engagement-ui.mjs": 2,
+  "app/static/feedback-ui.mjs": 1,
+  "app/static/files-ui.mjs": 1,
+  "app/static/finance-grants-ui.mjs": 1,
+  "app/static/governance-ui.mjs": 1,
+  "app/static/knowledge-access-ui.mjs": 7,
+  "app/static/media-spend-ui.mjs": 1,
+  "app/static/policy-assistant-ui.mjs": 2,
+  "app/static/policy-library-ui.mjs": 3,
+  "app/static/request-transparency-ui.mjs": 2,
+  "app/static/search-ui.mjs": 2,
+  "app/static/secondment-benefits-ui.mjs": 1,
+  "app/static/security-ui.mjs": 2,
+  "app/static/service-gates-ui.mjs": 2,
+  "app/static/vendors-ui.mjs": 1
+ },
+ "utc_substr": {
+  "app/procurement.mjs": 1
+ },
+ "utc_today": {},
+ "riyadh_text_bound": {},
+ "utc_midnight": {
+  "app/department-levels.mjs": 1,
+  "app/work-calendar.mjs": 1
+ }
+}

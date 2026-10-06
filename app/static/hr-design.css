@@ -1,0 +1,285 @@
+/* VOID 360 — الغلاف والتنقل (طبقة shell) وقاتل الحركة (طبقة kill). الألوان والمقاسات رموز من signature.css وحدها.
+   الأسطر الثلاثة التالية كتلة مجمَّدة يقرؤها tests/motion-cards.test.mjs حرفيًا: لا تُنسَّق آليًا، ولا يُضاف داخلها شيء، ولا تُكرَّر سلاسلها في الملف.
+   المفتاحان يبدآن وينتهيان عند الشكل الطبيعي للعنصر، فيعملان بلا fill-mode: الأول مسحة خط (يُرسم الخط من وسطه)، والثاني مسح شفافية لمؤشر التحميل. */
+@keyframes rq-beam{from{opacity:0;transform:scaleX(0)}to{opacity:1;transform:none}}
+@keyframes rq-sheen{0%,100%{opacity:1}50%{opacity:.28}}
+@media(prefers-reduced-motion:reduce){.rq-enter,.rq-enter.rq-shown{opacity:1;transform:none;animation:none}.rq-dept.is-live,.rq-card.is-live{animation:none;background-image:none}}
+
+@layer shell{
+/* ---------- frame: html is the scroller; no overflow and no fixed height on .shell, .stage or #main ---------- */
+html{scroll-padding-block:calc(var(--sticky-top) + var(--s4)) calc(var(--tabbar-h) + var(--safe-b) + var(--s4))}
+.shell{display:block;--shell-pad:max(var(--gutter),calc((100vw - var(--content-max))/2));--shell-lead:0px;--shell-tail:0px;--side-head-h:calc(var(--safe-t) + var(--s24))}
+.stage{display:block}
+.page{display:block;padding-inline:var(--shell-pad);padding-block-end:calc(var(--tabbar-h) + var(--safe-b) + var(--s14))}
+.side-scrim{display:none}
+:where(.topbar,.sig-siblings,.sig-tabs,.sidebar,.sig-cmd) :where(a,button,summary):focus-visible{outline:2px solid var(--focus);outline-offset:2px}
+
+/* ---------- top bar ---------- */
+.topbar{position:sticky;inset-block-start:0;z-index:var(--z-topbar);display:flex;align-items:center;gap:var(--s1);block-size:calc(var(--topbar-h) + var(--safe-t));padding-block-start:var(--safe-t);padding-inline:calc(var(--gutter) - var(--s4)) calc(var(--gutter) - var(--s3));background:var(--canvas);border-block-end:1px solid transparent;transition:border-color var(--d-state) var(--ease)}
+.topbar.is-condensed{border-block-end-color:var(--line)}
+a.brand{display:block;flex:none;padding:var(--s4);line-height:0;text-decoration-line:none}
+a.brand:focus-visible{outline-offset:0}
+.shell .brand-svg{display:block;inline-size:auto;block-size:20px;color:var(--logo)}
+.top-btn,.sig-appearance > button{display:inline-flex;flex:none;align-items:center;justify-content:center;gap:var(--s2);min-inline-size:var(--tap);min-block-size:var(--tap);color:var(--ink-2);transition:color var(--d-micro) var(--ease)}
+.sig-appearance > button{color:var(--ink-3)}
+:is(.top-btn,.sig-appearance > button) .glyph{inline-size:20px;block-size:20px}
+.avatar{display:inline-grid;flex:none;place-items:center;inline-size:28px;block-size:28px;border:1px solid var(--line-strong);border-radius:var(--r-pill);color:var(--ink-1);font-size:var(--fs-label);font-weight:var(--fw-strong);line-height:1}
+.top-index-label,.top-search-text,.top-search kbd{display:none}
+.topbar-title{flex:1 1 0;min-inline-size:0;overflow:hidden;color:var(--ink-1);font-size:var(--fs-row);font-weight:var(--fw-strong);text-align:center;text-overflow:ellipsis;white-space:nowrap;opacity:0;transition:opacity var(--d-state) var(--ease)}
+.is-condensed .topbar-title{opacity:1}
+.sig-siblings{display:none}
+
+/* ---------- tab bar (phone and tablet): flat, opaque, five targets ---------- */
+.sig-tabs{position:fixed;inset-inline:0;inset-block-end:0;z-index:var(--z-tabs);display:flex;block-size:calc(var(--tabbar-h) + var(--safe-b));padding-block-end:var(--safe-b);padding-inline:max(var(--safe-l),var(--safe-r));background:var(--canvas);border-block-start:1px solid var(--line)}
+.sig-tabs :is(a,button){position:relative;display:flex;flex:1 1 0;flex-direction:column;align-items:center;justify-content:center;gap:var(--s1);min-inline-size:48px;min-block-size:48px;color:var(--ink-4);font-size:var(--fs-label);font-weight:var(--fw-label);line-height:1.4;text-decoration-line:none;outline-offset:-2px;transition:color var(--d-micro) var(--ease)}
+.sig-tabs .glyph{inline-size:22px;block-size:22px}
+.sig-tabs .active{color:var(--ink-1)}
+.sig-tabs .active::after{content:"";position:absolute;inset-block-start:-1px;inset-inline-start:calc(50% - var(--s3));inline-size:var(--s6);block-size:2px;background:var(--ink-1)}
+.sig-tabs .nav-count{position:absolute;inset-block-start:var(--s1);inset-inline-start:calc(50% + var(--s2))}
+html.is-kbd .sig-tabs{display:none}
+
+/* ---------- count: a number with its mark, never a bubble. --c / --m / --w come from the state layer ---------- */
+.nav-count{display:inline-flex;align-items:center;gap:var(--s1);color:var(--w);font-size:var(--fs-label);font-weight:var(--fw-label);font-variant-numeric:tabular-nums lining-nums;line-height:1}
+.nav-count::before{content:"";flex:none;inline-size:8px;block-size:9px;background-color:var(--c);-webkit-mask:var(--m) center/contain no-repeat;mask:var(--m) center/contain no-repeat}
+
+/* ---------- index scene: the sidebar is a full-screen dialog at every size ---------- */
+.sidebar{position:fixed;inset:0;z-index:var(--z-index);display:block;overflow-y:auto;overscroll-behavior:contain;padding:0 max(var(--gutter),var(--safe-l),var(--safe-r)) calc(var(--safe-b) + var(--s14));background:var(--canvas);color:var(--ink-2);visibility:hidden;transform:translateY(100%);transition:transform var(--d-scene) var(--ease),visibility 0s linear var(--d-scene)}
+html.is-menu-open .sidebar{visibility:visible;transform:translateY(var(--drag,0px));transition:transform var(--d-scene) var(--ease)}
+html.is-menu-open .sidebar.is-dragging{transition:none}
+.side-head{position:sticky;inset-block-start:0;z-index:2;display:flex;align-items:flex-end;justify-content:space-between;gap:var(--s4);block-size:var(--side-head-h);padding-block-end:var(--s2);background:var(--canvas);touch-action:none}
+.side-head .brand{display:none}
+.side-title{color:var(--ink-display);font:var(--fw-display) var(--fs-display-m)/var(--lh-display) var(--font)}
+.side-title::before{content:"INDEX";content:"INDEX" / "";display:block;color:var(--ink-4);font:var(--fw-label) var(--fs-cap)/1.4 var(--font);letter-spacing:.08em}
+.side-done{display:inline-flex;flex:none;align-items:center;gap:var(--s2);min-inline-size:var(--tap);min-block-size:var(--tap);color:var(--ink-2);font-size:var(--fs-meta);font-weight:var(--fw-strong)}
+.side-profile{display:flex;align-items:center;gap:var(--s4);padding-block:var(--s4)}
+.side-profile .avatar{inline-size:48px;block-size:48px;font-size:var(--fs-title)}
+.side-profile strong{display:block;color:var(--ink-1);font-size:var(--fs-title);font-weight:var(--fw-label);line-height:var(--lh-title)}
+.side-profile small{display:block;color:var(--ink-4);font-size:var(--fs-label);font-weight:var(--fw-label)}
+.nav-search-label{position:sticky;inset-block-start:var(--side-head-h);z-index:1;min-block-size:var(--s14);background:var(--canvas)}
+.nav-search-label .glyph{inline-size:20px;block-size:20px}
+.sig-recent{display:flex;flex-wrap:wrap;gap:0 var(--s6);margin:0;padding:var(--s3) 0 0;list-style:none}
+.sig-recent::before{content:attr(aria-label);flex:1 0 100%;color:var(--ink-4);font-size:var(--fs-label);font-weight:var(--fw-label)}
+.sig-recent a{display:inline-flex;align-items:center;min-block-size:var(--tap);color:var(--ink-3);font-size:var(--fs-meta);text-decoration-line:none}
+
+.nav{display:block;counter-reset:idx;padding-block-start:var(--s4)}
+.hr-nav-group{counter-increment:idx}
+summary.hr-nav-label{display:block;outline-offset:-2px;padding-block:var(--s3);border-block-end:1px solid var(--line);color:var(--ink-3);font-size:var(--fs-title);font-weight:var(--fw-label);line-height:var(--s8);list-style:none;transition:color var(--d-micro) var(--ease)}
+summary.hr-nav-label::-webkit-details-marker{display:none}
+summary.hr-nav-label::before{content:counter(idx,decimal-leading-zero);display:inline-block;min-inline-size:var(--s8);margin-inline-end:var(--s4);border-block-end:4px solid var(--horizon);color:var(--ink-4);font-size:var(--fs-figure-s);font-weight:var(--fw-display);font-variant-numeric:tabular-nums lining-nums;line-height:var(--lh-figure);white-space:nowrap}
+.hr-nav-group[open]>summary.hr-nav-label{color:var(--ink-1)}
+.hr-nav-total{float:inline-end;color:var(--ink-4);font-size:var(--fs-label);font-weight:var(--fw-label)}
+.hr-nav-section{padding-block-end:var(--s3)}
+.hr-nav-sublabel,.side-account>.hr-nav-label{margin:0;padding-block:var(--s4) var(--s1);color:var(--ink-4);font-size:var(--fs-label);font-weight:var(--fw-label);line-height:1.4}
+.nav a,.nav-row{position:relative;display:flex;outline-offset:-2px;align-items:center;gap:var(--s3);inline-size:100%;min-block-size:48px;border-block-end:1px solid var(--line);color:var(--ink-3);font-size:var(--fs-body);line-height:1.5;text-align:start;text-decoration-line:none;transition:color var(--d-micro) var(--ease),padding-inline-start var(--d-micro) var(--ease)}
+.nav a::before{content:"";position:absolute;inset-block-start:calc(50% - 3px);inset-inline-start:0;inline-size:8px;block-size:6px;background-color:currentColor;-webkit-mask:var(--m-done) center/contain no-repeat;mask:var(--m-done) center/contain no-repeat;opacity:0;transition:opacity var(--d-micro) var(--ease)}
+.nav a.active{padding-inline-start:var(--s4);color:var(--ink-1);font-weight:var(--fw-strong)}
+.nav a.active::before{opacity:1}
+.nav-icon{display:inline-flex;flex:none;inline-size:20px;block-size:20px;color:var(--ink-4)}
+.nav-icon .glyph{inline-size:100%;block-size:100%}
+.tint-blue,.tint-green,.tint-indigo,.tint-orange,.tint-pink,.tint-purple,.tint-red,.tint-teal,.tint-yellow,.tint-mint,.tint-cyan,.tint-brown,.tint-gray{--icon:currentColor;background:none}
+.nav-label{flex:1 1 auto;min-inline-size:0}
+.nav-value{flex:none;color:var(--ink-4);font-size:var(--fs-meta)}
+.nav-row{font-size:var(--fs-table)}
+.nav-row.is-destructive,.nav-row.is-destructive .nav-icon{color:var(--stop)}
+.side-account{padding-block-start:var(--s6)}
+.side-note{margin:0;padding-block-start:var(--s6);color:var(--ink-4);font-size:var(--fs-label)}
+.side-note .status-dot{margin-inline-end:var(--s2)}
+/* filtering: app.mjs writes [hidden]; the display rules above would cancel the UA rule */
+.nav :is(a,.hr-nav-section,.hr-nav-group)[hidden],.sig-siblings [hidden]{display:none}
+.sidebar:has(#nav-search:not(:placeholder-shown)) :is(.hr-nav-total,.sig-recent){display:none}
+
+/* ---------- command palette ---------- */
+.sig-cmd{position:fixed;inset:0;z-index:var(--z-cmd);overflow-y:auto;overscroll-behavior:contain;background:var(--scrim);color:var(--ink-2)}
+.sig-cmd[hidden]{display:none}
+.sig-cmd-box{inline-size:min(760px,100% - var(--s8));margin-inline:auto;margin-block-start:calc(var(--safe-t) + var(--s2))}
+.sig-cmd-input{min-block-size:calc(var(--s14) + var(--s2))}
+.sig-cmd-input .glyph{inline-size:22px;block-size:22px}
+.sig-cmd-input input{font-size:var(--fs-title)}
+.sig-cmd-cancel{flex:none;min-inline-size:var(--tap);min-block-size:var(--tap);color:var(--ink-3);font-size:var(--fs-meta);font-weight:var(--fw-strong)}
+.sig-cmd-list{max-block-size:calc(100dvh - 64px - var(--safe-t));overflow-y:auto;overscroll-behavior:contain}
+.sig-cmd-group{margin:0;padding-block:var(--s6) var(--s2);color:var(--ink-4);font-size:var(--fs-label);font-weight:var(--fw-label)}
+.sig-cmd-item{display:grid;grid-template-columns:auto minmax(0,1fr) auto;align-items:center;gap:var(--s3);inline-size:100%;min-block-size:var(--s14);padding:var(--s2) var(--s3);border-block-end:1px solid var(--line);border-inline-start:2px solid transparent;color:var(--ink-3);text-align:start;outline-offset:-2px;transition:color var(--d-micro) var(--ease),border-color var(--d-micro) var(--ease)}
+.sig-cmd-item strong{display:block;color:var(--ink-2);font-size:var(--fs-row);font-weight:var(--fw-strong);line-height:1.5}
+.sig-cmd-item small{display:block;color:var(--ink-4);font-size:var(--fs-label);line-height:1.5}
+.sig-cmd-item b{display:inline-flex;align-items:center;gap:var(--s2);color:var(--ink-4);font-size:var(--fs-label);font-weight:var(--fw-label)}
+.sig-cmd-item.is-active{border-block-end-color:var(--line-strong);border-inline-start-color:var(--ink-1);color:var(--ink-1)}
+.sig-cmd-item.is-active strong{color:var(--ink-1)}
+.sig-cmd-item.is-active b::before{content:"";inline-size:8px;block-size:6px;background-color:var(--ink-1);-webkit-mask:var(--m-done) center/contain no-repeat;mask:var(--m-done) center/contain no-repeat}
+.sig-cmd-empty{margin:0;padding-block:var(--s6);color:var(--ink-4)}
+.sig-cmd-empty::before{content:"— "}
+.sig-cmd-foot{display:none}
+
+/* ---------- page head (the ::after horizon belongs to athar.css) ---------- */
+.page-head{position:relative;display:grid;grid-template-columns:minmax(0,1fr);gap:var(--s6);padding-block:var(--s6)}
+.page-head>div:first-child{position:relative;min-inline-size:0}
+.page-head>[data-sig-group]::before{content:attr(data-sig-group);display:block;margin-block-end:var(--s2);padding-inline-start:var(--s4);color:var(--ink-4);font-size:var(--fs-label);font-weight:var(--fw-label);line-height:1.4}
+.page-head>[data-sig-group]::after{content:"";position:absolute;inset-block-start:6px;inset-inline-start:0;inline-size:8px;block-size:6px;background-color:var(--ink-4);-webkit-mask:var(--m-done) center/contain no-repeat;mask:var(--m-done) center/contain no-repeat}
+.page-head h1+p{max-inline-size:52ch;margin-block-start:var(--s3);color:var(--ink-3);font-size:var(--fs-body)}
+.page-actions{display:flex;flex-wrap:wrap;align-items:center;gap:var(--s3)}
+.page-actions>.btn{flex:1 1 100%}
+.page-actions>.btn,.page-head>.btn{background-color:var(--canvas)}   /* integrator: the horizon block shares this corner; an edged pill must not let the lattice show through its label. The fill layer still wins for the lit action */
+.department-back{display:inline-flex;align-items:center;min-block-size:var(--tap);margin-block-start:var(--s4);color:var(--ink-3);font-size:var(--fs-meta);font-weight:var(--fw-strong);text-decoration-line:none}
+/* home and portal are stage scenes: the h1 stays the one semantic title but reads as a label; the greeting injected by signature.mjs is the display line */
+:root:is([data-route=home],[data-route=portal]) .page-head{min-block-size:var(--hero-h)}
+:root:is([data-route=home],[data-route=portal]) #main .page-head h1{color:var(--ink-4);font-size:var(--fs-label);font-weight:var(--fw-label);line-height:1.4}
+:root:is([data-route=home],[data-route=portal]) .page-head>[data-sig-group]::before,:root:is([data-route=home],[data-route=portal]) .page-head>[data-sig-group]::after{content:none}
+
+@media (hover:hover){
+  :is(.top-btn,.sig-appearance > button,.side-done,.sig-cmd-cancel,.department-back,.sig-recent a,.sig-siblings :is(a,button)):hover,.sig-tabs :is(a,button):hover,.nav-row:not(.is-destructive):hover{color:var(--ink-1)}
+  .nav a:hover{padding-inline-start:var(--s4);color:var(--ink-1)}
+  .nav a:hover::before{opacity:1}
+  .sig-cmd-item:hover{border-block-end-color:var(--line-strong);color:var(--ink-1)}
+  .nav-row.is-destructive:hover,.department-back:hover{text-decoration-line:underline}
+}
+
+@media (min-width:760px){
+  .sidebar>*{max-inline-size:720px;margin-inline:auto}
+  .sig-cmd-box{margin-block-start:18vh}
+  .sig-cmd-input{min-block-size:calc(var(--s14) + var(--s2))}
+  .sig-cmd-input input{font-size:var(--fs-display-m)}
+  .sig-cmd-list{max-block-size:calc(82dvh - 18vh - 112px)}
+  .sig-cmd-foot{display:flex;flex-wrap:wrap;gap:var(--s6);padding-block:var(--s4);color:var(--ink-4);font-size:var(--fs-label)}
+  .page-actions>.btn{flex:0 1 auto}
+  .page-head>.btn{justify-self:start}
+}
+
+@media (min-width:1024px){
+  html{scroll-padding-block-end:var(--s4)}
+  .shell{--shell-lead:calc(var(--gutter) + 90px + var(--s1) + 116px + var(--s4));--shell-tail:calc(var(--gutter) + var(--tap) + var(--tap) + var(--s4))}
+  .page{padding-block-end:var(--s24)}
+  .topbar{margin-block-end:var(--siblings-h)}
+  .shell .brand-svg{block-size:24px}
+  .top-avatar{inline-size:116px;justify-content:flex-start;padding-inline:var(--s2)}
+  .top-index-label{display:inline;font-size:var(--fs-meta);font-weight:var(--fw-strong)}
+  .topbar-title{display:none}
+  .top-search{margin-inline-start:auto}
+  /* the day's destinations sit inside the top bar row: fixed, between the index button and the search */
+  .sig-tabs{inset-block:0 auto;inset-inline:var(--shell-lead) var(--shell-tail);block-size:var(--topbar-h);gap:var(--s8);overflow:hidden;padding:0;background:none;border:0;pointer-events:none}
+  .sig-tabs a{flex:none;flex-direction:row;gap:var(--s2);min-inline-size:0;border-block-end:2px solid transparent;font-size:var(--fs-meta);font-weight:var(--fw-strong);white-space:nowrap;pointer-events:auto}
+  .sig-tabs a.active{border-block-end-color:var(--ink-1)}
+  .sig-tabs .active::after,.sig-tabs .glyph,.sig-tabs button{display:none}
+  .sig-tabs .nav-count{position:static}
+  /* sibling screens: its height is reserved by the top bar margin, so the injection never shifts the page */
+  .sig-siblings{position:sticky;inset-block-start:var(--topbar-h);z-index:calc(var(--z-topbar) - 1);display:flex;align-items:stretch;gap:var(--s6);block-size:var(--siblings-h);margin-block-start:calc(var(--siblings-h) * -1);padding-inline:var(--shell-pad);overflow:hidden;background:var(--canvas);border-block-end:1px solid var(--line);white-space:nowrap}
+  .sig-siblings :is(a,button){display:inline-flex;flex:none;align-items:center;gap:var(--s2);border-block-end:2px solid transparent;color:var(--ink-3);font-size:var(--fs-meta);text-decoration-line:none;outline-offset:-2px;transition:color var(--d-micro) var(--ease)}
+  .sig-siblings button{color:var(--ink-4);font-size:var(--fs-label);font-weight:var(--fw-label)}
+  .sig-siblings-group::after{content:"";inline-size:8px;block-size:6px;background-color:var(--ink-5);-webkit-mask:var(--m-done) center/contain no-repeat;mask:var(--m-done) center/contain no-repeat}
+  .sig-siblings-more{margin-inline-start:auto}
+  .sig-siblings a[aria-current]{border-block-end-color:var(--ink-1);color:var(--ink-1);font-weight:var(--fw-strong)}
+
+  /* index scene: statement column (4/12, never scrolls away) + work column (8/12, scrolls). Transparent, so the giant comma on the canvas shows */
+  .sidebar{display:grid;grid-template-columns:minmax(0,4fr) minmax(0,8fr);grid-template-rows:auto auto auto minmax(var(--s8),1fr) auto auto auto;column-gap:var(--s14);padding:0 var(--shell-pad) var(--s8);background:transparent;transform:none;opacity:0;transition:opacity var(--d-scene) var(--ease),visibility 0s linear var(--d-scene)}
+  html.is-menu-open .sidebar{transform:none;opacity:1;transition:opacity var(--d-scene) var(--ease)}
+  html.is-menu-open :is(.stage,.sig-tabs){visibility:hidden}
+  .sidebar>*{grid-column:1;max-inline-size:none;margin-inline:0}
+  .side-head{position:static;display:block;grid-row:1;block-size:auto;padding:0 0 var(--s6);background:none;touch-action:auto}
+  .side-head .brand{display:block;inline-size:max-content;margin-block:calc((var(--topbar-h) - 56px)/2) var(--s10);margin-inline-start:calc(var(--s4) * -1);padding:var(--s4);line-height:0}
+  .side-title{font-size:var(--fs-display-l)}
+  .side-done{position:fixed;inset-block-start:calc((var(--topbar-h) - var(--tap))/2);inset-inline-end:var(--shell-pad);z-index:3}
+  .side-done::after{content:"Esc";content:"Esc" / "";padding-inline:6px;border:1px solid var(--line);border-radius:var(--r-check);color:var(--ink-4);font:var(--fw-label) var(--fs-cap)/1.6 var(--font)}
+  .nav-search-label{position:static;grid-row:2;background:none}
+  .nav-search-label input{font-size:var(--fs-figure-s)}
+  .sig-recent{display:block;grid-row:3;padding-block-start:var(--s6)}
+  .sig-recent::before{display:block}
+  .sig-recent a{display:flex;min-block-size:40px;font-size:var(--fs-body)}
+  .side-profile{grid-row:5;padding-block:var(--s6) var(--s2)}
+  .side-account{grid-row:6;padding-block-start:0}
+  .side-note{grid-row:7}
+  .nav-row{min-block-size:40px;border-block-end:0}
+  /* the three end columns stay free of text: the engine bans the full-height bounding column of .nav, so a margin (not padding) is what lets the comma show */
+  .nav{position:sticky;inset-block-start:var(--topbar-h);grid-column:2;grid-row:1/-1;align-self:start;margin-block-start:var(--topbar-h);margin-inline-end:calc((100vw - 2*var(--shell-pad))*.25);max-block-size:calc(100dvh - var(--topbar-h) - var(--s8));overflow-y:auto;padding-block:0 var(--s14);padding-inline-end:var(--s4)}
+  .hr-nav-group{padding-block-end:var(--s10)}
+  summary.hr-nav-label{padding:0 0 var(--s4);border:0;color:var(--ink-1);line-height:var(--lh-title);cursor:default}
+  summary.hr-nav-label::before{display:block;inline-size:var(--s8);min-inline-size:0;margin:0 0 var(--s3);padding-block-end:var(--s2)}
+  .hr-nav-total{float:none;margin-inline-start:var(--s3)}
+  .nav .hr-nav-rows{columns:3 184px;column-gap:var(--s10)}   /* two columns still fit the narrowed work column at 1280 */
+  .hr-nav-section{break-inside:avoid;padding-block-end:var(--s6)}
+  .hr-nav-sublabel{padding-block-start:0}
+  .nav a{min-block-size:40px;border-block-end:0}
+  .nav .nav-icon,.side-account .nav-icon{display:none}
+
+  .page-head{grid-template-columns:repeat(12,minmax(0,1fr));align-items:end;padding-block:var(--s14) var(--s10)}
+  .page-head>div:first-child{grid-column:span 7}
+  .page-actions{grid-column:span 5;justify-content:flex-end}
+  .page-head>.btn{grid-column:span 5;justify-self:end;white-space:nowrap}   /* org-ui and work-ui emit a bare action, outside .page-actions */
+  :root[data-tier=ledger] .page-head{padding-block:var(--s8) var(--s6)}
+}
+@media (min-width:1024px) and (pointer:coarse){.nav a,.nav-row,.sig-recent a{min-block-size:var(--tap)}}
+@media (min-width:1024px) and (max-height:820px){.sig-recent{display:none}}
+@media (min-width:1280px){
+  .shell{--shell-tail:calc(var(--gutter) + 240px + var(--tap) + var(--s4))}
+  .top-search{justify-content:flex-start;inline-size:240px;min-block-size:40px;border-block-end:1px solid var(--line-strong);color:var(--ink-4)}
+  .top-search-text{display:block;flex:1 1 0;min-inline-size:0;overflow:hidden;font-size:var(--fs-meta);text-align:start;text-overflow:ellipsis;white-space:nowrap}
+  .top-search kbd{display:inline-block}
+}
+
+/* ---------- the field design: the one surface in the system. The hero band floods to the viewport edge; #main pads by the same amount, so nothing overflows ---------- */
+@media screen{
+:root[data-design=field][data-scene=home] #main > :is(.page-head,.journey-hero){background-color:var(--canvas);color:var(--ink-2);margin-inline:calc(var(--shell-pad) * -1);margin-block-end:var(--s10);padding-inline:var(--shell-pad)}
+}
+
+/* ---------- appearance picker (every design): the top-bar cluster, the design menu and the login row. Tokens only ----------
+   #design-menu is one popover appended to <body> by app.mjs; app.mjs writes only top/left through CSSOM. No display here:
+   a closed popover keeps the UA display:none, and the no-popover fallback keeps the base [hidden] rule. */
+.sig-appearance{display:inline-flex;flex:none;align-items:center}
+.sig-language{font-size:var(--fs-label);font-weight:var(--fw-strong);line-height:1}
+#design-menu{position:fixed;inset:auto;z-index:var(--z-cmd);box-sizing:border-box;min-inline-size:220px;max-inline-size:calc(100vw - var(--s4));margin:0;padding:var(--s1);overflow:visible;background:var(--canvas);color:var(--ink-2);border:1px solid var(--line);border-radius:var(--r-float);box-shadow:var(--shadow-float)}
+#design-menu [role=menuitemradio]{display:flex;align-items:center;gap:var(--s3);inline-size:100%;min-block-size:var(--tap);padding-inline:var(--s3);border-radius:calc(var(--r-float) - var(--s1));color:var(--ink-3);font-size:var(--fs-meta);text-align:start}
+#design-menu [role=menuitemradio]:focus-visible{outline:2px solid var(--focus);outline-offset:-2px}
+#design-menu [aria-checked=true]{color:var(--ink-1);font-weight:var(--fw-strong)}
+#design-menu [aria-checked=true]::after{content:"";flex:none;margin-inline-start:auto;inline-size:14px;block-size:10px;background-color:var(--action);-webkit-mask:var(--m-done) center/contain no-repeat;mask:var(--m-done) center/contain no-repeat}
+.design-menu-name{flex:1 1 auto;min-inline-size:0}
+.design-swatch{flex:none;inline-size:18px;block-size:18px;border-radius:var(--r-pill);box-shadow:0 0 0 1px var(--line)}
+.swatch-depth{background:radial-gradient(circle at 35% 35%,var(--brand-turquoise) 0 28%,color-mix(in srgb,var(--brand-turquoise) 22%,black) 62%,black 100%)}
+.swatch-classic{background:color-mix(in srgb,var(--brand-sky) 45%,white)}
+.swatch-void{background:black;box-shadow:0 0 0 1px var(--line-strong)}
+.swatch-field{background:var(--brand-turquoise)}
+.swatch-slate{background:var(--brand-sky)}
+.swatch-riwaq{background:linear-gradient(160deg,#F2F6F9 0 58%,var(--brand-turquoise-deep) 58%)}
+.login-appearance{display:flex;flex-wrap:wrap;align-items:center;gap:0 var(--s4);margin-block-start:var(--s2)}
+.login-appearance .text-button{color:var(--ink-4);font-size:var(--fs-label)}
+@media (hover:hover){
+  #design-menu [role=menuitemradio]:hover,.login-appearance .text-button:hover{color:var(--ink-1)}
+}
+@media (prefers-reduced-motion:no-preference){
+  #design-menu:popover-open{transition:opacity var(--d-micro) var(--ease),translate var(--d-micro) var(--ease)}
+  @starting-style{#design-menu:popover-open{opacity:0;translate:0 calc(var(--s1) * -1)}}
+}
+
+/* masks are painted with background-color, which forced colours override */
+@media (forced-colors:active){
+  .nav a::before,.nav-count::before,.sig-cmd-item b::before,.sig-siblings-group::after,.page-head>[data-sig-group]::after{forced-color-adjust:none;background-color:CanvasText}
+  .topbar,.sig-tabs,.sig-siblings{border-color:CanvasText}
+  #design-menu [aria-checked=true]::after{forced-color-adjust:none;background-color:CanvasText}
+  #design-menu{border-color:CanvasText}
+}
+} /* end @layer shell */
+
+/* ---------- kill: the motion killer, below the frozen block and with a space after @media so it never collides with the tested string ---------- */
+@layer kill{
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;animation-delay:0s!important;animation-iteration-count:1!important;transition-duration:.01ms!important;transition-delay:0s!important;scroll-behavior:auto!important}}
+:root[data-motion=off],:root[data-motion=off]::before,:root[data-motion=off]::after,:root[data-motion=off] *,:root[data-motion=off] *::before,:root[data-motion=off] *::after{animation-duration:.01ms!important;animation-delay:0s!important;animation-iteration-count:1!important;transition-duration:.01ms!important;transition-delay:0s!important;scroll-behavior:auto!important}
+}
+
+/* قواعد الحضور (099): زر البصمة الكبير في أعلى شاشة الحضور، وسطر المسافة والدقة قبل البصمة. */
+.att-punch{display:grid;gap:var(--s2);margin-block-end:var(--s3)}
+.att-punch > .btn{min-block-size:56px;inline-size:100%;font-size:var(--fs-row);font-weight:var(--fw-strong)}
+.att-geo{margin-block:var(--s2) 0;color:var(--ink-2)}
+
+/* ت1 — القائمة الجديدة والصفحات الجامعة (hubs-ui.mjs): فاصل «إدارة المنصة»، وكتلة «كل شاشاتك» المخفية، وصفوف الروابط، وسهم «افتح»
+   يُعكس في RTL، وتبئير ظاهر، وأهداف لمس 44 على المؤشر الخشن. خارج الطبقات عمدًا كقواعد الحضور أعلاه: لا يعلوها تصميم. */
+.nav .nav-sep{margin-block:var(--s3);border:0;border-block-start:1px solid var(--line)}
+.nav :is([data-nav-reach],.nav-sep,.hr-nav-rows)[hidden]{display:none}
+[dir=rtl] .is-directional{transform:scaleX(-1)}
+.hub-links{display:flex;flex-wrap:wrap;gap:var(--s3) var(--s6);margin-block:0 var(--s4)}
+.hub-links-title{margin:0 0 var(--s1);font-size:var(--fs-cap);font-weight:600;color:var(--ink-4)}
+.hub-links ul,.hub-list{display:flex;flex-wrap:wrap;gap:var(--s2);margin:0;padding:0;list-style:none}
+.hub-list{flex-direction:column;gap:0}
+.hub-link{display:inline-flex;align-items:center;justify-content:space-between;gap:var(--s2);min-block-size:44px;min-inline-size:44px;padding-inline:var(--s3);border-radius:var(--r-check);color:inherit;text-decoration:none}
+.hub-links .hub-link{border:1px solid var(--line)}
+.hub-list .hub-link{display:flex;inline-size:100%}
+.hub-list li + li .hub-link{border-block-start:1px solid var(--line);border-radius:0}
+.hub-link[aria-current=page]{font-weight:600}
+.hub-page{display:grid;gap:var(--s4)}
+:is(.nav a,.hub-link,.sig-tabs > a,.sig-tabs > button):focus-visible{outline:2px solid var(--focus);outline-offset:2px}
+@media (pointer:coarse){.nav a,.side-account .nav-row,.sig-tabs > :is(a,button){min-block-size:44px}}

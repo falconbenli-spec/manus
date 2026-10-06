@@ -1,0 +1,546 @@
+# Package 3 — general-ledger completeness: focused tests (branch p3/ledger-completeness on d9a310d), 2026-09-30
+# Runner: work/node24/bin/node v24.14.0 --test --test-reporter=tap, inside the agent sandbox (no port is opened: the route test drives the request handler directly).
+# Files: tests/ledger-completeness.test.mjs tests/ledger.test.mjs tests/finance.test.mjs tests/withholding-ledger.test.mjs tests/seed-finance-demo.test.mjs
+#        tests/options-conversions.test.mjs tests/billing-recurring.test.mjs tests/bank-reconciliation.test.mjs tests/project-closure.test.mjs
+#        tests/expenses-assets.test.mjs tests/reports-library.test.mjs tests/payables.test.mjs
+# Result: 87 tests, 87 pass, 0 fail, 0 skipped. Red evidence and the gap probe: docs/testing/p3-ledger-completeness-probe-20260930.txt
+TAP version 13
+# Subtest: csv reader: quoted fields, thousands separators and a trailing row survive the bank export format
+ok 1 - csv reader: quoted fields, thousands separators and a trailing row survive the bank export format
+  ---
+  duration_ms: 0.94825
+  type: 'test'
+  ...
+# Subtest: statement import: the file is the only source, its content digest blocks a second import, and a file that does not add up is refused
+ok 2 - statement import: the file is the only source, its content digest blocks a second import, and a file that does not add up is refused
+  ---
+  duration_ms: 15654.232791
+  type: 'test'
+  ...
+# Subtest: an imported bank line is never edited: correction is cancelling the whole batch, and only before a match on it is approved
+ok 3 - an imported bank line is never edited: correction is cancelling the whole batch, and only before a match on it is approved
+  ---
+  duration_ms: 16454.138334
+  type: 'test'
+  ...
+# Subtest: suggestion explains itself in words and stays a suggestion: nothing is matched without a human, and the preparer never approves
+ok 4 - suggestion explains itself in words and stays a suggestion: nothing is matched without a human, and the preparer never approves
+  ---
+  duration_ms: 16459.326041
+  type: 'test'
+  ...
+# Subtest: tenant isolation and capability: a user of another entity and a user without the capability see and touch nothing
+ok 5 - tenant isolation and capability: a user of another entity and a user without the capability see and touch nothing
+  ---
+  duration_ms: 17247.572458
+  type: 'test'
+  ...
+# Subtest: a bank rule only suggests: it names an account and an owner and posts nothing
+ok 6 - a bank rule only suggests: it names an account and an owner and posts nothing
+  ---
+  duration_ms: 16032.002083
+  type: 'test'
+  ...
+# Subtest: period reconciliation: every line is decided first, the difference is shown, and an approved reconciliation is locked
+ok 7 - period reconciliation: every line is decided first, the difference is shown, and an approved reconciliation is locked
+  ---
+  duration_ms: 16031.07225
+  type: 'test'
+  ...
+# Subtest: a non-zero difference is never stored or approved without a written explanation
+ok 8 - a non-zero difference is never stored or approved without a written explanation
+  ---
+  duration_ms: 15039.757458
+  type: 'test'
+  ...
+# Subtest: a recurring schedule prepares a draft for the period and never an issued invoice, and rerunning it changes nothing
+ok 9 - a recurring schedule prepares a draft for the period and never an issued invoice, and rerunning it changes nothing
+  ---
+  duration_ms: 16748.280125
+  type: 'test'
+  ...
+# Subtest: an advance is a liability whose receipt a second person confirms, and drawn amounts never exceed the paid balance
+ok 10 - an advance is a liability whose receipt a second person confirms, and drawn amounts never exceed the paid balance
+  ---
+  duration_ms: 16985.120625
+  type: 'test'
+  ...
+# Subtest: carry-forward and overage deduction are independent contract options that move entitlement only, never the invoice amount
+ok 11 - carry-forward and overage deduction are independent contract options that move entitlement only, never the invoice amount
+  ---
+  duration_ms: 16310.147958
+  type: 'test'
+  ...
+# Subtest: usage thresholds are configuration set by the contract owner, and each threshold alerts once per period
+ok 12 - usage thresholds are configuration set by the contract owner, and each threshold alerts once per period
+  ---
+  duration_ms: 17401.425708
+  type: 'test'
+  ...
+# Subtest: recurring billing is closed to accounts without the capability and never reaches another tenant
+ok 13 - recurring billing is closed to accounts without the capability and never reaches another tenant
+  ---
+  duration_ms: 17036.966333
+  type: 'test'
+  ...
+# Subtest: E51: a receipt is claimed once, approved by the line manager then finance, and the claimant decides nothing
+ok 14 - E51: a receipt is claimed once, approved by the line manager then finance, and the claimant decides nothing
+  ---
+  duration_ms: 16349.693208
+  type: 'test'
+  ...
+# Subtest: E52: custody is issued by finance, settled by approved claims, and closes only when the remainder is returned exactly
+ok 15 - E52: custody is issued by finance, settled by approved claims, and closes only when the remainder is returned exactly
+  ---
+  duration_ms: 16843.725042
+  type: 'test'
+  ...
+# Subtest: E61: an asset is approved by a second person and depreciates straight-line once per month with no gaps, the last month absorbing rounding
+ok 16 - E61: an asset is approved by a second person and depreciates straight-line once per month with no gaps, the last month absorbing rounding
+  ---
+  duration_ms: 16679.213125
+  type: 'test'
+  ...
+# Subtest: ledger: expense, custody, depreciation and the year-end close all post from their documents and keep the balance sheet balanced
+ok 17 - ledger: expense, custody, depreciation and the year-end close all post from their documents and keep the balance sheet balanced
+  ---
+  duration_ms: 17743.362125
+  type: 'test'
+  ...
+# Subtest: FIN-01/06/09: a balanced journal reaches an immutable local posting and a sourced trial balance
+ok 18 - FIN-01/06/09: a balanced journal reaches an immutable local posting and a sourced trial balance
+  ---
+  duration_ms: 16654.03625
+  type: 'test'
+  ...
+# Subtest: FIN-01/06: unbalanced, floating, negative, empty or two-sided amounts cannot create a journal
+ok 19 - FIN-01/06: unbalanced, floating, negative, empty or two-sided amounts cannot create a journal
+  ---
+  duration_ms: 17293.574625
+  type: 'test'
+  ...
+# Subtest: FIN-06: returned revisions require a fresh independent approval and cannot skip posting
+ok 20 - FIN-06: returned revisions require a fresh independent approval and cannot skip posting
+  ---
+  duration_ms: 17399.244166
+  type: 'test'
+  ...
+# Subtest: FIN-06/09: a closed period and deactivated reference block a pending posting
+ok 21 - FIN-06/09: a closed period and deactivated reference block a pending posting
+  ---
+  duration_ms: 17939.497542
+  type: 'test'
+  ...
+# Subtest: FIN-06: an exact reversal is prepared and approved separately, then offsets the ledger once
+ok 22 - FIN-06: an exact reversal is prepared and approved separately, then offsets the ledger once
+  ---
+  duration_ms: 16962.846208
+  type: 'test'
+  ...
+# Subtest: IT-02/PLT-05: financial reads and writes require current explicit unexpired grants
+ok 23 - IT-02/PLT-05: financial reads and writes require current explicit unexpired grants
+  ---
+  duration_ms: 17433.46225
+  type: 'test'
+  ...
+# Subtest: FIN-06: posting checks whether the original approver still holds authority
+ok 24 - FIN-06: posting checks whether the original approver still holds authority
+  ---
+  duration_ms: 15067.467459
+  type: 'test'
+  ...
+# Subtest: FIN-05/06: a matched procurement reference creates one exact payable journal
+ok 25 - FIN-05/06: a matched procurement reference creates one exact payable journal
+  ---
+  duration_ms: 15609.917041
+  type: 'test'
+  ...
+# Subtest: FIN-06 PLT-06/09: idempotent creation and rollback preserve one journal and its audit
+ok 26 - FIN-06 PLT-06/09: idempotent creation and rollback preserve one journal and its audit
+  ---
+  duration_ms: 12224.208083
+  type: 'test'
+  ...
+# ERROR: failed to copy trust settings of system certificate-25291
+# ERROR: failed to copy trust settings of system certificate-25291
+# ERROR: failed to copy trust settings of system certificate-25291
+# ERROR: failed to copy trust settings of system certificate-25291
+# Subtest: registry: every existing source kind is held unchanged, the new kinds join it, and another file can register its own kind
+ok 27 - registry: every existing source kind is held unchanged, the new kinds join it, and another file can register its own kind
+  ---
+  duration_ms: 17317.029791
+  type: 'test'
+  ...
+# Subtest: supplier invoice: net per cost centre, input VAT from the verified record, the gross liability — one balanced journal in minor units
+ok 28 - supplier invoice: net per cost centre, input VAT from the verified record, the gross liability — one balanced journal in minor units
+  ---
+  duration_ms: 18549.097459
+  type: 'test'
+  ...
+# Subtest: supplier invoice: not ready until the VAT position is known, and a supplier outside the VAT register posts gross to cost
+ok 29 - supplier invoice: not ready until the VAT position is known, and a supplier outside the VAT register posts gross to cost
+  ---
+  duration_ms: 18585.087125
+  type: 'test'
+  ...
+# Subtest: supplier invoice: one payable, one journal — the old manual path is closed, its journals stay readable, and a trigger refuses a second path
+ok 30 - supplier invoice: one payable, one journal — the old manual path is closed, its journals stay readable, and a trigger refuses a second path
+  ---
+  duration_ms: 17815.777792
+  type: 'test'
+  ...
+# Subtest: customer advances: receipt, each draw application and reversal become journals, and the control reads net of reversals
+ok 31 - customer advances: receipt, each draw application and reversal become journals, and the control reads net of reversals
+  ---
+  duration_ms: 17416.216917
+  type: 'test'
+  ...
+# Subtest: migration 167 upgrade: draws applied before it become one opening event each, and later applications are captured by the trigger
+ok 32 - migration 167 upgrade: draws applied before it become one opening event each, and later applications are captured by the trigger
+  ---
+  duration_ms: 17308.800417
+  type: 'test'
+  ...
+# Subtest: pending sources: an unposted supplier liability is listed and blocks the monthly close pack like any other unposted document
+ok 33 - pending sources: an unposted supplier liability is listed and blocks the monthly close pack like any other unposted document
+  ---
+  duration_ms: 16578.169292
+  type: 'test'
+  ...
+# Subtest: control reconciliation: AR, AP, input VAT, output VAT and customer advances tie to their control accounts after a synthetic month, and the trial balance balances
+ok 34 - control reconciliation: AR, AP, input VAT, output VAT and customer advances tie to their control accounts after a synthetic month, and the trial balance balances
+  ---
+  duration_ms: 15268.339625
+  type: 'test'
+  ...
+# Subtest: control reconciliation: every difference is itemised to a document or a journal, and the items add up to the difference
+ok 35 - control reconciliation: every difference is itemised to a document or a journal, and the items add up to the difference
+  ---
+  duration_ms: 14084.490792
+  type: 'test'
+  ...
+# Subtest: control reconciliation: read-only, finance-scoped and tenant-isolated
+ok 36 - control reconciliation: read-only, finance-scoped and tenant-isolated
+  ---
+  duration_ms: 13462.12675
+  type: 'test'
+  ...
+# Subtest: trace: a supplier invoice walks to its approvers, its posted journal, its payment, the bank line, and its reversal — with explicit no-link markers
+ok 37 - trace: a supplier invoice walks to its approvers, its posted journal, its payment, the bank line, and its reversal — with explicit no-link markers
+  ---
+  duration_ms: 13039.861208
+  type: 'test'
+  ...
+# Subtest: trace: an invoice reaches its receipt, the advance drawn on it and its credit note; a manual journal says it has no source document
+ok 38 - trace: an invoice reaches its receipt, the advance drawn on it and its credit note; a manual journal says it has no source document
+  ---
+  duration_ms: 13030.377792
+  type: 'test'
+  ...
+# Subtest: trace: finance-scoped, tenant-isolated, and it refuses what it cannot find instead of guessing
+ok 39 - trace: finance-scoped, tenant-isolated, and it refuses what it cannot find instead of guessing
+  ---
+  duration_ms: 12426.949583
+  type: 'test'
+  ...
+# Subtest: listFinance: no constant payment status; each payable carries its payment state from its payment order
+ok 40 - listFinance: no constant payment status; each payable carries its payment state from its payment order
+  ---
+  duration_ms: 11183.920666
+  type: 'test'
+  ...
+# Subtest: idempotency: two processes preparing the same supplier invoice at the same instant leave one journal, one payable link and one source link
+ok 41 - idempotency: two processes preparing the same supplier invoice at the same instant leave one journal, one payable link and one source link
+  ---
+  duration_ms: 14743.546459
+  type: 'test'
+  ...
+# Subtest: separation of duties: the preparer neither approves nor posts a sourced journal, a reversal needs another preparer, and a read-only holder prepares nothing
+ok 42 - separation of duties: the preparer neither approves nor posts a sourced journal, a reversal needs another preparer, and a read-only holder prepares nothing
+  ---
+  duration_ms: 10810.609292
+  type: 'test'
+  ...
+# Subtest: routes: GET /api/ledger/reconciliation and /api/ledger/trace answer a finance reader and refuse everyone else, writing nothing
+ok 43 - routes: GET /api/ledger/reconciliation and /api/ledger/trace answer a finance reader and refuse everyone else, writing nothing
+  ---
+  duration_ms: 12195.54575
+  type: 'test'
+  ...
+# Subtest: screens: the statements screen shows the control reconciliation and a trace action; the finance screen shows each payable’s real payment state
+ok 44 - screens: the statements screen shows the control reconciliation and a trace action; the finance screen shows each payable’s real payment state
+  ---
+  duration_ms: 9445.962834
+  type: 'test'
+  ...
+# Subtest: an issued invoice becomes one balanced draft journal whose lines cannot be edited or posted twice
+ok 45 - an issued invoice becomes one balanced draft journal whose lines cannot be edited or posted twice
+  ---
+  duration_ms: 16268.075333
+  type: 'test'
+  ...
+# Subtest: statements come from posted journals only: invoice, credit note and receipt flow into income statement, balance sheet and the customer statement
+ok 46 - statements come from posted journals only: invoice, credit note and receipt flow into income statement, balance sheet and the customer statement
+  ---
+  duration_ms: 17095.581917
+  type: 'test'
+  ...
+# Subtest: a payroll run posts as totals only, and nothing posts without approved mappings recorded and approved by different people
+ok 47 - a payroll run posts as totals only, and nothing posts without approved mappings recorded and approved by different people
+  ---
+  duration_ms: 16879.777
+  type: 'test'
+  ...
+# Subtest: مركز التكلفة: قائمة مرآة لصفوف المالية، والطلب يحمل معرّف الصفّ لا نصًّا وحده
+ok 48 - مركز التكلفة: قائمة مرآة لصفوف المالية، والطلب يحمل معرّف الصفّ لا نصًّا وحده
+  ---
+  duration_ms: 16424.302625
+  type: 'test'
+  ...
+# Subtest: اليوم الأول لم يتغيّر: مركز خارج قائمة المالية يبقى مقبولًا نصًّا حتى يقرّر المالك إغلاق الحقل
+ok 49 - اليوم الأول لم يتغيّر: مركز خارج قائمة المالية يبقى مقبولًا نصًّا حتى يقرّر المالك إغلاق الحقل
+  ---
+  duration_ms: 17672.368
+  type: 'test'
+  ...
+# Subtest: الطلب والمخصص يشيران إلى الصفّ نفسه، فالحجز يقع على المخصص المقصود
+ok 50 - الطلب والمخصص يشيران إلى الصفّ نفسه، فالحجز يقع على المخصص المقصود
+  ---
+  duration_ms: 16773.9755
+  type: 'test'
+  ...
+# Subtest: كل قائمة مسجّلة تحمل مالكًا وحوكمة، والمثبّتة نظامًا تحمل مادتها
+ok 51 - كل قائمة مسجّلة تحمل مالكًا وحوكمة، والمثبّتة نظامًا تحمل مادتها
+  ---
+  duration_ms: 17955.298125
+  type: 'test'
+  ...
+# Subtest: قيمة غير معروفة في قائمة معروفة تُرفض، والقيمة المخزَّنة قديمًا تبقى مقروءة
+ok 52 - قيمة غير معروفة في قائمة معروفة تُرفض، والقيمة المخزَّنة قديمًا تبقى مقروءة
+  ---
+  duration_ms: 16449.015167
+  type: 'test'
+  ...
+# Subtest: شاشة الموردين تعرض قوائمها المُدارة للقراءة: خياراتها وحالتها وسبب إقفال المقفلة منها
+ok 53 - شاشة الموردين تعرض قوائمها المُدارة للقراءة: خياراتها وحالتها وسبب إقفال المقفلة منها
+  ---
+  duration_ms: 16467.412083
+  type: 'test'
+  ...
+# Subtest: حمولة المدفوعات تحمل نسبة الضريبة بجدولها المؤرَّخ وحالات الأمر بقيدها
+ok 54 - حمولة المدفوعات تحمل نسبة الضريبة بجدولها المؤرَّخ وحالات الأمر بقيدها
+  ---
+  duration_ms: 14831.916833
+  type: 'test'
+  ...
+# Subtest: تشديد صيغة الرقم الضريبي يسري على الجديد ولا يجمّد ملفًا قائمًا كُتب قبله
+ok 55 - تشديد صيغة الرقم الضريبي يسري على الجديد ولا يجمّد ملفًا قائمًا كُتب قبله
+  ---
+  duration_ms: 15799.9025
+  type: 'test'
+  ...
+# Subtest: تعطيل تصنيف لا يجمّد ملفًا يحمله ولا يبدّل تصنيفه صامتًا في نموذج التحرير
+ok 56 - تعطيل تصنيف لا يجمّد ملفًا يحمله ولا يبدّل تصنيفه صامتًا في نموذج التحرير
+  ---
+  duration_ms: 12483.880041
+  type: 'test'
+  ...
+# Subtest: نوع وثيقة تفرضه مصفوفة المتطلبات لا يُعطَّل، والرفض يسمّي ما يفرضه ومن يملك تغييره
+ok 57 - نوع وثيقة تفرضه مصفوفة المتطلبات لا يُعطَّل، والرفض يسمّي ما يفرضه ومن يملك تغييره
+  ---
+  duration_ms: 13092.056209
+  type: 'test'
+  ...
+# Subtest: غرض معطَّل ما زال ربطه ساريًا يبقى في القوائم المالية موسومًا، لا يختفي منها
+ok 58 - غرض معطَّل ما زال ربطه ساريًا يبقى في القوائم المالية موسومًا، لا يختفي منها
+  ---
+  duration_ms: 11224.525167
+  type: 'test'
+  ...
+# Subtest: رموز الرفض بعد التحويل: option_not_offered على القيمة خارج القائمة، واسم الحقل حيث لم يتغيّر السبب
+ok 59 - رموز الرفض بعد التحويل: option_not_offered على القيمة خارج القائمة، واسم الحقل حيث لم يتغيّر السبب
+  ---
+  duration_ms: 12470.493833
+  type: 'test'
+  ...
+# Subtest: القائمة المقفلة بقيد في القاعدة ترفض كل كتابة، ويسمّي الرفض القيد وترحيله
+ok 60 - القائمة المقفلة بقيد في القاعدة ترفض كل كتابة، ويسمّي الرفض القيد وترحيله
+  ---
+  duration_ms: 11952.11375
+  type: 'test'
+  ...
+# Subtest: PRC-02: an unregistered or unqualified vendor never enters the payment cycle, and no bank account means no order
+ok 61 - PRC-02: an unregistered or unqualified vendor never enters the payment cycle, and no bank account means no order
+  ---
+  duration_ms: 53427.52125
+  type: 'test'
+  ...
+# Subtest: FIN-07/PRC-09: approved is not paid — three people prepare, approve and record the bank execution, and the bank-detail collector cannot record it
+ok 62 - FIN-07/PRC-09: approved is not paid — three people prepare, approve and record the bank execution, and the bank-detail collector cannot record it
+  ---
+  duration_ms: 16155.646
+  type: 'test'
+  ...
+# Subtest: PRC-09: if the vendor bank account changes after the order was prepared, approval stops instead of silently paying the new account
+ok 63 - PRC-09: if the vendor bank account changes after the order was prepared, approval stops instead of silently paying the new account
+  ---
+  duration_ms: 15784.744459
+  type: 'test'
+  ...
+# Subtest: input VAT enters the summary only after a second person verifies the supplier tax invoice, and cannot exceed 15% of net
+ok 64 - input VAT enters the summary only after a second person verifies the supplier tax invoice, and cannot exceed 15% of net
+  ---
+  duration_ms: 13052.738208
+  type: 'test'
+  ...
+# Subtest: FIN-09: تمنع ضريبة الفاتورة المكررة عبر مرجع شراء آخر بعد توحيد شكل رقمها
+ok 65 - FIN-09: تمنع ضريبة الفاتورة المكررة عبر مرجع شراء آخر بعد توحيد شكل رقمها
+  ---
+  duration_ms: 13557.222083
+  type: 'test'
+  ...
+# Subtest: PRC-09: يظهر توقف المورد بعد الاعتماد ويُحفظ التحذير عند توثيق تنفيذ وقع فعلا
+ok 66 - PRC-09: يظهر توقف المورد بعد الاعتماد ويُحفظ التحذير عند توثيق تنفيذ وقع فعلا
+  ---
+  duration_ms: 11695.470875
+  type: 'test'
+  ...
+# Subtest: FIN-09: السجلات القديمة المكررة لا تعتمد، ويمكن رفض المكرر ثم اعتماد الأصل
+ok 67 - FIN-09: السجلات القديمة المكررة لا تعتمد، ويمكن رفض المكرر ثم اعتماد الأصل
+  ---
+  duration_ms: 13378.568292
+  type: 'test'
+  ...
+# Subtest: PRC-09: تغير الحساب البنكي بعد اعتماد الدفع يظهر للمالية دون كشف الآيبان
+ok 68 - PRC-09: تغير الحساب البنكي بعد اعتماد الدفع يظهر للمالية دون كشف الآيبان
+  ---
+  duration_ms: 12706.816041
+  type: 'test'
+  ...
+# ERROR: failed to copy trust settings of system certificate-25291
+# ERROR: failed to copy trust settings of system certificate-25291
+# ERROR: failed to copy trust settings of system certificate-25291
+# ERROR: failed to copy trust settings of system certificate-25291
+# Subtest: closure (2): each technical blocker is named from its source, and only defects and tasks take a written exception
+ok 69 - closure (2): each technical blocker is named from its source, and only defects and tasks take a written exception
+  ---
+  duration_ms: 16969.706167
+  type: 'test'
+  ...
+# Subtest: closure (4): financial closure before technical closure is refused by name, in the code and in the database
+ok 70 - closure (4): financial closure before technical closure is refused by name, in the code and in the database
+  ---
+  duration_ms: 16494.186209
+  type: 'test'
+  ...
+# Subtest: closure (3): receivables, credits, refunds, journals and the margin are each read from their own source
+ok 71 - closure (3): receivables, credits, refunds, journals and the margin are each read from their own source
+  ---
+  duration_ms: 15872.592667
+  type: 'test'
+  ...
+# Subtest: closure (3): supplier liabilities and supplier taxes are read from procurement, payables and payment orders
+ok 72 - closure (3): supplier liabilities and supplier taxes are read from procurement, payables and payment orders
+  ---
+  duration_ms: 15871.370042
+  type: 'test'
+  ...
+# Subtest: closure (3): expenses, advances and company assets on the project are read from their own records
+ok 73 - closure (3): expenses, advances and company assets on the project are read from their own records
+  ---
+  duration_ms: 12732.303291
+  type: 'test'
+  ...
+# Subtest: closure (5): reopening is a new authorised record with a reason, ends the closures built on it, and every earlier closure stays
+ok 74 - closure (5): reopening is a new authorised record with a reason, ends the closures built on it, and every earlier closure stays
+  ---
+  duration_ms: 13303.050917
+  type: 'test'
+  ...
+# Subtest: closure: technical, margin and financial are different authorities, enforced on the server
+ok 75 - closure: technical, margin and financial are different authorities, enforced on the server
+  ---
+  duration_ms: 11170.764584
+  type: 'test'
+  ...
+# Subtest: closure: negative paths — stale checklist, bad decisions, stale margin, closed scopes — write nothing, and a replay writes nothing twice
+ok 76 - closure: negative paths — stale checklist, bad decisions, stale margin, closed scopes — write nothing, and a replay writes nothing twice
+  ---
+  duration_ms: 12304.205459
+  type: 'test'
+  ...
+# Subtest: closure: a closure racing a new receivable or journal refuses the stale review, and nothing new lands after it
+ok 77 - closure: a closure racing a new receivable or journal refuses the stale review, and nothing new lands after it
+  ---
+  duration_ms: 12097.108042
+  type: 'test'
+  ...
+# Subtest: closure: every closure act is in the audit chain with its record, and another tenant reaches nothing
+ok 78 - closure: every closure act is in the audit chain with its record, and another tenant reaches nothing
+  ---
+  duration_ms: 11378.222542
+  type: 'test'
+  ...
+# Subtest: closure: the routes carry the same rules over HTTP — the board, margin acceptance, and the refusals by name
+ok 79 - closure: the routes carry the same rules over HTTP — the board, margin acceptance, and the refusals by name
+  ---
+  duration_ms: 14012.915666
+  type: 'test'
+  ...
+# Subtest: closure: the commercial screen draws each closure button for its holder, and each form builds a payload the server accepts
+ok 80 - closure: the commercial screen draws each closure button for its holder, and each form builds a payload the server accepts
+  ---
+  duration_ms: 10475.564916
+  type: 'test'
+  ...
+# Subtest: migration 163: every lock closed before it becomes a carried record, the old rows are untouched, and legacy closures still reopen
+ok 81 - migration 163: every lock closed before it becomes a carried record, the old rows are untouched, and legacy closures still reopen
+  ---
+  duration_ms: 10946.604666
+  type: 'test'
+  ...
+# Subtest: report library: every report runs for every role allowed to open it, its rows match its columns, and it exports in both formats
+ok 82 - report library: every report runs for every role allowed to open it, its rows match its columns, and it exports in both formats
+  ---
+  duration_ms: 18705.445458
+  type: 'test'
+  ...
+# Subtest: report library: account reports show only the accounts whose team the reader belongs to, and finance figures stay with finance
+ok 83 - report library: account reports show only the accounts whose team the reader belongs to, and finance figures stay with finance
+  ---
+  duration_ms: 15895.698833
+  type: 'test'
+  ...
+# Subtest: demo chart of accounts: covers every posting purpose with an account of the right type, leaves every mapping awaiting a second person, and is repeatable
+ok 84 - demo chart of accounts: covers every posting purpose with an account of the right type, leaves every mapping awaiting a second person, and is repeatable
+  ---
+  duration_ms: 16368.512792
+  type: 'test'
+  ...
+# Subtest: withholding: a recorded entry becomes one balanced journal that recognises the liability to the authority
+ok 85 - withholding: a recorded entry becomes one balanced journal that recognises the liability to the authority
+  ---
+  duration_ms: 15349.094375
+  type: 'test'
+  ...
+# Subtest: withholding: the journal is refused while the linked payment order still carries the full amount
+ok 86 - withholding: the journal is refused while the linked payment order still carries the full amount
+  ---
+  duration_ms: 12691.849042
+  type: 'test'
+  ...
+# Subtest: withholding: a cancelled entry carries no obligation and builds no journal
+ok 87 - withholding: a cancelled entry carries no obligation and builds no journal
+  ---
+  duration_ms: 13048.999666
+  type: 'test'
+  ...
+1..87
+# tests 87
+# suites 0
+# pass 87
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 264308.884916

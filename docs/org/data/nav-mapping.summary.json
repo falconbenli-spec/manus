@@ -1,0 +1,290 @@
+[
+ {
+  "menu": "manager-1",
+  "role": "manager",
+  "accounts": 12,
+  "before": 71,
+  "after_a_estimate": "15–18",
+  "budget": 9,
+  "extra_departments": [
+   "إدارة الأعمال",
+   "إدارة الإنتاج",
+   "إدارة التسويق الرقمي",
+   "إدارة الحسابات",
+   "الإدارة التنفيذية للمشاريع",
+   "الحوكمة والالتزام والمخاطر",
+   "المالية",
+   "المشتريات",
+   "تقنية المعلومات"
+  ],
+  "a_within_12": "لا",
+  "after_b_estimate": "9",
+  "b_within_budget": "نعم"
+ },
+ {
+  "menu": "manager-2",
+  "role": "manager",
+  "accounts": 2,
+  "before": 72,
+  "after_a_estimate": "17",
+  "budget": 9,
+  "extra_departments": [
+   "إدارة الأعمال",
+   "إدارة الإنتاج",
+   "إدارة التسويق الرقمي",
+   "إدارة الحسابات",
+   "الإدارة التنفيذية للمشاريع",
+   "الحوكمة والالتزام والمخاطر",
+   "المالية",
+   "المشتريات",
+   "تقنية المعلومات"
+  ],
+  "a_within_12": "لا",
+  "after_b_estimate": "9",
+  "b_within_budget": "نعم"
+ },
+ {
+  "menu": "manager-3",
+  "role": "manager",
+  "accounts": 1,
+  "before": 96,
+  "after_a_estimate": "18",
+  "budget": 9,
+  "extra_departments": [
+   "إدارة الأعمال",
+   "إدارة الإنتاج",
+   "إدارة التسويق الرقمي",
+   "إدارة الحسابات",
+   "الإدارة التنفيذية للمشاريع",
+   "الحوكمة والالتزام والمخاطر",
+   "المشتريات",
+   "تقنية المعلومات",
+   "رأس المال البشري"
+  ],
+  "a_within_12": "لا",
+  "after_b_estimate": "9",
+  "b_within_budget": "نعم"
+ },
+ {
+  "menu": "manager-4",
+  "role": "manager",
+  "accounts": 1,
+  "before": 80,
+  "after_a_estimate": "17",
+  "budget": 9,
+  "extra_departments": [
+   "إدارة الأعمال",
+   "إدارة الإنتاج",
+   "إدارة التسويق الرقمي",
+   "الإدارة التنفيذية للمشاريع",
+   "الحوكمة والالتزام والمخاطر",
+   "المالية",
+   "المشتريات",
+   "تقنية المعلومات"
+  ],
+  "a_within_12": "لا",
+  "after_b_estimate": "9",
+  "b_within_budget": "نعم"
+ },
+ {
+  "menu": "manager-5",
+  "role": "manager",
+  "accounts": 1,
+  "before": 79,
+  "after_a_estimate": "16",
+  "budget": 9,
+  "extra_departments": [
+   "إدارة الإنتاج",
+   "إدارة التسويق الرقمي",
+   "الإدارة التنفيذية للمشاريع",
+   "الحوكمة والالتزام والمخاطر",
+   "المالية",
+   "المشتريات",
+   "تقنية المعلومات"
+  ],
+  "a_within_12": "لا",
+  "after_b_estimate": "9",
+  "b_within_budget": "نعم"
+ },
+ {
+  "menu": "manager-6",
+  "role": "manager",
+  "accounts": 1,
+  "before": 78,
+  "after_a_estimate": "16",
+  "budget": 9,
+  "extra_departments": [
+   "إدارة الأعمال",
+   "إدارة الإنتاج",
+   "الحوكمة والالتزام والمخاطر",
+   "المالية",
+   "المشتريات",
+   "تقنية المعلومات",
+   "مكتب الرئيس التنفيذي"
+  ],
+  "a_within_12": "لا",
+  "after_b_estimate": "9",
+  "b_within_budget": "نعم"
+ },
+ {
+  "menu": "manager-7",
+  "role": "manager",
+  "accounts": 1,
+  "before": 127,
+  "after_a_estimate": "20",
+  "budget": 9,
+  "extra_departments": [
+   "إدارة الأعمال",
+   "إدارة الإنتاج",
+   "إدارة التسويق الرقمي",
+   "إدارة الحسابات",
+   "إدارة العلاقات العامة والمؤثرين",
+   "الإدارة التنفيذية للمشاريع",
+   "الحوكمة والالتزام والمخاطر",
+   "المالية",
+   "المشتريات",
+   "تقنية المعلومات",
+   "مكتب الرئيس التنفيذي"
+  ],
+  "a_within_12": "لا",
+  "after_b_estimate": "9",
+  "b_within_budget": "نعم"
+ },
+ {
+  "menu": "manager-8",
+  "role": "manager",
+  "accounts": 1,
+  "before": 85,
+  "after_a_estimate": "18",
+  "budget": 9,
+  "extra_departments": [
+   "إدارة الأعمال",
+   "إدارة الإنتاج",
+   "إدارة التسويق الرقمي",
+   "إدارة الحسابات",
+   "الإدارة التنفيذية للمشاريع",
+   "الحوكمة والالتزام والمخاطر",
+   "المالية",
+   "المشتريات",
+   "تقنية المعلومات"
+  ],
+  "a_within_12": "لا",
+  "after_b_estimate": "9",
+  "b_within_budget": "نعم"
+ },
+ {
+  "menu": "hr-1",
+  "role": "hr",
+  "accounts": 1,
+  "before": 68,
+  "after_a_estimate": "10",
+  "budget": 8,
+  "extra_departments": [
+   "إدارة الإنتاج",
+   "الحوكمة والالتزام والمخاطر"
+  ],
+  "a_within_12": "نعم",
+  "after_b_estimate": "8",
+  "b_within_budget": "نعم"
+ },
+ {
+  "menu": "it-1",
+  "role": "it",
+  "accounts": 1,
+  "before": 50,
+  "after_a_estimate": "11",
+  "budget": 8,
+  "extra_departments": [
+   "إدارة الإنتاج",
+   "الحوكمة والالتزام والمخاطر",
+   "المشتريات"
+  ],
+  "a_within_12": "نعم",
+  "after_b_estimate": "8",
+  "b_within_budget": "نعم"
+ },
+ {
+  "menu": "admin-1",
+  "role": "admin",
+  "accounts": 1,
+  "before": 69,
+  "after_a_estimate": "17",
+  "budget": 9,
+  "extra_departments": [
+   "إدارة الأعمال",
+   "إدارة الإنتاج",
+   "إدارة العلاقات العامة والمؤثرين",
+   "الإدارة التنفيذية للمشاريع",
+   "الحوكمة والالتزام والمخاطر",
+   "المالية",
+   "المشتريات",
+   "رأس المال البشري",
+   "مكتب الرئيس التنفيذي"
+  ],
+  "a_within_12": "لا",
+  "after_b_estimate": "8",
+  "b_within_budget": "نعم"
+ },
+ {
+  "menu": "employee-1",
+  "role": "employee",
+  "accounts": 2,
+  "before": 32,
+  "after_a_estimate": "8",
+  "budget": 8,
+  "extra_departments": [
+   "المالية"
+  ],
+  "a_within_12": "نعم",
+  "after_b_estimate": "7",
+  "b_within_budget": "نعم"
+ },
+ {
+  "menu": "employee-2",
+  "role": "employee",
+  "accounts": 1,
+  "before": 47,
+  "after_a_estimate": "12",
+  "budget": 8,
+  "extra_departments": [
+   "إدارة الأعمال",
+   "إدارة الإنتاج",
+   "الإدارة التنفيذية للمشاريع",
+   "المشتريات"
+  ],
+  "a_within_12": "نعم",
+  "after_b_estimate": "8",
+  "b_within_budget": "نعم"
+ },
+ {
+  "menu": "employee-3",
+  "role": "employee",
+  "accounts": 1,
+  "before": 31,
+  "after_a_estimate": "8",
+  "budget": 8,
+  "extra_departments": [],
+  "a_within_12": "نعم",
+  "after_b_estimate": "8",
+  "b_within_budget": "نعم"
+ },
+ {
+  "menu": "pm-1",
+  "role": "pm",
+  "accounts": 1,
+  "before": 66,
+  "after_a_estimate": "14",
+  "budget": 8,
+  "extra_departments": [
+   "إدارة الأعمال",
+   "إدارة الإنتاج",
+   "الإدارة التنفيذية للمشاريع",
+   "الحوكمة والالتزام والمخاطر",
+   "المشتريات",
+   "تقنية المعلومات"
+  ],
+  "a_within_12": "لا",
+  "after_b_estimate": "8",
+  "b_within_budget": "نعم"
+ }
+]

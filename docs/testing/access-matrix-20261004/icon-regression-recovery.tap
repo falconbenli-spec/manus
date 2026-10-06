@@ -1,0 +1,120 @@
+(node:44698) ExperimentalWarning: vm.USE_MAIN_CONTEXT_DEFAULT_LOADER is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ admin studio, acceptance #1: a manager adds «مصدر الفرصة» to the Quote as a choice list, puts it in the header, requires it on «إصدار العرض للعميل», adds it as a list column and publishes — from the page itself, with no code and no restart (6487.936166ms)
+✔ admin studio, acceptance #2: renaming «العميل» to «الجهة» reaches every pilot screen, their dialogs and their list heads at once — labels, not prose — and rolls back in one click (5929.180958ms)
+✔ admin studio: without the configure capability there is no button, no drawer and no editor payload — and a configurer who does not work on the entity gets no button there either (5090.378959ms)
+✔ admin studio: removing a required rule is a loosening — the drawer offers «تسليم للنشر» instead of «نشر», the draft reaches the second publisher’s inbox, and they publish it from their own drawer (4859.344125ms)
+✔ view as: a manager trying the platform as an ordinary employee sees no costs or margins, cannot approve, pay or change a permission — refused by the server, not hidden — and the trial is recorded under their own name (4371.955208ms)
+✔ view as: the trial ends by itself after thirty minutes, and a request after it sees no persona (4139.046292ms)
+✔ custom fields reach the forms of hand-written screens through one seam: a create form, the generic «تعديل الحقول المخصّصة» dialog, and a conditional field (4260.34375ms)
+✔ platform terms: an override of a vocabulary key is data — it reaches what app.mjs draws through the vocabulary, and rolling it back returns the vocabulary phrase (4090.355ms)
+✔ page editor: closing the drawer returns focus to the «تعديل هذه الصفحة» button that opened it (3860.18925ms)
+✔ page editor: renaming an entity reaches compound labels that contain its name, and stops at word boundaries, plurals and sentences (0.555959ms)
+✔ page editor: the drawer stylesheet keeps the options table and the tab strip inside 460px (1.356292ms)
+✔ view as: a run with many screens does not push earlier runs out of the log (3733.045583ms)
+✔ golden: every operational screen renders to the same HTML for four seeded personas (9118.072959ms)
+✔ golden: moving the SQL wall clock a day forward moves no screen hash (13769.039708ms)
+✔ golden: the normaliser hides random identifiers but stays sensitive to order, count and text (0.383875ms)
+✔ golden: the page-editor trigger is outside every seeded persona’s screen, and appears only for a holder of the configure capability (4246.418125ms)
+✔ بصمات مركز الخدمات: الشاشات الأربع لجمهورَي الموظف والمدير تُرسم إلى HTML نفسها (3180.810166ms)
+✔ بصمات مركز الخدمات: رسمان من بذرتين متطابقتين يعطيان البصمات نفسها (لا معرّف عشوائي يتسرّب) (6333.820375ms)
+✔ الشاشة: العدّاد العام بسيط ويشمل الخدمات المرئية في المركز وصفحات الإدارات، لكل جمهور (4507.766209ms)
+✔ الشاشة: الموقوفة تغيب عن الشبكة والبحث ولا تُعرض تفاصيل الإعدادات للموظف (4332.008875ms)
+✔ الشاشة: كل بطاقة خدمة تحمل زمنها **وسنده**، ولا «٪» التزام في أي مخرج (4133.415583ms)
+✔ الشاشة: بطاقة المجموعة تطبع عدد بنودها ولا تطبع زمنًا، ومجموع بنود البطاقات = بنود الفئة (3915.983083ms)
+✔ العدسة: تُحفظ للحساب وتعود به، وعدسة الرحلة حيّة وتعرض التفاصيل في موضعها (3671.4085ms)
+✔ صفحة الفئة: الفرز يعيد الترتيب ولا يغيّر العدّ، وترتيبٌ مجهول يعود إلى ترتيب الشجرة (3517.506375ms)
+✔ البحث في الشاشة: يجد البطاقة باسمها وبرمزها وباسم خيار داخل مجموعتها، والفارغة تقول ماذا يفعل (3115.806416ms)
+✔ صفحة الخدمة: تسعة أقسام، كلٌّ من بياناته أو مكتوبٌ غيابُه وما يلزمه وعند من (3044.17675ms)
+✔ صفحة الخدمة: تردّ **رفضًا مكتوبًا** على رمزٍ ليس في دليل هذا الحساب، ويُرسم بـui.refusal (3137.758958ms)
+✔ الرسم: لا نمط سطري ولا سكربت سطري في أي مخرج (CSP)، والهيكل يقول لقارئ الشاشة إنه يحمّل (3106.076667ms)
+✔ الوصول: البطاقة هدفان متتاليان، وغير المؤهلة تبقى مرسومة قابلة للقراءة بسببها لا مخفيّة (2983.757417ms)
+✔ الشاشة: طلباتك المفتوحة من بيانات القاعدة، وبيانات الإسقاط تبقى خلف الواجهة (2886.504042ms)
+✔ بطاقة المجموعة: كل عضو رابطٌ إلى صفحته من الفئة مباشرة، وعضو الوحدة المخصصة رابطُ شاشته (2743.204958ms)
+✔ صفحة الخدمة: «خدمات قريبة» تسرد أخوة المجموعة أولًا ثم بطاقات الفئة، ستةً على الأكثر، بلا مجموعتها (2744.286209ms)
+✔ المخرج «لم تجد خدمتك؟»: اسم الخدمة من صفّها الحيّ في الحمولة، ولا اسم مكتوب في الشاشة، ومن لا يراها لا يُعطى رابطًا (2647.351084ms)
+✔ زرّ البدء في صفحة الخدمة يحمل معرّف **أحدث** نسخة: خدمةٌ لها نسختان بعد تحريرها (2658.293417ms)
+✔ الأنماط: لا قاعدة .sc-* تثبّت عرضًا أكبر من 358 بكسل، وأهداف اللمس ≥44/56/64، وعمود واحد تحت 480 (22.910958ms)
+✔ ترتيب الشاشة: البحث أول عنصر بعد الرأس، ثم العدسات، ثم الشبكة بلا تشخيص إسقاط (2640.458084ms)
+✔ SEC-06: delayed form loads and completed operations preserve the newer open form (39.021875ms)
+{"t":"2026-10-04T10:29:42.214Z","id":"197daa16","env":"local","m":"POST","p":"/api/login","s":200,"ms":342}
+{"t":"2026-10-04T10:29:42.652Z","id":"6101ea90","env":"local","m":"POST","p":"/api/login","s":200,"ms":433}
+{"t":"2026-10-04T10:29:42.668Z","id":"fd330bc9","env":"local","m":"GET","p":"/api/my-requests","s":200,"ms":12}
+{"t":"2026-10-04T10:29:42.683Z","id":"3c73ba72","env":"local","m":"GET","p":"/api/my-requests","s":200,"ms":14}
+{"t":"2026-10-04T10:29:42.686Z","id":"8c48f6cb","env":"local","m":"GET","p":"/api/my-requests","s":401,"ms":1}
+✔ my requests: one list of the employee's own requests from every module, and nobody else's (5278.145125ms)
+{"t":"2026-10-04T10:29:47.391Z","id":"c2914644","env":"local","m":"POST","p":"/api/login","s":200,"ms":417}
+{"t":"2026-10-04T10:29:47.776Z","id":"0c717d02","env":"local","m":"POST","p":"/api/login","s":200,"ms":370}
+{"t":"2026-10-04T10:29:48.123Z","id":"e7479d5a","env":"local","m":"POST","p":"/api/login","s":200,"ms":346}
+{"t":"2026-10-04T10:29:48.133Z","id":"d9750051","env":"local","m":"GET","p":"/api/profile","s":200,"ms":9}
+{"t":"2026-10-04T10:29:48.137Z","id":"4f714f62","env":"local","m":"GET","p":"/api/profile/employee","s":404,"ms":1}
+{"t":"2026-10-04T10:29:48.148Z","id":"b538898f","env":"local","m":"GET","p":"/api/profile/employee","s":200,"ms":9}
+✔ my profile: numbers are masked, the owner and HR can open it, the line manager and colleagues cannot (5460.376583ms)
+✔ deep links: each quick action opens a form, parameters only prefill known fields, and other routes are left alone (1.911958ms)
+✔ home: the Today card and quick actions are built for the employee, and an action the module cannot take is shown disabled with its reason (3914.20575ms)
+{"t":"2026-10-04T10:29:56.192Z","id":"07840558","env":"local","m":"POST","p":"/api/login","s":200,"ms":301}
+{"t":"2026-10-04T10:29:56.216Z","id":"c2ae2c8d","env":"local","m":"GET","p":"/api/catalog","s":200,"ms":15}
+✔ catalog dedup: duplicated catalog services open their module form, keep their codes, and fall back to a request when the module cannot take it (4144.253ms)
+{"t":"2026-10-04T10:29:59.964Z","id":"f4843ca6","env":"local","m":"POST","p":"/api/login","s":200,"ms":301}
+{"t":"2026-10-04T10:30:00.273Z","id":"53f6ddd3","env":"local","m":"POST","p":"/api/login","s":200,"ms":308}
+{"t":"2026-10-04T10:30:00.275Z","id":"a2c604da","env":"local","m":"GET","p":"/api/requirements","s":403,"ms":1}
+{"t":"2026-10-04T10:30:00.276Z","id":"92ef8654","env":"local","m":"GET","p":"/api/service-benchmark","s":403,"ms":1}
+{"t":"2026-10-04T10:30:00.287Z","id":"23d825e9","env":"local","m":"GET","p":"/api/requirements","s":200,"ms":11}
+{"t":"2026-10-04T10:30:00.297Z","id":"c224fba6","env":"local","m":"GET","p":"/api/requirements","s":200,"ms":8}
+{"t":"2026-10-04T10:30:00.300Z","id":"03aebec5","env":"local","m":"GET","p":"/api/notifications/count","s":200,"ms":1}
+✔ navigation: an ordinary employee gets a short menu without development pages, gated by capability; other roles keep theirs (4082.253125ms)
+{"t":"2026-10-04T10:30:03.420Z","id":"8d900565","env":"local","m":"GET","p":"/manifest.webmanifest","s":200,"ms":1}
+{"t":"2026-10-04T10:30:03.422Z","id":"841afca3","env":"local","m":"GET","p":"/icons/icon-192.png","s":200,"ms":1}
+{"t":"2026-10-04T10:30:03.423Z","id":"c3d2cf40","env":"local","m":"GET","p":"/icons/icon-512.png","s":200,"ms":0}
+{"t":"2026-10-04T10:30:03.424Z","id":"10d83d9d","env":"local","m":"GET","p":"/icons/icon-maskable-512.png","s":200,"ms":0}
+{"t":"2026-10-04T10:30:03.425Z","id":"6dfe0ba7","env":"local","m":"GET","p":"/icons/apple-touch-icon.png","s":200,"ms":0}
+{"t":"2026-10-04T10:30:03.426Z","id":"9e369898","env":"local","m":"GET","p":"/sw.js","s":200,"ms":0}
+✔ PWA: the manifest, icons and service worker are served with the right types, and the worker never caches /api (3124.9595ms)
+✔ PWA: run inside a simulated worker, sw.js lets /api pass untouched, caches only static files, and serves an offline page for navigation (2.861417ms)
+{"t":"2026-10-04T10:30:06.814Z","id":"53273eb0","env":"local","m":"POST","p":"/api/login","s":200,"ms":258}
+{"t":"2026-10-04T10:30:06.824Z","id":"a682fa74","env":"local","m":"GET","p":"/api/catalog/variants","s":200,"ms":9}
+{"t":"2026-10-04T10:30:06.837Z","id":"a138f458","env":"local","m":"POST","p":"/api/requests","s":201,"ms":11,"tx":1,"lock_ms":0}
+{"t":"2026-10-04T10:30:06.840Z","id":"31bb5a0e","env":"local","m":"POST","p":"/api/requests","s":400,"ms":2,"tx":1,"lock_ms":0}
+✔ variants: the chosen option decides the service, the approval route and the due date (3411.083542ms)
+✔ variants: each option previews its own chain and service level before submit (3382.926709ms)
+✔ variants: old service codes stay searchable and land on their card with the option preselected (3060.692916ms)
+{"t":"2026-10-04T10:30:16.559Z","id":"c1d03d8c","env":"local","m":"POST","p":"/api/login","s":200,"ms":266}
+{"t":"2026-10-04T10:30:16.569Z","id":"eb94e294","env":"local","m":"POST","p":"/api/requests","s":201,"ms":7,"tx":1,"lock_ms":0}
+✔ variants: option fields are validated on the server; fixed values cannot be changed from the browser (3285.0495ms)
+✔ integration: #letters/new?type= opens the letter wizard on that type, and never on another type (2.4675ms)
+✔ integration: the benefits card offers «مزاياي» and #my-benefits/new?option= opens that option only (2878.270833ms)
+✔ links: every #view/intent literal in app/static resolves to a registered screen and a registered intent (402.165667ms)
+✔ links: the catalogue card «طلب إجازة» and the search shortcuts are among what is checked, and they resolve (0.468125ms)
+✔ links: the scanner treats every quoted #word as a link unless it is provably something else, so a typo cannot pass as a selector (18.245ms)
+✔ links: the screen registries cannot drift from app.mjs (0.551625ms)
+✔ no dead click: a new employee reaches the leave form or a stated reason from all four routes (4365.865958ms)
+✔ no dead click: when the form can open, every route opens it (7.7345ms)
+✔ no dead click: the class of bug, not the instance — every silent path now states a reason (10.789417ms)
+✔ home chips: a chip that is not ready is disabled with its reason, a ready chip is a link, and an empty reason is never left blank (0.446916ms)
+✔ home quick actions use rounded local SVG icons instead of font glyphs (0.224708ms)
+✔ home SVG icons use adaptive system colours in light and dark themes (2.17975ms)
+✔ a non-JSON response becomes a readable Arabic message, not a parser error (0.68725ms)
+✔ الأقسام الثمانية: أسماء المالك وترتيبه، وسجلٌّ لا يضع مفتاحًا في مجموعتين ولا يسمّي قسمًا غير الثمانية (4.930333ms)
+✔ كل شاشة يبلغها الحساب لها قسم واحد، والقسم يصل شاشةً مسجلة، وما لا قسم له يُسمّى لا يُخفى (4559.146291ms)
+✔ عشرة صفوف على الأكثر، بترتيب الموجز الثابت، و«الرئيسية» في كل حساب (4266.689958ms)
+✔ ولا مجموعة مسمّاة بأقل من بندين، وكل بند في مجموعة من مجموعات قسمه (4014.030584ms)
+✔ الصلاحية هي التي تُظهر: ما لا يبلغه الحساب لا يُعرض، وسجلّ القسم لا يخترع طبقةً ثانية (3797.342625ms)
+✔ مجموعات القسم: الوحدة نقية، وصفحة الإدارة تتقدّم، والمتبقّي لا يلبس عنوانًا لا يصفه (0.380334ms)
+✔ العقد مع الموجّه: مسار صفحة القسم مسجَّل عند تبنّيه، والوحدة لا تنادي خادمًا ولا DOM (1.135084ms)
+✔ ق-ت1-1: each account gets at most eight section rows, «إدارة المنصة» and «فريقي» keep their audience, and no «أخرى» (4586.781291ms)
+✔ ق-ت1-2: every screen the old menu reached is still reached, and has a place the account can open from its menu (or is tagged internal with a reason) (4367.821125ms)
+✔ ق-ت1-3: each old route resolves to its new home, the address shows it, and the deep link still opens the launcher (4022.695125ms)
+✔ ق-ت1-4: a screen seen by more than one role keeps one label per lens, and pages take their title from it (3919.485ms)
+✔ hubs: «فريقي» و«المنظمة» و«إدارة المنصة» list every placed screen, and «ملفي» keeps five clear groups after its main content (3499.866ms)
+✔ globals: the reach list and the account are published for the department page, and the shell keeps every old condition (3439.143ms)
+✔ شريط الجوال: الوجهات اليومية الأربع حاضرة لكل حساب يبلغها — ولو كانت روابطها في كتلة «كل شاشاتك» المخفية (5307.924333ms)
+✔ شريط الجوال: الرابط الظاهر يغلب نظيره في الكتلة المخفية، والكتلة لا تزيد الشريط على أربع (1.136292ms)
+✔ SEC-01: reversed request responses cannot change the visible action or attachment target (30.344875ms)
+ℹ tests 78
+ℹ suites 0
+ℹ pass 78
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 56100.720875

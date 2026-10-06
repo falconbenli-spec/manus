@@ -1,0 +1,16 @@
+✔ SEC-06: delayed form loads and completed operations preserve the newer open form (13.362209ms)
+✔ inbox: a manager sees every pending decision across modules in one place, the requester sees none of them, and a decision removes its item (4250.507584ms)
+✔ SEC-01: reversed request responses cannot change the visible action or attachment target (27.193708ms)
+ERROR: failed to copy trust settings of system certificate-25291
+ERROR: failed to copy trust settings of system certificate-25291
+ERROR: failed to copy trust settings of system certificate-25291
+ERROR: failed to copy trust settings of system certificate-25291
+✔ every operational screen renders for every seeded role and every offered button opens a valid form (9552.111542ms)
+ℹ tests 4
+ℹ suites 0
+ℹ pass 4
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 10201.55975

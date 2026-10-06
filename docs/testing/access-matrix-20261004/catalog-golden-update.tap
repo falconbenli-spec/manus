@@ -1,0 +1,15 @@
+✔ golden: every operational screen renders to the same HTML for four seeded personas (5558.625875ms)
+✔ golden: moving the SQL wall clock a day forward moves no screen hash (9587.340125ms)
+✔ golden: the normaliser hides random identifiers but stays sensitive to order, count and text (0.354584ms)
+✔ golden: the page-editor trigger is outside every seeded persona’s screen, and appears only for a holder of the configure capability (3539.12725ms)
+✔ بصمات مركز الخدمات: الشاشات الأربع لجمهورَي الموظف والمدير تُرسم إلى HTML نفسها (2705.294417ms)
+ℹ baseline rewritten: 10 pairs
+✔ بصمات مركز الخدمات: رسمان من بذرتين متطابقتين يعطيان البصمات نفسها (لا معرّف عشوائي يتسرّب) (5348.855ms)
+ℹ tests 6
+ℹ suites 0
+ℹ pass 6
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 27107.94925

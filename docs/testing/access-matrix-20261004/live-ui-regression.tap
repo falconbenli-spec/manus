@@ -1,0 +1,187 @@
+✖ golden: every operational screen renders to the same HTML for four seeded personas (7549.290542ms)
+✔ golden: moving the SQL wall clock a day forward moves no screen hash (13095.676416ms)
+✔ golden: the normaliser hides random identifiers but stays sensitive to order, count and text (0.488041ms)
+✔ golden: the page-editor trigger is outside every seeded persona’s screen, and appears only for a holder of the configure capability (4730.182083ms)
+✖ بصمات مركز الخدمات: الشاشات الأربع لجمهورَي الموظف والمدير تُرسم إلى HTML نفسها (3127.868417ms)
+✔ بصمات مركز الخدمات: رسمان من بذرتين متطابقتين يعطيان البصمات نفسها (لا معرّف عشوائي يتسرّب) (6042.995209ms)
+✔ الشاشة: العدّاد العام بسيط ويشمل الخدمات المرئية في المركز وصفحات الإدارات، لكل جمهور (3778.435083ms)
+✔ الشاشة: الموقوفة تغيب عن الشبكة والبحث ولا تُعرض تفاصيل الإعدادات للموظف (3699.525417ms)
+✔ الشاشة: كل بطاقة خدمة تحمل زمنها **وسنده**، ولا «٪» التزام في أي مخرج (3443.6775ms)
+✔ الشاشة: بطاقة المجموعة تطبع عدد بنودها ولا تطبع زمنًا، ومجموع بنود البطاقات = بنود الفئة (3580.7385ms)
+✔ العدسة: تُحفظ للحساب وتعود به، وعدسة الرحلة حيّة وتعرض التفاصيل في موضعها (3712.162166ms)
+✔ صفحة الفئة: الفرز يعيد الترتيب ولا يغيّر العدّ، وترتيبٌ مجهول يعود إلى ترتيب الشجرة (3637.465542ms)
+✔ البحث في الشاشة: يجد البطاقة باسمها وبرمزها وباسم خيار داخل مجموعتها، والفارغة تقول ماذا يفعل (3415.988625ms)
+✔ صفحة الخدمة: تسعة أقسام، كلٌّ من بياناته أو مكتوبٌ غيابُه وما يلزمه وعند من (3023.716042ms)
+✔ صفحة الخدمة: تردّ **رفضًا مكتوبًا** على رمزٍ ليس في دليل هذا الحساب، ويُرسم بـui.refusal (2975.489042ms)
+✔ الرسم: لا نمط سطري ولا سكربت سطري في أي مخرج (CSP)، والهيكل يقول لقارئ الشاشة إنه يحمّل (2942.744417ms)
+✔ الوصول: البطاقة هدفان متتاليان، وغير المؤهلة تبقى مرسومة قابلة للقراءة بسببها لا مخفيّة (2871.263125ms)
+✔ الشاشة: طلباتك المفتوحة من بيانات القاعدة، وبيانات الإسقاط تبقى خلف الواجهة (2681.955292ms)
+✔ بطاقة المجموعة: كل عضو رابطٌ إلى صفحته من الفئة مباشرة، وعضو الوحدة المخصصة رابطُ شاشته (2692.53025ms)
+✔ صفحة الخدمة: «خدمات قريبة» تسرد أخوة المجموعة أولًا ثم بطاقات الفئة، ستةً على الأكثر، بلا مجموعتها (2681.984ms)
+✔ المخرج «لم تجد خدمتك؟»: اسم الخدمة من صفّها الحيّ في الحمولة، ولا اسم مكتوب في الشاشة، ومن لا يراها لا يُعطى رابطًا (2699.634334ms)
+✔ زرّ البدء في صفحة الخدمة يحمل معرّف **أحدث** نسخة: خدمةٌ لها نسختان بعد تحريرها (2668.239916ms)
+✔ الأنماط: لا قاعدة .sc-* تثبّت عرضًا أكبر من 358 بكسل، وأهداف اللمس ≥44/56/64، وعمود واحد تحت 480 (23.366375ms)
+✔ ترتيب الشاشة: البحث أول عنصر بعد الرأس، ثم العدسات، ثم الشبكة بلا تشخيص إسقاط (2743.291542ms)
+✔ شريط الجوال: الوجهات اليومية الأربع حاضرة لكل حساب يبلغها — ولو كانت روابطها في كتلة «كل شاشاتك» المخفية (4738.695833ms)
+✔ شريط الجوال: الرابط الظاهر يغلب نظيره في الكتلة المخفية، والكتلة لا تزيد الشريط على أربع (0.792167ms)
+✖ golden: every operational screen renders to the same HTML for four seeded personas (7546.994958ms)
+✔ golden: moving the SQL wall clock a day forward moves no screen hash (13168.120875ms)
+✔ golden: the normaliser hides random identifiers but stays sensitive to order, count and text (0.4935ms)
+✔ golden: the page-editor trigger is outside every seeded persona’s screen, and appears only for a holder of the configure capability (4569.65525ms)
+ℹ tests 30
+ℹ suites 0
+ℹ pass 27
+ℹ fail 3
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 53576.144083
+
+✖ failing tests:
+
+test at tests/ui-golden.test.mjs:111:1
+✖ golden: every operational screen renders to the same HTML for four seeded personas (7549.290542ms)
+  AssertionError [ERR_ASSERTION]: تغيّرت HTML شاشات. إن كان التغيير مقصودًا: UPDATE_GOLDEN=1 node --test tests/ui-golden.test.mjs ثم راجع git diff tests/ui-golden.baseline.json.
+  تنبيه: الأساس وُلّد على ICU 78.2 (Node 24.14.0) وهذا التشغيل على ICU 78.3 (Node 24.21.0)؛ إن كان كل الفرق في تواريخ هجرية فالسبب البيئة لا الكود.
+  + actual - expected
+  
+    {
+      added: [],
+  +   changed: [
+  +     'employee/vendors: 75784b06deb681e2 → 8c8102657570f4eb',
+  +     'employee/employee-profile: 3196a1071ec2db37 → c9b6942a17e3826a',
+  +     'employee/reports: 5a0b2f87f792c8a1 → ce51e2b6debedfbf',
+  +     'employee/assistants: 51d2fa6cc3da1d9a → 4c438fdcc51b0882',
+  +     'employee/home: abe70e9656b92650 → ef3b1f266faf98d0',
+  +     'employee/options: 032a94a31862ecf4 → 4432809e864ae55f',
+  +     'employee/policy-assistant: e5f5f48d5652676a → 80a56a30b9221c30',
+  +     'manager/leave: 6138ce99bdb4e3d6 → dd54d3ca79fe5dd5',
+  +     'manager/vendors: 4a9e5e926299bfe3 → 5481cd43c9179f8e',
+  +     'manager/employee-profile: c88c6df00c43b26f → c9d71e6cdb5c67ea',
+  +     'manager/reports: c86724a08f71a911 → 736b4464520015ce',
+  +     'manager/assistants: 51d2fa6cc3da1d9a → 4c438fdcc51b0882',
+  +     'manager/home: 4aa79dd55aff2217 → 7f1db825ac39a2ff',
+  +     'manager/policy-assistant: 52235a6d706caa16 → 1e6c955806924e0a',
+  +     'hr/leave: 41a3c797acdefd86 → f88bb15e70e29cbd',
+  +     'hr/vendors: e8242cb4e032aa8d → e57750440f774773',
+  +     'hr/employee-profile: 7e8ae8b89f851a82 → 9fa739bb2786fca8',
+  +     'hr/reports: d17a7ad6ecc1826a → 3b8fda110cdb0ce4',
+  +     'hr/assistants: 51d2fa6cc3da1d9a → 4c438fdcc51b0882',
+  +     'hr/home: af644529ccb84cf3 → 3738830d3c100c06',
+  +     'hr/options: d418ec19b9ff82b5 → c857b65b82fd9b52',
+  +     'hr/policy-assistant: 52235a6d706caa16 → 1e6c955806924e0a',
+  +     'admin/vendors: b5a3e2c8ed043a8e → d8e5a93357bff907',
+  +     'admin/reports: e4d6bb36cbf89f69 → d7f95d2941b8df25',
+  +     'admin/assistants: 54e894d051256fa1 → 657ba41a48f42574',
+  +     'admin/service-cards: 8f3134ea6944f080 → d94a40a03766e3c0',
+  +     'admin/approval-settings: f32986388451e9bd → e3fdbded38fb8b84',
+  +     'admin/options: dcb6d92c9c39f2f6 → 8e962d9525591244',
+  +     'admin/definitions: 2e9afa51c04322c8 → e27aeb85eda6d3fb',
+  +     'admin/permissions-matrix: 16b14f41d8af2198 → 84a29558fbf72fa8'
+  +   ],
+  -   changed: [],
+      removed: []
+    }
+  
+      at TestContext.<anonymous> (file:///Users/abdulaziz/Documents/Codex/2026-09-09/3-6t-live/tests/ui-golden.test.mjs:127:10)
+      at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+      at async Test.run (node:internal/test_runner/test:1409:7)
+      at async startSubtestAfterBootstrap (node:internal/test_runner/harness:387:3) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: { changed: [ 'employee/vendors: 75784b06deb681e2 → 8c8102657570f4eb', 'employee/employee-profile: 3196a1071ec2db37 → c9b6942a17e3826a', 'employee/reports: 5a0b2f87f792c8a1 → ce51e2b6debedfbf', 'employee/assistants: 51d2fa6cc3da1d9a → 4c438fdcc51b0882', 'employee/home: abe70e9656b92650 → ef3b1f266faf98d0', 'employee/options: 032a94a31862ecf4 → 4432809e864ae55f', 'employee/policy-assistant: e5f5f48d5652676a → 80a56a30b9221c30', 'manager/leave: 6138ce99bdb4e3d6 → dd54d3ca79fe5dd5', 'manager/vendors: 4a9e5e926299bfe3 → 5481cd43c9179f8e', 'manager/employee-profile: c88c6df00c43b26f → c9d71e6cdb5c67ea', 'manager/reports: c86724a08f71a911 → 736b4464520015ce', 'manager/assistants: 51d2fa6cc3da1d9a → 4c438fdcc51b0882', 'manager/home: 4aa79dd55aff2217 → 7f1db825ac39a2ff', 'manager/policy-assistant: 52235a6d706caa16 → 1e6c955806924e0a', 'hr/leave: 41a3c797acdefd86 → f88bb15e70e29cbd', 'hr/vendors: e8242cb4e032aa8d → e57750440f774773', 'hr/employee-profile: 7e8ae8b89f851a82 → 9fa739bb2786fca8', 'hr/reports: d17a7ad6ecc1826a → 3b8fda110cdb0ce4', 'hr/assistants: 51d2fa6cc3da1d9a → 4c438fdcc51b0882', 'hr/home: af644529ccb84cf3 → 3738830d3c100c06', 'hr/options: d418ec19b9ff82b5 → c857b65b82fd9b52', 'hr/policy-assistant: 52235a6d706caa16 → 1e6c955806924e0a', 'admin/vendors: b5a3e2c8ed043a8e → d8e5a93357bff907', 'admin/reports: e4d6bb36cbf89f69 → d7f95d2941b8df25', 'admin/assistants: 54e894d051256fa1 → 657ba41a48f42574', 'admin/service-cards: 8f3134ea6944f080 → d94a40a03766e3c0', 'admin/approval-settings: f32986388451e9bd → e3fdbded38fb8b84', 'admin/options: dcb6d92c9c39f2f6 → 8e962d9525591244', 'admin/definitions: 2e9afa51c04322c8 → e27aeb85eda6d3fb', 'admin/permissions-matrix: 16b14f41d8af2198 → 84a29558fbf72fa8' ], added: [], removed: [] },
+    expected: { changed: [], added: [], removed: [] },
+    operator: 'deepStrictEqual',
+    diff: 'simple'
+  }
+
+test at tests/catalog-golden.test.mjs:71:1
+✖ بصمات مركز الخدمات: الشاشات الأربع لجمهورَي الموظف والمدير تُرسم إلى HTML نفسها (3127.868417ms)
+  AssertionError [ERR_ASSERTION]: تغيّرت HTML شاشات مركز الخدمات. إن كان التغيير مقصودًا: UPDATE_CATALOG_GOLDEN=1 node --test tests/catalog-golden.test.mjs ثم راجع git diff tests/catalog-golden.baseline.json.
+  + actual - expected
+  
+    {
+      added: [],
+  +   changed: [
+  +     'employee/services: fa49140267001240 → 7b3d485102b1b769',
+  +     'employee/services/HR-ATTENDANCE-FIX: ef3fb0981844955b → f77860d80540ecd3',
+  +     'employee/services/lens/journey: aef57c0fc399415c → 4ee345fe97be312b',
+  +     'manager/services: 485b800608df60d7 → 6e3b10cc44d79e77',
+  +     'manager/services/HR-ATTENDANCE-FIX: 1eff8cadebfb89ac → cfa1c1e196b8d54a',
+  +     'manager/services/lens/journey: 85372f9ad57a255b → 681e3ce99c5fefc0'
+  +   ],
+  -   changed: [],
+      removed: []
+    }
+  
+      at TestContext.<anonymous> (file:///Users/abdulaziz/Documents/Codex/2026-09-09/3-6t-live/tests/catalog-golden.test.mjs:86:10)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+      at Test.postRun (node:internal/test_runner/test:1542:19)
+      at Test.run (node:internal/test_runner/test:1467:12)
+      at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: { changed: [ 'employee/services: fa49140267001240 → 7b3d485102b1b769', 'employee/services/HR-ATTENDANCE-FIX: ef3fb0981844955b → f77860d80540ecd3', 'employee/services/lens/journey: aef57c0fc399415c → 4ee345fe97be312b', 'manager/services: 485b800608df60d7 → 6e3b10cc44d79e77', 'manager/services/HR-ATTENDANCE-FIX: 1eff8cadebfb89ac → cfa1c1e196b8d54a', 'manager/services/lens/journey: 85372f9ad57a255b → 681e3ce99c5fefc0' ], added: [], removed: [] },
+    expected: { changed: [], added: [], removed: [] },
+    operator: 'deepStrictEqual',
+    diff: 'simple'
+  }
+
+test at tests/ui-golden.test.mjs:111:1
+✖ golden: every operational screen renders to the same HTML for four seeded personas (7546.994958ms)
+  AssertionError [ERR_ASSERTION]: تغيّرت HTML شاشات. إن كان التغيير مقصودًا: UPDATE_GOLDEN=1 node --test tests/ui-golden.test.mjs ثم راجع git diff tests/ui-golden.baseline.json.
+  تنبيه: الأساس وُلّد على ICU 78.2 (Node 24.14.0) وهذا التشغيل على ICU 78.3 (Node 24.21.0)؛ إن كان كل الفرق في تواريخ هجرية فالسبب البيئة لا الكود.
+  + actual - expected
+  
+    {
+      added: [],
+  +   changed: [
+  +     'employee/vendors: 75784b06deb681e2 → 8c8102657570f4eb',
+  +     'employee/employee-profile: 3196a1071ec2db37 → c9b6942a17e3826a',
+  +     'employee/reports: 5a0b2f87f792c8a1 → ce51e2b6debedfbf',
+  +     'employee/assistants: 51d2fa6cc3da1d9a → 4c438fdcc51b0882',
+  +     'employee/home: abe70e9656b92650 → ef3b1f266faf98d0',
+  +     'employee/options: 032a94a31862ecf4 → 4432809e864ae55f',
+  +     'employee/policy-assistant: e5f5f48d5652676a → 80a56a30b9221c30',
+  +     'manager/leave: 6138ce99bdb4e3d6 → dd54d3ca79fe5dd5',
+  +     'manager/vendors: 4a9e5e926299bfe3 → 5481cd43c9179f8e',
+  +     'manager/employee-profile: c88c6df00c43b26f → c9d71e6cdb5c67ea',
+  +     'manager/reports: c86724a08f71a911 → 736b4464520015ce',
+  +     'manager/assistants: 51d2fa6cc3da1d9a → 4c438fdcc51b0882',
+  +     'manager/home: 4aa79dd55aff2217 → 7f1db825ac39a2ff',
+  +     'manager/policy-assistant: 52235a6d706caa16 → 1e6c955806924e0a',
+  +     'hr/leave: 41a3c797acdefd86 → f88bb15e70e29cbd',
+  +     'hr/vendors: e8242cb4e032aa8d → e57750440f774773',
+  +     'hr/employee-profile: 7e8ae8b89f851a82 → 9fa739bb2786fca8',
+  +     'hr/reports: d17a7ad6ecc1826a → 3b8fda110cdb0ce4',
+  +     'hr/assistants: 51d2fa6cc3da1d9a → 4c438fdcc51b0882',
+  +     'hr/home: af644529ccb84cf3 → 3738830d3c100c06',
+  +     'hr/options: d418ec19b9ff82b5 → c857b65b82fd9b52',
+  +     'hr/policy-assistant: 52235a6d706caa16 → 1e6c955806924e0a',
+  +     'admin/vendors: b5a3e2c8ed043a8e → d8e5a93357bff907',
+  +     'admin/reports: e4d6bb36cbf89f69 → d7f95d2941b8df25',
+  +     'admin/assistants: 54e894d051256fa1 → 657ba41a48f42574',
+  +     'admin/service-cards: 8f3134ea6944f080 → d94a40a03766e3c0',
+  +     'admin/approval-settings: f32986388451e9bd → e3fdbded38fb8b84',
+  +     'admin/options: dcb6d92c9c39f2f6 → 8e962d9525591244',
+  +     'admin/definitions: 2e9afa51c04322c8 → e27aeb85eda6d3fb',
+  +     'admin/permissions-matrix: 16b14f41d8af2198 → 84a29558fbf72fa8'
+  +   ],
+  -   changed: [],
+      removed: []
+    }
+  
+      at TestContext.<anonymous> (file:///Users/abdulaziz/Documents/Codex/2026-09-09/3-6t-live/tests/ui-golden.test.mjs:127:10)
+      at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+      at async Test.run (node:internal/test_runner/test:1409:7)
+      at async startSubtestAfterBootstrap (node:internal/test_runner/harness:387:3) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: { changed: [ 'employee/vendors: 75784b06deb681e2 → 8c8102657570f4eb', 'employee/employee-profile: 3196a1071ec2db37 → c9b6942a17e3826a', 'employee/reports: 5a0b2f87f792c8a1 → ce51e2b6debedfbf', 'employee/assistants: 51d2fa6cc3da1d9a → 4c438fdcc51b0882', 'employee/home: abe70e9656b92650 → ef3b1f266faf98d0', 'employee/options: 032a94a31862ecf4 → 4432809e864ae55f', 'employee/policy-assistant: e5f5f48d5652676a → 80a56a30b9221c30', 'manager/leave: 6138ce99bdb4e3d6 → dd54d3ca79fe5dd5', 'manager/vendors: 4a9e5e926299bfe3 → 5481cd43c9179f8e', 'manager/employee-profile: c88c6df00c43b26f → c9d71e6cdb5c67ea', 'manager/reports: c86724a08f71a911 → 736b4464520015ce', 'manager/assistants: 51d2fa6cc3da1d9a → 4c438fdcc51b0882', 'manager/home: 4aa79dd55aff2217 → 7f1db825ac39a2ff', 'manager/policy-assistant: 52235a6d706caa16 → 1e6c955806924e0a', 'hr/leave: 41a3c797acdefd86 → f88bb15e70e29cbd', 'hr/vendors: e8242cb4e032aa8d → e57750440f774773', 'hr/employee-profile: 7e8ae8b89f851a82 → 9fa739bb2786fca8', 'hr/reports: d17a7ad6ecc1826a → 3b8fda110cdb0ce4', 'hr/assistants: 51d2fa6cc3da1d9a → 4c438fdcc51b0882', 'hr/home: af644529ccb84cf3 → 3738830d3c100c06', 'hr/options: d418ec19b9ff82b5 → c857b65b82fd9b52', 'hr/policy-assistant: 52235a6d706caa16 → 1e6c955806924e0a', 'admin/vendors: b5a3e2c8ed043a8e → d8e5a93357bff907', 'admin/reports: e4d6bb36cbf89f69 → d7f95d2941b8df25', 'admin/assistants: 54e894d051256fa1 → 657ba41a48f42574', 'admin/service-cards: 8f3134ea6944f080 → d94a40a03766e3c0', 'admin/approval-settings: f32986388451e9bd → e3fdbded38fb8b84', 'admin/options: dcb6d92c9c39f2f6 → 8e962d9525591244', 'admin/definitions: 2e9afa51c04322c8 → e27aeb85eda6d3fb', 'admin/permissions-matrix: 16b14f41d8af2198 → 84a29558fbf72fa8' ], added: [], removed: [] },
+    expected: { changed: [], added: [], removed: [] },
+    operator: 'deepStrictEqual',
+    diff: 'simple'
+  }

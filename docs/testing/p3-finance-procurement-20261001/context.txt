@@ -1,0 +1,34 @@
+measured_by: measure-p3.sh
+started_at: 2026-10-01T07:16:51Z
+commit_before: 198a760476cb1ffec69090951a31fa9288a71210
+branch: p3/integration
+dirty_before: 0
+node: v24.14.0
+worktrees: 98
+live_commit: 627816ccfd30915ebe64e4df1e5d51629bc7d141
+live_dirty: 0
+service_pid_present: yes
+service_started: Thu Oct  1 09:48:13 2026    
+service_root_http: 200
+service_health_anonymous_http: 401
+build_fingerprint_worktree: {"commit":"198a760476cb1ffec69090951a31fa9288a71210","source_digest":"79c14f9e67afe373b6ca9ae3540850c1317628f70cdfb2288a680aee6980c60c","files":504}
+build_fingerprint_live_tree: {"commit":"627816ccfd30915ebe64e4df1e5d51629bc7d141","source_digest":"ff4d264a237684e2815cf31bc047a4a45371c9737c72225003cdedf46c8ad3cd","files":504}
+check_started: 2026-10-01T07:16:52Z
+check_exit: 0
+gate_quick_started: 2026-10-01T07:17:12Z
+gate_quick_exit: 0
+upgrade_parity_started: 2026-10-01T07:17:38Z
+upgrade_parity_exit: 0
+row_parity_started: 2026-10-01T07:17:40Z
+row_parity_exit: 0
+focused_files: 70
+focused_started: 2026-10-01T07:17:41Z
+focused_exit: 0
+gate_full_started: 2026-10-01T07:23:08Z
+gate_full_exit: 0
+suite_started: 2026-10-01T07:47:46Z
+suite_exit: 0
+commit_after: 198a760476cb1ffec69090951a31fa9288a71210
+dirty_after: 0
+finished_at: 2026-10-01T08:12:41Z
+MEASURE_DONE

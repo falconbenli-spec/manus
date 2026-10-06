@@ -1,0 +1,12 @@
+commit: ce939a4ea30c3f06fcbb583c3be6736afbc809f2
+dirty: 0
+node: v24.14.0
+started_at: 2026-10-01T03:44:57Z
+suite_exit: 1
+finished_at: 2026-10-01T04:01:58Z
+parity_exit: 0
+# tests 2156
+# pass 2154
+# fail 2
+# skipped 0
+SUITE_RECORD_DONE

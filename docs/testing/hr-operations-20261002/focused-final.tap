@@ -1,0 +1,52 @@
+(node:18825) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ pulse: an answer is stored with nothing that ties it to a person — not a name, not a time, not an insertion order (3809.727125ms)
+✔ pulse: a distribution is withheld whole when any band is smaller than the minimum, because showing the rest with the total discloses it by subtraction (3491.279542ms)
+✔ pulse: no result exists before the cycle closes, none ever exists below the minimum, and nothing is ever split by department or compared to an industry (3349.538916ms)
+✔ pulse: the minimum is a dated setting nobody can backdate, the author of the questions cannot open the cycle, and an opened cycle is closed rather than rewritten (3359.998875ms)
+✔ recognition: a card is tied to a value its owner defined, never to itself, and nothing in the module counts, scores or ranks a person (2665.072958ms)
+✔ announcements: the author does not broadcast their own notice, a published notice is withdrawn rather than reworded, and read receipts exist only where they were justified (2656.28075ms)
+✔ events: a simple calendar anyone in the audience can read, cancelled with a reason and never deleted (2549.899875ms)
+(node:18826) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+{"t":"2026-10-02T20:29:27.620Z","id":"9c35262e","env":"local","m":"POST","p":"/api/login","s":200,"ms":340}
+{"t":"2026-10-02T20:29:27.948Z","id":"b3810721","env":"local","m":"POST","p":"/api/login","s":200,"ms":318}
+{"t":"2026-10-02T20:29:27.951Z","id":"db4e5f92","env":"local","m":"GET","p":"/hr-operations-ui.mjs","s":200,"ms":1}
+{"t":"2026-10-02T20:29:27.955Z","id":"1c45f760","env":"local","m":"GET","p":"/api/hr/operations","s":200,"ms":3}
+{"t":"2026-10-02T20:29:27.957Z","id":"634d92e5","env":"local","m":"GET","p":"/api/hr/operations","s":200,"ms":1}
+{"t":"2026-10-02T20:29:27.962Z","id":"96f45b7c","env":"local","m":"POST","p":"/api/hr/competencies","s":201,"ms":5,"tx":1,"lock_ms":0}
+{"t":"2026-10-02T20:29:27.965Z","id":"908a501c","env":"local","m":"GET","p":"/api/hr/operations","s":200,"ms":2}
+✔ مركز عمليات الموارد البشرية وخدمته الثابتة يعملان عبر الخادم المحلي (4565.691458ms)
+(node:18827) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ مركز عمليات الموارد البشرية يجمع الوحدات الفعلية ويمنع الحسابات غير المخولة (3879.892916ms)
+✔ قاموس الكفاءات يعتمد بفصل مهام وتعرض المصفوفة فجوة مثبتة بالدليل (3423.539084ms)
+✔ خطة تحسين الأداء تمر من اقتراح المدير إلى مراجعة الموارد البشرية ثم إقرار الموظف ونقاط المتابعة والإقفال (3247.248125ms)
+✔ الاستبانة العامة تثبت الأسئلة عند الفتح وتحمي الرد المجهول من الربط بصاحبه (3346.527958ms)
+(node:18828) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ لا مدخلان في قائمة حساب واحد يفتحان الوجهة نفسها (5153.713667ms)
+✔ ولا مدخل بلا وجهة: كل مفتاح في القائمة مسجَّل في سجل الوجهات (4553.708042ms)
+✔ وقائمة الموظف العادي تبقى في حدود ما يستعمله (4552.873584ms)
+(node:18829) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ ق-ت1-1: each account gets at most eight section rows, «إدارة المنصة» and «فريقي» keep their audience, and no «أخرى» (3886.435333ms)
+✔ ق-ت1-2: every screen the old menu reached is still reached, and has a place the account can open from its menu (or is tagged internal with a reason) (3602.709792ms)
+✔ ق-ت1-3: each old route resolves to its new home, the address shows it, and the deep link still opens the launcher (3316.617125ms)
+✔ ق-ت1-4: a screen seen by more than one role keeps one label per lens, and pages take their title from it (3306.011916ms)
+✔ hubs: «فريقي» و«المنظمة» و«إدارة المنصة» list every placed screen, and «ملفي» keeps five clear groups after its main content (2662.882959ms)
+✔ globals: the reach list and the account are published for the department page, and the shell keeps every old condition (2648.812667ms)
+(node:18830) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ TAL-05: weights must total 100, the cycle opens one review per employee with an active manager, and scores stay hidden from the employee until release (3849.982541ms)
+✔ TAL-06: calibration is by a third person, a changed score needs a reason, release is not by the cycle creator, and one appeal is decided by someone who neither scored nor calibrated (3536.838916ms)
+✔ TAL-07/08: training is approved by the manager and completed with evidence; a goal is closed by the manager, not by its owner (3317.704166ms)
+✔ TAL-09: succession plans are visible only to their capability holders, never to the position holder or a listed candidate (3349.635625ms)
+ℹ tests 25
+ℹ suites 0
+ℹ pass 25
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 22143.483416

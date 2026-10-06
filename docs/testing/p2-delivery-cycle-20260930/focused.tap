@@ -1,0 +1,834 @@
+TAP version 13
+# (node:80083) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: numbering: six processes issuing at the same instant get six distinct consecutive numbers, and a same-project race yields one certificate and no gap
+ok 1 - numbering: six processes issuing at the same instant get six distinct consecutive numbers, and a same-project race yields one certificate and no gap
+  ---
+  duration_ms: 14027.003458
+  type: 'test'
+  ...
+# Subtest: immutability: an issued certificate refuses UPDATE and DELETE in SQL on every column, and so do its acceptance and reversal; the insert guards hold without the code
+ok 2 - immutability: an issued certificate refuses UPDATE and DELETE in SQL on every column, and so do its acceptance and reversal; the insert guards hold without the code
+  ---
+  duration_ms: 12194.462709
+  type: 'test'
+  ...
+# Subtest: correction: a new version with its own number points at what it corrects; the old one stays as issued, and neither a stale, a superseded nor a closure-backed version is corrected
+ok 3 - correction: a new version with its own number points at what it corrects; the old one stays as issued, and neither a stale, a superseded nor a closure-backed version is corrected
+  ---
+  duration_ms: 14616.983666
+  type: 'test'
+  ...
+# Subtest: reversal: a separate record with its reason; the reversed version stops counting, cannot be reversed or corrected again, and a fresh certificate may follow
+ok 4 - reversal: a separate record with its reason; the reversed version stops counting, cannot be reversed or corrected again, and a fresh certificate may follow
+  ---
+  duration_ms: 13987.442917
+  type: 'test'
+  ...
+# Subtest: client acceptance: every channel is employee-entered external evidence carrying its written limit, and nothing on the record, the screen or the document claims a signature
+ok 5 - client acceptance: every channel is employee-entered external evidence carrying its written limit, and nothing on the record, the screen or the document claims a signature
+  ---
+  duration_ms: 9537.904
+  type: 'test'
+  ...
+# Subtest: separation of duties and permissions: the issuer and the internal acceptor of the deliverables never record the client acceptance, in code and in SQL
+ok 6 - separation of duties and permissions: the issuer and the internal acceptor of the deliverables never record the client acceptance, in code and in SQL
+  ---
+  duration_ms: 11495.629125
+  type: 'test'
+  ...
+# Subtest: negative paths: every refusal names what is missing, who owns it and the next step
+ok 7 - negative paths: every refusal names what is missing, who owns it and the next step
+  ---
+  duration_ms: 11809.453
+  type: 'test'
+  ...
+# Subtest: replay through HTTP: the same idempotency key returns the same certificate, a changed body is refused, a repeated acceptance is refused, and the document is served to members only
+ok 8 - replay through HTTP: the same idempotency key returns the same certificate, a changed body is refused, a repeated acceptance is refused, and the document is served to members only
+  ---
+  duration_ms: 15039.41925
+  type: 'test'
+  ...
+# Subtest: audit chain: issue, acceptance, correction and reversal each leave a named event on an unbroken chain
+ok 9 - audit chain: issue, acceptance, correction and reversal each leave a named event on an unbroken chain
+  ---
+  duration_ms: 8182.116167
+  type: 'test'
+  ...
+# Subtest: tenant isolation: another tenant neither reads nor acts on a certificate, and numbers its own certificates from one
+ok 10 - tenant isolation: another tenant neither reads nor acts on a certificate, and numbers its own certificates from one
+  ---
+  duration_ms: 9619.162458
+  type: 'test'
+  ...
+# Subtest: migration 164 over a database with pre-164 certificates: rows are kept as written, an acknowledged one still counts, an unrepresented one is corrected before acceptance
+ok 11 - migration 164 over a database with pre-164 certificates: rows are kept as written, an acknowledged one still counts, an unrepresented one is corrected before acceptance
+  ---
+  duration_ms: 9772.037791
+  type: 'test'
+  ...
+# Subtest: screen: the commercial file draws the certificate with its representative, acceptance limit and statement, and its forms post to the certificate routes
+ok 12 - screen: the commercial file draws the certificate with its representative, acceptance limit and statement, and its forms post to the certificate routes
+  ---
+  duration_ms: 12644.836792
+  type: 'test'
+  ...
+# (node:80084) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: delivery cycle: no step of the client chain opens before the step before it was approved by someone else
+ok 13 - delivery cycle: no step of the client chain opens before the step before it was approved by someone else
+  ---
+  duration_ms: 8848.842291
+  type: 'test'
+  ...
+# Subtest: delivery cycle: an entitlement is born from an accepted deliverable only — a submitted one is not enough
+ok 14 - delivery cycle: an entitlement is born from an accepted deliverable only — a submitted one is not enough
+  ---
+  duration_ms: 11805.203791
+  type: 'test'
+  ...
+# Subtest: delivery cycle: the customer invoice hangs on an approved entitlement, and the preparer never issues it
+ok 15 - delivery cycle: the customer invoice hangs on an approved entitlement, and the preparer never issues it
+  ---
+  duration_ms: 12878.468292
+  type: 'test'
+  ...
+# Subtest: delivery cycle: collection is recorded and matched by two people and never exceeds the entitlement
+ok 16 - delivery cycle: collection is recorded and matched by two people and never exceeds the entitlement
+  ---
+  duration_ms: 13643.399667
+  type: 'test'
+  ...
+# Subtest: delivery cycle: a client review stage closes only on an external approval documented against that very version
+ok 17 - delivery cycle: a client review stage closes only on an external approval documented against that very version
+  ---
+  duration_ms: 13977.903084
+  type: 'test'
+  ...
+# Subtest: delivery cycle: no supplier award without a comparison, a qualified vendor and an approved project budget
+ok 18 - delivery cycle: no supplier award without a comparison, a qualified vendor and an approved project budget
+  ---
+  duration_ms: 11242.390208
+  type: 'test'
+  ...
+# Subtest: delivery cycle: the supplier is not received, invoiced or paid before the purchase order, and the payment needs three separate people
+ok 19 - delivery cycle: the supplier is not received, invoiced or paid before the purchase order, and the payment needs three separate people
+  ---
+  duration_ms: 11460.741209
+  type: 'test'
+  ...
+# Subtest: delivery cycle: execution is blocked until the advance payment is confirmed
+ok 20 - delivery cycle: execution is blocked until the advance payment is confirmed
+  ---
+  duration_ms: 10115.165
+  type: 'test'
+  ...
+# Subtest: delivery cycle: a supplier may not start before a purchase order AND a commencement authorisation
+ok 21 - delivery cycle: a supplier may not start before a purchase order AND a commencement authorisation
+  ---
+  duration_ms: 11070.261208
+  type: 'test'
+  ...
+# Subtest: delivery cycle: the customer purchase order is recorded against the commercial case before execution
+ok 22 - delivery cycle: the customer purchase order is recorded against the commercial case before execution
+  ---
+  duration_ms: 8411.502875
+  type: 'test'
+  ...
+# Subtest: delivery cycle: a project can be closed technically and then financially
+ok 23 - delivery cycle: a project can be closed technically and then financially
+  ---
+  duration_ms: 10370.07475
+  type: 'test'
+  ...
+# Subtest: delivery cycle: paying the supplier marks the purchase as paid, read from payment_orders not from a constant
+ok 24 - delivery cycle: paying the supplier marks the purchase as paid, read from payment_orders not from a constant
+  ---
+  duration_ms: 11606.555125
+  type: 'test'
+  ...
+# Subtest: delivery cycle: work packages can be planned for more than one department
+ok 25 - delivery cycle: work packages can be planned for more than one department
+  ---
+  duration_ms: 12131.545792
+  type: 'test'
+  ...
+# Subtest: delivery cycle: a finance delegation is granted, expires and is revoked through the platform, never by a direct insert
+ok 26 - delivery cycle: a finance delegation is granted, expires and is revoked through the platform, never by a direct insert
+  ---
+  duration_ms: 13769.205083
+  type: 'test'
+  ...
+# Subtest: delivery cycle: the completion certificate is a numbered, versioned record, and the client acceptance is employee-entered evidence with its stated limit, never a signature
+ok 27 - delivery cycle: the completion certificate is a numbered, versioned record, and the client acceptance is employee-entered evidence with its stated limit, never a signature
+  ---
+  duration_ms: 9523.927167
+  type: 'test'
+  ...
+# Subtest: التفويض المالي له سقف مدة، ورقمه هو ما تستعمله المنصة فعلًا لا رقم مستعار
+ok 28 - التفويض المالي له سقف مدة، ورقمه هو ما تستعمله المنصة فعلًا لا رقم مستعار
+  ---
+  duration_ms: 12552.514083
+  type: 'test'
+  ...
+# (node:80085) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: ER-01: a case whose accepted terms require neither condition behaves exactly as before, and the terms say whether a customer PO is required
+ok 29 - ER-01: a case whose accepted terms require neither condition behaves exactly as before, and the terms say whether a customer PO is required
+  ---
+  duration_ms: 8674.36
+  type: 'test'
+  ...
+# Subtest: ER-02: every paid-execution entry point is checked on the server at the moment of action
+ok 30 - ER-02: every paid-execution entry point is checked on the server at the moment of action
+  ---
+  duration_ms: 11727.711583
+  type: 'test'
+  ...
+# Subtest: ER-03: an exemption is requested by one person and authorised by another, with written reasons, and both sides are auditable
+ok 31 - ER-03: an exemption is requested by one person and authorised by another, with written reasons, and both sides are auditable
+  ---
+  duration_ms: 11691.987334
+  type: 'test'
+  ...
+# Subtest: ER-04: the exemption is rechecked at the moment of action — withdrawn, or held by someone who lost the authority, it no longer opens the gate
+ok 32 - ER-04: the exemption is rechecked at the moment of action — withdrawn, or held by someone who lost the authority, it no longer opens the gate
+  ---
+  duration_ms: 28244.889417
+  type: 'test'
+  ...
+# Subtest: ER-05: partial, duplicate and reversed receipts — only money that arrived once and stayed opens the gate
+ok 33 - ER-05: partial, duplicate and reversed receipts — only money that arrived once and stayed opens the gate
+  ---
+  duration_ms: 11043.793292
+  type: 'test'
+  ...
+# Subtest: ER-06: the customer PO is versioned and append-only — superseded, expired or unconfirmed versions never satisfy the gate
+ok 34 - ER-06: the customer PO is versioned and append-only — superseded, expired or unconfirmed versions never satisfy the gate
+  ---
+  duration_ms: 10650.140375
+  type: 'test'
+  ...
+# Subtest: ER-07: the order is checked against its own case — wrong client, opportunity, agreement, project or tenant is refused
+ok 35 - ER-07: the order is checked against its own case — wrong client, opportunity, agreement, project or tenant is refused
+  ---
+  duration_ms: 10724.238625
+  type: 'test'
+  ...
+# Subtest: ER-08: another tenant's receipt never satisfies the gate, and a bank reference is unique within a tenant only
+ok 36 - ER-08: another tenant's receipt never satisfies the gate, and a bank reference is unique within a tenant only
+  ---
+  duration_ms: 10385.696875
+  type: 'test'
+  ...
+# Subtest: ER-09: concurrency — the gate and the action share one write lock, so a reversal racing a delivery submission lands before it or after it, never between
+ok 37 - ER-09: concurrency — the gate and the action share one write lock, so a reversal racing a delivery submission lands before it or after it, never between
+  ---
+  duration_ms: 8329.833333
+  type: 'test'
+  ...
+# Subtest: ER-10: the actions are reachable over HTTP with the platform session, CSRF and idempotency, and the commercial screen names the blockers
+ok 38 - ER-10: the actions are reachable over HTTP with the platform session, CSRF and idempotency, and the commercial screen names the blockers
+  ---
+  duration_ms: 14905.463709
+  type: 'test'
+  ...
+# Subtest: ER-11: the billing screen asks for the bank reference, offers the reversal once, and links an advance to its project
+ok 39 - ER-11: the billing screen asks for the bank reference, offers the reversal once, and links an advance to its project
+  ---
+  duration_ms: 12549.968375
+  type: 'test'
+  ...
+# (node:80086) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: خط الأساس يطابق المخطط الذي تنتجه الترحيلات، فلا يحرس رقمًا لقاعدة أخرى
+ok 40 - خط الأساس يطابق المخطط الذي تنتجه الترحيلات، فلا يحرس رقمًا لقاعدة أخرى
+  ---
+  duration_ms: 7450.231125
+  type: 'test'
+  ...
+# Subtest: والبصمة حتمية: بناءان متتاليان يعطيان القيمة نفسها
+ok 41 - والبصمة حتمية: بناءان متتاليان يعطيان القيمة نفسها
+  ---
+  duration_ms: 19675.947584
+  type: 'test'
+  ...
+# (node:80087) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: الترحيل 142 بعد 153 يحفظ روابط الإدارات السابقة ويصف مصدرها من دون اختلاق قرار أو حدث بشري
+ok 42 - الترحيل 142 بعد 153 يحفظ روابط الإدارات السابقة ويصف مصدرها من دون اختلاق قرار أو حدث بشري
+  ---
+  duration_ms: 8506.894083
+  type: 'test'
+  ...
+# (node:80088) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: ق-ت1-1: each account gets at most eight section rows, «إدارة المنصة» and «فريقي» keep their audience, and no «أخرى»
+ok 43 - ق-ت1-1: each account gets at most eight section rows, «إدارة المنصة» and «فريقي» keep their audience, and no «أخرى»
+  ---
+  duration_ms: 8695.161
+  type: 'test'
+  ...
+# Subtest: ق-ت1-2: every screen the old menu reached is still reached, and has a place the account can open from its menu (or is tagged internal with a reason)
+ok 44 - ق-ت1-2: every screen the old menu reached is still reached, and has a place the account can open from its menu (or is tagged internal with a reason)
+  ---
+  duration_ms: 11909.271208
+  type: 'test'
+  ...
+# Subtest: ق-ت1-3: each old route resolves to its new home, the address shows it, and the deep link still opens the launcher
+ok 45 - ق-ت1-3: each old route resolves to its new home, the address shows it, and the deep link still opens the launcher
+  ---
+  duration_ms: 12751.424125
+  type: 'test'
+  ...
+# Subtest: ق-ت1-4: a screen seen by more than one role keeps one label per lens, and pages take their title from it
+ok 46 - ق-ت1-4: a screen seen by more than one role keeps one label per lens, and pages take their title from it
+  ---
+  duration_ms: 13600.025375
+  type: 'test'
+  ...
+# Subtest: hubs: «فريقي» و«المنظمة» و«إدارة المنصة» are still routes that list every screen placed there, grouped, with stable labels (they are no longer sidebar rows); «ملفي» and «بانتظار إجرائي» carry their link rows
+ok 47 - hubs: «فريقي» و«المنظمة» و«إدارة المنصة» are still routes that list every screen placed there, grouped, with stable labels (they are no longer sidebar rows); «ملفي» and «بانتظار إجرائي» carry their link rows
+  ---
+  duration_ms: 13966.126333
+  type: 'test'
+  ...
+# Subtest: globals: the reach list and the account are published for the department page, and the shell keeps every old condition
+ok 48 - globals: the reach list and the account are published for the department page, and the shell keeps every old condition
+  ---
+  duration_ms: 10688.890334
+  type: 'test'
+  ...
+# (node:80089) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: AXIS-01: the eight axes are independent — moving one leaves the other seven where they were
+ok 49 - AXIS-01: the eight axes are independent — moving one leaves the other seven where they were
+  ---
+  duration_ms: 8858.292417
+  type: 'test'
+  ...
+# Subtest: AXIS-02: the advance gate blocks paid execution and never touches pre-sale scoping
+ok 50 - AXIS-02: the advance gate blocks paid execution and never touches pre-sale scoping
+  ---
+  duration_ms: 24978.029083
+  type: 'test'
+  ...
+# Subtest: AXIS-03: the advance is expected from the payment schedule, and confirmed only against a real receipt by a second person
+ok 51 - AXIS-03: the advance is expected from the payment schedule, and confirmed only against a real receipt by a second person
+  ---
+  duration_ms: 27618.516167
+  type: 'test'
+  ...
+# Subtest: AXIS-04: supplier start refuses without a purchase order and without a commencement authorisation
+ok 52 - AXIS-04: supplier start refuses without a purchase order and without a commencement authorisation
+  ---
+  duration_ms: 11208.999667
+  type: 'test'
+  ...
+# Subtest: AXIS-05: a multi-department project can be planned — work packages carry a department, a phase and an owner
+ok 53 - AXIS-05: a multi-department project can be planned — work packages carry a department, a phase and an owner
+  ---
+  duration_ms: 22094.074167
+  type: 'test'
+  ...
+# Subtest: AXIS-06: closure refuses by naming the exact outstanding item, and needs technical then financial
+ok 54 - AXIS-06: closure refuses by naming the exact outstanding item, and needs technical then financial
+  ---
+  duration_ms: 10770.732833
+  type: 'test'
+  ...
+# Subtest: AXIS-07: financial closure names every outstanding balance, and a decision is written not silent
+ok 55 - AXIS-07: financial closure names every outstanding balance, and a decision is written not silent
+  ---
+  duration_ms: 8597.438375
+  type: 'test'
+  ...
+# Subtest: AXIS-08: reopening a closure needs a capability and a reason, and leaves an audited record
+ok 56 - AXIS-08: reopening a closure needs a capability and a reason, and leaves an audited record
+  ---
+  duration_ms: 10579.444209
+  type: 'test'
+  ...
+# Subtest: AXIS-09: invoicing, collection and supplier settlement each read their own source and no other
+ok 57 - AXIS-09: invoicing, collection and supplier settlement each read their own source and no other
+  ---
+  duration_ms: 12777.971709
+  type: 'test'
+  ...
+# Subtest: AXIS-08: both locks in one hand are refused with a way out, and the way out is a capability plus a written reason
+ok 58 - AXIS-08: both locks in one hand are refused with a way out, and the way out is a capability plus a written reason
+  ---
+  duration_ms: 11068.788084
+  type: 'test'
+  ...
+# Subtest: AXIS-08: the same-person rule holds in both directions, and a reason is refused when the locks are in two hands
+ok 59 - AXIS-08: the same-person rule holds in both directions, and a reason is refused when the locks are in two hands
+  ---
+  duration_ms: 13512.332583
+  type: 'test'
+  ...
+# Subtest: AXIS-08: a reason on locks held by two people is refused, and the database refuses a silent same-person row from outside the code
+ok 60 - AXIS-08: a reason on locks held by two people is refused, and the database refuses a silent same-person row from outside the code
+  ---
+  duration_ms: 9438.018
+  type: 'test'
+  ...
+# (node:80127) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: closure (2): each technical blocker is named from its source, and only defects and tasks take a written exception
+ok 61 - closure (2): each technical blocker is named from its source, and only defects and tasks take a written exception
+  ---
+  duration_ms: 11743.456416
+  type: 'test'
+  ...
+# Subtest: closure (4): financial closure before technical closure is refused by name, in the code and in the database
+ok 62 - closure (4): financial closure before technical closure is refused by name, in the code and in the database
+  ---
+  duration_ms: 12173.603541
+  type: 'test'
+  ...
+# Subtest: closure (3): receivables, credits, refunds, journals and the margin are each read from their own source
+ok 63 - closure (3): receivables, credits, refunds, journals and the margin are each read from their own source
+  ---
+  duration_ms: 13668.1475
+  type: 'test'
+  ...
+# Subtest: closure (3): supplier liabilities and supplier taxes are read from procurement, payables and payment orders
+ok 64 - closure (3): supplier liabilities and supplier taxes are read from procurement, payables and payment orders
+  ---
+  duration_ms: 14366.223125
+  type: 'test'
+  ...
+# Subtest: closure (3): expenses, advances and company assets on the project are read from their own records
+ok 65 - closure (3): expenses, advances and company assets on the project are read from their own records
+  ---
+  duration_ms: 11125.971042
+  type: 'test'
+  ...
+# Subtest: closure (5): reopening is a new authorised record with a reason, ends the closures built on it, and every earlier closure stays
+ok 66 - closure (5): reopening is a new authorised record with a reason, ends the closures built on it, and every earlier closure stays
+  ---
+  duration_ms: 11712.203417
+  type: 'test'
+  ...
+# Subtest: closure: technical, margin and financial are different authorities, enforced on the server
+ok 67 - closure: technical, margin and financial are different authorities, enforced on the server
+  ---
+  duration_ms: 9837.188458
+  type: 'test'
+  ...
+# Subtest: closure: negative paths — stale checklist, bad decisions, stale margin, closed scopes — write nothing, and a replay writes nothing twice
+ok 68 - closure: negative paths — stale checklist, bad decisions, stale margin, closed scopes — write nothing, and a replay writes nothing twice
+  ---
+  duration_ms: 10699.258375
+  type: 'test'
+  ...
+# Subtest: closure: a closure racing a new receivable or journal refuses the stale review, and nothing new lands after it
+ok 69 - closure: a closure racing a new receivable or journal refuses the stale review, and nothing new lands after it
+  ---
+  duration_ms: 8300.396375
+  type: 'test'
+  ...
+# Subtest: closure: every closure act is in the audit chain with its record, and another tenant reaches nothing
+ok 70 - closure: every closure act is in the audit chain with its record, and another tenant reaches nothing
+  ---
+  duration_ms: 10165.025459
+  type: 'test'
+  ...
+# Subtest: closure: the routes carry the same rules over HTTP — the board, margin acceptance, and the refusals by name
+ok 71 - closure: the routes carry the same rules over HTTP — the board, margin acceptance, and the refusals by name
+  ---
+  duration_ms: 15507.430125
+  type: 'test'
+  ...
+# Subtest: closure: the commercial screen draws each closure button for its holder, and each form builds a payload the server accepts
+ok 72 - closure: the commercial screen draws each closure button for its holder, and each form builds a payload the server accepts
+  ---
+  duration_ms: 11241.889667
+  type: 'test'
+  ...
+# Subtest: migration 163: every lock closed before it becomes a carried record, the old rows are untouched, and legacy closures still reopen
+ok 73 - migration 163: every lock closed before it becomes a carried record, the old rows are untouched, and legacy closures still reopen
+  ---
+  duration_ms: 13079.730667
+  type: 'test'
+  ...
+# Subtest: project participation UI shows the receiving decision, returned history and honest legacy provenance
+ok 74 - project participation UI shows the receiving decision, returned history and honest legacy provenance
+  ---
+  duration_ms: 0.741458
+  type: 'test'
+  ...
+# Subtest: project participation UI builds guarded request and decision payloads
+ok 75 - project participation UI builds guarded request and decision payloads
+  ---
+  duration_ms: 0.687666
+  type: 'test'
+  ...
+# (node:80248) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: AXIS-05: asking for another department stays pending until its current head acts
+ok 76 - AXIS-05: asking for another department stays pending until its current head acts
+  ---
+  duration_ms: 14380.912042
+  type: 'test'
+  ...
+# Subtest: returned participation stays in history and a fresh request can later be accepted
+ok 77 - returned participation stays in history and a fresh request can later be accepted
+  ---
+  duration_ms: 14598.637958
+  type: 'test'
+  ...
+# Subtest: department decisions recheck the actor, tenant, routing and active state at decision time
+ok 78 - department decisions recheck the actor, tenant, routing and active state at decision time
+  ---
+  duration_ms: 9103.594458
+  type: 'test'
+  ...
+# Subtest: one project manager of record governs tasks and project axes without role-wide escalation
+ok 79 - one project manager of record governs tasks and project axes without role-wide escalation
+  ---
+  duration_ms: 12538.549333
+  type: 'test'
+  ...
+# Subtest: صاحب طلب المشاركة لا يعتمد طلبه حتى إذا انتقل إلى رئاسة الإدارة المستقبلة
+ok 80 - صاحب طلب المشاركة لا يعتمد طلبه حتى إذا انتقل إلى رئاسة الإدارة المستقبلة
+  ---
+  duration_ms: 11251.498042
+  type: 'test'
+  ...
+# Subtest: قاعدة البيانات ترفض اختلاق قرار مشاركة مباشرة عند الإنشاء
+ok 81 - قاعدة البيانات ترفض اختلاق قرار مشاركة مباشرة عند الإنشاء
+  ---
+  duration_ms: 10180.207584
+  type: 'test'
+  ...
+# Subtest: رابط المشاركة يحتاج قرارًا مقبولًا مطابقًا ولا يقبل اختلاق سجل قديم
+ok 82 - رابط المشاركة يحتاج قرارًا مقبولًا مطابقًا ولا يقبل اختلاق سجل قديم
+  ---
+  duration_ms: 8709.720125
+  type: 'test'
+  ...
+# Subtest: مسار HTTP يرفض الاعتماد الذاتي حتى مع جلسة صالحة وCSRF صحيح
+ok 83 - مسار HTTP يرفض الاعتماد الذاتي حتى مع جلسة صالحة وCSRF صحيح
+  ---
+  duration_ms: 10007.099917
+  type: 'test'
+  ...
+# (node:80571) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: الخطوة الجاية تمشي السلسلة بترتيبها: الجاهزية ثم التنفيذ ثم القبول والحزم ثم الشهادة، وتسمّي صاحب كل خطوة وشاشتها
+ok 84 - الخطوة الجاية تمشي السلسلة بترتيبها: الجاهزية ثم التنفيذ ثم القبول والحزم ثم الشهادة، وتسمّي صاحب كل خطوة وشاشتها
+  ---
+  duration_ms: 11241.499625
+  type: 'test'
+  ...
+# Subtest: الأزرار تقول ما يقبله الخادم: مدير المشروع المسجَّل، ومسؤول الحزمة، والعضو، ومن خارج المشروع والكيان
+ok 85 - الأزرار تقول ما يقبله الخادم: مدير المشروع المسجَّل، ومسؤول الحزمة، والعضو، ومن خارج المشروع والكيان
+  ---
+  duration_ms: 10337.280375
+  type: 'test'
+  ...
+# Subtest: الشاشة ترسم ما وصلها مهرَّبًا، ونماذجها تذهب لمسارات الخادم بنسخها، وتعديل النطاق لا يفك مركز تكلفة لم يُعرض
+ok 86 - الشاشة ترسم ما وصلها مهرَّبًا، ونماذجها تذهب لمسارات الخادم بنسخها، وتعديل النطاق لا يفك مركز تكلفة لم يُعرض
+  ---
+  duration_ms: 10295.922875
+  type: 'test'
+  ...
+# Subtest: HTTP: ‎/api/project-spine‎ يقرؤه عضو المشروع، ومن خارج المشروع يقرأ لوحةً بلا مشاريعه، وبلا جلسة لا شيء
+ok 87 - HTTP: ‎/api/project-spine‎ يقرؤه عضو المشروع، ومن خارج المشروع يقرأ لوحةً بلا مشاريعه، وبلا جلسة لا شيء
+  ---
+  duration_ms: 9834.166875
+  type: 'test'
+  ...
+# Subtest: الالتزام واحد: الكامل يبدأ بالمختصر، وترويسة Markdown تحمل الاثنين نفسيهما، وتاريخ القياس واحد
+ok 88 - الالتزام واحد: الكامل يبدأ بالمختصر، وترويسة Markdown تحمل الاثنين نفسيهما، وتاريخ القياس واحد
+  ---
+  duration_ms: 1.494625
+  type: 'test'
+  ...
+# Subtest: الدرجات السبع عشرة والموانع متطابقة بين الملفين، والدرجة من السلّم الصحيح
+ok 89 - الدرجات السبع عشرة والموانع متطابقة بين الملفين، والدرجة من السلّم الصحيح
+  ---
+  duration_ms: 0.835208
+  type: 'test'
+  ...
+# Subtest: المتوسط والرقم الحاكم محسوبان بالقاعدة المكتوبة لا منقولان، ويتفق عليهما الملفان
+ok 90 - المتوسط والرقم الحاكم محسوبان بالقاعدة المكتوبة لا منقولان، ويتفق عليهما الملفان
+  ---
+  duration_ms: 0.410041
+  type: 'test'
+  ...
+# Subtest: خط أساس البوابة والبطاقة يقولان الترحيل والبصمة والأرضية نفسها
+ok 91 - خط أساس البوابة والبطاقة يقولان الترحيل والبصمة والأرضية نفسها
+  ---
+  duration_ms: 0.889916
+  type: 'test'
+  ...
+# (node:80728) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# {"t":"2026-09-30T18:25:19.692Z","id":"ff84bdfb","env":"local","m":"GET","p":"/service-quality-ui.mjs","s":200,"ms":2}
+# {"t":"2026-09-30T18:25:19.704Z","id":"364eeafa","env":"local","m":"GET","p":"/integrations-ui.mjs","s":200,"ms":2}
+# {"t":"2026-09-30T18:25:19.708Z","id":"a6a6145e","env":"local","m":"GET","p":"/hr-design.mjs","s":200,"ms":1}
+# {"t":"2026-09-30T18:25:19.711Z","id":"c4aa55be","env":"local","m":"GET","p":"/brand-logo.mjs","s":200,"ms":0}
+# {"t":"2026-09-30T18:25:19.721Z","id":"17826a8b","env":"local","m":"GET","p":"/athar.mjs","s":200,"ms":1}
+# {"t":"2026-09-30T18:25:19.725Z","id":"c8388160","env":"local","m":"GET","p":"/operations.mjs","s":200,"ms":0}
+# {"t":"2026-09-30T18:25:19.726Z","id":"d4689764","env":"local","m":"GET","p":"/request-picker.mjs","s":200,"ms":0}
+# {"t":"2026-09-30T18:25:19.730Z","id":"a067c5f0","env":"local","m":"GET","p":"/catalog-home-ui.mjs","s":200,"ms":1}
+# {"t":"2026-09-30T18:25:19.774Z","id":"a688718e","env":"local","m":"GET","p":"/service-page.mjs","s":200,"ms":35}
+# {"t":"2026-09-30T18:25:19.830Z","id":"05e2f51d","env":"local","m":"GET","p":"/motion-cards.mjs","s":200,"ms":0}
+# {"t":"2026-09-30T18:25:19.833Z","id":"3e35c06f","env":"local","m":"GET","p":"/executive-ui.mjs","s":200,"ms":0}
+# {"t":"2026-09-30T18:25:19.835Z","id":"aac8e7ae","env":"local","m":"GET","p":"/org-ui.mjs","s":200,"ms":1}
+# {"t":"2026-09-30T18:25:19.836Z","id":"c7aaf353","env":"local","m":"GET","p":"/work-ui.mjs","s":200,"ms":1}
+# {"t":"2026-09-30T18:25:19.838Z","id":"90278270","env":"local","m":"GET","p":"/deep-links.mjs","s":200,"ms":0}
+# {"t":"2026-09-30T18:25:19.851Z","id":"657ed623","env":"local","m":"GET","p":"/vocabulary.mjs","s":200,"ms":12}
+# {"t":"2026-09-30T18:25:19.852Z","id":"7fba081c","env":"local","m":"GET","p":"/kit.mjs","s":200,"ms":0}
+# {"t":"2026-09-30T18:25:19.853Z","id":"0768eaa1","env":"local","m":"GET","p":"/pwa.mjs","s":200,"ms":1}
+# {"t":"2026-09-30T18:25:19.854Z","id":"d620c691","env":"local","m":"GET","p":"/arabic-count.mjs","s":200,"ms":1}
+# {"t":"2026-09-30T18:25:19.856Z","id":"2a5f7a22","env":"local","m":"GET","p":"/focus-record.mjs","s":200,"ms":1}
+# {"t":"2026-09-30T18:25:19.859Z","id":"26597c3b","env":"local","m":"GET","p":"/definitions-client.mjs","s":200,"ms":0}
+# {"t":"2026-09-30T18:25:19.861Z","id":"741be9b9","env":"local","m":"GET","p":"/nav-map.mjs","s":200,"ms":0}
+# {"t":"2026-09-30T18:25:19.882Z","id":"873704c2","env":"local","m":"GET","p":"/hubs-ui.mjs","s":200,"ms":20}
+# {"t":"2026-09-30T18:25:19.889Z","id":"3ca000cb","env":"local","m":"GET","p":"/page-editor.mjs","s":200,"ms":2}
+# {"t":"2026-09-30T18:25:19.896Z","id":"d1b53c6d","env":"local","m":"GET","p":"/service-gates-ui.mjs","s":200,"ms":1}
+# {"t":"2026-09-30T18:25:19.896Z","id":"f4548853","env":"local","m":"GET","p":"/files-ui.mjs","s":200,"ms":0}
+# {"t":"2026-09-30T18:25:19.897Z","id":"c5f50b10","env":"local","m":"GET","p":"/dates.mjs","s":200,"ms":0}
+# {"t":"2026-09-30T18:25:19.897Z","id":"6197e170","env":"local","m":"GET","p":"/leave-count.mjs","s":200,"ms":0}
+# {"t":"2026-09-30T18:25:19.898Z","id":"3674dcfd","env":"local","m":"GET","p":"/catalog-search.mjs","s":200,"ms":0}
+# {"t":"2026-09-30T18:25:19.898Z","id":"07e727d4","env":"local","m":"GET","p":"/budgets-ui.mjs","s":200,"ms":0}
+# {"t":"2026-09-30T18:25:19.899Z","id":"f46279fa","env":"local","m":"GET","p":"/commercial-ui.mjs","s":200,"ms":0}
+# {"t":"2026-09-30T18:25:19.899Z","id":"9a0cf02f","env":"local","m":"GET","p":"/procurement-ui.mjs","s":200,"ms":0}
+# {"t":"2026-09-30T18:25:19.900Z","id":"27c6c402","env":"local","m":"GET","p":"/leave-ui.mjs","s":200,"ms":1}
+# {"t":"2026-09-30T18:25:19.900Z","id":"5673c890","env":"local","m":"GET","p":"/delegations-ui.mjs","s":200,"ms":0}
+# {"t":"2026-09-30T18:25:19.900Z","id":"be3c718b","env":"local","m":"GET","p":"/people-ui.mjs","s":200,"ms":0}
+# {"t":"2026-09-30T18:25:19.901Z","id":"761d7baa","env":"local","m":"GET","p":"/studio-ui.mjs","s":200,"ms":0}
+# {"t":"2026-09-30T18:25:19.901Z","id":"bccc47ec","env":"local","m":"GET","p":"/finance-ui.mjs","s":200,"ms":0}
+# {"t":"2026-09-30T18:25:19.902Z","id":"94279f0c","env":"local","m":"GET","p":"/accounts-ui.mjs","s":200,"ms":0}
+# {"t":"2026-09-30T18:25:19.913Z","id":"1c53fdc3","env":"local","m":"GET","p":"/receivables-ui.mjs","s":200,"ms":10}
+# {"t":"2026-09-30T18:25:19.917Z","id":"984751c5","env":"local","m":"GET","p":"/vendors-ui.mjs","s":200,"ms":0}
+# {"t":"2026-09-30T18:25:19.918Z","id":"6d3085c3","env":"local","m":"GET","p":"/approvals-ui.mjs","s":200,"ms":1}
+# {"t":"2026-09-30T18:25:19.918Z","id":"f7d20692","env":"local","m":"GET","p":"/invoices-ui.mjs","s":200,"ms":0}
+# {"t":"2026-09-30T18:25:19.918Z","id":"6d689ce5","env":"local","m":"GET","p":"/contracts-ui.mjs","s":200,"ms":0}
+# {"t":"2026-09-30T18:25:19.919Z","id":"6627846d","env":"local","m":"GET","p":"/attendance-ui.mjs","s":200,"ms":0}
+# {"t":"2026-09-30T18:25:19.919Z","id":"110fe8d2","env":"local","m":"GET","p":"/payroll-ui.mjs","s":200,"ms":0}
+# {"t":"2026-09-30T18:25:19.921Z","id":"2983ceb3","env":"local","m":"GET","p":"/statements-ui.mjs","s":200,"ms":1}
+# {"t":"2026-09-30T18:25:19.926Z","id":"19302bcc","env":"local","m":"GET","p":"/security-ui.mjs","s":200,"ms":1}
+# {"t":"2026-09-30T18:25:19.927Z","id":"4fc58a69","env":"local","m":"GET","p":"/payables-ui.mjs","s":200,"ms":0}
+# {"t":"2026-09-30T18:25:19.928Z","id":"4b597198","env":"local","m":"GET","p":"/payroll-extras-ui.mjs","s":200,"ms":0}
+# {"t":"2026-09-30T18:25:19.929Z","id":"679b94c1","env":"local","m":"GET","p":"/employees-ui.mjs","s":200,"ms":0}
+# {"t":"2026-09-30T18:25:19.930Z","id":"9bb2219c","env":"local","m":"GET","p":"/employee-profile-ui.mjs","s":200,"ms":0}
+# {"t":"2026-09-30T18:25:19.930Z","id":"1f64d1c5","env":"local","m":"GET","p":"/talent-ui.mjs","s":200,"ms":0}
+# {"t":"2026-09-30T18:25:19.931Z","id":"ad23556c","env":"local","m":"GET","p":"/procurement-extras-ui.mjs","s":200,"ms":0}
+# {"t":"2026-09-30T18:25:19.931Z","id":"74e153f2","env":"local","m":"GET","p":"/campaigns-ui.mjs","s":200,"ms":0}
+# {"t":"2026-09-30T18:25:19.932Z","id":"f338f632","env":"local","m":"GET","p":"/ai-ui.mjs","s":200,"ms":1}
+# {"t":"2026-09-30T18:25:19.932Z","id":"c936b2d3","env":"local","m":"GET","p":"/centres-ui.mjs","s":200,"ms":0}
+# {"t":"2026-09-30T18:25:19.933Z","id":"1b7a6c27","env":"local","m":"GET","p":"/inbox-ui.mjs","s":200,"ms":0}
+# {"t":"2026-09-30T18:25:19.933Z","id":"ea01e3fa","env":"local","m":"GET","p":"/service-cards-ui.mjs","s":200,"ms":0}
+# {"t":"2026-09-30T18:25:19.934Z","id":"689ba584","env":"local","m":"GET","p":"/compliance-ui.mjs","s":200,"ms":0}
+# {"t":"2026-09-30T18:25:19.934Z","id":"a74623ab","env":"local","m":"GET","p":"/expenses-ui.mjs","s":200,"ms":0}
+# {"t":"2026-09-30T18:25:19.935Z","id":"063071ea","env":"local","m":"GET","p":"/assets-ui.mjs","s":200,"ms":1}
+# {"t":"2026-09-30T18:25:19.935Z","id":"8938ff3c","env":"local","m":"GET","p":"/agency-ui.mjs","s":200,"ms":0}
+# {"t":"2026-09-30T18:25:19.935Z","id":"8d4f6a75","env":"local","m":"GET","p":"/reports-ui.mjs","s":200,"ms":0}
+# {"t":"2026-09-30T18:25:19.936Z","id":"2f521c02","env":"local","m":"GET","p":"/bank-reconciliation-ui.mjs","s":200,"ms":0}
+# {"t":"2026-09-30T18:25:19.936Z","id":"192a5ccc","env":"local","m":"GET","p":"/billing-recurring-ui.mjs","s":200,"ms":0}
+# {"t":"2026-09-30T18:25:19.937Z","id":"a5b4b028","env":"local","m":"GET","p":"/cash-close-ui.mjs","s":200,"ms":0}
+# {"t":"2026-09-30T18:25:19.937Z","id":"8121fd4e","env":"local","m":"GET","p":"/contracts-register-ui.mjs","s":200,"ms":0}
+# {"t":"2026-09-30T18:25:19.938Z","id":"ae77348e","env":"local","m":"GET","p":"/engagement-ui.mjs","s":200,"ms":0}
+# {"t":"2026-09-30T18:25:19.939Z","id":"e1d9659d","env":"local","m":"GET","p":"/feedback-ui.mjs","s":200,"ms":0}
+# {"t":"2026-09-30T18:25:19.940Z","id":"f9e1bd76","env":"local","m":"GET","p":"/governance-ui.mjs","s":200,"ms":0}
+# {"t":"2026-09-30T18:25:19.942Z","id":"0af4d890","env":"local","m":"GET","p":"/home-ui.mjs","s":200,"ms":1}
+# {"t":"2026-09-30T18:25:19.942Z","id":"fcbca61b","env":"local","m":"GET","p":"/expiry-ui.mjs","s":200,"ms":0}
+# {"t":"2026-09-30T18:25:19.943Z","id":"3a8fe83e","env":"local","m":"GET","p":"/influencers-ui.mjs","s":200,"ms":0}
+# {"t":"2026-09-30T18:25:19.944Z","id":"7e9bef61","env":"local","m":"GET","p":"/leave-benefits-ui.mjs","s":200,"ms":0}
+# {"t":"2026-09-30T18:25:19.944Z","id":"968c1c65","env":"local","m":"GET","p":"/benefits-portal-ui.mjs","s":200,"ms":0}
+# {"t":"2026-09-30T18:25:19.946Z","id":"dbf4bf29","env":"local","m":"GET","p":"/letters-ui.mjs","s":200,"ms":1}
+# {"t":"2026-09-30T18:25:19.948Z","id":"d7be8454","env":"local","m":"GET","p":"/pr-ui.mjs","s":200,"ms":1}
+# {"t":"2026-09-30T18:25:19.949Z","id":"82ba45ed","env":"local","m":"GET","p":"/equipment-ui.mjs","s":200,"ms":0}
+# {"t":"2026-09-30T18:25:19.949Z","id":"0f84003d","env":"local","m":"GET","p":"/privacy-ui.mjs","s":200,"ms":0}
+# {"t":"2026-09-30T18:25:19.950Z","id":"c9ecd309","env":"local","m":"GET","p":"/production-ui.mjs","s":200,"ms":0}
+# {"t":"2026-09-30T18:25:19.950Z","id":"db13d2bf","env":"local","m":"GET","p":"/profitability-ui.mjs","s":200,"ms":0}
+# {"t":"2026-09-30T18:25:19.951Z","id":"d494d5a0","env":"local","m":"GET","p":"/resourcing-ui.mjs","s":200,"ms":0}
+# {"t":"2026-09-30T18:25:19.956Z","id":"c46075b4","env":"local","m":"GET","p":"/review-rounds-ui.mjs","s":200,"ms":0}
+# {"t":"2026-09-30T18:25:19.959Z","id":"ec9d948d","env":"local","m":"GET","p":"/search-ui.mjs","s":200,"ms":1}
+# {"t":"2026-09-30T18:25:19.960Z","id":"ae90ebb1","env":"local","m":"GET","p":"/tax-returns-ui.mjs","s":200,"ms":0}
+# {"t":"2026-09-30T18:25:19.962Z","id":"c1619d2d","env":"local","m":"GET","p":"/wage-protection-ui.mjs","s":200,"ms":1}
+# {"t":"2026-09-30T18:25:19.963Z","id":"46ebe16d","env":"local","m":"GET","p":"/lifecycle-ui.mjs","s":200,"ms":0}
+# {"t":"2026-09-30T18:25:19.965Z","id":"fd492b39","env":"local","m":"GET","p":"/einvoice-ui.mjs","s":200,"ms":0}
+# {"t":"2026-09-30T18:25:19.967Z","id":"3e0fab30","env":"local","m":"GET","p":"/intake-settings-ui.mjs","s":200,"ms":1}
+# {"t":"2026-09-30T18:25:19.968Z","id":"1d92d2f8","env":"local","m":"GET","p":"/project-intake-ui.mjs","s":200,"ms":0}
+# {"t":"2026-09-30T18:25:19.969Z","id":"7cd27766","env":"local","m":"GET","p":"/request-transparency-ui.mjs","s":200,"ms":1}
+# {"t":"2026-09-30T18:25:19.969Z","id":"596b429e","env":"local","m":"GET","p":"/knowledge-access-ui.mjs","s":200,"ms":0}
+# {"t":"2026-09-30T18:25:20.002Z","id":"a77aab5e","env":"local","m":"GET","p":"/pipeline-estimates-ui.mjs","s":200,"ms":33}
+# {"t":"2026-09-30T18:25:20.026Z","id":"eaf5a220","env":"local","m":"GET","p":"/pricing-ui.mjs","s":200,"ms":0}
+# {"t":"2026-09-30T18:25:20.027Z","id":"d91b87a6","env":"local","m":"GET","p":"/platform-ops-ui.mjs","s":200,"ms":1}
+# {"t":"2026-09-30T18:25:20.027Z","id":"734fea74","env":"local","m":"GET","p":"/catalog-quality-ui.mjs","s":200,"ms":0}
+# {"t":"2026-09-30T18:25:20.027Z","id":"22de2050","env":"local","m":"GET","p":"/hr-cases-comp-ui.mjs","s":200,"ms":0}
+# {"t":"2026-09-30T18:25:20.028Z","id":"d78cc577","env":"local","m":"GET","p":"/media-spend-ui.mjs","s":200,"ms":0}
+# {"t":"2026-09-30T18:25:20.028Z","id":"8f7a022e","env":"local","m":"GET","p":"/approval-settings-ui.mjs","s":200,"ms":0}
+# {"t":"2026-09-30T18:25:20.029Z","id":"71f062f5","env":"local","m":"GET","p":"/appearance-ui.mjs","s":200,"ms":0}
+# {"t":"2026-09-30T18:25:20.029Z","id":"8bd99786","env":"local","m":"GET","p":"/discipline-ui.mjs","s":200,"ms":0}
+# {"t":"2026-09-30T18:25:20.029Z","id":"a9bafa8c","env":"local","m":"GET","p":"/notifications-ui.mjs","s":200,"ms":0}
+# {"t":"2026-09-30T18:25:20.030Z","id":"32bd0877","env":"local","m":"GET","p":"/my-requests-ui.mjs","s":200,"ms":0}
+# {"t":"2026-09-30T18:25:20.030Z","id":"503b0201","env":"local","m":"GET","p":"/profile-ui.mjs","s":200,"ms":0}
+# {"t":"2026-09-30T18:25:20.034Z","id":"834487ab","env":"local","m":"GET","p":"/payroll-rules-ui.mjs","s":200,"ms":1}
+# {"t":"2026-09-30T18:25:20.035Z","id":"35c7b9be","env":"local","m":"GET","p":"/payroll-insurance-ui.mjs","s":200,"ms":0}
+# {"t":"2026-09-30T18:25:20.036Z","id":"fe26a277","env":"local","m":"GET","p":"/hr-policies-ui.mjs","s":200,"ms":0}
+# {"t":"2026-09-30T18:25:20.036Z","id":"81288aa2","env":"local","m":"GET","p":"/forms-ui.mjs","s":200,"ms":0}
+# {"t":"2026-09-30T18:25:20.037Z","id":"17a677e7","env":"local","m":"GET","p":"/finance-grants-ui.mjs","s":200,"ms":0}
+# {"t":"2026-09-30T18:25:20.037Z","id":"2c328199","env":"local","m":"GET","p":"/secondment-benefits-ui.mjs","s":200,"ms":0}
+# {"t":"2026-09-30T18:25:20.038Z","id":"ed159f2a","env":"local","m":"GET","p":"/policy-library-ui.mjs","s":200,"ms":0}
+# {"t":"2026-09-30T18:25:20.038Z","id":"60de2b0f","env":"local","m":"GET","p":"/policy-assistant-ui.mjs","s":200,"ms":0}
+# {"t":"2026-09-30T18:25:20.039Z","id":"6cb4cda2","env":"local","m":"GET","p":"/epmo-ui.mjs","s":200,"ms":1}
+# {"t":"2026-09-30T18:25:20.040Z","id":"0eff5dba","env":"local","m":"GET","p":"/definitions-ui.mjs","s":200,"ms":0}
+# {"t":"2026-09-30T18:25:20.041Z","id":"40996544","env":"local","m":"GET","p":"/permissions-matrix-ui.mjs","s":200,"ms":0}
+# {"t":"2026-09-30T18:25:20.042Z","id":"e4a6ff5a","env":"local","m":"GET","p":"/project-participation-ui.mjs","s":200,"ms":1}
+# {"t":"2026-09-30T18:25:20.042Z","id":"9b762b52","env":"local","m":"GET","p":"/project-spine-ui.mjs","s":200,"ms":0}
+# {"t":"2026-09-30T18:25:20.042Z","id":"9842e287","env":"local","m":"GET","p":"/department-escalation-ui.mjs","s":200,"ms":0}
+# {"t":"2026-09-30T18:25:20.043Z","id":"028fbd42","env":"local","m":"GET","p":"/module-services.mjs","s":200,"ms":0}
+# {"t":"2026-09-30T18:25:20.043Z","id":"e2f91ee7","env":"local","m":"GET","p":"/depth-scene.mjs","s":200,"ms":0}
+# {"t":"2026-09-30T18:25:20.044Z","id":"1fe20cd3","env":"local","m":"GET","p":"/signature.css","s":200,"ms":0}
+# {"t":"2026-09-30T18:25:20.045Z","id":"b7d1db4a","env":"local","m":"GET","p":"/style.css","s":200,"ms":1}
+# {"t":"2026-09-30T18:25:20.045Z","id":"cefbe132","env":"local","m":"GET","p":"/journey.css","s":200,"ms":0}
+# {"t":"2026-09-30T18:25:20.046Z","id":"50e97bc7","env":"local","m":"GET","p":"/athar.css","s":200,"ms":0}
+# {"t":"2026-09-30T18:25:20.047Z","id":"6942ed02","env":"local","m":"GET","p":"/hr-design.css","s":200,"ms":1}
+# {"t":"2026-09-30T18:25:20.048Z","id":"89077b9c","env":"local","m":"GET","p":"/depth.css","s":200,"ms":0}
+# {"t":"2026-09-30T18:25:20.049Z","id":"dc2403af","env":"local","m":"GET","p":"/classic.css","s":200,"ms":0}
+# {"t":"2026-09-30T18:25:20.052Z","id":"be6ddfff","env":"local","m":"GET","p":"/riwaq.css","s":200,"ms":1}
+# {"t":"2026-09-30T18:25:20.053Z","id":"178906e1","env":"local","m":"GET","p":"/yawm.css","s":200,"ms":1}
+# {"t":"2026-09-30T18:25:20.054Z","id":"7b943c5c","env":"local","m":"GET","p":"/markaz.css","s":200,"ms":0}
+# {"t":"2026-09-30T18:25:20.055Z","id":"0ed617b1","env":"local","m":"GET","p":"/studio.css","s":200,"ms":1}
+# {"t":"2026-09-30T18:25:20.055Z","id":"6547d169","env":"local","m":"GET","p":"/page-editor.css","s":200,"ms":0}
+# {"t":"2026-09-30T18:25:20.057Z","id":"89d583c3","env":"local","m":"GET","p":"/journey.mjs","s":200,"ms":1}
+# {"t":"2026-09-30T18:25:20.058Z","id":"2c4f57bd","env":"local","m":"GET","p":"/app.mjs","s":200,"ms":0}
+# {"t":"2026-09-30T18:25:20.059Z","id":"7624e0ec","env":"local","m":"GET","p":"/signature.mjs","s":200,"ms":0}
+# {"t":"2026-09-30T18:25:20.059Z","id":"1a2c2762","env":"local","m":"GET","p":"/interact.mjs","s":200,"ms":0}
+# Subtest: every module and stylesheet the interface imports is actually served
+ok 92 - every module and stylesheet the interface imports is actually served
+  ---
+  duration_ms: 10840.819667
+  type: 'test'
+  ...
+# (node:80744) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: commencement: only an independent reviewer in scope issues, replaces or withdraws it — never the requester, an outsider, another tenant or a conflicted reviewer
+ok 93 - commencement: only an independent reviewer in scope issues, replaces or withdraws it — never the requester, an outsider, another tenant or a conflicted reviewer
+  ---
+  duration_ms: 10020.2305
+  type: 'test'
+  ...
+# Subtest: commencement: it records issuer, dates, scope, order version, validity and evidence, and the receipt re-checks all of it when it is recorded
+ok 94 - commencement: it records issuer, dates, scope, order version, validity and evidence, and the receipt re-checks all of it when it is recorded
+  ---
+  duration_ms: 12845.855583
+  type: 'test'
+  ...
+# Subtest: commencement: withdrawal and replacement add records and never rewrite or delete the earlier ones
+ok 95 - commencement: withdrawal and replacement add records and never rewrite or delete the earlier ones
+  ---
+  duration_ms: 12328.899334
+  type: 'test'
+  ...
+# Subtest: commencement: a replayed or repeated request creates no second record, through the module and through the API route
+ok 96 - commencement: a replayed or repeated request creates no second record, through the module and through the API route
+  ---
+  duration_ms: 13714.229875
+  type: 'test'
+  ...
+# Subtest: commencement: a receipt racing a withdrawal never lands after it — separate processes on one database file
+ok 97 - commencement: a receipt racing a withdrawal never lands after it — separate processes on one database file
+  ---
+  duration_ms: 15391.17225
+  type: 'test'
+  ...
+# orderings: fresh:withdraw fresh:withdraw fresh:receive+withdraw same:withdraw same:receive same:withdraw
+# Subtest: commencement UI: the purchase shows the standing authorisation and its history, and every form posts to the procurement route with the opened version
+ok 98 - commencement UI: the purchase shows the standing authorisation and its history, and every form posts to the procurement route with the opened version
+  ---
+  duration_ms: 7529.651667
+  type: 'test'
+  ...
+# Subtest: migration 162: an authorisation issued before it is carried as issued — no validity or evidence invented — and opens no receipt until replaced
+ok 99 - migration 162: an authorisation issued before it is carried as issued — no validity or evidence invented — and opens no receipt until replaced
+  ---
+  duration_ms: 7312.628875
+  type: 'test'
+  ...
+# Subtest: TRACE: all 220 original rows and acceptance criteria match the workbook and evidence
+ok 100 - TRACE: all 220 original rows and acceptance criteria match the workbook and evidence
+  ---
+  duration_ms: 6266.446875
+  type: 'test'
+  ...
+# Subtest: TRACE: changing acceptance or declaring partial work complete is rejected
+ok 101 - TRACE: changing acceptance or declaring partial work complete is rejected
+  ---
+  duration_ms: 60.207833
+  type: 'test'
+  ...
+# (node:80786) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: golden: every operational screen renders to the same HTML for four seeded personas
+ok 102 - golden: every operational screen renders to the same HTML for four seeded personas
+  ---
+  duration_ms: 28909.423584
+  type: 'test'
+  ...
+# Subtest: golden: moving the SQL wall clock a day forward moves no screen hash
+ok 103 - golden: moving the SQL wall clock a day forward moves no screen hash
+  ---
+  duration_ms: 35477.374
+  type: 'test'
+  ...
+# Subtest: golden: the normaliser hides random identifiers but stays sensitive to order, count and text
+ok 104 - golden: the normaliser hides random identifiers but stays sensitive to order, count and text
+  ---
+  duration_ms: 1.42275
+  type: 'test'
+  ...
+# Subtest: golden: the page-editor trigger is outside every seeded persona’s screen, and appears only for a holder of the configure capability
+ok 105 - golden: the page-editor trigger is outside every seeded persona’s screen, and appears only for a holder of the configure capability
+  ---
+  duration_ms: 10777.637708
+  type: 'test'
+  ...
+# (node:80840) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: الحزمة تحفظ معايير قبولها ومخرجاتها ومرجع مخصصها — والمخصص من المشروع نفسه وحده
+ok 106 - الحزمة تحفظ معايير قبولها ومخرجاتها ومرجع مخصصها — والمخصص من المشروع نفسه وحده
+  ---
+  duration_ms: 11275.484667
+  type: 'test'
+  ...
+# Subtest: التكليف عبر الإدارات لمساهمٍ مسجّل، ولا يمنح تصريحًا واحدًا — لا مالية ولا رواتب ولا موردين ولا عملاء
+ok 107 - التكليف عبر الإدارات لمساهمٍ مسجّل، ولا يمنح تصريحًا واحدًا — لا مالية ولا رواتب ولا موردين ولا عملاء
+  ---
+  duration_ms: 12426.063208
+  type: 'test'
+  ...
+# Subtest: التبعية بلا حلقة: الحلقة تُرفض باسم مسارها في الكود، وفي القاعدة لو التفّ عليها أحد
+ok 108 - التبعية بلا حلقة: الحلقة تُرفض باسم مسارها في الكود، وفي القاعدة لو التفّ عليها أحد
+  ---
+  duration_ms: 9314.242834
+  type: 'test'
+  ...
+# Subtest: لا إنجاز بلا دليل: التسليم يسمّي كل ناقص، ولا يسبق ما يعتمد عليه، والقاعدة ترفضه بلا دليل
+ok 109 - لا إنجاز بلا دليل: التسليم يسمّي كل ناقص، ولا يسبق ما يعتمد عليه، والقاعدة ترفضه بلا دليل
+  ---
+  duration_ms: 12003.325167
+  type: 'test'
+  ...
+# Subtest: العزل: حزمة كيانٍ لا يمسّها حسابُ كيانٍ آخر، ولا تعتمد حزمةٌ على حزمة مشروعٍ آخر
+ok 110 - العزل: حزمة كيانٍ لا يمسّها حسابُ كيانٍ آخر، ولا تعتمد حزمةٌ على حزمة مشروعٍ آخر
+  ---
+  duration_ms: 7613.519542
+  type: 'test'
+  ...
+1..110
+# tests 110
+# suites 0
+# pass 110
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 208276.06075

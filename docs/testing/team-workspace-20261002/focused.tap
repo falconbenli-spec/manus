@@ -1,0 +1,198 @@
+TAP version 13
+# (node:4354) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: removing a member revokes every new read while retaining authorship and reason
+ok 1 - removing a member revokes every new read while retaining authorship and reason
+  ---
+  duration_ms: 4424.881584
+  type: 'test'
+  ...
+# Subtest: space roles control actions and membership management respects project scope
+ok 2 - space roles control actions and membership management respects project scope
+  ---
+  duration_ms: 4624.315208
+  type: 'test'
+  ...
+# Subtest: inactive or expired memberships are rejected at read time
+ok 3 - inactive or expired memberships are rejected at read time
+  ---
+  duration_ms: 4404.184792
+  type: 'test'
+  ...
+# (node:4355) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: workspace writes require CSRF and creation is idempotent
+ok 4 - workspace writes require CSRF and creation is idempotent
+  ---
+  duration_ms: 5265.627792
+  type: 'test'
+  ...
+# Subtest: chat pagination returns a cursor and board endpoints never include file bytes
+ok 5 - chat pagination returns a cursor and board endpoints never include file bytes
+  ---
+  duration_ms: 5163.826292
+  type: 'test'
+  ...
+# Subtest: work and space discovery expose the same governed workspace without creating duplicates
+ok 6 - work and space discovery expose the same governed workspace without creating duplicates
+  ---
+  duration_ms: 4416.4935
+  type: 'test'
+  ...
+# (node:4356) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: a due weekly check-in creates one Riyadh cycle and keeps named answers out of Pulse
+ok 7 - a due weekly check-in creates one Riyadh cycle and keeps named answers out of Pulse
+  ---
+  duration_ms: 4304.347958
+  type: 'test'
+  ...
+# Subtest: a named check-in answer can become a task without writing performance data
+ok 8 - a named check-in answer can become a task without writing performance data
+  ---
+  duration_ms: 4604.279
+  type: 'test'
+  ...
+# (node:4357) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: documents keep immutable revisions and expose only their current revision on the board
+ok 9 - documents keep immutable revisions and expose only their current revision on the board
+  ---
+  duration_ms: 4370.120041
+  type: 'test'
+  ...
+# Subtest: publishing a file as evidence pins one digest even after a new version
+ok 10 - publishing a file as evidence pins one digest even after a new version
+  ---
+  duration_ms: 4517.469166
+  type: 'test'
+  ...
+# Subtest: file signatures, names, membership and scan state are enforced
+ok 11 - file signatures, names, membership and scan state are enforced
+  ---
+  duration_ms: 4519.470167
+  type: 'test'
+  ...
+# (node:4358) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: formal project topics stay separate from company announcements and retain revisions
+ok 12 - formal project topics stay separate from company announcements and retain revisions
+  ---
+  duration_ms: 4515.755458
+  type: 'test'
+  ...
+# Subtest: chat cannot become approval and redaction keeps the audit trail without leaking text
+ok 13 - chat cannot become approval and redaction keeps the audit trail without leaking text
+  ---
+  duration_ms: 4587.12575
+  type: 'test'
+  ...
+# Subtest: a chat line converts to one governed task and keeps its source link
+ok 14 - a chat line converts to one governed task and keeps its source link
+  ---
+  duration_ms: 4467.742667
+  type: 'test'
+  ...
+# (node:4359) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: workspace report counts drill into the exact rows and labels workload as task count
+ok 15 - workspace report counts drill into the exact rows and labels workload as task count
+  ---
+  duration_ms: 4427.109625
+  type: 'test'
+  ...
+# (node:4360) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: events use UTC with a declared Riyadh timezone and internal attendees
+ok 16 - events use UTC with a declared Riyadh timezone and internal attendees
+  ---
+  duration_ms: 4327.396791
+  type: 'test'
+  ...
+# (node:4361) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: search never reveals a workspace title after membership removal, even before reindex
+ok 17 - search never reveals a workspace title after membership removal, even before reindex
+  ---
+  duration_ms: 4554.408375
+  type: 'test'
+  ...
+# Subtest: workspace search indexes documents but never raw chat or file bytes
+ok 18 - workspace search indexes documents but never raw chat or file bytes
+  ---
+  duration_ms: 4541.601959
+  type: 'test'
+  ...
+# (node:4362) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: one target has one space and membership never crosses tenants
+ok 19 - one target has one space and membership never crosses tenants
+  ---
+  duration_ms: 4465.9355
+  type: 'test'
+  ...
+# Subtest: workspace discovery shows only eligible targets and removes a suggestion after activation
+ok 20 - workspace discovery shows only eligible targets and removes a suggestion after activation
+  ---
+  duration_ms: 4511.934833
+  type: 'test'
+  ...
+# Subtest: project membership is derived without copying project business fields
+ok 21 - project membership is derived without copying project business fields
+  ---
+  duration_ms: 2802.082375
+  type: 'test'
+  ...
+# Subtest: department spaces derive active internal members and external guests stay disabled
+ok 22 - department spaces derive active internal members and external guests stay disabled
+  ---
+  duration_ms: 2688.321459
+  type: 'test'
+  ...
+# (node:4363) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: list and card views read one task identity, not duplicated records
+ok 23 - list and card views read one task identity, not duplicated records
+  ---
+  duration_ms: 4525.712666
+  type: 'test'
+  ...
+# Subtest: card completion requires evidence and stale movement cannot overwrite current order
+ok 24 - card completion requires evidence and stale movement cannot overwrite current order
+  ---
+  duration_ms: 2788.534208
+  type: 'test'
+  ...
+# Subtest: linked request cards are read-only in the free board
+ok 25 - linked request cards are read-only in the free board
+  ---
+  duration_ms: 2690.375917
+  type: 'test'
+  ...
+# Subtest: workspace keeps mobile tools reachable and respects reduced motion
+ok 26 - workspace keeps mobile tools reachable and respects reduced motion
+  ---
+  duration_ms: 0.59275
+  type: 'test'
+  ...
+# Subtest: workspace navigation contains every contracted tool without rendering all panels together
+ok 27 - workspace navigation contains every contracted tool without rendering all panels together
+  ---
+  duration_ms: 1.06725
+  type: 'test'
+  ...
+# Subtest: workspace form contracts point to governed API routes and require idempotency for creates
+ok 28 - workspace form contracts point to governed API routes and require idempotency for creates
+  ---
+  duration_ms: 0.817375
+  type: 'test'
+  ...
+1..28
+# tests 28
+# suites 0
+# pass 28
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 19406.879834

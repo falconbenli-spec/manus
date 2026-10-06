@@ -1,0 +1,26 @@
+✔ ACCESS: an employee holds only their own portal, and every other screen is closed (3006.574125ms)
+✔ ACCESS: the first admin grants a scoped capability, and revoking it ends the session (3208.171167ms)
+✔ ACCESS: a scoped admin only reaches what was granted, and the last first admin cannot be demoted (3159.021875ms)
+✔ ACCESS: the server refuses screens without a grant and reports what the account holds (3534.809208ms)
+✔ إعادة كلمة مرور حساب إداري تتطلب أدمن أول وتبقي بياناته وجلساته سليمة عند الرفض (4641.416834ms)
+✔ التصريح العام لا يقبل نطاق إدارة يوحي بقيد غير مطبق (3507.899ms)
+✔ مصفوفة الصلاحيات: الشامل يمنح الحزمة الآمنة المتوافقة ويستبعد الحساس والمحصور وإدارة المنصة (3155.250792ms)
+✔ مصفوفة الصلاحيات: المخصص يرفض جمع الإعداد والاعتماد كلها أو لا يكتب شيئًا (2996.2665ms)
+✔ مصفوفة الصلاحيات: المخصص يتطلب نطاقًا للمفاتيح المحصورة ويمنح المختار فقط (3055.075625ms)
+✔ الخادم يمنع الاستيلاء على حساب الأدمن الأول عبر إعادة كلمة المرور المباشرة (3953.903083ms)
+✔ SCALE: several managers in a department stop routing until the admin assigns one approver (3282.721292ms)
+✔ SCALE: admin creates and imports employees with a manager hierarchy, all or nothing (5293.604416ms)
+✔ SCALE: a temporary password blocks the API until the employee sets a strong one (5086.431083ms)
+✔ SCALE: failed logins lock one account from an office address without locking colleagues (6886.317917ms)
+✔ SCALE: the narrowed request list returns exactly the authorized requests for 250 accounts (72152.768209ms)
+ℹ listRequests for 274 accounts over 80 requests: 112ms total, 0.4ms per account
+✔ LAUNCHER: services are grouped by department and section, searchable in Arabic, and escaped (2748.512333ms)
+✔ ACCOUNTS UI: admin forms send only the fields the server accepts (2625.577417ms)
+ℹ tests 17
+ℹ suites 0
+ℹ pass 17
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 98399.216542

@@ -1,0 +1,128 @@
+/* محرّر الصفحة، والحقول المخصّصة في الشاشات، وشريط «جرّب كمستخدم» (ترحيل 123 — docs/implementation/handoff/os-admin-studio.md).
+   كل لون ومسافة وحجم خط رمزٌ من signature.css: لا لون مكتوب هنا، فالملف يتبع التصاميم الستة والوضعين من تلقائه.
+   خصائص منطقية وحدها (inline/block)، فالعربية من اليمين والإنجليزية من اليسار بلا قاعدة ثانية. لا style= في الترميز (CSP). */
+
+/* ───── الحقول المخصّصة في موضعها ───── */
+.cf-fields{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,220px),1fr));gap:var(--s3) var(--s6);margin-block:var(--s3)}
+.cf-fields.cf-header{padding-block-end:var(--s3);border-block-end:1px solid var(--line)}
+.cf-item{min-inline-size:0}
+.cf-item dt{font-size:var(--fs-label);font-weight:var(--fw-label);color:var(--ink-4)}
+.cf-item dd{margin:0;font-size:var(--fs-table);color:var(--ink-1);overflow-wrap:anywhere}
+.cf-missing{color:var(--ink-4)}
+/* سبب «غير متاح» جملة كاملة في خانة قائمة. بلا كسرٍ داخل الكلمة يصير أعرضُ كلمة فيها أقلَّ عرض للعمود، فيزحم العمود
+   جيرانه حتى ينكسر رمز السجل («QT-0002») على سطرين. الكسر عند أي موضع يجعل أقل عرضٍ حرفًا واحدًا، فتتقاسم الأعمدة السطر. */
+.cf-item dd small,.cf-records td small{display:block;font-size:var(--fs-cap);color:var(--ink-4);overflow-wrap:anywhere}
+.cf-records td{min-inline-size:0}
+.cf-records{margin-block:var(--s3)}
+.cf-filters{display:flex;flex-wrap:wrap;align-items:end;gap:var(--s3) var(--s4);margin-block-end:var(--s3)}
+.cf-filters label{display:grid;gap:var(--s1);min-inline-size:min(100%,200px);flex:1 1 200px}
+.cf-filters label>span{font-size:var(--fs-label);font-weight:var(--fw-label);color:var(--ink-4)}
+.cf-filters small{flex:none;padding-block-end:var(--s2)}
+/* حقل التصفية على شكل حقول المنصة: خط سفلي على القماش، لا صندوق أبيض من افتراض المتصفح. */
+.cf-filters :is(input,select){inline-size:100%;min-block-size:var(--tap);padding-block:0;padding-inline:0;background-color:transparent;border:0;border-block-end:1px solid var(--line-strong);border-radius:0;color:var(--ink-1);font:inherit;font-size:var(--fs-table)}
+.cf-filters select{padding-inline-end:20px;background-image:var(--select-arrow);background-repeat:no-repeat;background-size:9px 10px;background-position:0 50%;appearance:none}
+:root[dir=ltr] .cf-filters select{background-position:100% 50%}
+.cf-filters :is(input,select):focus-visible{outline:0;border-block-end:2px solid var(--focus)}
+.pe-preview-note{margin-block-end:var(--s4)}
+
+/* ───── شريط «جرّب كمستخدم»: دائم ما دامت التجربة جارية ───── */
+:root{--view-as-h:48px;--view-as-ink:var(--occasion-condolence)}
+.view-as-banner{position:fixed;inset-block-start:0;inset-inline:0;z-index:calc(var(--z-index) + 1);display:flex;align-items:center;gap:var(--s3);
+  block-size:var(--view-as-h);padding-inline:max(var(--s4),var(--safe-l)) max(var(--s4),var(--safe-r));background:var(--occasion-urgent);color:var(--view-as-ink);
+  font-size:var(--fs-meta);line-height:1.35;overflow:hidden}
+.view-as-banner strong{font-weight:var(--fw-strong);white-space:nowrap}
+.view-as-banner span{flex:1 1 auto;min-inline-size:0;overflow:hidden;text-overflow:ellipsis;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical}
+.view-as-banner button{flex:none;min-block-size:36px;padding-inline:var(--s4);border:2px solid var(--view-as-ink);border-radius:var(--r-0);background:transparent;color:var(--view-as-ink);font:inherit;font-weight:var(--fw-strong);cursor:pointer}
+.view-as-banner button:focus-visible{outline:2px solid var(--view-as-ink);outline-offset:2px}
+html[data-view-as=on] body{padding-block-start:var(--view-as-h)}
+html[data-view-as=on] .topbar{inset-block-start:var(--view-as-h)}
+html[data-view-as=on] .sidebar{inset-block-start:var(--view-as-h)}
+.view-as-banner .view-as-short{display:none}
+@media (max-width:760px){:root{--view-as-h:64px}.view-as-banner{gap:var(--s2);font-size:var(--fs-cap)}.view-as-banner .view-as-long{display:none}.view-as-banner .view-as-short{display:-webkit-box}}
+
+/* ───── الدرج ───── */
+.pe-drawer{position:fixed;inset-block:0;inset-inline-end:0;z-index:calc(var(--z-index) + 20);display:flex;flex-direction:column;inline-size:min(460px,100vw);
+  background:var(--canvas);color:var(--ink-2);border-inline-start:1px solid var(--line-strong);box-shadow:var(--shadow-float);overscroll-behavior:contain}
+html[data-view-as=on] .pe-drawer{inset-block-start:var(--view-as-h)}
+.pe-head{flex:none;display:flex;align-items:flex-start;justify-content:space-between;gap:var(--s3);padding:max(var(--s4),var(--safe-t)) var(--s4) var(--s2)}
+.pe-eyebrow{margin:0;font-size:var(--fs-label);font-weight:var(--fw-label);color:var(--accent-ink,var(--action))}
+.pe-head h2{margin:0;font-size:var(--fs-title);font-weight:var(--fw-strong);line-height:var(--lh-title);color:var(--ink-1)}
+.pe-state{flex:none;display:flex;flex-wrap:wrap;align-items:center;gap:var(--s2);padding:0 var(--s4) var(--s3);font-size:var(--fs-cap);color:var(--ink-3)}
+.pe-entity{flex:none;padding:0 var(--s4) var(--s3)}
+/* التبويبات تلتف ولا تنزلق: شريطٌ ينزلق بلا مؤشر انزلاق (scrollbar-width:none) يترك التبويب السابع خارج الشاشة
+   بلا ما يدل عليه — على درج عرضه 460px كان مجموع عرض السبعة 527px. الالتفاف يُظهرها كلها في سطرين. */
+.pe-tabs{flex:none;display:flex;flex-wrap:wrap;gap:0;border-block:1px solid var(--line);padding-inline:var(--s2)}
+.pe-tabs button{flex:none;min-block-size:var(--tap);padding-inline:var(--s3);border:0;border-block-end:2px solid transparent;border-radius:var(--r-0);background:transparent;color:var(--ink-3);font:inherit;font-size:var(--fs-meta);cursor:pointer}
+.pe-tabs button[aria-selected=true]{color:var(--ink-1);border-block-end-color:var(--action);font-weight:var(--fw-strong)}
+.pe-tabs button:focus-visible,.pe-row button:focus-visible,.pe-types button:focus-visible{outline:2px solid var(--focus);outline-offset:-2px}
+/* متن الدرج لا ينزلق عرضًا أبدًا: ما اتسع تكفّل به حاوية الجدول نفسها، فلا يجرّ حقلٌ يأخذ التركيز النموذجَ كلَّه جانبًا. */
+.pe-body{flex:1 1 auto;min-block-size:0;min-inline-size:0;overflow-y:auto;overflow-x:hidden;padding:var(--s4);scroll-padding-block:var(--s6)}
+.pe-body h3{margin:var(--s6) 0 var(--s2);font-size:var(--fs-row);font-weight:var(--fw-strong);color:var(--ink-1)}
+.pe-body h3:first-child{margin-block-start:0}
+.pe-body p{margin:0 0 var(--s3);font-size:var(--fs-meta);line-height:1.6;color:var(--ink-3)}
+.pe-body .form-grid{grid-template-columns:minmax(0,1fr)}
+.pe-body .form-actions{position:static;margin-block-start:var(--s4);padding:0;background:transparent;border:0}
+.pe-drawer .empty{min-block-size:0;padding-block:var(--s4);text-align:start}
+.pe-drawer .empty-symbol{display:none}
+.pe-drawer .empty strong{font-size:var(--fs-row);font-weight:var(--fw-strong);line-height:1.5}
+.pe-drawer .empty p{margin:0;font-size:var(--fs-meta)}
+.pe-message:empty{display:none}
+.pe-message{margin-block-end:var(--s4)}
+.pe-list{list-style:none;margin:0 0 var(--s4);padding:0;border-block-start:1px solid var(--line)}
+.pe-row{display:flex;flex-wrap:wrap;align-items:center;gap:var(--s2) var(--s3);min-block-size:var(--tap);padding-block:var(--s2);border-block-end:1px solid var(--line)}
+.pe-row>div:first-child{flex:1 1 160px;min-inline-size:0}
+.pe-row strong{display:block;font-size:var(--fs-table);font-weight:var(--fw-strong);color:var(--ink-1);overflow-wrap:anywhere}
+.pe-row small{display:block;font-size:var(--fs-cap);color:var(--ink-4)}
+.pe-row.is-locked strong,.pe-row.is-locked small{color:var(--ink-5)}
+.pe-row.is-retired strong{color:var(--ink-4);text-decoration:line-through}
+.pe-tools{flex:none;display:flex;flex-wrap:wrap;gap:var(--s1)}
+.pe-tools .btn{min-inline-size:var(--tap)}
+.pe-types{display:grid;grid-template-columns:repeat(auto-fill,minmax(130px,1fr));gap:var(--s2);margin-block-end:var(--s4)}
+.pe-types button{display:grid;gap:2px;min-block-size:56px;padding:var(--s2) var(--s3);border:1px solid var(--line-strong);border-radius:var(--r-0);background:transparent;color:var(--ink-1);font:inherit;font-size:var(--fs-meta);text-align:start;cursor:pointer}
+.pe-types button small{font-size:var(--fs-cap);color:var(--ink-4)}
+@media (hover:hover){.pe-types button:hover{border-color:var(--action)}}
+/* جدول الخيارات: العمود الأول يحمل قيمة الخيار التي يولّدها المحرّر، ولا يُعرض لمن لا يكتب معرّفات. */
+.pe-options th:first-child,.pe-options td:first-child{display:none}
+/* الأساس المشترك يفرض على جدول الصفوف min-inline-size:560px (classic.css)، وهو أعرض من الدرج (460px). العرض الثابت
+   والتخطيط المثبَّت لا يرفعان أرضيةً؛ فتُصفَّر الأرضية هنا ليُقسَّم العرض الفعلي على الأعمدة الثلاثة المعروضة. */
+.pe-options .rows-field table{table-layout:fixed;inline-size:100%;min-inline-size:0}
+.pe-options .rows-field :is(th,td){padding-inline:2px}
+.pe-options .rows-field td :is(input,select){inline-size:100%;min-inline-size:0}
+.pe-options .rows-field .rows-remove{inline-size:40px}
+.pe-options .rows-field .rows-remove .btn{min-inline-size:36px;inline-size:36px;padding-inline:0}
+/* الحاوية تبقى على انزلاقها المشترك (max-inline-size:100%;overflow-x:auto): إن ضاق الدرج عن الأعمدة انزلق الجدول وحده
+   داخل حاويته، ولا يخرج من المتن. إلغاء الانزلاق («visible») كان يدفع الجدول خارج الدرج فيُقصّ عمود اللون وزر الحذف. */
+.pe-caps .checks{max-block-size:240px;overflow-y:auto;padding:var(--s2);border:1px solid var(--line)}
+.pe-matrix td,.pe-matrix th{text-align:center}
+.pe-matrix td:first-child,.pe-matrix th:first-child{text-align:start}
+.pe-matrix input{inline-size:22px;block-size:22px}
+.pe-diff{list-style:none;margin:0 0 var(--s3);padding:0;font-size:var(--fs-cap);color:var(--ink-3)}
+.pe-diff li{padding-block:2px}
+.pe-diff .is-loosening{color:var(--spark)}
+.pe-foot{flex:none;display:grid;gap:var(--s2);padding:var(--s3) var(--s4) max(var(--s4),var(--safe-b));border-block-start:1px solid var(--line-strong);background:var(--canvas)}
+.pe-foot-row{display:flex;flex-wrap:wrap;gap:var(--s2)}
+.pe-foot-row .btn{flex:1 1 auto}
+.pe-foot label{display:grid;gap:var(--s1);font-size:var(--fs-label);color:var(--ink-4)}
+.pe-foot small{font-size:var(--fs-cap);color:var(--ink-4)}
+.pe-foot input,.pe-entity select{inline-size:100%;min-block-size:var(--tap);padding:0;background-color:transparent;border:0;border-block-end:1px solid var(--line-strong);border-radius:0;color:var(--ink-1);font:inherit;font-size:var(--fs-table)}
+.pe-foot input:focus-visible,.pe-entity select:focus-visible{outline:0;border-block-end:2px solid var(--focus)}
+.pe-foot .pe-diff{max-block-size:120px;overflow-y:auto;margin-block:var(--s2) 0}
+/* الفعل الأول في الدرج واحد: النشر. يأخذ لون الفعل حين يكون ممكنًا، كما تفعل المنصة مع فعل الصفحة الأول. */
+.pe-foot [data-pe=publish]:not(:disabled){border-color:transparent;background-color:var(--action);color:var(--on-action)}
+@media (hover:hover){.pe-foot [data-pe=publish]:not(:disabled):hover{background-color:var(--action-hover)}}
+.pe-changes summary{min-block-size:32px;font-size:var(--fs-cap);color:var(--ink-3);cursor:pointer}
+.pe-changes summary:focus-visible{outline:2px solid var(--focus);outline-offset:2px}
+/* سطح المكتب: الصفحة تبقى مقروءة بجوار الدرج، فيرى المعدّ أثر كل تعديل على الصفحة نفسها. */
+@media (min-width:1100px){html[data-page-editor=open] #main{padding-inline-end:calc(min(460px,40vw) + var(--s4))}}
+/* الجوال: صفيحة بارتفاع الشاشة كله. */
+@media (max-width:760px){
+  .pe-drawer{inset-inline:0;inline-size:100%;border-inline-start:0}
+  .pe-head h2{font-size:var(--fs-row)}
+  .pe-tabs button{padding-inline:var(--s2)}
+  .pe-foot-row .btn{flex:1 1 40%}
+}
+@media (prefers-reduced-motion:no-preference){.pe-drawer{animation:pe-in var(--d-state) var(--ease)}}
+@keyframes pe-in{from{opacity:0;transform:translateX(-16px)}to{opacity:1;transform:none}}
+:root[dir=ltr] .pe-drawer{animation-name:pe-in-ltr}
+@keyframes pe-in-ltr{from{opacity:0;transform:translateX(16px)}to{opacity:1;transform:none}}
+@media (forced-colors:active){.view-as-banner{border-block-end:2px solid CanvasText}.pe-drawer{border-inline-start:2px solid CanvasText}}

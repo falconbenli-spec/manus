@@ -1,0 +1,14 @@
+(node:76446) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ golden: every operational screen renders to the same HTML for four seeded personas (5667.15525ms)
+✔ golden: moving the SQL wall clock a day forward moves no screen hash (10090.022916ms)
+✔ golden: the normaliser hides random identifiers but stays sensitive to order, count and text (0.364ms)
+✔ golden: the page-editor trigger is outside every seeded persona’s screen, and appears only for a holder of the configure capability (3674.178041ms)
+ℹ tests 4
+ℹ suites 0
+ℹ pass 4
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 19771.141958

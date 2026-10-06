@@ -1,0 +1,25 @@
+(node:20896) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ the governed scope is exactly the audited 42 deepen services and 12 existing-module connections (0.603833ms)
+✔ a deepen service cannot close until its tangible output is recorded and accepted by the requester (2874.967167ms)
+{"t":"2026-10-05T13:26:34.291Z","id":"c991b805","env":"local","m":"POST","p":"/api/login","s":200,"ms":255}
+{"t":"2026-10-05T13:26:34.548Z","id":"8cd73a0c","env":"local","m":"POST","p":"/api/login","s":200,"ms":253}
+{"t":"2026-10-05T13:26:34.558Z","id":"0e3c9d90","env":"local","m":"POST","p":"/api/requests/729ff6da-f826-4c1d-9380-917b5879c34b/outputs","s":201,"ms":8,"tx":1,"lock_ms":0}
+{"t":"2026-10-05T13:26:34.568Z","id":"c21afbae","env":"local","m":"POST","p":"/api/service-outputs/92445ded-6843-49aa-85a1-4a36a0b2bd63/accept","s":201,"ms":9,"tx":1,"lock_ms":0}
+{"t":"2026-10-05T13:26:34.571Z","id":"a5fc56de","env":"local","m":"GET","p":"/api/requests/729ff6da-f826-4c1d-9380-917b5879c34b","s":200,"ms":2}
+✔ the HTTP workflow records and decides an output, then exposes the closure gate in request detail (3277.196834ms)
+✔ a connected service accepts only a real record from its existing module and tenant (2689.135417ms)
+(node:20897) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ لا يقرأ موظف آخر مخرجات طلب لا يملك حق الاطلاع عليه (2849.773625ms)
+✔ لا يقبل مخرج تغيير وظيفي يخص موظفًا آخر أو طلبًا آخر أو حركة ملغاة (2694.177375ms)
+✔ تغيير الحساب البنكي يحتاج حساب صاحب الطلب متحققًا لا سجلًا معلقًا (2681.167167ms)
+✔ يعاد فحص مخرج السجل عند قبوله وعند الإغلاق ولا يكفي قبوله قبل إلغائه (2621.353625ms)
+ℹ tests 8
+ℹ suites 0
+ℹ pass 8
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 11005.091125

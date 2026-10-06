@@ -1,0 +1,9 @@
+
+> 36t-local-platform@0.1.0 check
+> node scripts/check.mjs
+
+(node:18912) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+Syntax checked: 774 JavaScript modules. Source hashes match. Traceability: 220 requirements / 22 domains. Migrations: 161 planned, highest 200.
+Quality ratchet: local primitives 83 (baseline 83) · short refusals 1170 (baseline 1170) · status literals outside the vocabulary 2 (baseline 2) · Latin values without direction isolation 0 (baseline 0) · direct person-table reads 734 (baseline 734) · links 158 checked, 0 unresolved · 277 ms
+Checks cover syntax, source integrity, traceability and the quality ratchet. No TypeScript compiler or production bundle is configured for this JavaScript build.

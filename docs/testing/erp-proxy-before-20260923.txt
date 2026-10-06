@@ -1,0 +1,94 @@
+✖ SEC-PROXY-01: ترويسة HTTPS من عميل بعيد لا تغير حقيقة النقل (0.944542ms)
+✔ SEC-PROXY-02: ترويسة HTTPS تقبل من وكيل استرجاع مصرح فقط (0.144125ms)
+✖ SEC-PROXY-03: عناوين الاسترجاع المشوهة لا تمنح الثقة (0.112709ms)
+✖ SEC-PROXY-04: الترويسات المتعددة أو الغامضة لا تثبت HTTPS (0.098333ms)
+✔ SEC-PROXY-05: التشفير الفعلي ومعاينة HTTPS الصريحة يبقيان موثوقين (0.067333ms)
+✖ SEC-PROXY-06: استجابة الخادم لا ترسل HSTS بناء على ترويسة عميل بعيد (8.27025ms)
+ℹ tests 6
+ℹ suites 0
+ℹ pass 2
+ℹ fail 4
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 427.948125
+
+✖ failing tests:
+
+test at ../3-6t-live/tests/proxy-transport.test.mjs:9:1
+✖ SEC-PROXY-01: ترويسة HTTPS من عميل بعيد لا تغير حقيقة النقل (0.944542ms)
+  AssertionError [ERR_ASSERTION]: 192.168.1.20
+  
+  true !== false
+  
+      at TestContext.<anonymous> (file:///Users/abdulaziz/Documents/Codex/2026-09-09/3-6t-live/tests/proxy-transport.test.mjs:11:12)
+      at Test.runInAsyncScope (node:async_hooks:226:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.start (node:internal/test_runner/test:1262:17)
+      at startSubtestAfterBootstrap (node:internal/test_runner/harness:387:17) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: true,
+    expected: false,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at ../3-6t-live/tests/proxy-transport.test.mjs:23:1
+✖ SEC-PROXY-03: عناوين الاسترجاع المشوهة لا تمنح الثقة (0.112709ms)
+  AssertionError [ERR_ASSERTION]: 127.999.0.1
+  
+  true !== false
+  
+      at TestContext.<anonymous> (file:///Users/abdulaziz/Documents/Codex/2026-09-09/3-6t-live/tests/proxy-transport.test.mjs:25:12)
+      at Test.runInAsyncScope (node:async_hooks:226:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+      at Test.postRun (node:internal/test_runner/test:1542:19)
+      at Test.run (node:internal/test_runner/test:1467:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: true,
+    expected: false,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at ../3-6t-live/tests/proxy-transport.test.mjs:29:1
+✖ SEC-PROXY-04: الترويسات المتعددة أو الغامضة لا تثبت HTTPS (0.098333ms)
+  AssertionError [ERR_ASSERTION]: https,http
+  
+  true !== false
+  
+      at TestContext.<anonymous> (file:///Users/abdulaziz/Documents/Codex/2026-09-09/3-6t-live/tests/proxy-transport.test.mjs:31:12)
+      at Test.runInAsyncScope (node:async_hooks:226:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+      at Test.postRun (node:internal/test_runner/test:1542:19)
+      at Test.run (node:internal/test_runner/test:1467:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: true,
+    expected: false,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at ../3-6t-live/tests/proxy-transport.test.mjs:41:1
+✖ SEC-PROXY-06: استجابة الخادم لا ترسل HSTS بناء على ترويسة عميل بعيد (8.27025ms)
+  AssertionError [ERR_ASSERTION]: 203.0.113.10: https
+  
+  true !== false
+  
+      at TestContext.<anonymous> (file:///Users/abdulaziz/Documents/Codex/2026-09-09/3-6t-live/tests/proxy-transport.test.mjs:54:12)
+      at async Test.run (node:internal/test_runner/test:1409:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: true,
+    expected: false,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }

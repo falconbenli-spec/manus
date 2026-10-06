@@ -1,0 +1,697 @@
+# Package 3 — receivables, settlement, credit notes, reversals: focused test run (TAP)
+# Branch p3/receivables-settlement on base 3d1d84c, working tree with migration 170 and the changes committed with this file.
+# Runner: work/node24/bin/node v24.14.0, --test-reporter=tap, inside the session sandbox (local port binding refused).
+# Files: the two new files (receivables-settlement, invoices-reporting-label), the changed receivables test, and the neighbours
+# that read receivables, invoices, the ledger registry, the closure checklist, the inbox and the UI goldens.
+# Result: 108 tests, 107 pass, 1 fail. The one failure (obligations: the nav badge endpoint…) calls server.listen() and gets
+# «listen EPERM» from the sandbox; it fails identically on the untouched base. Every route of this package is exercised in-process
+# instead (tests/definitions-fixture.mjs dispatch: session, CSRF, idempotency key and refusal travel through the real handler).
+# Red stage and probe: docs/testing/p3-receivables-settlement-probe-20260930.txt. The run date rolled to 2026-10-01 in Riyadh;
+# the file keeps the name the brief gave it.
+TAP version 13
+# Subtest: cash forecast: only an explicit capability opens it, and another tenant never appears in it
+ok 1 - cash forecast: only an explicit capability opens it, and another tenant never appears in it
+  ---
+  duration_ms: 22217.7495
+  type: 'test'
+  ...
+# Subtest: cash forecast: the horizon is thirteen rolling weeks and a claim lands in the week of its due date
+ok 2 - cash forecast: the horizon is thirteen rolling weeks and a claim lands in the week of its due date
+  ---
+  duration_ms: 21673.210542
+  type: 'test'
+  ...
+# Subtest: cash forecast: an issued invoice is confirmed, an unbilled entitlement is expected, and the two are never one number
+ok 3 - cash forecast: an issued invoice is confirmed, an unbilled entitlement is expected, and the two are never one number
+  ---
+  duration_ms: 21108.419458
+  type: 'test'
+  ...
+# Subtest: cash forecast: a recorded collection promise moves money to its promised date and stays expected
+ok 4 - cash forecast: a recorded collection promise moves money to its promised date and stays expected
+  ---
+  duration_ms: 23129.509167
+  type: 'test'
+  ...
+# Subtest: cash forecast: the opening balance is a manual input that is declared missing, and nothing the screen computes is stored
+ok 5 - cash forecast: the opening balance is a manual input that is declared missing, and nothing the screen computes is stored
+  ---
+  duration_ms: 21988.223583
+  type: 'test'
+  ...
+# Subtest: cash forecast: scenarios are manual inputs computed on the spot, never stored and never changing a document
+ok 6 - cash forecast: scenarios are manual inputs computed on the spot, never stored and never changing a document
+  ---
+  duration_ms: 22788.331625
+  type: 'test'
+  ...
+# Subtest: cash forecast: no collection rate is invented, and a small sample says so instead of pretending
+ok 7 - cash forecast: no collection rate is invented, and a small sample says so instead of pretending
+  ---
+  duration_ms: 21187.094125
+  type: 'test'
+  ...
+# Subtest: cash forecast: salaries are a total from live contracts, never a person, and what the platform cannot know is declared
+ok 8 - cash forecast: salaries are a total from live contracts, never a person, and what the platform cannot know is declared
+  ---
+  duration_ms: 20643.180792
+  type: 'test'
+  ...
+# Subtest: cash forecast: live contracts answer “do I cover payroll?” as a total only, with its pay-date assumption declared
+ok 9 - cash forecast: live contracts answer “do I cover payroll?” as a total only, with its pay-date assumption declared
+  ---
+  duration_ms: 21691.407667
+  type: 'test'
+  ...
+# Subtest: cash forecast screen: it renders from real board data under the strict content policy
+ok 10 - cash forecast screen: it renders from real board data under the strict content policy
+  ---
+  duration_ms: 21298.959125
+  type: 'test'
+  ...
+# Subtest: cash forecast: a contracted subscription is expected money on its own billing dates, counted once
+ok 11 - cash forecast: a contracted subscription is expected money on its own billing dates, counted once
+  ---
+  duration_ms: 22889.582417
+  type: 'test'
+  ...
+# Subtest: the only built-in gateway is disconnected: it refuses all three calls, sends nothing, and says so
+ok 12 - the only built-in gateway is disconnected: it refuses all three calls, sends nothing, and says so
+  ---
+  duration_ms: 5.89425
+  type: 'test'
+  ...
+# Subtest: issuing a document archives it and queues it in the same statement, and the archive can never be edited or deleted
+ok 13 - issuing a document archives it and queues it in the same statement, and the archive can never be edited or deleted
+  ---
+  duration_ms: 22544.4505
+  type: 'test'
+  ...
+# Subtest: the counter never resets, never skips and never goes back, and the hash chain link is enforced by the database itself
+ok 14 - the counter never resets, never skips and never goes back, and the hash chain link is enforced by the database itself
+  ---
+  duration_ms: 22315.445666
+  type: 'test'
+  ...
+# Subtest: whoever classifies the channel never performs the attempt, the channel is fixed once set, and a stale version is refused
+ok 15 - whoever classifies the channel never performs the attempt, the channel is fixed once set, and a stale version is refused
+  ---
+  duration_ms: 21285.3065
+  type: 'test'
+  ...
+# Subtest: today an attempt sends nothing: the refusal is logged with its reason and the next attempt backs off exponentially
+ok 16 - today an attempt sends nothing: the refusal is logged with its reason and the next attempt backs off exponentially
+  ---
+  duration_ms: 23311.13375
+  type: 'test'
+  ...
+# Subtest: an injected gateway drives every queue state, a decision is final, and a rejected document keeps its number and its place in the counter
+ok 17 - an injected gateway drives every queue state, a decision is final, and a rejected document keeps its number and its place in the counter
+  ---
+  duration_ms: 22449.854583
+  type: 'test'
+  ...
+# Subtest: a buyer with missing tax data blocks the attempt until a documented override is recorded, and the override is permanent
+ok 18 - a buyer with missing tax data blocks the attempt until a documented override is recorded, and the override is permanent
+  ---
+  duration_ms: 23033.465959
+  type: 'test'
+  ...
+# Subtest: a complete buyer needs no override, and a credit note is archived with the reference of its original invoice
+ok 19 - a complete buyer needs no override, and a credit note is archived with the reference of its original invoice
+  ---
+  duration_ms: 22390.19625
+  type: 'test'
+  ...
+# Subtest: the screen needs the einvoice capability, and another tenant sees and touches nothing
+ok 20 - the screen needs the einvoice capability, and another tenant sees and touches nothing
+  ---
+  duration_ms: 22243.358667
+  type: 'test'
+  ...
+# Subtest: inbox: a manager sees every pending decision across modules in one place, the requester sees none of them, and a decision removes its item
+ok 21 - inbox: a manager sees every pending decision across modules in one place, the requester sees none of them, and a decision removes its item
+  ---
+  duration_ms: 26327.595083
+  type: 'test'
+  ...
+# Subtest: invoices API: every issued document says it is internal and not reported while no e-invoicing gateway is connected; a draft says it is not issued
+ok 22 - invoices API: every issued document says it is internal and not reported while no e-invoicing gateway is connected; a draft says it is not issued
+  ---
+  duration_ms: 22575.665209
+  type: 'test'
+  ...
+# Subtest: invoices API: a queue status written by a simulated provider never reads as reported on the invoice
+ok 23 - invoices API: a queue status written by a simulated provider never reads as reported on the invoice
+  ---
+  duration_ms: 21926.352584
+  type: 'test'
+  ...
+# Subtest: criterion 7: an accepted deliverable is not billable until the receivable is approved, and both tax profiles exist
+ok 24 - criterion 7: an accepted deliverable is not billable until the receivable is approved, and both tax profiles exist
+  ---
+  duration_ms: 22941.114375
+  type: 'test'
+  ...
+# Subtest: issuing needs a second person, numbers run without gaps, and an issued invoice cannot be changed or deleted
+ok 25 - issuing needs a second person, numbers run without gaps, and an issued invoice cannot be changed or deleted
+  ---
+  duration_ms: 21912.249417
+  type: 'test'
+  ...
+# Subtest: a credit note corrects an issued invoice, never exceeds it, and carries its own sequence and reason
+ok 26 - a credit note corrects an issued invoice, never exceeds it, and carries its own sequence and reason
+  ---
+  duration_ms: 21534.231333
+  type: 'test'
+  ...
+# Subtest: zero-rated supplies need a written reason, access needs a finance grant, and tax data is replaced rather than edited
+ok 27 - zero-rated supplies need a written reason, access needs a finance grant, and tax data is replaced rather than edited
+  ---
+  duration_ms: 23402.219042
+  type: 'test'
+  ...
+# Subtest: the QR issue time carries no fractional seconds, while the record keeps its own precision
+ok 28 - the QR issue time carries no fractional seconds, while the record keeps its own precision
+  ---
+  duration_ms: 22259.704833
+  type: 'test'
+  ...
+# Subtest: the output-VAT rate is read from the dated legal schedule at the supply date, not written into the code
+ok 29 - the output-VAT rate is read from the dated legal schedule at the supply date, not written into the code
+  ---
+  duration_ms: 22854.458208
+  type: 'test'
+  ...
+# Subtest: a rate that is not the one in force on the supply date is refused, in either direction
+ok 30 - a rate that is not the one in force on the supply date is refused, in either direction
+  ---
+  duration_ms: 21653.992042
+  type: 'test'
+  ...
+# Subtest: the archived copy carries the document type, the tax category code, the payment means and a unit code on every line
+ok 31 - the archived copy carries the document type, the tax category code, the payment means and a unit code on every line
+  ---
+  duration_ms: 21407.246958
+  type: 'test'
+  ...
+# ERROR: failed to copy trust settings of system certificate-25291
+# ERROR: failed to copy trust settings of system certificate-25291
+# ERROR: failed to copy trust settings of system certificate-25291
+# ERROR: failed to copy trust settings of system certificate-25291
+# Subtest: registry: every existing source kind is held unchanged, the new kinds join it, and another file can register its own kind
+ok 32 - registry: every existing source kind is held unchanged, the new kinds join it, and another file can register its own kind
+  ---
+  duration_ms: 24001.107
+  type: 'test'
+  ...
+# Subtest: supplier invoice: net per cost centre, input VAT from the verified record, the gross liability — one balanced journal in minor units
+ok 33 - supplier invoice: net per cost centre, input VAT from the verified record, the gross liability — one balanced journal in minor units
+  ---
+  duration_ms: 23297.889375
+  type: 'test'
+  ...
+# Subtest: supplier invoice: not ready until the VAT position is known, and a supplier outside the VAT register posts gross to cost
+ok 34 - supplier invoice: not ready until the VAT position is known, and a supplier outside the VAT register posts gross to cost
+  ---
+  duration_ms: 23646.852584
+  type: 'test'
+  ...
+# Subtest: supplier invoice: one payable, one journal — the old manual path is closed, its journals stay readable, and a trigger refuses a second path
+ok 35 - supplier invoice: one payable, one journal — the old manual path is closed, its journals stay readable, and a trigger refuses a second path
+  ---
+  duration_ms: 24212.578833
+  type: 'test'
+  ...
+# Subtest: customer advances: receipt, each draw application and reversal become journals, and the control reads net of reversals
+ok 36 - customer advances: receipt, each draw application and reversal become journals, and the control reads net of reversals
+  ---
+  duration_ms: 23383.27725
+  type: 'test'
+  ...
+# Subtest: migration 167 upgrade: draws applied before it become one opening event each, and later applications are captured by the trigger
+ok 37 - migration 167 upgrade: draws applied before it become one opening event each, and later applications are captured by the trigger
+  ---
+  duration_ms: 23551.608792
+  type: 'test'
+  ...
+# Subtest: pending sources: an unposted supplier liability is listed and blocks the monthly close pack like any other unposted document
+ok 38 - pending sources: an unposted supplier liability is listed and blocks the monthly close pack like any other unposted document
+  ---
+  duration_ms: 23020.976458
+  type: 'test'
+  ...
+# Subtest: control reconciliation: AR, AP, input VAT, output VAT and customer advances tie to their control accounts after a synthetic month, and the trial balance balances
+ok 39 - control reconciliation: AR, AP, input VAT, output VAT and customer advances tie to their control accounts after a synthetic month, and the trial balance balances
+  ---
+  duration_ms: 23199.219042
+  type: 'test'
+  ...
+# Subtest: control reconciliation: every difference is itemised to a document or a journal, and the items add up to the difference
+ok 40 - control reconciliation: every difference is itemised to a document or a journal, and the items add up to the difference
+  ---
+  duration_ms: 23914.246833
+  type: 'test'
+  ...
+# Subtest: control reconciliation: read-only, finance-scoped and tenant-isolated
+ok 41 - control reconciliation: read-only, finance-scoped and tenant-isolated
+  ---
+  duration_ms: 23776.489625
+  type: 'test'
+  ...
+# Subtest: trace: a supplier invoice walks to its approvers, its posted journal, its payment, the bank line, and its reversal — with explicit no-link markers
+ok 42 - trace: a supplier invoice walks to its approvers, its posted journal, its payment, the bank line, and its reversal — with explicit no-link markers
+  ---
+  duration_ms: 23346.751792
+  type: 'test'
+  ...
+# Subtest: trace: an invoice reaches its receipt, the advance drawn on it and its credit note; a manual journal says it has no source document
+ok 43 - trace: an invoice reaches its receipt, the advance drawn on it and its credit note; a manual journal says it has no source document
+  ---
+  duration_ms: 21659.639209
+  type: 'test'
+  ...
+# Subtest: trace: finance-scoped, tenant-isolated, and it refuses what it cannot find instead of guessing
+ok 44 - trace: finance-scoped, tenant-isolated, and it refuses what it cannot find instead of guessing
+  ---
+  duration_ms: 22146.067958
+  type: 'test'
+  ...
+# Subtest: listFinance: no constant payment status; each payable carries its payment state from its payment order
+ok 45 - listFinance: no constant payment status; each payable carries its payment state from its payment order
+  ---
+  duration_ms: 20254.985041
+  type: 'test'
+  ...
+# Subtest: idempotency: two processes preparing the same supplier invoice at the same instant leave one journal, one payable link and one source link
+ok 46 - idempotency: two processes preparing the same supplier invoice at the same instant leave one journal, one payable link and one source link
+  ---
+  duration_ms: 22141.044
+  type: 'test'
+  ...
+# Subtest: separation of duties: the preparer neither approves nor posts a sourced journal, a reversal needs another preparer, and a read-only holder prepares nothing
+ok 47 - separation of duties: the preparer neither approves nor posts a sourced journal, a reversal needs another preparer, and a read-only holder prepares nothing
+  ---
+  duration_ms: 18390.287625
+  type: 'test'
+  ...
+# Subtest: routes: GET /api/ledger/reconciliation and /api/ledger/trace answer a finance reader and refuse everyone else, writing nothing
+ok 48 - routes: GET /api/ledger/reconciliation and /api/ledger/trace answer a finance reader and refuse everyone else, writing nothing
+  ---
+  duration_ms: 22546.501583
+  type: 'test'
+  ...
+# Subtest: screens: the statements screen shows the control reconciliation and a trace action; the finance screen shows each payable’s real payment state
+ok 49 - screens: the statements screen shows the control reconciliation and a trace action; the finance screen shows each payable’s real payment state
+  ---
+  duration_ms: 14977.062916
+  type: 'test'
+  ...
+# Subtest: an issued invoice becomes one balanced draft journal whose lines cannot be edited or posted twice
+ok 50 - an issued invoice becomes one balanced draft journal whose lines cannot be edited or posted twice
+  ---
+  duration_ms: 22479.900958
+  type: 'test'
+  ...
+# Subtest: statements come from posted journals only: invoice, credit note and receipt flow into income statement, balance sheet and the customer statement
+ok 51 - statements come from posted journals only: invoice, credit note and receipt flow into income statement, balance sheet and the customer statement
+  ---
+  duration_ms: 22304.613334
+  type: 'test'
+  ...
+# Subtest: a payroll run posts as totals only, and nothing posts without approved mappings recorded and approved by different people
+ok 52 - a payroll run posts as totals only, and nothing posts without approved mappings recorded and approved by different people
+  ---
+  duration_ms: 21523.122416
+  type: 'test'
+  ...
+# ERROR: failed to copy trust settings of system certificate-25291
+# ERROR: failed to copy trust settings of system certificate-25291
+# ERROR: failed to copy trust settings of system certificate-25291
+# ERROR: failed to copy trust settings of system certificate-25291
+# Subtest: obligations: for six personas the home decisions card, counts.decide, the nav badge and the \#work decisions list are one number
+ok 53 - obligations: for six personas the home decisions card, counts.decide, the nav badge and the \#work decisions list are one number
+  ---
+  duration_ms: 32268.398583
+  type: 'test'
+  ...
+# Subtest: obligations: the nav badge endpoint serves the same number, cached per user and cleared by a write
+not ok 54 - obligations: the nav badge endpoint serves the same number, cached per user and cleared by a write
+  ---
+  duration_ms: 24028.589084
+  type: 'test'
+  location: '/Users/abdulaziz/Documents/Codex/2026-09-09/3-6t-360-codex-handoff-master/.claude/worktrees/p3-receivables/tests/obligations.test.mjs:104:1'
+  failureType: 'testCodeFailure'
+  error: 'listen EPERM: operation not permitted 127.0.0.1'
+  code: 'EPERM'
+  stack: |-
+    Server.setupListenHandle [as _listen2] (node:net:1926:21)
+    listenInCluster (node:net:2005:12)
+    node:net:2214:7
+    process.processTicksAndRejections (node:internal/process/task_queues:90:21)
+  ...
+# Subtest: obligations: card() throws when handed a number
+ok 55 - obligations: card() throws when handed a number
+  ---
+  duration_ms: 0.586542
+  type: 'test'
+  ...
+# Subtest: obligations: every module that can emit an approve-type action has an inbox source or a written reason — the next missing queue fails loudly
+ok 56 - obligations: every module that can emit an approve-type action has an inbox source or a written reason — the next missing queue fails loudly
+  ---
+  duration_ms: 137.168583
+  type: 'test'
+  ...
+# Subtest: obligations: whoever must accept a resignation is told — a queue that had no inbox source, so nobody was
+ok 57 - obligations: whoever must accept a resignation is told — a queue that had no inbox source, so nobody was
+  ---
+  duration_ms: 22295.643292
+  type: 'test'
+  ...
+# Subtest: obligations: 100% of items carrying an id deep-link to that record, never to the bare screen
+ok 58 - obligations: 100% of items carrying an id deep-link to that record, never to the bare screen
+  ---
+  duration_ms: 27687.183625
+  type: 'test'
+  ...
+# Subtest: obligations: no optional item is ever late or counted — a satisfaction survey, a reopen prompt and my own draft do not make a first-day employee overdue
+ok 59 - obligations: no optional item is ever late or counted — a satisfaction survey, a reopen prompt and my own draft do not make a first-day employee overdue
+  ---
+  duration_ms: 25276.77925
+  type: 'test'
+  ...
+# Subtest: obligations: waiting age runs from when the step reached the person, in working days — pressing follow-up does not reset it
+ok 60 - obligations: waiting age runs from when the step reached the person, in working days — pressing follow-up does not reset it
+  ---
+  duration_ms: 23224.500958
+  type: 'test'
+  ...
+# Subtest: obligations: honest time — no flat three calendar days: a weekend is not waiting, an approved holiday is not waiting, and a service target sets the due date
+ok 61 - obligations: honest time — no flat three calendar days: a weekend is not waiting, an approved holiday is not waiting, and a service target sets the due date
+  ---
+  duration_ms: 22727.828875
+  type: 'test'
+  ...
+# Subtest: obligations: the «مهامي» tile equals what \#work shows — request tasks, project tasks with no cap, personal tasks, my commitments and the department queue
+ok 62 - obligations: the «مهامي» tile equals what \#work shows — request tasks, project tasks with no cap, personal tasks, my commitments and the department queue
+  ---
+  duration_ms: 30086.886958
+  type: 'test'
+  ...
+# Subtest: obligations: the inbox counts before it slices, says «يُعرض 50 من N», and one tenant or one colleague never reads another’s obligations
+ok 63 - obligations: the inbox counts before it slices, says «يُعرض 50 من N», and one tenant or one colleague never reads another’s obligations
+  ---
+  duration_ms: 24735.312875
+  type: 'test'
+  ...
+# ERROR: failed to copy trust settings of system certificate-25291
+# ERROR: failed to copy trust settings of system certificate-25291
+# ERROR: failed to copy trust settings of system certificate-25291
+# ERROR: failed to copy trust settings of system certificate-25291
+# Subtest: closure (2): each technical blocker is named from its source, and only defects and tasks take a written exception
+ok 64 - closure (2): each technical blocker is named from its source, and only defects and tasks take a written exception
+  ---
+  duration_ms: 21456.495583
+  type: 'test'
+  ...
+# Subtest: closure (4): financial closure before technical closure is refused by name, in the code and in the database
+ok 65 - closure (4): financial closure before technical closure is refused by name, in the code and in the database
+  ---
+  duration_ms: 23504.952125
+  type: 'test'
+  ...
+# Subtest: closure (3): receivables, credits, refunds, journals and the margin are each read from their own source
+ok 66 - closure (3): receivables, credits, refunds, journals and the margin are each read from their own source
+  ---
+  duration_ms: 23011.989417
+  type: 'test'
+  ...
+# Subtest: closure (3): supplier liabilities and supplier taxes are read from procurement, payables and payment orders
+ok 67 - closure (3): supplier liabilities and supplier taxes are read from procurement, payables and payment orders
+  ---
+  duration_ms: 24241.577166
+  type: 'test'
+  ...
+# Subtest: closure (3): expenses, advances and company assets on the project are read from their own records
+ok 68 - closure (3): expenses, advances and company assets on the project are read from their own records
+  ---
+  duration_ms: 22385.876875
+  type: 'test'
+  ...
+# Subtest: closure (5): reopening is a new authorised record with a reason, ends the closures built on it, and every earlier closure stays
+ok 69 - closure (5): reopening is a new authorised record with a reason, ends the closures built on it, and every earlier closure stays
+  ---
+  duration_ms: 22157.543375
+  type: 'test'
+  ...
+# Subtest: closure: technical, margin and financial are different authorities, enforced on the server
+ok 70 - closure: technical, margin and financial are different authorities, enforced on the server
+  ---
+  duration_ms: 21258.573125
+  type: 'test'
+  ...
+# Subtest: closure: negative paths — stale checklist, bad decisions, stale margin, closed scopes — write nothing, and a replay writes nothing twice
+ok 71 - closure: negative paths — stale checklist, bad decisions, stale margin, closed scopes — write nothing, and a replay writes nothing twice
+  ---
+  duration_ms: 22571.808875
+  type: 'test'
+  ...
+# Subtest: closure: a closure racing a new receivable or journal refuses the stale review, and nothing new lands after it
+ok 72 - closure: a closure racing a new receivable or journal refuses the stale review, and nothing new lands after it
+  ---
+  duration_ms: 22078.277458
+  type: 'test'
+  ...
+# Subtest: closure: every closure act is in the audit chain with its record, and another tenant reaches nothing
+ok 73 - closure: every closure act is in the audit chain with its record, and another tenant reaches nothing
+  ---
+  duration_ms: 21293.475959
+  type: 'test'
+  ...
+# Subtest: closure: the routes carry the same rules over HTTP — the board, margin acceptance, and the refusals by name
+ok 74 - closure: the routes carry the same rules over HTTP — the board, margin acceptance, and the refusals by name
+  ---
+  duration_ms: 26157.484083
+  type: 'test'
+  ...
+# Subtest: closure: the commercial screen draws each closure button for its holder, and each form builds a payload the server accepts
+ok 75 - closure: the commercial screen draws each closure button for its holder, and each form builds a payload the server accepts
+  ---
+  duration_ms: 19217.774709
+  type: 'test'
+  ...
+# Subtest: migration 163: every lock closed before it becomes a carried record, the old rows are untouched, and legacy closures still reopen
+ok 76 - migration 163: every lock closed before it becomes a carried record, the old rows are untouched, and legacy closures still reopen
+  ---
+  duration_ms: 19001.05775
+  type: 'test'
+  ...
+# Subtest: receivables: an issued credit note lowers the ceiling on receipts, the balance and the aging bucket
+ok 77 - receivables: an issued credit note lowers the ceiling on receipts, the balance and the aging bucket
+  ---
+  duration_ms: 23586.353625
+  type: 'test'
+  ...
+# Subtest: receivables: a credit note for the whole invoice leaves nothing to collect and nothing owing
+ok 78 - receivables: a credit note for the whole invoice leaves nothing to collect and nothing owing
+  ---
+  duration_ms: 22910.427958
+  type: 'test'
+  ...
+# ERROR: failed to copy trust settings of system certificate-25291
+# ERROR: failed to copy trust settings of system certificate-25291
+# ERROR: failed to copy trust settings of system certificate-25291
+# ERROR: failed to copy trust settings of system certificate-25291
+# Subtest: reversal: a bounced receipt is reversed by a new record a third person approves; the receipt row stays as it was and the claim balance reopens
+ok 79 - reversal: a bounced receipt is reversed by a new record a third person approves; the receipt row stays as it was and the claim balance reopens
+  ---
+  duration_ms: 24045.379625
+  type: 'test'
+  ...
+# Subtest: reversal: the database keeps the requester, the recorder and the matcher out of the approval, and the decision inside the tenant
+ok 80 - reversal: the database keeps the requester, the recorder and the matcher out of the approval, and the decision inside the tenant
+  ---
+  duration_ms: 23019.286208
+  type: 'test'
+  ...
+# Subtest: reversal: what cannot be reversed is refused by name, and a rejected request leaves the money collected
+ok 81 - reversal: what cannot be reversed is refused by name, and a rejected request leaves the money collected
+  ---
+  duration_ms: 22837.486208
+  type: 'test'
+  ...
+# Subtest: cancellation: an open claim is cancelled only by an independent approval, never while a receipt or an uncorrected invoice stands on it
+ok 82 - cancellation: an open claim is cancelled only by an independent approval, never while a receipt or an uncorrected invoice stands on it
+  ---
+  duration_ms: 22335.895917
+  type: 'test'
+  ...
+# Subtest: cancellation: the database refuses a cancellation nobody approved, a pending claim is returned instead, and a cancelled draft frees its delivery
+ok 83 - cancellation: the database refuses a cancellation nobody approved, a pending claim is returned instead, and a cancelled draft frees its delivery
+  ---
+  duration_ms: 23527.603666
+  type: 'test'
+  ...
+# Subtest: disputes: an open dispute moves the claim to the disputed bucket and pauses follow-up until someone else resolves it with evidence
+ok 84 - disputes: an open dispute moves the claim to the disputed bucket and pauses follow-up until someone else resolves it with evidence
+  ---
+  duration_ms: 22947.413208
+  type: 'test'
+  ...
+# Subtest: promises: a promise to pay has an amount and a date; kept and broken are read from receipts, and a bounced receipt breaks a kept promise
+ok 85 - promises: a promise to pay has an amount and a date; kept and broken are read from receipts, and a bounced receipt breaks a kept promise
+  ---
+  duration_ms: 21740.429167
+  type: 'test'
+  ...
+# Subtest: on account: one transfer for two claims is recorded once, matched by another person and allocated across both by someone other than its recorder
+ok 86 - on account: one transfer for two claims is recorded once, matched by another person and allocated across both by someone other than its recorder
+  ---
+  duration_ms: 21629.888667
+  type: 'test'
+  ...
+# Subtest: on account: a payment that arrives before its claim waits unapplied and is allocated once the claim is approved
+ok 87 - on account: a payment that arrives before its claim waits unapplied and is allocated once the claim is approved
+  ---
+  duration_ms: 20880.058958
+  type: 'test'
+  ...
+# Subtest: on account: a bounced transfer is reversed only after its allocations are undone, by someone who neither recorded nor matched it
+ok 88 - on account: a bounced transfer is reversed only after its allocations are undone, by someone who neither recorded nor matched it
+  ---
+  duration_ms: 19085.6615
+  type: 'test'
+  ...
+# Subtest: ledger: receipt → reversal → re-receipt and on account → allocation → reversal → reallocation keep AR and customer advances tied to their control accounts, every journal balanced
+ok 89 - ledger: receipt → reversal → re-receipt and on account → allocation → reversal → reallocation keep AR and customer advances tied to their control accounts, every journal balanced
+  ---
+  duration_ms: 18257.01975
+  type: 'test'
+  ...
+# Subtest: trace: an invoice walks to its receipt, the bounce and the allocation that settled it, each with who asked, who approved and the posted journal
+ok 90 - trace: an invoice walks to its receipt, the bounce and the allocation that settled it, each with who asked, who approved and the posted journal
+  ---
+  duration_ms: 18472.830083
+  type: 'test'
+  ...
+# Subtest: tenant isolation: another tenant neither sees nor touches these claims, receipts or cash on account
+ok 91 - tenant isolation: another tenant neither sees nor touches these claims, receipts or cash on account
+  ---
+  duration_ms: 19146.350583
+  type: 'test'
+  ...
+# Subtest: idempotency: one key replays one cash-on-account record and one allocation; the same key with another body is refused
+ok 92 - idempotency: one key replays one cash-on-account record and one allocation; the same key with another body is refused
+  ---
+  duration_ms: 11980.909291
+  type: 'test'
+  ...
+# Subtest: race: two processes asking for and approving the same reversal, and two allocating the same cash beyond it, leave one reversal and no over-allocation
+ok 93 - race: two processes asking for and approving the same reversal, and two allocating the same cash beyond it, leave one reversal and no over-allocation
+  ---
+  duration_ms: 17390.29775
+  type: 'test'
+  ...
+# Subtest: project closure checklist stays true: a reversal reopens collection, pending decisions and open disputes are named, cash on account and the new documents are counted
+ok 94 - project closure checklist stays true: a reversal reopens collection, pending decisions and open disputes are named, cash on account and the new documents are counted
+  ---
+  duration_ms: 10972.368917
+  type: 'test'
+  ...
+# Subtest: inbox: each new decision reaches the person who must take it, labelled for what it is
+ok 95 - inbox: each new decision reaches the person who must take it, labelled for what it is
+  ---
+  duration_ms: 7529.633
+  type: 'test'
+  ...
+# Subtest: screen: the receivables screen offers each settlement form to the right person, and the forms post where the routes listen
+ok 96 - screen: the receivables screen offers each settlement form to the right person, and the forms post where the routes listen
+  ---
+  duration_ms: 3375.514
+  type: 'test'
+  ...
+# Subtest: routes: the settlement endpoints answer through the real request handler, with session, CSRF, idempotency and written refusals
+ok 97 - routes: the settlement endpoints answer through the real request handler, with session, CSRF, idempotency and written refusals
+  ---
+  duration_ms: 3251.613875
+  type: 'test'
+  ...
+# Subtest: FIN-03: المخرج المقبول ينشئ استحقاقًا واحدًا بلقطة مصدر ولا يتجاوز قيمة البند
+ok 98 - FIN-03: المخرج المقبول ينشئ استحقاقًا واحدًا بلقطة مصدر ولا يتجاوز قيمة البند
+  ---
+  duration_ms: 20712.799625
+  type: 'test'
+  ...
+# Subtest: FIN-03: إعداد واعتماد الاستحقاق مستقلان والنسخة المقدمة ثابتة
+ok 99 - FIN-03: إعداد واعتماد الاستحقاق مستقلان والنسخة المقدمة ثابتة
+  ---
+  duration_ms: 21867.8865
+  type: 'test'
+  ...
+# Subtest: FIN-03: كل قبض يصل إلى استحقاق ويحتاج مطابقة مستقلة ولا يتجاوز الرصيد
+ok 100 - FIN-03: كل قبض يصل إلى استحقاق ويحتاج مطابقة مستقلة ولا يتجاوز الرصيد
+  ---
+  duration_ms: 22840.251
+  type: 'test'
+  ...
+# Subtest: FIN-04/08: العرض يفصل المتنازع عليه ولا يدعي فاتورة أو دفعًا خارجيًا
+ok 101 - FIN-04/08: العرض يفصل المتنازع عليه ولا يدعي فاتورة أو دفعًا خارجيًا
+  ---
+  duration_ms: 20873.534333
+  type: 'test'
+  ...
+# Subtest: المسودة والمراجعة والرفض لا تظهر كاستحقاق مسدد
+ok 102 - المسودة والمراجعة والرفض لا تظهر كاستحقاق مسدد
+  ---
+  duration_ms: 19845.881542
+  type: 'test'
+  ...
+# Subtest: رفض قبض غير مطابق يحرر المبلغ لمراجعة سجل صحيح دون تغيير الرصيد المؤكد
+ok 103 - رفض قبض غير مطابق يحرر المبلغ لمراجعة سجل صحيح دون تغيير الرصيد المؤكد
+  ---
+  duration_ms: 20441.778792
+  type: 'test'
+  ...
+# Subtest: واجهة المستحقات توفر الرفض للمطابق المستقل وتمنعه عن صاحب القبض
+ok 104 - واجهة المستحقات توفر الرفض للمطابق المستقل وتمنعه عن صاحب القبض
+  ---
+  duration_ms: 15.535583
+  type: 'test'
+  ...
+# ERROR: failed to copy trust settings of system certificate-25291
+# ERROR: failed to copy trust settings of system certificate-25291
+# ERROR: failed to copy trust settings of system certificate-25291
+# ERROR: failed to copy trust settings of system certificate-25291
+# Subtest: golden: every operational screen renders to the same HTML for four seeded personas
+ok 105 - golden: every operational screen renders to the same HTML for four seeded personas
+  ---
+  duration_ms: 47720.906417
+  type: 'test'
+  ...
+# Subtest: golden: moving the SQL wall clock a day forward moves no screen hash
+ok 106 - golden: moving the SQL wall clock a day forward moves no screen hash
+  ---
+  duration_ms: 77807.269584
+  type: 'test'
+  ...
+# Subtest: golden: the normaliser hides random identifiers but stays sensitive to order, count and text
+ok 107 - golden: the normaliser hides random identifiers but stays sensitive to order, count and text
+  ---
+  duration_ms: 5.769584
+  type: 'test'
+  ...
+# Subtest: golden: the page-editor trigger is outside every seeded persona’s screen, and appears only for a holder of the configure capability
+ok 108 - golden: the page-editor trigger is outside every seeded persona’s screen, and appears only for a holder of the configure capability
+  ---
+  duration_ms: 25875.240542
+  type: 'test'
+  ...
+1..108
+# tests 108
+# suites 0
+# pass 107
+# fail 1
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 448042.673542

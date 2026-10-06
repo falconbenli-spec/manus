@@ -1,0 +1,192 @@
+
+> 36t-local-platform@0.1.0 test
+> node --test tests/*.test.mjs
+
+✔ PLT-04 regression: the workflow exposes an authorized manual escalation operation (0.616417ms)
+✔ PLT-04: متابعة مؤرخة مرة واحدة لا تغير المعتمد ولا تقفز إلى الخطوة التالية (107.605167ms)
+✔ PLT-04: سحب صلاحية المعتمد أو حسم الطلب يمنع المتابعة (94.652ms)
+✔ PLT-04: delegation expiry withdraws read, search, decision and attachment access (193.887ms)
+✔ PLT-04: delegated decision records both actors and revocation removes remaining access (100.411625ms)
+✔ IT-02: delegation cannot cross roles, services, reporting lines or current assignments (83.8935ms)
+✔ PLT-04: delegation never approves the delegate request and cannot be chained (87.548792ms)
+✔ PLT-04: parallel review accepts either order and emits one approval only after all decisions (102.193583ms)
+✔ PLT-04: return closes a parallel round and resubmission preserves prior decisions (98.540291ms)
+✔ SEC-07: role, account or session withdrawal while the body streams prevents a catalog write (420.856917ms)
+✔ PRC-01/FIN-02: لا تسمح ترسية بشراء دون مخصص مشروع معتمد (117.092083ms)
+✔ FIN-02/PRC-01: المخصص المشترك يمنع تجاوز طلبين للسقف ويحرر الحجز بالرفض (131.968292ms)
+✔ FIN-02/PLT-05: سحب النطاق المالي يمنع القراءة واعتماد أمر مبني عليه (109.529334ms)
+✔ FIN-02: المراجعة لا تخفض السقف دون الالتزامات ولا تسمح بالاعتماد الذاتي (84.793208ms)
+✔ PRC-03: عرضان لا يكفيان للترسية وفق دليل الدورة الموحدة (98.034167ms)
+✔ CRM-01/02/06/09: qualified lead becomes an approved quote, internal agreement and scoped project (145.924875ms)
+✔ CRM-01: normalized registration conflicts before saving and network retries use current access (92.728125ms)
+✔ CRM-02/07: qualification and quote decisions require an independent current direct manager (85.287584ms)
+✔ CRM-06: quote rejection preserves the old version and requires approval of the replacement (79.648167ms)
+✔ CRM-06: decimal text, currency, dates, bounds and discounts are validated without floating arithmetic (100.290583ms)
+✔ ACC-01: admin, unrelated employees, other managers and tenant IDs cannot read or mutate client files (89.558834ms)
+✔ CRM-09/PMO-01: project creation rejects members outside the direct team and cannot precede agreement evidence (112.444666ms)
+✔ ACC-01/08: member PM sees delivery scope without financial fields, and membership removal revokes access (96.415416ms)
+✔ ACC-03/08: delivery acceptance uses the original contract line and independent evidence once (81.849875ms)
+✔ ACC-06/PMO-02: additional work becomes one task only after approval and leaves the baseline fixed (69.165833ms)
+✔ ACC-06: rejected changes cannot start and a supplied decision cannot target another file (98.974375ms)
+✔ CRM-02: rejected qualification creates a new immutable submission before quoting (86.203917ms)
+✔ CRM-01/06: a failed audit rolls back business records and public mutations require a caller transaction (73.835083ms)
+✔ ACC-01: deactivated users and removed project owners cannot retain commercial mutation rights (95.122083ms)
+✔ CRM-06 UI: the quote form captures the target version and preserves decimal text and all existing lines (77.873ms)
+✔ ACC-01 UI: PM rendering and submission use redacted data and escaped user content (100.847709ms)
+✖ SEC-06: delayed form loads and completed operations preserve the newer open form (16.746958ms)
+✔ FIN-01/06/09: a balanced journal reaches an immutable local posting and a sourced trial balance (111.764125ms)
+✔ FIN-01/06: unbalanced, floating, negative, empty or two-sided amounts cannot create a journal (97.496416ms)
+✔ FIN-06: returned revisions require a fresh independent approval and cannot skip posting (104.522ms)
+✔ FIN-06/09: a closed period and deactivated reference block a pending posting (90.754375ms)
+✔ FIN-06: an exact reversal is prepared and approved separately, then offsets the ledger once (83.455833ms)
+✔ IT-02/PLT-05: financial reads and writes require current explicit unexpired grants (66.676541ms)
+✔ FIN-06: posting checks whether the original approver still holds authority (89.605375ms)
+✔ FIN-05/06: a matched procurement reference creates one exact payable journal (118.722375ms)
+✔ FIN-06 PLT-06/09: idempotent creation and rollback preserve one journal and its audit (74.894625ms)
+✔ HR-04: opening balance requires an explicit amount, effective date, evidence and HR scope (137.631167ms)
+✔ HR-04/05 PLT-04: manager then HR approves one debit and cancellation returns it once (86.663416ms)
+✔ HR-04: reservations prevent a second request from spending unavailable days (79.464042ms)
+✔ HR-04: overlapping periods are rejected across leave types and approved requests (77.743417ms)
+✔ HR-04: dates use the configured weekdays and holidays with separate balance years (100.218625ms)
+✔ HR-04 F05/F10: employee identity and Riyadh date boundaries do not depend on names or UTC dates (79.145792ms)
+✔ HR-05 PLT-01/05: reads and actions exclude unrelated employees, tenants and technical admins (95.690666ms)
+✔ HR-05 PLT-05: every call rechecks active role and scope after account changes (80.673583ms)
+✔ HR-05 PLT-04: clients cannot choose identity, approvers, state or request days (72.290708ms)
+✔ HR-04/05 PLT-04: returned requests release their hold and resubmit an immutable new revision (80.406583ms)
+✔ HR-05 PLT-04: HR cannot finalize approval after the employee manager changes (78.041209ms)
+✔ HR-04 PLT-09: creation retries reuse one request and recheck access before returning it (70.289375ms)
+✔ HR-04 PLT-06: ledger, decisions and submitted snapshots cannot be changed or deleted (81.110292ms)
+✔ HR-04 PLT-06: an audit write failure rolls back the reservation and request together (72.593292ms)
+✔ HR-04: future effective dates, leap days and a different workweek follow the stored calendar (85.442792ms)
+✔ HR-04/05: pending cancellation releases a hold without posting a debit or refund (89.824791ms)
+✔ HR-05 F04: the local calendar includes approved authorized days and removes cancelled leave (73.914583ms)
+✔ HR-05 SEC-01: leave forms retain the selected request version and escape stored text (79.592625ms)
+✔ F09: an unknown route is denied for every role (0.519792ms)
+✔ F09: known rules and explicit empty overrides keep their meaning (0.094833ms)
+✔ NFR-08: migration 002 preserves version 001 users and service records and runs once (116.570042ms)
+✔ WF-01/02/05 HTTP: a scoped commercial project funds a purchase that reaches an unpaid matched reference (893.235167ms)
+✔ WF-08 HTTP: opening, reservation, two approvals and cancellation update the same employee year once (822.627625ms)
+✔ PLT-04 HTTP: a temporary substitute loses the decision endpoint after revocation (582.196584ms)
+✔ NFR-08: expanding synthetic fixtures twice preserves existing users, records and balances (67.256917ms)
+✔ FIN-06 HTTP: explicit financial accounts prepare, independently approve and post without external execution (603.35625ms)
+✔ TAL-01/02 HTTP: approved hiring scope admits one candidate and masks the profile from checklist outsiders (514.018792ms)
+✔ STR-08/CRT-09 HTTP: project members produce an approved text version and an internal delivery manifest (518.390292ms)
+✔ TAL-01/02/03/04 HR-08: hiring reaches a completed local checklist with independent owners (117.835667ms)
+✔ TAL-01 PLT-04: need approval requires plan and budget evidence and cannot be self-approved (150.905625ms)
+✔ TAL-02 PLT-09: candidate contact is unique, normalized and restricted to synthetic addresses (83.670709ms)
+✔ TAL-02 PLT-01/05: candidate data excludes unrelated managers, employees, other tenants and admins (82.597ms)
+✔ TAL-02 PLT-05: active roles and departments are rechecked on every candidate operation (86.482208ms)
+✔ TAL-03: each evaluator records criterion evidence before seeing another recommendation (95.377792ms)
+✔ TAL-03: interviews require every approved criterion and cannot be evaluated before their date (78.054875ms)
+✔ TAL-04 PLT-04: changing approved compensation creates a revision and requires a fresh approval (108.236417ms)
+✔ TAL-04: offer inputs, stage evidence, expiry and acceptance dates are checked (100.380666ms)
+✔ HR-08 PLT-05: checklist owners see only their tasks and cannot complete another owner task (98.516584ms)
+✔ HR-08: onboarding cannot start before acceptance or assign an inactive, external or admin owner (86.095ms)
+✔ TAL-02 PLT-06/09: repeated candidate creation reuses the authorized identity and audit (81.608667ms)
+✔ TAL-02 PLT-06: candidate records, evaluations, offer revisions and decisions resist rewriting (89.68125ms)
+✔ TAL-02: retention expiry hides the candidate profile and queues an authorized retention review (77.519208ms)
+✔ TAL-01/02 PLT-06: an audit failure rolls back the applicant and a missing transaction is rejected (238.985125ms)
+✔ TAL-04: a single vacancy cannot accept a second candidate or reuse an old approval (165.279708ms)
+✔ TAL-04 F10: acceptance dates use the Riyadh day at the UTC year boundary (95.965375ms)
+✔ TAL-02/04 SEC-01: people forms retain the selected version and escape sensitive displayed text (90.084459ms)
+✔ PLT-04: request moves from employee to manager to executor with completion evidence (101.129875ms)
+✔ PLT-04: sequential approval cannot skip HR or overwrite an earlier submitted version (81.750459ms)
+✔ PLT-01/05/07: tenant, unrelated employee, and technical admin cannot read request, file or search title (72.242041ms)
+✔ PLT-04: creator cannot approve and client cannot choose approver, state, tenant or requester (71.710875ms)
+✔ PLT-04: self routing and ambiguous approval routing fail without partial records (67.642208ms)
+✔ PLT-04/09: stale duplicate decision fails and creates one blocked event (84.274708ms)
+✔ PLT-04: cancellation and rejection are terminal and cannot be executed (80.401791ms)
+✔ PLT-03: required fields and dates validated by server; new catalog service needs no new app (78.654041ms)
+✔ PLT-07: unsafe filename, wrong signature and post-submit attachment are rejected (86.321417ms)
+✔ PLT-06: audit and submitted snapshots cannot be changed or deleted (83.40475ms)
+✔ PMO-01 and access: project membership gates tasks and briefs, completion requires evidence (74.0135ms)
+✔ IT-02: password, CSRF, disabled users, expiration and logout are enforced (165.428625ms)
+✔ HTTP security and cross-department journey use real local endpoints (632.509833ms)
+✔ NFR-04/10: SQLite backup restores requests, attachment bytes, permissions and audit (107.3275ms)
+✔ PRC-01/03/04/05/06 and FIN-05/07/08: a purchase reaches two matched payables without payment or official issuance (103.825834ms)
+✔ PRC-01/03: allocation, comparison and evidence are required before an award (111.124458ms)
+✔ PRC-04/06: requesters cannot approve, skip an award, or match their own invoice (99.840875ms)
+✔ PRC-01 and FIN-02: project membership, current team and a separate PM cost grant constrain every read and action (86.413166ms)
+✔ PRC-04/05 and FIN-05: stale actions and repeated receipt or supplier invoice references create no second record (88.256ms)
+✔ PRC-05/06: excess quantities, mismatched amounts and unmatched receipts cannot become payables (83.208417ms)
+✔ PRC-04/08 and PLT-06: submitted values, order versions and evidence records resist changes and deletion (94.836917ms)
+✔ PRC-01/04: decimal strings, bounds, currency and unrecognized fields are checked on the server (84.180542ms)
+✔ PRC-01 and PLT-09: creation retries return the current authorized record and rollback includes its audit (74.083166ms)
+✔ PRC-04 and PLT-06: public writes require a transaction and failed audit rolls back the submitted version (77.760292ms)
+✔ PRC-04/06: database constraints prevent an unbalanced payable and preserve receipt and invoice evidence (94.573041ms)
+✔ PRC-04: cancellation and rejection are final and cannot generate an internal order (84.746208ms)
+✔ PRC-01/04 UI: forms use authorized IDs, escape supplier evidence, and keep the opened version (73.782792ms)
+✔ SEC-02: revoked role removes request, search, attachment and notification access (92.502ms)
+✔ SEC-03: changed reporting line revokes the old manager approval scope (70.976875ms)
+✔ SEC-03: HTTP approval rechecks current department with an existing session (188.860292ms)
+✔ SEC-05: settled decisions and step identity cannot be rewritten or deleted (76.949583ms)
+✔ SEC-04: concurrent HTTP retries create one record and keys cannot change content or bypass visibility (353.525791ms)
+✔ STR-05/06/08/09, CRT-02/08/09: approved brief, two outputs, inspected rights and internal acceptance preserve their source versions (116.934167ms)
+✔ STR-08/09: returned briefs need a new version, retain the reason, and cannot be changed after approval (82.919208ms)
+✔ CRT-04/05/08: output return and quality approval are tied to one immutable version (86.726167ms)
+✔ CRT-07/09, LEG-03, PRO-06: expired, future, short-duration and wrong-channel rights block new manifests (275.646667ms)
+✔ CRT-07/08/09: unchecked or failed assets cannot be included, and an unapproved output cannot enter an otherwise valid manifest (145.057541ms)
+✔ STR-09/CRT-04: only the project creator may appoint an independent alternate reviewer (86.378292ms)
+✔ CRT-06: tenant, admin and project membership are checked on all studio reads and actions (87.694167ms)
+✔ CRT-06/09: asset, output and package IDs cannot be substituted across studio workspaces (98.978834ms)
+✔ CRT-05/09: retries cannot duplicate a decision, manifest or acceptance; snapshots survive later output creation (78.997708ms)
+✔ STR-06/CRT-02: incomplete briefs, unknown fields, channels and external asset URLs are rejected (75.629833ms)
+✔ CRT-09: audit failure rolls back the issued manifest and the workspace version (72.652291ms)
+✔ CRT-06: createOnce rechecks membership for a repeated studio creation (72.0205ms)
+✔ CRT-07/09: acceptance rechecks asset expiry across midnight in Riyadh (82.025334ms)
+✔ STR-09/CRT-04: membership and current role revoke a designated reviewer before the next decision (68.282959ms)
+✔ CRT-05 UI: output forms capture the original target and version without editable identity fields (72.038458ms)
+✔ CRT-06/09 UI: unauthorized actions are absent, content is escaped, and an asset reference is never a download link (71.916791ms)
+✖ TRACE: all 220 original rows and acceptance criteria match the workbook and evidence (17.857792ms)
+✔ TRACE: changing acceptance or declaring partial work complete is rejected (17.636666ms)
+✖ SEC-01: reversed request responses cannot change the visible action or attachment target (8.550292ms)
+ℹ tests 138
+ℹ suites 0
+ℹ pass 135
+ℹ fail 3
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 4869.927084
+
+✖ failing tests:
+
+test at tests/dialog-races.test.mjs:8:1
+✖ SEC-06: delayed form loads and completed operations preserve the newer open form (16.746958ms)
+  ReferenceError: workFrames is not defined
+      at loginView (evalmachine.<anonymous>:91:250)
+      at evalmachine.<anonymous>:167:83
+      at async TestContext.<anonymous> (file:///Users/abdulaziz/Documents/Codex/2026-09-09/3-6t-360-codex-handoff-master/tests/dialog-races.test.mjs:35:1)
+      at async Test.run (node:internal/test_runner/test:1389:7)
+      at async startSubtestAfterBootstrap (node:internal/test_runner/harness:387:3)
+
+test at tests/traceability.test.mjs:4:1
+✖ TRACE: all 220 original rows and acceptance criteria match the workbook and evidence (17.857792ms)
+  AssertionError [ERR_ASSERTION]: CRM-01: saved test output changed
+  + actual - expected
+  
+  + 'a12bf669a1970e0886af8b13035fa28efe3f95e748b0dd1014d6c208da553de0'
+  - '29bbb1f5ce195e506ebc48f26beb982922883e5089d7eaac198dba4a8f102984'
+  
+      at validateTraceability (file:///Users/abdulaziz/Documents/Codex/2026-09-09/3-6t-360-codex-handoff-master/scripts/trace.mjs:74:16)
+      at TestContext.<anonymous> (file:///Users/abdulaziz/Documents/Codex/2026-09-09/3-6t-360-codex-handoff-master/tests/traceability.test.mjs:5:17)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1382:25)
+      at Test.start (node:internal/test_runner/test:1242:17)
+      at startSubtestAfterBootstrap (node:internal/test_runner/harness:387:17) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: 'a12bf669a1970e0886af8b13035fa28efe3f95e748b0dd1014d6c208da553de0',
+    expected: '29bbb1f5ce195e506ebc48f26beb982922883e5089d7eaac198dba4a8f102984',
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at tests/ui-race.test.mjs:8:1
+✖ SEC-01: reversed request responses cannot change the visible action or attachment target (8.550292ms)
+  ReferenceError: workFrames is not defined
+      at loginView (evalmachine.<anonymous>:91:250)
+      at evalmachine.<anonymous>:167:83
+      at async TestContext.<anonymous> (file:///Users/abdulaziz/Documents/Codex/2026-09-09/3-6t-360-codex-handoff-master/tests/ui-race.test.mjs:27:3)
+      at async Test.run (node:internal/test_runner/test:1389:7)
+      at async startSubtestAfterBootstrap (node:internal/test_runner/harness:387:3)

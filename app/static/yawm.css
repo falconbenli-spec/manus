@@ -1,0 +1,623 @@
+/* ==========================================================================
+   3,6T — «اليوم» (data-design=yawm): بطاقة ترتفع عن الورق بظل ناعم، وزوايا واسعة،
+   وأفعال دائرية، وحالةٌ تُقرأ قرصًا ملوّنًا بهندسةٍ خاصة بها.
+
+   ★ لماذا مظهرٌ ثامن ولم يكفِ «الرواق»؟
+   «الرواق» أُخذ من المرجع نفسه (نموذج Lovable) وأخذ منه **البنية**: أرضٌ واحدة هادئة، تدرّج
+   طباعي حقيقي، لون فعل واحد بخل، وحالات دلالية منفصلة عنه. لكنه رفض من المرجع ثلاثة أشياء
+   عمدًا — الظل، ونصف القطر الواسع، والحركة — وبناها على الضد: «بطاقات تُقرأ أجسامًا بلا ظل»
+   ونصف قطر 12px وسكونٌ تام. وهذا المظهر يأخذ الثلاثة التي تركها، فيصير الفرق بينهما فرق
+   تصميمين لا فرق نسختين:
+
+     |            | الرواق              | اليوم                                   |
+     | الظل       | لا ظل إطلاقًا        | ظلّان: بطاقةٌ ترتفع، وأعمق عند التحويم   |
+     | نصف القطر  | 12px سلّمًا واحدًا    | 16px جذرًا ← بطاقة 24px، والأفعال دائرية |
+     | البلاطة    | خيط وأرض أفتح        | قرص أيقونة ملوّن ورقمٌ كبير مجدول        |
+     | الحالة     | شارة نصية بتلوين     | قرص ملوّن، لكل حالة هندسته               |
+     | الحركة     | ساكن                 | ظهورٌ لطيف وضغطٌ خفيف، ويسكن عند تقليل الحركة |
+
+   ★ قاعدة اللون — لا تُنقض (قرار المالك 1، وهي قاعدة «الرواق» نفسها):
+   كل لون هنا من هوية 3,6T في هذا المستودع، لا من المرجع. فيروزي المرجع لون صاحبه؛ وفيروزي
+   الشركة يعيش في signature.css رمزًا واحدًا (--brand-turquoise / --brand-turquoise-deep)
+   ولا يُكتب HEX هنا أبدًا. والمحايدات من --brand-paper و--brand-sky و--brand-charcoal،
+   والحالات من ألوان المناسبات في الدليل (تذكير #F1C40F، عاجل #E74C3C، مولود #5DADE2).
+
+   وفرقان مقصودان عن المرجع يبقيان كما حسمهما «الرواق»، فلا يُعادان إليه:
+   1) لا أخضر لحالة «تم»: ليس في الهوية أخضر، وقرار المنصة أن المعتاد لا يُلوَّن. فـ«تم» صامتة
+      بحبر فحمي، وصمتها يُبقي لون الفعل نادرًا — وهو مقصد المرجع الأول لا مخالفته.
+   2) العربية لا تُشدّ: letter-spacing السالب يكسر وصل الحروف، فهو للاتيني وحده كما في depth.css.
+
+   الخط: Alexandria المشحونة في app/static/fonts/ وحدها — وهي خط المرجع نفسه، فلا مضيف
+   خطوط خارجيًا ولا ملف ثنائي جديد في هذا التغيير.
+
+   التقسيم كـ«الرواق»: مكوّنات «الكلاسيكي» أساسًا مشتركًا (classic.css يضم data-design=yawm
+   إلى محدِّداته)، وطبقتان هنا: tokens (القيم المُوضَعة) وyawm (التركيب). كل قاعدة داخل
+   @media screen، فلا تمس الطباعة ولا تصميمًا آخر. القواعد المتداخلة تبدأ بـ& صراحةً،
+   ولا قيمة حرفية خارج كتل الرموز.
+   ========================================================================== */
+
+/* ---------- 1. الرموز ---------- */
+@layer tokens{
+@media screen{
+
+/* المقاسات والخط ونصف القطر: مستقلة عن الوضع */
+:root[data-design=yawm]{
+  --font:"Alexandria","SF Arabic","Segoe UI","Noto Sans Arabic",Tahoma,sans-serif;
+  --font-rounded:var(--font);
+  --font-mono:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+  /* Alexandria تُشحن بأربعة أوزان: 200 و300 و400 و700. لا وزن 600، فلا يُطلب. */
+  --fw-display:700; --fw-body:400; --fw-stage-body:300; --fw-label:700; --fw-strong:700;
+  --fs-large:30px; --fs-title1:24px; --fs-title2:20px; --fs-title3:17px; --fs-headline:16px;
+  --fs-body:16px; --fs-callout:15px; --fs-sub:15px; --fs-foot:13px; --fs-cap:12px; --fs-cap2:12px;   /* Arabic floor 12 */
+  --lh-body:1.7; --lh-head:1.3;
+  /* نصف قطر واحد تُشتق منه البقية (1rem = 16px عند الجذر 16). البطاقة 24px والفعل دائري. */
+  --radius:1rem;
+  --r-xs:calc(var(--radius) / 4); --r-sm:calc(var(--radius) / 2); --r-md:calc(var(--radius) * 3 / 4);
+  --r-lg:calc(var(--radius) * 3 / 2); --r-xl:calc(var(--radius) * 2); --r-pill:999px;
+  --hair:1px; --tap:44px;
+  --s5:20px; --s12:48px;
+  --gutter:16px; --gap-section:28px;
+  --ease:cubic-bezier(.2,.8,.2,1); --ease-out:cubic-bezier(.22,1,.36,1);
+  --spring:cubic-bezier(.34,1.36,.64,1);
+  --d1:.15s; --d2:.26s; --d3:.4s;
+  --topbar-h:56px; --tabbar-h:64px; --siblings-h:0px; --hero-h:0px; --filter-h:0px;
+  --row-h:56px;
+  /* قرص الأيقونة والحالة: مقاس واحد يمشي مع هدف اللمس */
+  --disc:40px; --disc-lg:44px;
+  /* الرئيسية: عرض بطاقة الشريط، ونزوحه إلى حافة الشاشة، ومقاس رقم البلاطة */
+  --hm-strip-w:128px; --hm-bleed:var(--gutter); --hm-fig:26px;
+  --ring-live:0; --scene-3d:0;       /* لا مشهد: الارتفاع هو التصميم، لا العمق المجسّم */
+}
+@media (min-resolution:2dppx){:root[data-design=yawm]{--hair:.5px}}
+@media (min-width:1024px){:root[data-design=yawm]{
+  --fs-large:36px; --fs-title1:27px; --fs-title2:21px; --fs-title3:18px;
+  --gutter:40px; --gap-section:36px; --tap:40px;
+  /* الشاشة الواسعة: بطاقة شريط أعرض، ولا نزوح إلى الحافة — الصفحة نفسها صارت محدودة العرض */
+  --hm-strip-w:144px; --hm-bleed:0px; --hm-fig:30px;
+  --sidebar-docked:1;
+}}
+
+/* --- الفاتح: الأساس. يغطي data-theme=light وauto على جهاز فاتح.
+       الشق الثاني يعلو كتلة الدخول الداكنة في signature.css، كما في classic.css وriwaq.css --- */
+:root[data-design=yawm],
+:root[data-design=yawm]:has(> body > #app > .login){
+  color-scheme:light;
+  /* الأرض ورق الهوية، والبطاقة بيضاء صافية ترتفع عنها بالظل لا بالخيط */
+  --canvas:var(--brand-paper); --bg:var(--brand-paper);
+  --surface:#FFFFFF; --surface-2:var(--brand-paper); --surface-raised:#FFFFFF;
+  --ink-1:#000000; --ink-2:var(--brand-charcoal); --ink-3:#3F4347; --ink-4:#4D5257; --ink-5:#565B60;
+  --label:var(--brand-charcoal); --label-2:#4D5257; --label-3:#6A7075; --label-4:rgba(53,53,53,.28);
+  --line:rgba(53,53,53,.12); --line-strong:rgba(53,53,53,.60);   /* حدّ المكوّن وحده يشتد (3:1، كان 1.76). و--line خيط البطاقة يبقى .12: البطاقة ترتفع بالظل لا بالخيط */
+  --separator:rgba(53,53,53,.12); --separator-opaque:var(--brand-sky);
+  --fill:rgba(53,53,53,.05); --fill-2:rgba(53,53,53,.09); --fill-3:rgba(53,53,53,.03);
+  --material:rgba(255,255,255,.86); --material-thick:rgba(255,255,255,.96); --material-edge:rgba(53,53,53,.08);
+  --scrim:rgba(53,53,53,.34);
+  /* الظلّان: بالفحمي لا بالأسود الخالص، فيبقى الارتفاع ناعمًا لا حادًّا */
+  --shadow-card:0 1px 2px rgba(53,53,53,.05),0 8px 24px -12px rgba(53,53,53,.16);
+  --shadow-lift:0 2px 4px rgba(53,53,53,.06),0 18px 40px -16px rgba(53,53,53,.22);
+  --shadow-float:0 12px 32px rgba(53,53,53,.14),0 2px 6px rgba(53,53,53,.07);
+  --shadow-bar:0 1px 0 rgba(53,53,53,.07);
+  /* لون الفعل الواحد: فيروزي الهوية العميق، وتغميقُه نصًّا ليعبر 4.5 على الأرض والبطاقة معًا */
+  --tint:#0E6B59; --tint-fill:var(--brand-turquoise-deep); --on-tint:#FFFFFF;
+  --brand-deep:var(--brand-turquoise-deep);
+  --action:var(--brand-turquoise-deep); --on-action:#FFFFFF;
+  --action-hover:#0E6B59; --action-press:#0B5A4B;
+  --focus:#0E6B59;
+  /* الحالات من ألوان الدليل، منفصلة عن لون الفعل. العلامة باللون، والحبر درجته الداكنة. */
+  --green:var(--brand-charcoal);  --green-ink:var(--brand-charcoal);  /* تم — صامتة */
+  --orange:#F1C40F; --orange-ink:#7A5C00;   /* تذكير */
+  --yellow:#F1C40F; --yellow-ink:#7A5C00;
+  --red:#E74C3C;    --red-ink:#A93226;      /* عاجل */
+  --blue:#5DADE2;   --blue-ink:#1F6F9B;     /* جارٍ */
+  --indigo:#1F6F9B; --purple-ink:#4D5257; --gray:#6A7075;
+  --ghost:rgba(53,53,53,.05);
+  --select-bg:#FFFFFF; --select-arrow:#4D5257;
+  --horizon:var(--brand-sky);
+}
+
+/* --- الداكن: الفحمي أساسًا لا السواد الخالص، والبطاقة ترتفع بلونها لا بظلها وحده --- */
+:root[data-design=yawm][data-theme=dark],
+:root[data-design=yawm][data-theme=dark]:has(> body > #app > .login){
+  color-scheme:dark;
+  --canvas:#1A1A1A; --bg:#1A1A1A;
+  --surface:#242424; --surface-2:#2B2B2B; --surface-raised:#2B2B2B;
+  --ink-1:#FFFFFF; --ink-2:#F2F2F2; --ink-3:#E4E4E4; --ink-4:#C9C9C9; --ink-5:#AFAFAF;
+  --label:#F6F6F6; --label-2:#C2C2C2; --label-3:#9A9A9A; --label-4:rgba(246,246,246,.28);
+  --line:rgba(255,255,255,.11); --line-strong:rgba(255,255,255,.40);
+  --separator:rgba(255,255,255,.11); --separator-opaque:#333333;
+  --fill:rgba(255,255,255,.06); --fill-2:rgba(255,255,255,.10); --fill-3:rgba(255,255,255,.035);
+  --material:rgba(36,36,36,.86); --material-thick:rgba(36,36,36,.97); --material-edge:rgba(255,255,255,.08);
+  --scrim:rgba(0,0,0,.56);
+  --shadow-card:0 1px 2px rgba(0,0,0,.4),0 8px 24px -12px rgba(0,0,0,.6);
+  --shadow-lift:0 2px 4px rgba(0,0,0,.45),0 18px 40px -16px rgba(0,0,0,.7);
+  --shadow-float:0 12px 32px rgba(0,0,0,.6),0 2px 6px rgba(0,0,0,.4);
+  --shadow-bar:0 1px 0 rgba(0,0,0,.5);
+  /* الفيروزي يفتح على الداكن ليعبر التباين، ويبقى مشتقًّا من رمز الهوية لا مكتوبًا */
+  --tint:#3FC8A8; --tint-fill:var(--brand-turquoise); --on-tint:#10221E;
+  --action:var(--brand-turquoise); --on-action:#10221E;
+  --action-hover:#3FC8A8; --action-press:#2FB394;
+  --focus:#3FC8A8;
+  --green:#E4E4E4;  --green-ink:#E4E4E4;    /* تم — صامتة على الداكن أيضًا */
+  --orange:#F1C40F; --orange-ink:#F6D55C;
+  --yellow:#F1C40F; --yellow-ink:#F6D55C;
+  --red:#E74C3C;    --red-ink:#F1897C;
+  --blue:#5DADE2;   --blue-ink:#8FCBEB;
+  --indigo:#8FCBEB; --purple-ink:#C2C2C2; --gray:#9A9A9A;
+  --ghost:rgba(255,255,255,.06);
+  --select-bg:#242424; --select-arrow:#C2C2C2;
+  --horizon:#2B2B2B;
+}
+
+/* --- يتبع الجهاز: الداكن يُنسخ كما هو حين يكون الجهاز داكنًا وauto هو الاختيار --- */
+@media (prefers-color-scheme:dark){
+  :root[data-design=yawm][data-theme=auto],
+  :root[data-design=yawm][data-theme=auto]:has(> body > #app > .login){
+    color-scheme:dark;
+    --canvas:#1A1A1A; --bg:#1A1A1A;
+    --surface:#242424; --surface-2:#2B2B2B; --surface-raised:#2B2B2B;
+    --ink-1:#FFFFFF; --ink-2:#F2F2F2; --ink-3:#E4E4E4; --ink-4:#C9C9C9; --ink-5:#AFAFAF;
+    --label:#F6F6F6; --label-2:#C2C2C2; --label-3:#9A9A9A; --label-4:rgba(246,246,246,.28);
+    --line:rgba(255,255,255,.11); --line-strong:rgba(255,255,255,.40);
+    --separator:rgba(255,255,255,.11); --separator-opaque:#333333;
+    --fill:rgba(255,255,255,.06); --fill-2:rgba(255,255,255,.10); --fill-3:rgba(255,255,255,.035);
+    --material:rgba(36,36,36,.86); --material-thick:rgba(36,36,36,.97); --material-edge:rgba(255,255,255,.08);
+    --scrim:rgba(0,0,0,.56);
+    --shadow-card:0 1px 2px rgba(0,0,0,.4),0 8px 24px -12px rgba(0,0,0,.6);
+    --shadow-lift:0 2px 4px rgba(0,0,0,.45),0 18px 40px -16px rgba(0,0,0,.7);
+    --shadow-float:0 12px 32px rgba(0,0,0,.6),0 2px 6px rgba(0,0,0,.4);
+    --shadow-bar:0 1px 0 rgba(0,0,0,.5);
+    --tint:#3FC8A8; --tint-fill:var(--brand-turquoise); --on-tint:#10221E;
+    --action:var(--brand-turquoise); --on-action:#10221E;
+    --action-hover:#3FC8A8; --action-press:#2FB394;
+    --focus:#3FC8A8;
+    --green:#E4E4E4; --green-ink:#E4E4E4;
+    --orange:#F1C40F; --orange-ink:#F6D55C; --yellow:#F1C40F; --yellow-ink:#F6D55C;
+    --red:#E74C3C; --red-ink:#F1897C; --blue:#5DADE2; --blue-ink:#8FCBEB;
+    --indigo:#8FCBEB; --purple-ink:#C2C2C2; --gray:#9A9A9A;
+    --ghost:rgba(255,255,255,.06);
+    --select-bg:#242424; --select-arrow:#C2C2C2; --horizon:#2B2B2B;
+  }
+}
+
+}
+}
+
+/* ---------- 2. التركيب ---------- */
+@layer yawm{
+@media screen{
+:root[data-design=yawm]{
+
+  /* --- حلقة التركيز: ظاهرة، صلبة، بلون الفعل، بإزاحة --- */
+  & :focus-visible{outline:2px solid var(--tint);outline-offset:2px;border-radius:var(--r-sm)}
+  & :is(.vn-list > li,.pt-row,.panel,.vn-card) :focus-visible{outline-offset:1px}
+
+  /* --- الطباعة: سؤال الصفحة كبير وعريض، يليه سطر واحد هادئ، ثم المحتوى --- */
+  & :is(h1,h2,h3,h4){text-wrap:balance}
+  & :is(p,li,dd,figcaption,.subtle,.hint){text-wrap:pretty}
+  /* العربية لا تُشدّ: للاتيني وحده */
+  & [dir=ltr]:is(h1,h2,h3),& :is(h1,h2,h3) [dir=ltr]{letter-spacing:-0.01em}
+  & :is(.page-head h1,.journey-hero h1,.ex-hero h1),& #main .page-head h1{
+    font-size:clamp(26px,2.4vw + 18px,44px);font-weight:var(--fw-display);line-height:1.2;color:var(--label)}
+  & #main :is(.page-head,.journey-hero,.ex-hero) h1:is(.is-long,.is-xlong){font-size:clamp(22px,1.5vw + 16px,32px)}
+  & :is(.page-head,.journey-hero) > div > p,& .page-head h1 + p,& .journey-copy > p{
+    max-inline-size:64ch;margin-block-start:var(--s2);color:var(--label-2);
+    font-size:var(--fs-body);font-weight:var(--fw-body);line-height:var(--lh-body)}
+  & .page-head{padding-block:var(--s4) 0;margin-block-end:var(--s2)}
+  & :is(.vn-block > h3,.panel-head h2,.vn-board > h3){
+    font-size:var(--fs-title3);font-weight:var(--fw-label);line-height:var(--lh-head)}
+
+  /* --- الفراغ سخي --- */
+  & .page{max-inline-size:1120px;padding-block-start:var(--s3)}
+  & .page > * + *{margin-block-start:var(--gap-section)}
+  & :is(.panel + .panel,.panel + section,section + .panel,.vn-block + .vn-block){margin-block-start:var(--gap-section)}
+  & :is(.panel-body,.vn-block){padding:var(--s5)}
+  & .vn-grid{gap:var(--s4)}
+
+  /* --- البطاقة ترتفع: بيضاء على الورق، بظل ناعم وخيط شعرة، وزاوية واسعة --- */
+  & :is(.panel,.vn-card,.vn-list,.department-card,.rq-dept,.wk-card,.req-card,.sig-tabs){
+    border:var(--hair) solid var(--line);border-radius:var(--r-lg);
+    background:var(--surface);box-shadow:var(--shadow-card);
+    transition:box-shadow var(--d2) var(--ease),transform var(--d2) var(--ease)}
+  & :is(.vn-card,.panel) :is(.vn-list,.vn-tile){border:0;box-shadow:none}
+  @media (hover:hover){
+    & :is(.department-card,.rq-dept,.wk-card,.req-card,.vn-tile[href]):hover{box-shadow:var(--shadow-lift)}
+  }
+
+  /* --- الصف هدف كامل: ارتفاع لمس، ورابط ممدود --- */
+  & :is(.vn-list > li,.pt-row,.ex-row,.service-row,.task-row,.notification-row,.acc-gap){
+    min-block-size:var(--row-h);border-radius:var(--r-md);
+    transition:background-color var(--d1) var(--ease)}
+  & .vn-list > li > a:first-child{display:flex;align-items:center;min-block-size:var(--tap)}
+  & .vn-list > li > a:first-child::after{content:"";position:absolute;inset:0}
+  & .vn-list > li > :is(button,a.btn,.operation-actions,details,.badge,.pill,.vn-flag){position:relative;z-index:1}
+  @media (hover:hover){
+    & :is(.vn-list > li,.pt-row,.ex-row,.service-row,.task-row,.notification-row):has(a):hover{
+      background:color-mix(in srgb,var(--tint) 7%,var(--surface))}
+  }
+  & :is(.vn-list > li,.pt-row,.ex-row):active{background:color-mix(in srgb,var(--tint) 12%,var(--surface))}
+
+  /* --- الحالة النشطة --- */
+  & .hr-nav-rows a.active{background:color-mix(in srgb,var(--tint) 12%,transparent);color:var(--tint);border-radius:var(--r-md)}
+  & .hr-nav-rows a.active .nav-label{font-weight:var(--fw-label)}
+  & .sig-tabs [aria-selected=true],& .sig-tabs .is-active{color:var(--tint);border-block-end:2px solid var(--tint)}
+
+  /* --- البلاطة: قرصٌ ملوّن ورقمٌ كبير مجدول، لا رقم عارٍ --- */
+  & :is(.vn-tile,.stat,.pt-tile,.ex-figure,.acc-stats article){
+    padding:var(--s4);background:var(--surface);border:var(--hair) solid var(--line);
+    border-radius:var(--r-lg);box-shadow:var(--shadow-card)}
+  & :is(.vn-card,.panel) :is(.vn-tile,.pt-tile){background:var(--fill-3);box-shadow:none;border-radius:var(--r-md)}
+  & :is(.vn-tile strong,.stat-number,.pt-tile strong,.ex-figure strong,.acc-stats strong){
+    font-family:var(--font);font-size:26px;font-weight:var(--fw-display);line-height:1.1;
+    font-variant-numeric:tabular-nums}
+  & .vn-tiles > .vn-tile:first-child strong{font-size:30px}
+  & :is(.vn-tile,.pt-tile,.acc-stats article) > span{
+    font-size:var(--fs-foot);font-weight:var(--fw-body);color:var(--label-2)}
+
+  /* --- الحالات: شارةٌ ممتلئة بتلوين خفيف، والحرف الدلالي أمامها يحمل اللون --- */
+  & :is(.badge,.vn-flag,.ex-flag,.pill,.rq-chip){
+    padding:4px 12px;border-radius:var(--r-pill);font-weight:var(--fw-label);
+    background:color-mix(in srgb,var(--ink) 12%,transparent)}
+  & .vn-alert{background:color-mix(in srgb,var(--orange-ink) 10%,var(--surface));
+    border:var(--hair) solid color-mix(in srgb,var(--orange-ink) 26%,transparent);
+    border-radius:var(--r-lg);color:var(--label)}
+  & .vn-alert > strong,& .vn-alert strong{color:var(--orange-ink)}
+  & .vn-alert.is-ok{background:color-mix(in srgb,var(--green-ink) 10%,var(--surface));
+    border-color:color-mix(in srgb,var(--green-ink) 24%,transparent)}
+  & .vn-alert.is-ok strong{color:var(--green-ink)}
+  & .vn-alert.is-block{background:color-mix(in srgb,var(--red-ink) 10%,var(--surface));
+    border-color:color-mix(in srgb,var(--red-ink) 26%,transparent)}
+  & .vn-alert.is-block strong{color:var(--red-ink)}
+  & .nav-row.is-destructive,& .nav-row.is-destructive .nav-label{color:var(--red-ink)}
+  & .status-dot{background:var(--tint)}
+
+  /* --- القرص: الأيقونة تجلس في قرص بلون خفيف بدل أن تطفو عارية --- */
+  & .nav-icon{
+    inline-size:var(--disc);block-size:var(--disc);display:grid;place-items:center;
+    background:color-mix(in srgb,var(--icon,var(--tint)) 14%,transparent);
+    border-radius:var(--r-md);color:var(--icon,var(--tint))}
+  /* لون واحد: رموز الفهرس لا تتلوّن قوس قزح، والفعل وحده يحمل اللون */
+  & :is(.tint-blue,.tint-green,.tint-indigo,.tint-orange,.tint-pink,.tint-purple,
+        .tint-teal,.tint-yellow,.tint-mint,.tint-cyan,.tint-brown,.tint-gray){--icon:var(--label-2)}
+  & .tint-teal{--icon:var(--tint)}
+  & .tint-red{--icon:var(--red-ink)}
+  & :is(.tone-1,.tone-4,.tone-8){--tone:var(--tint)} & :is(.tone-2,.tone-5){--tone:var(--label-2)}
+  & .tone-3{--tone:var(--orange-ink)} & .tone-6{--tone:var(--red-ink)} & .tone-7{--tone:var(--blue-ink)}
+
+  /* --- الأزرار: دائرية كاملة، والفعل الواحد وحده ممتلئ --- */
+  & .btn{min-block-size:var(--tap);padding-inline:var(--s5);border-radius:var(--r-pill);
+    font-weight:var(--fw-label);background:transparent;
+    border:var(--hair) solid var(--line-strong);color:var(--label);
+    transition:background-color var(--d1) var(--ease),border-color var(--d1) var(--ease),transform var(--d1) var(--ease)}
+  & .btn.primary{background:var(--tint-fill);border-color:var(--tint-fill);color:var(--on-tint);box-shadow:var(--shadow-card)}
+  & .btn.outline{border-color:var(--line-strong);color:var(--label)}
+  @media (hover:hover){
+    & .btn:hover{background:color-mix(in srgb,var(--tint) 9%,transparent);
+      border-color:color-mix(in srgb,var(--tint) 50%,var(--line-strong))}
+    & .btn.primary:hover{background:var(--action-hover);border-color:var(--action-hover);box-shadow:var(--shadow-lift)}
+  }
+  & .btn:active{scale:var(--press-scale)}
+  & .btn.primary:active{background:var(--action-press);border-color:var(--action-press)}
+  & .operation-actions{gap:var(--s2)}
+  /* الشرائح دائرية كذلك: المرجع لا يترك حافة حادة في مسار النقر */
+  & :is(.eu-chip,.eu-punch,.top-btn,.top-search,.chip,.filter-chip,
+        .nav-search-label,.sig-filter,.acc-filter,.avatar,.status-dot,.nav-count){border-radius:var(--r-pill)}
+  & .eu-punch{min-block-size:var(--tap)}
+  & .sig-tabs > *{border-radius:var(--r-md)}
+
+  /* --- الحقول: خيط هادئ، وارتفاع لمس، ولا تكبير في iOS (16px) --- */
+  & :is(input,select,textarea){min-block-size:var(--tap);border-radius:var(--r-md);
+    border:1px solid var(--line-strong);background:var(--surface);   /* 1px لا --hair: نصف بكسل على الشاشة المضاعفة */
+    color:var(--label);font-size:var(--fs-body)}
+  & :is(input,select,textarea):focus-visible{border-color:var(--tint)}
+  & label{color:var(--label-2);font-size:var(--fs-foot);font-weight:var(--fw-label)}
+
+  /* --- الجدول: صفوف تتنفّس وخيط واحد --- */
+  & :is(.table-wrap,table){border-radius:var(--r-lg)}
+  & :is(td,th){padding-block:var(--s3);border-block-end:var(--hair) solid var(--separator)}
+  & th{color:var(--label-2);font-size:var(--fs-foot);font-weight:var(--fw-label)}
+  & :is(td,th) :is(.num,time),& .num{font-variant-numeric:tabular-nums}
+
+  /* --- الشريطان: معتمان أولًا، والشفافية لا تُطلب إلا حين تعمل الضبابية فعلًا.
+         (عيبٌ رأيناه في المرجع الحي: شريطٌ شفاف بلا ضبابية يترك النص يعبر من تحته.) --- */
+  & .topbar{background:var(--canvas);border-block-end:var(--hair) solid var(--line);box-shadow:var(--shadow-bar)}
+  & .sidebar{background:var(--surface);border-inline-end:var(--hair) solid var(--line)}
+  @supports ((backdrop-filter:blur(1px)) or (-webkit-backdrop-filter:blur(1px))){
+    & .topbar{background:var(--material-thick);backdrop-filter:saturate(180%) blur(20px);
+      -webkit-backdrop-filter:saturate(180%) blur(20px)}
+  }
+
+  /* --- الحالة الفارغة: جملة هادئة في بطاقة مرتفعة --- */
+  & .empty{padding:var(--s12) var(--s5);background:var(--surface);
+    border:var(--hair) solid var(--line);border-radius:var(--r-lg);
+    box-shadow:var(--shadow-card);text-align:center}
+  & .empty-symbol{color:var(--label-3)}
+
+  /* ======================= الرئيسية: «وش المطلوب مني اليوم؟» =======================
+     التركيب من النموذج المرجعي: تحية خافتة ثم سؤال كبير ثم سطر يجيب بالعدد، شريطٌ من
+     الخدمات السريعة ينزلق تحته، صفُّ بلاطات يعدّ الحالات، ثم كتلٌ مسمّاة فيها بطاقات المهام.
+     والهيئة من «اليوم» نفسه: بطاقة ترتفع بظل ناعم، زاوية واسعة، أفعال دائرية، وحالةٌ تُقرأ
+     قرصًا بهندسةٍ خاصة بها.
+
+     ★ الحالة تُقرأ بالشكل أولًا ثم باللون. لكل حالة هندسة لا تشاركها غيرُها — معيّنٌ للانتظار،
+     مثلثٌ للمعاد، مربعٌ قائمٌ بحدّ صلب للمطلوب منك، حلقةٌ متقطعة للجاري، حلقةٌ متّصلة للمنجز،
+     ومثمّنٌ للمرفوض — فمن لا يميّز الألوان يقرأ الشاشة كاملةً. والشكل يُرسم على ::before لا على
+     العنصر، فلا يقصّ clip-path ما بداخل القرص، ويبقى صندوق القرص مربعًا بمقاس واحد فتستوي الصفوف.
+
+     ★ الألوان كلها من الهوية: التذكير --orange-ink (دليل #F1C40F)، والعاجل --red-ink (#E74C3C)،
+     والأزرق --blue-ink (#5DADE2)، والفعل --tint / --tint-fill المشتقّان من --brand-turquoise
+     في signature.css. و«تم» تبقى صامتة بفحمي --green-ink، فلا أخضر لها (قرار قائم). */
+
+  /* --- السؤال --- */
+  & .hm-greet{margin:0;font-size:var(--fs-sub);font-weight:var(--fw-body);line-height:1.5;color:var(--label-2)}
+  & .hm-ask{margin:var(--s1) 0 0;font-size:clamp(28px,4vw + 12px,48px);font-weight:var(--fw-display);
+    line-height:1.15;color:var(--label);text-wrap:balance;overflow-wrap:break-word}
+  & .hm-sub{margin:var(--s2) 0 0;max-inline-size:64ch;font-size:var(--fs-body);font-weight:var(--fw-body);
+    line-height:var(--lh-body);color:var(--label-2);text-wrap:pretty}
+
+  /* --- الشريط: ينزلق بمحاذاة إجبارية على المحور المنطقي، بطاقاته بعرض ثابت، ويمتدّ إلى حافة
+         الشاشة بهامشٍ سالب يساوي حشو الصفحة تمامًا فيُلغيه، فلا يتجاوز عرض الأرض ولا يجرّ
+         الصفحة أفقيًا؛ الفيض محبوسٌ فيه وحده. وشريط التمرير مخفيّ، والمحاذاة تحترم الحافة. --- */
+  & .hm-strip{display:flex;gap:var(--s3);
+    margin:var(--s6) calc(var(--hm-bleed) * -1) 0;padding:0 var(--hm-bleed) var(--s2);
+    overflow-x:auto;overflow-y:hidden;
+    scroll-snap-type:inline mandatory;scroll-padding-inline:var(--hm-bleed);
+    overscroll-behavior-inline:contain;scrollbar-width:none;-ms-overflow-style:none}
+  & .hm-strip::-webkit-scrollbar{display:none;inline-size:0;block-size:0}
+  & :is(.hm-strip-new,.hm-strip-card){flex:none;scroll-snap-align:start;
+    display:flex;flex-direction:column;align-items:flex-start;gap:var(--s1);
+    inline-size:var(--hm-strip-w);padding:var(--s4);border-radius:var(--r-lg);
+    box-shadow:var(--shadow-card);text-decoration-line:none;
+    transition:box-shadow var(--d2) var(--ease),transform var(--d1) var(--ease),background-color var(--d1) var(--ease)}
+  & .hm-strip-card{background:var(--surface);border:var(--hair) solid var(--line);color:var(--label)}
+  /* أول بطاقة ممتلئة بلون الفعل — وهي الموضع الوحيد في الشريط الذي يحمل الفيروزي */
+  & .hm-strip-new{background:var(--tint-fill);border:var(--hair) solid var(--tint-fill);color:var(--on-tint)}
+  & :is(.hm-strip-new,.hm-strip-card) > .hm-disc{margin-block-end:var(--s2)}
+  /* قرص بطاقة الخدمة محايد لا فيروزي: قرار «اليوم» القائم في .nav-icon أن رموز الفهرس
+     لا تتلوّن، والفعل وحده يحمل اللون — فتبقى البطاقة الممتلئة وحدها هي الفيروز في الشريط */
+  & .hm-strip-card > .hm-disc{--hm-c:var(--label-2)}
+  & .hm-strip-new > .hm-disc{--hm-c:currentColor}
+  & .hm-strip-new > .hm-disc::before{background:color-mix(in srgb,var(--on-tint) 20%,transparent);border-color:transparent}
+  & :is(.hm-strip-new,.hm-strip-card) > strong{display:-webkit-box;-webkit-box-orient:vertical;
+    -webkit-line-clamp:2;line-clamp:2;overflow:hidden;
+    font-size:var(--fs-cap);font-weight:var(--fw-label);line-height:1.45}
+  & :is(.hm-strip-new,.hm-strip-card) > small{font-size:var(--fs-cap2);line-height:1.4}
+  & .hm-strip-card > small{color:var(--label-3)}
+  & .hm-strip-new > small{opacity:.84}
+
+  /* --- صف البلاطات: عمودان على الجوال وأربعة حين تتّسع الشاشة بلا استعلام وسائط.
+         الشبكة تقبل البنيتين: قرص ورقم وتسمية مسطّحة، أو قرص وغلافٌ يضمّ السطرين. --- */
+  & .hm-stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:var(--s3);
+    margin:var(--s6) 0 0;padding:0;list-style:none}
+  & .hm-stat{display:grid;grid-template-columns:auto minmax(0,1fr);grid-template-rows:auto auto;
+    align-items:center;align-content:center;column-gap:var(--s3);min-inline-size:0;
+    padding:var(--s4);border:var(--hair) solid var(--line);border-radius:var(--r-lg);
+    background:var(--surface);box-shadow:var(--shadow-card);color:var(--label);text-decoration-line:none}
+  & .hm-stat > .hm-disc{grid-row:1 / span 2;inline-size:var(--disc-lg);block-size:var(--disc-lg)}
+  & .hm-stat > :nth-child(2):last-child{grid-row:1 / span 2;min-inline-size:0}
+  & .hm-stat :is(strong,dd){margin:0;font-family:var(--font);font-size:var(--hm-fig);font-weight:var(--fw-display);
+    line-height:1.05;font-variant-numeric:tabular-nums;color:var(--label)}
+  & .hm-stat :is(span,small,dt):not(.hm-disc,.hm-disc *){font-size:var(--fs-foot);font-weight:var(--fw-body);
+    line-height:1.4;color:var(--label-2)}
+
+  /* --- كتلة مسمّاة: عنوانٌ وعدده بجانبه، سطرٌ تحته، ثم قائمة بلا نقاط --- */
+  & .hm-block{margin-block-start:var(--s10)}
+  & .hm-block > :is(h2,h3){display:flex;flex-wrap:wrap;align-items:baseline;gap:var(--s2);margin:0;
+    font-size:var(--fs-title2);font-weight:var(--fw-display);line-height:var(--lh-head);color:var(--label);text-wrap:balance}
+  & .hm-block > :is(h2,h3) :is(span,small,b){font-size:var(--fs-foot);font-weight:var(--fw-body);
+    color:var(--label-3);font-variant-numeric:tabular-nums}
+  & .hm-block > p{margin:var(--s1) 0 0;max-inline-size:64ch;font-size:var(--fs-foot);line-height:1.6;color:var(--label-2)}
+  & .hm-block > :is(ul,ol){display:grid;grid-template-columns:minmax(0,1fr);gap:var(--s3);
+    margin:var(--s4) 0 0;padding:0;list-style:none}
+
+  /* --- بطاقة المهمة: نصف قطر واسع، وظلٌّ ناعم يعمق عند التحويم --- */
+  & .hm-card{display:flex;flex-direction:column;gap:var(--s3);min-inline-size:0;
+    padding:var(--s4);border:var(--hair) solid var(--line);border-radius:var(--r-lg);
+    background:var(--surface);box-shadow:var(--shadow-card);
+    transition:box-shadow var(--d2) var(--ease),transform var(--d2) var(--ease)}
+  & .hm-card-head{display:flex;align-items:center;gap:var(--s3) var(--s4);min-inline-size:0}
+  & .hm-card-head > .hm-disc{inline-size:var(--disc-lg);block-size:var(--disc-lg)}
+  & .hm-card-head > div{flex:1 1 auto;min-inline-size:0}
+  & .hm-card-head :is(h2,h3,h4){margin:0;min-inline-size:0;font-size:var(--fs-callout);font-weight:var(--fw-label);
+    line-height:1.4;color:var(--label);overflow-wrap:break-word}
+  & .hm-card-head :is(.badge,.pill,.vn-flag){flex:none;margin-inline-start:auto}
+  & .hm-card-meta{margin:2px 0 0;font-size:var(--fs-cap);line-height:1.5;color:var(--label-3);overflow-wrap:break-word}
+  & .hm-card-note{margin:0;font-size:var(--fs-callout);line-height:var(--lh-body);color:var(--label-2);text-wrap:pretty}
+  /* --- شريط الحقائق: الخيط يفصله عن نصّ البطاقة، والاسم أصغر من قيمته فتُقرأ القيمة أولًا --- */
+  & .hm-facts{display:grid;grid-template-columns:repeat(auto-fit,minmax(11rem,1fr));gap:var(--s2) var(--s5);
+    margin:0;padding-block-start:var(--s3);border-block-start:var(--hair) solid var(--line)}
+  & .hm-facts > div{display:grid;gap:1px;min-inline-size:0}
+  & .hm-facts dt{margin:0;font-size:var(--fs-cap);font-weight:var(--fw-body);line-height:1.4;color:var(--label-3)}
+  & .hm-facts dd{margin:0;min-inline-size:0;font-size:var(--fs-foot);font-weight:var(--fw-label);line-height:1.5;
+    color:var(--label);overflow-wrap:break-word;text-wrap:pretty;font-variant-numeric:tabular-nums}
+
+  /* صف الأزرار: دائريّ كأفعال المظهر، وكل هدفٍ ≥ 44 حتى على الشاشة الواسعة حيث --tap أصغر */
+  & .hm-card-actions{display:flex;flex-wrap:wrap;align-items:center;gap:var(--s2);margin-block-start:var(--s1)}
+  & .hm-card-actions > :is(a,button,.btn){display:inline-flex;align-items:center;justify-content:center;gap:var(--s2);
+    min-block-size:max(var(--tap),44px);max-inline-size:100%;padding-inline:var(--s5);border-radius:var(--r-pill);
+    font-size:var(--fs-callout);font-weight:var(--fw-label);text-decoration-line:none}
+  & .hm-card-actions > a:not(.btn){color:var(--tint)}
+
+  /* --- مؤشّر الخطوات: يلتفّ، المنجزة بعلامة صحّ مرسومة بحدّين ماديّين (شكلها ثابت لا يُقلب مع
+         الاتجاه)، والحالية مميّزة بتلوين لون الفعل، والفاصل مثلثٌ بحدود منطقية فيقلب نفسه مع
+         اتجاه القراءة وحده — يسارًا في RTL ويمينًا في LTR — بلا استعلام اتجاه ولا صورة. --- */
+  & .hm-steps{display:flex;flex-wrap:wrap;align-items:center;gap:var(--s1) var(--s2);margin:0;padding:0;
+    list-style:none;font-size:var(--fs-cap);line-height:1.6;color:var(--label-3)}
+  & .hm-step{display:inline-flex;align-items:center;gap:var(--s1);min-inline-size:0}
+  & .hm-step:not(:last-child)::after{content:"";flex:none;inline-size:0;block-size:0;margin-inline-start:var(--s1);
+    border-block:3px solid transparent;border-inline-end:0;border-inline-start:4px solid currentColor;opacity:.45}
+  & .hm-step.is-done{color:var(--green-ink);font-weight:var(--fw-label)}
+  & .hm-step.is-done::before{content:"";flex:none;inline-size:.34em;block-size:.62em;margin-inline-end:.22em;
+    border:2px solid currentColor;border-top:0;border-left:0;transform:rotate(45deg) translate(-.06em,-.1em)}
+  & .hm-step.is-now{padding:2px var(--s2);border-radius:var(--r-sm);font-weight:var(--fw-label);
+    color:var(--tint);background:color-mix(in srgb,var(--tint) 12%,transparent)}
+
+  /* --- القرص: تلوينٌ خفيف من لون الحالة، وهندسةٌ خاصة بكل حالة --- */
+  & .hm-disc{--hm-c:var(--label-3);position:relative;isolation:isolate;flex:none;
+    inline-size:var(--disc);block-size:var(--disc);display:grid;place-items:center;
+    margin:0;padding:0;border:0;border-radius:0;background:none;   /* يلغي دائرة .eu-chip > span الممتلئة */
+    color:var(--hm-c);font-size:calc(var(--disc) / 2.4);font-weight:var(--fw-label);line-height:1;
+    font-variant-numeric:tabular-nums}
+  & .hm-disc::before{content:"";position:absolute;z-index:-1;inset:0;
+    border:2px solid transparent;border-radius:var(--radius);
+    background:color-mix(in srgb,var(--hm-c) 14%,transparent)}
+  & .hm-disc > *{grid-area:1 / 1}
+  /* ينتظر قرارك — معيّن: مربعٌ واقفٌ على زاويته، غير مستقرٍّ، ينتظر منك. تذكيرُ الدليل لونه. */
+  & .hm-disc.is-decide{--hm-c:var(--orange-ink)}
+  & .hm-disc.is-decide::before{border-radius:var(--r-xs);transform:rotate(45deg) scale(.72);
+    border-color:color-mix(in srgb,var(--hm-c) 45%,transparent)}
+  /* رجع لك — مثلث تنبيه، والمحتوى ينزل إلى بطنه. عاجلُ الدليل لونه. */
+  & .hm-disc.is-return{--hm-c:var(--red-ink)}
+  & .hm-disc.is-return::before{border:0;border-radius:0;clip-path:polygon(50% 2%,98% 94%,2% 94%);
+    background:color-mix(in srgb,var(--hm-c) 20%,transparent)}
+  & .hm-disc.is-return{padding-block-start:.5em}   /* الرمز ينزل إلى بطن المثلث؛ ::before يقيس صندوق الحشو فلا يتأثر */
+  /* عليك تنفيذه — مربعٌ قائمٌ بحدٍّ صلب: صندوق مهمةٍ مفتوح. أزرق الدليل لونه. */
+  & .hm-disc.is-do{--hm-c:var(--blue-ink)}
+  & .hm-disc.is-do::before{border-radius:var(--r-md);border-style:solid;
+    border-color:color-mix(in srgb,var(--hm-c) 55%,transparent)}
+  /* ماشي بروحه — حلقةٌ متقطعة: تدور بنفسها، وخفّتها تقول إنها لا تطلب منك شيئًا. */
+  & .hm-disc.is-run{--hm-c:var(--blue-ink)}
+  & .hm-disc.is-run::before{border-radius:var(--r-pill);border-style:dashed;
+    border-color:color-mix(in srgb,var(--hm-c) 48%,transparent);
+    background:color-mix(in srgb,var(--hm-c) 7%,transparent)}
+  /* تم — الحلقة نفسها غير مقطوعة: الشكل يقابل «الجاري» مباشرةً، والحبر فحميّ صامت لا أخضر. */
+  & .hm-disc.is-done{--hm-c:var(--green-ink)}
+  & .hm-disc.is-done::before{border-radius:var(--r-pill);border-style:solid;
+    border-color:color-mix(in srgb,var(--hm-c) 34%,transparent);
+    background:color-mix(in srgb,var(--hm-c) 10%,transparent)}
+  /* مرفوض — مثمّنٌ كإشارة القف: نهايةٌ لا رجعة فيها، ولونها عاجل الدليل. */
+  & .hm-disc.is-reject{--hm-c:var(--red-ink)}
+  & .hm-disc.is-reject::before{border:0;border-radius:0;
+    clip-path:polygon(31% 2%,69% 2%,98% 31%,98% 69%,69% 98%,31% 98%,2% 69%,2% 31%);
+    background:color-mix(in srgb,var(--hm-c) 18%,transparent)}
+
+  /* --- ربط العقد بالترميز الفعلي ---------------------------------------------
+     ترميز الرئيسية (app/static/home-ui.mjs) يحمل أصناف hm-* فوق أصناف المنصة المشتركة، عمدًا:
+     ‎.vn-list‎ و‎.vn-tile‎ و‎.eu-chip‎ و‎.btn‎ تبقى معها فتُقرأ الشاشة في المظاهر السبعة الأخرى.
+     وهنا يُفكّ التعارض: ما ورثته من هيئة الصفّ أو الشريحة أو البطاقة العامة يعود إلى هيئة
+     «اليوم». طبقة yawm تعلو classic وsurfaces وcomponents، فالتعارض مع تلك الملفات محسوم
+     بالطبقة؛ وما يحتاج ترجيحًا هو ما يزاحمها من قواعد هذا الملف نفسه، وله رُفعت الأولوية. */
+
+  /* الشريط: ‎.eu-quick‎ يلفّ بطاقاته — والشريط لا يلفّ، ينزلق */
+  & .hm-strip{flex-wrap:nowrap}
+  /* بطاقة الشريط قد تحمل محتواها مباشرةً أو تلفّ رابطًا/زرًّا واحدًا (شريحة eu-chip أو text-button):
+     في الحالتين يملأ الجسمُ الداخلي البطاقةَ ويصير عمودًا، فلا تبقى شريحةٌ بيضويةٌ داخل بطاقة. */
+  & .hm-strip-card > :is(a,button){display:flex;flex-direction:column;align-items:flex-start;gap:var(--s1);
+    inline-size:100%;min-inline-size:0;min-block-size:0;margin:0;padding:0;
+    border:0;border-radius:0;background:none;color:inherit;cursor:pointer;
+    font-family:inherit;font-size:var(--fs-cap);font-weight:var(--fw-label);line-height:1.45;
+    text-align:start;text-decoration-line:none}
+  & .hm-strip-card .eu-chip-text{display:grid;gap:2px;min-inline-size:0;font-weight:var(--fw-label);text-align:start}
+  & .hm-strip-card .eu-chip-text > small{font-size:var(--fs-cap2);font-weight:var(--fw-body);line-height:1.4;color:var(--label-3)}
+  /* ما ليس جاهزًا يبقى ظاهرًا: البطاقة نفسها تصير مقطّعة الحدّ بلا ظل، فالتعطيل يُقرأ بالشكل لا بالخفوت وحده */
+  & :is(.hm-strip-card.is-old,.hm-strip-card:has(.is-disabled)){border-style:dashed;box-shadow:none;color:var(--label-2)}
+  & .hm-strip-new{text-align:start}
+
+  /* البلاطة: ‎.vn-tile‎ تأتي بشبكة مناطق مسمّاة ورقمٍ أكبر لأولى البلاطات — والرئيسية صفٌّ متساوٍ */
+  & .hm-stat{grid-template-areas:none}
+  & .hm-stat::before{content:none}
+  & .hm-stat > .hm-disc{grid-area:1 / 1 / span 2 / span 1}
+  & .hm-stat > strong{grid-area:1 / 2}
+  & .hm-stat > span{grid-area:2 / 2}
+  & .hm-stats > .hm-stat :is(strong,dd){font-size:var(--hm-fig)}
+
+  /* الكتلة: ‎.vn-block‎ صندوقٌ محشوّ، وعنوانها في ‎.panel-head‎ لا ولدًا مباشرًا. الرئيسية كتلٌ مسطّحة. */
+  & .hm-block{padding:0;background:none;border:0;box-shadow:none}
+  & .hm-block .panel-head{margin-block-end:var(--s4)}
+  & .hm-block .panel-head h2{font-size:var(--fs-title2);font-weight:var(--fw-display);line-height:var(--lh-head);color:var(--label)}
+  & .hm-block .panel-head h2 :is(small,span){font-size:var(--fs-foot);font-weight:var(--fw-body);
+    color:var(--label-3);font-variant-numeric:tabular-nums}
+  & .hm-block .panel-head p{font-size:var(--fs-foot);line-height:1.6;color:var(--label-2)}
+  /* قائمة البطاقات ليست لوحة صفوف: لا إطار ولا ظلّ للحاوية، ولا خيط فاصل بين عنصرين */
+  & .hm-block > :is(ul,ol){border:0;background:none;box-shadow:none;padding:0}
+  & .hm-block > :is(ul,ol) > li + li::before{content:none}
+
+  /* البطاقة داخل قائمة صفوف: ترجع بطاقةً — لا صفًّا بارتفاع صفّ ولا زاويةِ صفّ ولا تلوينِ تحويم صفّ */
+  & .hm-block .hm-card{min-block-size:0;border-radius:var(--r-lg);background:var(--surface);
+    padding:var(--s4);gap:var(--s3);align-items:stretch;flex-wrap:nowrap}
+  & .hm-block .hm-card:is(:hover,:active){background:var(--surface)}
+  /* رأس البطاقة: العنوان رابطٌ فيه ‎<strong>‎ لا عنوانًا، والشارة تُدفع إلى آخر السطر */
+  & .hm-card-head > :is(div,a,p){flex:1 1 auto;min-inline-size:0}
+  & .hm-card-head :is(h2,h3,h4,strong){margin:0;min-inline-size:0;font-size:var(--fs-callout);
+    font-weight:var(--fw-label);line-height:1.4;color:var(--label);overflow-wrap:break-word}
+  & .hm-card-head > a{text-decoration-line:none}
+  & .hm-card-head + .hm-card-meta{margin-block-start:calc(2px - var(--s3))}
+
+  /* خطوةٌ بلا نص: الترميز يرسمها مربّعات زينة والنص كلّه في aria-label. فتصير شريطًا مقسّمًا —
+     المنجزة فحميّة، والحالية أعرض بلون الفعل، والآتية باهتة — ولا علامة صحّ ولا فاصل لما لا نصّ فيه. */
+  & .hm-step:empty{inline-size:var(--s3);block-size:3px;padding:0;border-radius:var(--r-pill);
+    background:currentColor;opacity:.26}
+  & .hm-step:empty::before,& .hm-step:empty::after{content:none}
+  & .hm-step:empty.is-done{background:var(--green-ink);opacity:.8}
+  & .hm-step:empty.is-now{inline-size:var(--s6);background:var(--tint);opacity:1}
+
+  /* رابط «كل طلباتي» في آخر الشاشة: وحده في وسط سطره */
+  & .hm-all{display:flex;justify-content:center;margin:var(--s10) 0 0}
+
+  /* --- التحويم والضغط وحلقة التركيز: الحلقة تلزم نصف قطر البطاقة فلا تنكمش زواياها عند التركيز --- */
+  @media (hover:hover){
+    & :is(.hm-card,.hm-strip-card,a.hm-stat):hover{box-shadow:var(--shadow-lift)}
+    & .hm-strip-new:hover{background:var(--action-hover);border-color:var(--action-hover);box-shadow:var(--shadow-lift)}
+  }
+  & :is(.hm-strip-new,.hm-strip-card,a.hm-stat):active{scale:var(--press-scale)}
+  & :is(.hm-card,.hm-stat,.hm-strip-card,.hm-strip-new):focus-visible{
+    outline:2px solid var(--tint);outline-offset:3px;border-radius:var(--r-lg)}
+
+  /* --- تقليل الحركة: لا انتقال ولا ضغط، والانزلاق يبقى لأنه تخطيط لا حركة زائدة --- */
+  @media (prefers-reduced-motion:reduce){
+    & :is(.hm-card,.hm-stat,.hm-strip-card,.hm-strip-new){transition:none}
+    & :is(.hm-strip-new,.hm-strip-card,a.hm-stat):active{transform:none;scale:none}
+    & .hm-strip{scroll-behavior:auto}
+  }
+
+  /* --- الألوان المفروضة: القاعدة المشتركة في classic.css تُفرّغ خلفية ::before، فيضيع المثلث
+         والمثمّن المرسومان بالتعبئة. هنا يعود كل قرص حدًّا ظاهرًا، وتبقى الحالات الستّ متمايزة
+         بالهندسة وحدها: معيّن، ومنقّط، ومربع صلب، ودائرة متقطعة، ودائرة صلبة، ومزدوج. --- */
+  @media (forced-colors:active){
+    & .hm-disc::before{background:transparent;border:1px solid CanvasText}
+    & .hm-disc.is-run::before{border-style:dashed}
+    & :is(.hm-disc.is-return,.hm-disc.is-reject)::before{clip-path:none;border-radius:var(--r-xs)}
+    & .hm-disc.is-return::before{border-style:dotted}
+    & .hm-disc.is-reject::before{border-style:double;border-width:3px}
+    & .hm-disc.is-return{padding-block-start:0}
+  }
+
+  /* --- الحركة: ظهورٌ لطيف مرة واحدة، ويسكن تمامًا عند تقليل الحركة --- */
+  @media (prefers-reduced-motion:no-preference){
+    & #main .page > *{animation:yawm-rise var(--d3) var(--ease-out) both}
+    & #main .page > *:nth-child(2){animation-delay:.04s}
+    & #main .page > *:nth-child(3){animation-delay:.08s}
+    & #main .page > *:nth-child(n+4){animation-delay:.12s}
+  }
+}
+
+@keyframes yawm-rise{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+
+/* --- 390px: عمود واحد، هوامش أضيق، وكل هدف ≥ 44px. لا تمرير أفقي. --- */
+@media (max-width:600px){:root[data-design=yawm]{
+  --gutter:16px; --gap-section:20px; --radius:.875rem;
+  --hm-strip-w:124px; --hm-fig:22px;
+  & .page{padding-block-start:var(--s2)}
+  & :is(.panel-body,.vn-block){padding:var(--s4)}
+  & .vn-grid{grid-template-columns:minmax(0,1fr);gap:var(--s3)}
+  & :is(.vn-tiles,.stats,.pt-tiles,.acc-stats){grid-template-columns:repeat(2,minmax(0,1fr));gap:var(--s2)}
+  & :is(.vn-tile strong,.pt-tile strong,.stat-number){font-size:22px}
+  & .vn-tiles > .vn-tile:first-child strong{font-size:24px}
+  & .page-head{padding-block-start:var(--s3)}
+  & :is(.btn,.operation-actions button){min-block-size:var(--tap)}
+  & .operation-actions{flex-wrap:wrap}
+  & .nav-icon{inline-size:36px;block-size:36px}
+  /* الرئيسية عند 390: بلاطتان في الصف، وبطاقة أضيق حشوًا، والشريط وحده يمرّر أفقيًا */
+  & .hm-stats{grid-template-columns:repeat(2,minmax(0,1fr));gap:var(--s2)}
+  & .hm-card{padding:var(--s3)}
+  & .hm-block{margin-block-start:var(--s8)}
+}}
+@media (min-width:1024px){:root[data-design=yawm]{
+  & .shell{grid-template-columns:272px minmax(0,1fr)}
+  & .sidebar{padding-block:var(--s5)}
+  & .page{padding-block-end:var(--s12)}
+  & .vn-grid{grid-template-columns:repeat(auto-fit,minmax(320px,1fr))}
+  /* عمودان لبطاقات المهام على الشاشة الواسعة، كما في النموذج المرجعي */
+  & .hm-block > :is(ul,ol){grid-template-columns:repeat(2,minmax(0,1fr))}
+}}
+}
+}

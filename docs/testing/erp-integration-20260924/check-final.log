@@ -1,0 +1,7 @@
+
+> 36t-local-platform@0.1.0 check
+> node scripts/check.mjs
+
+Syntax checked: 580 JavaScript modules. Source hashes match. Traceability: 220 requirements / 22 domains.
+Quality ratchet: local primitives 113 (baseline 113) · short refusals 1184 (baseline 1184) · status literals outside the vocabulary 2 (baseline 2) · links 132 checked, 0 unresolved · 574 ms
+Checks cover syntax, source integrity, traceability and the quality ratchet. No TypeScript compiler or production bundle is configured for this JavaScript build.

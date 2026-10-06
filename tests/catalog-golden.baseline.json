@@ -1,0 +1,23 @@
+{
+ "note": "بصمات HTML لشاشات مركز الخدمات لكل (جمهور/شاشة). يُعاد توليدها بـ UPDATE_CATALOG_GOLDEN=1 node --test tests/catalog-golden.test.mjs بعد تغيير مقصود، ويُراجَع فرقها.",
+ "frozen_at": "2026-09-20T06:00:00.000Z",
+ "node": "24.14.0",
+ "icu": "78.2",
+ "audiences": [
+  "employee",
+  "manager"
+ ],
+ "pairs": 10,
+ "screens": {
+  "employee/services": "35e47c4a90cd3936",
+  "employee/services/category/my_time": "324c1ca22d9a2f7c",
+  "employee/services/HR-ATTENDANCE-FIX": "34845b1c4623a0c1",
+  "employee/services/search/تعريف": "d85878fd9a56e0d4",
+  "employee/services/lens/journey": "f6bb954072896789",
+  "manager/services": "c8e2af937ca99dd8",
+  "manager/services/category/my_time": "324c1ca22d9a2f7c",
+  "manager/services/HR-ATTENDANCE-FIX": "b3f8d63631915bbb",
+  "manager/services/search/تعريف": "d85878fd9a56e0d4",
+  "manager/services/lens/journey": "7ea4630169c306ef"
+ }
+}

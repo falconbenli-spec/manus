@@ -1,0 +1,21 @@
+✔ الترحيلان 140/141: يترقيان فوق أرشيف a0d7898 المسجل فيه 135 و137 و138 دون تخطي أساس البنود (10224.381292ms)
+✔ الترحيل 140: الطلب القديم يصبح بندًا واحدًا وتخصيصًا واحدًا دون تغيير كميته أو مخصصه أو حالته (10110.076583ms)
+✔ الترحيل 141: العرض القديم يصبح له سعر بند دون تغيير رأسه أو اختلاق حدث بشري (9872.930833ms)
+✔ PRC-04/05/06: السطر الواحد الحالي يُحفظ بمعرّف ثابت وتتبعه الاستلامات والفاتورة والمطابقة (9999.535709ms)
+✔ PRC-05: القاعدة ترفض ربط استلام من طلب ببند أمر طلب آخر (11500.607458ms)
+✔ PRC-04: الطلب والعرض والأمر يحفظون عدة بنود بهويات وأسعار مستقلة (10006.31875ms)
+✔ PRC-04: تسعير العرض يرفض البند الناقص والمكرر والغريب (11423.7115ms)
+✔ PRC-05/06: الاستلام والفاتورة والمطابقة تتحقق من كل بند مستقلًا (15185.91425ms)
+✔ واجهة المشتريات تجمع البنود والأسعار والكميات في جداول صفوف (1.403916ms)
+✔ golden: every operational screen renders to the same HTML for four seeded personas (28788.376917ms)
+✔ golden: moving the SQL wall clock a day forward moves no screen hash (27135.616959ms)
+✔ golden: the normaliser hides random identifiers but stays sensitive to order, count and text (0.497958ms)
+✔ golden: the page-editor trigger is outside every seeded persona’s screen, and appears only for a holder of the configure capability (4024.837916ms)
+ℹ tests 13
+ℹ suites 0
+ℹ pass 13
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 61222.238417

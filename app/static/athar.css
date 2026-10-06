@@ -1,0 +1,234 @@
+/* VOID 360 — package E, layer "stage": the ring canvas, the login threshold, stage heroes, the horizon and the still derivatives.
+   Every colour is a token from signature.css; no rule lives outside @layer stage except @keyframes. The three designs differ by tokens;
+   the two rules scoped to data-design=field at the end are the only structural ones (addendum D). */
+@keyframes e-wait{from{opacity:0}to{opacity:0}}
+@keyframes e-reveal{from{clip-path:inset(0 0 100% 0)}to{clip-path:inset(0)}}
+@keyframes e-threshold{0%,50%{opacity:1}83%,100%{opacity:0}}
+
+@layer stage{
+/* ---------- the canvas. Geometry goes to the engine from signature.mjs; CSS only sizes the box per scene ---------- */
+:root{--e-fade:to right;
+  --e-holder:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 132 12'%3E%3Cpath d='M8.18 3.6H4.04l3.04 4.8h3.55zM23.16 2.7h-5.69l4.18 6.6h4.88zM38.14 1.8H30.9l5.32 8.4h6.21zM53.13.9h-8.8l6.46 10.2h7.55zM63.89 0h10.35l-7.6 12h-8.88zM78.87.9h8.8l-6.46 10.2h-7.55zM93.86 1.8h7.24l-5.32 8.4h-6.21zM108.84 2.7h5.69l-4.18 6.6h-4.88zM123.82 3.6h4.14l-3.04 4.8h-3.55z'/%3E%3C/svg%3E");
+  --e-hollow:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='-.5 -.5 14.73 11'%3E%3Cpath d='M5.11 0h8.62L7.4 10H0z' fill='none' stroke='%23000' stroke-width='1.3' vector-effect='non-scaling-stroke'/%3E%3C/svg%3E");
+  --e-logo:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 58 24'%3E%3Cpath d='M11.0835 8.24795L15.8338 3.19227L15.9194 3.10149V0H0.731621V4.08237H9.32292L4.87993 8.82034L4.79429 8.91112V11.8966H7.50694C11.5973 11.8966 12.4537 13.8256 12.4537 15.4444C12.4537 17.9407 10.8669 19.431 8.20714 19.431C6.84955 19.431 5.832 19.0502 5.18217 18.2988C4.48197 17.4894 4.2301 16.2337 4.45427 14.6703L4.50464 14.3097H0.205212L0.177506 14.5921C-0.0919957 17.2196 0.545237 19.4713 2.01616 21.1028C3.47449 22.7191 5.61539 23.5739 8.20714 23.5739C13.2118 23.5739 16.7078 20.2555 16.7078 15.5024C16.7078 11.9748 14.5669 9.23892 11.0835 8.24543'/%3E%3Cpath d='M23.0973 18.1021H18.7702H18.5788L18.4906 18.2736L15.8006 23.5411L15.5664 24H16.0802H19.7651H19.9364L20.0296 23.8537L23.3618 18.5837L23.6691 18.1021H23.0973Z'/%3E%3Cpath d='M32.9126 6.46775H32.8547L37.144 0.499265L37.5017 0H32.3383L32.2451 0.133642L26.8375 7.85963C24.8502 10.7241 24.1777 12.527 24.1777 15.0057C24.1777 19.8117 28.0011 23.5739 32.8824 23.5739C37.7636 23.5739 41.5291 19.8092 41.5291 15.0057C41.5291 12.6304 40.6551 10.4593 39.0708 8.89094C37.4891 7.32759 35.3029 6.46522 32.9126 6.46522M37.275 15.0032C37.275 17.6104 35.4691 19.431 32.8824 19.431C30.2957 19.431 28.4318 17.6508 28.4318 15.0032C28.4318 12.3555 30.2629 10.6056 32.8824 10.6056C35.5018 10.6056 37.275 12.4135 37.275 15.0032Z'/%3E%3Cpath d='M57.6844 0H40.5824H40.2676V0.315192V3.7697V4.08237H40.5824H47.0227V22.9107V23.2234H47.3351H50.962H51.2743V22.9107V4.08237H57.6844H57.9993V3.7697V0.315192V0H57.6844Z'/%3E%3C/svg%3E")}   /* the four paths of brand-logo.mjs, verbatim: one geometry, two sources, compared by the V check */
+:root[dir=ltr]{--e-fade:to left}
+.sig-aurora{display:none;position:absolute;inset-block-start:0;inset-inline-start:0;z-index:var(--z-canvas);inline-size:100%;block-size:100%;pointer-events:none}
+/* login: the box is one viewport tall and scrolls WITH the page, so an exclusion rectangle measured at layout stays true while a short screen scrolls */
+:root[data-scene=login] .sig-aurora{display:block}
+:root[data-scene=home] .sig-aurora{display:block;block-size:calc(var(--sticky-top) + var(--hero-h) + var(--s24))}
+@media (min-width:1024px){
+  :root[data-scene=index] .sig-aurora{display:block;position:fixed}
+  :root{--ring-x:34vw;--ring-y:42vh;--ring-r:min(50vh,32vw)}
+  :root[dir=ltr]{--ring-x:66vw}
+}
+@media (min-width:760px) and (max-width:1023.98px){:root{--ring-r:min(190px,28vw)}}
+
+/* ---------- login: one column; the ring is a horizon above the form. Two columns from 1024 ---------- */
+.login{position:relative;display:grid;grid-template-columns:minmax(0,1fr);align-content:start;min-block-size:100dvh;padding-block:0 calc(var(--s6) + var(--safe-b));padding-inline:calc(var(--gutter) + var(--safe-l)) calc(var(--gutter) + var(--safe-r));background:transparent;color:var(--ink-2)}
+:is(.login-story,.login-form){display:contents}
+:is(.hr-frames,.athar-scene,.athar-motion,.login-masthead,.login-wordmark,.login-mobile-tagline){display:none}
+.login-story .brand{position:absolute;inset-block-start:calc(var(--s4) + var(--safe-t));inset-inline-start:calc(var(--gutter) + var(--safe-l));line-height:0}
+.login .brand-svg{display:block;inline-size:auto;block-size:var(--s6);color:var(--logo)}
+/* the eye of the ring: the label and the display line sit on the ring centre, whatever the viewport. 1.02 R keeps the diagonal of a two-line title
+   inside (eye - 48px), the guard signature.mjs applies before it steps the title down */
+.story-copy{position:absolute;inset-block-start:var(--ring-y);inset-inline:0;inline-size:calc(var(--ring-r) * 1.02);margin-inline:auto;translate:0 -50%;text-align:center}
+.story-copy .eyebrow{margin-block-end:var(--s2);color:var(--spark);letter-spacing:0}
+.story-copy h1{color:var(--ink-display);font:var(--fw-display) var(--fs-display-xl)/var(--lh-display) var(--font);letter-spacing:0;text-wrap:balance;animation:e-reveal 420ms var(--ease)}
+.story-copy h1.is-long{font-size:var(--fs-display-l)}
+.story-copy p,.hr-values{display:none}
+.login-card{display:flex;flex-direction:column;inline-size:min(400px,100%);margin-block-start:calc(var(--ring-y) + var(--ring-r));margin-inline:auto}
+.login-card .eyebrow{color:var(--ink-4);font-size:var(--fs-cap);font-weight:var(--fw-strong)}
+.login-card .eyebrow:lang(en){letter-spacing:.08em;text-transform:uppercase}   /* Latin only: tracking and case never touch Arabic (they break joining) */
+.login-card .eyebrow::before{content:none}
+.login-card h2{margin-block-start:var(--s1);color:var(--ink-1);font-size:var(--fs-title);font-weight:var(--fw-strong);line-height:var(--lh-title)}
+.login-card > p:not(.login-note){margin-block-start:var(--s2);color:var(--ink-3);font-size:var(--fs-meta);line-height:1.6}
+:is(#login-form,#password-form){display:flex;flex-direction:column;gap:var(--s4);margin-block-start:var(--s6)}
+:is(#login-form,#password-form) label{display:flex;flex-direction:column;color:var(--ink-3);font-size:var(--fs-label);font-weight:var(--fw-label);line-height:1.4}
+:is(#login-form,#password-form) label:focus-within{color:var(--ink-1)}
+:is(#login-form,#password-form) input{min-block-size:var(--s14);font-weight:var(--fw-body)}
+:is(#login-form,#password-form) input::placeholder{color:var(--ink-5);opacity:1}
+:is(#login-form,#password-form) small{margin-block-start:var(--s1);color:var(--ink-4);font-size:var(--fs-label);font-weight:var(--fw-body);line-height:1.6}
+/* the two-step code folds while empty: the label and a short line that still reads as a field; focus opens it */
+#login-form label:has(> input[name=otp]:placeholder-shown):not(:focus-within){flex-direction:row;align-items:center;justify-content:space-between;gap:var(--s4);color:var(--ink-4)}
+#login-form label:has(> input[name=otp]:placeholder-shown):not(:focus-within) input{flex:none;inline-size:120px;min-block-size:var(--tap)}
+#login-error:empty{display:none}
+:is(.login-card,.password-form) .btn{--btn-w:100%}
+:is(#login-form,#password-form) > .btn{margin-block-start:var(--s2)}
+.password-form .text-button{align-self:center}
+.login-note{margin-block-start:var(--s6);color:var(--ink-4);font-size:var(--fs-label);line-height:1.7}
+.login-card > .text-button{align-self:flex-start;margin-block-start:var(--s2);color:var(--ink-4);font-size:var(--fs-label)}
+.login-footer{inline-size:min(400px,100%);margin-block-start:var(--s4);margin-inline:auto;color:var(--ink-5);font-size:var(--fs-label);font-weight:var(--fw-body);line-height:1.6}
+/* the password form keeps the writing line when it opens inside the dialog from the account menu */
+#dialog .password-form{max-inline-size:400px}
+/* phones: the threshold fits one screen without scrolling under the fixed ring (spec 5.1, 375x812: two lines, the folded code, the 56px pill, the language
+   button, the footer). The intro line and the first-sign-in note leave the eye, not the accessibility tree. The forced password gate keeps its explanation */
+@media (max-width:759.98px){
+  .login{padding-block-end:calc(var(--s4) + var(--safe-b))}
+  .login:not(.password-gate) .login-card > p{position:absolute;inline-size:1px;block-size:1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap}
+  #login-form{margin-block-start:var(--s4)}
+  .login-card .btn:is(.dark,.primary){--btn-h:var(--s14)}
+  .login-card > .text-button{margin-block-start:0}
+}
+
+@media (max-height:600px){
+  .story-copy{position:static;inline-size:auto;margin-block-start:calc(var(--s18) + var(--safe-t));translate:none;text-align:start}
+  .story-copy h1{font-size:var(--fs-display-l)}
+  :is(.login-card,.password-gate .login-card){margin-block-start:var(--s8)}
+  .password-gate .login-card{margin-block-start:calc(var(--s18) + var(--safe-t))}
+}
+@media (min-width:1024px) and (min-height:600.02px){
+  .login{grid-template-columns:repeat(12,minmax(0,1fr));grid-template-rows:auto minmax(0,1fr) auto auto;column-gap:var(--s6);row-gap:var(--s4);padding-block:calc(var(--s6) * 2 + var(--safe-t)) calc(var(--s8) + var(--safe-b))}
+  .login-story > :not(.story-copy),.login-form > *{grid-column:1 / span 5}
+  .login-story .brand{position:static;grid-row:1}
+  .login .brand-svg{block-size:calc(var(--s6) + var(--s1))}
+  .story-copy{inset-inline:auto;inset-inline-end:calc(34vw - var(--ring-r) * .51);margin-inline:0;text-align:start}
+  :root[dir=ltr] .story-copy{inset-inline-end:calc(34vw - var(--ring-r) * .6);inline-size:calc(var(--ring-r) * 1.2)}   /* Latin words are longer: a wider box, still inside the eye */
+  .story-copy p{display:block;position:absolute;inset-block-start:min(calc(50% + var(--ring-r) + var(--s3)),calc(50% + 100vh - var(--ring-y) - var(--s30)));inset-inline:0;max-inline-size:30em;color:var(--ink-3);font-size:var(--fs-body-l);font-weight:var(--fw-stage-body);line-height:var(--lh-body-l);text-wrap:pretty}
+  :is(.login-card,.password-gate .login-card){grid-row:2;align-self:center;margin-block:var(--s6);margin-inline:0}
+  .hr-values{grid-row:3;display:flex;flex-wrap:wrap;gap:var(--s1) var(--s4);color:var(--ink-4);font-size:var(--fs-label);font-weight:var(--fw-label);line-height:1.4}
+  .hr-values > span + span::before{content:"";display:inline-block;inline-size:8px;aspect-ratio:1.373;margin-inline-end:var(--s4);background-color:var(--spark);-webkit-mask:var(--m-done) center/contain no-repeat;mask:var(--m-done) center/contain no-repeat}
+  .login-footer{grid-row:4;margin:0}
+}
+
+@media (min-width:1024px) and (min-height:600.02px) and (max-height:800px){
+  .login{padding-block-start:calc(var(--s8) + var(--safe-t))}
+  :is(.login-card,.password-gate .login-card){margin-block:0}
+}
+
+/* ---------- the threshold: the one moment the identity turquoise is a full field. A cut when motion is off: the animation
+   has no fill-mode, so the motion killer leaves the still frame in place until signature.mjs removes the class ---------- */
+html.is-threshold::before,html.is-threshold::after{content:"";position:fixed;z-index:var(--z-threshold);pointer-events:none;animation:e-threshold 480ms linear}
+html.is-threshold::before{inset:0;background-color:var(--brand-turquoise)}
+html.is-threshold::after{inset-block-start:calc(var(--safe-t) + (var(--topbar-h) - 20px) / 2);inset-inline-start:max(var(--gutter),calc((100vw - var(--content-max)) / 2));inline-size:48.33px;block-size:20px;background-color:var(--brand-paper);-webkit-mask:var(--e-logo) center/contain no-repeat;mask:var(--e-logo) center/contain no-repeat}
+@media (min-width:1024px){html.is-threshold::after{inset-block-start:calc((var(--topbar-h) - 24px) / 2);inline-size:58px;block-size:24px}}
+
+/* ---------- stage heroes: home and portal. signature.mjs injects date, greeting, census and the eye into .page-head ---------- */
+.sig-date,.sig-greeting,.sig-census{grid-column:1;min-inline-size:0;margin:0}
+.sig-date{grid-row:2;align-self:end;color:var(--ink-4);font-size:var(--fs-label);font-weight:var(--fw-label);line-height:1.4}
+.sig-greeting{grid-column:1 / span 2;grid-row:4;color:var(--ink-display);font:var(--fw-display) var(--fs-display-l)/var(--lh-display) var(--font);letter-spacing:0;text-wrap:balance}
+.sig-census{grid-row:3;align-self:start;min-block-size:calc(var(--fs-meta) * 1.6);margin-block-start:calc(var(--s4) * -1);color:var(--ink-3);font-size:var(--fs-meta);line-height:1.6}
+/* the hero opens with the label, the date, the census and the eye, then the greeting; the page description closes it in the quiet voice of .vn-head > p
+   (spec 6.1), whole and unclipped. The wrapper dissolves so h1 and p are grid items. `.page-head h1+p` lives in @layer shell and outranks this layer, so the
+   quiet voice reaches it through the tokens that rule reads, and min-inline-size outranks its 52ch */
+:root[data-scene=home] .page-head > div:first-child{display:contents}
+:root[data-scene=home] .page-head h1{grid-column:1;grid-row:1}
+:root[data-scene=home] .page-head h1 + p{--fs-body:var(--fs-label);--ink-3:var(--ink-4);--s3:0px;grid-column:1 / span 2;grid-row:5;min-inline-size:min(72ch,100%);line-height:1.6}
+/* the eye: a square of 2.24 x the ring radius. signature.mjs measures this box and hands the engine its centre and R */
+.sig-eye{grid-column:2;grid-row:1 / span 3;align-self:center;justify-self:end;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:var(--s1);inline-size:calc(var(--hero-ring-r) * 2.24);aspect-ratio:1;color:var(--ink-1);text-align:center;text-decoration-line:none}
+.sig-eye b{font-size:var(--fs-figure-s);font-weight:var(--fw-display);line-height:var(--lh-figure)}
+.sig-eye span{position:absolute;inline-size:1px;block-size:1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap}
+@media (min-width:760px){
+  .sig-eye b{font-size:var(--fs-figure-m)}
+  .sig-eye span{position:static;inline-size:auto;max-inline-size:calc(var(--hero-ring-r) * 1.3);block-size:auto;overflow:visible;clip-path:none;white-space:normal;color:var(--ink-4);font-size:var(--fs-label);font-weight:var(--fw-label);line-height:1.4}
+}
+@media (min-width:1024px){
+  .sig-date,.sig-greeting,.sig-census,:root[data-scene=home] .page-head :is(h1,h1 + p){grid-column:1 / span 7}
+  /* the fixed 380px band (spec 1.4 item 1): label and date read as one pair, and the description sits as close to the census as the census to the greeting */
+  .sig-date{margin-block-start:calc(var(--s4) * -1)}
+  :root[data-scene=home] .page-head h1 + p{--s3:calc(var(--s2) * -1)}
+  .sig-greeting{grid-row:3;margin-block-start:calc(var(--s2) * -1)}
+  .sig-census{grid-row:4;min-block-size:calc(var(--fs-body-l) * var(--lh-body-l));margin-block-start:calc(var(--s2) * -1);font-size:var(--fs-body-l);font-weight:var(--fw-stage-body);line-height:var(--lh-body-l)}
+  .sig-eye{grid-column:8 / span 5;grid-row:1 / span 5;align-self:start;margin-block:calc(var(--s6) * -1)}
+  .sig-eye b{font-size:var(--fs-figure-xl)}
+}
+
+/* portal, launcher and executive heroes: stage type, no surface */
+.journey-hero{display:grid;grid-template-columns:minmax(0,1fr) auto;column-gap:var(--s4);padding-block:var(--s6) var(--s10)}
+/* integrator: the portal hero carries the eye too (spec 7.2(1)). portal-ui emits section.journey-hero, not .page-head, and signature.mjs appends a.sig-eye
+   alone as its last child, so the eye gets the end column here instead of falling under the copy. Below 760 the copy wrapper dissolves, as the home hero's
+   does: the label sits beside the 134px eye and the headline runs the full width under it (the same reason sig-greeting takes its own row at 375) */
+.journey-hero > .journey-copy{display:contents}
+.journey-hero > .journey-copy > *{grid-column:1 / -1;min-inline-size:0}
+.journey-hero > .journey-copy > .journey-greeting{grid-column:1;grid-row:1;align-self:end}
+.journey-hero > .sig-eye{grid-column:2;grid-row:1;align-self:start}   /* start, not centre: a taller copy must not push the ring past the canvas box, which ends at --hero-h + s24 */
+@media (min-width:760px){
+  .journey-hero{column-gap:var(--s6)}
+  .journey-hero > .journey-copy{display:block;grid-column:1;grid-row:1;min-inline-size:0}
+}
+.journey-greeting{color:var(--ink-4);font-size:var(--fs-label);font-weight:var(--fw-label);line-height:1.4}
+.journey-copy h1,.ex-hero-copy h1{margin-block:var(--s2) var(--s3);color:var(--ink-display);font:var(--fw-display) var(--fs-display-l)/var(--lh-display) var(--font);letter-spacing:0;text-wrap:balance}
+/* one display line per screen: under a hero that already greets at display-l, the portal sentence steps down */
+.page-head:has(> .sig-greeting) ~ * .journey-copy h1{font-size:var(--fs-display-m)}
+.journey-copy > p,.ex-hero-copy > p,.rq-hero-copy > p{max-inline-size:30em;color:var(--ink-3);font-size:var(--fs-body-l);font-weight:var(--fw-stage-body);line-height:var(--lh-body-l);text-wrap:pretty}
+.journey-cta{display:flex;flex-wrap:wrap;align-items:center;gap:var(--s3) var(--s4);margin-block-start:var(--s8)}
+.pt-tiles{margin-block:var(--s6) var(--gap-section)}
+.rq-hero{display:grid;gap:var(--s6);padding-block:var(--s6) var(--s8)}
+.rq-kicker{display:block;color:var(--ink-4);font-size:var(--fs-label);font-weight:var(--fw-label);line-height:1.4}
+.rq-kicker::before{content:"";display:inline-block;inline-size:8px;aspect-ratio:1.373;margin-inline-end:var(--s2);background-color:currentColor;-webkit-mask:var(--m-done) center/contain no-repeat;mask:var(--m-done) center/contain no-repeat}
+.rq-hero-copy h3{margin-block:var(--s2);color:var(--ink-1);font-size:var(--fs-display-m);font-weight:var(--fw-display);line-height:var(--lh-display);text-wrap:balance}
+.rq-hero-copy > p{font-size:var(--fs-body);font-weight:var(--fw-body);line-height:var(--lh-body)}
+/* the launcher question line: size and position only; the writing line itself is A's primitive. rq-beam (B) draws the focus line from its centre */
+.rq-search{position:relative;min-block-size:var(--s14)}
+.rq-search input{font-size:calc(var(--fs-body) * 1.5)}
+.rq-search::after{content:"";position:absolute;inset-block-end:-2px;inset-inline:0;block-size:2px;background-color:var(--focus);opacity:0;pointer-events:none}
+.rq-search:focus-within::after{opacity:1;animation:rq-beam var(--d-scene) var(--ease)}
+.rq-search-icon{flex:none;font-size:0;line-height:0}
+.rq-search-icon::before{content:"";display:block;inline-size:12px;block-size:14px;background-color:currentColor;-webkit-mask:var(--m-turn) center/contain no-repeat;mask:var(--m-turn) center/contain no-repeat}
+.rq-search kbd{display:none}   /* the "/" shortcut is gone (WCAG 2.1.4); the hint would be false */
+.ex-hero{display:grid;gap:var(--s6);padding-block:var(--s6) var(--s10)}
+.ex-figures{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:var(--s8) var(--s6);margin-block-end:var(--gap-section)}
+.ex-figure{display:flex;flex-direction:column;gap:var(--s1);min-inline-size:0;padding-block-start:var(--s4);border-block-start:1px solid var(--line)}
+.ex-figure-label{color:var(--ink-4);font-size:var(--fs-label);font-weight:var(--fw-label);line-height:1.4}
+.ex-figure strong{color:var(--c,var(--ink-1));font-size:var(--fs-figure-xl);font-weight:var(--fw-display);line-height:var(--lh-figure)}
+.ex-figure small{color:var(--ink-4);font-size:var(--fs-label);line-height:1.5}
+@media (min-width:1024px){
+  .journey-hero,.ex-hero{padding-block:var(--s10) var(--s14)}
+  /* copy 7/12 from the start, eye 5/12 from the end. The band is the same 380px as the home hero, reserved before the eye mounts; this hero pads s10/s14
+     where .page-head pads s14/s10, so the eye's block margins are uneven to seat the ring on the same y as on #home (no jump between the two routes) */
+  .journey-hero{grid-template-columns:repeat(12,minmax(0,1fr));min-block-size:var(--hero-h)}
+  .journey-hero > .journey-copy{grid-column:1 / span 7}
+  .journey-hero > .sig-eye{grid-column:8 / span 5;margin-block:calc(var(--s2) * -1) calc(var(--s10) * -1)}
+  .ex-hero{grid-template-columns:repeat(12,minmax(0,1fr));align-items:end}
+  .ex-hero > *{grid-column:span 5}
+  .ex-hero-copy{grid-column:span 7}
+  .ex-figures{grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:var(--s10) var(--s14)}
+}
+
+/* ---------- still derivatives: pure CSS, no data ---------- */
+/* the horizon: a 17 x 7 block of the guideline lattice in the lower end corner, dense at the outer edge, fading toward the text.
+   Phones, ledger screens and every sensitive route get the one-row 6px strip instead: it is never hidden, only quietened */
+.page-head::after{content:"";position:absolute;z-index:-1;inset-block-end:0;inset-inline-end:0;inline-size:min(320px,40%);block-size:6px;background-color:var(--horizon);pointer-events:none;
+  -webkit-mask:var(--m-tile) 0 -3.8px/12px 13.6px repeat,linear-gradient(var(--e-fade),#000,transparent 85%);-webkit-mask-composite:source-in;
+  mask:var(--m-tile) 0 -3.8px/12px 13.6px repeat,linear-gradient(var(--e-fade),#000,transparent 85%);mask-composite:intersect}
+:root[data-scene=home] .page-head::after{content:none}
+@media (min-width:760px){
+  .page-head::after{inline-size:204px;block-size:95.2px;-webkit-mask-position:0 0;mask-position:0 0}
+  :root[data-tier=ledger] .page-head::after,
+  html:is([data-route=payroll],[data-route=hr-cases],[data-route=compensation],[data-route=security],[data-route=payroll-extras],[data-route=payroll-anomaly],[data-route=wps],[data-route=contracts],[data-route=wage-reconciliation],[data-route=benefits],[data-route=performance]) .page-head::after{inline-size:min(320px,40%);block-size:6px;-webkit-mask-position:0 -3.8px,0 0;mask-position:0 -3.8px,0 0}
+}
+/* the giant comma behind the first word of a page-level empty state: hollow by default (something is missing), full on the good emptiness */
+.empty-symbol{--e-fs:var(--fs-display-m);font-size:0;line-height:0}
+.empty-symbol::before{content:"";position:absolute;z-index:-1;inset-block-start:calc(var(--s14) - var(--e-fs) * .25);inset-inline-start:calc(var(--s4) * -1);block-size:calc(var(--e-fs) * 1.75);aspect-ratio:1.373;background-color:var(--ghost);-webkit-mask:var(--e-hollow) center/contain no-repeat;mask:var(--e-hollow) center/contain no-repeat}
+:is(#main,#main > .operations) > .empty > .empty-symbol,#main > .panel > .empty:only-child > .empty-symbol{--e-fs:var(--fs-display-l)}
+html:is([data-route=inbox],[data-route=notifications],[data-route=work]) .empty-symbol::before{-webkit-mask-image:var(--m-done);mask-image:var(--m-done)}
+/* #inbox with nothing pending: inbox-ui emits the sentence in a bare section with no .empty-symbol, so the filled comma (spec 7.2 item 4) hangs on the section itself.
+   style.css makes the node position:relative with padding-block --s10; isolation keeps z-index:-1 behind the words and above the canvas. Same geometry as .empty-symbol::before. */
+html[data-route=inbox] .operations > .panel.panel-body.vn-none{isolation:isolate}
+html[data-route=inbox] .operations > .panel.panel-body.vn-none::before{content:"";position:absolute;z-index:-1;inset-block-start:calc(var(--s10) - var(--fs-display-l) * .25);inset-inline-start:calc(var(--s4) * -1);block-size:calc(var(--fs-display-l) * 1.75);aspect-ratio:1.373;background-color:var(--ghost);-webkit-mask:var(--m-done) center/contain no-repeat;mask:var(--m-done) center/contain no-repeat;pointer-events:none}
+/* loading: the card-holder mark, nine mirrored commas growing toward the centre. It waits 400ms, then rq-sheen (B) sweeps it; still, with its words, when motion is off */
+.loading{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:var(--s4);min-block-size:40dvh;padding:var(--s10) var(--gutter);color:var(--ink-4);font-size:var(--fs-label);font-weight:var(--fw-label);line-height:1.4;text-align:center}
+#app > .loading{min-block-size:100dvh}
+.loading::before{content:"";inline-size:132px;block-size:12px;background-color:var(--ink-3);-webkit-mask:var(--e-holder) center/contain no-repeat;mask:var(--e-holder) center/contain no-repeat;animation:e-wait 400ms,rq-sheen 1.2s var(--ease) 400ms infinite}
+/* the same mark is the drag handle of the phone sheets */
+.dialog-head::before,.side-head::before{content:"";position:absolute;inset-block-start:var(--s2);inset-inline:0;inline-size:88px;block-size:8px;margin-inline:auto;background-color:var(--ink-4);pointer-events:none;-webkit-mask:var(--e-holder) center/contain no-repeat;mask:var(--e-holder) center/contain no-repeat}
+@media (min-width:760px){.dialog-head::before{content:none}}
+@media (min-width:1024px){.side-head::before{content:none}}
+
+/* ---------- the field design (addendum D): the hero band is opaque over the canvas, so the ring is drawn still, as the guideline pattern masked to a ring.
+   No gap and no moons here; the number and the sentence are in the DOM. radial-gradient inside mask is the one named exception ---------- */
+@media screen{
+:root[data-design=field][data-scene=home] .sig-aurora{display:none}
+:root[data-design=field][data-scene=home] .sig-eye{position:relative}
+:root[data-design=field][data-scene=home] .sig-eye::before{content:"";position:absolute;inset:0;pointer-events:none;background-color:var(--ring-a);
+  -webkit-mask:var(--m-tile) 0 0/12px 13.6px repeat,radial-gradient(closest-side,transparent 64%,#000 64.5%,#000 89%,transparent 89.5%);-webkit-mask-composite:source-in;
+  mask:var(--m-tile) 0 0/12px 13.6px repeat,radial-gradient(closest-side,transparent 64%,#000 64.5%,#000 89%,transparent 89.5%);mask-composite:intersect}
+}
+@media screen and (max-width:759.98px){
+  :root[data-design=field][data-scene=home] .sig-eye::before{-webkit-mask-size:6px 6.8px,auto;mask-size:6px 6.8px,auto}
+}
+/* marks painted with a mask that are not in A's forced-colours list */
+@media (forced-colors:active){
+  .rq-kicker::before,.rq-search-icon::before,.hr-values > span + span::before,.rq-search::after,html.is-threshold::after,
+  html[data-route=inbox] .operations > .panel.panel-body.vn-none::before{forced-color-adjust:none;background-color:CanvasText}
+}
+} /* end @layer stage */

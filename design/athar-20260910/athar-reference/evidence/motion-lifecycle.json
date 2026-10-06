@@ -1,0 +1,26 @@
+[
+  {
+    "name": "DPR is capped and no animation runs while idle",
+    "passed": true
+  },
+  {
+    "name": "Pointer interaction animates and settles without an endless loop",
+    "passed": true
+  },
+  {
+    "name": "Reduced-motion preference suppresses interaction frames",
+    "passed": true
+  },
+  {
+    "name": "Pause cancels motion and persists its preference",
+    "passed": true
+  },
+  {
+    "name": "Hidden page and offscreen scene cancel frames",
+    "passed": true
+  },
+  {
+    "name": "Changing reduced-motion preference returns the scene to rest",
+    "passed": true
+  }
+]

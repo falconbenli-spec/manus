@@ -1,0 +1,18 @@
+{
+ "measured_on_commit": "b4302eb",
+ "server": "synthetic in-memory preview (p2-preview-server.mjs) on 127.0.0.1:3612, served from the p2-integration worktree at b4302eb; not port 3600, no live data",
+ "account": "manager (project manager of record on the synthetic projects)",
+ "method": "built-in browser at each width; every <details> in #main expanded; overflow = documentElement.scrollWidth - clientWidth; a hidden action = a button or a.btn in #main with zero size or outside the viewport horizontally",
+ "screens": ["project-spine", "commercial", "procurement", "billing-schedules", "project-participation", "projects"],
+ "results": {
+  "360": { "overflow_total": 0, "hidden_actions": 0, "buttons": {"project-spine": 18, "commercial": 8, "procurement": 5, "billing-schedules": 4, "project-participation": 2, "projects": 7} },
+  "390": { "overflow_total": 0, "hidden_actions": 0, "buttons": {"project-spine": 18, "commercial": 8, "procurement": 5, "billing-schedules": 4, "project-participation": 2, "projects": 7} },
+  "414": { "overflow_total": 0, "hidden_actions": 0, "buttons": {"project-spine": 18, "commercial": 8, "procurement": 5, "billing-schedules": 4, "project-participation": 2, "projects": 7} },
+  "1280": { "overflow_total": 0, "hidden_actions": 0, "buttons": {"project-spine": 18, "commercial": 8, "procurement": 5, "billing-schedules": 4, "project-participation": 2, "projects": 7} }
+ },
+ "notes": [
+  "The first 390 pass read the commercial screen before it finished rendering (0 buttons); it was re-measured with a wait on its heading: 8 buttons, none hidden, no overflow.",
+  "receivables and payables were opened at 360 as well: no overflow and no hidden action; both refuse the synthetic manager for lack of a finance delegation, which is the expected rule, so their action buttons were not exercised.",
+  "Screenshots were not taken: the browser pane was not displayed, so it could not composite frames. Layout measurements do not depend on compositing."
+ ]
+}

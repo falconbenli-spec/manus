@@ -1,0 +1,72 @@
+{
+  "measured_at": "2026-09-29",
+  "database": "work/hr-design-preview-20260914.sqlite (نسخة التشغيل، قراءة فقط)",
+  "question": "منحٌ محصور بإدارة — هل يحترمه محرك النماذج؟",
+  "grants_active": 102,
+  "grants_department_confined": 5,
+  "confined_grants": [
+    {
+      "capability": "commercial.use",
+      "department_id": "accounts",
+      "n": 1
+    },
+    {
+      "capability": "commercial.use",
+      "department_id": "business-dev",
+      "n": 1
+    },
+    {
+      "capability": "pricing.sheets.use",
+      "department_id": "accounts",
+      "n": 1
+    },
+    {
+      "capability": "pricing.sheets.use",
+      "department_id": "business-dev",
+      "n": 1
+    },
+    {
+      "capability": "studio.use",
+      "department_id": "accounts",
+      "n": 1
+    }
+  ],
+  "capabilities_scoped_total": 7,
+  "capabilities_confined_in_code_before_fix": [
+    "department.levels.manage"
+  ],
+  "chain_capabilities": {
+    "commercial.use": 5,
+    "projects.use": 5,
+    "clients.manage": 19,
+    "epmo.review": 3,
+    "finance.use": 6,
+    "studio.use": 5,
+    "approvals.record": 4,
+    "production.manage": 1,
+    "pr.manage": 4
+  },
+  "exposed_before_fix": [
+    {
+      "capability": "commercial.use",
+      "department_id": "accounts",
+      "grants": 1,
+      "chain_steps": 5
+    },
+    {
+      "capability": "commercial.use",
+      "department_id": "business-dev",
+      "grants": 1,
+      "chain_steps": 5
+    },
+    {
+      "capability": "studio.use",
+      "department_id": "accounts",
+      "grants": 1,
+      "chain_steps": 5
+    }
+  ],
+  "form_instances": 0,
+  "form_approvals": 0,
+  "note": "form_instances=0 وform_approvals=0 — لم يُتَّخذ قرار واحد بعد، فالإصلاح لا يُبطل اعتمادًا قائمًا. ولا أسماء موظفين في هذا الملف: المقيس عدد المنح وتصاريحها وإداراتها لا أصحابها."
+}

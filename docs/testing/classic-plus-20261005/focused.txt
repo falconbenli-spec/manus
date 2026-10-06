@@ -1,0 +1,208 @@
+(node:14178) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ قيد القاعدة يقبل كل تصميم في DESIGNS — لا تصميمًا في الكود يرفضه الجدول (3324.144709ms)
+✔ «الرواق» يُختار ويُحفظ ويُقرأ بعد إعادة الفتح، ولا يتغير الافتراضي (2750.907125ms)
+✔ تصميم خارج القائمة يُرفض قبل أن يصل القاعدة (2735.981375ms)
+(node:14179) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ المحرّك يقرأ الرموز فعلًا قبل أن يحكم — لا خريطة فارغة تمرّ صامتة (505.67675ms)
+✔ كل زوج نص/خلفية يعبر 4.5:1 — في التصاميم الثمانية والأوضاع الأربعة (410.729958ms)
+✔ مؤشّر البؤرة وحدود المكوّنات تعبر 3:1 (WCAG 1.4.11) (358.268208ms)
+✔ حبر الفيروزي وأحبار الحالات تعبر 4.5:1 على كل سطح — في التصاميم التسعة والأوضاع الأربعة (363.936542ms)
+✔ الأدوار --color-*: كل نصٍّ على كل خلفية يعبر 4.5:1، والحدّ والبؤرة 3:1 — في التصاميم التسعة والأوضاع الأربعة (719.353334ms)
+✔ مؤشّر البؤرة مصمت لا شفاف — الشفافية تُذيبه في الخلفية مهما كانت نسبته (418.339291ms)
+✔ لكل تصميم لوحة معاينة خاصة به في شاشة المظهر — لا تصميم يستعير صورة غيره (0.425542ms)
+(node:14180) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ defaults: with no rows every user resolves to depth/dark, unlocked, source default — never auto (3170.080458ms)
+✔ resolution order: personal choice, then company default, then depth/dark; reset returns to the company default (2748.091667ms)
+✔ lock: the personal row is ignored but kept, the personal save is refused in clear Arabic, and the choice returns when the lock lifts (2729.771583ms)
+✔ invalid values are refused: unknown design or theme, extra or missing keys, wrong types, short reason, stale version, no change (2599.523833ms)
+✔ only the super admin sets the company default, inside a transaction, with a written reason — and every change is audited with before and after (2614.7295ms)
+✔ tenant isolation: a company default, a lock and a personal choice in one tenant never reach the other (2594.966167ms)
+{"t":"2026-10-05T12:09:00.389Z","id":"ae4d2b5d","env":"local","m":"POST","p":"/api/login","s":200,"ms":272}
+{"t":"2026-10-05T12:09:00.694Z","id":"f072570e","env":"local","m":"POST","p":"/api/login","s":200,"ms":300}
+{"t":"2026-10-05T12:09:00.962Z","id":"c700d9a9","env":"local","m":"POST","p":"/api/login","s":200,"ms":266}
+{"t":"2026-10-05T12:09:00.963Z","id":"14afdf00","env":"local","m":"GET","p":"/api/me","s":200,"ms":0}
+{"t":"2026-10-05T12:09:00.964Z","id":"50b2dfb0","env":"local","m":"GET","p":"/api/appearance","s":401,"ms":0}
+{"t":"2026-10-05T12:09:00.965Z","id":"f50fe514","env":"local","m":"GET","p":"/api/appearance","s":200,"ms":0}
+{"t":"2026-10-05T12:09:00.971Z","id":"f2646358","env":"local","m":"POST","p":"/api/account/appearance","s":201,"ms":5,"tx":1,"lock_ms":0}
+{"t":"2026-10-05T12:09:00.972Z","id":"60fec05b","env":"local","m":"GET","p":"/api/me","s":200,"ms":1}
+{"t":"2026-10-05T12:09:01.231Z","id":"6849e58a","env":"local","m":"POST","p":"/api/login","s":200,"ms":258}
+{"t":"2026-10-05T12:09:01.233Z","id":"bb3f91df","env":"local","m":"POST","p":"/api/account/appearance","s":403,"ms":0}
+{"t":"2026-10-05T12:09:01.236Z","id":"1f4c95bb","env":"local","m":"POST","p":"/api/account/appearance","s":400,"ms":1,"tx":1,"lock_ms":0}
+{"t":"2026-10-05T12:09:01.237Z","id":"d2034065","env":"local","m":"POST","p":"/api/account/appearance","s":400,"ms":1,"tx":1,"lock_ms":0}
+{"t":"2026-10-05T12:09:01.238Z","id":"73e4246a","env":"local","m":"POST","p":"/api/admin/appearance","s":403,"ms":1,"tx":1,"lock_ms":0}
+{"t":"2026-10-05T12:09:01.242Z","id":"54b140ce","env":"local","m":"POST","p":"/api/admin/appearance","s":403,"ms":1,"tx":1,"lock_ms":0}
+{"t":"2026-10-05T12:09:01.243Z","id":"a4fcde5c","env":"local","m":"POST","p":"/api/admin/appearance","s":400,"ms":1,"tx":1,"lock_ms":0}
+{"t":"2026-10-05T12:09:01.244Z","id":"86b942e0","env":"local","m":"POST","p":"/api/admin/appearance","s":201,"ms":1,"tx":1,"lock_ms":0}
+{"t":"2026-10-05T12:09:01.245Z","id":"79f81aa5","env":"local","m":"POST","p":"/api/account/appearance","s":409,"ms":1,"tx":1,"lock_ms":0}
+{"t":"2026-10-05T12:09:01.245Z","id":"e77a7109","env":"local","m":"GET","p":"/api/me","s":200,"ms":0}
+{"t":"2026-10-05T12:09:01.246Z","id":"c54dd9f7","env":"local","m":"GET","p":"/api/appearance","s":200,"ms":0}
+{"t":"2026-10-05T12:09:01.247Z","id":"34045793","env":"local","m":"POST","p":"/api/admin/appearance","s":409,"ms":1,"tx":1,"lock_ms":0}
+{"t":"2026-10-05T12:09:01.248Z","id":"13ea0813","env":"local","m":"POST","p":"/api/admin/appearance","s":201,"ms":0,"tx":1,"lock_ms":0}
+{"t":"2026-10-05T12:09:01.249Z","id":"63af928d","env":"local","m":"GET","p":"/api/me","s":200,"ms":1}
+{"t":"2026-10-05T12:09:01.250Z","id":"784fec7c","env":"local","m":"GET","p":"/theme-boot.js","s":200,"ms":1}
+{"t":"2026-10-05T12:09:01.251Z","id":"1c8aa799","env":"local","m":"GET","p":"/appearance-ui.mjs","s":200,"ms":0}
+✔ HTTP: the three routes, CSRF, the payload field on /api/login and /api/me, and the two static files (3949.135458ms)
+✔ the screen: renders for employee and super admin, locked and unlocked, inside the strict CSP, and every offered button opens a valid form (3885.107625ms)
+✔ migration 095: depth and classic join the allowed designs, depth becomes the default, neon is still refused, and existing rows survive unchanged (3198.909ms)
+✔ the client mirrors: the boot script and app.mjs fall back to depth, list the five designs, and the picker actions stay clear of the destructive tone (2.606875ms)
+✔ مدار: يحفظ الترحيل المظهر السابق والقفل ويقبل الاختيار الشخصي الجديد (3176.0675ms)
+(node:14181) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+{"t":"2026-10-05T12:08:43.997Z","id":"7efc763e","env":"local","m":"GET","p":"/icons.mjs","s":200,"ms":2}
+{"t":"2026-10-05T12:08:44.010Z","id":"da56eb46","env":"local","m":"GET","p":"/kit.mjs","s":200,"ms":5}
+{"t":"2026-10-05T12:08:44.013Z","id":"54961bcf","env":"local","m":"GET","p":"/service-quality-ui.mjs","s":200,"ms":0}
+{"t":"2026-10-05T12:08:44.014Z","id":"79092d5f","env":"local","m":"GET","p":"/integrations-ui.mjs","s":200,"ms":0}
+{"t":"2026-10-05T12:08:44.015Z","id":"de8af861","env":"local","m":"GET","p":"/hr-design.mjs","s":200,"ms":0}
+{"t":"2026-10-05T12:08:44.016Z","id":"6a6b92d5","env":"local","m":"GET","p":"/brand-logo.mjs","s":200,"ms":0}
+{"t":"2026-10-05T12:08:44.018Z","id":"700f3d52","env":"local","m":"GET","p":"/athar.mjs","s":200,"ms":1}
+{"t":"2026-10-05T12:08:44.019Z","id":"56f6d76a","env":"local","m":"GET","p":"/operations.mjs","s":200,"ms":1}
+{"t":"2026-10-05T12:08:44.019Z","id":"f2a02d77","env":"local","m":"GET","p":"/request-picker.mjs","s":200,"ms":0}
+{"t":"2026-10-05T12:08:44.020Z","id":"8d8af94d","env":"local","m":"GET","p":"/catalog-home-ui.mjs","s":200,"ms":0}
+{"t":"2026-10-05T12:08:44.021Z","id":"1a79c360","env":"local","m":"GET","p":"/service-page.mjs","s":200,"ms":0}
+{"t":"2026-10-05T12:08:44.022Z","id":"3336d8fd","env":"local","m":"GET","p":"/motion-cards.mjs","s":200,"ms":0}
+{"t":"2026-10-05T12:08:44.022Z","id":"c06e4ca2","env":"local","m":"GET","p":"/executive-cockpit-ui.mjs","s":200,"ms":0}
+{"t":"2026-10-05T12:08:44.023Z","id":"831e01b7","env":"local","m":"GET","p":"/admin-cockpit-ui.mjs","s":200,"ms":0}
+{"t":"2026-10-05T12:08:44.024Z","id":"d05c5e72","env":"local","m":"GET","p":"/org-ui.mjs","s":200,"ms":1}
+{"t":"2026-10-05T12:08:44.024Z","id":"bd0964c0","env":"local","m":"GET","p":"/work-ui.mjs","s":200,"ms":0}
+{"t":"2026-10-05T12:08:44.024Z","id":"e3b429a1","env":"local","m":"GET","p":"/workspace-ui.mjs","s":200,"ms":0}
+{"t":"2026-10-05T12:08:44.025Z","id":"58a07765","env":"local","m":"GET","p":"/portal-ui.mjs","s":200,"ms":0}
+{"t":"2026-10-05T12:08:44.025Z","id":"ce4fff70","env":"local","m":"GET","p":"/deep-links.mjs","s":200,"ms":0}
+{"t":"2026-10-05T12:08:44.026Z","id":"9a8ce618","env":"local","m":"GET","p":"/vocabulary.mjs","s":200,"ms":1}
+{"t":"2026-10-05T12:08:44.026Z","id":"7ea4fe51","env":"local","m":"GET","p":"/pwa.mjs","s":200,"ms":0}
+{"t":"2026-10-05T12:08:44.026Z","id":"2585f5b9","env":"local","m":"GET","p":"/arabic-count.mjs","s":200,"ms":0}
+{"t":"2026-10-05T12:08:44.027Z","id":"fddff7a3","env":"local","m":"GET","p":"/focus-record.mjs","s":200,"ms":0}
+{"t":"2026-10-05T12:08:44.027Z","id":"2489f7f6","env":"local","m":"GET","p":"/definitions-client.mjs","s":200,"ms":0}
+{"t":"2026-10-05T12:08:44.027Z","id":"d9e8c6c8","env":"local","m":"GET","p":"/nav-map.mjs","s":200,"ms":0}
+{"t":"2026-10-05T12:08:44.028Z","id":"b5611595","env":"local","m":"GET","p":"/hubs-ui.mjs","s":200,"ms":0}
+{"t":"2026-10-05T12:08:44.028Z","id":"35024170","env":"local","m":"GET","p":"/page-editor.mjs","s":200,"ms":0}
+{"t":"2026-10-05T12:08:44.029Z","id":"bb997ee8","env":"local","m":"GET","p":"/service-gates-ui.mjs","s":200,"ms":1}
+{"t":"2026-10-05T12:08:44.029Z","id":"e63a8d46","env":"local","m":"GET","p":"/files-ui.mjs","s":200,"ms":0}
+{"t":"2026-10-05T12:08:44.029Z","id":"c91bbf6d","env":"local","m":"GET","p":"/dates.mjs","s":200,"ms":0}
+{"t":"2026-10-05T12:08:44.030Z","id":"720d0885","env":"local","m":"GET","p":"/leave-count.mjs","s":200,"ms":1}
+{"t":"2026-10-05T12:08:44.030Z","id":"fd21802f","env":"local","m":"GET","p":"/catalog-search.mjs","s":200,"ms":0}
+{"t":"2026-10-05T12:08:44.030Z","id":"fa27f469","env":"local","m":"GET","p":"/budgets-ui.mjs","s":200,"ms":0}
+{"t":"2026-10-05T12:08:44.031Z","id":"fe89d108","env":"local","m":"GET","p":"/commercial-ui.mjs","s":200,"ms":1}
+{"t":"2026-10-05T12:08:44.031Z","id":"9f970aac","env":"local","m":"GET","p":"/procurement-ui.mjs","s":200,"ms":0}
+{"t":"2026-10-05T12:08:44.031Z","id":"bfa6fdcb","env":"local","m":"GET","p":"/leave-ui.mjs","s":200,"ms":0}
+{"t":"2026-10-05T12:08:44.032Z","id":"e5fa0f1c","env":"local","m":"GET","p":"/delegations-ui.mjs","s":200,"ms":0}
+{"t":"2026-10-05T12:08:44.032Z","id":"404ef8d6","env":"local","m":"GET","p":"/people-ui.mjs","s":200,"ms":0}
+{"t":"2026-10-05T12:08:44.033Z","id":"d6e12ae1","env":"local","m":"GET","p":"/studio-ui.mjs","s":200,"ms":1}
+{"t":"2026-10-05T12:08:44.033Z","id":"bb8bcbdf","env":"local","m":"GET","p":"/finance-ui.mjs","s":200,"ms":0}
+{"t":"2026-10-05T12:08:44.033Z","id":"d6238599","env":"local","m":"GET","p":"/accounts-ui.mjs","s":200,"ms":0}
+{"t":"2026-10-05T12:08:44.034Z","id":"5f8377a2","env":"local","m":"GET","p":"/receivables-ui.mjs","s":200,"ms":1}
+{"t":"2026-10-05T12:08:44.034Z","id":"2a67ae10","env":"local","m":"GET","p":"/vendors-ui.mjs","s":200,"ms":0}
+{"t":"2026-10-05T12:08:44.034Z","id":"a87748e9","env":"local","m":"GET","p":"/approvals-ui.mjs","s":200,"ms":0}
+{"t":"2026-10-05T12:08:44.035Z","id":"f40c1556","env":"local","m":"GET","p":"/invoices-ui.mjs","s":200,"ms":1}
+{"t":"2026-10-05T12:08:44.035Z","id":"a9f8755d","env":"local","m":"GET","p":"/contracts-ui.mjs","s":200,"ms":0}
+{"t":"2026-10-05T12:08:44.035Z","id":"bc03bde4","env":"local","m":"GET","p":"/attendance-ui.mjs","s":200,"ms":0}
+{"t":"2026-10-05T12:08:44.036Z","id":"eb186aca","env":"local","m":"GET","p":"/payroll-ui.mjs","s":200,"ms":0}
+{"t":"2026-10-05T12:08:44.036Z","id":"ad246435","env":"local","m":"GET","p":"/statements-ui.mjs","s":200,"ms":0}
+{"t":"2026-10-05T12:08:44.036Z","id":"12ef9da4","env":"local","m":"GET","p":"/security-ui.mjs","s":200,"ms":0}
+{"t":"2026-10-05T12:08:44.037Z","id":"9f6799c5","env":"local","m":"GET","p":"/payables-ui.mjs","s":200,"ms":0}
+{"t":"2026-10-05T12:08:44.037Z","id":"4037477f","env":"local","m":"GET","p":"/payroll-extras-ui.mjs","s":200,"ms":0}
+{"t":"2026-10-05T12:08:44.037Z","id":"77117e49","env":"local","m":"GET","p":"/employees-ui.mjs","s":200,"ms":0}
+{"t":"2026-10-05T12:08:44.038Z","id":"73d9bec1","env":"local","m":"GET","p":"/employee-profile-ui.mjs","s":200,"ms":0}
+{"t":"2026-10-05T12:08:44.038Z","id":"8366b6fe","env":"local","m":"GET","p":"/talent-ui.mjs","s":200,"ms":0}
+{"t":"2026-10-05T12:08:44.038Z","id":"257a9926","env":"local","m":"GET","p":"/procurement-extras-ui.mjs","s":200,"ms":0}
+{"t":"2026-10-05T12:08:44.039Z","id":"eba266ec","env":"local","m":"GET","p":"/campaigns-ui.mjs","s":200,"ms":0}
+{"t":"2026-10-05T12:08:44.039Z","id":"c14dd04e","env":"local","m":"GET","p":"/ai-ui.mjs","s":200,"ms":0}
+{"t":"2026-10-05T12:08:44.040Z","id":"bc9dd544","env":"local","m":"GET","p":"/centres-ui.mjs","s":200,"ms":0}
+{"t":"2026-10-05T12:08:44.040Z","id":"a975fcb0","env":"local","m":"GET","p":"/inbox-ui.mjs","s":200,"ms":0}
+{"t":"2026-10-05T12:08:44.041Z","id":"ddefcdcd","env":"local","m":"GET","p":"/service-cards-ui.mjs","s":200,"ms":1}
+{"t":"2026-10-05T12:08:44.041Z","id":"8879b7cf","env":"local","m":"GET","p":"/compliance-ui.mjs","s":200,"ms":0}
+{"t":"2026-10-05T12:08:44.041Z","id":"8c14d620","env":"local","m":"GET","p":"/expenses-ui.mjs","s":200,"ms":0}
+{"t":"2026-10-05T12:08:44.042Z","id":"56909f50","env":"local","m":"GET","p":"/assets-ui.mjs","s":200,"ms":0}
+{"t":"2026-10-05T12:08:44.042Z","id":"b3264235","env":"local","m":"GET","p":"/agency-ui.mjs","s":200,"ms":0}
+{"t":"2026-10-05T12:08:44.042Z","id":"41ea5610","env":"local","m":"GET","p":"/reports-ui.mjs","s":200,"ms":0}
+{"t":"2026-10-05T12:08:44.043Z","id":"c8364cdb","env":"local","m":"GET","p":"/bank-reconciliation-ui.mjs","s":200,"ms":1}
+{"t":"2026-10-05T12:08:44.045Z","id":"bd07dd74","env":"local","m":"GET","p":"/billing-recurring-ui.mjs","s":200,"ms":0}
+{"t":"2026-10-05T12:08:44.045Z","id":"175b6b7a","env":"local","m":"GET","p":"/cash-close-ui.mjs","s":200,"ms":0}
+{"t":"2026-10-05T12:08:44.046Z","id":"62dbd959","env":"local","m":"GET","p":"/contracts-register-ui.mjs","s":200,"ms":0}
+{"t":"2026-10-05T12:08:44.046Z","id":"8bfb390b","env":"local","m":"GET","p":"/engagement-ui.mjs","s":200,"ms":0}
+{"t":"2026-10-05T12:08:44.047Z","id":"ace2b89c","env":"local","m":"GET","p":"/feedback-ui.mjs","s":200,"ms":0}
+{"t":"2026-10-05T12:08:44.047Z","id":"6fdf40a5","env":"local","m":"GET","p":"/governance-ui.mjs","s":200,"ms":0}
+{"t":"2026-10-05T12:08:44.048Z","id":"355e491b","env":"local","m":"GET","p":"/home-ui.mjs","s":200,"ms":0}
+{"t":"2026-10-05T12:08:44.049Z","id":"35e5abd8","env":"local","m":"GET","p":"/expiry-ui.mjs","s":200,"ms":1}
+{"t":"2026-10-05T12:08:44.049Z","id":"079d7a8f","env":"local","m":"GET","p":"/influencers-ui.mjs","s":200,"ms":0}
+{"t":"2026-10-05T12:08:44.049Z","id":"2ad9b86d","env":"local","m":"GET","p":"/leave-benefits-ui.mjs","s":200,"ms":0}
+{"t":"2026-10-05T12:08:44.050Z","id":"20e4076c","env":"local","m":"GET","p":"/benefits-portal-ui.mjs","s":200,"ms":0}
+{"t":"2026-10-05T12:08:44.050Z","id":"54d1b2e4","env":"local","m":"GET","p":"/letters-ui.mjs","s":200,"ms":0}
+{"t":"2026-10-05T12:08:44.055Z","id":"bffab0d7","env":"local","m":"GET","p":"/pr-ui.mjs","s":200,"ms":1}
+{"t":"2026-10-05T12:08:44.056Z","id":"c9c95d07","env":"local","m":"GET","p":"/equipment-ui.mjs","s":200,"ms":0}
+{"t":"2026-10-05T12:08:44.056Z","id":"385608e4","env":"local","m":"GET","p":"/privacy-ui.mjs","s":200,"ms":0}
+{"t":"2026-10-05T12:08:44.057Z","id":"899fe293","env":"local","m":"GET","p":"/production-ui.mjs","s":200,"ms":1}
+{"t":"2026-10-05T12:08:44.057Z","id":"437b4e98","env":"local","m":"GET","p":"/profitability-ui.mjs","s":200,"ms":0}
+{"t":"2026-10-05T12:08:44.057Z","id":"823bd1ff","env":"local","m":"GET","p":"/resourcing-ui.mjs","s":200,"ms":0}
+{"t":"2026-10-05T12:08:44.058Z","id":"6b41d4f4","env":"local","m":"GET","p":"/review-rounds-ui.mjs","s":200,"ms":0}
+{"t":"2026-10-05T12:08:44.058Z","id":"bd80a09d","env":"local","m":"GET","p":"/search-ui.mjs","s":200,"ms":0}
+{"t":"2026-10-05T12:08:44.058Z","id":"d911edf1","env":"local","m":"GET","p":"/tax-returns-ui.mjs","s":200,"ms":0}
+{"t":"2026-10-05T12:08:44.059Z","id":"8493888d","env":"local","m":"GET","p":"/wage-protection-ui.mjs","s":200,"ms":0}
+{"t":"2026-10-05T12:08:44.060Z","id":"b093b05e","env":"local","m":"GET","p":"/lifecycle-ui.mjs","s":200,"ms":1}
+{"t":"2026-10-05T12:08:44.060Z","id":"5fbef8c8","env":"local","m":"GET","p":"/einvoice-ui.mjs","s":200,"ms":0}
+{"t":"2026-10-05T12:08:44.060Z","id":"94a472d0","env":"local","m":"GET","p":"/intake-settings-ui.mjs","s":200,"ms":0}
+{"t":"2026-10-05T12:08:44.061Z","id":"3e063067","env":"local","m":"GET","p":"/project-intake-ui.mjs","s":200,"ms":0}
+{"t":"2026-10-05T12:08:44.061Z","id":"a17abcd0","env":"local","m":"GET","p":"/request-transparency-ui.mjs","s":200,"ms":0}
+{"t":"2026-10-05T12:08:44.061Z","id":"aaa65c06","env":"local","m":"GET","p":"/knowledge-access-ui.mjs","s":200,"ms":0}
+{"t":"2026-10-05T12:08:44.062Z","id":"ac2c575f","env":"local","m":"GET","p":"/pipeline-estimates-ui.mjs","s":200,"ms":0}
+{"t":"2026-10-05T12:08:44.062Z","id":"dac6b340","env":"local","m":"GET","p":"/pricing-ui.mjs","s":200,"ms":0}
+{"t":"2026-10-05T12:08:44.062Z","id":"3a176d0f","env":"local","m":"GET","p":"/platform-ops-ui.mjs","s":200,"ms":0}
+{"t":"2026-10-05T12:08:44.063Z","id":"bfef1e78","env":"local","m":"GET","p":"/catalog-quality-ui.mjs","s":200,"ms":0}
+{"t":"2026-10-05T12:08:44.063Z","id":"c0b6b82f","env":"local","m":"GET","p":"/hr-cases-comp-ui.mjs","s":200,"ms":0}
+{"t":"2026-10-05T12:08:44.063Z","id":"893a3a04","env":"local","m":"GET","p":"/hr-operations-ui.mjs","s":200,"ms":0}
+{"t":"2026-10-05T12:08:44.064Z","id":"a93d0e2f","env":"local","m":"GET","p":"/media-spend-ui.mjs","s":200,"ms":0}
+{"t":"2026-10-05T12:08:44.064Z","id":"5ad1c9fa","env":"local","m":"GET","p":"/approval-settings-ui.mjs","s":200,"ms":0}
+{"t":"2026-10-05T12:08:44.065Z","id":"c875db02","env":"local","m":"GET","p":"/appearance-ui.mjs","s":200,"ms":0}
+{"t":"2026-10-05T12:08:44.065Z","id":"891b91a2","env":"local","m":"GET","p":"/discipline-ui.mjs","s":200,"ms":0}
+{"t":"2026-10-05T12:08:44.066Z","id":"83fbc980","env":"local","m":"GET","p":"/notifications-ui.mjs","s":200,"ms":1}
+{"t":"2026-10-05T12:08:44.066Z","id":"efe6d883","env":"local","m":"GET","p":"/my-requests-ui.mjs","s":200,"ms":0}
+{"t":"2026-10-05T12:08:44.066Z","id":"30f1f8f9","env":"local","m":"GET","p":"/profile-ui.mjs","s":200,"ms":0}
+{"t":"2026-10-05T12:08:44.066Z","id":"4cf17869","env":"local","m":"GET","p":"/payroll-rules-ui.mjs","s":200,"ms":0}
+{"t":"2026-10-05T12:08:44.067Z","id":"e18037b9","env":"local","m":"GET","p":"/payroll-insurance-ui.mjs","s":200,"ms":0}
+{"t":"2026-10-05T12:08:44.067Z","id":"2eb38239","env":"local","m":"GET","p":"/hr-policies-ui.mjs","s":200,"ms":0}
+{"t":"2026-10-05T12:08:44.067Z","id":"5f45ad13","env":"local","m":"GET","p":"/forms-ui.mjs","s":200,"ms":0}
+{"t":"2026-10-05T12:08:44.068Z","id":"ecf84bed","env":"local","m":"GET","p":"/finance-grants-ui.mjs","s":200,"ms":0}
+{"t":"2026-10-05T12:08:44.068Z","id":"6372b764","env":"local","m":"GET","p":"/secondment-benefits-ui.mjs","s":200,"ms":0}
+{"t":"2026-10-05T12:08:44.068Z","id":"37190f90","env":"local","m":"GET","p":"/policy-library-ui.mjs","s":200,"ms":0}
+{"t":"2026-10-05T12:08:44.069Z","id":"488bd050","env":"local","m":"GET","p":"/policy-assistant-ui.mjs","s":200,"ms":0}
+{"t":"2026-10-05T12:08:44.069Z","id":"2187779f","env":"local","m":"GET","p":"/epmo-ui.mjs","s":200,"ms":0}
+{"t":"2026-10-05T12:08:44.069Z","id":"b03d67bf","env":"local","m":"GET","p":"/definitions-ui.mjs","s":200,"ms":0}
+{"t":"2026-10-05T12:08:44.069Z","id":"7fb323e7","env":"local","m":"GET","p":"/permissions-matrix-ui.mjs","s":200,"ms":0}
+{"t":"2026-10-05T12:08:44.070Z","id":"84389b79","env":"local","m":"GET","p":"/project-participation-ui.mjs","s":200,"ms":0}
+{"t":"2026-10-05T12:08:44.070Z","id":"17c486c5","env":"local","m":"GET","p":"/project-spine-ui.mjs","s":200,"ms":0}
+{"t":"2026-10-05T12:08:44.070Z","id":"2099ff54","env":"local","m":"GET","p":"/finance-exceptions-ui.mjs","s":200,"ms":0}
+{"t":"2026-10-05T12:08:44.071Z","id":"a2b386f1","env":"local","m":"GET","p":"/options-ui.mjs","s":200,"ms":1}
+{"t":"2026-10-05T12:08:44.071Z","id":"e564915a","env":"local","m":"GET","p":"/department-escalation-ui.mjs","s":200,"ms":0}
+{"t":"2026-10-05T12:08:44.071Z","id":"6568d2a2","env":"local","m":"GET","p":"/module-services.mjs","s":200,"ms":0}
+{"t":"2026-10-05T12:08:44.071Z","id":"ac350fea","env":"local","m":"GET","p":"/depth-scene.mjs","s":200,"ms":0}
+{"t":"2026-10-05T12:08:44.072Z","id":"d741c98f","env":"local","m":"GET","p":"/signature.css","s":200,"ms":0}
+{"t":"2026-10-05T12:08:44.072Z","id":"13be4a90","env":"local","m":"GET","p":"/style.css","s":200,"ms":0}
+{"t":"2026-10-05T12:08:44.073Z","id":"9772b85d","env":"local","m":"GET","p":"/cockpit.css","s":200,"ms":0}
+{"t":"2026-10-05T12:08:44.074Z","id":"60221b03","env":"local","m":"GET","p":"/workspace.css","s":200,"ms":1}
+{"t":"2026-10-05T12:08:44.074Z","id":"1974fc75","env":"local","m":"GET","p":"/journey.css","s":200,"ms":0}
+{"t":"2026-10-05T12:08:44.074Z","id":"9b6450a0","env":"local","m":"GET","p":"/athar.css","s":200,"ms":0}
+{"t":"2026-10-05T12:08:44.075Z","id":"74af18d5","env":"local","m":"GET","p":"/hr-design.css","s":200,"ms":0}
+{"t":"2026-10-05T12:08:44.075Z","id":"32da0c14","env":"local","m":"GET","p":"/depth.css","s":200,"ms":0}
+{"t":"2026-10-05T12:08:44.075Z","id":"64195d32","env":"local","m":"GET","p":"/classic.css","s":200,"ms":0}
+{"t":"2026-10-05T12:08:44.076Z","id":"9e9fb650","env":"local","m":"GET","p":"/classic-plus.css","s":200,"ms":0}
+{"t":"2026-10-05T12:08:44.076Z","id":"5a05456e","env":"local","m":"GET","p":"/riwaq.css","s":200,"ms":0}
+{"t":"2026-10-05T12:08:44.076Z","id":"317e53ca","env":"local","m":"GET","p":"/yawm.css","s":200,"ms":0}
+{"t":"2026-10-05T12:08:44.076Z","id":"4a9c334d","env":"local","m":"GET","p":"/markaz.css","s":200,"ms":0}
+{"t":"2026-10-05T12:08:44.077Z","id":"9588d3c4","env":"local","m":"GET","p":"/studio.css","s":200,"ms":0}
+{"t":"2026-10-05T12:08:44.077Z","id":"a631ef7e","env":"local","m":"GET","p":"/page-editor.css","s":200,"ms":0}
+{"t":"2026-10-05T12:08:44.077Z","id":"e77da449","env":"local","m":"GET","p":"/employee-portal.css","s":200,"ms":0}
+{"t":"2026-10-05T12:08:44.078Z","id":"7cda5de7","env":"local","m":"GET","p":"/journey.mjs","s":200,"ms":0}
+{"t":"2026-10-05T12:08:44.078Z","id":"22ce39fe","env":"local","m":"GET","p":"/app.mjs","s":200,"ms":0}
+{"t":"2026-10-05T12:08:44.078Z","id":"38856447","env":"local","m":"GET","p":"/signature.mjs","s":200,"ms":0}
+{"t":"2026-10-05T12:08:44.079Z","id":"a5fef000","env":"local","m":"GET","p":"/interact.mjs","s":200,"ms":0}
+✔ every module and stylesheet the interface imports is actually served (3314.546583ms)
+ℹ tests 22
+ℹ suites 0
+ℹ pass 22
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 31178.72325

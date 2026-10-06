@@ -1,0 +1,190 @@
+TAP version 13
+# Subtest: الالتزام يُقرأ من ملفات git نفسها: مستودعٌ عادي، وشجرة عمل مضافة، ومرجعٌ مضغوط، وHEAD منفصل
+ok 1 - الالتزام يُقرأ من ملفات git نفسها: مستودعٌ عادي، وشجرة عمل مضافة، ومرجعٌ مضغوط، وHEAD منفصل
+  ---
+  duration_ms: 6.902417
+  type: 'test'
+  ...
+# Subtest: ما لا يُقرأ يعيد null لا خطأ، ولا يُتبع مرجعٌ يخرج من دليل git
+ok 2 - ما لا يُقرأ يعيد null لا خطأ، ولا يُتبع مرجعٌ يخرج من دليل git
+  ---
+  duration_ms: 3.4095
+  type: 'test'
+  ...
+# Subtest: بصمة الملفات حتمية، وتتغير بتغيّر المحتوى أو الاسم، ولا تحسب ما لا يحمّله الخادم
+ok 3 - بصمة الملفات حتمية، وتتغير بتغيّر المحتوى أو الاسم، ولا تحسب ما لا يحمّله الخادم
+  ---
+  duration_ms: 3.813208
+  type: 'test'
+  ...
+# Subtest: الصحة تحمل البصمة بلا مسار: الالتزام وبصمة الملفات وعددها ووقت حسابها
+ok 4 - الصحة تحمل البصمة بلا مسار: الالتزام وبصمة الملفات وعددها ووقت حسابها
+  ---
+  duration_ms: 2.6215
+  type: 'test'
+  ...
+# Subtest: المستودع نفسه: البصمة تُحسب على app/ الحقيقية، والالتزام التزامٌ أو null
+ok 5 - المستودع نفسه: البصمة تُحسب على app/ الحقيقية، والالتزام التزامٌ أو null
+  ---
+  duration_ms: 40.845792
+  type: 'test'
+  ...
+# Subtest: نقطة الصحة تعيد البصمة لمن يملك إدارة المنصة وحده، وبلا جلسة لا شيء
+ok 6 - نقطة الصحة تعيد البصمة لمن يملك إدارة المنصة وحده، وبلا جلسة لا شيء
+  ---
+  duration_ms: 3098.768083
+  type: 'test'
+  ...
+# Subtest: delivery cycle: no step of the client chain opens before the step before it was approved by someone else
+ok 7 - delivery cycle: no step of the client chain opens before the step before it was approved by someone else
+  ---
+  duration_ms: 2575.542333
+  type: 'test'
+  ...
+# Subtest: delivery cycle: an entitlement is born from an accepted deliverable only — a submitted one is not enough
+ok 8 - delivery cycle: an entitlement is born from an accepted deliverable only — a submitted one is not enough
+  ---
+  duration_ms: 2242.344666
+  type: 'test'
+  ...
+# Subtest: delivery cycle: the customer invoice hangs on an approved entitlement, and the preparer never issues it
+ok 9 - delivery cycle: the customer invoice hangs on an approved entitlement, and the preparer never issues it
+  ---
+  duration_ms: 2051.619
+  type: 'test'
+  ...
+# Subtest: delivery cycle: collection is recorded and matched by two people and never exceeds the entitlement
+ok 10 - delivery cycle: collection is recorded and matched by two people and never exceeds the entitlement
+  ---
+  duration_ms: 2022.4775
+  type: 'test'
+  ...
+# Subtest: delivery cycle: a client review stage closes only on an external approval documented against that very version
+ok 11 - delivery cycle: a client review stage closes only on an external approval documented against that very version
+  ---
+  duration_ms: 1991.606833
+  type: 'test'
+  ...
+# Subtest: delivery cycle: no supplier award without a comparison, a qualified vendor and an approved project budget
+ok 12 - delivery cycle: no supplier award without a comparison, a qualified vendor and an approved project budget
+  ---
+  duration_ms: 2009.537125
+  type: 'test'
+  ...
+# Subtest: delivery cycle: the supplier is not received, invoiced or paid before the purchase order, and the payment needs three separate people
+ok 13 - delivery cycle: the supplier is not received, invoiced or paid before the purchase order, and the payment needs three separate people
+  ---
+  duration_ms: 2044.180875
+  type: 'test'
+  ...
+# Subtest: delivery cycle: execution is blocked until the advance payment is confirmed
+ok 14 - delivery cycle: execution is blocked until the advance payment is confirmed # SKIP غير موجودة. لا كيان «دفعة مقدمة» على الملف التجاري ولا شرط عليها: بعد create_project يُقبل submit_delivery وbudget وprocurement بلا أي مقبوض. المطلوب: حالة «جاهزية البدء» على الملف التجاري تشترط دفعة مقدمة مؤكدة (ar_receipts.status=confirmed) أو إعفاءً مسجلًا. انظر الكسر B1 في تدقيق 2026-09-20.
+  ---
+  duration_ms: 0.080042
+  type: 'test'
+  ...
+# Subtest: delivery cycle: a supplier may not start before a purchase order AND a commencement authorisation
+ok 15 - delivery cycle: a supplier may not start before a purchase order AND a commencement authorisation # SKIP نصفها موجود: أمر الشراء (procurement approve_order) يمنع الاستلام قبله. أمر المباشرة (أمر بدء العمل) لا كيان له ولا مسار: POST /api/procurement/:id/commence يرد invalid_action. المطلوب: سجل مباشرة بتاريخه ومن أصدره، والاستلام يشترطه. الكسر B2.
+  ---
+  duration_ms: 0.036375
+  type: 'test'
+  ...
+# Subtest: delivery cycle: the customer purchase order is recorded against the commercial case before execution
+ok 16 - delivery cycle: the customer purchase order is recorded against the commercial case before execution # SKIP لا حقل ولا كيان لأمر شراء العميل في commercial.mjs ولا في contracts-register.mjs (سجل العقود لا يعرف الملف التجاري ولا المشروع، ولا FK بينهما). أقرب بديل اليوم: نص agreement_evidence الحر في register_contract. الكسر B3.
+  ---
+  duration_ms: 0.084833
+  type: 'test'
+  ...
+# Subtest: delivery cycle: a project can be closed technically and then financially
+ok 17 - delivery cycle: a project can be closed technically and then financially # SKIP لا إجراء إقفال ولا حالة: جدول projects لا يحمل عمود status أصلًا (id, tenant_id, name, brief, created_by, created_at فقط)، وحالة commercial_cases تقف عند project_active إلى الأبد حتى بعد التسليم والفوترة والتحصيل الكامل. الكسر B4/B5.
+  ---
+  duration_ms: 0.037667
+  type: 'test'
+  ...
+# Subtest: delivery cycle: paying the supplier marks the purchase as paid, read from payment_orders not from a constant
+ok 18 - delivery cycle: paying the supplier marks the purchase as paid, read from payment_orders not from a constant
+  ---
+  duration_ms: 2151.093875
+  type: 'test'
+  ...
+# Subtest: delivery cycle: work packages can be planned for more than one department
+ok 19 - delivery cycle: work packages can be planned for more than one department # SKIP ممنوع اليوم: commercial.create_project يقبل أعضاء من إدارة الملف التجاري ومن يتبعون المدير مباشرة فقط، وprojects.createTask يشترط عضوية المشروع. موظف إدارة أخرى يُرفض بـassignee. لا مفهوم «حزمة عمل» بإدارة مسؤولة أصلًا: tasks جدول مسطح بلا إدارة ولا مرحلة. الكسر B7.
+  ---
+  duration_ms: 0.048334
+  type: 'test'
+  ...
+# Subtest: delivery cycle: a finance delegation is granted, expires and is revoked through the platform, never by a direct insert
+ok 20 - delivery cycle: a finance delegation is granted, expires and is revoked through the platform, never by a direct insert
+  ---
+  duration_ms: 2019.775833
+  type: 'test'
+  ...
+# Subtest: delivery cycle: the completion certificate is a record with its own state, signed by the client
+ok 21 - delivery cycle: the completion certificate is a record with its own state, signed by the client # SKIP الموجود: accept_delivery يخزن acceptance_evidence وcustomer_representative نصًا داخل commercial_reviews، ويقوم مقام البوابة (الاستحقاق يشترطه). الغائب: مستند شهادة إنجاز مستقل له رقم وحالة وتوقيع الطرفين، ولا ربط له بتقرير الإنجاز ولا بمحضر التسليم. الكسر B9.
+  ---
+  duration_ms: 0.038542
+  type: 'test'
+  ...
+# Subtest: التفويض المالي له سقف مدة، ورقمه هو ما تستعمله المنصة فعلًا لا رقم مستعار
+ok 22 - التفويض المالي له سقف مدة، ورقمه هو ما تستعمله المنصة فعلًا لا رقم مستعار
+  ---
+  duration_ms: 2014.01675
+  type: 'test'
+  ...
+# Subtest: خط الأساس يطابق المخطط الذي تنتجه الترحيلات، فلا يحرس رقمًا لقاعدة أخرى
+ok 23 - خط الأساس يطابق المخطط الذي تنتجه الترحيلات، فلا يحرس رقمًا لقاعدة أخرى
+  ---
+  duration_ms: 2298.513709
+  type: 'test'
+  ...
+# Subtest: والبصمة حتمية: بناءان متتاليان يعطيان القيمة نفسها
+ok 24 - والبصمة حتمية: بناءان متتاليان يعطيان القيمة نفسها
+  ---
+  duration_ms: 3889.350458
+  type: 'test'
+  ...
+# Subtest: سطر الطلب يحمل ما يُشخَّص به، ولا يحمل قيم الاستعلام ولا حمولة
+ok 25 - سطر الطلب يحمل ما يُشخَّص به، ولا يحمل قيم الاستعلام ولا حمولة
+  ---
+  duration_ms: 2.979709
+  type: 'test'
+  ...
+# Subtest: عمر آخر نسخة احتياطية يُقرأ من أحدث ملف، ويغوص في المجلدات الفرعية
+ok 26 - عمر آخر نسخة احتياطية يُقرأ من أحدث ملف، ويغوص في المجلدات الفرعية
+  ---
+  duration_ms: 1.7845
+  type: 'test'
+  ...
+# Subtest: لقطة الصحة تعرض ما يُبنى عليه قرار، ولا تخترع ما لم يُقس
+ok 27 - لقطة الصحة تعرض ما يُبنى عليه قرار، ولا تخترع ما لم يُقس
+  ---
+  duration_ms: 0.145583
+  type: 'test'
+  ...
+# Subtest: نقطة الصحة خلف تصريح إدارة المنصة، لا مفتوحة
+ok 28 - نقطة الصحة خلف تصريح إدارة المنصة، لا مفتوحة
+  ---
+  duration_ms: 3191.025833
+  type: 'test'
+  ...
+# Subtest: TRACE: all 220 original rows and acceptance criteria match the workbook and evidence
+ok 29 - TRACE: all 220 original rows and acceptance criteria match the workbook and evidence
+  ---
+  duration_ms: 1196.946791
+  type: 'test'
+  ...
+# Subtest: TRACE: changing acceptance or declaring partial work complete is rejected
+ok 30 - TRACE: changing acceptance or declaring partial work complete is rejected
+  ---
+  duration_ms: 25.313625
+  type: 'test'
+  ...
+1..30
+# tests 30
+# suites 0
+# pass 24
+# fail 0
+# cancelled 0
+# skipped 6
+# todo 0
+# duration_ms 21328.275166

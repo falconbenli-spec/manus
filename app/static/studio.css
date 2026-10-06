@@ -1,0 +1,98 @@
+/* مدار 360: مكونات الكلاسيكي كأساس مشترك، وهوية ومساحات عمل مستقلة. */
+@layer studio{
+@media screen{
+:root[data-design=studio]{
+ --scene-3d:0;--ring-live:0;
+ --font:"Alexandria",Tahoma,sans-serif;--font-rounded:var(--font);
+ --r-sm:8px;--r-md:12px;--r-lg:16px;--r-xl:20px;
+ --fs-large:30px;--fs-title1:26px;--lh-body:1.7;--gutter:20px;
+ --tint:#0E6B59;--action:var(--tint);--tint-fill:var(--tint);--on-action:#fff;   /* #087762 لم يكن من الدليل: #0E6B59 من الملحق (أبيض عليه 6.40) */
+ --canvas:#edf3f2;--bg:var(--canvas);--surface:#fff;--surface-2:#e5eeeb;
+ --label:#102b27;--label-2:#526762;--label-3:var(--label-2);--ink-1:var(--label);--ink-3:var(--label-2);
+ --focus:var(--tint);   /* حلقة بؤرة مصمتة بلون التصميم. و--label-3 يساوي الثاني: لا محايد أخضر ثالث في هذا الملف يعبر 4.5 على #edf3f2 (#637872 = 3.98) */
+ --separator:#d3dfdc;--line:var(--separator);--material:var(--surface);--material-thick:var(--surface);
+ & .topbar{background:var(--surface);border-block-end:1px solid var(--separator);min-block-size:64px}
+ & .topbar-title{opacity:1;transform:none;text-align:start}
+ & .page{max-inline-size:1440px;padding-block-start:24px}
+ & :is(.page-head,.journey-hero){padding:20px 0;border-block-end:1px solid var(--separator);margin-block-end:24px;min-block-size:0}
+ & :is(.page-head,.journey-hero) h1{text-wrap:balance;font-size:clamp(24px,2.4vw,34px)}
+ & :is(.page-head,.journey-copy) > p{max-inline-size:64ch}
+ & :is(.panel,.vn-block,.department-card,.rq-dept){border:1px solid var(--separator);box-shadow:none;border-radius:var(--r-lg)}
+ & :is(.vn-block,.panel-body){padding:20px}
+ & :is(.pt-row,.vn-list > li){min-block-size:56px}
+ & :is(.pt-row,.vn-list > li) a{display:inline-flex;align-items:center;min-block-size:44px}
+ & .nav-icon{background:color-mix(in srgb,var(--tint) 13%,transparent);color:var(--accent-ink);border-radius:8px}
+ & .hr-nav-rows a.active{background:color-mix(in srgb,var(--tint) 12%,transparent);border-inline-start:3px solid var(--tint)}
+ & .pt-quick{border:1px solid var(--separator);min-block-size:72px}
+ & :is(.btn,button,input,select){touch-action:manipulation}
+ & :focus-visible{outline:3px solid var(--focus);outline-offset:3px}
+ & .journey-heading{border-inline-start:3px solid var(--tint);padding-inline-start:12px}
+}
+:root[data-design=studio][data-theme=dark]{
+ --canvas:#0c1716;--bg:var(--canvas);--surface:#152522;--surface-2:#1d302c;
+ --label:#eef7f4;--label-2:#b3c8c1;--label-3:#9db6ad;--separator:#30483f;
+ --tint:var(--brand-turquoise);--on-action:#000;--on-tint:#000;--focus:var(--tint);
+ --accent-ink:#3CCDB0;--action-hover:#1BB899;--action-press:#15987E;--surface-raised:var(--surface-2);
+}
+@media(prefers-color-scheme:dark){:root[data-design=studio][data-theme=auto]{
+ --canvas:#0c1716;--bg:var(--canvas);--surface:#152522;--surface-2:#1d302c;
+ --label:#eef7f4;--label-2:#b3c8c1;--label-3:#9db6ad;--separator:#30483f;
+ --tint:var(--brand-turquoise);--on-action:#000;--on-tint:#000;--focus:var(--tint);
+ --accent-ink:#3CCDB0;--action-hover:#1BB899;--action-press:#15987E;--surface-raised:var(--surface-2);
+}}
+@media(min-width:1024px){:root[data-design=studio]{
+ --sidebar-docked:1;--gutter:32px;
+ & .shell{grid-template-columns:264px minmax(0,1fr)}
+ & .sidebar{background:var(--surface);padding:24px 12px}
+ & .hr-nav-rows{background:transparent}
+ & .hr-nav-rows a{min-block-size:44px;font-size:13px}
+ & .top-search{border:1px solid var(--separator);border-radius:10px}
+ & .sig-tabs{display:none}
+ & .page{padding-block-end:48px}
+}}
+@media(max-width:600px){:root[data-design=studio]{
+ --gutter:16px;--fs-body:15px;
+ & .page{padding-block-start:8px}
+ & :is(.page-head,.journey-hero){padding-block:16px;margin-block-end:16px}
+ & :is(.vn-block,.panel-body){padding:16px}
+ & .sig-tabs{border-radius:16px;border:1px solid var(--separator)}
+ & .operation-actions{gap:8px}
+ & :is(.btn,.operation-actions button){min-block-size:44px}
+}}
+}
+}
+@layer studio{
+@media screen{
+:root[data-design=studio]{
+ & .eu-today{border-block-start:3px solid var(--tint)}
+ & .eu-today .panel-head{padding:16px 20px 0}
+ & .eu-today .panel-body{padding:16px 20px}
+ & .eu-today :is(h2,p,dl,dd){margin-block:0}
+ & .eu-today .eu-times dd{font-size:24px;line-height:1.5}
+ & .eu-punch-box{gap:10px}
+ & .eu-punch{min-block-size:44px;border-radius:10px}
+ & .eu-quick{gap:8px}
+ & .eu-chip{border-radius:10px;background:var(--surface);font-size:13px}
+ & .pt-tiles a{border-block-start:3px solid var(--tint);border-radius:12px}
+ & .nav-icon{color:var(--accent-ink)!important}
+}
+}
+}
+@layer studio{
+@media screen{
+:root[data-design=studio]{
+ & .eu-today .panel-head{display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:start;gap:8px}
+ & .eu-today .panel-head .subtle{font-size:12px}   /* was 11: Arabic floor 12 */
+ & .eu-today .panel-head .btn{min-block-size:36px;padding-inline:10px;font-size:12px}
+ & .eu-times dt{font-size:12px}
+ & .eu-times dd{font-size:20px}
+ & .eu-punch-box > .subtle{font-size:12px;line-height:1.7}
+ & .eu-day{margin:0}
+}
+@media(max-width:600px){:root[data-design=studio]{
+ & .eu-day{display:flex;align-items:center;justify-content:space-between;gap:12px;border-block-start:1px solid var(--separator);padding-block-start:10px}
+ & .eu-facts > li{border:0;padding:0;min-block-size:0;font-size:13px}
+ & .eu-status{font-size:13px}
+}}
+}
+}

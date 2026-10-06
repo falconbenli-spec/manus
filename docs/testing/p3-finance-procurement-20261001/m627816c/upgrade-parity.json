@@ -1,0 +1,35 @@
+{
+ "ok": true,
+ "backup": "work/backups/pre-p2-deploy-20260930/36t-20260930T2017.sqlite",
+ "backup_version_before": 159,
+ "backup_had_142": false,
+ "fresh": {
+  "version": 178,
+  "digest": "1ce72b3eb7fe8e1611cf5f7949cff054f4fe2e49f05d768e1c1e9cdf4ef94a3b",
+  "counts": {
+   "index": 1407,
+   "table": 607,
+   "trigger": 1341,
+   "view": 5
+  },
+  "objects": 3360
+ },
+ "upgraded": {
+  "version": 178,
+  "applied_versions": 155,
+  "digest": "1ce72b3eb7fe8e1611cf5f7949cff054f4fe2e49f05d768e1c1e9cdf4ef94a3b",
+  "counts": {
+   "index": 1407,
+   "table": 607,
+   "trigger": 1341,
+   "view": 5
+  },
+  "objects": 3360,
+  "integrity": "ok",
+  "foreign_key_violations": 0,
+  "audit_chain": true
+ },
+ "only_in_fresh": [],
+ "only_in_upgraded": [],
+ "differing_sql": []
+}

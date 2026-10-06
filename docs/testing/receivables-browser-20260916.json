@@ -1,0 +1,12 @@
+{
+  "checked_at": "2026-09-16",
+  "viewport": "Codex in-app browser",
+  "database": "in-memory synthetic fixture",
+  "route": "#receivables",
+  "login": "passed",
+  "navigation_link": "visible",
+  "page_heading": "مستحقات العملاء والتحصيل",
+  "external_status": "غير متصل",
+  "empty_state": "visible",
+  "page_errors": []
+}

@@ -1,0 +1,6 @@
+
+> 36t-local-platform@0.1.0 check
+> node scripts/check.mjs
+
+Syntax checked: 93 JavaScript modules. Source hashes match. Traceability: 220 requirements / 22 domains.
+Checks cover syntax, source integrity and traceability. No TypeScript compiler or production bundle is configured for this JavaScript build.

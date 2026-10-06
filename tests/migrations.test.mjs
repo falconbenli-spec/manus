@@ -1,0 +1,20 @@
+import test from 'node:test';
+import assert from 'node:assert/strict';
+import { DatabaseSync } from 'node:sqlite';
+import { readFileSync,readdirSync,mkdtempSync,rmSync } from 'node:fs';
+import { tmpdir } from 'node:os';
+import { join } from 'node:path';
+import { seed } from '../scripts/seed.mjs';
+import { openDb,hash } from '../app/db.mjs';
+test('NFR-08: migration 002 preserves version 001 users and service records and runs once',t=>{
+  const directory=mkdtempSync(join(tmpdir(),'36t-migrate-'));t.after(()=>rmSync(directory,{recursive:true,force:true}));
+  const path=join(directory,'local.sqlite'),db=new DatabaseSync(path),schema=readFileSync(new URL('../app/schema.sql',import.meta.url),'utf8');
+  db.exec(schema);db.prepare('INSERT INTO schema_migrations VALUES(1,?)').run(hash(schema));seed(db,'synthetic-migration-test');
+  const before=JSON.stringify(db.prepare('SELECT id,username,role FROM users ORDER BY id').all());db.close();
+  const migrated=openDb(path);assert.equal(JSON.stringify(migrated.prepare('SELECT id,username,role FROM users ORDER BY id').all()),before);
+  const versions=[1,...readdirSync(new URL('../app/migrations/',import.meta.url)).filter(f=>/^\d{3}-.+\.sql$/.test(f)).map(f=>Number(f.slice(0,3)))].sort((a,b)=>a-b);
+  assert.ok(versions.includes(2));assert.equal(new Set(versions).size,versions.length);
+  assert.equal(migrated.prepare('SELECT COUNT(*) AS n FROM services').get().n,3);assert.deepEqual(migrated.prepare('SELECT version FROM schema_migrations ORDER BY version').all().map(r=>r.version),versions);
+  const checksums=JSON.stringify(migrated.prepare('SELECT * FROM schema_migrations ORDER BY version').all());migrated.close();
+  const again=openDb(path);assert.equal(JSON.stringify(again.prepare('SELECT * FROM schema_migrations ORDER BY version').all()),checksums);again.close();
+});

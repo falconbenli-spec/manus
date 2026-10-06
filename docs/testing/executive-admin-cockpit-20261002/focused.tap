@@ -1,0 +1,116 @@
+TAP version 13
+# Subtest: admin cockpit links to source tools and never renders business KPIs
+ok 1 - admin cockpit links to source tools and never renders business KPIs
+  ---
+  duration_ms: 77.804417
+  type: 'test'
+  ...
+# Subtest: every operational check shows its state and evidence time
+ok 2 - every operational check shows its state and evidence time
+  ---
+  duration_ms: 5.60875
+  type: 'test'
+  ...
+# Subtest: admin cockpit escapes notes and renders no individual records
+ok 3 - admin cockpit escapes notes and renders no individual records
+  ---
+  duration_ms: 2.609875
+  type: 'test'
+  ...
+# (node:88954) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: served cockpit assets and platform route agree with capabilities
+ok 4 - served cockpit assets and platform route agree with capabilities
+  ---
+  duration_ms: 5348.621208
+  type: 'test'
+  ...
+# Subtest: browser shell routes executive and platform health to their new renderers
+ok 5 - browser shell routes executive and platform health to their new renderers
+  ---
+  duration_ms: 2.751667
+  type: 'test'
+  ...
+# Subtest: document and offline cache include the cockpit stylesheet and modules
+ok 6 - document and offline cache include the cockpit stylesheet and modules
+  ---
+  duration_ms: 0.593584
+  type: 'test'
+  ...
+# (node:88955) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: executive routes parse their range and keep named details behind source access
+ok 7 - executive routes parse their range and keep named details behind source access
+  ---
+  duration_ms: 5606.785292
+  type: 'test'
+  ...
+# (node:88956) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: a missing cash source is unavailable, never zero
+ok 8 - a missing cash source is unavailable, never zero
+  ---
+  duration_ms: 4380.718791
+  type: 'test'
+  ...
+# Subtest: the cockpit has six aggregate dimensions and keeps the legacy board contract
+ok 9 - the cockpit has six aggregate dimensions and keeps the legacy board contract
+  ---
+  duration_ms: 3675.265958
+  type: 'test'
+  ...
+# Subtest: named drilldown stays behind the source capability while the aggregate remains visible
+ok 10 - named drilldown stays behind the source capability while the aggregate remains visible
+  ---
+  duration_ms: 2634.847416
+  type: 'test'
+  ...
+# (node:88957) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: metric definitions are versioned and cannot be rewritten after use
+ok 11 - metric definitions are versioned and cannot be rewritten after use
+  ---
+  duration_ms: 4429.541125
+  type: 'test'
+  ...
+# Subtest: the metric contract carries its source and refuses incomplete or invented values
+ok 12 - the metric contract carries its source and refuses incomplete or invented values
+  ---
+  duration_ms: 3703.149209
+  type: 'test'
+  ...
+# (node:88958) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: missing, stale, and failed independent checks never report healthy
+ok 13 - missing, stale, and failed independent checks never report healthy
+  ---
+  duration_ms: 4459.104
+  type: 'test'
+  ...
+# Subtest: platform health is read-only, aggregate, and strips unapproved build fields
+ok 14 - platform health is read-only, aggregate, and strips unapproved build fields
+  ---
+  duration_ms: 3549.266667
+  type: 'test'
+  ...
+# Subtest: platform health requires the platform operations capability
+ok 15 - platform health requires the platform operations capability
+  ---
+  duration_ms: 2622.049083
+  type: 'test'
+  ...
+# Subtest: platform health API stays separate from employee access
+ok 16 - platform health API stays separate from employee access
+  ---
+  duration_ms: 2945.324583
+  type: 'test'
+  ...
+1..16
+# tests 16
+# suites 0
+# pass 16
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 13987.603291

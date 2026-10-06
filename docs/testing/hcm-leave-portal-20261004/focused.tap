@@ -1,0 +1,250 @@
+(node:96716) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ بوابة الموظف تحمل كل خدمة يحق للحساب طلبها، بلا نسخة يدوية ناقصة (7001.895375ms)
+✔ بوابة الموظف تعرض خدمات الموارد البشرية أولًا وتفتحها بمسار الطلب الموحد (8197.948167ms)
+✔ مسار بوابة الموظف مستقل، ولا يعاد توجيهه إلى الرئيسية (3.346125ms)
+(node:96717) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ تجربة الإجازات تحفظ ترتيب HCM ولونًا ثابتًا لكل نوع وتضيف التعويضية (7.460709ms)
+✔ نموذج الطلب يرتب الأنواع مثل HCM ويحتفظ بالأنواع النظامية الإضافية (0.655791ms)
+✔ بوابة الموظف تقرأ الرصيد النظامي والتعويضي من وحدة الإجازات وتعرض مداخل HCM (7015.371584ms)
+(node:96718) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ compensatory: the hour arithmetic never rounds against the worker and the consent sentence states amount and deadline (2.089458ms)
+✔ compensatory: policy v3 carries the ratio, the deadline and the cap with their articles, and refuses a ratio below the legal floor (6995.451958ms)
+✔ compensatory: consent is the employee's alone, explicit, recorded with its sentence, and immutable (8088.279375ms)
+✔ compensatory: approval credits hours × the accepted ratio with the deadline counted from the work date, once (7199.124792ms)
+✔ compensatory: leave-compensated overtime never reaches payroll as overtime pay, by either door (7311.797209ms)
+✔ compensatory: leave is consumed from the oldest credit first, in half days too, and cancelling returns the hours to the same credits (6349.971083ms)
+✔ compensatory: without an accepted working-time policy the type refuses and names that policy and its owner — no assumed eight hours (6121.9945ms)
+✔ compensatory: an accepted version-2 policy keeps reading exactly as before — no compensatory type, no choice, nothing invented (6179.821708ms)
+✔ compensatory: a credit past its deadline is raised by the daily sweep, proposed as overtime pay by a human, and nothing is ever deleted (7239.152125ms)
+✔ compensatory: when the employee leaves, the unused hours block the settlement until they are proposed as overtime pay (5969.559666ms)
+✔ compensatory: the yearly cap is measured when the choice is made, and what exceeds it stays payable as overtime (5373.849084ms)
+✔ compensatory: overtime approved as time off before the ledger existed is credited by a human, not lost (5443.509375ms)
+✔ compensatory review: an exit payout never goes to a month with no payroll line — a locked exit month names who reopens it, and the hours stay due (5336.06025ms)
+✔ compensatory review: when the exit month is already approved no run can carry the pay — it is an open item on the settlement, carried by a written decision and kept with it (3136.328667ms)
+✔ compensatory review: leave approved for a date after the service ended is not «used» — it blocks the settlement until it is cancelled, then its hours are paid (3588.8185ms)
+✔ compensatory review: a hand-written overtime movement is refused while leave-compensated hours are unsettled — next month and before approval too — and the approver sees one that came first (3281.335875ms)
+✔ compensatory review: hours past their deadline are not leave any more, even for a back-dated request — the payout queue does not shrink under the preparer (2938.028042ms)
+✔ compensatory review: a working-time policy accepted between reservation and approval does not debit a day at the old length — the request goes back to be reserved again (2976.033417ms)
+✔ compensatory review: split payouts of one credit never return more overtime than was worked, at a ratio that does not divide evenly (2943.049166ms)
+✔ compensatory review: the company cap on overtime pay (Art. 77(5)) never blocks the pay of unused compensatory hours — the approver is told, and decides (2874.148917ms)
+✔ compensatory review: the employee never sees a fake zero — «غير متاح» with its reason when no policy is accepted, and approved hours not yet credited are shown to their owner (5832.104333ms)
+✔ compensatory review: the payroll pre-run check counts what is really due — a credit still inside its deadline is a notice, not «انقضت مهلته» (2891.904416ms)
+✔ compensatory review: INSERT OR REPLACE cannot rewrite a recorded consent or a credit (2990.706125ms)
+✔ compensatory UI: the overtime form offers the choice, shows the exact sentence the server stores, and sends consent only when ticked (6100.650417ms)
+✔ compensatory UI: «الإجازات» shows the balance in hours and days with each credit's deadline and the 14-day warning; attendance shows the queues to their holders only (2933.642167ms)
+(node:96719) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ the regulation draft cites its articles and changes nothing until the HR manager accepts it (7055.796042ms)
+✔ calendar-day and working-day types count the same range differently (8079.340375ms)
+✔ sick leave tiers cross request and month boundaries: 30 full, 60 at 75%, then unpaid, proposed to payroll and never auto-approved (7226.519959ms)
+✔ emergency leave takes half days: the third day may be 2.5 + 0.5, and nothing beyond (7300.735958ms)
+✔ annual leave is refused during probation and allowed once it ends (6215.657959ms)
+✔ unpaid leave needs a year of service and no balance left; above 5 working days it goes to the authority holder (6049.348959ms)
+✔ more than 20 unpaid days stop the annual accrual for the period (Art. 86.2b, 91.6) (6232.45725ms)
+✔ leave reads the approved public holidays: one source for attendance and leave (11493.929709ms)
+✔ annual leave reserves and debits against the accrual engine once an accrual rule is accepted (5402.422458ms)
+✔ event types, exam notice and iddah limits follow their articles (5234.261958ms)
+✔ the leave form, the catalog service and search all lead to the same request (5408.283ms)
+{"t":"2026-10-03T21:44:51.843Z","id":"1cd35cc3","env":"local","m":"POST","p":"/api/login","s":200,"ms":285}
+{"t":"2026-10-03T21:44:52.128Z","id":"4d4fa75e","env":"local","m":"POST","p":"/api/login","s":200,"ms":281}
+{"t":"2026-10-03T21:44:52.408Z","id":"53096916","env":"local","m":"POST","p":"/api/login","s":200,"ms":279}
+{"t":"2026-10-03T21:44:52.690Z","id":"b3b7cdfa","env":"local","m":"POST","p":"/api/login","s":200,"ms":281}
+{"t":"2026-10-03T21:44:52.698Z","id":"da981119","env":"local","m":"POST","p":"/api/leave/types/draft","s":201,"ms":7,"tx":1,"lock_ms":0}
+{"t":"2026-10-03T21:44:52.704Z","id":"cbbf0329","env":"local","m":"POST","p":"/api/leave/types/3a8ec55a-76e8-4178-bd21-33e4ffa2d4aa/accept","s":403,"ms":4,"tx":1,"lock_ms":0}
+{"t":"2026-10-03T21:44:52.706Z","id":"383fd02b","env":"local","m":"POST","p":"/api/leave/types/3a8ec55a-76e8-4178-bd21-33e4ffa2d4aa/accept","s":201,"ms":1,"tx":1,"lock_ms":0}
+{"t":"2026-10-03T21:44:52.707Z","id":"aca85784","env":"local","m":"POST","p":"/api/leave/calendars","s":403,"ms":0,"tx":1,"lock_ms":0}
+{"t":"2026-10-03T21:44:52.709Z","id":"00f80f62","env":"local","m":"POST","p":"/api/leave/calendars","s":201,"ms":1,"tx":1,"lock_ms":0}
+{"t":"2026-10-03T21:44:52.717Z","id":"8efb2e1e","env":"local","m":"POST","p":"/api/leave/requests","s":201,"ms":7,"tx":1,"lock_ms":0}
+{"t":"2026-10-03T21:44:52.723Z","id":"9c2b39f1","env":"local","m":"POST","p":"/api/leave/requests/44caad5f-30b4-4939-b4fc-bd500d30e644/approve","s":201,"ms":3,"tx":1,"lock_ms":0}
+{"t":"2026-10-03T21:44:52.729Z","id":"cac796df","env":"local","m":"GET","p":"/api/leave","s":200,"ms":5}
+{"t":"2026-10-03T21:44:52.731Z","id":"a7691491","env":"local","m":"GET","p":"/leave-count.mjs","s":200,"ms":1}
+{"t":"2026-10-03T21:44:52.732Z","id":"e1f826c7","env":"local","m":"GET","p":"/module-services.mjs","s":200,"ms":0}
+✔ HTTP: HR prepares, the HR manager accepts, HR sets the calendar, and the employee requests leave with a certificate (5225.370167ms)
+✔ integration: under an accepted leave-types policy the variant card, the quick action and #leave/new open the statutory request form (3453.73475ms)
+✔ integration: before the policy is accepted the leave card and quick action follow opening balances only (3293.088625ms)
+(node:96720) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ HR-04: opening balance requires an explicit amount, effective date, evidence and HR scope (7106.823125ms)
+✔ HR-04/05 PLT-04: manager then HR approves one debit and cancellation returns it once (8095.076667ms)
+✔ B20: an approved leave can be cancelled before it starts and not after (7184.504916ms)
+✔ HR-04: reservations prevent a second request from spending unavailable days (7314.34825ms)
+✔ HR-04: overlapping periods are rejected across leave types and approved requests (6265.042458ms)
+✔ HR-04: dates use the configured weekdays and holidays with separate balance years (5975.287625ms)
+✔ HR-04 F05/F10: employee identity and Riyadh date boundaries do not depend on names or UTC dates (6270.891667ms)
+✔ HR-05 PLT-01/05: reads and actions exclude unrelated employees, tenants and technical admins (5727.043541ms)
+✔ HR-05 PLT-05: every call rechecks active role and scope after account changes (5811.227416ms)
+✔ HR-05 PLT-04: clients cannot choose identity, approvers, state or request days (5396.373375ms)
+✔ HR-04/05 PLT-04: returned requests release their hold and resubmit an immutable new revision (5224.93325ms)
+✔ HR-05 PLT-04: HR cannot finalize approval after the employee manager changes (5398.524834ms)
+✔ HR-04 PLT-09: creation retries reuse one request and recheck access before returning it (3900.547041ms)
+✔ HR-04 PLT-06: ledger, decisions and submitted snapshots cannot be changed or deleted (3195.648666ms)
+✔ HR-04 PLT-06: an audit write failure rolls back the reservation and request together (3348.038625ms)
+✔ HR-04: future effective dates, leap days and a different workweek follow the stored calendar (3104.880417ms)
+✔ HR-04/05: pending cancellation releases a hold without posting a debit or refund (2938.648667ms)
+✔ HR-05 F04: the local calendar includes approved authorized days and removes cancelled leave (2936.277625ms)
+✔ HR-05 SEC-01: leave forms retain the selected request version and escape stored text (2906.236333ms)
+(node:96721) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ ROUTING: a request transfers to another department, and only its current owner may do it (7194.438375ms)
+✔ ROUTING: assigned tasks hold the request open until they are settled by their owner (8750.5875ms)
+✔ ROUTING: the service clock counts from submission and flags what is late (7479.672625ms)
+✔ PORTAL: an employee sees their own requests, decisions, tasks and quick services (7330.383292ms)
+(node:96722) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+{"t":"2026-10-03T21:43:39.028Z","id":"d3cad5ce","env":"local","m":"GET","p":"/icons.mjs","s":200,"ms":3}
+{"t":"2026-10-03T21:43:39.045Z","id":"49a63599","env":"local","m":"GET","p":"/kit.mjs","s":200,"ms":1}
+{"t":"2026-10-03T21:43:39.048Z","id":"cb8b6405","env":"local","m":"GET","p":"/service-quality-ui.mjs","s":200,"ms":0}
+{"t":"2026-10-03T21:43:39.051Z","id":"16d1e210","env":"local","m":"GET","p":"/integrations-ui.mjs","s":200,"ms":0}
+{"t":"2026-10-03T21:43:39.054Z","id":"fa0883d4","env":"local","m":"GET","p":"/hr-design.mjs","s":200,"ms":0}
+{"t":"2026-10-03T21:43:39.056Z","id":"878dccff","env":"local","m":"GET","p":"/brand-logo.mjs","s":200,"ms":0}
+{"t":"2026-10-03T21:43:39.059Z","id":"3a91f6a6","env":"local","m":"GET","p":"/athar.mjs","s":200,"ms":0}
+{"t":"2026-10-03T21:43:39.061Z","id":"08a6d8c6","env":"local","m":"GET","p":"/operations.mjs","s":200,"ms":1}
+{"t":"2026-10-03T21:43:39.067Z","id":"bfb72eba","env":"local","m":"GET","p":"/request-picker.mjs","s":200,"ms":4}
+{"t":"2026-10-03T21:43:39.071Z","id":"7669325f","env":"local","m":"GET","p":"/catalog-home-ui.mjs","s":200,"ms":1}
+{"t":"2026-10-03T21:43:39.073Z","id":"2b29b067","env":"local","m":"GET","p":"/service-page.mjs","s":200,"ms":0}
+{"t":"2026-10-03T21:43:39.075Z","id":"6b79a302","env":"local","m":"GET","p":"/motion-cards.mjs","s":200,"ms":0}
+{"t":"2026-10-03T21:43:39.077Z","id":"a75fd5ee","env":"local","m":"GET","p":"/executive-cockpit-ui.mjs","s":200,"ms":0}
+{"t":"2026-10-03T21:43:39.080Z","id":"1eaba084","env":"local","m":"GET","p":"/admin-cockpit-ui.mjs","s":200,"ms":0}
+{"t":"2026-10-03T21:43:39.081Z","id":"d2f94314","env":"local","m":"GET","p":"/org-ui.mjs","s":200,"ms":0}
+{"t":"2026-10-03T21:43:39.083Z","id":"76dfca67","env":"local","m":"GET","p":"/work-ui.mjs","s":200,"ms":1}
+{"t":"2026-10-03T21:43:39.086Z","id":"c600a884","env":"local","m":"GET","p":"/workspace-ui.mjs","s":200,"ms":0}
+{"t":"2026-10-03T21:43:39.088Z","id":"13d26970","env":"local","m":"GET","p":"/portal-ui.mjs","s":200,"ms":1}
+{"t":"2026-10-03T21:43:39.090Z","id":"c775671d","env":"local","m":"GET","p":"/deep-links.mjs","s":200,"ms":1}
+{"t":"2026-10-03T21:43:39.091Z","id":"aaa1b232","env":"local","m":"GET","p":"/vocabulary.mjs","s":200,"ms":0}
+{"t":"2026-10-03T21:43:39.092Z","id":"b888640c","env":"local","m":"GET","p":"/pwa.mjs","s":200,"ms":0}
+{"t":"2026-10-03T21:43:39.093Z","id":"fc2fe02a","env":"local","m":"GET","p":"/arabic-count.mjs","s":200,"ms":0}
+{"t":"2026-10-03T21:43:39.094Z","id":"b57495ca","env":"local","m":"GET","p":"/focus-record.mjs","s":200,"ms":0}
+{"t":"2026-10-03T21:43:39.095Z","id":"d24ae93c","env":"local","m":"GET","p":"/definitions-client.mjs","s":200,"ms":1}
+{"t":"2026-10-03T21:43:39.095Z","id":"6b86ce63","env":"local","m":"GET","p":"/nav-map.mjs","s":200,"ms":0}
+{"t":"2026-10-03T21:43:39.096Z","id":"f8f2345d","env":"local","m":"GET","p":"/hubs-ui.mjs","s":200,"ms":0}
+{"t":"2026-10-03T21:43:39.097Z","id":"50da063d","env":"local","m":"GET","p":"/page-editor.mjs","s":200,"ms":0}
+{"t":"2026-10-03T21:43:39.098Z","id":"4684346a","env":"local","m":"GET","p":"/service-gates-ui.mjs","s":200,"ms":0}
+{"t":"2026-10-03T21:43:39.102Z","id":"a4cdbe27","env":"local","m":"GET","p":"/files-ui.mjs","s":200,"ms":1}
+{"t":"2026-10-03T21:43:39.104Z","id":"fef915fd","env":"local","m":"GET","p":"/dates.mjs","s":200,"ms":0}
+{"t":"2026-10-03T21:43:39.106Z","id":"ee01b22c","env":"local","m":"GET","p":"/leave-count.mjs","s":200,"ms":1}
+{"t":"2026-10-03T21:43:39.107Z","id":"e1cde7a3","env":"local","m":"GET","p":"/catalog-search.mjs","s":200,"ms":0}
+{"t":"2026-10-03T21:43:39.108Z","id":"b58f6f18","env":"local","m":"GET","p":"/budgets-ui.mjs","s":200,"ms":0}
+{"t":"2026-10-03T21:43:39.109Z","id":"3f8d03aa","env":"local","m":"GET","p":"/commercial-ui.mjs","s":200,"ms":0}
+{"t":"2026-10-03T21:43:39.110Z","id":"005294ee","env":"local","m":"GET","p":"/procurement-ui.mjs","s":200,"ms":1}
+{"t":"2026-10-03T21:43:39.111Z","id":"b0726aa8","env":"local","m":"GET","p":"/leave-ui.mjs","s":200,"ms":1}
+{"t":"2026-10-03T21:43:39.112Z","id":"180e2a7e","env":"local","m":"GET","p":"/delegations-ui.mjs","s":200,"ms":0}
+{"t":"2026-10-03T21:43:39.114Z","id":"e8f9f31c","env":"local","m":"GET","p":"/people-ui.mjs","s":200,"ms":0}
+{"t":"2026-10-03T21:43:39.117Z","id":"5a09ead6","env":"local","m":"GET","p":"/studio-ui.mjs","s":200,"ms":1}
+{"t":"2026-10-03T21:43:39.118Z","id":"548b17bd","env":"local","m":"GET","p":"/finance-ui.mjs","s":200,"ms":0}
+{"t":"2026-10-03T21:43:39.119Z","id":"83f28406","env":"local","m":"GET","p":"/accounts-ui.mjs","s":200,"ms":0}
+{"t":"2026-10-03T21:43:39.120Z","id":"005bf1cf","env":"local","m":"GET","p":"/receivables-ui.mjs","s":200,"ms":0}
+{"t":"2026-10-03T21:43:39.122Z","id":"2efe6ad6","env":"local","m":"GET","p":"/vendors-ui.mjs","s":200,"ms":0}
+{"t":"2026-10-03T21:43:39.123Z","id":"ee3e9934","env":"local","m":"GET","p":"/approvals-ui.mjs","s":200,"ms":0}
+{"t":"2026-10-03T21:43:39.125Z","id":"ecfcb4ef","env":"local","m":"GET","p":"/invoices-ui.mjs","s":200,"ms":1}
+{"t":"2026-10-03T21:43:39.127Z","id":"b4e61eb0","env":"local","m":"GET","p":"/contracts-ui.mjs","s":200,"ms":1}
+{"t":"2026-10-03T21:43:39.128Z","id":"b445c200","env":"local","m":"GET","p":"/attendance-ui.mjs","s":200,"ms":1}
+{"t":"2026-10-03T21:43:39.129Z","id":"a9ecd8c0","env":"local","m":"GET","p":"/payroll-ui.mjs","s":200,"ms":1}
+{"t":"2026-10-03T21:43:39.134Z","id":"75fb79b9","env":"local","m":"GET","p":"/statements-ui.mjs","s":200,"ms":2}
+{"t":"2026-10-03T21:43:39.137Z","id":"aa47dffb","env":"local","m":"GET","p":"/security-ui.mjs","s":200,"ms":0}
+{"t":"2026-10-03T21:43:39.139Z","id":"b9f33ebb","env":"local","m":"GET","p":"/payables-ui.mjs","s":200,"ms":0}
+{"t":"2026-10-03T21:43:39.141Z","id":"69a6a3df","env":"local","m":"GET","p":"/payroll-extras-ui.mjs","s":200,"ms":1}
+{"t":"2026-10-03T21:43:39.142Z","id":"98112372","env":"local","m":"GET","p":"/employees-ui.mjs","s":200,"ms":0}
+{"t":"2026-10-03T21:43:39.143Z","id":"42c0b78c","env":"local","m":"GET","p":"/employee-profile-ui.mjs","s":200,"ms":0}
+{"t":"2026-10-03T21:43:39.144Z","id":"1b15f2c6","env":"local","m":"GET","p":"/talent-ui.mjs","s":200,"ms":0}
+{"t":"2026-10-03T21:43:39.146Z","id":"a5fac4df","env":"local","m":"GET","p":"/procurement-extras-ui.mjs","s":200,"ms":0}
+{"t":"2026-10-03T21:43:39.147Z","id":"f89e15b8","env":"local","m":"GET","p":"/campaigns-ui.mjs","s":200,"ms":0}
+{"t":"2026-10-03T21:43:39.149Z","id":"fa2f8143","env":"local","m":"GET","p":"/ai-ui.mjs","s":200,"ms":0}
+{"t":"2026-10-03T21:43:39.150Z","id":"c53ec96b","env":"local","m":"GET","p":"/centres-ui.mjs","s":200,"ms":0}
+{"t":"2026-10-03T21:43:39.152Z","id":"c72042a0","env":"local","m":"GET","p":"/inbox-ui.mjs","s":200,"ms":0}
+{"t":"2026-10-03T21:43:39.154Z","id":"4bfae265","env":"local","m":"GET","p":"/service-cards-ui.mjs","s":200,"ms":0}
+{"t":"2026-10-03T21:43:39.155Z","id":"88d528f7","env":"local","m":"GET","p":"/compliance-ui.mjs","s":200,"ms":0}
+{"t":"2026-10-03T21:43:39.156Z","id":"4c5b3823","env":"local","m":"GET","p":"/expenses-ui.mjs","s":200,"ms":0}
+{"t":"2026-10-03T21:43:39.158Z","id":"35a23618","env":"local","m":"GET","p":"/assets-ui.mjs","s":200,"ms":1}
+{"t":"2026-10-03T21:43:39.159Z","id":"aaa36972","env":"local","m":"GET","p":"/agency-ui.mjs","s":200,"ms":0}
+{"t":"2026-10-03T21:43:39.160Z","id":"a39b3ed4","env":"local","m":"GET","p":"/reports-ui.mjs","s":200,"ms":0}
+{"t":"2026-10-03T21:43:39.161Z","id":"f8a55eac","env":"local","m":"GET","p":"/bank-reconciliation-ui.mjs","s":200,"ms":0}
+{"t":"2026-10-03T21:43:39.162Z","id":"d0b51b49","env":"local","m":"GET","p":"/billing-recurring-ui.mjs","s":200,"ms":0}
+{"t":"2026-10-03T21:43:39.164Z","id":"626e1e0e","env":"local","m":"GET","p":"/cash-close-ui.mjs","s":200,"ms":1}
+{"t":"2026-10-03T21:43:39.164Z","id":"beaa5bf0","env":"local","m":"GET","p":"/contracts-register-ui.mjs","s":200,"ms":0}
+{"t":"2026-10-03T21:43:39.165Z","id":"f6b36373","env":"local","m":"GET","p":"/engagement-ui.mjs","s":200,"ms":0}
+{"t":"2026-10-03T21:43:39.167Z","id":"de2670b9","env":"local","m":"GET","p":"/feedback-ui.mjs","s":200,"ms":1}
+{"t":"2026-10-03T21:43:39.170Z","id":"2db77510","env":"local","m":"GET","p":"/governance-ui.mjs","s":200,"ms":1}
+{"t":"2026-10-03T21:43:39.171Z","id":"c7e1037a","env":"local","m":"GET","p":"/home-ui.mjs","s":200,"ms":0}
+{"t":"2026-10-03T21:43:39.173Z","id":"6b02ba1a","env":"local","m":"GET","p":"/expiry-ui.mjs","s":200,"ms":1}
+{"t":"2026-10-03T21:43:39.175Z","id":"df9b10b2","env":"local","m":"GET","p":"/influencers-ui.mjs","s":200,"ms":1}
+{"t":"2026-10-03T21:43:39.177Z","id":"9506adf8","env":"local","m":"GET","p":"/leave-benefits-ui.mjs","s":200,"ms":1}
+{"t":"2026-10-03T21:43:39.178Z","id":"d9b71af4","env":"local","m":"GET","p":"/benefits-portal-ui.mjs","s":200,"ms":0}
+{"t":"2026-10-03T21:43:39.179Z","id":"e56cf6fb","env":"local","m":"GET","p":"/letters-ui.mjs","s":200,"ms":1}
+{"t":"2026-10-03T21:43:39.179Z","id":"e7420d0f","env":"local","m":"GET","p":"/pr-ui.mjs","s":200,"ms":0}
+{"t":"2026-10-03T21:43:39.181Z","id":"ea95ddc8","env":"local","m":"GET","p":"/equipment-ui.mjs","s":200,"ms":1}
+{"t":"2026-10-03T21:43:39.182Z","id":"c6e9502c","env":"local","m":"GET","p":"/privacy-ui.mjs","s":200,"ms":0}
+{"t":"2026-10-03T21:43:39.185Z","id":"adabc612","env":"local","m":"GET","p":"/production-ui.mjs","s":200,"ms":1}
+{"t":"2026-10-03T21:43:39.187Z","id":"dd704b74","env":"local","m":"GET","p":"/profitability-ui.mjs","s":200,"ms":0}
+{"t":"2026-10-03T21:43:39.189Z","id":"410548e0","env":"local","m":"GET","p":"/resourcing-ui.mjs","s":200,"ms":1}
+{"t":"2026-10-03T21:43:39.190Z","id":"921a25cd","env":"local","m":"GET","p":"/review-rounds-ui.mjs","s":200,"ms":0}
+{"t":"2026-10-03T21:43:39.192Z","id":"402f6f10","env":"local","m":"GET","p":"/search-ui.mjs","s":200,"ms":0}
+{"t":"2026-10-03T21:43:39.193Z","id":"88f6c16e","env":"local","m":"GET","p":"/tax-returns-ui.mjs","s":200,"ms":0}
+{"t":"2026-10-03T21:43:39.194Z","id":"da73d0ac","env":"local","m":"GET","p":"/wage-protection-ui.mjs","s":200,"ms":1}
+{"t":"2026-10-03T21:43:39.194Z","id":"d9b1e5d2","env":"local","m":"GET","p":"/lifecycle-ui.mjs","s":200,"ms":0}
+{"t":"2026-10-03T21:43:39.198Z","id":"b038daac","env":"local","m":"GET","p":"/einvoice-ui.mjs","s":200,"ms":1}
+{"t":"2026-10-03T21:43:39.200Z","id":"6e84473f","env":"local","m":"GET","p":"/intake-settings-ui.mjs","s":200,"ms":1}
+{"t":"2026-10-03T21:43:39.202Z","id":"f47324e3","env":"local","m":"GET","p":"/project-intake-ui.mjs","s":200,"ms":0}
+{"t":"2026-10-03T21:43:39.205Z","id":"ee6d97a9","env":"local","m":"GET","p":"/request-transparency-ui.mjs","s":200,"ms":0}
+{"t":"2026-10-03T21:43:39.206Z","id":"9b839523","env":"local","m":"GET","p":"/knowledge-access-ui.mjs","s":200,"ms":0}
+{"t":"2026-10-03T21:43:39.207Z","id":"7a0b59f8","env":"local","m":"GET","p":"/pipeline-estimates-ui.mjs","s":200,"ms":0}
+{"t":"2026-10-03T21:43:39.214Z","id":"8d08dbfd","env":"local","m":"GET","p":"/pricing-ui.mjs","s":200,"ms":0}
+{"t":"2026-10-03T21:43:39.215Z","id":"2052a126","env":"local","m":"GET","p":"/platform-ops-ui.mjs","s":200,"ms":0}
+{"t":"2026-10-03T21:43:39.217Z","id":"43f2ba09","env":"local","m":"GET","p":"/catalog-quality-ui.mjs","s":200,"ms":1}
+{"t":"2026-10-03T21:43:39.219Z","id":"6122b277","env":"local","m":"GET","p":"/hr-cases-comp-ui.mjs","s":200,"ms":0}
+{"t":"2026-10-03T21:43:39.221Z","id":"fac92c32","env":"local","m":"GET","p":"/hr-operations-ui.mjs","s":200,"ms":0}
+{"t":"2026-10-03T21:43:39.222Z","id":"2d1c11b0","env":"local","m":"GET","p":"/media-spend-ui.mjs","s":200,"ms":0}
+{"t":"2026-10-03T21:43:39.224Z","id":"662686ea","env":"local","m":"GET","p":"/approval-settings-ui.mjs","s":200,"ms":1}
+{"t":"2026-10-03T21:43:39.225Z","id":"664e6bec","env":"local","m":"GET","p":"/appearance-ui.mjs","s":200,"ms":1}
+{"t":"2026-10-03T21:43:39.225Z","id":"7379a4f4","env":"local","m":"GET","p":"/discipline-ui.mjs","s":200,"ms":0}
+{"t":"2026-10-03T21:43:39.226Z","id":"eb26acdc","env":"local","m":"GET","p":"/notifications-ui.mjs","s":200,"ms":0}
+{"t":"2026-10-03T21:43:39.227Z","id":"f0c9b97f","env":"local","m":"GET","p":"/my-requests-ui.mjs","s":200,"ms":1}
+{"t":"2026-10-03T21:43:39.227Z","id":"3270a465","env":"local","m":"GET","p":"/profile-ui.mjs","s":200,"ms":0}
+{"t":"2026-10-03T21:43:39.228Z","id":"139bee5e","env":"local","m":"GET","p":"/payroll-rules-ui.mjs","s":200,"ms":0}
+{"t":"2026-10-03T21:43:39.228Z","id":"d8cce472","env":"local","m":"GET","p":"/payroll-insurance-ui.mjs","s":200,"ms":0}
+{"t":"2026-10-03T21:43:39.229Z","id":"7dc901ec","env":"local","m":"GET","p":"/hr-policies-ui.mjs","s":200,"ms":0}
+{"t":"2026-10-03T21:43:39.229Z","id":"97ab714e","env":"local","m":"GET","p":"/forms-ui.mjs","s":200,"ms":0}
+{"t":"2026-10-03T21:43:39.230Z","id":"a6192c09","env":"local","m":"GET","p":"/finance-grants-ui.mjs","s":200,"ms":0}
+{"t":"2026-10-03T21:43:39.232Z","id":"b032d191","env":"local","m":"GET","p":"/secondment-benefits-ui.mjs","s":200,"ms":1}
+{"t":"2026-10-03T21:43:39.234Z","id":"c0fd2204","env":"local","m":"GET","p":"/policy-library-ui.mjs","s":200,"ms":1}
+{"t":"2026-10-03T21:43:39.237Z","id":"929fb2d9","env":"local","m":"GET","p":"/policy-assistant-ui.mjs","s":200,"ms":0}
+{"t":"2026-10-03T21:43:39.238Z","id":"9444634a","env":"local","m":"GET","p":"/epmo-ui.mjs","s":200,"ms":0}
+{"t":"2026-10-03T21:43:39.239Z","id":"0a2f6fa9","env":"local","m":"GET","p":"/definitions-ui.mjs","s":200,"ms":0}
+{"t":"2026-10-03T21:43:39.240Z","id":"1e5f2969","env":"local","m":"GET","p":"/permissions-matrix-ui.mjs","s":200,"ms":0}
+{"t":"2026-10-03T21:43:39.241Z","id":"d01beb18","env":"local","m":"GET","p":"/project-participation-ui.mjs","s":200,"ms":0}
+{"t":"2026-10-03T21:43:39.242Z","id":"16ead495","env":"local","m":"GET","p":"/project-spine-ui.mjs","s":200,"ms":0}
+{"t":"2026-10-03T21:43:39.243Z","id":"e87082fa","env":"local","m":"GET","p":"/finance-exceptions-ui.mjs","s":200,"ms":0}
+{"t":"2026-10-03T21:43:39.244Z","id":"6ac9b64a","env":"local","m":"GET","p":"/options-ui.mjs","s":200,"ms":0}
+{"t":"2026-10-03T21:43:39.245Z","id":"3190f295","env":"local","m":"GET","p":"/department-escalation-ui.mjs","s":200,"ms":0}
+{"t":"2026-10-03T21:43:39.246Z","id":"caebd4f8","env":"local","m":"GET","p":"/module-services.mjs","s":200,"ms":0}
+{"t":"2026-10-03T21:43:39.247Z","id":"06cf5a52","env":"local","m":"GET","p":"/depth-scene.mjs","s":200,"ms":1}
+{"t":"2026-10-03T21:43:39.249Z","id":"019507c3","env":"local","m":"GET","p":"/signature.css","s":200,"ms":1}
+{"t":"2026-10-03T21:43:39.251Z","id":"e38311a9","env":"local","m":"GET","p":"/style.css","s":200,"ms":1}
+{"t":"2026-10-03T21:43:39.254Z","id":"4edf76ca","env":"local","m":"GET","p":"/cockpit.css","s":200,"ms":1}
+{"t":"2026-10-03T21:43:39.256Z","id":"ed000fa8","env":"local","m":"GET","p":"/workspace.css","s":200,"ms":0}
+{"t":"2026-10-03T21:43:39.258Z","id":"b09e8173","env":"local","m":"GET","p":"/journey.css","s":200,"ms":1}
+{"t":"2026-10-03T21:43:39.259Z","id":"5e14ad96","env":"local","m":"GET","p":"/athar.css","s":200,"ms":1}
+{"t":"2026-10-03T21:43:39.260Z","id":"42add0f6","env":"local","m":"GET","p":"/hr-design.css","s":200,"ms":1}
+{"t":"2026-10-03T21:43:39.261Z","id":"75ea8ba3","env":"local","m":"GET","p":"/depth.css","s":200,"ms":1}
+{"t":"2026-10-03T21:43:39.262Z","id":"48229672","env":"local","m":"GET","p":"/classic.css","s":200,"ms":1}
+{"t":"2026-10-03T21:43:39.263Z","id":"100b84e2","env":"local","m":"GET","p":"/riwaq.css","s":200,"ms":0}
+{"t":"2026-10-03T21:43:39.266Z","id":"14b6d2d2","env":"local","m":"GET","p":"/yawm.css","s":200,"ms":1}
+{"t":"2026-10-03T21:43:39.269Z","id":"34a34f02","env":"local","m":"GET","p":"/markaz.css","s":200,"ms":1}
+{"t":"2026-10-03T21:43:39.271Z","id":"0c0a53ca","env":"local","m":"GET","p":"/studio.css","s":200,"ms":1}
+{"t":"2026-10-03T21:43:39.273Z","id":"43cda2eb","env":"local","m":"GET","p":"/page-editor.css","s":200,"ms":1}
+{"t":"2026-10-03T21:43:39.274Z","id":"1d40754f","env":"local","m":"GET","p":"/employee-portal.css","s":200,"ms":0}
+{"t":"2026-10-03T21:43:39.276Z","id":"9870ee7d","env":"local","m":"GET","p":"/journey.mjs","s":200,"ms":1}
+{"t":"2026-10-03T21:43:39.277Z","id":"27674f24","env":"local","m":"GET","p":"/app.mjs","s":200,"ms":0}
+{"t":"2026-10-03T21:43:39.279Z","id":"12ca2598","env":"local","m":"GET","p":"/signature.mjs","s":200,"ms":0}
+{"t":"2026-10-03T21:43:39.280Z","id":"e1441457","env":"local","m":"GET","p":"/interact.mjs","s":200,"ms":0}
+✔ every module and stylesheet the interface imports is actually served (7304.603125ms)
+ℹ tests 69
+ℹ suites 0
+ℹ pass 69
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 120527.308333

@@ -1,0 +1,236 @@
+/* ==========================================================================
+   3,6T — «مركز الأثر» (data-design=markaz): فحميٌّ عميق، أسطح واضحة، والإبراز نادر.
+
+   الموجز الذي بُني عليه (المالك، 30 سبتمبر 2026): «فحمي عميق، أسطح واضحة، أخضر 3,6T كلون
+   إبراز، ومساحات بيضاء أهدأ. نقلل الزجاجية والتوهج ونستخدمهما في نقاط محددة» و«حركة هادئة
+   ومفيدة: انتقال قصير بين المراحل، تحديث العدادات، وإظهار مسار الطلب. نتجنب الحركة المستمرة».
+
+   ★ قاعدة اللون — لا تُنقض: كل لون من هوية 3,6T في هذا المستودع. الفيروزي لا يُكتب HEX هنا
+   أبدًا (قرار المالك 1: موضعه الوحيد signature.css)، ويُقرأ من --brand-turquoise ومشتقّاته.
+   والمحايد من --brand-charcoal و--brand-sky و--brand-paper. و«الأخضر» في الموجز هو فيروزي
+   الهوية نفسه: يُقرأ أخضرَ على أرضٍ فحمية، ولا يُستحدث أخضر ثانٍ لأن الهوية لا تحمله.
+
+   ثلاثة قرارات تميّزه عن إخوته، وكلها من الموجز لا من الذوق:
+   1) **الإبراز نادر بقاعدة لا بنيّة.** الفيروزي للفعل الواحد في الشاشة ولمؤشّر البؤرة وحدهما.
+      الحالات (متأخر، بانتظار، منتهٍ) تُقال بالحبر وبخيطٍ جانبيّ، لا بتلوين الخلفية — فلا
+      تتنافس أربعة ألوان على نظر من يفتح الشاشة ليعرف ما عليه اليوم.
+   2) **الزجاج والتوهج ممنوعان إلا في موضعين:** الشريط السفلي في الجوال، والعنصر المسحوب.
+      ما عداهما أسطحُ مصمتة يفصلها خيطٌ شعرة — لأن الشفافية على أرضٍ فحمية تُذيب الحدّ
+      فتصير البطاقات بقعةً واحدة، وهو ما يشكو منه الموجز.
+   3) **الحركة تُعلِّم ولا تُزيّن:** انتقالٌ قصير عند تغيّر الحالة، وعدّادٌ يتحرّك حين يتغيّر
+      رقمه، ولا حركة دائمة ولا تنفّس ولا وميض. وكلها تسقط تحت prefers-reduced-motion.
+
+   البنية: يضمّ نفسه إلى أساس «الكلاسيكي» (classic.css يذكره في محدِّداته) ثم يعلوه بطبقة
+   markaz. كل قاعدة داخل @media screen فلا تمسّ الطباعة ولا تصميمًا آخر، والمتداخل يبدأ بـ&،
+   ولا قيمة لونية حرفية خارج كتلة الرموز.
+   ========================================================================== */
+
+/* ---------- ١. الرموز ---------- */
+/* ★ ترتيب الكتل ليس ذوقًا: classic.css يذكر markaz في محدِّده، ويكتب لوحَه الداكن على
+   `:root:is(…)[data-theme=dark]` — نوعيّتها (0,2,1). فلو كُتب لوحُ «مركز الأثر» الداكن على
+   `:root[data-design=markaz]` وحدها (0,1,1) لغلبه الكلاسيكيُّ فلا يظهر من هذا المظهر لونٌ واحد
+   في الوضع الداكن — وهو ما حدث فعلًا يوم شُحن أول مرة: القيد والملف والزر كلها في موضعها،
+   والشاشة تعرض ألوان الكلاسيكي. والعلاج أن يُكتب الداكن بالنوعية نفسها وبعده في ترتيب المصدر،
+   وهو ما يفعله yawm.css. فالأساس هنا فاتح، والداكن بمحدِّدٍ ذي سمتين، والتلقائي على جهازٍ داكن
+   بكتلةٍ ثالثة مطابقة — الثلاث كما في classic.css حرفًا بحرف في تركيبها. */
+@layer tokens{
+@media screen{
+/* المقاسات والحركة: مستقلة عن الوضع. */
+:root[data-design=markaz]{
+  /* المساحة أهدأ: سلّم أوسع من الكلاسيكي بدرجة. */
+  --s5:22px; --s12:52px; --gutter:20px; --gap-section:24px;
+  --r-xs:6px; --r-sm:10px; --r-md:12px; --r-lg:16px; --r-xl:22px; --r-pill:999px;
+  --hair:1px; --tap:44px;
+  --d1:.14s; --d2:.22s; --d3:.32s;
+  --ease:cubic-bezier(.32,.72,0,1); --ease-out:cubic-bezier(.22,1,.36,1); --spring:cubic-bezier(.34,1.36,.64,1);
+}
+/* الفاتح: الأساس — الورق البارد من الهوية، والحبر فحميّ. الشقّ الثاني يعلو كتلة الدخول الداكنة في signature.css. */
+:root[data-design=markaz],
+:root[data-design=markaz]:has(> body > #app > .login){
+  color-scheme:light;
+  --bg:#F2F3F5; --canvas:#F2F3F5; --surface:#FFFFFF; --surface-2:#F7F8FA; --surface-raised:#FFFFFF;
+  /* قيسا على الأرض #F2F3F5 (تدقيق 30 سبتمبر): الحبر الثالث عند .60 كان 4.41 والحد 4.5، والحدّ القوي عند .36 كان 2.22
+     وهو حدّ مكوّن (WCAG 1.4.11، 3:1). عند .64 يصير الحبر 5.01، وعند .50 يصير الحدّ 3.28 (و3.35 على الأبيض). */
+  --label:#1A1A1A; --label-2:rgba(26,26,26,.80); --label-3:rgba(26,26,26,.64); --label-4:rgba(26,26,26,.16);
+  --ink-1:#1A1A1A; --ink-2:#1A1A1A; --ink-3:rgba(26,26,26,.80); --ink-4:rgba(26,26,26,.64); --ink-5:rgba(26,26,26,.64);
+  --line:rgba(26,26,26,.14); --line-strong:rgba(26,26,26,.50);
+  --separator:rgba(26,26,26,.14); --separator-opaque:#D8DADE;
+  --fill:rgba(26,26,26,.05); --fill-2:rgba(26,26,26,.09); --fill-3:rgba(26,26,26,.03);
+  --material:rgba(255,255,255,.80); --material-thick:rgba(255,255,255,.94); --material-edge:rgba(26,26,26,.06);
+  /* الإبراز: فيروزي الهوية، بلا HEX (قرار المالك 1: موضعه الوحيد signature.css). */
+  /* الفيروزي نصًّا على الأرض: #12806B كان 4.37 على #F2F3F5، فحبر النص مشتقٌّ منه نحو السواد (84٪) = 5.71،
+     ومصدره رمز الهوية وحده. والتعبئة (زر الفعل) تبقى #12806B بنصٍّ أبيض 4.85. */
+  --tint:color-mix(in srgb,var(--brand-turquoise-deep) 84%,#000); --tint-fill:var(--brand-turquoise-deep); --on-tint:#FFFFFF;
+  --turn:var(--tint);
+  --focus:var(--brand-turquoise-deep); --horizon:var(--brand-turquoise-deep);
+  /* الحالات تُقال بالحبر وخيطٍ جانبيّ، فلا لون خلفية لها. */
+  --state-late:#8C2F24; --state-wait:#7A5C00; --state-done:rgba(26,26,26,.64);
+  /* لوحة Apple في «الكلاسيكي» كانت تتسرّب إلى هذا المظهر عبر أساسه المشترك: ثلاثة عشر لونًا خارج الدليل
+     (#007AFF و#34C759 و#FF3B30 وأخواتها) في الشارات والخطوات والتنبيهات. تُعاد هنا إلى الدليل: «عاجل» بأحمر الدليل
+     المعمَّق (#C0392B من الملحق، نصٌّ أبيض عليه 5.44)، و«تذكير» بأصفره، وما سواهما محايد: المعتاد صامت. */
+  --red:#C0392B; --red-ink:var(--state-late);
+  --orange:#F1C40F; --orange-ink:var(--state-wait); --yellow:#F1C40F; --yellow-ink:var(--state-wait);
+  --green:var(--brand-charcoal); --green-ink:var(--label-2); --blue:var(--brand-charcoal); --blue-ink:var(--label-2);
+  --gray:var(--brand-charcoal); --gray-ink:var(--label-2); --purple-ink:var(--label-2);
+  --indigo:var(--brand-charcoal); --purple:var(--brand-charcoal); --pink:var(--brand-charcoal); --teal:var(--brand-charcoal);
+  --mint:var(--brand-charcoal); --cyan:var(--brand-charcoal); --brown:var(--brand-charcoal);
+  --scrim:rgba(0,0,0,.28);
+  /* الظل خافتٌ جدًا: الفصل بالخيط لا بالارتفاع (الموجز: أسطح واضحة). */
+  --shadow-bar:0 2px 10px rgb(0 0 0/.08),0 0 0 var(--hair) rgba(26,26,26,.08);
+  --shadow-float:0 14px 38px rgb(0 0 0/.14),0 0 0 var(--hair) rgba(26,26,26,.10);
+  --shadow-card:0 1px 2px rgb(0 0 0/.05);
+}
+/* الداكن: الكتلتان متطابقتان (auto على جهاز داكن، وdark صراحةً) — كما في classic.css. */
+:root[data-design=markaz][data-theme=dark],
+:root[data-design=markaz][data-theme=dark]:has(> body > #app > .login){
+  color-scheme:dark;
+  /* المحايد: سلّم فحميّ مشتقّ من --brand-charcoal، أعمق منه للأرض وأفتح للأسطح. */
+  --bg:#141414; --canvas:#141414; --surface:#1C1C1C; --surface-2:#232323; --surface-raised:#262626;
+  --label:#F4F4F5; --label-2:rgba(244,244,245,.80); --label-3:rgba(244,244,245,.58); --label-4:rgba(244,244,245,.16);
+  --ink-1:#F4F4F5; --ink-2:#F4F4F5; --ink-3:rgba(244,244,245,.80); --ink-4:rgba(244,244,245,.58); --ink-5:rgba(244,244,245,.58);
+  --line:rgba(244,244,245,.14); --line-strong:rgba(244,244,245,.40);   /* .34 كان 2.91 على #232323؛ .40 = 3.47 */
+  --separator:rgba(244,244,245,.14); --separator-opaque:#2E2E2E;
+  --fill:rgba(244,244,245,.06); --fill-2:rgba(244,244,245,.10); --fill-3:rgba(244,244,245,.04);
+  --material:rgba(28,28,28,.86); --material-thick:rgba(28,28,28,.97); --material-edge:rgba(244,244,245,.08);
+  --tint:var(--brand-turquoise); --tint-fill:var(--brand-turquoise-deep); --on-tint:#FFFFFF; --turn:var(--tint);
+  --focus:var(--brand-turquoise); --horizon:var(--brand-turquoise);
+  --state-late:#E7A9A2; --state-wait:#E8D08A; --state-done:var(--label-3);
+  --red:#C0392B; --red-ink:var(--state-late);
+  --orange:#F1C40F; --orange-ink:var(--state-wait); --yellow:#F1C40F; --yellow-ink:var(--state-wait);
+  --green:var(--label-3); --green-ink:var(--label-2); --blue:var(--label-3); --blue-ink:var(--label-2);
+  --gray:var(--label-3); --gray-ink:var(--label-2); --purple-ink:var(--label-2);
+  --indigo:var(--label-3); --purple:var(--label-3); --pink:var(--label-3); --teal:var(--label-3);
+  --mint:var(--label-3); --cyan:var(--label-3); --brown:var(--label-3);
+  --scrim:rgba(0,0,0,.52);
+  --shadow-bar:0 2px 10px rgb(0 0 0/.40),0 0 0 var(--hair) rgba(244,244,245,.08);
+  --shadow-float:0 14px 38px rgb(0 0 0/.52),0 0 0 var(--hair) rgba(244,244,245,.10);
+  --shadow-card:0 1px 2px rgb(0 0 0/.35);
+}
+@media (prefers-color-scheme:dark){
+:root[data-design=markaz][data-theme=auto],
+:root[data-design=markaz][data-theme=auto]:has(> body > #app > .login){
+  color-scheme:dark;
+  --bg:#141414; --canvas:#141414; --surface:#1C1C1C; --surface-2:#232323; --surface-raised:#262626;
+  --label:#F4F4F5; --label-2:rgba(244,244,245,.80); --label-3:rgba(244,244,245,.58); --label-4:rgba(244,244,245,.16);
+  --ink-1:#F4F4F5; --ink-2:#F4F4F5; --ink-3:rgba(244,244,245,.80); --ink-4:rgba(244,244,245,.58); --ink-5:rgba(244,244,245,.58);
+  --line:rgba(244,244,245,.14); --line-strong:rgba(244,244,245,.40);   /* .34 كان 2.91 على #232323؛ .40 = 3.47 */
+  --separator:rgba(244,244,245,.14); --separator-opaque:#2E2E2E;
+  --fill:rgba(244,244,245,.06); --fill-2:rgba(244,244,245,.10); --fill-3:rgba(244,244,245,.04);
+  --material:rgba(28,28,28,.86); --material-thick:rgba(28,28,28,.97); --material-edge:rgba(244,244,245,.08);
+  --tint:var(--brand-turquoise); --tint-fill:var(--brand-turquoise-deep); --on-tint:#FFFFFF; --turn:var(--tint);
+  --focus:var(--brand-turquoise); --horizon:var(--brand-turquoise);
+  --state-late:#E7A9A2; --state-wait:#E8D08A; --state-done:var(--label-3);
+  --red:#C0392B; --red-ink:var(--state-late);
+  --orange:#F1C40F; --orange-ink:var(--state-wait); --yellow:#F1C40F; --yellow-ink:var(--state-wait);
+  --green:var(--label-3); --green-ink:var(--label-2); --blue:var(--label-3); --blue-ink:var(--label-2);
+  --gray:var(--label-3); --gray-ink:var(--label-2); --purple-ink:var(--label-2);
+  --indigo:var(--label-3); --purple:var(--label-3); --pink:var(--label-3); --teal:var(--label-3);
+  --mint:var(--label-3); --cyan:var(--label-3); --brown:var(--label-3);
+  --scrim:rgba(0,0,0,.52);
+  --shadow-bar:0 2px 10px rgb(0 0 0/.40),0 0 0 var(--hair) rgba(244,244,245,.08);
+  --shadow-float:0 14px 38px rgb(0 0 0/.52),0 0 0 var(--hair) rgba(244,244,245,.10);
+  --shadow-card:0 1px 2px rgb(0 0 0/.35);
+}}
+}}
+
+/* ---------- ٢. التركيب ---------- */
+@layer markaz{
+@media screen{
+:root[data-design=markaz]{
+
+  /* الأرض والسطح: مصمت يفصله خيط، بلا زجاج. */
+  & body{background:var(--bg);color:var(--label)}
+  & :is(.panel,.vn-tile,.hm-card,.hm-stat,.rq-row,.sc-card){
+    background:var(--surface);border:var(--hair) solid var(--line);box-shadow:none;
+    -webkit-backdrop-filter:none;backdrop-filter:none}
+
+  /* الأيقونات والصورة الرمزية محايدة: لوحٌ هادئ بحبر النص. كانت ألواح القائمة والخدمات بألوان Apple من الأساس المشترك،
+     والصورة الرمزية تدرّجًا رماديًّا (#A5ABB6←#858994) بحرفٍ أبيض عليه نحو 2.2:1. الفيروزي للفعل الواحد وللبؤرة وحدهما. */
+  & :is(.nav-icon,.service-icon,.rq-row-icon,.rq-dept-icon,.rq-rail-icon,.rq-pill > span,.avatar),
+  & .hm-strip .hm-strip-card :is(.hm-disc,.eu-chip > span:first-child){background:var(--fill-2);color:var(--label)}
+  & .rq-rail-item.active .rq-rail-icon{background:transparent;color:inherit}
+  & .nav-row.is-destructive .nav-icon{color:var(--red-ink)}
+
+  /* الحقل يُعرف بحدّه: تعبئة ‎--fill‎ وحدها 1.1:1 على السطح (WCAG 1.4.11 يطلب 3:1). خيطٌ داخلي بالحدّ القوي لا يغيّر
+     المقاس، وعند التركيز تعود حلقة الأساس كما هي. حقول البحث مستثناة: حدّها على حاويتها. */
+  & :is(input:where(:not([type=checkbox],[type=radio],[type=file],[type=range],[type=hidden],[type=search])),select,textarea):not(:focus){
+    box-shadow:inset 0 0 0 var(--hair) var(--line-strong)}
+
+  /* الزجاج في موضعين اثنين لا ثالث لهما: شريط الجوال، والعنصر المسحوب. */
+  & :is(.sig-tabs,.sidebar,#design-menu,#dialog,.journey-dialog){
+    -webkit-backdrop-filter:saturate(170%) blur(20px);backdrop-filter:saturate(170%) blur(20px)}
+
+  /* الإبراز نادر: الفعل الواحد ومؤشّر البؤرة. وما عداه حبرٌ على سطح. */
+  & .btn{border-radius:var(--r-md);box-shadow:none}
+  & .btn.primary{background:var(--tint-fill);color:var(--on-tint)}
+  & .btn.outline{background:none;border:var(--hair) solid var(--line);color:var(--label)}
+  & :is(a,button,input,select,textarea,[tabindex]):focus-visible{
+    outline:2px solid var(--focus);outline-offset:2px}
+
+  /* الحالة تُقال بخيطٍ جانبيّ وحبر، لا بخلفية ملوّنة — فلا تتنافس أربعة ألوان على النظر. */
+  & :is(.panel,.rq-row,.vn-tile).is-late{border-inline-start:3px solid var(--state-late)}
+  & :is(.panel,.rq-row,.vn-tile).is-wait{border-inline-start:3px solid var(--state-wait)}
+  & .is-late :is(strong,.status){color:var(--state-late)}
+  & .is-wait :is(strong,.status){color:var(--state-wait)}
+
+  /* المساحة أهدأ: الصفحة أضيق قليلًا فيقصر السطر ويسهل المسح. */
+  & .page{max-inline-size:1120px;padding-block-start:var(--s4)}
+  & .page > * + *{margin-block-start:var(--gap-section)}
+
+  /* الطباعة: تدرّج واضح، والعنوان لا يُشدّ حرفيًا في العربية. */
+  & :is(h1,h2,h3){color:var(--label);text-wrap:balance;letter-spacing:0}
+  & :lang(en) :is(h1,h2,h3){letter-spacing:-.01em}
+  & p,& li{text-wrap:pretty}
+  & .subtle,& small{color:var(--label-3)}
+  /* ‎small‎ داخل سطحٍ ممتلئ يرث حبر سطحه كاملًا: القاعدة أعلاه كانت تصبغه بالحبر الثالث فوق الفيروزي (2.03 فاتحًا و2.22 داكنًا). */
+  & :is(.btn,.hm-strip-new,.rq-rail-item.active) :is(small,em){color:inherit;opacity:1}
+  /* بطاقة الإجراء هدفٌ واحد (classic.css): البؤرة على البطاقة لا على سطر الرابط داخلها. */
+  & .hm-strip .hm-strip-card > :is(.eu-chip,.text-button):focus-visible{outline:none}
+  & .hm-strip > .hm-strip-card:has(> :is(.eu-chip,.text-button):focus-visible){outline:2px solid var(--focus);outline-offset:2px}
+
+  /* شريط الحقائق: عمل هذا المظهر كله أن يُقرأ من البطاقة ما على صاحبها اليوم — الحالة والمسؤول
+     والموعد والمرحلة والتالي — فالاسم خافتٌ والقيمة بحبر كامل، والخيط يفصلهما عمّا فوقهما. */
+  & .hm-facts{border-block-start-color:var(--line);gap:var(--s2) var(--s5)}
+  & .hm-facts dt{color:var(--label-3)}
+  & .hm-facts dd{color:var(--label);font-variant-numeric:tabular-nums}
+  & .hm-card.is-late .hm-facts dd{color:var(--label)}
+
+  /* العدّاد: رقمٌ مجدول لا يرقص عرضه حين يتغيّر. */
+  & :is(.vn-tile strong,.hm-stat strong,.rq-chip){font-variant-numeric:tabular-nums}
+
+  /* ── الحركة: تُعلِّم ولا تُزيّن ───────────────────────────────────────────── */
+  /* انتقالٌ قصير عند تغيّر الحالة، ولا حركة دائمة ولا وميض. */
+  & :is(.panel,.rq-row,.vn-tile,.hm-card){transition:border-color var(--d1) var(--ease-out),background-color var(--d1) var(--ease-out)}
+  @media (hover:hover){& :is(.rq-row,.vn-tile,.hm-card):hover{border-color:var(--line-strong)}}   /* hover only where the pointer hovers */
+  & :is(.btn,.rq-row,.hm-strip-card):active{scale:var(--press-scale)}
+  /* العدّاد يتحرّك حين يتغيّر رقمه وحده (تضع الواجهة data-changed عند التحديث). */
+  & [data-changed] :is(strong,.vn-value){animation:k-markaz-count var(--d2) var(--ease-out) 1}
+  /* مسار الطلب: الخطوة المنجزة تُملأ مرة، ولا تنبض. */
+  & .step.is-done::before{animation:k-markaz-step var(--d2) var(--ease-out) 1 both}
+
+  /* ── الجوال: شريط سفلي، وزرّ الإنشاء قريب من الإبهام، وبطاقة بعرض الشاشة ── */
+  @media (max-width:480px){
+    & .page{padding-inline:var(--gutter)}
+    & :is(.panel,.vn-tile,.hm-card){border-radius:var(--r-md)}
+    & .sig-tabs{box-shadow:var(--shadow-bar)}
+    /* الفعل الأول يتمدّد ليبلغه الإبهام بلا مدّ اليد. */
+    & .page .btn.primary{inline-size:100%;min-block-size:48px}
+    & .rq-opt{grid-template-columns:minmax(0,1fr)}
+    /* على الجوال الحقائق عمودٌ واحد: عمودان بعرض 360 يكسران القيمة على سطرين لكل حقيقة. */
+    & .hm-facts{grid-template-columns:minmax(0,1fr)}
+  }
+}
+
+@keyframes k-markaz-count{from{opacity:.55;transform:translateY(-2px)}to{opacity:1;transform:none}}
+@keyframes k-markaz-step{from{transform:scaleX(0);transform-origin:inline-start}to{transform:none}}
+
+/* من طلب سكونًا وجده كاملًا: لا انتقال ولا عدّاد متحرّك ولا خطوة تُملأ. */
+@media (prefers-reduced-motion:reduce){
+  :root[data-design=markaz]{
+    & :is(.panel,.rq-row,.vn-tile,.hm-card){transition:none}
+    & :is(.btn,.rq-row,.hm-strip-card):active{transform:none;scale:none}
+    & [data-changed] :is(strong,.vn-value){animation:none}
+    & .step.is-done::before{animation:none}
+  }
+}
+}}

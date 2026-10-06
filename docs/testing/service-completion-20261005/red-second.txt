@@ -1,0 +1,73 @@
+(node:20940) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ لا يقرأ موظف آخر مخرجات طلب لا يملك حق الاطلاع عليه (2735.658583ms)
+✔ لا يقبل مخرج تغيير وظيفي يخص موظفًا آخر أو طلبًا آخر أو حركة ملغاة (2537.298959ms)
+✔ تغيير الحساب البنكي يحتاج حساب صاحب الطلب متحققًا لا سجلًا معلقًا (2607.885834ms)
+✔ يعاد فحص مخرج السجل عند قبوله وعند الإغلاق ولا يكفي قبوله قبل إلغائه (2595.066667ms)
+✖ طلب إقفال الحملة لا يسلم حملة ما زالت في التخطيط (2584.114583ms)
+✖ مسار المغادرة لا يقبل حزمة انضمام ولا حزمة تخص موظفًا آخر (2564.740708ms)
+✖ تسعير الفرصة لا يقبل سجلًا أوليًا لا يحمل تسعيرًا معتمدًا (2579.44225ms)
+ℹ tests 7
+ℹ suites 0
+ℹ pass 4
+ℹ fail 3
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 18367.93025
+
+✖ failing tests:
+
+test at tests/service-output-integrity.test.mjs:74:1
+✖ طلب إقفال الحملة لا يسلم حملة ما زالت في التخطيط (2584.114583ms)
+  AssertionError [ERR_ASSERTION]: Missing expected exception.
+      at TestContext.<anonymous> (file:///Users/abdulaziz/Documents/Codex/2026-09-09/3-6t-live/tests/service-output-integrity.test.mjs:79:10)
+      at Test.runInAsyncScope (node:async_hooks:228:14)
+      at Test.run (node:internal/test_runner/test:1118:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:787:18)
+      at Test.postRun (node:internal/test_runner/test:1247:19)
+      at Test.run (node:internal/test_runner/test:1175:12)
+      at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:787:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: undefined,
+    operator: 'throws',
+    diff: 'simple'
+  }
+
+test at tests/service-output-integrity.test.mjs:82:1
+✖ مسار المغادرة لا يقبل حزمة انضمام ولا حزمة تخص موظفًا آخر (2564.740708ms)
+  AssertionError [ERR_ASSERTION]: Missing expected exception.
+      at TestContext.<anonymous> (file:///Users/abdulaziz/Documents/Codex/2026-09-09/3-6t-live/tests/service-output-integrity.test.mjs:89:56)
+      at Test.runInAsyncScope (node:async_hooks:228:14)
+      at Test.run (node:internal/test_runner/test:1118:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:787:18)
+      at Test.postRun (node:internal/test_runner/test:1247:19)
+      at Test.run (node:internal/test_runner/test:1175:12)
+      at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:787:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: undefined,
+    operator: 'throws',
+    diff: 'simple'
+  }
+
+test at tests/service-output-integrity.test.mjs:94:1
+✖ تسعير الفرصة لا يقبل سجلًا أوليًا لا يحمل تسعيرًا معتمدًا (2579.44225ms)
+  AssertionError [ERR_ASSERTION]: Missing expected exception.
+      at TestContext.<anonymous> (file:///Users/abdulaziz/Documents/Codex/2026-09-09/3-6t-live/tests/service-output-integrity.test.mjs:98:10)
+      at Test.runInAsyncScope (node:async_hooks:228:14)
+      at Test.run (node:internal/test_runner/test:1118:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:787:18)
+      at Test.postRun (node:internal/test_runner/test:1247:19)
+      at Test.run (node:internal/test_runner/test:1175:12)
+      at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:787:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: undefined,
+    operator: 'throws',
+    diff: 'simple'
+  }

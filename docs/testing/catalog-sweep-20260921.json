@@ -1,0 +1,252 @@
+{
+  "ships": {
+    "summary": {
+      "mode": "ships",
+      "started": "2026-09-21T13:14:19.848Z",
+      "finished": "2026-09-21T13:14:23.441Z",
+      "port": 3742,
+      "services": 142,
+      "passed": 137,
+      "failed": 5,
+      "submitted": 142,
+      "approved": 142,
+      "executed": 142,
+      "closed": 137,
+      "executed_by_decider": 115,
+      "by_execution_basis": {
+        "native": 142
+      },
+      "no_executor": 0,
+      "fallback_executions": []
+    },
+    "health": {
+      "services_checked": 142,
+      "summary": {
+        "no_executor": 0,
+        "step_unresolvable": 0,
+        "threshold_undefined": 0,
+        "sod_no_executor": 0,
+        "no_substitute": 0,
+        "decider_is_executor": 126
+      },
+      "decider_is_executor": {
+        "count": 126,
+        "sensitive": 18
+      }
+    },
+    "stops": [
+      {
+        "code": "HR-EXPERIENCE-CERT",
+        "stage": "close",
+        "error": "letter_template_required",
+        "message": "لا قالب معتمد لهذا الخطاب بعد، فلا يُغلق الطلب بلا خطاب. يعتمد مالك الإجراء القالب ثم يُصدر الخطاب من «خطابات الموظفين»"
+      },
+      {
+        "code": "HR-LETTER",
+        "stage": "close",
+        "error": "letter_template_required",
+        "message": "لا قالب معتمد لهذا الخطاب بعد، فلا يُغلق الطلب بلا خطاب. يعتمد مالك الإجراء القالب ثم يُصدر الخطاب من «خطابات الموظفين»"
+      },
+      {
+        "code": "HR-RESIGNATION",
+        "stage": "close",
+        "error": "resignation_open",
+        "message": "لا يُغلق طلب الاستقالة قبل قبولها أو قبولها حكمًا أو سحبها في وحدة الاستقالة"
+      },
+      {
+        "code": "HR-SALARY-CERT",
+        "stage": "close",
+        "error": "letter_template_required",
+        "message": "لا قالب معتمد لهذا الخطاب بعد، فلا يُغلق الطلب بلا خطاب. يعتمد مالك الإجراء القالب ثم يُصدر الخطاب من «خطابات الموظفين»"
+      },
+      {
+        "code": "PRC-VENDOR-BANK",
+        "stage": "close",
+        "error": "vendor_not_registered",
+        "message": "المورد «تجريبي المورد» غير مسجل في ملف الموردين. سجّله أولًا، فالتحقق المالي من بيانات الدفع يجري في سجله لا في نص الطلب"
+      }
+    ],
+    "enabled_adoptions": null
+  },
+  "enabled": {
+    "summary": {
+      "mode": "enabled",
+      "started": "2026-09-21T13:14:24.346Z",
+      "finished": "2026-09-21T13:14:28.293Z",
+      "port": 3742,
+      "services": 142,
+      "passed": 137,
+      "failed": 5,
+      "submitted": 142,
+      "approved": 142,
+      "executed": 142,
+      "closed": 137,
+      "executed_by_decider": 97,
+      "by_execution_basis": {
+        "native": 129,
+        "escalation": 11,
+        "deputy": 2
+      },
+      "no_executor": 0,
+      "fallback_executions": [
+        {
+          "code": "DAT-DATA-ACCESS",
+          "executor": "vp-corporate",
+          "basis": "escalation",
+          "label": "مرجع تصعيد الإدارة",
+          "why": "مرجع تصعيد الإدارة المنفذة المسجل؛ وصله الطلب لأن منفذي الإدارة كلهم أصحابُ قرار فيه أو أصحابُه"
+        },
+        {
+          "code": "DIG-AD-ACCOUNT",
+          "executor": "vp-growth",
+          "basis": "escalation",
+          "label": "مرجع تصعيد الإدارة",
+          "why": "مرجع تصعيد الإدارة المنفذة المسجل؛ وصله الطلب لأن منفذي الإدارة كلهم أصحابُ قرار فيه أو أصحابُه"
+        },
+        {
+          "code": "DIG-BUDGET-CHANGE",
+          "executor": "vp-growth",
+          "basis": "escalation",
+          "label": "مرجع تصعيد الإدارة",
+          "why": "مرجع تصعيد الإدارة المنفذة المسجل؛ وصله الطلب لأن منفذي الإدارة كلهم أصحابُ قرار فيه أو أصحابُه"
+        },
+        {
+          "code": "FIN-BUDGET-TRANSFER",
+          "executor": "head-accounts",
+          "basis": "deputy",
+          "label": "نائب مسمّى",
+          "why": "تفعيل مصطنع داخل نسخة اختبار مؤقتة بتاريخ المسح، لقياس أثر القرار المعلّق. ليس قرار مالك إجراء."
+        },
+        {
+          "code": "FIN-CUSTODY",
+          "executor": "vp-corporate",
+          "basis": "escalation",
+          "label": "مرجع تصعيد الإدارة",
+          "why": "مرجع تصعيد الإدارة المنفذة المسجل؛ وصله الطلب لأن منفذي الإدارة كلهم أصحابُ قرار فيه أو أصحابُه"
+        },
+        {
+          "code": "FIN-PAYMENT-REQUEST",
+          "executor": "vp-corporate",
+          "basis": "escalation",
+          "label": "مرجع تصعيد الإدارة",
+          "why": "مرجع تصعيد الإدارة المنفذة المسجل؛ وصله الطلب لأن منفذي الإدارة كلهم أصحابُ قرار فيه أو أصحابُه"
+        },
+        {
+          "code": "FIN-REFUND",
+          "executor": "vp-corporate",
+          "basis": "escalation",
+          "label": "مرجع تصعيد الإدارة",
+          "why": "مرجع تصعيد الإدارة المنفذة المسجل؛ وصله الطلب لأن منفذي الإدارة كلهم أصحابُ قرار فيه أو أصحابُه"
+        },
+        {
+          "code": "INF-PROOF-PAYMENT",
+          "executor": "vp-growth",
+          "basis": "escalation",
+          "label": "مرجع تصعيد الإدارة",
+          "why": "مرجع تصعيد الإدارة المنفذة المسجل؛ وصله الطلب لأن منفذي الإدارة كلهم أصحابُ قرار فيه أو أصحابُه"
+        },
+        {
+          "code": "LEG-PRIVACY-REQUEST",
+          "executor": "head-accounts",
+          "basis": "deputy",
+          "label": "نائب مسمّى",
+          "why": "تفعيل مصطنع داخل نسخة اختبار مؤقتة بتاريخ المسح، لقياس أثر القرار المعلّق. ليس قرار مالك إجراء."
+        },
+        {
+          "code": "PRC-EMERGENCY",
+          "executor": "vp-corporate",
+          "basis": "escalation",
+          "label": "مرجع تصعيد الإدارة",
+          "why": "مرجع تصعيد الإدارة المنفذة المسجل؛ وصله الطلب لأن منفذي الإدارة كلهم أصحابُ قرار فيه أو أصحابُه"
+        },
+        {
+          "code": "PRC-PO-CHANGE",
+          "executor": "vp-corporate",
+          "basis": "escalation",
+          "label": "مرجع تصعيد الإدارة",
+          "why": "مرجع تصعيد الإدارة المنفذة المسجل؛ وصله الطلب لأن منفذي الإدارة كلهم أصحابُ قرار فيه أو أصحابُه"
+        },
+        {
+          "code": "PRC-PURCHASE-REQUEST",
+          "executor": "vp-corporate",
+          "basis": "escalation",
+          "label": "مرجع تصعيد الإدارة",
+          "why": "مرجع تصعيد الإدارة المنفذة المسجل؛ وصله الطلب لأن منفذي الإدارة كلهم أصحابُ قرار فيه أو أصحابُه"
+        },
+        {
+          "code": "PRC-VENDOR-BANK",
+          "executor": "vp-corporate",
+          "basis": "escalation",
+          "label": "مرجع تصعيد الإدارة",
+          "why": "مرجع تصعيد الإدارة المنفذة المسجل؛ وصله الطلب لأن منفذي الإدارة كلهم أصحابُ قرار فيه أو أصحابُه"
+        }
+      ]
+    },
+    "health": {
+      "services_checked": 142,
+      "summary": {
+        "no_executor": 0,
+        "step_unresolvable": 0,
+        "threshold_undefined": 0,
+        "sod_no_executor": 0,
+        "no_substitute": 0,
+        "decider_is_executor": 106
+      },
+      "decider_is_executor": {
+        "count": 106,
+        "sensitive": 0
+      }
+    },
+    "stops": [
+      {
+        "code": "HR-EXPERIENCE-CERT",
+        "stage": "close",
+        "error": "letter_template_required",
+        "message": "لا قالب معتمد لهذا الخطاب بعد، فلا يُغلق الطلب بلا خطاب. يعتمد مالك الإجراء القالب ثم يُصدر الخطاب من «خطابات الموظفين»"
+      },
+      {
+        "code": "HR-LETTER",
+        "stage": "close",
+        "error": "letter_template_required",
+        "message": "لا قالب معتمد لهذا الخطاب بعد، فلا يُغلق الطلب بلا خطاب. يعتمد مالك الإجراء القالب ثم يُصدر الخطاب من «خطابات الموظفين»"
+      },
+      {
+        "code": "HR-RESIGNATION",
+        "stage": "close",
+        "error": "resignation_open",
+        "message": "لا يُغلق طلب الاستقالة قبل قبولها أو قبولها حكمًا أو سحبها في وحدة الاستقالة"
+      },
+      {
+        "code": "HR-SALARY-CERT",
+        "stage": "close",
+        "error": "letter_template_required",
+        "message": "لا قالب معتمد لهذا الخطاب بعد، فلا يُغلق الطلب بلا خطاب. يعتمد مالك الإجراء القالب ثم يُصدر الخطاب من «خطابات الموظفين»"
+      },
+      {
+        "code": "PRC-VENDOR-BANK",
+        "stage": "close",
+        "error": "vendor_not_registered",
+        "message": "المورد «تجريبي المورد» غير مسجل في ملف الموردين. سجّله أولًا، فالتحقق المالي من بيانات الدفع يجري في سجله لا في نص الطلب"
+      }
+    ],
+    "enabled_adoptions": {
+      "adopted": 41,
+      "failed": [],
+      "deputies": [
+        {
+          "code": "FIN-BUDGET-TRANSFER",
+          "deputy": "head-accounts",
+          "adopted_after_naming": true,
+          "code_error": null
+        },
+        {
+          "code": "LEG-PRIVACY-REQUEST",
+          "deputy": "head-accounts",
+          "adopted_after_naming": true,
+          "code_error": null
+        }
+      ]
+    }
+  },
+  "note": "ملخص مسح دليل الخدمات على فرع fix/services-workflow بتاريخ 2026-09-21. وُلِّد بـ node scripts/qa-catalog-sweep.mjs على نسخة مصطنعة مؤقتة حُذفت؛ لا بيانات شخص حقيقي فيه."
+}

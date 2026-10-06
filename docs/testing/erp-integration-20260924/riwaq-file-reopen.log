@@ -1,0 +1,3 @@
+(node:64573) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+{"node":"v24.14.0","execPath":"/private/tmp/36t-node24/node-v24.14.0-darwin-arm64/bin/node","synthetic":true,"migration":143,"previousRowsPreserved":true,"physicalCloseAndReopen":true,"riwaqPersisted":true,"companySettingsPreserved":true,"integrity":"ok","foreignKeyViolations":0}

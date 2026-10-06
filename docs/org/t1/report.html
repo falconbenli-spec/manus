@@ -1,0 +1,141 @@
+<title>ت1 — تقرير المعاينة</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+:root{--paper:#f3f4f1;--sheet:#fbfbf9;--ink:#1b2230;--muted:#586070;--line:#d3d8d3;--accent:#24594f;--accent-soft:#e1ece8;--ok:#1f6a3b;--ok-soft:#e2f0e6;--bad:#a13a22;--warn:#8a5a10;--warn-soft:#f6ecd8;
+--f:"IBM Plex Sans Arabic","Noto Sans Arabic",Tahoma,system-ui,sans-serif;--mono:"IBM Plex Mono",ui-monospace,Menlo,monospace}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){color-scheme:dark;--paper:#131719;--sheet:#1a1f22;--ink:#e6e9e6;--muted:#a1a9a6;--line:#343c3d;--accent:#7cc0af;--accent-soft:#1f302c;--ok:#7fd19b;--ok-soft:#1c2f23;--bad:#f0927c;--warn:#e0b25a;--warn-soft:#33291a}}
+:root[data-theme="dark"]{color-scheme:dark;--paper:#131719;--sheet:#1a1f22;--ink:#e6e9e6;--muted:#a1a9a6;--line:#343c3d;--accent:#7cc0af;--accent-soft:#1f302c;--ok:#7fd19b;--ok-soft:#1c2f23;--bad:#f0927c;--warn:#e0b25a;--warn-soft:#33291a}
+body{background:var(--paper);color:var(--ink);font:16px/1.75 var(--f);direction:rtl}
+.wrap{max-width:980px;margin:0 auto;padding-inline:16px;padding-block:24px 64px}
+h1{font-size:1.9rem;line-height:1.3;margin:0 0 .25rem;text-wrap:balance}h2{font-size:1.3rem;margin:2.5rem 0 .75rem;text-wrap:balance}h3{font-size:1.05rem;margin:0}
+.status{font-family:var(--mono);font-size:.9rem;background:var(--sheet);border:1px solid var(--line);border-radius:6px;padding:10px 12px;overflow-wrap:anywhere}
+.lede{max-width:65ch;color:var(--muted)}
+.figs{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:12px;margin:1.25rem 0}
+.fig{background:var(--sheet);border:1px solid var(--line);border-radius:6px;padding:12px}.fig b{display:block;font-size:1.6rem;font-variant-numeric:tabular-nums;color:var(--accent)}.fig span{color:var(--muted);font-size:.9rem}
+nav.toc{display:flex;flex-wrap:wrap;gap:8px}nav.toc a{color:var(--accent);text-decoration:none;border:1px solid var(--line);border-radius:999px;padding:6px 12px;min-height:44px;display:inline-flex;align-items:center}
+a:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+.scroll{overflow-x:auto}table{border-collapse:collapse;width:100%;font-size:.9rem}th,td{border-bottom:1px solid var(--line);padding:6px 8px;text-align:start;vertical-align:top}th{color:var(--muted);font-weight:500}
+td.num{font-variant-numeric:tabular-nums}td.code{font-family:var(--mono);font-size:.85rem;white-space:nowrap}
+.pill{display:inline-block;font-size:.8rem;border-radius:4px;padding:0 8px;font-weight:600;white-space:nowrap}
+.pass{background:var(--ok-soft);color:var(--ok)}.part{background:var(--warn-soft);color:var(--warn)}.manual{background:var(--accent-soft);color:var(--accent)}
+.box{background:var(--sheet);border:1px solid var(--line);border-radius:6px;padding:14px 16px;margin:12px 0}
+pre{font-family:var(--mono);font-size:.85rem;background:var(--sheet);border:1px solid var(--line);border-radius:6px;padding:12px;overflow-x:auto;direction:ltr;text-align:left;white-space:pre}
+ol,ul{padding-inline-start:1.3rem}li{margin:.35rem 0;max-width:75ch}
+.note{color:var(--muted);font-size:.88rem;max-width:75ch}code{font-family:var(--mono);font-size:.9em}
+</style>
+<div class="wrap">
+<p class="status">ت1 جاهزة للمعاينة · الفرع org-t1 · الرابط http://127.0.0.1:3601 بعد تشغيل أمر واحد على جهازك</p>
+<h1>ت1 — تقرير المعاينة</h1>
+<p class="lede">القائمة الجانبية الجديدة، وباب «الخدمات» الواحد، وصفحة لكل إدارة بخمسة أقسام، مبنية في نسخة منفصلة من الكود (الفرع <code>org-t1</code>) على قرارات ت0 المعتمدة و«بعد-ب». الواجهة وحدها تغيّرت: من يطلب ومن يعتمد ومن ينفّذ بقي كما هو لكل حساب. لا يُكتب هنا «مقبول»؛ القبول لك.</p>
+<div class="figs">
+<div class="fig"><b>7–9</b><span>مدخلات القائمة الآن، وكانت 31–127</span></div>
+<div class="fig"><b>15 / 15</b><span>قائمة ضمن حد دورها، مقيسة على 28 حساب معاينة</span></div>
+<div class="fig"><b>0</b><span>شاشة فقدها أي حساب</span></div>
+<div class="fig"><b>8 من 10</b><span>معايير ناجحة آليًا، وواحد جزئي، وواحد يدوي لك</span></div>
+</div>
+<nav class="toc" aria-label="أقسام التقرير"><a href="#try">جرّب المعاينة</a><a href="#menus">القائمة قبل وبعد</a><a href="#criteria">المعايير</a><a href="#tasks">مهام اختبار الشجرة</a><a href="#built">ما بُني</a><a href="#open">ما لم يُنجز</a></nav>
+
+<h2 id="try">جرّب المعاينة من متصفحك</h2>
+<div class="box">
+<p>حماية جلستي تمنع فتح منفذ على الجهاز، فلم أستطع تشغيل الخادم بنفسي. شغّله أنت بأمر واحد:</p>
+<ol>
+<li>افتح «الطرفية» (Terminal) على جهازك.</li>
+<li>انسخ هذا والصقه، ثم اضغط Enter:</li>
+</ol>
+<pre>cd "/Users/abdulaziz/Documents/Codex/2026-09-09/3-6t-360-codex-handoff-master/.claude/worktrees/org-t1"
+LOCAL_DB_PATH=work/org-t1-preview/preview.sqlite PORT=3601 LOCAL_BIND_HOST=127.0.0.1 npm start</pre>
+<ol start="3">
+<li>افتح في المتصفح: <code>http://127.0.0.1:3601</code></li>
+<li>ادخل بأي حساب معاينة بكلمة مروره المعتادة. جرّب موظفًا، ثم مديرًا، ثم الأدمن، وقارن القائمة الجانبية.</li>
+<li>على الجوال أو بتضييق النافذة: الشريط السفلي فيه الرئيسية و«إجرائي» والخدمات وطلباتي، وزر يفتح القائمة ويُغلق بـEsc أو بزر الرجوع.</li>
+<li>للإيقاف: عُد إلى الطرفية واضغط Ctrl+C.</li>
+</ol>
+<ul class="note">
+<li>القاعدة نسخة من آخر نسخة احتياطية مجرّبة (الترحيل 147، بصمتها مطابقة)، في مجلد <code>work/org-t1-preview/</code> داخل نسخة org-t1. لا القاعدة الحية. الإقلاع لا يرحّل شيئًا لأن الكود عند الترحيل 147 نفسه.</li>
+<li>الخادم على <code>127.0.0.1</code> وحده، فلا يصله جهاز آخر.</li>
+<li>مفتاح تشفير الحقول في المعاينة مفتاح جديد لنسخة org-t1، لا مفتاح التشغيل. أثره: حساب واحد مفعَّل عليه التحقق بخطوتين لن يدخل في المعاينة، وأرقام الحسابات البنكية المشفّرة لا تُقرأ. بقية الحسابات تدخل عاديًا.</li>
+<li>المهام الخلفية (التذكيرات) تكتب في النسخة وحدها. البريد مطفأ.</li>
+</ul>
+</div>
+
+<h2 id="menus">القائمة الجانبية قبل وبعد، مقيسة</h2>
+<p class="note">قيست بتشغيل كود القائمة نفسه على تصاريح كل حساب من الحسابات الثمانية والعشرين في نسخة القاعدة، قبل التعديل (commit 37cef8b) وبعده. «بعد» هو المدخلات الظاهرة. و«الوصول» عدد الشاشات التي يصلها الحساب من أي مكان.</p>
+<div class="scroll"><table>
+<thead><tr><th>الدور</th><th>الإدارات</th><th>حسابات</th><th>قبل</th><th>بعد</th><th>الحد</th><th>الوصول قبل ← بعد</th></tr></thead>
+<tbody>
+<tr><td class="code">admin</td><td>تشغيل المنصة</td><td class="num">1</td><td class="num">69</td><td class="num">8</td><td class="num">9</td><td class="num">69 ← 69</td></tr>
+<tr><td class="code">employee</td><td>تشغيل المنصة</td><td class="num">2</td><td class="num">32</td><td class="num">7</td><td class="num">8</td><td class="num">32 ← 33</td></tr>
+<tr><td class="code">employee</td><td>الخدمات الإبداعية</td><td class="num">1</td><td class="num">31</td><td class="num">8</td><td class="num">8</td><td class="num">31 ← 32</td></tr>
+<tr><td class="code">employee</td><td>الخدمات الإبداعية</td><td class="num">1</td><td class="num">47</td><td class="num">8</td><td class="num">8</td><td class="num">47 ← 48</td></tr>
+<tr><td class="code">hr</td><td>رأس المال البشري</td><td class="num">1</td><td class="num">68</td><td class="num">8</td><td class="num">8</td><td class="num">68 ← 68</td></tr>
+<tr><td class="code">it</td><td>تقنية المعلومات</td><td class="num">1</td><td class="num">50</td><td class="num">8</td><td class="num">8</td><td class="num">50 ← 50</td></tr>
+<tr><td class="code">manager</td><td>تسع إدارات</td><td class="num">12</td><td class="num">71</td><td class="num">9</td><td class="num">9</td><td class="num">71 ← 71</td></tr>
+<tr><td class="code">manager</td><td>الحوكمة، المشتريات</td><td class="num">2</td><td class="num">72</td><td class="num">9</td><td class="num">9</td><td class="num">72 ← 72</td></tr>
+<tr><td class="code">manager</td><td>الإدارة التنفيذية للمشاريع</td><td class="num">1</td><td class="num">78</td><td class="num">9</td><td class="num">9</td><td class="num">78 ← 78</td></tr>
+<tr><td class="code">manager</td><td>إدارة الأعمال</td><td class="num">1</td><td class="num">79</td><td class="num">9</td><td class="num">9</td><td class="num">79 ← 79</td></tr>
+<tr><td class="code">manager</td><td>إدارة الحسابات</td><td class="num">1</td><td class="num">80</td><td class="num">9</td><td class="num">9</td><td class="num">80 ← 80</td></tr>
+<tr><td class="code">manager</td><td>مكتب الرئيس التنفيذي</td><td class="num">1</td><td class="num">85</td><td class="num">9</td><td class="num">9</td><td class="num">85 ← 85</td></tr>
+<tr><td class="code">manager</td><td>المالية</td><td class="num">1</td><td class="num">96</td><td class="num">9</td><td class="num">9</td><td class="num">96 ← 96</td></tr>
+<tr><td class="code">manager</td><td>رأس المال البشري</td><td class="num">1</td><td class="num">127</td><td class="num">9</td><td class="num">9</td><td class="num">127 ← 127</td></tr>
+<tr><td class="code">pm</td><td>الخدمات الإبداعية</td><td class="num">1</td><td class="num">66</td><td class="num">8</td><td class="num">8</td><td class="num">66 ← 66</td></tr>
+</tbody></table></div>
+<ul class="note">
+<li>مجموعة «أخرى» كانت في قوائم الحسابات الثمانية والعشرين كلها، وهي الآن في لا شيء منها.</li>
+<li>زاد وصول الموظف شاشة واحدة: «الخدمات» صار في قائمته. كان يصلها قبل برابط، والخادم كان يخدمها له أصلًا، فلا منح جديد.</li>
+<li>حسابا «تشغيل المنصة» (الموظفان والأدمن) بلا مدخل إدارة، لأن إدارتهم بلا خدمات ولا طابور، فلا صفحة لها. شاشاتهم في «إدارة المنصة» وفي صفحات الإدارات المالكة.</li>
+</ul>
+
+<h2 id="criteria">معايير القبول</h2>
+<div class="scroll"><table>
+<thead><tr><th>المعيار</th><th>النتيجة</th><th>الدليل</th></tr></thead>
+<tbody>
+<tr><td class="code">ق-ت1-1</td><td><span class="pill pass">ناجح</span></td><td>الحد لكل حساب ولا يتجاوز 12، و«إدارة المنصة» للأدمن وحده، ولا «أخرى». اختبار <code>tests/org-t1-nav.test.mjs</code>، والقياس أعلاه على 28 حسابًا.</td></tr>
+<tr><td class="code">ق-ت1-2</td><td><span class="pill pass">ناجح</span></td><td>كود القائمة القديم (37cef8b) والجديد يُشغَّلان على كل حساب: لا شاشة مفقودة، والإضافة الوحيدة «الخدمات» للموظف. وعلى نسخة القاعدة: الوصول بعد يحوي الوصول قبل في القوائم الخمس عشرة.</td></tr>
+<tr><td class="code">ق-ت1-3</td><td><span class="pill pass">ناجح</span></td><td><code>#catalog</code> و<code>#departments</code> و<code>#portal</code> تُحال إلى موضعها الجديد ويظهر العنوان الجديد، و<code>#catalog/new</code> ما زال يفتح نافذة الطلب. وبقية المسارات القديمة تعمل كما هي لأن الشاشات لم تُحذف.</td></tr>
+<tr><td class="code">ق-ت1-4</td><td><span class="pill pass">ناجح</span></td><td>الشاشة تحمل اسمًا واحدًا في كل عدسة، وعنوان الصفحة يؤخذ منه: «إجازاتي» في ملفي، و«إجازات فريقي» في فريقي، و«إجازات الموظفين» في صفحة رأس المال البشري.</td></tr>
+<tr><td class="code">ق-ت1-5</td><td><span class="pill pass">ناجح</span></td><td>كل خدمة من الـ142 على ثلاث ضغطات من الرئيسية بالعدسة الافتراضية «حسب الإدارة»، لحسابات موظف ومدير وموارد بشرية وتقنية ومن خارج الإدارة.</td></tr>
+<tr><td class="code">ق-ت1-6</td><td><span class="pill pass">ناجح</span></td><td>البحث يجد الخدمات الـ142 باسمها، وبعد إضافة تشكيل ومدّ وهمزات، وبأكثر من 300 مرادف.</td></tr>
+<tr><td class="code">ق-ت1-7</td><td><span class="pill pass">ناجح</span></td><td>الأربعون (39 من د4 وDAT-PROFITABILITY من د3) خارج «حسب الحاجة» و«خدمات مختارة» و«لك»، وكل منها في قسم «الخدمات» بصفحة إدارتها. والحدّيات الأربع عشرة باقية في الباب الأمامي. والرابط المباشر لكل منها يعمل.</td></tr>
+<tr><td class="code">ق-ت1-8</td><td><span class="pill pass">ناجح</span></td><td>لقطة لكل حساب (26 حسابًا في القاعدة المختبرة): ما يطلبه، وما يعتمده، وما يصل طابوره. أُخذت قبل أي تعديل في الواجهة (commit ef5cab1)، وتطابق بعده تطابقًا تامًا: 3550 طلبًا، و4578 اعتمادًا، و208 تنفيذًا.</td></tr>
+<tr><td class="code">ق-ت1-9</td><td><span class="pill part">جزئي</span></td><td>الحزمة كاملة: 1690 اختبارًا، نجح 1646، وتُخطّي 6، وفشل 38. والـ38 كلها رفض فتح منفذ (<code>listen EPERM</code>) من حماية الجلسة، فحصتها واحدًا واحدًا، ولا تأكيد واحد فاشل. وهو العدد نفسه قبل ت1. اختبارات HTTP لم تُقس هنا، وتُقاس على جهازك أو في البوابة TP2.1. <code>npm run check</code> ناجح، والمسنّنة نزلت درجة (113 إلى 112).</td></tr>
+<tr><td class="code">ق-ت1-10</td><td><span class="pill manual">يدوي، لك</span></td><td>مراجعة التصميم على المكتب والجوال لكل دور، ثم مهام اختبار الشجرة أدناه على المعاينة. لم تُجرَ بعد.</td></tr>
+</tbody></table></div>
+<p class="note">وراجع وكيل مستقل الفرق كله مقابل ممنوعات ت1: لا تصفية بالجمهور، ولا قرار وصول جديد، ولا تغيير منفّذ أو مسار اعتماد أو حالة، ولا ترحيل، ولا مفتاح قُلب. حكمه: الممنوعات محترمة، وبلا ملاحظة حرجة أو عالية. وأُصلحت ملاحظتاه المتوسطة الأولى والمنخفضات قبل الـcommit.</p>
+
+<h2 id="tasks">عشر مهام لاختبار الشجرة على المعاينة</h2>
+<p class="note">اقرأ كل مهمة للمشارك من الرئيسية، ولا تدلّه. سجّل: هل وصل، وعدد الضغطات، وهل رجع للخلف. عتبة النجاح (ق5) تكتبها أنت قبل أول جلسة. ولك أيضًا صفحة الاختبار الثابتة في <code>docs/org/tree-test/index.html</code>.</p>
+<div class="scroll"><table>
+<thead><tr><th>#</th><th>المهمة</th><th>الطريق المتوقع في المعاينة</th></tr></thead>
+<tbody>
+<tr><td class="num">1</td><td>تريد إجازة الأسبوع القادم.</td><td>الخدمات › رأس المال البشري › طلب إجازة (أو البحث «إجازة»)</td></tr>
+<tr><td class="num">2</td><td>جهازك المحمول معطل ولا يعمل.</td><td>الخدمات › تقنية المعلومات › طلب دعم تقني</td></tr>
+<tr><td class="num">3</td><td>تحتاج خطاب تعريف لجهة خارجية.</td><td>الخدمات › رأس المال البشري › طلب خطاب وظيفي</td></tr>
+<tr><td class="num">4</td><td>(لمدير) موظف جديد في فريقك يبدأ الأحد ويحتاج حسابًا على الأنظمة.</td><td>الخدمات › تقنية المعلومات › تجهيز حسابات موظف جديد، أو «فريقي» في الخدمات</td></tr>
+<tr><td class="num">5</td><td>تريد سلفة على راتبك.</td><td>الخدمات › رأس المال البشري › سلفة على الراتب</td></tr>
+<tr><td class="num">6</td><td>قدّمت طلبًا الأسبوع الماضي وتريد أن تعرف أين وصل.</td><td>مساحتي › طلباتي</td></tr>
+<tr><td class="num">7</td><td>تحتاج شراء أداة لعملك.</td><td>الخدمات › المشتريات › طلب شراء</td></tr>
+<tr><td class="num">8</td><td>تريد تصميمًا لتعميم داخلي في إدارتك.</td><td>الخدمات › الخدمات الإبداعية › طلب تصميم</td></tr>
+<tr><td class="num">9</td><td>تريد رؤية قسيمة راتب الشهر الماضي.</td><td>مساحتي › ملفي › قسائمي</td></tr>
+<tr><td class="num">10</td><td>(لمدير) تريد اعتماد إجازة طلبها أحد أعضاء فريقك.</td><td>مساحتي › بانتظار إجرائي</td></tr>
+</tbody></table></div>
+
+<h2 id="built">ما بُني</h2>
+<ul>
+<li><b>القائمة الجانبية</b> بترتيب ثابت: مساحتي (الرئيسية، بانتظار إجرائي بعدده وحده، طلباتي، ملفي، الإشعارات)، ثم فريقي للمدير، ثم الخدمات للجميع، ثم إدارتك، ثم المنظمة، ثم إدارة المنصة للأدمن بعد فاصل. كل شاشة كنت تصلها باقية: في صفحة جامعة («ملفي» و«فريقي» و«المنظمة» و«إدارة المنصة»)، أو في «أدوات الإدارة» بصفحة إدارتها، أو في بحث الشاشات.</li>
+<li><b>باب «الخدمات» الواحد</b> مكان «طلب خدمة» و«مركز الخدمات» و«الإدارات». العدسة الأولى «حسب الإدارة» وبشريط الإدارات، ومعها «حسب الحاجة» والبحث القائم. وكتلة «خدمات مختارة» سبع خدمات مختارة يدويًا بلا أعداد؛ «الأكثر طلبًا» تعود بعد بيانات حقيقية.</li>
+<li><b>صفحة كل إدارة</b> بخمسة أقسام: نظرة عامة (ومعها «أدوات الإدارة»)، والطلبات الواردة، والخدمات، والفريق، والتقارير. ومن ليس من الإدارة ولا أداة له فيها يرى «الخدمات» وحدها. وخدمات ADM- في صفحة «الشؤون الإدارية والمرافق» بوسم «ينفّذها مؤقتًا: مكتب الرئيس التنفيذي»، وADM-EXPENSE-CLAIM تحت المالية، عرضًا فقط.</li>
+<li><b>نقل الأربعين</b> من فئات الحاجة إلى صفحات إداراتها، عرضًا فقط: صفوف الإسقاط وشروط الظهور والرابط المباشر كما هي.</li>
+<li><b>البطاقة المسودة</b>: «لم يُكتب بعد. يكمله: [الإدارة]» مكان «غير متاح».</li>
+<li><b>الجوال</b>: شريط سفلي بأربعة، والقائمة في درج يُغلق بـEsc والرجوع. وتركيز ظاهر، وأهداف لمس لا تقل عن 44 بكسل، و<code>aria-current</code> على المدخل النشط.</li>
+</ul>
+
+<h2 id="open">ما لم يُنجز، وسببه</h2>
+<ul>
+<li><b>الأسماء الموحدة لم تُطبَّق.</b> كل مقترحات التسمية الثماني والعشرين «بانتظار مالك الإدارة» في جدول التحويل، فلا اسم معتمد. الطريق جاهز: تعريف الخدمة في الكود و<code>CATALOG_RENAMES</code>، والاسم القديم يصير مرادفًا تلقائيًا، بلا ترحيل.</li>
+<li><b>لم أشغّل خادم المعاينة</b>، لأن حماية الجلسة ترفض فتح المنفذ. الأمر جاهز أعلاه.</li>
+<li><b>لم يلزم حقل جديد ولا ترحيل.</b> الموضع وملكية العرض ثابتان في الكود بقرارات ت0، إلى أن يُفصلا في البيانات في ت2أ.</li>
+<li><b>لقطة ق-ت1-8 لا تغطي «ما يظهر في الباب».</b> اقترحها المراجع عمودًا رابعًا، وأجّلتُها لأن اختبار الخدمات يغطيها لحسابات الموظف والمدير والأدمن.</li>
+<li><b>لم يُدمج شيء</b> في integration-20260920. الدمج بعد موافقتك على المعاينة وبعد إغلاق م1.</li>
+</ul>
+</div>

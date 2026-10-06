@@ -1,0 +1,32 @@
+[
+  {
+    "h1": "صبحك الله بالخير، عبدالله",
+    "route": "#home",
+    "scrollWidth": 390,
+    "width": 390
+  },
+  {
+    "h1": "يومك أسهل من هنا",
+    "route": "#portal",
+    "scrollWidth": 390,
+    "width": 390
+  },
+  {
+    "h1": "خلّنا نرتب طلبك",
+    "route": "#request",
+    "scrollWidth": 390,
+    "width": 390
+  },
+  {
+    "h1": "قرار واضح. وشغل يمشي.",
+    "route": "#approvals",
+    "scrollWidth": 390,
+    "width": 390
+  },
+  {
+    "h1": "الصورة كاملة. والقرار أقرب.",
+    "route": "#executive",
+    "scrollWidth": 390,
+    "width": 390
+  }
+]

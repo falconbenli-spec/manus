@@ -1,0 +1,3380 @@
+TAP version 13
+# (node:88876) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: an approved monthly entry is a ledger source: the schedule’s own accounts and centre, at its month end, in halalas that add up
+ok 1 - an approved monthly entry is a ledger source: the schedule’s own accounts and centre, at its month end, in halalas that add up
+  ---
+  duration_ms: 3823.967625
+  type: 'test'
+  ...
+# Subtest: the entry reports its real posting state from the ledger: waiting, in the ledger, posted, reversed
+ok 2 - the entry reports its real posting state from the ledger: waiting, in the ledger, posted, reversed
+  ---
+  duration_ms: 3597.119708
+  type: 'test'
+  ...
+# (node:88877) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: advance draws: a draw tied to its claim counts as collection there, so a second receipt for money the advance covered is refused
+ok 3 - advance draws: a draw tied to its claim counts as collection there, so a second receipt for money the advance covered is refused
+  ---
+  duration_ms: 3866.791541
+  type: 'test'
+  ...
+# Subtest: advance draws: a draw never takes a claim past its net — refused by name at planning and at application, and by the database underneath
+ok 4 - advance draws: a draw never takes a claim past its net — refused by name at planning and at application, and by the database underneath
+  ---
+  duration_ms: 3723.218625
+  type: 'test'
+  ...
+# Subtest: advance draws: the claim is found from an exact invoice number, an unmatched reference stays unlinked, and another customer's claim is refused
+ok 5 - advance draws: the claim is found from an exact invoice number, an unmatched reference stays unlinked, and another customer's claim is refused
+  ---
+  duration_ms: 3894.828416
+  type: 'test'
+  ...
+# Subtest: migration 177: an existing draw is linked by the migration's own statement only when its text equals one issued invoice number of the same customer
+ok 6 - migration 177: an existing draw is linked by the migration's own statement only when its text equals one issued invoice number of the same customer
+  ---
+  duration_ms: 3800.986417
+  type: 'test'
+  ...
+# (node:88878) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: المساعد المجرد غير النشط لا يرسل بيانات للمزود ولا يظهر متاحًا
+ok 7 - المساعد المجرد غير النشط لا يرسل بيانات للمزود ولا يظهر متاحًا
+  ---
+  duration_ms: 3764.745875
+  type: 'test'
+  ...
+# Subtest: إيقاف المساعد النشط يمنع التشغيل اللاحق مع بقاء الإعداد العام مفعلاً
+ok 8 - إيقاف المساعد النشط يمنع التشغيل اللاحق مع بقاء الإعداد العام مفعلاً
+  ---
+  duration_ms: 3548.839875
+  type: 'test'
+  ...
+# Subtest: الإيقاف أثناء انتظار brief_gaps يحفظ التكلفة دون الناتج أو المصادر
+ok 9 - الإيقاف أثناء انتظار brief_gaps يحفظ التكلفة دون الناتج أو المصادر
+  ---
+  duration_ms: 3658.35575
+  type: 'test'
+  ...
+# Subtest: الإيقاف أثناء انتظار brief_gaps يحفظ التكلفة دون الناتج أو المصادر [قبل الحد 2026-09-30T20:05:00.000Z]
+ok 10 - الإيقاف أثناء انتظار brief_gaps يحفظ التكلفة دون الناتج أو المصادر [قبل الحد 2026-09-30T20:05:00.000Z]
+  ---
+  duration_ms: 3650.689084
+  type: 'test'
+  ...
+# Subtest: الإيقاف أثناء انتظار brief_gaps يحفظ التكلفة دون الناتج أو المصادر [داخل الفجوة 2026-09-30T23:05:00.000Z]
+ok 11 - الإيقاف أثناء انتظار brief_gaps يحفظ التكلفة دون الناتج أو المصادر [داخل الفجوة 2026-09-30T23:05:00.000Z]
+  ---
+  duration_ms: 3677.025542
+  type: 'test'
+  ...
+# Subtest: الإيقاف أثناء انتظار brief_gaps يحفظ التكلفة دون الناتج أو المصادر [بعد الفجوة 2026-10-01T09:05:00.000Z]
+ok 12 - الإيقاف أثناء انتظار brief_gaps يحفظ التكلفة دون الناتج أو المصادر [بعد الفجوة 2026-10-01T09:05:00.000Z]
+  ---
+  duration_ms: 3977.462375
+  type: 'test'
+  ...
+# Subtest: الإيقاف أثناء انتظار skills_path يحفظ التكلفة دون الناتج أو المصادر
+ok 13 - الإيقاف أثناء انتظار skills_path يحفظ التكلفة دون الناتج أو المصادر
+  ---
+  duration_ms: 3649.458708
+  type: 'test'
+  ...
+# Subtest: الإيقاف أثناء انتظار skills_path يحفظ التكلفة دون الناتج أو المصادر [قبل الحد 2026-09-30T20:05:00.000Z]
+ok 14 - الإيقاف أثناء انتظار skills_path يحفظ التكلفة دون الناتج أو المصادر [قبل الحد 2026-09-30T20:05:00.000Z]
+  ---
+  duration_ms: 3845.08775
+  type: 'test'
+  ...
+# Subtest: الإيقاف أثناء انتظار skills_path يحفظ التكلفة دون الناتج أو المصادر [داخل الفجوة 2026-09-30T23:05:00.000Z]
+ok 15 - الإيقاف أثناء انتظار skills_path يحفظ التكلفة دون الناتج أو المصادر [داخل الفجوة 2026-09-30T23:05:00.000Z]
+  ---
+  duration_ms: 3750.322375
+  type: 'test'
+  ...
+# Subtest: الإيقاف أثناء انتظار skills_path يحفظ التكلفة دون الناتج أو المصادر [بعد الفجوة 2026-10-01T09:05:00.000Z]
+ok 16 - الإيقاف أثناء انتظار skills_path يحفظ التكلفة دون الناتج أو المصادر [بعد الفجوة 2026-10-01T09:05:00.000Z]
+  ---
+  duration_ms: 3748.934958
+  type: 'test'
+  ...
+# Subtest: غياب الجرد يمنع التشغيل، وجرد كيان آخر لا يفتح بوابة هذا الكيان
+ok 17 - غياب الجرد يمنع التشغيل، وجرد كيان آخر لا يفتح بوابة هذا الكيان
+  ---
+  duration_ms: 3667.352542
+  type: 'test'
+  ...
+# (node:88879) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: AI is off until the first admin turns it on, model assistants stay unavailable without a provider key, and every instruction set refuses to treat data as commands
+ok 18 - AI is off until the first admin turns it on, model assistants stay unavailable without a provider key, and every instruction set refuses to treat data as commands
+  ---
+  duration_ms: 3770.235875
+  type: 'test'
+  ...
+# Subtest: policy answers quote the accepted paragraph with its policy and date, refuse when nothing matches, and respect the daily limit
+ok 19 - policy answers quote the accepted paragraph with its policy and date, refuse when nothing matches, and respect the daily limit
+  ---
+  duration_ms: 3609.585833
+  type: 'test'
+  ...
+# Subtest: a model run sends only what the user may see, keeps one client per run, prices by the configured rates, and is reviewed once by its owner
+ok 20 - a model run sends only what the user may see, keeps one client per run, prices by the configured rates, and is reviewed once by its owner
+  ---
+  duration_ms: 3541.408292
+  type: 'test'
+  ...
+# Subtest: a model run sends only what the user may see, keeps one client per run, prices by the configured rates, and is reviewed once by its owner [قبل الحد 2026-09-30T20:05:00.000Z]
+ok 21 - a model run sends only what the user may see, keeps one client per run, prices by the configured rates, and is reviewed once by its owner [قبل الحد 2026-09-30T20:05:00.000Z]
+  ---
+  duration_ms: 3619.577875
+  type: 'test'
+  ...
+# Subtest: a model run sends only what the user may see, keeps one client per run, prices by the configured rates, and is reviewed once by its owner [داخل الفجوة 2026-09-30T23:05:00.000Z]
+ok 22 - a model run sends only what the user may see, keeps one client per run, prices by the configured rates, and is reviewed once by its owner [داخل الفجوة 2026-09-30T23:05:00.000Z]
+  ---
+  duration_ms: 3581.464791
+  type: 'test'
+  ...
+# Subtest: a model run sends only what the user may see, keeps one client per run, prices by the configured rates, and is reviewed once by its owner [بعد الفجوة 2026-10-01T09:05:00.000Z]
+ok 23 - a model run sends only what the user may see, keeps one client per run, prices by the configured rates, and is reviewed once by its owner [بعد الفجوة 2026-10-01T09:05:00.000Z]
+  ---
+  duration_ms: 3958.926666
+  type: 'test'
+  ...
+# Subtest: a provider failure is recorded as a failed run with no invented output
+ok 24 - a provider failure is recorded as a failed run with no invented output
+  ---
+  duration_ms: 3587.10575
+  type: 'test'
+  ...
+# (node:88880) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: formula, haversine and zone classification are pure and match the regulation example
+ok 25 - formula, haversine and zone classification are pure and match the regulation example
+  ---
+  duration_ms: 1.045083
+  type: 'test'
+  ...
+# Subtest: GPS sampling takes the first fix within 20 m, else the best after the settle time, and reports denial
+ok 26 - GPS sampling takes the first fix within 20 m, else the best after the settle time, and reports denial
+  ---
+  duration_ms: 49.374
+  type: 'test'
+  ...
+# Subtest: regulation values are a draft policy: nothing applies before the HR manager accepts it, and every value cites its article
+ok 27 - regulation values are a draft policy: nothing applies before the HR manager accepts it, and every value cites its article
+  ---
+  duration_ms: 3646.908875
+  type: 'test'
+  ...
+# Subtest: overtime: prior assignment by the manager, pre-approval by the authority holder, written HR budget, caps, suggested pay and time off in lieu
+ok 28 - overtime: prior assignment by the manager, pre-approval by the authority holder, written HR budget, caps, suggested pay and time off in lieu
+  ---
+  duration_ms: 3730.595667
+  type: 'test'
+  ...
+# Subtest: no overtime on a work-mission day, and no mission over overtime (Art. 77(9))
+ok 29 - no overtime on a work-mission day, and no mission over overtime (Art. 77(9))
+  ---
+  duration_ms: 3744.04875
+  type: 'test'
+  ...
+# Subtest: an approved permission removes the late or early flag for its period only; early leave without one is flagged; the monthly cap is enforced
+ok 30 - an approved permission removes the late or early flag for its period only; early leave without one is flagged; the monthly cap is enforced
+  ---
+  duration_ms: 3553.550625
+  type: 'test'
+  ...
+# Subtest: same-day late or absence notice (Art. 75): the manager may accept it as the excuse
+ok 31 - same-day late or absence notice (Art. 75): the manager may accept it as the excuse
+  ---
+  duration_ms: 3627.712833
+  type: 'test'
+  ...
+# Subtest: Ramadan hours from the accepted policy: lateness and early leave are measured against 6 hours inside the dated range only
+ok 32 - Ramadan hours from the accepted policy: lateness and early leave are measured against 6 hours inside the dated range only
+  ---
+  duration_ms: 3826.211125
+  type: 'test'
+  ...
+# Subtest: location is evidence, never a gate: server-side haversine, zone flags, privacy notice first, explanation and review
+ok 33 - location is evidence, never a gate: server-side haversine, zone flags, privacy notice first, explanation and review
+  ---
+  duration_ms: 3640.930917
+  type: 'test'
+  ...
+# Subtest: raw coordinates are purged by a queued job after the retention period and only the zone result stays
+ok 34 - raw coordinates are purged by a queued job after the retention period and only the zone result stays
+  ---
+  duration_ms: 3775.5445
+  type: 'test'
+  ...
+# Subtest: attendance exemptions: approved dated records, two people, and exempt days are judged neither late nor absent
+ok 35 - attendance exemptions: approved dated records, two people, and exempt days are judged neither late nor absent
+  ---
+  duration_ms: 3806.02225
+  type: 'test'
+  ...
+# Subtest: attendance exemptions: approved dated records, two people, and exempt days are judged neither late nor absent [قبل الحد 2026-09-30T20:05:00.000Z]
+ok 36 - attendance exemptions: approved dated records, two people, and exempt days are judged neither late nor absent [قبل الحد 2026-09-30T20:05:00.000Z]
+  ---
+  duration_ms: 3704.492541
+  type: 'test'
+  ...
+# Subtest: attendance exemptions: approved dated records, two people, and exempt days are judged neither late nor absent [داخل الفجوة 2026-09-30T23:05:00.000Z]
+ok 37 - attendance exemptions: approved dated records, two people, and exempt days are judged neither late nor absent [داخل الفجوة 2026-09-30T23:05:00.000Z]
+  ---
+  duration_ms: 3628.725542
+  type: 'test'
+  ...
+# Subtest: attendance exemptions: approved dated records, two people, and exempt days are judged neither late nor absent [بعد الفجوة 2026-10-01T09:05:00.000Z]
+ok 38 - attendance exemptions: approved dated records, two people, and exempt days are judged neither late nor absent [بعد الفجوة 2026-10-01T09:05:00.000Z]
+  ---
+  duration_ms: 3852.480042
+  type: 'test'
+  ...
+# Subtest: reports: R37 counts late days, the weekly shortfall subtracts approved permission, and the monthly workbook is a real xlsx
+ok 39 - reports: R37 counts late days, the weekly shortfall subtracts approved permission, and the monthly workbook is a real xlsx
+  ---
+  duration_ms: 4165.841333
+  type: 'test'
+  ...
+# Subtest: the generic catalog service routes a permission request to the attendance screen
+ok 40 - the generic catalog service routes a permission request to the attendance screen
+  ---
+  duration_ms: 3984.151334
+  type: 'test'
+  ...
+# {"t":"2026-10-01T07:18:38.900Z","id":"8675e539","env":"local","m":"GET","p":"/","s":200,"ms":2}
+# Subtest: the server allows geolocation for its own origin only
+ok 41 - the server allows geolocation for its own origin only
+  ---
+  duration_ms: 4016.45775
+  type: 'test'
+  ...
+# (node:88881) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: HR-03: check-in uses server time once per day, and a missing or incomplete day only asks for clarification
+ok 42 - HR-03: check-in uses server time once per day, and a missing or incomplete day only asks for clarification
+  ---
+  duration_ms: 3595.969041
+  type: 'test'
+  ...
+# Subtest: a correction is decided by the line manager or HR, never by the employee, and keeps the previous times
+ok 43 - a correction is decided by the line manager or HR, never by the employee, and keeps the previous times
+  ---
+  duration_ms: 3645.572875
+  type: 'test'
+  ...
+# Subtest: unpaid absence needs a working-time policy, a real empty workday, the employee statement window, and two different people
+ok 44 - unpaid absence needs a working-time policy, a real empty workday, the employee statement window, and two different people
+  ---
+  duration_ms: 3746.060416
+  type: 'test'
+  ...
+# Subtest: unpaid absence needs a working-time policy, a real empty workday, the employee statement window, and two different people [قبل الحد 2026-09-30T20:05:00.000Z]
+ok 45 - unpaid absence needs a working-time policy, a real empty workday, the employee statement window, and two different people [قبل الحد 2026-09-30T20:05:00.000Z]
+  ---
+  duration_ms: 3722.95475
+  type: 'test'
+  ...
+# Subtest: unpaid absence needs a working-time policy, a real empty workday, the employee statement window, and two different people [داخل الفجوة 2026-09-30T23:05:00.000Z]
+ok 46 - unpaid absence needs a working-time policy, a real empty workday, the employee statement window, and two different people [داخل الفجوة 2026-09-30T23:05:00.000Z]
+  ---
+  duration_ms: 3516.641208
+  type: 'test'
+  ...
+# Subtest: unpaid absence needs a working-time policy, a real empty workday, the employee statement window, and two different people [بعد الفجوة 2026-10-01T09:05:00.000Z]
+ok 47 - unpaid absence needs a working-time policy, a real empty workday, the employee statement window, and two different people [بعد الفجوة 2026-10-01T09:05:00.000Z]
+  ---
+  duration_ms: 3927.435375
+  type: 'test'
+  ...
+# Subtest: without an accepted working-time policy no day is judged late or absent
+ok 48 - without an accepted working-time policy no day is judged late or absent
+  ---
+  duration_ms: 3662.67525
+  type: 'test'
+  ...
+# (node:88882) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: audit export: a period package carries its journals, documents, approvals, settlements, reversals and the audit chain segment, and verifies after a round trip through a file
+ok 49 - audit export: a period package carries its journals, documents, approvals, settlements, reversals and the audit chain segment, and verifies after a round trip through a file
+  ---
+  duration_ms: 3912.160667
+  type: 'test'
+  ...
+# Subtest: audit export: a changed amount, an edited event or a removed event is caught on re-import
+ok 50 - audit export: a changed amount, an edited event or a removed event is caught on re-import
+  ---
+  duration_ms: 3731.861166
+  type: 'test'
+  ...
+# Subtest: audit export: only a finance reader who also holds the audit capability exports; another tenant's events appear as hashes only; the export itself is audited
+ok 51 - audit export: only a finance reader who also holds the audit capability exports; another tenant's events appear as hashes only; the export itself is audited
+  ---
+  duration_ms: 3850.700875
+  type: 'test'
+  ...
+# Subtest: audit export: the route answers a download with the package as an attachment, through the real handler
+ok 52 - audit export: the route answers a download with the package as an attachment, through the real handler
+  ---
+  duration_ms: 4455.9075
+  type: 'test'
+  ...
+# Subtest: audit export: a package saved to disk verifies with the command-line checker alone, and a changed file fails it with the reason
+ok 53 - audit export: a package saved to disk verifies with the command-line checker alone, and a changed file fails it with the reason
+  ---
+  duration_ms: 4380.852291
+  type: 'test'
+  ...
+# (node:88884) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: HTTP: a grouped match is proposed by one account and approved by another through the router, and an unbalanced one comes back as a named refusal
+ok 54 - HTTP: a grouped match is proposed by one account and approved by another through the router, and an unbalanced one comes back as a named refusal
+  ---
+  duration_ms: 4396.807584
+  type: 'test'
+  ...
+# Subtest: HTTP: a control difference is explained on the close through its route, and the route refuses an unknown item by name
+ok 55 - HTTP: a control difference is explained on the close through its route, and the route refuses an unknown item by name
+  ---
+  duration_ms: 4341.80275
+  type: 'test'
+  ...
+# (node:88886) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: a synthetic month: documents post, a CSV statement imports, grouped and split matches reconcile to zero with a posted bank fee, the month closes green, reopens through the approved path, takes a dated adjustment, and re-closes
+ok 56 - a synthetic month: documents post, a CSV statement imports, grouped and split matches reconcile to zero with a posted bank fee, the month closes green, reopens through the approved path, takes a dated adjustment, and re-closes
+  ---
+  duration_ms: 4093.274875
+  type: 'test'
+  ...
+# (node:88887) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: two processes preparing the journal of one classified bank line at the same instant leave one journal and one named refusal
+ok 57 - two processes preparing the journal of one classified bank line at the same instant leave one journal and one named refusal
+  ---
+  duration_ms: 6601.749708
+  type: 'test'
+  ...
+# Subtest: two third persons approving one reopening at the same instant open the ledger once: one decision, one refusal, one version step
+ok 58 - two third persons approving one reopening at the same instant open the ledger once: one decision, one refusal, one version step
+  ---
+  duration_ms: 6479.615083
+  type: 'test'
+  ...
+# (node:88888) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: the ledger knows two new purposes, and a classified bank line posts nothing until they are mapped by two people
+ok 59 - the ledger knows two new purposes, and a classified bank line posts nothing until they are mapped by two people
+  ---
+  duration_ms: 3892.0195
+  type: 'test'
+  ...
+# Subtest: a classified bank fee is one balanced journal on the bank account’s own ledger account; interest runs the other way; a transfer or an unknown line is not a source
+ok 60 - a classified bank fee is one balanced journal on the bank account’s own ledger account; interest runs the other way; a transfer or an unknown line is not a source
+  ---
+  duration_ms: 3552.333
+  type: 'test'
+  ...
+# Subtest: a posted classified line counts as reconciled: posting the charge leaves no difference, and reversing its journal brings the bank-side item back
+ok 61 - a posted classified line counts as reconciled: posting the charge leaves no difference, and reversing its journal brings the bank-side item back
+  ---
+  duration_ms: 3595.646542
+  type: 'test'
+  ...
+# Subtest: a returned supplier payment: Dr bank for what came back, Dr bank charges for the shortfall, Cr payable for the order — the payable ties out and the payment’s trace shows the return
+ok 62 - a returned supplier payment: Dr bank for what came back, Dr bank charges for the shortfall, Cr payable for the order — the payable ties out and the payment’s trace shows the return
+  ---
+  duration_ms: 4084.368583
+  type: 'test'
+  ...
+# Subtest: source kinds read their own tenant only: another entity cannot build a journal from this bank line
+ok 63 - source kinds read their own tenant only: another entity cannot build a journal from this bank line
+  ---
+  duration_ms: 3644.650334
+  type: 'test'
+  ...
+# (node:88892) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: grouped match: one bank line settles two platform records only when the sums agree to the halala, and whoever prepares it never approves it
+ok 64 - grouped match: one bank line settles two platform records only when the sums agree to the halala, and whoever prepares it never approves it
+  ---
+  duration_ms: 3903.638875
+  type: 'test'
+  ...
+# Subtest: split match: two bank lines settle one record exactly, the header keeps the record, and a many-to-many match is refused
+ok 65 - split match: two bank lines settle one record exactly, the header keeps the record, and a many-to-many match is refused
+  ---
+  duration_ms: 3770.371
+  type: 'test'
+  ...
+# Subtest: a posted manual journal on the bank account is matchable; a draft or another account’s journal is not; an unmatched one is outstanding in the reconciliation
+ok 66 - a posted manual journal on the bank account is matchable; a draft or another account’s journal is not; an unmatched one is outstanding in the reconciliation
+  ---
+  duration_ms: 3702.742167
+  type: 'test'
+  ...
+# Subtest: a transfer between two company bank accounts is one manual journal matched once in each account’s statement
+ok 67 - a transfer between two company bank accounts is one manual journal matched once in each account’s statement
+  ---
+  duration_ms: 3700.039916
+  type: 'test'
+  ...
+# Subtest: widened kinds: an advance receipt, its reversal and a returned supplier payment are cash records with their direction, matchable, and traced from the ledger
+ok 68 - widened kinds: an advance receipt, its reversal and a returned supplier payment are cash records with their direction, matchable, and traced from the ledger
+  ---
+  duration_ms: 3932.5395
+  type: 'test'
+  ...
+# Subtest: rejecting a grouped match releases its line and records for a new match, and the rejected members stay as history
+ok 69 - rejecting a grouped match releases its line and records for a new match, and the rejected members stay as history
+  ---
+  duration_ms: 3608.244792
+  type: 'test'
+  ...
+# Subtest: the database balances every approved match to the halala, whoever writes it
+ok 70 - the database balances every approved match to the halala, whoever writes it
+  ---
+  duration_ms: 3923.160375
+  type: 'test'
+  ...
+# Subtest: bank screen: grouped and split matches, a journal match and a classified fee render from real board data, and the group and split forms send exact members
+ok 71 - bank screen: grouped and split matches, a journal match and a classified fee render from real board data, and the group and split forms send exact members
+  ---
+  duration_ms: 4085.330959
+  type: 'test'
+  ...
+# (node:88913) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: receivables cash: a receipt reversal, cash on account and its reversal are cash records with their direction, matchable, and traced from the ledger to their line
+ok 72 - receivables cash: a receipt reversal, cash on account and its reversal are cash records with their direction, matchable, and traced from the ledger to their line
+  ---
+  duration_ms: 4031.551833
+  type: 'test'
+  ...
+# Subtest: receivables cash: two reversals in one bank debit are one grouped match, and a pending cash on account is not matchable
+ok 73 - receivables cash: two reversals in one bank debit are one grouped match, and a pending cash on account is not matchable
+  ---
+  duration_ms: 3971.696959
+  type: 'test'
+  ...
+# Subtest: migration 171: every match and item on a pre-171 database survives the rebuild column for column, the guards still hold, and the three receivables kinds are accepted
+ok 74 - migration 171: every match and item on a pre-171 database survives the rebuild column for column, the guards still hold, and the three receivables kinds are accepted
+  ---
+  duration_ms: 3823.7065
+  type: 'test'
+  ...
+# (node:88914) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: csv reader: quoted fields, thousands separators and a trailing row survive the bank export format
+ok 75 - csv reader: quoted fields, thousands separators and a trailing row survive the bank export format
+  ---
+  duration_ms: 0.911583
+  type: 'test'
+  ...
+# Subtest: statement import: the file is the only source, its content digest blocks a second import, and a file that does not add up is refused
+ok 76 - statement import: the file is the only source, its content digest blocks a second import, and a file that does not add up is refused
+  ---
+  duration_ms: 3799.42025
+  type: 'test'
+  ...
+# Subtest: an imported bank line is never edited: correction is cancelling the whole batch, and only before a match on it is approved
+ok 77 - an imported bank line is never edited: correction is cancelling the whole batch, and only before a match on it is approved
+  ---
+  duration_ms: 3812.733
+  type: 'test'
+  ...
+# Subtest: suggestion explains itself in words and stays a suggestion: nothing is matched without a human, and the preparer never approves
+ok 78 - suggestion explains itself in words and stays a suggestion: nothing is matched without a human, and the preparer never approves
+  ---
+  duration_ms: 3716.807042
+  type: 'test'
+  ...
+# Subtest: tenant isolation and capability: a user of another entity and a user without the capability see and touch nothing
+ok 79 - tenant isolation and capability: a user of another entity and a user without the capability see and touch nothing
+  ---
+  duration_ms: 3650.017458
+  type: 'test'
+  ...
+# Subtest: a bank rule only suggests: it names an account and an owner and posts nothing
+ok 80 - a bank rule only suggests: it names an account and an owner and posts nothing
+  ---
+  duration_ms: 3720.829
+  type: 'test'
+  ...
+# Subtest: period reconciliation: every line is decided first, the difference is shown, and an approved reconciliation is locked
+ok 81 - period reconciliation: every line is decided first, the difference is shown, and an approved reconciliation is locked
+  ---
+  duration_ms: 3953.555959
+  type: 'test'
+  ...
+# Subtest: a non-zero difference is never stored or approved without a written explanation
+ok 82 - a non-zero difference is never stored or approved without a written explanation
+  ---
+  duration_ms: 3879.717084
+  type: 'test'
+  ...
+# (node:88917) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: eligibility: tenure is counted in calendar months, month ends clamp, and the day before the boundary is not yet eligible
+ok 83 - eligibility: tenure is counted in calendar months, month ends clamp, and the day before the boundary is not yet eligible
+  ---
+  duration_ms: 1.22525
+  type: 'test'
+  ...
+# Subtest: the employee view: what I have from the contract, my insurance with masked numbers, and when I become eligible
+ok 84 - the employee view: what I have from the contract, my insurance with masked numbers, and when I become eligible
+  ---
+  duration_ms: 3724.029833
+  type: 'test'
+  ...
+# Subtest: privacy: only the employee and the benefits capability see «مزاياي», dependants and benefit documents
+ok 85 - privacy: only the employee and the benefits capability see «مزاياي», dependants and benefit documents
+  ---
+  duration_ms: 3832.665083
+  type: 'test'
+  ...
+# Subtest: dependant add and remove: the employee requests, HR confirms, and medical dependants are updated through benefits.mjs
+ok 86 - dependant add and remove: the employee requests, HR confirms, and medical dependants are updated through benefits.mjs
+  ---
+  duration_ms: 3687.332167
+  type: 'test'
+  ...
+# Subtest: HR never decides their own benefit request, and the employee can withdraw only while it is pending
+ok 87 - HR never decides their own benefit request, and the employee can withdraw only while it is pending
+  ---
+  duration_ms: 3888.964833
+  type: 'test'
+  ...
+# Subtest: draft until accepted: nothing is claimable from a draft, the proposer never accepts, and the matrix needs a written basis
+ok 88 - draft until accepted: nothing is claimable from a draft, the proposer never accepts, and the matrix needs a written basis
+  ---
+  duration_ms: 3897.346125
+  type: 'test'
+  ...
+# Subtest: ticket claim chain: employee, then HR sets the class and amount, then a different person in finance confirms; money is only proposed
+ok 89 - ticket claim chain: employee, then HR sets the class and amount, then a different person in finance confirms; money is only proposed
+  ---
+  duration_ms: 3855.75725
+  type: 'test'
+  ...
+# Subtest: the ticket option waits for tenure, and class upgrade and education follow the accepted policy only
+ok 90 - the ticket option waits for tenure, and class upgrade and education follow the accepted policy only
+  ---
+  duration_ms: 3823.937292
+  type: 'test'
+  ...
+# Subtest: the screens render for every role without undefined values or inline styles, and every offered button opens a usable form
+ok 91 - the screens render for every role without undefined values or inline styles, and every offered button opens a usable form
+  ---
+  duration_ms: 3883.209209
+  type: 'test'
+  ...
+# Subtest: notifications open the right screen and the unread list reads them
+ok 92 - notifications open the right screen and the unread list reads them
+  ---
+  duration_ms: 3712.738375
+  type: 'test'
+  ...
+# Subtest: ticket claim year at the Riyadh boundary: a claim made at 00:30 Riyadh on 1 January is that year's one claim
+ok 93 - ticket claim year at the Riyadh boundary: a claim made at 00:30 Riyadh on 1 January is that year's one claim
+  ---
+  duration_ms: 3969.882583
+  type: 'test'
+  ...
+# (node:88941) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: PRC-01/FIN-02: لا تسمح ترسية بشراء دون مخصص مشروع معتمد
+ok 94 - PRC-01/FIN-02: لا تسمح ترسية بشراء دون مخصص مشروع معتمد
+  ---
+  duration_ms: 3819.335458
+  type: 'test'
+  ...
+# Subtest: FIN-02/PRC-01: المخصص المشترك يمنع تجاوز طلبين للسقف ويحرر الحجز بالرفض
+ok 95 - FIN-02/PRC-01: المخصص المشترك يمنع تجاوز طلبين للسقف ويحرر الحجز بالرفض
+  ---
+  duration_ms: 3973.512834
+  type: 'test'
+  ...
+# Subtest: FIN-02/PLT-05: سحب النطاق المالي يمنع القراءة واعتماد أمر مبني عليه
+ok 96 - FIN-02/PLT-05: سحب النطاق المالي يمنع القراءة واعتماد أمر مبني عليه
+  ---
+  duration_ms: 4097.477958
+  type: 'test'
+  ...
+# Subtest: FIN-02: المراجعة لا تخفض السقف دون الالتزامات ولا تسمح بالاعتماد الذاتي
+ok 97 - FIN-02: المراجعة لا تخفض السقف دون الالتزامات ولا تسمح بالاعتماد الذاتي
+  ---
+  duration_ms: 3991.889625
+  type: 'test'
+  ...
+# Subtest: PRC-03: عرضان لا يكفيان للترسية وفق دليل الدورة الموحدة
+ok 98 - PRC-03: عرضان لا يكفيان للترسية وفق دليل الدورة الموحدة
+  ---
+  duration_ms: 3993.807875
+  type: 'test'
+  ...
+# Subtest: النطاق المالي للمشروع له سقف مدة، وهو أفق الصلاحية المالية نفسه
+ok 99 - النطاق المالي للمشروع له سقف مدة، وهو أفق الصلاحية المالية نفسه
+  ---
+  duration_ms: 4075.418791
+  type: 'test'
+  ...
+# (node:88942) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: cash forecast: only an explicit capability opens it, and another tenant never appears in it
+ok 100 - cash forecast: only an explicit capability opens it, and another tenant never appears in it
+  ---
+  duration_ms: 3669.05525
+  type: 'test'
+  ...
+# Subtest: cash forecast: the horizon is thirteen rolling weeks and a claim lands in the week of its due date
+ok 101 - cash forecast: the horizon is thirteen rolling weeks and a claim lands in the week of its due date
+  ---
+  duration_ms: 3597.1015
+  type: 'test'
+  ...
+# Subtest: cash forecast: an issued invoice is confirmed, an unbilled entitlement is expected, and the two are never one number
+ok 102 - cash forecast: an issued invoice is confirmed, an unbilled entitlement is expected, and the two are never one number
+  ---
+  duration_ms: 3960.123
+  type: 'test'
+  ...
+# Subtest: cash forecast: a recorded collection promise moves money to its promised date and stays expected
+ok 103 - cash forecast: a recorded collection promise moves money to its promised date and stays expected
+  ---
+  duration_ms: 3845.49525
+  type: 'test'
+  ...
+# Subtest: cash forecast: the opening balance is a manual input that is declared missing, and nothing the screen computes is stored
+ok 104 - cash forecast: the opening balance is a manual input that is declared missing, and nothing the screen computes is stored
+  ---
+  duration_ms: 4075.697083
+  type: 'test'
+  ...
+# Subtest: cash forecast: scenarios are manual inputs computed on the spot, never stored and never changing a document
+ok 105 - cash forecast: scenarios are manual inputs computed on the spot, never stored and never changing a document
+  ---
+  duration_ms: 3895.331167
+  type: 'test'
+  ...
+# Subtest: cash forecast: no collection rate is invented, and a small sample says so instead of pretending
+ok 106 - cash forecast: no collection rate is invented, and a small sample says so instead of pretending
+  ---
+  duration_ms: 3756.570292
+  type: 'test'
+  ...
+# Subtest: cash forecast: salaries are a total from live contracts, never a person, and what the platform cannot know is declared
+ok 107 - cash forecast: salaries are a total from live contracts, never a person, and what the platform cannot know is declared
+  ---
+  duration_ms: 3994.921875
+  type: 'test'
+  ...
+# Subtest: cash forecast: live contracts answer “do I cover payroll?” as a total only, with its pay-date assumption declared
+ok 108 - cash forecast: live contracts answer “do I cover payroll?” as a total only, with its pay-date assumption declared
+  ---
+  duration_ms: 4073.05675
+  type: 'test'
+  ...
+# Subtest: cash forecast screen: it renders from real board data under the strict content policy
+ok 109 - cash forecast screen: it renders from real board data under the strict content policy
+  ---
+  duration_ms: 3825.99825
+  type: 'test'
+  ...
+# Subtest: cash forecast: a contracted subscription is expected money on its own billing dates, counted once
+ok 110 - cash forecast: a contracted subscription is expected money on its own billing dates, counted once
+  ---
+  duration_ms: 3900.033333
+  type: 'test'
+  ...
+# (node:88943) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: نصوص الغياب: لا رقم في النصّ الثابت، والمحقون يُقاس لحظته ويتحرك مع التبنّي والنشر والإكمال على الشاشات الثلاث معًا
+ok 111 - نصوص الغياب: لا رقم في النصّ الثابت، والمحقون يُقاس لحظته ويتحرك مع التبنّي والنشر والإكمال على الشاشات الثلاث معًا
+  ---
+  duration_ms: 4188.665291
+  type: 'test'
+  ...
+# Subtest: «سياقك أنت»: المسودة ليست طلبًا سابقًا، والمقدَّم يُعدّ بالتعريف نفسه في لوح الجودة
+ok 112 - «سياقك أنت»: المسودة ليست طلبًا سابقًا، والمقدَّم يُعدّ بالتعريف نفسه في لوح الجودة
+  ---
+  duration_ms: 4045.384
+  type: 'test'
+  ...
+# Subtest: الإعدادات: عدد المراحل يُعدّ من الخريطة، وفرق المدير من صفوف الجمهورين، وعدّاد المرادفات كل الصفوف عند الفتح، والمستثنى من السجل مسمًّى
+ok 113 - الإعدادات: عدد المراحل يُعدّ من الخريطة، وفرق المدير من صفوف الجمهورين، وعدّاد المرادفات كل الصفوف عند الفتح، والمستثنى من السجل مسمًّى
+  ---
+  duration_ms: 3981.023167
+  type: 'test'
+  ...
+# Subtest: لوح الصحة: حين تختلط حالات المزايا تُسمّى كلُّ حالة بكلمتها لا بمفتاحها الإنجليزي
+ok 114 - لوح الصحة: حين تختلط حالات المزايا تُسمّى كلُّ حالة بكلمتها لا بمفتاحها الإنجليزي
+  ---
+  duration_ms: 3965.997542
+  type: 'test'
+  ...
+# Subtest: زمن العثور: نصّ «ما يلزم» لا يطلب بياناتٍ تحملها المنصة فعلًا (الأحداث مختومة ومربوطة بمعرّف الجلسة)
+ok 115 - زمن العثور: نصّ «ما يلزم» لا يطلب بياناتٍ تحملها المنصة فعلًا (الأحداث مختومة ومربوطة بمعرّف الجلسة)
+  ---
+  duration_ms: 0.254583
+  type: 'test'
+  ...
+# Subtest: كل زرّ «اختر النوع» على الشاشات المرسومة له مجموعة في نافذة الخيارات لهذا الحساب، وبطاقة «إجازة» بابها رابط شاشتها
+ok 116 - كل زرّ «اختر النوع» على الشاشات المرسومة له مجموعة في نافذة الخيارات لهذا الحساب، وبطاقة «إجازة» بابها رابط شاشتها
+  ---
+  duration_ms: 4498.511958
+  type: 'test'
+  ...
+# Subtest: مسحُ روابطٍ من \#services عبر الرئيسية والفئات وصفحات الخدمة يبلغ كل صفحة خدمة في الدليل لكل جمهور
+ok 117 - مسحُ روابطٍ من \#services عبر الرئيسية والفئات وصفحات الخدمة يبلغ كل صفحة خدمة في الدليل لكل جمهور
+  ---
+  duration_ms: 7574.024542
+  type: 'test'
+  ...
+# Subtest: صفحة الخدمة: تجاوز تسمية كيان منشور («العميل» ← «الجهة») يصل قسم «ما الذي ستحتاجه؟» كما يصل دليل الخدمات والنموذج
+ok 118 - صفحة الخدمة: تجاوز تسمية كيان منشور («العميل» ← «الجهة») يصل قسم «ما الذي ستحتاجه؟» كما يصل دليل الخدمات والنموذج
+  ---
+  duration_ms: 4022.123583
+  type: 'test'
+  ...
+# Subtest: البحث الشامل: كل اسمٍ قديم من التسع عشرة يجد خدمته، وكلمة الطالب «تعريف بالعمل» تجد الخطاب المبذور، ولا رمز يُفهرس مرتين
+ok 119 - البحث الشامل: كل اسمٍ قديم من التسع عشرة يجد خدمته، وكلمة الطالب «تعريف بالعمل» تجد الخطاب المبذور، ولا رمز يُفهرس مرتين
+  ---
+  duration_ms: 4041.236458
+  type: 'test'
+  ...
+# Subtest: الرحلة: الابن المقدَّم آليًا يحمل ملاحظةً تسمّي الرحلة والأب ومن اعتمده، وحدثًا باسم المعتمِد يقرؤه خطّ الطلب
+ok 120 - الرحلة: الابن المقدَّم آليًا يحمل ملاحظةً تسمّي الرحلة والأب ومن اعتمده، وحدثًا باسم المعتمِد يقرؤه خطّ الطلب
+  ---
+  duration_ms: 4171.120417
+  type: 'test'
+  ...
+# Subtest: المشغّل القديم: بطاقة المجموعة تُسنَد إلى إدارة أعضائها، فلا خدمة تغيب عن رفّ إدارتها
+ok 121 - المشغّل القديم: بطاقة المجموعة تُسنَد إلى إدارة أعضائها، فلا خدمة تغيب عن رفّ إدارتها
+  ---
+  duration_ms: 3848.095291
+  type: 'test'
+  ...
+# Subtest: الترويسة: خدمةٌ موقوفة لجمهور المدير وحده لا تُقال للموظف «موقوفة»، وتُقال للمدير
+ok 122 - الترويسة: خدمةٌ موقوفة لجمهور المدير وحده لا تُقال للموظف «موقوفة»، وتُقال للمدير
+  ---
+  duration_ms: 4073.78275
+  type: 'test'
+  ...
+# Subtest: البحث بكلمات الناس: عشرون سؤالًا دارجًا مضبوطًا ≥18، وعشرون محجوزًا بلا كلمة مضافة ≥13، ولا سؤال يعود فارغًا حين تُصيب كلمةٌ واحدة
+ok 123 - البحث بكلمات الناس: عشرون سؤالًا دارجًا مضبوطًا ≥18، وعشرون محجوزًا بلا كلمة مضافة ≥13، ولا سؤال يعود فارغًا حين تُصيب كلمةٌ واحدة
+  ---
+  duration_ms: 4558.630666
+  type: 'test'
+  ...
+# المضبوطة (مراجع): 20/20 · المحجوزة (بلا كلمة مضافة): 14/20 — الأخيرة هي مقياس كلمات الناس
+# Subtest: الأنماط: الشريط الملتصق يقف فوق شريط التبويب السفلي على الجوال ويعود إلى الصفر فوق 760، وروابط النصّ في البطاقات ≥44
+ok 124 - الأنماط: الشريط الملتصق يقف فوق شريط التبويب السفلي على الجوال ويعود إلى الصفر فوق 760، وروابط النصّ في البطاقات ≥44
+  ---
+  duration_ms: 1.299125
+  type: 'test'
+  ...
+# Subtest: لوح النتائج: الاستعلام الفارغ يعيد ما رُسم أولًا (مشغّل الإدارة)، والعدّاد نصٌّ للوح الدائم، وقائمة التبويبات بترتيب Tab واحد
+ok 125 - لوح النتائج: الاستعلام الفارغ يعيد ما رُسم أولًا (مشغّل الإدارة)، والعدّاد نصٌّ للوح الدائم، وقائمة التبويبات بترتيب Tab واحد
+  ---
+  duration_ms: 4023.653375
+  type: 'test'
+  ...
+# Subtest: سجل البحث: بحثٌ أصاب سرّيًا لا يُسجَّل (قرار المالك §8-7 كما هو)، وتبويب المرادفات يسمّي المستثنى بأسمائه
+ok 126 - سجل البحث: بحثٌ أصاب سرّيًا لا يُسجَّل (قرار المالك §8-7 كما هو)، وتبويب المرادفات يسمّي المستثنى بأسمائه
+  ---
+  duration_ms: 4153.452167
+  type: 'test'
+  ...
+# Subtest: «الكلاسيكي» و«مدار 360»: كل قيمة لونية حرفية من الدليل أو مشتقّة منه باسمها
+ok 127 - «الكلاسيكي» و«مدار 360»: كل قيمة لونية حرفية من الدليل أو مشتقّة منه باسمها
+  ---
+  duration_ms: 3.45675
+  type: 'test'
+  ...
+# Subtest: «الكلاسيكي»: لا لون من لوحة Apple ولا من رماديات iOS — ولا من «الأخضر» القديم الذي لم يكن في الدليل
+ok 128 - «الكلاسيكي»: لا لون من لوحة Apple ولا من رماديات iOS — ولا من «الأخضر» القديم الذي لم يكن في الدليل
+  ---
+  duration_ms: 1.587166
+  type: 'test'
+  ...
+# Subtest: «الكلاسيكي»: الصورة الرمزية محايدة، والمربّعات الزخرفية لا تأخذ ألوان المناسبات، والحالات تبقى بمعانيها
+ok 129 - «الكلاسيكي»: الصورة الرمزية محايدة، والمربّعات الزخرفية لا تأخذ ألوان المناسبات، والحالات تبقى بمعانيها
+  ---
+  duration_ms: 1.576
+  type: 'test'
+  ...
+# Subtest: رمز القائمة بلون قرصه في كل تصميم — لا أبيض ثابتًا يختفي على أقراص الإخوة الفاتحة
+ok 130 - رمز القائمة بلون قرصه في كل تصميم — لا أبيض ثابتًا يختفي على أقراص الإخوة الفاتحة
+  ---
+  duration_ms: 1.074334
+  type: 'test'
+  ...
+# (node:89134) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: close checklist: the list starts empty and every task comes from an owner who put it there
+ok 131 - close checklist: the list starts empty and every task comes from an owner who put it there
+  ---
+  duration_ms: 3880.745042
+  type: 'test'
+  ...
+# Subtest: close checklist: the capability, not a role, opens it, and another tenant is never in view
+ok 132 - close checklist: the capability, not a role, opens it, and another tenant is never in view
+  ---
+  duration_ms: 3893.256
+  type: 'test'
+  ...
+# Subtest: close checklist: a task closes only with evidence, and whoever executed one never approves the close
+ok 133 - close checklist: a task closes only with evidence, and whoever executed one never approves the close
+  ---
+  duration_ms: 3967.06625
+  type: 'test'
+  ...
+# Subtest: close checklist: an approved close locks the accounting period so no entry carries a date inside it
+ok 134 - close checklist: an approved close locks the accounting period so no entry carries a date inside it
+  ---
+  duration_ms: 3734.269625
+  type: 'test'
+  ...
+# Subtest: close checklist: an approved close reopens only on a documented request a third person approves
+ok 135 - close checklist: an approved close reopens only on a documented request a third person approves
+  ---
+  duration_ms: 3968.31725
+  type: 'test'
+  ...
+# Subtest: close checklist: every write needs a transaction and a fresh version of what the screen showed
+ok 136 - close checklist: every write needs a transaction and a fresh version of what the screen showed
+  ---
+  duration_ms: 4091.225667
+  type: 'test'
+  ...
+# Subtest: close checklist screen: it renders from real board data under the strict content policy
+ok 137 - close checklist screen: it renders from real board data under the strict content policy
+  ---
+  duration_ms: 4090.920417
+  type: 'test'
+  ...
+# (node:89162) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: an empty month passes all four system checks, each named on the close screen, and the close is approved as before
+ok 138 - an empty month passes all four system checks, each named on the close screen, and the close is approved as before
+  ---
+  duration_ms: 3985.571375
+  type: 'test'
+  ...
+# Subtest: approve_close refuses, naming each item and its owner: an unposted journal, a document waiting for its journal, an unreconciled bank account, an unexplained control difference
+ok 139 - approve_close refuses, naming each item and its owner: an unposted journal, a document waiting for its journal, an unreconciled bank account, an unexplained control difference
+  ---
+  duration_ms: 3895.536916
+  type: 'test'
+  ...
+# Subtest: a control difference is explained in writing on the close; whoever explains it does not approve it; a changed amount needs a new explanation
+ok 140 - a control difference is explained in writing on the close; whoever explains it does not approve it; a changed amount needs a new explanation
+  ---
+  duration_ms: 3925.918416
+  type: 'test'
+  ...
+# Subtest: the checks read their own month and tenant only: what belongs to another month or entity does not block, and the pure function agrees with the screen
+ok 141 - the checks read their own month and tenant only: what belongs to another month or entity does not block, and the pure function agrees with the screen
+  ---
+  duration_ms: 3942.12375
+  type: 'test'
+  ...
+# (node:89258) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: المحرّك يقرأ الرموز فعلًا قبل أن يحكم — لا خريطة فارغة تمرّ صامتة
+ok 142 - المحرّك يقرأ الرموز فعلًا قبل أن يحكم — لا خريطة فارغة تمرّ صامتة
+  ---
+  duration_ms: 533.325709
+  type: 'test'
+  ...
+# Subtest: كل زوج نص/خلفية يعبر 4.5:1 — في التصاميم الثمانية والأوضاع الأربعة
+ok 143 - كل زوج نص/خلفية يعبر 4.5:1 — في التصاميم الثمانية والأوضاع الأربعة
+  ---
+  duration_ms: 470.633958
+  type: 'test'
+  ...
+# Subtest: مؤشّر البؤرة وحدود المكوّنات تعبر 3:1 (WCAG 1.4.11)
+ok 144 - مؤشّر البؤرة وحدود المكوّنات تعبر 3:1 (WCAG 1.4.11)
+  ---
+  duration_ms: 426.754541
+  type: 'test'
+  ...
+# Subtest: حبر الفيروزي وأحبار الحالات تعبر 4.5:1 على كل سطح — في التصاميم التسعة والأوضاع الأربعة
+ok 145 - حبر الفيروزي وأحبار الحالات تعبر 4.5:1 على كل سطح — في التصاميم التسعة والأوضاع الأربعة
+  ---
+  duration_ms: 402.907708
+  type: 'test'
+  ...
+# Subtest: الأدوار --color-*: كل نصٍّ على كل خلفية يعبر 4.5:1، والحدّ والبؤرة 3:1 — في التصاميم التسعة والأوضاع الأربعة
+ok 146 - الأدوار --color-*: كل نصٍّ على كل خلفية يعبر 4.5:1، والحدّ والبؤرة 3:1 — في التصاميم التسعة والأوضاع الأربعة
+  ---
+  duration_ms: 827.876375
+  type: 'test'
+  ...
+# Subtest: مؤشّر البؤرة مصمت لا شفاف — الشفافية تُذيبه في الخلفية مهما كانت نسبته
+ok 147 - مؤشّر البؤرة مصمت لا شفاف — الشفافية تُذيبه في الخلفية مهما كانت نسبته
+  ---
+  duration_ms: 321.035916
+  type: 'test'
+  ...
+# Subtest: لكل تصميم لوحة معاينة خاصة به في شاشة المظهر — لا تصميم يستعير صورة غيره
+ok 148 - لكل تصميم لوحة معاينة خاصة به في شاشة المظهر — لا تصميم يستعير صورة غيره
+  ---
+  duration_ms: 0.308958
+  type: 'test'
+  ...
+# (node:89324) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# (node:89407) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: opening the database waits for a lock held by another process instead of failing at once
+ok 149 - opening the database waits for a lock held by another process instead of failing at once
+  ---
+  duration_ms: 4330.146125
+  type: 'test'
+  ...
+# (node:89367) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: delivery cycle: no step of the client chain opens before the step before it was approved by someone else
+ok 150 - delivery cycle: no step of the client chain opens before the step before it was approved by someone else
+  ---
+  duration_ms: 3835.586125
+  type: 'test'
+  ...
+# Subtest: delivery cycle: an entitlement is born from an accepted deliverable only — a submitted one is not enough
+ok 151 - delivery cycle: an entitlement is born from an accepted deliverable only — a submitted one is not enough
+  ---
+  duration_ms: 4202.228833
+  type: 'test'
+  ...
+# Subtest: delivery cycle: the customer invoice hangs on an approved entitlement, and the preparer never issues it
+ok 152 - delivery cycle: the customer invoice hangs on an approved entitlement, and the preparer never issues it
+  ---
+  duration_ms: 4103.788833
+  type: 'test'
+  ...
+# Subtest: delivery cycle: collection is recorded and matched by two people and never exceeds the entitlement
+ok 153 - delivery cycle: collection is recorded and matched by two people and never exceeds the entitlement
+  ---
+  duration_ms: 4039.391416
+  type: 'test'
+  ...
+# Subtest: delivery cycle: a client review stage closes only on an external approval documented against that very version
+ok 154 - delivery cycle: a client review stage closes only on an external approval documented against that very version
+  ---
+  duration_ms: 3956.262708
+  type: 'test'
+  ...
+# Subtest: delivery cycle: no supplier award without a comparison, a qualified vendor and an approved project budget
+ok 155 - delivery cycle: no supplier award without a comparison, a qualified vendor and an approved project budget
+  ---
+  duration_ms: 4021.283292
+  type: 'test'
+  ...
+# Subtest: delivery cycle: the supplier is not received, invoiced or paid before the purchase order, and the payment needs three separate people
+ok 156 - delivery cycle: the supplier is not received, invoiced or paid before the purchase order, and the payment needs three separate people
+  ---
+  duration_ms: 3994.229166
+  type: 'test'
+  ...
+# Subtest: delivery cycle: execution is blocked until the advance payment is confirmed
+ok 157 - delivery cycle: execution is blocked until the advance payment is confirmed
+  ---
+  duration_ms: 4060.380708
+  type: 'test'
+  ...
+# Subtest: delivery cycle: a supplier may not start before a purchase order AND a commencement authorisation
+ok 158 - delivery cycle: a supplier may not start before a purchase order AND a commencement authorisation
+  ---
+  duration_ms: 4185.217208
+  type: 'test'
+  ...
+# Subtest: delivery cycle: the customer purchase order is recorded against the commercial case before execution
+ok 159 - delivery cycle: the customer purchase order is recorded against the commercial case before execution
+  ---
+  duration_ms: 3983.147
+  type: 'test'
+  ...
+# Subtest: delivery cycle: a project can be closed technically and then financially
+ok 160 - delivery cycle: a project can be closed technically and then financially
+  ---
+  duration_ms: 4043.550625
+  type: 'test'
+  ...
+# Subtest: delivery cycle: paying the supplier marks the purchase as paid, read from payment_orders not from a constant
+ok 161 - delivery cycle: paying the supplier marks the purchase as paid, read from payment_orders not from a constant
+  ---
+  duration_ms: 3998.295
+  type: 'test'
+  ...
+# Subtest: delivery cycle: work packages can be planned for more than one department
+ok 162 - delivery cycle: work packages can be planned for more than one department
+  ---
+  duration_ms: 4353.130708
+  type: 'test'
+  ...
+# Subtest: delivery cycle: a finance delegation is granted, expires and is revoked through the platform, never by a direct insert
+ok 163 - delivery cycle: a finance delegation is granted, expires and is revoked through the platform, never by a direct insert
+  ---
+  duration_ms: 4113.4975
+  type: 'test'
+  ...
+# Subtest: delivery cycle: the completion certificate is a numbered, versioned record, and the client acceptance is employee-entered evidence with its stated limit, never a signature
+ok 164 - delivery cycle: the completion certificate is a numbered, versioned record, and the client acceptance is employee-entered evidence with its stated limit, never a signature
+  ---
+  duration_ms: 3919.309708
+  type: 'test'
+  ...
+# Subtest: التفويض المالي له سقف مدة، ورقمه هو ما تستعمله المنصة فعلًا لا رقم مستعار
+ok 165 - التفويض المالي له سقف مدة، ورقمه هو ما تستعمله المنصة فعلًا لا رقم مستعار
+  ---
+  duration_ms: 3737.543875
+  type: 'test'
+  ...
+# Subtest: الأساسيات: ألوان الدليل وحدها بـOKLCH، كل مثبّت يرجع إلى HEX الدليل نفسه، وكلها داخل sRGB
+ok 166 - الأساسيات: ألوان الدليل وحدها بـOKLCH، كل مثبّت يرجع إلى HEX الدليل نفسه، وكلها داخل sRGB
+  ---
+  duration_ms: 3.093416
+  type: 'test'
+  ...
+# Subtest: الأساسيات: الصبغة ثابتة على طول السلّم — الفيروزي ±8° من 174.8، والرمادي بلا صبغة
+ok 167 - الأساسيات: الصبغة ثابتة على طول السلّم — الفيروزي ±8° من 174.8، والرمادي بلا صبغة
+  ---
+  duration_ms: 0.274
+  type: 'test'
+  ...
+# Subtest: الأدوار: رمزٌ واحد لكل دور باسم --color-{role}-{variant}، وكل دورٍ تقرؤه ورقةٌ معرَّف
+ok 168 - الأدوار: رمزٌ واحد لكل دور باسم --color-{role}-{variant}، وكل دورٍ تقرؤه ورقةٌ معرَّف
+  ---
+  duration_ms: 1.468334
+  type: 'test'
+  ...
+# Subtest: الحركة: الضغط 0.96 بالضبط على scale بـ150ms ease-out، ولا transition: all، ولا ارتداد في ردّ الضغط
+ok 169 - الحركة: الضغط 0.96 بالضبط على scale بـ150ms ease-out، ولا transition: all، ولا ارتداد في ردّ الضغط
+  ---
+  duration_ms: 1.038083
+  type: 'test'
+  ...
+# Subtest: لا حركة في الرسم الأول، وتبديل المظهر لا يذوب
+ok 170 - لا حركة في الرسم الأول، وتبديل المظهر لا يذوب
+  ---
+  duration_ms: 0.494417
+  type: 'test'
+  ...
+# Subtest: الطباعة: لا تباعد أحرف ولا حروف كبيرة على العربية، ولا نص عربي تحت 12px
+ok 171 - الطباعة: لا تباعد أحرف ولا حروف كبيرة على العربية، ولا نص عربي تحت 12px
+  ---
+  duration_ms: 6.076542
+  type: 'test'
+  ...
+# Subtest: اللمس: التحويم لا يعلق بعد النقر في بطاقات «الكلاسيكي»، وأداة مساحة النقر للأسطول موجودة
+ok 172 - اللمس: التحويم لا يعلق بعد النقر في بطاقات «الكلاسيكي»، وأداة مساحة النقر للأسطول موجودة
+  ---
+  duration_ms: 0.415333
+  type: 'test'
+  ...
+# (node:89432) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: ledger screen: a payable paid inside a grouped order reads paid, a returned transfer is not payment, and a supplier credit lowers what is owed
+ok 173 - ledger screen: a payable paid inside a grouped order reads paid, a returned transfer is not payment, and a supplier credit lowers what is owed
+  ---
+  duration_ms: 4287.03675
+  type: 'test'
+  ...
+# (node:89511) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: exceptions: each kind is computed from its source with its owner, and what already waits as a decision elsewhere is listed but not counted in the inbox twice
+ok 174 - exceptions: each kind is computed from its source with its owner, and what already waits as a decision elsewhere is listed but not counted in the inbox twice
+  ---
+  duration_ms: 4316.906083
+  type: 'test'
+  ...
+# Subtest: acknowledgement: an append-only record by the owner, at the amount of the moment; it leaves the inbox, comes back when the amount changes, and is refused to anyone else
+ok 175 - acknowledgement: an append-only record by the owner, at the amount of the moment; it leaves the inbox, comes back when the amount changes, and is refused to anyone else
+  ---
+  duration_ms: 4298.019459
+  type: 'test'
+  ...
+# Subtest: overdue re-close: a reopened month past its re-close date is an exception for whoever manages the close
+ok 176 - overdue re-close: a reopened month past its re-close date is an exception for whoever manages the close
+  ---
+  duration_ms: 4082.450292
+  type: 'test'
+  ...
+# Subtest: screen and routes: the queue renders each exception with its owner and an acknowledge form, and the route acknowledges once per idempotency key through the real handler
+ok 177 - screen and routes: the queue renders each exception with its owner and an acknowledge form, and the route acknowledges once per idempotency key through the real handler
+  ---
+  duration_ms: 4773.82925
+  type: 'test'
+  ...
+# Subtest: audit package: the queue offers the period package as a download to whoever also holds the audit capability, and to no one else
+ok 178 - audit package: the queue offers the period package as a download to whoever also holds the audit capability, and to no one else
+  ---
+  duration_ms: 4189.334041
+  type: 'test'
+  ...
+# (node:89520) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: suppliers: the ledger statement, R32, the executive pulse, the cash forecast and the project settlement axis all read payable_balances — a batch, a partial payment, a return and a supplier credit note included
+ok 179 - suppliers: the ledger statement, R32, the executive pulse, the cash forecast and the project settlement axis all read payable_balances — a batch, a partial payment, a return and a supplier credit note included
+  ---
+  duration_ms: 4421.397958
+  type: 'test'
+  ...
+# Subtest: customers: the ledger statement, R31 aging, the executive pulse and the cash forecast read ar_claim_collection — a reversed receipt is not collected, a credit note lowers the claim, an allocation settles it
+ok 180 - customers: the ledger statement, R31 aging, the executive pulse and the cash forecast read ar_claim_collection — a reversed receipt is not collected, a credit note lowers the claim, an allocation settles it
+  ---
+  duration_ms: 3989.553125
+  type: 'test'
+  ...
+# Subtest: project closure: the journals line counts the project's advance receipt, draw and reversal, a batch payment through its lines, and a returned supplier payment
+ok 181 - project closure: the journals line counts the project's advance receipt, draw and reversal, a batch payment through its lines, and a returned supplier payment
+  ---
+  duration_ms: 4160.962
+  type: 'test'
+  ...
+# Subtest: trace: a batch payment settles every invoice it pays, by the part it paid, and the payment names each invoice it settles
+ok 182 - trace: a batch payment settles every invoice it pays, by the part it paid, and the payment names each invoice it settles
+  ---
+  duration_ms: 3949.898667
+  type: 'test'
+  ...
+# (node:89531) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: AP aging: each open payable is aged from its due date — the verified tax invoice date plus the owner's payment term — at its outstanding balance, and without an adopted term it says so and ages from the invoice date
+ok 183 - AP aging: each open payable is aged from its due date — the verified tax invoice date plus the owner's payment term — at its outstanding balance, and without an adopted term it says so and ages from the invoice date
+  ---
+  duration_ms: 4193.127375
+  type: 'test'
+  ...
+# Subtest: R35 is the close checks themselves: unposted journals (never a rejected one), documents without a posted journal, an active bank account without an approved reconciliation, and each control difference, every row with an owner and a named item
+ok 184 - R35 is the close checks themselves: unposted journals (never a rejected one), documents without a posted journal, an active bank account without an approved reconciliation, and each control difference, every row with an owner and a named item
+  ---
+  duration_ms: 4090.170542
+  type: 'test'
+  ...
+# Subtest: margin: supplier cost enters the project margin net of verified input VAT and of approved supplier credit notes, against net revenue — and verifying the VAT later moves the figures an acceptance was taken on
+ok 185 - margin: supplier cost enters the project margin net of verified input VAT and of approved supplier credit notes, against net revenue — and verifying the VAT later moves the figures an acceptance was taken on
+  ---
+  duration_ms: 4175.950292
+  type: 'test'
+  ...
+# Subtest: cash forecast: the opening balance comes from the ledger balance of reconciled bank accounts plus final cash documents not yet posted; a typed figure is refused while a reconciliation exists, and stays labelled manual when none does
+ok 186 - cash forecast: the opening balance comes from the ledger balance of reconciled bank accounts plus final cash documents not yet posted; a typed figure is refused while a reconciliation exists, and stays labelled manual when none does
+  ---
+  duration_ms: 3658.001917
+  type: 'test'
+  ...
+# (node:89733) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: FIN-01/06/09: a balanced journal reaches an immutable local posting and a sourced trial balance
+ok 187 - FIN-01/06/09: a balanced journal reaches an immutable local posting and a sourced trial balance
+  ---
+  duration_ms: 3782.438125
+  type: 'test'
+  ...
+# Subtest: FIN-01/06: unbalanced, floating, negative, empty or two-sided amounts cannot create a journal
+ok 188 - FIN-01/06: unbalanced, floating, negative, empty or two-sided amounts cannot create a journal
+  ---
+  duration_ms: 3913.078333
+  type: 'test'
+  ...
+# Subtest: FIN-06: returned revisions require a fresh independent approval and cannot skip posting
+ok 189 - FIN-06: returned revisions require a fresh independent approval and cannot skip posting
+  ---
+  duration_ms: 4093.610875
+  type: 'test'
+  ...
+# Subtest: FIN-06/09: a closed period and deactivated reference block a pending posting
+ok 190 - FIN-06/09: a closed period and deactivated reference block a pending posting
+  ---
+  duration_ms: 3941.098959
+  type: 'test'
+  ...
+# Subtest: FIN-06: an exact reversal is prepared and approved separately, then offsets the ledger once
+ok 191 - FIN-06: an exact reversal is prepared and approved separately, then offsets the ledger once
+  ---
+  duration_ms: 4037.532209
+  type: 'test'
+  ...
+# Subtest: IT-02/PLT-05: financial reads and writes require current explicit unexpired grants
+ok 192 - IT-02/PLT-05: financial reads and writes require current explicit unexpired grants
+  ---
+  duration_ms: 4013.73
+  type: 'test'
+  ...
+# Subtest: FIN-06: posting checks whether the original approver still holds authority
+ok 193 - FIN-06: posting checks whether the original approver still holds authority
+  ---
+  duration_ms: 4038.43075
+  type: 'test'
+  ...
+# Subtest: FIN-05/06: a matched procurement reference creates one exact payable journal
+ok 194 - FIN-05/06: a matched procurement reference creates one exact payable journal
+  ---
+  duration_ms: 4488.312417
+  type: 'test'
+  ...
+# Subtest: FIN-06 PLT-06/09: idempotent creation and rollback preserve one journal and its audit
+ok 195 - FIN-06 PLT-06/09: idempotent creation and rollback preserve one journal and its audit
+  ---
+  duration_ms: 4374.44725
+  type: 'test'
+  ...
+# (node:89734) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: خط الأساس يطابق المخطط الذي تنتجه الترحيلات، فلا يحرس رقمًا لقاعدة أخرى
+ok 196 - خط الأساس يطابق المخطط الذي تنتجه الترحيلات، فلا يحرس رقمًا لقاعدة أخرى
+  ---
+  duration_ms: 3333.049208
+  type: 'test'
+  ...
+# Subtest: والبصمة حتمية: بناءان متتاليان يعطيان القيمة نفسها
+ok 197 - والبصمة حتمية: بناءان متتاليان يعطيان القيمة نفسها
+  ---
+  duration_ms: 6991.288625
+  type: 'test'
+  ...
+# (node:89771) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: the unpaid-leave threshold and its mode are one decision: the leave-types policy is the source, and the settlement policy copies it instead of asking again
+ok 198 - the unpaid-leave threshold and its mode are one decision: the leave-types policy is the source, and the settlement policy copies it instead of asking again
+  ---
+  duration_ms: 3882.548875
+  type: 'test'
+  ...
+# Subtest: م91/3: طريقة «لا يُحسم» لا تُنقص مدة الخدمة مهما بلغت أيام الإجازة بلا أجر
+ok 199 - م91/3: طريقة «لا يُحسم» لا تُنقص مدة الخدمة مهما بلغت أيام الإجازة بلا أجر
+  ---
+  duration_ms: 0.126416
+  type: 'test'
+  ...
+# Subtest: a settlement policy accepted before any leave-types policy keeps deciding, and the leave-types policy takes over the moment it is accepted
+ok 200 - a settlement policy accepted before any leave-types policy keeps deciding, and the leave-types policy takes over the moment it is accepted
+  ---
+  duration_ms: 3956.7245
+  type: 'test'
+  ...
+# Subtest: a leave-types policy accepted without a mode leaves the settlement policy deciding it, and the threshold still comes from one place
+ok 201 - a leave-types policy accepted without a mode leaves the settlement policy deciding it, and the threshold still comes from one place
+  ---
+  duration_ms: 4006.210292
+  type: 'test'
+  ...
+# Subtest: Art. 116: a discipline fine and another fine in the same month land exactly on the cap, measured by one wage basis in both modules
+ok 202 - Art. 116: a discipline fine and another fine in the same month land exactly on the cap, measured by one wage basis in both modules
+  ---
+  duration_ms: 3817.810584
+  type: 'test'
+  ...
+# Subtest: the seeded deductions policy carries the wage basis that the code used to assume, so accepting it changes no number
+ok 203 - the seeded deductions policy carries the wage basis that the code used to assume, so accepting it changes no number
+  ---
+  duration_ms: 3992.550792
+  type: 'test'
+  ...
+# Subtest: the discipline schedule stops being a second home for the Art. 116 monthly cap: the deductions policy overrides it and the difference is reported
+ok 204 - the discipline schedule stops being a second home for the Art. 116 monthly cap: the deductions policy overrides it and the difference is reported
+  ---
+  duration_ms: 3781.075083
+  type: 'test'
+  ...
+# Subtest: one day-basis resolver answers the payroll run and the leave pay effect, and the payday shift follows the accepted working days
+ok 205 - one day-basis resolver answers the payroll run and the leave pay effect, and the payday shift follows the accepted working days
+  ---
+  duration_ms: 0.555542
+  type: 'test'
+  ...
+# Subtest: one HR policy screen lists every draft policy from every store with its articles, status, preparer and the same two-person rule, and never offers an action the module would refuse
+ok 206 - one HR policy screen lists every draft policy from every store with its articles, status, preparer and the same two-person rule, and never offers an action the module would refuse
+  ---
+  duration_ms: 4033.076125
+  type: 'test'
+  ...
+# Subtest: the readiness checklist names what still blocks the HR modules, each line pointing at where it is fixed, and clears as the blockers are removed
+ok 207 - the readiness checklist names what still blocks the HR modules, each line pointing at where it is fixed, and clears as the blockers are removed
+  ---
+  duration_ms: 4058.307333
+  type: 'test'
+  ...
+# (node:89773) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: خريطة التكاملات ترفض الدور المزور وتسحب الوصول فور تغيير الدور
+ok 208 - خريطة التكاملات ترفض الدور المزور وتسحب الوصول فور تغيير الدور
+  ---
+  duration_ms: 4136.3815
+  type: 'test'
+  ...
+# Subtest: واجهة الربط تعرض الموانع وتهرب المحتوى ولا توهم باتصال ناجح
+ok 209 - واجهة الربط تعرض الموانع وتهرب المحتوى ولا توهم باتصال ناجح
+  ---
+  duration_ms: 1.46075
+  type: 'test'
+  ...
+# (node:89868) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: invoices API: every issued document says it is internal and not reported while no e-invoicing gateway is connected; a draft says it is not issued
+ok 210 - invoices API: every issued document says it is internal and not reported while no e-invoicing gateway is connected; a draft says it is not issued
+  ---
+  duration_ms: 3810.4325
+  type: 'test'
+  ...
+# Subtest: invoices API: a queue status written by a simulated provider never reads as reported on the invoice
+ok 211 - invoices API: a queue status written by a simulated provider never reads as reported on the invoice
+  ---
+  duration_ms: 3916.772375
+  type: 'test'
+  ...
+# Subtest: kit.tile is byte-identical to the old copy-pasted tile, including the trailing space when there is no tone
+ok 212 - kit.tile is byte-identical to the old copy-pasted tile, including the trailing space when there is no tone
+  ---
+  duration_ms: 6.504125
+  type: 'test'
+  ...
+# Subtest: kit.tile matches every local tile still living in a screen: they differ only in parameter naming
+ok 213 - kit.tile matches every local tile still living in a screen: they differ only in parameter naming
+  ---
+  duration_ms: 61.170958
+  type: 'test'
+  ...
+# Subtest: kit.tile with a link is the anchor form «طلباتي» used, and the link is escaped
+ok 214 - kit.tile with a link is the anchor form «طلباتي» used, and the link is escaped
+  ---
+  duration_ms: 0.355708
+  type: 'test'
+  ...
+# Subtest: kit.empty, kit.pageHead and kit.statusBadge are byte-identical to the functions in app.mjs
+ok 215 - kit.empty, kit.pageHead and kit.statusBadge are byte-identical to the functions in app.mjs
+  ---
+  duration_ms: 3.696584
+  type: 'test'
+  ...
+# Subtest: kit.statusBadge with a module shows the one canonical phrase and keeps the module's own phrase beside it
+ok 216 - kit.statusBadge with a module shows the one canonical phrase and keeps the module's own phrase beside it
+  ---
+  duration_ms: 0.189459
+  type: 'test'
+  ...
+# Subtest: kit.table is the table the mobile enhancer reads, and with no rows it renders an empty state instead of a header over nothing
+ok 217 - kit.table is the table the mobile enhancer reads, and with no rows it renders an empty state instead of a header over nothing
+  ---
+  duration_ms: 0.80275
+  type: 'test'
+  ...
+# Subtest: kit.row and kit.card carry the shared skeleton of the list row and the folding card
+ok 218 - kit.row and kit.card carry the shared skeleton of the list row and the folding card
+  ---
+  duration_ms: 0.127958
+  type: 'test'
+  ...
+# Subtest: kit.refusal draws what was refused, what is missing, who holds it and the next step; a bare message keeps the old .error shape
+ok 219 - kit.refusal draws what was refused, what is missing, who holds it and the next step; a bare message keeps the old .error shape
+  ---
+  duration_ms: 0.1655
+  type: 'test'
+  ...
+# Subtest: kit: nothing it emits breaks the content security policy, and it refuses to be built without an escaper
+ok 220 - kit: nothing it emits breaks the content security policy, and it refuses to be built without an escaper
+  ---
+  duration_ms: 0.461875
+  type: 'test'
+  ...
+# Subtest: kit: the language is read when a screen is drawn, so one kit survives a language switch
+ok 221 - kit: the language is read when a screen is drawn, so one kit survives a language switch
+  ---
+  duration_ms: 0.131416
+  type: 'test'
+  ...
+# Subtest: kit: app.mjs injects it as ctx.ui at the single module.render call site, and the server serves it
+ok 222 - kit: app.mjs injects it as ctx.ui at the single module.render call site, and the server serves it
+  ---
+  duration_ms: 1.875958
+  type: 'test'
+  ...
+# Subtest: kit: the six migrated daily screens take tile from ctx.ui and define none of their own
+ok 223 - kit: the six migrated daily screens take tile from ctx.ui and define none of their own
+  ---
+  duration_ms: 0.92725
+  type: 'test'
+  ...
+# Subtest: kit: the third argument is optional — kit(e), kit(e,tr) and kit(e,tr,undefined) emit the same bytes, and an empty registry draws nothing
+ok 224 - kit: the third argument is optional — kit(e), kit(e,tr) and kit(e,tr,undefined) emit the same bytes, and an empty registry draws nothing
+  ---
+  duration_ms: 0.318708
+  type: 'test'
+  ...
+# Subtest: kit: with the registry link, labels, status phrases and custom fields reach a hand-written screen — a missing value says «غير متاح» with its reason and owner
+ok 225 - kit: with the registry link, labels, status phrases and custom fields reach a hand-written screen — a missing value says «غير متاح» with its reason and owner
+  ---
+  duration_ms: 0.527125
+  type: 'test'
+  ...
+# (node:89885) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: registry: every existing source kind is held unchanged, the new kinds join it, and another file can register its own kind
+ok 226 - registry: every existing source kind is held unchanged, the new kinds join it, and another file can register its own kind
+  ---
+  duration_ms: 3872.070584
+  type: 'test'
+  ...
+# Subtest: supplier invoice: net per cost centre, input VAT from the verified record, the gross liability — one balanced journal in minor units
+ok 227 - supplier invoice: net per cost centre, input VAT from the verified record, the gross liability — one balanced journal in minor units
+  ---
+  duration_ms: 4147.040458
+  type: 'test'
+  ...
+# Subtest: supplier invoice: not ready until the VAT position is known, and a supplier outside the VAT register posts gross to cost
+ok 228 - supplier invoice: not ready until the VAT position is known, and a supplier outside the VAT register posts gross to cost
+  ---
+  duration_ms: 4176.190958
+  type: 'test'
+  ...
+# Subtest: supplier invoice: one payable, one journal — the old manual path is closed, its journals stay readable, and a trigger refuses a second path
+ok 229 - supplier invoice: one payable, one journal — the old manual path is closed, its journals stay readable, and a trigger refuses a second path
+  ---
+  duration_ms: 4080.274458
+  type: 'test'
+  ...
+# Subtest: customer advances: receipt, each draw application and reversal become journals, and the control reads net of reversals
+ok 230 - customer advances: receipt, each draw application and reversal become journals, and the control reads net of reversals
+  ---
+  duration_ms: 4127.462375
+  type: 'test'
+  ...
+# Subtest: migration 167 upgrade: draws applied before it become one opening event each, and later applications are captured by the trigger
+ok 231 - migration 167 upgrade: draws applied before it become one opening event each, and later applications are captured by the trigger
+  ---
+  duration_ms: 4502.986375
+  type: 'test'
+  ...
+# Subtest: pending sources: an unposted supplier liability is listed and blocks the monthly close pack like any other unposted document
+ok 232 - pending sources: an unposted supplier liability is listed and blocks the monthly close pack like any other unposted document
+  ---
+  duration_ms: 4039.487292
+  type: 'test'
+  ...
+# Subtest: control reconciliation: AR, AP, input VAT, output VAT and customer advances tie to their control accounts after a synthetic month, and the trial balance balances
+ok 233 - control reconciliation: AR, AP, input VAT, output VAT and customer advances tie to their control accounts after a synthetic month, and the trial balance balances
+  ---
+  duration_ms: 3903.691792
+  type: 'test'
+  ...
+# Subtest: control reconciliation: every difference is itemised to a document or a journal, and the items add up to the difference
+ok 234 - control reconciliation: every difference is itemised to a document or a journal, and the items add up to the difference
+  ---
+  duration_ms: 4133.497791
+  type: 'test'
+  ...
+# Subtest: control reconciliation: read-only, finance-scoped and tenant-isolated
+ok 235 - control reconciliation: read-only, finance-scoped and tenant-isolated
+  ---
+  duration_ms: 4407.469375
+  type: 'test'
+  ...
+# Subtest: trace: a supplier invoice walks to its approvers, its posted journal, its payment, the bank line, and its reversal — with explicit no-link markers
+ok 236 - trace: a supplier invoice walks to its approvers, its posted journal, its payment, the bank line, and its reversal — with explicit no-link markers
+  ---
+  duration_ms: 4173.2805
+  type: 'test'
+  ...
+# Subtest: trace: an invoice reaches its receipt, the advance drawn on it and its credit note; a manual journal says it has no source document
+ok 237 - trace: an invoice reaches its receipt, the advance drawn on it and its credit note; a manual journal says it has no source document
+  ---
+  duration_ms: 3983.040417
+  type: 'test'
+  ...
+# Subtest: trace: finance-scoped, tenant-isolated, and it refuses what it cannot find instead of guessing
+ok 238 - trace: finance-scoped, tenant-isolated, and it refuses what it cannot find instead of guessing
+  ---
+  duration_ms: 3913.776417
+  type: 'test'
+  ...
+# Subtest: listFinance: no constant payment status; each payable carries its payment state from its payment order
+ok 239 - listFinance: no constant payment status; each payable carries its payment state from its payment order
+  ---
+  duration_ms: 4039.135708
+  type: 'test'
+  ...
+# Subtest: idempotency: two processes preparing the same supplier invoice at the same instant leave one journal, one payable link and one source link
+ok 240 - idempotency: two processes preparing the same supplier invoice at the same instant leave one journal, one payable link and one source link
+  ---
+  duration_ms: 7952.571125
+  type: 'test'
+  ...
+# Subtest: separation of duties: the preparer neither approves nor posts a sourced journal, a reversal needs another preparer, and a read-only holder prepares nothing
+ok 241 - separation of duties: the preparer neither approves nor posts a sourced journal, a reversal needs another preparer, and a read-only holder prepares nothing
+  ---
+  duration_ms: 8009.885
+  type: 'test'
+  ...
+# Subtest: routes: GET /api/ledger/reconciliation and /api/ledger/trace answer a finance reader and refuse everyone else, writing nothing
+ok 242 - routes: GET /api/ledger/reconciliation and /api/ledger/trace answer a finance reader and refuse everyone else, writing nothing
+  ---
+  duration_ms: 9574.199708
+  type: 'test'
+  ...
+# Subtest: screens: the statements screen shows the control reconciliation and a trace action; the finance screen shows each payable’s real payment state
+ok 243 - screens: the statements screen shows the control reconciliation and a trace action; the finance screen shows each payable’s real payment state
+  ---
+  duration_ms: 8337.513833
+  type: 'test'
+  ...
+# (node:89919) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: the ledger does not reopen from the ledger screen or by a direct update: finance names the controlled path, and the database refuses the rest
+ok 244 - the ledger does not reopen from the ledger screen or by a direct update: finance names the controlled path, and the database refuses the rest
+  ---
+  duration_ms: 3713.431625
+  type: 'test'
+  ...
+# Subtest: a checklist reopen request carries a ledger reopening; a third person with ledger authority approves it once the owner has set the re-close deadline, and the month takes a dated adjustment
+ok 245 - a checklist reopen request carries a ledger reopening; a third person with ledger authority approves it once the owner has set the re-close deadline, and the month takes a dated adjustment
+  ---
+  duration_ms: 4079.563917
+  type: 'test'
+  ...
+# Subtest: re-close relocks the ledger through the same checks and records who re-closed; the reopening is used once and its history never changes
+ok 246 - re-close relocks the ledger through the same checks and records who re-closed; the reopening is used once and its history never changes
+  ---
+  duration_ms: 3995.889791
+  type: 'test'
+  ...
+# Subtest: a rejected reopening leaves the ledger locked and the close approved; another tenant never sees the request
+ok 247 - a rejected reopening leaves the ledger locked and the close approved; another tenant never sees the request
+  ---
+  duration_ms: 3854.050792
+  type: 'test'
+  ...
+# (node:90044) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: قائمة مبذورة بقيم اليوم: الخيارات هي مصفوفة الكود بترتيبها، وكل قيمة فيها مقبولة
+ok 248 - قائمة مبذورة بقيم اليوم: الخيارات هي مصفوفة الكود بترتيبها، وكل قيمة فيها مقبولة
+  ---
+  duration_ms: 4033.269667
+  type: 'test'
+  ...
+# Subtest: الإضافة تجعل الخيار قابلًا للاختيار، وتُسجَّل بفاعلها وسببها وتصنيفها
+ok 249 - الإضافة تجعل الخيار قابلًا للاختيار، وتُسجَّل بفاعلها وسببها وتصنيفها
+  ---
+  duration_ms: 3953.350292
+  type: 'test'
+  ...
+# Subtest: التعطيل يمنع الاستعمال الجديد ويترك السجل القديم مقروءًا، والمستعمَل لا يُحذف
+ok 250 - التعطيل يمنع الاستعمال الجديد ويترك السجل القديم مقروءًا، والمستعمَل لا يُحذف
+  ---
+  duration_ms: 3908.409083
+  type: 'test'
+  ...
+# Subtest: قيمة خارج القائمة تُرفض برفض يسمّي الحقل بالعربية ومالكه وخطوته التالية
+ok 251 - قيمة خارج القائمة تُرفض برفض يسمّي الحقل بالعربية ومالكه وخطوته التالية
+  ---
+  duration_ms: 4164.302666
+  type: 'test'
+  ...
+# Subtest: القائمة المثبّتة نظامًا: للقراءة فقط، وكل كتابة عليها تُرفض باسم مادتها
+ok 252 - القائمة المثبّتة نظامًا: للقراءة فقط، وكل كتابة عليها تُرفض باسم مادتها
+  ---
+  duration_ms: 4052.942
+  type: 'test'
+  ...
+# Subtest: القائمة التي تفتح بوابة لا تتسع بيد واحدة: الخيار ينتظر شخصًا ثانيًا
+ok 253 - القائمة التي تفتح بوابة لا تتسع بيد واحدة: الخيار ينتظر شخصًا ثانيًا
+  ---
+  duration_ms: 3768.548459
+  type: 'test'
+  ...
+# Subtest: القائمة المحدودة بمحرس لا تنزل تحت حدّها، والرفض يسمّي المحرس
+ok 254 - القائمة المحدودة بمحرس لا تنزل تحت حدّها، والرفض يسمّي المحرس
+  ---
+  duration_ms: 3568.294542
+  type: 'test'
+  ...
+# Subtest: التصريح يحرس القائمة: من لا يحمله لا يغيّرها، والرفض يسمّي التصريح ومالك القائمة
+ok 255 - التصريح يحرس القائمة: من لا يحمله لا يغيّرها، والرفض يسمّي التصريح ومالك القائمة
+  ---
+  duration_ms: 3794.587875
+  type: 'test'
+  ...
+# Subtest: القيمة ذات الأساس المعتمد: افتراض الكود حتى يقررها إنسان ويعتمدها آخر، ثم تسري من تاريخها
+ok 256 - القيمة ذات الأساس المعتمد: افتراض الكود حتى يقررها إنسان ويعتمدها آخر، ثم تسري من تاريخها
+  ---
+  duration_ms: 4018.998917
+  type: 'test'
+  ...
+# Subtest: القيمة المثبّتة نظامًا جدول مؤرَّخ يُقرأ ولا يُقرَّر: النسبة بتاريخ الفاتورة، وأداتها بجوارها
+ok 257 - القيمة المثبّتة نظامًا جدول مؤرَّخ يُقرأ ولا يُقرَّر: النسبة بتاريخ الفاتورة، وأداتها بجوارها
+  ---
+  duration_ms: 3638.432875
+  type: 'test'
+  ...
+# Subtest: لوحة المالك تعرض القوائم وحوكمتها وسجل تغيّرها، وحمولة الوحدة تعرض قوائمها وحدها
+ok 258 - لوحة المالك تعرض القوائم وحوكمتها وسجل تغيّرها، وحمولة الوحدة تعرض قوائمها وحدها
+  ---
+  duration_ms: 3730.3955
+  type: 'test'
+  ...
+# Subtest: الخيار المشحون معطَّلًا في الكود لم يُعطَّل «منذ» تاريخ: الرفض يقول إنه لم يُفعَّل بعد
+ok 259 - الخيار المشحون معطَّلًا في الكود لم يُعطَّل «منذ» تاريخ: الرفض يقول إنه لم يُفعَّل بعد
+  ---
+  duration_ms: 3623.770875
+  type: 'test'
+  ...
+# Subtest: إعادة الترتيب وإعادة التسمية لا تفعّلان خيارًا شحنه الكود معطَّلًا
+ok 260 - إعادة الترتيب وإعادة التسمية لا تفعّلان خيارًا شحنه الكود معطَّلًا
+  ---
+  duration_ms: 3636.275625
+  type: 'test'
+  ...
+# Subtest: القائمة المرآة: ما يغيّر وجود الخيار أو اسمه يقع في جدولها لا في الطبقة
+ok 261 - القائمة المرآة: ما يغيّر وجود الخيار أو اسمه يقع في جدولها لا في الطبقة
+  ---
+  duration_ms: 3867.096625
+  type: 'test'
+  ...
+# Subtest: الشكل المعلَن يُفرض عند الإضافة: قيمة خارج قيد العمود وحقل إضافي ناقص يُرفضان رفضًا مكتوبًا
+ok 262 - الشكل المعلَن يُفرض عند الإضافة: قيمة خارج قيد العمود وحقل إضافي ناقص يُرفضان رفضًا مكتوبًا
+  ---
+  duration_ms: 7487.056083
+  type: 'test'
+  ...
+# Subtest: القيمة المعتمدة تُرفض إن خالف نوعها نوع القرار، والرفض يقول أي نوع يُنتظر
+ok 263 - القيمة المعتمدة تُرفض إن خالف نوعها نوع القرار، والرفض يقول أي نوع يُنتظر
+  ---
+  duration_ms: 7433.169125
+  type: 'test'
+  ...
+# Subtest: المثبّت نظامًا لا يُسجَّل بدعوى بلا مادة: إمّا استشهاد يجده القارئ، وإمّا إقرار صريح بمن يملك تسجيله
+ok 264 - المثبّت نظامًا لا يُسجَّل بدعوى بلا مادة: إمّا استشهاد يجده القارئ، وإمّا إقرار صريح بمن يملك تسجيله
+  ---
+  duration_ms: 7775.251959
+  type: 'test'
+  ...
+# Subtest: الاستشهاد المُقرّ بغيابه يُقال في الرفض ويُسمّى مالكه، فلا يُرسَل القارئ إلى إعادة صياغة للقاعدة
+ok 265 - الاستشهاد المُقرّ بغيابه يُقال في الرفض ويُسمّى مالكه، فلا يُرسَل القارئ إلى إعادة صياغة للقاعدة
+  ---
+  duration_ms: 7614.564417
+  type: 'test'
+  ...
+# Subtest: «مركز الأثر»: كل حبر نصٍّ يعبر 4.5:1 على كل سطح — في الفاتح والداكن والتلقائي
+ok 266 - «مركز الأثر»: كل حبر نصٍّ يعبر 4.5:1 على كل سطح — في الفاتح والداكن والتلقائي
+  ---
+  duration_ms: 5.192917
+  type: 'test'
+  ...
+# Subtest: «مركز الأثر»: مؤشّر البؤرة والحدّ القوي يعبران 3:1 (WCAG 1.4.11)
+ok 267 - «مركز الأثر»: مؤشّر البؤرة والحدّ القوي يعبران 3:1 (WCAG 1.4.11)
+  ---
+  duration_ms: 0.463583
+  type: 'test'
+  ...
+# Subtest: «مركز الأثر»: النص الأبيض على تعبئة الفعل وعلى الأحمر يعبر 4.5:1
+ok 268 - «مركز الأثر»: النص الأبيض على تعبئة الفعل وعلى الأحمر يعبر 4.5:1
+  ---
+  duration_ms: 0.350667
+  type: 'test'
+  ...
+# Subtest: «مركز الأثر»: ألوان الحالة والتصنيف من الهوية وحدها — لا لون من لوحة Apple يتسرّب من الأساس
+ok 269 - «مركز الأثر»: ألوان الحالة والتصنيف من الهوية وحدها — لا لون من لوحة Apple يتسرّب من الأساس
+  ---
+  duration_ms: 1.2375
+  type: 'test'
+  ...
+# Subtest: «مركز الأثر»: كتلة الداكن وتوأمها «التلقائي على جهاز داكن» متطابقتان
+ok 270 - «مركز الأثر»: كتلة الداكن وتوأمها «التلقائي على جهاز داكن» متطابقتان
+  ---
+  duration_ms: 0.38525
+  type: 'test'
+  ...
+# Subtest: «مركز الأثر»: الأيقونات والصورة الرمزية على لوحٍ محايد — لا ألواح ملوّنة من الأساس
+ok 271 - «مركز الأثر»: الأيقونات والصورة الرمزية على لوحٍ محايد — لا ألواح ملوّنة من الأساس
+  ---
+  duration_ms: 0.392625
+  type: 'test'
+  ...
+# (node:90152) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: mail is OFF by default: without MAIL_* the worker marks mail blocked and the admin screen says the owner must choose a provider
+ok 272 - mail is OFF by default: without MAIL_* the worker marks mail blocked and the admin screen says the owner must choose a provider
+  ---
+  duration_ms: 3867.162083
+  type: 'test'
+  ...
+# Subtest: sending through a mocked provider: one request with Bearer key and idempotency key, provider id stored, the key never shown
+ok 273 - sending through a mocked provider: one request with Bearer key and idempotency key, provider id stored, the key never shown
+  ---
+  duration_ms: 3888.446292
+  type: 'test'
+  ...
+# Subtest: retry with backoff through the jobs queue, rate limit per minute, a permanent refusal fails once, and exhausted retries dead-letter
+ok 274 - retry with backoff through the jobs queue, rate limit per minute, a permanent refusal fails once, and exhausted retries dead-letter
+  ---
+  duration_ms: 4454.115292
+  type: 'test'
+  ...
+# Subtest: templates: every value is escaped, the page is Arabic RTL with a text part, and a hostile link falls back to the notifications screen
+ok 275 - templates: every value is escaped, the page is Arabic RTL with a text part, and a hostile link falls back to the notifications screen
+  ---
+  duration_ms: 0.447375
+  type: 'test'
+  ...
+# Subtest: no salary, ID or health data in any rendered mail, whatever the in-app notice says
+ok 276 - no salary, ID or health data in any rendered mail, whatever the in-app notice says
+  ---
+  duration_ms: 3953.390833
+  type: 'test'
+  ...
+# Subtest: daily reminders: one job per Riyadh day from 08:00, idempotent across repeats and a restart, reminders sent once per stage
+ok 277 - daily reminders: one job per Riyadh day from 08:00, idempotent across repeats and a restart, reminders sent once per stage
+  ---
+  duration_ms: 4323.69825
+  type: 'test'
+  ...
+# Subtest: daily reminders: probation report due two weeks before the end goes to the line manager; overdue decisions and the manager digest
+ok 278 - daily reminders: probation report due two weeks before the end goes to the line manager; overdue decisions and the manager digest
+  ---
+  duration_ms: 4052.764334
+  type: 'test'
+  ...
+# {"t":"2026-10-01T07:19:53.890Z","id":"521a9e7d","env":"local","m":"POST","p":"/api/login","s":200,"ms":357}
+# {"t":"2026-10-01T07:19:53.904Z","id":"ad0a0441","env":"local","m":"GET","p":"/api/notifications/unread-count","s":200,"ms":4}
+# {"t":"2026-10-01T07:19:53.909Z","id":"85098aaf","env":"local","m":"GET","p":"/api/notifications","s":200,"ms":1}
+# {"t":"2026-10-01T07:19:53.926Z","id":"d30dae63","env":"local","m":"POST","p":"/api/notifications/read-all","s":201,"ms":13,"tx":1,"lock_ms":0}
+# {"t":"2026-10-01T07:19:53.932Z","id":"0e9174c8","env":"local","m":"GET","p":"/api/notifications/unread-count","s":200,"ms":0}
+# Subtest: mark all as read, unread count and paging; nothing of a colleague is touched
+ok 279 - mark all as read, unread count and paging; nothing of a colleague is touched
+  ---
+  duration_ms: 4574.085917
+  type: 'test'
+  ...
+# Subtest: B21 and the new modules: executors hear when a multi-step request is ready, and missions and training decisions notify
+ok 280 - B21 and the new modules: executors hear when a multi-step request is ready, and missions and training decisions notify
+  ---
+  duration_ms: 3746.075333
+  type: 'test'
+  ...
+# Subtest: security alerts reach platform admins: repeated failed logins, MFA reset, sensitive grant and a new admin
+ok 281 - security alerts reach platform admins: repeated failed logins, MFA reset, sensitive grant and a new admin
+  ---
+  duration_ms: 5880.629292
+  type: 'test'
+  ...
+# Subtest: idle timeout: a sensitive session idle past 30 minutes gets 401 session_expired, an active one does not, and other sessions have no limit until the owner sets one
+ok 282 - idle timeout: a sensitive session idle past 30 minutes gets 401 session_expired, an active one does not, and other sessions have no limit until the owner sets one
+  ---
+  duration_ms: 4604.509084
+  type: 'test'
+  ...
+# {"t":"2026-10-01T07:20:11.929Z","id":"8b0e43d0","env":"local","m":"GET","p":"/","s":200,"ms":1}
+# {"t":"2026-10-01T07:20:11.932Z","id":"4d642635","env":"local","m":"GET","p":"/app.mjs","s":200,"ms":1}
+# {"t":"2026-10-01T07:20:11.934Z","id":"e72942be","env":"local","m":"GET","p":"/api/me","s":401,"ms":1}
+# {"t":"2026-10-01T07:20:11.936Z","id":"6f0f321e","env":"local","m":"GET","p":"/","s":200,"ms":1}
+# {"t":"2026-10-01T07:20:11.939Z","id":"ae7a9ad6","env":"local","m":"GET","p":"/","s":200,"ms":1}
+# {"t":"2026-10-01T07:20:11.942Z","id":"a9aa6eeb","env":"local","m":"GET","p":"/","s":200,"ms":1}
+# Subtest: security headers: COOP, cross-domain policies and origin-agent cluster on every response, CSP unchanged, HSTS only over HTTPS or a trusted proxy
+ok 283 - security headers: COOP, cross-domain policies and origin-agent cluster on every response, CSP unchanged, HSTS only over HTTPS or a trusted proxy
+  ---
+  duration_ms: 3771.822458
+  type: 'test'
+  ...
+# (node:90264) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: مركز التكلفة: قائمة مرآة لصفوف المالية، والطلب يحمل معرّف الصفّ لا نصًّا وحده
+ok 284 - مركز التكلفة: قائمة مرآة لصفوف المالية، والطلب يحمل معرّف الصفّ لا نصًّا وحده
+  ---
+  duration_ms: 4086.533333
+  type: 'test'
+  ...
+# Subtest: اليوم الأول لم يتغيّر: مركز خارج قائمة المالية يبقى مقبولًا نصًّا حتى يقرّر المالك إغلاق الحقل
+ok 285 - اليوم الأول لم يتغيّر: مركز خارج قائمة المالية يبقى مقبولًا نصًّا حتى يقرّر المالك إغلاق الحقل
+  ---
+  duration_ms: 4128.301042
+  type: 'test'
+  ...
+# Subtest: الطلب والمخصص يشيران إلى الصفّ نفسه، فالحجز يقع على المخصص المقصود
+ok 286 - الطلب والمخصص يشيران إلى الصفّ نفسه، فالحجز يقع على المخصص المقصود
+  ---
+  duration_ms: 3724.963167
+  type: 'test'
+  ...
+# Subtest: كل قائمة مسجّلة تحمل مالكًا وحوكمة، والمثبّتة نظامًا تحمل مادتها
+ok 287 - كل قائمة مسجّلة تحمل مالكًا وحوكمة، والمثبّتة نظامًا تحمل مادتها
+  ---
+  duration_ms: 3711.882708
+  type: 'test'
+  ...
+# Subtest: قيمة غير معروفة في قائمة معروفة تُرفض، والقيمة المخزَّنة قديمًا تبقى مقروءة
+ok 288 - قيمة غير معروفة في قائمة معروفة تُرفض، والقيمة المخزَّنة قديمًا تبقى مقروءة
+  ---
+  duration_ms: 3779.362459
+  type: 'test'
+  ...
+# Subtest: شاشة الموردين تعرض قوائمها المُدارة وتدل على شاشة تعديلها: خياراتها وحالتها وسبب إقفال المقفلة منها
+ok 289 - شاشة الموردين تعرض قوائمها المُدارة وتدل على شاشة تعديلها: خياراتها وحالتها وسبب إقفال المقفلة منها
+  ---
+  duration_ms: 3988.077417
+  type: 'test'
+  ...
+# Subtest: حمولة المدفوعات تحمل نسبة الضريبة بجدولها المؤرَّخ وحالات الأمر بقيدها
+ok 290 - حمولة المدفوعات تحمل نسبة الضريبة بجدولها المؤرَّخ وحالات الأمر بقيدها
+  ---
+  duration_ms: 3827.143833
+  type: 'test'
+  ...
+# Subtest: تشديد صيغة الرقم الضريبي يسري على الجديد ولا يجمّد ملفًا قائمًا كُتب قبله
+ok 291 - تشديد صيغة الرقم الضريبي يسري على الجديد ولا يجمّد ملفًا قائمًا كُتب قبله
+  ---
+  duration_ms: 3742.581542
+  type: 'test'
+  ...
+# Subtest: تعطيل تصنيف لا يجمّد ملفًا يحمله ولا يبدّل تصنيفه صامتًا في نموذج التحرير
+ok 292 - تعطيل تصنيف لا يجمّد ملفًا يحمله ولا يبدّل تصنيفه صامتًا في نموذج التحرير
+  ---
+  duration_ms: 3800.066333
+  type: 'test'
+  ...
+# Subtest: نوع وثيقة تفرضه مصفوفة المتطلبات لا يُعطَّل، والرفض يسمّي ما يفرضه ومن يملك تغييره
+ok 293 - نوع وثيقة تفرضه مصفوفة المتطلبات لا يُعطَّل، والرفض يسمّي ما يفرضه ومن يملك تغييره
+  ---
+  duration_ms: 3742.758166
+  type: 'test'
+  ...
+# Subtest: غرض معطَّل ما زال ربطه ساريًا يبقى في القوائم المالية موسومًا، لا يختفي منها
+ok 294 - غرض معطَّل ما زال ربطه ساريًا يبقى في القوائم المالية موسومًا، لا يختفي منها
+  ---
+  duration_ms: 3669.835417
+  type: 'test'
+  ...
+# Subtest: رموز الرفض بعد التحويل: option_not_offered على القيمة خارج القائمة، واسم الحقل حيث لم يتغيّر السبب
+ok 295 - رموز الرفض بعد التحويل: option_not_offered على القيمة خارج القائمة، واسم الحقل حيث لم يتغيّر السبب
+  ---
+  duration_ms: 6296.177667
+  type: 'test'
+  ...
+# Subtest: القائمة المقفلة بقيد في القاعدة ترفض كل كتابة، ويسمّي الرفض القيد وترحيله
+ok 296 - القائمة المقفلة بقيد في القاعدة ترفض كل كتابة، ويسمّي الرفض القيد وترحيله
+  ---
+  duration_ms: 7645.559542
+  type: 'test'
+  ...
+# (node:90443) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: options: the board is for whoever decides a value or manages a list — a plain employee is refused by name
+ok 297 - options: the board is for whoever decides a value or manages a list — a plain employee is refused by name
+  ---
+  duration_ms: 5222.787041
+  type: 'test'
+  ...
+# Subtest: options: a value is recorded by one holder, reaches the other holder's inbox, and takes effect only on their approval
+ok 298 - options: a value is recorded by one holder, reaches the other holder's inbox, and takes effect only on their approval
+  ---
+  duration_ms: 5143.398416
+  type: 'test'
+  ...
+# Subtest: options: refusals are named — legally fixed, unknown key, wrong value shape, duplicate effective date
+ok 299 - options: refusals are named — legally fixed, unknown key, wrong value shape, duplicate effective date
+  ---
+  duration_ms: 5456.194834
+  type: 'test'
+  ...
+# Subtest: options: a list option with an Arabic value is added and stopped through its encoded path; a broken encoding is a refusal
+ok 300 - options: a list option with an Arabic value is added and stopped through its encoded path; a broken encoding is a refusal
+  ---
+  duration_ms: 5179.45425
+  type: 'test'
+  ...
+# Subtest: options: a list that opens a gate widens with two people — the second sees it in the inbox, the first cannot approve it
+ok 301 - options: a list that opens a gate widens with two people — the second sees it in the inbox, the first cannot approve it
+  ---
+  duration_ms: 5266.990584
+  type: 'test'
+  ...
+# (node:90465) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: ق-ت1-1: each account gets at most eight section rows, «إدارة المنصة» and «فريقي» keep their audience, and no «أخرى»
+ok 302 - ق-ت1-1: each account gets at most eight section rows, «إدارة المنصة» and «فريقي» keep their audience, and no «أخرى»
+  ---
+  duration_ms: 3970.090417
+  type: 'test'
+  ...
+# Subtest: ق-ت1-2: every screen the old menu reached is still reached, and has a place the account can open from its menu (or is tagged internal with a reason)
+ok 303 - ق-ت1-2: every screen the old menu reached is still reached, and has a place the account can open from its menu (or is tagged internal with a reason)
+  ---
+  duration_ms: 3610.735291
+  type: 'test'
+  ...
+# Subtest: ق-ت1-3: each old route resolves to its new home, the address shows it, and the deep link still opens the launcher
+ok 304 - ق-ت1-3: each old route resolves to its new home, the address shows it, and the deep link still opens the launcher
+  ---
+  duration_ms: 3924.351166
+  type: 'test'
+  ...
+# Subtest: ق-ت1-4: a screen seen by more than one role keeps one label per lens, and pages take their title from it
+ok 305 - ق-ت1-4: a screen seen by more than one role keeps one label per lens, and pages take their title from it
+  ---
+  duration_ms: 3964.73875
+  type: 'test'
+  ...
+# Subtest: hubs: «فريقي» و«المنظمة» و«إدارة المنصة» are still routes that list every screen placed there, grouped, with stable labels (they are no longer sidebar rows); «ملفي» and «بانتظار إجرائي» carry their link rows
+ok 306 - hubs: «فريقي» و«المنظمة» و«إدارة المنصة» are still routes that list every screen placed there, grouped, with stable labels (they are no longer sidebar rows); «ملفي» and «بانتظار إجرائي» carry their link rows
+  ---
+  duration_ms: 3737.389333
+  type: 'test'
+  ...
+# Subtest: globals: the reach list and the account are published for the department page, and the shell keeps every old condition
+ok 307 - globals: the reach list and the account are published for the department page, and the shell keeps every old condition
+  ---
+  duration_ms: 3815.364458
+  type: 'test'
+  ...
+# (node:90525) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: PRC-02: an unregistered or unqualified vendor never enters the payment cycle, and no bank account means no order
+ok 308 - PRC-02: an unregistered or unqualified vendor never enters the payment cycle, and no bank account means no order
+  ---
+  duration_ms: 12076.23125
+  type: 'test'
+  ...
+# Subtest: FIN-07/PRC-09: approved is not paid — three people prepare, approve and record the bank execution, and the bank-detail collector cannot record it
+ok 309 - FIN-07/PRC-09: approved is not paid — three people prepare, approve and record the bank execution, and the bank-detail collector cannot record it
+  ---
+  duration_ms: 3917.587084
+  type: 'test'
+  ...
+# Subtest: PRC-09: if the vendor bank account changes after the order was prepared, approval stops instead of silently paying the new account
+ok 310 - PRC-09: if the vendor bank account changes after the order was prepared, approval stops instead of silently paying the new account
+  ---
+  duration_ms: 3798.128542
+  type: 'test'
+  ...
+# Subtest: input VAT enters the summary only after a second person verifies the supplier tax invoice, and cannot exceed 15% of net
+ok 311 - input VAT enters the summary only after a second person verifies the supplier tax invoice, and cannot exceed 15% of net
+  ---
+  duration_ms: 3762.9855
+  type: 'test'
+  ...
+# Subtest: FIN-09: تمنع ضريبة الفاتورة المكررة عبر مرجع شراء آخر بعد توحيد شكل رقمها
+ok 312 - FIN-09: تمنع ضريبة الفاتورة المكررة عبر مرجع شراء آخر بعد توحيد شكل رقمها
+  ---
+  duration_ms: 6931.551583
+  type: 'test'
+  ...
+# Subtest: PRC-09: يظهر توقف المورد بعد الاعتماد ويُحفظ التحذير عند توثيق تنفيذ وقع فعلا
+ok 313 - PRC-09: يظهر توقف المورد بعد الاعتماد ويُحفظ التحذير عند توثيق تنفيذ وقع فعلا
+  ---
+  duration_ms: 7829.516208
+  type: 'test'
+  ...
+# Subtest: FIN-09: السجلات القديمة المكررة لا تعتمد، ويمكن رفض المكرر ثم اعتماد الأصل
+ok 314 - FIN-09: السجلات القديمة المكررة لا تعتمد، ويمكن رفض المكرر ثم اعتماد الأصل
+  ---
+  duration_ms: 7961.9595
+  type: 'test'
+  ...
+# Subtest: PRC-09: تغير الحساب البنكي بعد اعتماد الدفع يظهر للمالية دون كشف الآيبان
+ok 315 - PRC-09: تغير الحساب البنكي بعد اعتماد الدفع يظهر للمالية دون كشف الآيبان
+  ---
+  duration_ms: 8274.555
+  type: 'test'
+  ...
+# (node:90536) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: bank change: verifying a replacement supersedes the old account, records the change, tells finance in the platform and leaves a simulated message for the previously trusted contact
+ok 316 - bank change: verifying a replacement supersedes the old account, records the change, tells finance in the platform and leaves a simulated message for the previously trusted contact
+  ---
+  duration_ms: 3934.358333
+  type: 'test'
+  ...
+# Subtest: bank change: while the owner has not adopted the cooling-off days or the first-payment cap, the changed account stays blocked with a refusal naming both decisions and their owner
+ok 317 - bank change: while the owner has not adopted the cooling-off days or the first-payment cap, the changed account stays blocked with a refusal naming both decisions and their owner
+  ---
+  duration_ms: 4053.121708
+  type: 'test'
+  ...
+# Subtest: bank change: cooling-off counts from the verification day; afterwards the first payment is capped, released by a third person, and only then recorded as executed
+ok 318 - bank change: cooling-off counts from the verification day; afterwards the first payment is capped, released by a third person, and only then recorded as executed
+  ---
+  duration_ms: 5338.913667
+  type: 'test'
+  ...
+# Subtest: bank change window: the collector and the verifier cannot prepare, approve, release or record the first payment to that vendor — refused in code and in SQL — and a returned first payment reopens the window
+ok 319 - bank change window: the collector and the verifier cannot prepare, approve, release or record the first payment to that vendor — refused in code and in SQL — and a returned first payment reopens the window
+  ---
+  duration_ms: 8745.828667
+  type: 'test'
+  ...
+# Subtest: shared IBAN: verification is refused while the IBAN sits on another active vendor, until a separate reasoned decision by someone other than the collector allows it — and the decider does not verify
+ok 320 - shared IBAN: verification is refused while the IBAN sits on another active vendor, until a separate reasoned decision by someone other than the collector allows it — and the decider does not verify
+  ---
+  duration_ms: 7893.000166
+  type: 'test'
+  ...
+# Subtest: partial and batch: an order pays part of a payable or several payables of one vendor in one transfer; payableBalance tracks each step; over-allocation is refused in code and in SQL
+ok 321 - partial and batch: an order pays part of a payable or several payables of one vendor in one transfer; payableBalance tracks each step; over-allocation is refused in code and in SQL
+  ---
+  duration_ms: 8167.597042
+  type: 'test'
+  ...
+# Subtest: returns: a bounced transfer is recorded once as its own record by a third person, the executed order is never edited, the balance reopens and can be paid again exactly once
+ok 322 - returns: a bounced transfer is recorded once as its own record by a third person, the executed order is never edited, the balance reopens and can be paid again exactly once
+  ---
+  duration_ms: 7747.142667
+  type: 'test'
+  ...
+# Subtest: adjustments: supplier credit and debit notes are append-only, reasoned and approved by a second person; they move the balance, and a credit can never go below what is paid or on its way
+ok 323 - adjustments: supplier credit and debit notes are append-only, reasoned and approved by a second person; they move the balance, and a credit can never go below what is paid or on its way
+  ---
+  duration_ms: 8524.662208
+  type: 'test'
+  ...
+# Subtest: execution wording: every order says execution was recorded manually and simulated; the payload and the screen never claim the platform paid
+ok 324 - execution wording: every order says execution was recorded manually and simulated; the payload and the screen never claim the platform paid
+  ---
+  duration_ms: 7916.769125
+  type: 'test'
+  ...
+# Subtest: vendor centre: open payables count only what is still owed — a paid payable is not open, a return reopens it
+ok 325 - vendor centre: open payables count only what is still owed — a paid payable is not open, a return reopens it
+  ---
+  duration_ms: 6622.011833
+  type: 'test'
+  ...
+# Subtest: tenant isolation: another tenant sees no balance, order, return or adjustment and cannot act on any of them
+ok 326 - tenant isolation: another tenant sees no balance, order, return or adjustment and cannot act on any of them
+  ---
+  duration_ms: 5856.842584
+  type: 'test'
+  ...
+# Subtest: HTTP without a port: partial and batch orders, release, execution, return and adjustments go through the real handler; a replayed create returns the same record and a replayed step is refused
+ok 327 - HTTP without a port: partial and batch orders, release, execution, return and adjustments go through the real handler; a replayed create returns the same record and a replayed step is refused
+  ---
+  duration_ms: 7841.184334
+  type: 'test'
+  ...
+# Subtest: race: processes writing the same database file at the same instant never release money twice — one order for a full balance, one execution, one return, one re-payment, one first-payment release
+ok 328 - race: processes writing the same database file at the same instant never release money twice — one order for a full balance, one execution, one return, one re-payment, one first-payment release
+  ---
+  duration_ms: 20388.558416
+  type: 'test'
+  ...
+# Subtest: upgrade: a database that already holds orders before 166 gets one line per order and the same balances, loses the one-order index, and its legacy vendor with two verified accounts is settled at the next verification
+ok 329 - upgrade: a database that already holds orders before 166 gets one line per order and the same balances, loses the one-order index, and its legacy vendor with two verified accounts is settled at the next verification
+  ---
+  duration_ms: 5487.107708
+  type: 'test'
+  ...
+# (node:90537) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: PAY-03: only approved adjustments enter the run, each exactly once, and a proposer or the employee cannot approve
+ok 330 - PAY-03: only approved adjustments enter the run, each exactly once, and a proposer or the employee cannot approve
+  ---
+  duration_ms: 3664.942125
+  type: 'test'
+  ...
+# Subtest: an approved advance is recovered in equal instalments through payroll and shows what is still outstanding
+ok 331 - an approved advance is recovered in equal instalments through payroll and shows what is still outstanding
+  ---
+  duration_ms: 3702.953209
+  type: 'test'
+  ...
+# Subtest: PAY-07: the transfer file needs a verified salary account for everyone, is released only after approval, and its execution is recorded by someone else
+ok 332 - PAY-07: the transfer file needs a verified salary account for everyone, is released only after approval, and its execution is recorded by someone else
+  ---
+  duration_ms: 6689.591334
+  type: 'test'
+  ...
+# Subtest: PAY-09: the settlement applies the accepted policy by termination class — resignation tiers differ from employer termination — and deducts outstanding advances
+ok 333 - PAY-09: the settlement applies the accepted policy by termination class — resignation tiers differ from employer termination — and deducts outstanding advances
+  ---
+  duration_ms: 7467.227416
+  type: 'test'
+  ...
+# (node:90541) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: the case follows the join date the employee record holds, not the start of the contract he happens to be on now; and two recorded dates on opposite sides of the new law are named, never picked between
+ok 334 - the case follows the join date the employee record holds, not the start of the contract he happens to be on now; and two recorded dates on opposite sides of the new law are named, never picked between
+  ---
+  duration_ms: 6367.543791
+  type: 'test'
+  ...
+# Subtest: a non-Saudi is not assumed to be outside the Gulf because nobody asked: the run refuses until the question is answered where nationality is recorded, and either answer is a record
+ok 335 - a non-Saudi is not assumed to be outside the Gulf because nobody asked: the run refuses until the question is answered where nationality is recorded, and either answer is a record
+  ---
+  duration_ms: 7848.639375
+  type: 'test'
+  ...
+# Subtest: a non-Saudi is not assumed to be outside the Gulf because nobody asked: the run refuses until the question is answered where nationality is recorded, and either answer is a record [قبل الحد 2026-09-30T20:05:00.000Z]
+ok 336 - a non-Saudi is not assumed to be outside the Gulf because nobody asked: the run refuses until the question is answered where nationality is recorded, and either answer is a record [قبل الحد 2026-09-30T20:05:00.000Z]
+  ---
+  duration_ms: 7489.892791
+  type: 'test'
+  ...
+# Subtest: a non-Saudi is not assumed to be outside the Gulf because nobody asked: the run refuses until the question is answered where nationality is recorded, and either answer is a record [داخل الفجوة 2026-09-30T23:05:00.000Z]
+ok 337 - a non-Saudi is not assumed to be outside the Gulf because nobody asked: the run refuses until the question is answered where nationality is recorded, and either answer is a record [داخل الفجوة 2026-09-30T23:05:00.000Z]
+  ---
+  duration_ms: 7700.430083
+  type: 'test'
+  ...
+# Subtest: a non-Saudi is not assumed to be outside the Gulf because nobody asked: the run refuses until the question is answered where nationality is recorded, and either answer is a record [بعد الفجوة 2026-10-01T09:05:00.000Z]
+ok 338 - a non-Saudi is not assumed to be outside the Gulf because nobody asked: the run refuses until the question is answered where nationality is recorded, and either answer is a record [بعد الفجوة 2026-10-01T09:05:00.000Z]
+  ---
+  duration_ms: 7434.058584
+  type: 'test'
+  ...
+# Subtest: the approval gate reads the rule in force, not the basis frozen on the line: a draft calculated before the rule was accepted, or before an exclusion was recorded, cannot be submitted or approved
+ok 339 - the approval gate reads the rule in force, not the basis frozen on the line: a draft calculated before the rule was accepted, or before an exclusion was recorded, cannot be submitted or approved
+  ---
+  duration_ms: 7993.3105
+  type: 'test'
+  ...
+# Subtest: an employee whose contract changed mid-month is charged on each part by its own wage and days, not on the newest contract for the whole month
+ok 340 - an employee whose contract changed mid-month is charged on each part by its own wage and days, not on the newest contract for the whole month
+  ---
+  duration_ms: 7486.74475
+  type: 'test'
+  ...
+# Subtest: a share clamped to what is left of the wage says so on the line, on the run and on the payslip: the percentage never prints next to an amount it does not produce
+ok 341 - a share clamped to what is left of the wage says so on the line, on the run and on the payslip: the percentage never prints next to an amount it does not produce
+  ---
+  duration_ms: 6277.810209
+  type: 'test'
+  ...
+# Subtest: accepting the insurance rule after a month was approved does not invent a retroactive wage difference with no stated reason
+ok 342 - accepting the insurance rule after a month was approved does not invent a retroactive wage difference with no stated reason
+  ---
+  duration_ms: 5537.106041
+  type: 'test'
+  ...
+# Subtest: the early-pay date is judged by the working week the tenant accepted, and a date confirmed by mistake is withdrawn with a written reason instead of standing for ever
+ok 343 - the early-pay date is judged by the working week the tenant accepted, and a date confirmed by mistake is withdrawn with a written reason instead of standing for ever
+  ---
+  duration_ms: 5597.930625
+  type: 'test'
+  ...
+# Subtest: the basis of an exclusion refuses an identity number however it is written: Arabic-Indic and Persian digits and digits split by dots are numbers too
+ok 344 - the basis of an exclusion refuses an identity number however it is written: Arabic-Indic and Persian digits and digits split by dots are numbers too
+  ---
+  duration_ms: 4682.49975
+  type: 'test'
+  ...
+# Subtest: when the accepted rounding rule moves the deduction, the basis carries the amount that was actually withheld — and the HR manager may keep the employee share at the halala the brief recommends
+ok 345 - when the accepted rounding rule moves the deduction, the basis carries the amount that was actually withheld — and the HR manager may keep the employee share at the halala the brief recommends
+  ---
+  duration_ms: 4898.718667
+  type: 'test'
+  ...
+# Subtest: the occupational-hazards branch is in force under both laws, so a month before the date that was copied into its row still charges the company its two per cent
+ok 346 - the occupational-hazards branch is in force under both laws, so a month before the date that was copied into its row still charges the company its two per cent
+  ---
+  duration_ms: 6062.060834
+  type: 'test'
+  ...
+# Subtest: an age at first coverage is never applied as a figure the platform invented: nothing changes until the HR manager records a verified threshold, and then the run refuses instead of deducting
+ok 347 - an age at first coverage is never applied as a figure the platform invented: nothing changes until the HR manager records a verified threshold, and then the run refuses instead of deducting
+  ---
+  duration_ms: 6021.805333
+  type: 'test'
+  ...
+# Subtest: a run whose month the insurance rule never governed says the company share is unavailable, and never prints a zero it did not compute
+ok 348 - a run whose month the insurance rule never governed says the company share is unavailable, and never prints a zero it did not compute
+  ---
+  duration_ms: 5670.72925
+  type: 'test'
+  ...
+# (node:90565) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: شريط الجوال: الوجهات اليومية الأربع حاضرة لكل حساب يبلغها — ولو كانت روابطها في كتلة «كل شاشاتك» المخفية
+ok 349 - شريط الجوال: الوجهات اليومية الأربع حاضرة لكل حساب يبلغها — ولو كانت روابطها في كتلة «كل شاشاتك» المخفية
+  ---
+  duration_ms: 10019.215125
+  type: 'test'
+  ...
+# Subtest: شريط الجوال: الرابط الظاهر يغلب نظيره في الكتلة المخفية، والكتلة لا تزيد الشريط على أربع
+ok 350 - شريط الجوال: الرابط الظاهر يغلب نظيره في الكتلة المخفية، والكتلة لا تزيد الشريط على أربع
+  ---
+  duration_ms: 1.880708
+  type: 'test'
+  ...
+# (node:90566) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: defaults: with no rows every user resolves to depth/dark, unlocked, source default — never auto
+ok 351 - defaults: with no rows every user resolves to depth/dark, unlocked, source default — never auto
+  ---
+  duration_ms: 7500.404125
+  type: 'test'
+  ...
+# Subtest: resolution order: personal choice, then company default, then depth/dark; reset returns to the company default
+ok 352 - resolution order: personal choice, then company default, then depth/dark; reset returns to the company default
+  ---
+  duration_ms: 7844.391791
+  type: 'test'
+  ...
+# Subtest: lock: the personal row is ignored but kept, the personal save is refused in clear Arabic, and the choice returns when the lock lifts
+ok 353 - lock: the personal row is ignored but kept, the personal save is refused in clear Arabic, and the choice returns when the lock lifts
+  ---
+  duration_ms: 7444.979542
+  type: 'test'
+  ...
+# Subtest: invalid values are refused: unknown design or theme, extra or missing keys, wrong types, short reason, stale version, no change
+ok 354 - invalid values are refused: unknown design or theme, extra or missing keys, wrong types, short reason, stale version, no change
+  ---
+  duration_ms: 7967.534792
+  type: 'test'
+  ...
+# Subtest: only the super admin sets the company default, inside a transaction, with a written reason — and every change is audited with before and after
+ok 355 - only the super admin sets the company default, inside a transaction, with a written reason — and every change is audited with before and after
+  ---
+  duration_ms: 7310.92625
+  type: 'test'
+  ...
+# Subtest: tenant isolation: a company default, a lock and a personal choice in one tenant never reach the other
+ok 356 - tenant isolation: a company default, a lock and a personal choice in one tenant never reach the other
+  ---
+  duration_ms: 6236.813084
+  type: 'test'
+  ...
+# {"t":"2026-10-01T07:21:17.159Z","id":"b77be0d1","env":"local","m":"POST","p":"/api/login","s":200,"ms":467}
+# {"t":"2026-10-01T07:21:17.628Z","id":"84595fb3","env":"local","m":"POST","p":"/api/login","s":200,"ms":460}
+# {"t":"2026-10-01T07:21:18.109Z","id":"ce73a4a8","env":"local","m":"POST","p":"/api/login","s":200,"ms":477}
+# {"t":"2026-10-01T07:21:18.120Z","id":"d10eba2f","env":"local","m":"GET","p":"/api/me","s":200,"ms":2}
+# {"t":"2026-10-01T07:21:18.122Z","id":"1ebbf54c","env":"local","m":"GET","p":"/api/appearance","s":401,"ms":0}
+# {"t":"2026-10-01T07:21:18.123Z","id":"4a698d9c","env":"local","m":"GET","p":"/api/appearance","s":200,"ms":1}
+# {"t":"2026-10-01T07:21:18.129Z","id":"d35d41e0","env":"local","m":"POST","p":"/api/account/appearance","s":201,"ms":5,"tx":1,"lock_ms":0}
+# {"t":"2026-10-01T07:21:18.135Z","id":"f291a89f","env":"local","m":"GET","p":"/api/me","s":200,"ms":1}
+# {"t":"2026-10-01T07:21:18.993Z","id":"4e90d3a5","env":"local","m":"POST","p":"/api/login","s":200,"ms":846}
+# {"t":"2026-10-01T07:21:18.995Z","id":"289d7f18","env":"local","m":"POST","p":"/api/account/appearance","s":403,"ms":0}
+# {"t":"2026-10-01T07:21:18.997Z","id":"2d9a13d4","env":"local","m":"POST","p":"/api/account/appearance","s":400,"ms":1,"tx":1,"lock_ms":0}
+# {"t":"2026-10-01T07:21:18.998Z","id":"ea255cc2","env":"local","m":"POST","p":"/api/account/appearance","s":400,"ms":0,"tx":1,"lock_ms":0}
+# {"t":"2026-10-01T07:21:18.999Z","id":"f4e0918a","env":"local","m":"POST","p":"/api/admin/appearance","s":403,"ms":0,"tx":1,"lock_ms":0}
+# {"t":"2026-10-01T07:21:19.000Z","id":"5bdd68c1","env":"local","m":"POST","p":"/api/admin/appearance","s":403,"ms":0,"tx":1,"lock_ms":0}
+# {"t":"2026-10-01T07:21:19.001Z","id":"171272a4","env":"local","m":"POST","p":"/api/admin/appearance","s":400,"ms":0,"tx":1,"lock_ms":0}
+# {"t":"2026-10-01T07:21:19.002Z","id":"548d8cfc","env":"local","m":"POST","p":"/api/admin/appearance","s":201,"ms":0,"tx":1,"lock_ms":0}
+# {"t":"2026-10-01T07:21:19.003Z","id":"f86c8247","env":"local","m":"POST","p":"/api/account/appearance","s":409,"ms":0,"tx":1,"lock_ms":0}
+# {"t":"2026-10-01T07:21:19.004Z","id":"cb3009b2","env":"local","m":"GET","p":"/api/me","s":200,"ms":1}
+# {"t":"2026-10-01T07:21:19.011Z","id":"6868592a","env":"local","m":"GET","p":"/api/appearance","s":200,"ms":1}
+# {"t":"2026-10-01T07:21:19.013Z","id":"0f7052fa","env":"local","m":"POST","p":"/api/admin/appearance","s":409,"ms":1,"tx":1,"lock_ms":0}
+# {"t":"2026-10-01T07:21:19.014Z","id":"3e843620","env":"local","m":"POST","p":"/api/admin/appearance","s":201,"ms":1,"tx":1,"lock_ms":0}
+# {"t":"2026-10-01T07:21:19.014Z","id":"8a6b7a90","env":"local","m":"GET","p":"/api/me","s":200,"ms":0}
+# {"t":"2026-10-01T07:21:19.016Z","id":"7eee3e5c","env":"local","m":"GET","p":"/theme-boot.js","s":200,"ms":1}
+# {"t":"2026-10-01T07:21:19.017Z","id":"6f618697","env":"local","m":"GET","p":"/appearance-ui.mjs","s":200,"ms":1}
+# Subtest: HTTP: the three routes, CSRF, the payload field on /api/login and /api/me, and the two static files
+ok 357 - HTTP: the three routes, CSRF, the payload field on /api/login and /api/me, and the two static files
+  ---
+  duration_ms: 7871.107375
+  type: 'test'
+  ...
+# Subtest: the screen: renders for employee and super admin, locked and unlocked, inside the strict CSP, and every offered button opens a valid form
+ok 358 - the screen: renders for employee and super admin, locked and unlocked, inside the strict CSP, and every offered button opens a valid form
+  ---
+  duration_ms: 4582.74075
+  type: 'test'
+  ...
+# Subtest: migration 095: depth and classic join the allowed designs, depth becomes the default, neon is still refused, and existing rows survive unchanged
+ok 359 - migration 095: depth and classic join the allowed designs, depth becomes the default, neon is still refused, and existing rows survive unchanged
+  ---
+  duration_ms: 4845.577292
+  type: 'test'
+  ...
+# Subtest: the client mirrors: the boot script and app.mjs fall back to depth, list the five designs, and the picker actions stay clear of the destructive tone
+ok 360 - the client mirrors: the boot script and app.mjs fall back to depth, list the five designs, and the picker actions stay clear of the destructive tone
+  ---
+  duration_ms: 4.149458
+  type: 'test'
+  ...
+# Subtest: مدار: يحفظ الترحيل المظهر السابق والقفل ويقبل الاختيار الشخصي الجديد
+ok 361 - مدار: يحفظ الترحيل المظهر السابق والقفل ويقبل الاختيار الشخصي الجديد
+  ---
+  duration_ms: 6042.293542
+  type: 'test'
+  ...
+# (node:90575) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: printable invoice: an issued invoice carries its QR symbol and says plainly it was not reported to Fatoora; a draft carries neither number nor QR
+ok 362 - printable invoice: an issued invoice carries its QR symbol and says plainly it was not reported to Fatoora; a draft carries neither number nor QR
+  ---
+  duration_ms: 7.458083
+  type: 'test'
+  ...
+# Subtest: printable payslip: earnings, additions and deductions reconcile to the net shown
+ok 363 - printable payslip: earnings, additions and deductions reconcile to the net shown
+  ---
+  duration_ms: 0.264
+  type: 'test'
+  ...
+# (node:90576) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: E2E P3 procurement: request → sourcing → award → order → commencement → partial receipt → return → partial invoice with a price variance → held → decided → match → liability → credit note → partial payment → reversal path
+ok 364 - E2E P3 procurement: request → sourcing → award → order → commencement → partial receipt → return → partial invoice with a price variance → held → decided → match → liability → credit note → partial payment → reversal path
+  ---
+  duration_ms: 8199.2655
+  type: 'test'
+  ...
+# Subtest: returns: against receipt lines, by someone other than the requester, never more than was received; they shrink what can be matched, hold an invoice that billed the returned goods, and ask for a credit note on a matched liability
+ok 365 - returns: against receipt lines, by someone other than the requester, never more than was received; they shrink what can be matched, hold an invoice that billed the returned goods, and ask for a credit note on a matched liability
+  ---
+  duration_ms: 7995.296917
+  type: 'test'
+  ...
+# Subtest: held invoices: a variance is never auto-accepted; an independent approver accepts only within an adopted tolerance or with a finance override, asks for a credit note, or rejects
+ok 366 - held invoices: a variance is never auto-accepted; an independent approver accepts only within an adopted tolerance or with a finance override, asks for a credit note, or rejects
+  ---
+  duration_ms: 8944.429083
+  type: 'test'
+  ...
+# Subtest: supplier notes: credit and debit notes go through the payments API, a credit note answers its request and never exceeds it, and the disputed amount is held back from payment until the note is approved or the request is waived
+ok 367 - supplier notes: credit and debit notes go through the payments API, a credit note answers its request and never exceeds it, and the disputed amount is held back from payment until the note is approved or the request is waived
+  ---
+  duration_ms: 7125.704958
+  type: 'test'
+  ...
+# Subtest: void: an unpaid invoice or payable is voided by a separate append-only record with its reason and an independent approver, refused once a payment is in flight or executed, and releases its consumption
+ok 368 - void: an unpaid invoice or payable is voided by a separate append-only record with its reason and an independent approver, refused once a payment is in flight or executed, and releases its consumption
+  ---
+  duration_ms: 6085.184
+  type: 'test'
+  ...
+# Subtest: commitments: consumed at match, released on close_short, and the budget figures stay true (committed + consumed + released = the order, available = cap − used)
+ok 369 - commitments: consumed at match, released on close_short, and the budget figures stay true (committed + consumed + released = the order, available = cap − used)
+  ---
+  duration_ms: 5888.005917
+  type: 'test'
+  ...
+# Subtest: ledger: payable_adjustment builds per cost centre from the payable split, controls payable and input VAT, and a return + credit note + void sequence keeps both control accounts at zero difference
+ok 370 - ledger: payable_adjustment builds per cost centre from the payable split, controls payable and input VAT, and a return + credit note + void sequence keeps both control accounts at zero difference
+  ---
+  duration_ms: 5129.093708
+  type: 'test'
+  ...
+# Subtest: tenant isolation: another tenant sees no exception, cannot act on one, and the ledger kind lists nothing for it
+ok 371 - tenant isolation: another tenant sees no exception, cannot act on one, and the ledger kind lists nothing for it
+  ---
+  duration_ms: 5265.859125
+  type: 'test'
+  ...
+# Subtest: UI: the award button follows the server — three quotes or an approved emergency — and the exception panels escape supplier text and post to the exception routes
+ok 372 - UI: the award button follows the server — three quotes or an approved emergency — and the exception panels escape supplier text and post to the exception routes
+  ---
+  duration_ms: 6200.759875
+  type: 'test'
+  ...
+# Subtest: payableState reads payable_balances: two partial orders, a batch, an executed part, a bank return and a credit-settled payable report their true state, and «settled» has its name
+ok 373 - payableState reads payable_balances: two partial orders, a batch, an executed part, a bank return and a credit-settled payable report their true state, and «settled» has its name
+  ---
+  duration_ms: 6404.276792
+  type: 'test'
+  ...
+# Subtest: HTTP without a port: returns, decisions, voids and supplier notes go through the real handler; a replayed step is refused and a replayed create returns the same note
+ok 374 - HTTP without a port: returns, decisions, voids and supplier notes go through the real handler; a replayed step is refused and a replayed create returns the same note
+  ---
+  duration_ms: 8434.922625
+  type: 'test'
+  ...
+# Subtest: race: processes writing one database file at the same instant never over-return, never record two credit notes for one request, and never void twice
+ok 375 - race: processes writing one database file at the same instant never over-return, never record two credit notes for one request, and never void twice
+  ---
+  duration_ms: 16099.565459
+  type: 'test'
+  ...
+# Subtest: migration 169: applies cleanly; the match guard keeps its independent-approval clauses; the new records keep their history
+ok 376 - migration 169: applies cleanly; the match guard keeps its independent-approval clauses; the new records keep their history
+  ---
+  duration_ms: 3600.612417
+  type: 'test'
+  ...
+# Subtest: closure checklist: supplier liabilities read the invoice state, returns and awaited credit notes, and an approved supplier note is a document with its journal
+ok 377 - closure checklist: supplier liabilities read the invoice state, returns and awaited credit notes, and an approved supplier note is a document with its journal
+  ---
+  duration_ms: 4370.662042
+  type: 'test'
+  ...
+# Subtest: budget reports: R12 and R33 show what the budget screen shows — committed shrinks with consumption at match and release at close_short
+ok 378 - budget reports: R12 and R33 show what the budget screen shows — committed shrinks with consumption at match and release at close_short
+  ---
+  duration_ms: 3937.674084
+  type: 'test'
+  ...
+# Subtest: finance exceptions: only an undecided variance is a held invoice, and a pending void waits as a reversal with the person who decides it
+ok 379 - finance exceptions: only an undecided variance is a held invoice, and a pending void waits as a reversal with the person who decides it
+  ---
+  duration_ms: 4128.580334
+  type: 'test'
+  ...
+# (node:90579) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: PRC-04: الطلب والعرض والأمر يحفظون عدة بنود بهويات وأسعار مستقلة
+ok 380 - PRC-04: الطلب والعرض والأمر يحفظون عدة بنود بهويات وأسعار مستقلة
+  ---
+  duration_ms: 8038.841792
+  type: 'test'
+  ...
+# Subtest: PRC-04: تسعير العرض يرفض البند الناقص والمكرر والغريب
+ok 381 - PRC-04: تسعير العرض يرفض البند الناقص والمكرر والغريب
+  ---
+  duration_ms: 8569.37975
+  type: 'test'
+  ...
+# Subtest: PRC-05/06: الاستلام والفاتورة والمطابقة تتحقق من كل بند مستقلًا
+ok 382 - PRC-05/06: الاستلام والفاتورة والمطابقة تتحقق من كل بند مستقلًا
+  ---
+  duration_ms: 7213.155917
+  type: 'test'
+  ...
+# Subtest: واجهة المشتريات تجمع البنود والأسعار والكميات في جداول صفوف
+ok 383 - واجهة المشتريات تجمع البنود والأسعار والكميات في جداول صفوف
+  ---
+  duration_ms: 0.798083
+  type: 'test'
+  ...
+# (node:90580) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: PRC-01/03/04/05/06 and FIN-05/07/08: a purchase reaches two matched payables without payment or official issuance
+ok 384 - PRC-01/03/04/05/06 and FIN-05/07/08: a purchase reaches two matched payables without payment or official issuance
+  ---
+  duration_ms: 7666.129708
+  type: 'test'
+  ...
+# Subtest: PRC-01/03: allocation, comparison and evidence are required before an award
+ok 385 - PRC-01/03: allocation, comparison and evidence are required before an award
+  ---
+  duration_ms: 8296.166375
+  type: 'test'
+  ...
+# Subtest: PRC-04/06: requesters cannot approve, skip an award, or match their own invoice
+ok 386 - PRC-04/06: requesters cannot approve, skip an award, or match their own invoice
+  ---
+  duration_ms: 6924.259208
+  type: 'test'
+  ...
+# Subtest: PRC-01 and FIN-02: project membership, current team and a separate PM cost grant constrain every read and action
+ok 387 - PRC-01 and FIN-02: project membership, current team and a separate PM cost grant constrain every read and action
+  ---
+  duration_ms: 6263.326916
+  type: 'test'
+  ...
+# Subtest: PRC-04/05 and FIN-05: stale actions and repeated receipt or supplier invoice references create no second record
+ok 388 - PRC-04/05 and FIN-05: stale actions and repeated receipt or supplier invoice references create no second record
+  ---
+  duration_ms: 5999.046708
+  type: 'test'
+  ...
+# Subtest: PRC-05/06: excess quantities, mismatched amounts and unmatched receipts cannot become payables
+ok 389 - PRC-05/06: excess quantities, mismatched amounts and unmatched receipts cannot become payables
+  ---
+  duration_ms: 5003.776125
+  type: 'test'
+  ...
+# Subtest: PRC-04/08 and PLT-06: submitted values, order versions and evidence records resist changes and deletion
+ok 390 - PRC-04/08 and PLT-06: submitted values, order versions and evidence records resist changes and deletion
+  ---
+  duration_ms: 4969.145625
+  type: 'test'
+  ...
+# Subtest: PRC-01/04: decimal strings, bounds, currency and unrecognized fields are checked on the server
+ok 391 - PRC-01/04: decimal strings, bounds, currency and unrecognized fields are checked on the server
+  ---
+  duration_ms: 6591.224916
+  type: 'test'
+  ...
+# Subtest: PRC-01 and PLT-09: creation retries return the current authorized record and rollback includes its audit
+ok 392 - PRC-01 and PLT-09: creation retries return the current authorized record and rollback includes its audit
+  ---
+  duration_ms: 6086.083625
+  type: 'test'
+  ...
+# Subtest: PRC-04 and PLT-06: public writes require a transaction and failed audit rolls back the submitted version
+ok 393 - PRC-04 and PLT-06: public writes require a transaction and failed audit rolls back the submitted version
+  ---
+  duration_ms: 6282.831375
+  type: 'test'
+  ...
+# Subtest: PRC-04/06: database constraints prevent an unbalanced payable and preserve receipt and invoice evidence
+ok 394 - PRC-04/06: database constraints prevent an unbalanced payable and preserve receipt and invoice evidence
+  ---
+  duration_ms: 5811.487416
+  type: 'test'
+  ...
+# Subtest: PRC-04: cancellation and rejection are final and cannot generate an internal order
+ok 395 - PRC-04: cancellation and rejection are final and cannot generate an internal order
+  ---
+  duration_ms: 5382.060792
+  type: 'test'
+  ...
+# Subtest: PRC-01/04 UI: forms use authorized IDs, escape supplier evidence, and keep the opened version
+ok 396 - PRC-01/04 UI: forms use authorized IDs, escape supplier evidence, and keep the opened version
+  ---
+  duration_ms: 5458.185167
+  type: 'test'
+  ...
+# Subtest: PRC-02/03: an entity with no vendor file is refused at the quote and never reaches an internal order
+ok 397 - PRC-02/03: an entity with no vendor file is refused at the quote and never reaches an internal order
+  ---
+  duration_ms: 4929.96075
+  type: 'test'
+  ...
+# Subtest: PRC-05/06: whoever recorded a receipt cannot approve the match built on it, in code and in the database
+ok 398 - PRC-05/06: whoever recorded a receipt cannot approve the match built on it, in code and in the database
+  ---
+  duration_ms: 4282.636416
+  type: 'test'
+  ...
+# (node:90582) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: AXIS-01: the eight axes are independent — moving one leaves the other seven where they were
+ok 399 - AXIS-01: the eight axes are independent — moving one leaves the other seven where they were
+  ---
+  duration_ms: 7829.78975
+  type: 'test'
+  ...
+# Subtest: AXIS-02: the advance gate blocks paid execution and never touches pre-sale scoping
+ok 400 - AXIS-02: the advance gate blocks paid execution and never touches pre-sale scoping
+  ---
+  duration_ms: 15358.34
+  type: 'test'
+  ...
+# Subtest: AXIS-03: the advance is expected from the payment schedule, and confirmed only against a real receipt by a second person
+ok 401 - AXIS-03: the advance is expected from the payment schedule, and confirmed only against a real receipt by a second person
+  ---
+  duration_ms: 11805.979125
+  type: 'test'
+  ...
+# Subtest: AXIS-04: supplier start refuses without a purchase order and without a commencement authorisation
+ok 402 - AXIS-04: supplier start refuses without a purchase order and without a commencement authorisation
+  ---
+  duration_ms: 4768.450167
+  type: 'test'
+  ...
+# Subtest: AXIS-05: a multi-department project can be planned — work packages carry a department, a phase and an owner
+ok 403 - AXIS-05: a multi-department project can be planned — work packages carry a department, a phase and an owner
+  ---
+  duration_ms: 11240.4165
+  type: 'test'
+  ...
+# Subtest: AXIS-06: closure refuses by naming the exact outstanding item, and needs technical then financial
+ok 404 - AXIS-06: closure refuses by naming the exact outstanding item, and needs technical then financial
+  ---
+  duration_ms: 6203.783666
+  type: 'test'
+  ...
+# Subtest: AXIS-07: financial closure names every outstanding balance, and a decision is written not silent
+ok 405 - AXIS-07: financial closure names every outstanding balance, and a decision is written not silent
+  ---
+  duration_ms: 6368.107125
+  type: 'test'
+  ...
+# Subtest: AXIS-08: reopening a closure needs a capability and a reason, and leaves an audited record
+ok 406 - AXIS-08: reopening a closure needs a capability and a reason, and leaves an audited record
+  ---
+  duration_ms: 5760.15825
+  type: 'test'
+  ...
+# Subtest: AXIS-09: invoicing, collection and supplier settlement each read their own source and no other
+ok 407 - AXIS-09: invoicing, collection and supplier settlement each read their own source and no other
+  ---
+  duration_ms: 5462.723292
+  type: 'test'
+  ...
+# Subtest: AXIS-08: both locks in one hand are refused with a way out, and the way out is a capability plus a written reason
+ok 408 - AXIS-08: both locks in one hand are refused with a way out, and the way out is a capability plus a written reason
+  ---
+  duration_ms: 5665.122375
+  type: 'test'
+  ...
+# Subtest: AXIS-08: the same-person rule holds in both directions, and a reason is refused when the locks are in two hands
+ok 409 - AXIS-08: the same-person rule holds in both directions, and a reason is refused when the locks are in two hands
+  ---
+  duration_ms: 4921.069625
+  type: 'test'
+  ...
+# Subtest: AXIS-08: a reason on locks held by two people is refused, and the database refuses a silent same-person row from outside the code
+ok 410 - AXIS-08: a reason on locks held by two people is refused, and the database refuses a silent same-person row from outside the code
+  ---
+  duration_ms: 4145.669292
+  type: 'test'
+  ...
+# (node:90594) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: PM-01: the gate blocks paid execution until the advance is confirmed, and never blocks scoping
+ok 411 - PM-01: the gate blocks paid execution until the advance is confirmed, and never blocks scoping
+  ---
+  duration_ms: 5601.616792
+  type: 'test'
+  ...
+# Subtest: PM-01: each missing document refuses by name and says who must provide it
+ok 412 - PM-01: each missing document refuses by name and says who must provide it
+  ---
+  duration_ms: 5628.505625
+  type: 'test'
+  ...
+# Subtest: PM-01 gate guards project execution itself: tasks and templates refuse by document name, and the second reading only warns
+ok 413 - PM-01 gate guards project execution itself: tasks and templates refuse by document name, and the second reading only warns
+  ---
+  duration_ms: 4574.025
+  type: 'test'
+  ...
+# Subtest: PM-02: kickoff minutes record attendance, the agreed scope and every policy the source lists, and fill their own checklist row
+ok 414 - PM-02: kickoff minutes record attendance, the agreed scope and every policy the source lists, and fill their own checklist row
+  ---
+  duration_ms: 4584.199334
+  type: 'test'
+  ...
+# Subtest: revision rounds are counted per deliverable from its own contract line, and the template default is not a company policy
+ok 415 - revision rounds are counted per deliverable from its own contract line, and the template default is not a company policy
+  ---
+  duration_ms: 5986.966167
+  type: 'test'
+  ...
+# Subtest: PM-03: the four classifications hold, our own error is never charged to the client, and exhausted rounds raise a priced quotation
+ok 416 - PM-03: the four classifications hold, our own error is never charged to the client, and exhausted rounds raise a priced quotation
+  ---
+  duration_ms: 5796.349334
+  type: 'test'
+  ...
+# Subtest: PM-03: an applied change moves budget, schedule and the deliverable, and reopens only the approvals it touches
+ok 417 - PM-03: an applied change moves budget, schedule and the deliverable, and reopens only the approvals it touches
+  ---
+  duration_ms: 5907.156667
+  type: 'test'
+  ...
+# Subtest: the change classification policy stays a draft until someone other than its author approves it
+ok 418 - the change classification policy stays a draft until someone other than its author approves it
+  ---
+  duration_ms: 5764.715875
+  type: 'test'
+  ...
+# Subtest: BD-04 is an electronic record: two separate parties approve it, one person cannot be both, and the money stays with finance
+ok 419 - BD-04 is an electronic record: two separate parties approve it, one person cannot be both, and the money stays with finance
+  ---
+  duration_ms: 5284.843291
+  type: 'test'
+  ...
+# Subtest: a departing project manager leaves the intake chain visible in the clearance list
+ok 420 - a departing project manager leaves the intake chain visible in the clearance list
+  ---
+  duration_ms: 5385.809292
+  type: 'test'
+  ...
+# Subtest: the intake records carry their catalogue form identity, and the catalogue refuses a second empty copy of it
+ok 421 - the intake records carry their catalogue form identity, and the catalogue refuses a second empty copy of it
+  ---
+  duration_ms: 4933.576417
+  type: 'test'
+  ...
+# Subtest: the financially approved pricing file is a reference to an approved pricing sheet, not a sentence someone typed
+ok 422 - the financially approved pricing file is a reference to an approved pricing sheet, not a sentence someone typed
+  ---
+  duration_ms: 4255.569167
+  type: 'test'
+  ...
+# Subtest: PM-03 at the Riyadh day boundary: a change raised at 02:05 Riyadh on the 1st cannot be applied from the last day of the previous month
+ok 423 - PM-03 at the Riyadh day boundary: a change raised at 02:05 Riyadh on the 1st cannot be applied from the last day of the previous month
+  ---
+  duration_ms: 3995.655333
+  type: 'test'
+  ...
+# (node:90621) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: AXIS-05: asking for another department stays pending until its current head acts
+ok 424 - AXIS-05: asking for another department stays pending until its current head acts
+  ---
+  duration_ms: 5926.964416
+  type: 'test'
+  ...
+# Subtest: returned participation stays in history and a fresh request can later be accepted
+ok 425 - returned participation stays in history and a fresh request can later be accepted
+  ---
+  duration_ms: 5945.980042
+  type: 'test'
+  ...
+# Subtest: department decisions recheck the actor, tenant, routing and active state at decision time
+ok 426 - department decisions recheck the actor, tenant, routing and active state at decision time
+  ---
+  duration_ms: 5672.050625
+  type: 'test'
+  ...
+# Subtest: one project manager of record governs tasks and project axes without role-wide escalation
+ok 427 - one project manager of record governs tasks and project axes without role-wide escalation
+  ---
+  duration_ms: 5280.755333
+  type: 'test'
+  ...
+# Subtest: صاحب طلب المشاركة لا يعتمد طلبه حتى إذا انتقل إلى رئاسة الإدارة المستقبلة
+ok 428 - صاحب طلب المشاركة لا يعتمد طلبه حتى إذا انتقل إلى رئاسة الإدارة المستقبلة
+  ---
+  duration_ms: 5653.731792
+  type: 'test'
+  ...
+# Subtest: قاعدة البيانات ترفض اختلاق قرار مشاركة مباشرة عند الإنشاء
+ok 429 - قاعدة البيانات ترفض اختلاق قرار مشاركة مباشرة عند الإنشاء
+  ---
+  duration_ms: 5003.847542
+  type: 'test'
+  ...
+# Subtest: رابط المشاركة يحتاج قرارًا مقبولًا مطابقًا ولا يقبل اختلاق سجل قديم
+ok 430 - رابط المشاركة يحتاج قرارًا مقبولًا مطابقًا ولا يقبل اختلاق سجل قديم
+  ---
+  duration_ms: 3993.4935
+  type: 'test'
+  ...
+# Subtest: مسار HTTP يرفض الاعتماد الذاتي حتى مع جلسة صالحة وCSRF صحيح
+ok 431 - مسار HTTP يرفض الاعتماد الذاتي حتى مع جلسة صالحة وCSRF صحيح
+  ---
+  duration_ms: 4479.550333
+  type: 'test'
+  ...
+# (node:90649) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: reversal: a bounced receipt is reversed by a new record a third person approves; the receipt row stays as it was and the claim balance reopens
+ok 432 - reversal: a bounced receipt is reversed by a new record a third person approves; the receipt row stays as it was and the claim balance reopens
+  ---
+  duration_ms: 5831.058083
+  type: 'test'
+  ...
+# Subtest: reversal: the database keeps the requester, the recorder and the matcher out of the approval, and the decision inside the tenant
+ok 433 - reversal: the database keeps the requester, the recorder and the matcher out of the approval, and the decision inside the tenant
+  ---
+  duration_ms: 5239.856375
+  type: 'test'
+  ...
+# Subtest: reversal: what cannot be reversed is refused by name, and a rejected request leaves the money collected
+ok 434 - reversal: what cannot be reversed is refused by name, and a rejected request leaves the money collected
+  ---
+  duration_ms: 5202.32775
+  type: 'test'
+  ...
+# Subtest: cancellation: an open claim is cancelled only by an independent approval, never while a receipt or an uncorrected invoice stands on it
+ok 435 - cancellation: an open claim is cancelled only by an independent approval, never while a receipt or an uncorrected invoice stands on it
+  ---
+  duration_ms: 4761.28
+  type: 'test'
+  ...
+# Subtest: cancellation: the database refuses a cancellation nobody approved, a pending claim is returned instead, and a cancelled draft frees its delivery
+ok 436 - cancellation: the database refuses a cancellation nobody approved, a pending claim is returned instead, and a cancelled draft frees its delivery
+  ---
+  duration_ms: 4026.878958
+  type: 'test'
+  ...
+# Subtest: disputes: an open dispute moves the claim to the disputed bucket and pauses follow-up until someone else resolves it with evidence
+ok 437 - disputes: an open dispute moves the claim to the disputed bucket and pauses follow-up until someone else resolves it with evidence
+  ---
+  duration_ms: 4209.501459
+  type: 'test'
+  ...
+# Subtest: promises: a promise to pay has an amount and a date; kept and broken are read from receipts, and a bounced receipt breaks a kept promise
+ok 438 - promises: a promise to pay has an amount and a date; kept and broken are read from receipts, and a bounced receipt breaks a kept promise
+  ---
+  duration_ms: 3824.38075
+  type: 'test'
+  ...
+# Subtest: on account: one transfer for two claims is recorded once, matched by another person and allocated across both by someone other than its recorder
+ok 439 - on account: one transfer for two claims is recorded once, matched by another person and allocated across both by someone other than its recorder
+  ---
+  duration_ms: 4290.262875
+  type: 'test'
+  ...
+# Subtest: on account: a payment that arrives before its claim waits unapplied and is allocated once the claim is approved
+ok 440 - on account: a payment that arrives before its claim waits unapplied and is allocated once the claim is approved
+  ---
+  duration_ms: 3925.136833
+  type: 'test'
+  ...
+# Subtest: on account: a bounced transfer is reversed only after its allocations are undone, by someone who neither recorded nor matched it
+ok 441 - on account: a bounced transfer is reversed only after its allocations are undone, by someone who neither recorded nor matched it
+  ---
+  duration_ms: 3676.960375
+  type: 'test'
+  ...
+# Subtest: ledger: receipt → reversal → re-receipt and on account → allocation → reversal → reallocation keep AR and customer advances tied to their control accounts, every journal balanced
+ok 442 - ledger: receipt → reversal → re-receipt and on account → allocation → reversal → reallocation keep AR and customer advances tied to their control accounts, every journal balanced
+  ---
+  duration_ms: 3531.195709
+  type: 'test'
+  ...
+# Subtest: trace: an invoice walks to its receipt, the bounce and the allocation that settled it, each with who asked, who approved and the posted journal
+ok 443 - trace: an invoice walks to its receipt, the bounce and the allocation that settled it, each with who asked, who approved and the posted journal
+  ---
+  duration_ms: 2973.856083
+  type: 'test'
+  ...
+# Subtest: tenant isolation: another tenant neither sees nor touches these claims, receipts or cash on account
+ok 444 - tenant isolation: another tenant neither sees nor touches these claims, receipts or cash on account
+  ---
+  duration_ms: 2676.798458
+  type: 'test'
+  ...
+# Subtest: idempotency: one key replays one cash-on-account record and one allocation; the same key with another body is refused
+ok 445 - idempotency: one key replays one cash-on-account record and one allocation; the same key with another body is refused
+  ---
+  duration_ms: 2722.665541
+  type: 'test'
+  ...
+# Subtest: race: two processes asking for and approving the same reversal, and two allocating the same cash beyond it, leave one reversal and no over-allocation
+ok 446 - race: two processes asking for and approving the same reversal, and two allocating the same cash beyond it, leave one reversal and no over-allocation
+  ---
+  duration_ms: 10734.448041
+  type: 'test'
+  ...
+# Subtest: project closure checklist stays true: a reversal reopens collection, pending decisions and open disputes are named, cash on account and the new documents are counted
+ok 447 - project closure checklist stays true: a reversal reopens collection, pending decisions and open disputes are named, cash on account and the new documents are counted
+  ---
+  duration_ms: 2556.627125
+  type: 'test'
+  ...
+# Subtest: inbox: each new decision reaches the person who must take it, labelled for what it is
+ok 448 - inbox: each new decision reaches the person who must take it, labelled for what it is
+  ---
+  duration_ms: 2618.523167
+  type: 'test'
+  ...
+# Subtest: screen: the receivables screen offers each settlement form to the right person, and the forms post where the routes listen
+ok 449 - screen: the receivables screen offers each settlement form to the right person, and the forms post where the routes listen
+  ---
+  duration_ms: 2768.446625
+  type: 'test'
+  ...
+# Subtest: routes: the settlement endpoints answer through the real request handler, with session, CSRF, idempotency and written refusals
+ok 450 - routes: the settlement endpoints answer through the real request handler, with session, CSRF, idempotency and written refusals
+  ---
+  duration_ms: 3192.919541
+  type: 'test'
+  ...
+# (node:90655) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: FIN-03: المخرج المقبول ينشئ استحقاقًا واحدًا بلقطة مصدر ولا يتجاوز قيمة البند
+ok 451 - FIN-03: المخرج المقبول ينشئ استحقاقًا واحدًا بلقطة مصدر ولا يتجاوز قيمة البند
+  ---
+  duration_ms: 5256.71925
+  type: 'test'
+  ...
+# Subtest: FIN-03: إعداد واعتماد الاستحقاق مستقلان والنسخة المقدمة ثابتة
+ok 452 - FIN-03: إعداد واعتماد الاستحقاق مستقلان والنسخة المقدمة ثابتة
+  ---
+  duration_ms: 5575.736958
+  type: 'test'
+  ...
+# Subtest: FIN-03: كل قبض يصل إلى استحقاق ويحتاج مطابقة مستقلة ولا يتجاوز الرصيد
+ok 453 - FIN-03: كل قبض يصل إلى استحقاق ويحتاج مطابقة مستقلة ولا يتجاوز الرصيد
+  ---
+  duration_ms: 4970.080625
+  type: 'test'
+  ...
+# Subtest: FIN-04/08: العرض يفصل المتنازع عليه ولا يدعي فاتورة أو دفعًا خارجيًا
+ok 454 - FIN-04/08: العرض يفصل المتنازع عليه ولا يدعي فاتورة أو دفعًا خارجيًا
+  ---
+  duration_ms: 4269.072958
+  type: 'test'
+  ...
+# Subtest: المسودة والمراجعة والرفض لا تظهر كاستحقاق مسدد
+ok 455 - المسودة والمراجعة والرفض لا تظهر كاستحقاق مسدد
+  ---
+  duration_ms: 4031.622875
+  type: 'test'
+  ...
+# Subtest: رفض قبض غير مطابق يحرر المبلغ لمراجعة سجل صحيح دون تغيير الرصيد المؤكد
+ok 456 - رفض قبض غير مطابق يحرر المبلغ لمراجعة سجل صحيح دون تغيير الرصيد المؤكد
+  ---
+  duration_ms: 3944.234125
+  type: 'test'
+  ...
+# Subtest: واجهة المستحقات توفر الرفض للمطابق المستقل وتمنعه عن صاحب القبض
+ok 457 - واجهة المستحقات توفر الرفض للمطابق المستقل وتمنعه عن صاحب القبض
+  ---
+  duration_ms: 2.850458
+  type: 'test'
+  ...
+# (node:90678) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: ledger dates: an expense approved by finance at 00:30 Riyadh on 1 October is dated 1 October in the journal and in the pending list, not 30 September
+ok 458 - ledger dates: an expense approved by finance at 00:30 Riyadh on 1 October is dated 1 October in the journal and in the pending list, not 30 September
+  ---
+  duration_ms: 4045.993166
+  type: 'test'
+  ...
+# Subtest: migration 178: a promise to pay made at 01:00 Riyadh on 1 October cannot be dated 30 September, even written past the code
+ok 459 - migration 178: a promise to pay made at 01:00 Riyadh on 1 October cannot be dated 30 September, even written past the code
+  ---
+  duration_ms: 4022.2575
+  type: 'test'
+  ...
+# (node:90679) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: riyadhToday and riyadhMonth read the Riyadh calendar at the edges: 20:59Z, 21:00Z, 23:59Z, 00:00Z, month end and year end
+ok 460 - riyadhToday and riyadhMonth read the Riyadh calendar at the edges: 20:59Z, 21:00Z, 23:59Z, 00:00Z, month end and year end
+  ---
+  duration_ms: 0.991625
+  type: 'test'
+  ...
+# Subtest: the default clock is Date: riyadhToday() and riyadhMonth() follow a pinned clock on both sides of midnight UTC
+ok 461 - the default clock is Date: riyadhToday() and riyadhMonth() follow a pinned clock on both sides of midnight UTC
+  ---
+  duration_ms: 0.362417
+  type: 'test'
+  ...
+# Subtest: riyadhDateOf passes a bare date through, and returns null for nothing or an unreadable value
+ok 462 - riyadhDateOf passes a bare date through, and returns null for nothing or an unreadable value
+  ---
+  duration_ms: 0.088417
+  type: 'test'
+  ...
+# Subtest: the ranges are half-open UTC instants: a Riyadh day, month and year start at 21:00Z of the day before
+ok 463 - the ranges are half-open UTC instants: a Riyadh day, month and year start at 21:00Z of the day before
+  ---
+  duration_ms: 0.64225
+  type: 'test'
+  ...
+# Subtest: ai: at 02:05 Riyadh on the 1st the month cost and the runs of the day count what happened since Riyadh midnight, not since UTC midnight
+ok 464 - ai: at 02:05 Riyadh on the 1st the month cost and the runs of the day count what happened since Riyadh midnight, not since UTC midnight
+  ---
+  duration_ms: 3878.971208
+  type: 'test'
+  ...
+# Subtest: finance grants: a grant from the 1st to the 31st is live from Riyadh midnight of the 1st and ends at Riyadh midnight after the 31st
+ok 465 - finance grants: a grant from the 1st to the 31st is live from Riyadh midnight of the 1st and ends at Riyadh midnight after the 31st
+  ---
+  duration_ms: 3827.078083
+  type: 'test'
+  ...
+# Subtest: invoices: a tax invoice issued at 02:05 Riyadh on 1 January carries the new year in its number
+ok 466 - invoices: a tax invoice issued at 02:05 Riyadh on 1 January carries the new year in its number
+  ---
+  duration_ms: 3887.7155
+  type: 'test'
+  ...
+# Subtest: career profile: at 02:05 Riyadh on 1 January a qualification obtained this year is accepted
+ok 467 - career profile: at 02:05 Riyadh on 1 January a qualification obtained this year is accepted
+  ---
+  duration_ms: 4003.892042
+  type: 'test'
+  ...
+# Subtest: catalog admin: the board day that seasons are read on is the Riyadh day
+ok 468 - catalog admin: the board day that seasons are read on is the Riyadh day
+  ---
+  duration_ms: 3700.649
+  type: 'test'
+  ...
+# Subtest: payroll payment: approved at 00:30 Riyadh on the 1st, it cannot be recorded as executed on the last day of the previous month
+ok 469 - payroll payment: approved at 00:30 Riyadh on the 1st, it cannot be recorded as executed on the last day of the previous month
+  ---
+  duration_ms: 3468.224875
+  type: 'test'
+  ...
+# Subtest: wage protection: a file exported at 00:30 Riyadh on the 1st cannot be recorded as uploaded on the last day of the previous month
+ok 470 - wage protection: a file exported at 00:30 Riyadh on the 1st cannot be recorded as uploaded on the last day of the previous month
+  ---
+  duration_ms: 3021.323917
+  type: 'test'
+  ...
+# Subtest: expenses: a claim approved by finance at 02:05 Riyadh on the 1st cannot be reimbursed on the last day of the previous month
+ok 471 - expenses: a claim approved by finance at 02:05 Riyadh on the 1st cannot be reimbursed on the last day of the previous month
+  ---
+  duration_ms: 2590.277708
+  type: 'test'
+  ...
+# Subtest: payables: a payment order approved at 02:05 Riyadh on the 1st cannot be recorded as executed on the last day of the previous month
+ok 472 - payables: a payment order approved at 02:05 Riyadh on the 1st cannot be recorded as executed on the last day of the previous month
+  ---
+  duration_ms: 2752.45175
+  type: 'test'
+  ...
+# Subtest: pipeline: an opportunity created at 02:05 Riyadh on the 1st takes no activity dated the last day of the previous month
+ok 473 - pipeline: an opportunity created at 02:05 Riyadh on the 1st takes no activity dated the last day of the previous month
+  ---
+  duration_ms: 2748.840334
+  type: 'test'
+  ...
+# Subtest: talent: results released at 02:05 Riyadh on the 1st can be appealed through the 15th, Riyadh time
+ok 474 - talent: results released at 02:05 Riyadh on the 1st can be appealed through the 15th, Riyadh time
+  ---
+  duration_ms: 2598.567541
+  type: 'test'
+  ...
+# Subtest: request intake: a request made at 00:30 Riyadh fourteen days before today is still inside the duplicate window at 02:05 Riyadh
+ok 475 - request intake: a request made at 00:30 Riyadh fourteen days before today is still inside the duplicate window at 02:05 Riyadh
+  ---
+  duration_ms: 2692.239584
+  type: 'test'
+  ...
+# Subtest: feedback: a one-to-one held at 02:05 Riyadh on the 1st is dated the 1st and held zero days ago
+ok 476 - feedback: a one-to-one held at 02:05 Riyadh on the 1st is dated the 1st and held zero days ago
+  ---
+  duration_ms: 2581.519083
+  type: 'test'
+  ...
+# Subtest: epmo report: a request opened at 00:30 Riyadh on the 1st is not open at the end of the previous month
+ok 477 - epmo report: a request opened at 00:30 Riyadh on the 1st is not open at the end of the previous month
+  ---
+  duration_ms: 2513.090291
+  type: 'test'
+  ...
+# Subtest: deferred revenue: a reversal and a draw recorded at 00:30 Riyadh on the 1st are not in the sheet as of the last day of the previous month
+ok 478 - deferred revenue: a reversal and a draw recorded at 00:30 Riyadh on the 1st are not in the sheet as of the last day of the previous month
+  ---
+  duration_ms: 2446.335916
+  type: 'test'
+  ...
+# Subtest: custom fields: a field published at 02:05 Riyadh on the 1st is added after an opportunity closed on the last day of the previous month
+ok 479 - custom fields: a field published at 02:05 Riyadh on the 1st is added after an opportunity closed on the last day of the previous month
+  ---
+  duration_ms: 2515.648583
+  type: 'test'
+  ...
+# Subtest: guard patterns count the lines that broke on 1 October and not their corrected forms
+ok 480 - guard patterns count the lines that broke on 1 October and not their corrected forms
+  ---
+  duration_ms: 0.996917
+  type: 'test'
+  ...
+# Subtest: guard: no file reads a UTC timestamp as a Riyadh day more often than scripts/riyadh-time-baseline.json allows, and a new file starts at zero
+ok 481 - guard: no file reads a UTC timestamp as a Riyadh day more often than scripts/riyadh-time-baseline.json allows, and a new file starts at zero
+  ---
+  duration_ms: 178.076583
+  type: 'test'
+  ...
+# Subtest: الالتزام واحد: الكامل يبدأ بالمختصر، وترويسة Markdown تحمل الاثنين نفسيهما، وتاريخ القياس واحد
+ok 482 - الالتزام واحد: الكامل يبدأ بالمختصر، وترويسة Markdown تحمل الاثنين نفسيهما، وتاريخ القياس واحد
+  ---
+  duration_ms: 1.705542
+  type: 'test'
+  ...
+# Subtest: الدرجات السبع عشرة والموانع متطابقة بين الملفين، والدرجة من السلّم الصحيح
+ok 483 - الدرجات السبع عشرة والموانع متطابقة بين الملفين، والدرجة من السلّم الصحيح
+  ---
+  duration_ms: 0.765417
+  type: 'test'
+  ...
+# Subtest: المتوسط والرقم الحاكم محسوبان بالقاعدة المكتوبة لا منقولان، ويتفق عليهما الملفان
+ok 484 - المتوسط والرقم الحاكم محسوبان بالقاعدة المكتوبة لا منقولان، ويتفق عليهما الملفان
+  ---
+  duration_ms: 0.3355
+  type: 'test'
+  ...
+# Subtest: خط أساس البوابة والبطاقة يقولان الترحيل والبصمة والأرضية نفسها
+ok 485 - خط أساس البوابة والبطاقة يقولان الترحيل والبصمة والأرضية نفسها
+  ---
+  duration_ms: 0.770208
+  type: 'test'
+  ...
+# (node:90681) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: «الخدمات» بعدسة الإدارة: سطر الحالة يعدّ ما تحته — قاعدة بذرت خدماتها ولم يُسقَط دليلها (حال المعاينة)
+ok 486 - «الخدمات» بعدسة الإدارة: سطر الحالة يعدّ ما تحته — قاعدة بذرت خدماتها ولم يُسقَط دليلها (حال المعاينة)
+  ---
+  duration_ms: 4352.030166
+  type: 'test'
+  ...
+# Subtest: «الخدمات» بعدسة الإدارة: سطر الحالة يعدّ ما تحته — بعد إسقاط الدليل
+ok 487 - «الخدمات» بعدسة الإدارة: سطر الحالة يعدّ ما تحته — بعد إسقاط الدليل
+  ---
+  duration_ms: 4258.367958
+  type: 'test'
+  ...
+# Subtest: «الخدمات»: بلا counts يبقى سطر الحالة عدّ الشجرة (عدسة الحاجة والرحلة كما كانتا)
+ok 488 - «الخدمات»: بلا counts يبقى سطر الحالة عدّ الشجرة (عدسة الحاجة والرحلة كما كانتا)
+  ---
+  duration_ms: 4552.110542
+  type: 'test'
+  ...
+# Subtest: app.mjs يمرّر عدّ العدسة إلى الرسم الأول وإلى إعادة الرسم بعد البحث، ويصفّره مع اللوح
+ok 489 - app.mjs يمرّر عدّ العدسة إلى الرسم الأول وإلى إعادة الرسم بعد البحث، ويصفّره مع اللوح
+  ---
+  duration_ms: 0.944125
+  type: 'test'
+  ...
+# (node:90696) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: integrations: every connection carries a status from the contract vocabulary with its basis, none is active, and the local simulations are named
+ok 490 - integrations: every connection carries a status from the contract vocabulary with its basis, none is active, and the local simulations are named
+  ---
+  duration_ms: 3967.4675
+  type: 'test'
+  ...
+# Subtest: e-invoicing: the board says the official channel is a local simulation, not connected, and a scripted success from a test gateway is still labelled as coming from that gateway
+ok 491 - e-invoicing: the board says the official channel is a local simulation, not connected, and a scripted success from a test gateway is still labelled as coming from that gateway
+  ---
+  duration_ms: 3850.874166
+  type: 'test'
+  ...
+# Subtest: the printable tax invoice carries a visible internal / not-reported watermark, issued or draft
+ok 492 - the printable tax invoice carries a visible internal / not-reported watermark, issued or draft
+  ---
+  duration_ms: 7.978041
+  type: 'test'
+  ...
+# (node:90698) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# {"t":"2026-10-01T07:22:23.624Z","id":"32361e6a","env":"local","m":"GET","p":"/kit.mjs","s":200,"ms":2}
+# {"t":"2026-10-01T07:22:23.640Z","id":"bda8b09b","env":"local","m":"GET","p":"/service-quality-ui.mjs","s":200,"ms":0}
+# {"t":"2026-10-01T07:22:23.641Z","id":"db5fef1a","env":"local","m":"GET","p":"/integrations-ui.mjs","s":200,"ms":0}
+# {"t":"2026-10-01T07:22:23.646Z","id":"e7c6c25d","env":"local","m":"GET","p":"/hr-design.mjs","s":200,"ms":3}
+# {"t":"2026-10-01T07:22:23.648Z","id":"601affb1","env":"local","m":"GET","p":"/brand-logo.mjs","s":200,"ms":0}
+# {"t":"2026-10-01T07:22:23.651Z","id":"8e9936cc","env":"local","m":"GET","p":"/athar.mjs","s":200,"ms":1}
+# {"t":"2026-10-01T07:22:23.652Z","id":"171a58d0","env":"local","m":"GET","p":"/operations.mjs","s":200,"ms":0}
+# {"t":"2026-10-01T07:22:23.653Z","id":"388c9836","env":"local","m":"GET","p":"/request-picker.mjs","s":200,"ms":0}
+# {"t":"2026-10-01T07:22:23.655Z","id":"dfbbd59f","env":"local","m":"GET","p":"/catalog-home-ui.mjs","s":200,"ms":1}
+# {"t":"2026-10-01T07:22:23.658Z","id":"3be716f7","env":"local","m":"GET","p":"/service-page.mjs","s":200,"ms":1}
+# {"t":"2026-10-01T07:22:23.660Z","id":"9729acc8","env":"local","m":"GET","p":"/motion-cards.mjs","s":200,"ms":0}
+# {"t":"2026-10-01T07:22:23.661Z","id":"6221f979","env":"local","m":"GET","p":"/executive-ui.mjs","s":200,"ms":0}
+# {"t":"2026-10-01T07:22:23.662Z","id":"5e322ffe","env":"local","m":"GET","p":"/org-ui.mjs","s":200,"ms":0}
+# {"t":"2026-10-01T07:22:23.662Z","id":"5179d45e","env":"local","m":"GET","p":"/work-ui.mjs","s":200,"ms":0}
+# {"t":"2026-10-01T07:22:23.663Z","id":"7809f52f","env":"local","m":"GET","p":"/deep-links.mjs","s":200,"ms":0}
+# {"t":"2026-10-01T07:22:23.663Z","id":"bb92c4f7","env":"local","m":"GET","p":"/vocabulary.mjs","s":200,"ms":0}
+# {"t":"2026-10-01T07:22:23.664Z","id":"f4b0a307","env":"local","m":"GET","p":"/pwa.mjs","s":200,"ms":1}
+# {"t":"2026-10-01T07:22:23.664Z","id":"fd6212bb","env":"local","m":"GET","p":"/arabic-count.mjs","s":200,"ms":0}
+# {"t":"2026-10-01T07:22:23.665Z","id":"2329d1d8","env":"local","m":"GET","p":"/focus-record.mjs","s":200,"ms":0}
+# {"t":"2026-10-01T07:22:23.667Z","id":"5490db5b","env":"local","m":"GET","p":"/definitions-client.mjs","s":200,"ms":1}
+# {"t":"2026-10-01T07:22:23.668Z","id":"497e86cb","env":"local","m":"GET","p":"/nav-map.mjs","s":200,"ms":0}
+# {"t":"2026-10-01T07:22:23.670Z","id":"b3f72dc7","env":"local","m":"GET","p":"/hubs-ui.mjs","s":200,"ms":1}
+# {"t":"2026-10-01T07:22:23.671Z","id":"d44e14bb","env":"local","m":"GET","p":"/page-editor.mjs","s":200,"ms":0}
+# {"t":"2026-10-01T07:22:23.672Z","id":"6d33d022","env":"local","m":"GET","p":"/service-gates-ui.mjs","s":200,"ms":0}
+# {"t":"2026-10-01T07:22:23.672Z","id":"e0d3ad34","env":"local","m":"GET","p":"/files-ui.mjs","s":200,"ms":0}
+# {"t":"2026-10-01T07:22:23.673Z","id":"4832340d","env":"local","m":"GET","p":"/dates.mjs","s":200,"ms":0}
+# {"t":"2026-10-01T07:22:23.674Z","id":"4747f3ef","env":"local","m":"GET","p":"/leave-count.mjs","s":200,"ms":0}
+# {"t":"2026-10-01T07:22:23.675Z","id":"34bda93d","env":"local","m":"GET","p":"/catalog-search.mjs","s":200,"ms":1}
+# {"t":"2026-10-01T07:22:23.677Z","id":"f99c7801","env":"local","m":"GET","p":"/budgets-ui.mjs","s":200,"ms":0}
+# {"t":"2026-10-01T07:22:23.678Z","id":"dd8543a3","env":"local","m":"GET","p":"/commercial-ui.mjs","s":200,"ms":0}
+# {"t":"2026-10-01T07:22:23.680Z","id":"bb8f0274","env":"local","m":"GET","p":"/procurement-ui.mjs","s":200,"ms":1}
+# {"t":"2026-10-01T07:22:23.681Z","id":"65a4ce8b","env":"local","m":"GET","p":"/leave-ui.mjs","s":200,"ms":1}
+# {"t":"2026-10-01T07:22:23.682Z","id":"54b710f5","env":"local","m":"GET","p":"/delegations-ui.mjs","s":200,"ms":1}
+# {"t":"2026-10-01T07:22:23.683Z","id":"7da8d0df","env":"local","m":"GET","p":"/people-ui.mjs","s":200,"ms":0}
+# {"t":"2026-10-01T07:22:23.684Z","id":"2ac2b877","env":"local","m":"GET","p":"/studio-ui.mjs","s":200,"ms":1}
+# {"t":"2026-10-01T07:22:23.684Z","id":"45b3f6d1","env":"local","m":"GET","p":"/finance-ui.mjs","s":200,"ms":0}
+# {"t":"2026-10-01T07:22:23.685Z","id":"3c07677b","env":"local","m":"GET","p":"/accounts-ui.mjs","s":200,"ms":0}
+# {"t":"2026-10-01T07:22:23.685Z","id":"8d266a8a","env":"local","m":"GET","p":"/receivables-ui.mjs","s":200,"ms":0}
+# {"t":"2026-10-01T07:22:23.687Z","id":"5542b8b8","env":"local","m":"GET","p":"/vendors-ui.mjs","s":200,"ms":0}
+# {"t":"2026-10-01T07:22:23.690Z","id":"ab46e5b4","env":"local","m":"GET","p":"/approvals-ui.mjs","s":200,"ms":1}
+# {"t":"2026-10-01T07:22:23.691Z","id":"e728c83c","env":"local","m":"GET","p":"/invoices-ui.mjs","s":200,"ms":0}
+# {"t":"2026-10-01T07:22:23.693Z","id":"090b9f30","env":"local","m":"GET","p":"/contracts-ui.mjs","s":200,"ms":1}
+# {"t":"2026-10-01T07:22:23.694Z","id":"11124030","env":"local","m":"GET","p":"/attendance-ui.mjs","s":200,"ms":0}
+# {"t":"2026-10-01T07:22:23.695Z","id":"cf4c34e5","env":"local","m":"GET","p":"/payroll-ui.mjs","s":200,"ms":0}
+# {"t":"2026-10-01T07:22:23.696Z","id":"71408d1b","env":"local","m":"GET","p":"/statements-ui.mjs","s":200,"ms":0}
+# {"t":"2026-10-01T07:22:23.698Z","id":"d48e51d3","env":"local","m":"GET","p":"/security-ui.mjs","s":200,"ms":1}
+# {"t":"2026-10-01T07:22:23.699Z","id":"7b06c68d","env":"local","m":"GET","p":"/payables-ui.mjs","s":200,"ms":1}
+# {"t":"2026-10-01T07:22:23.700Z","id":"deb3d0bd","env":"local","m":"GET","p":"/payroll-extras-ui.mjs","s":200,"ms":1}
+# {"t":"2026-10-01T07:22:23.701Z","id":"e2ed7a86","env":"local","m":"GET","p":"/employees-ui.mjs","s":200,"ms":0}
+# {"t":"2026-10-01T07:22:23.702Z","id":"782f55b3","env":"local","m":"GET","p":"/employee-profile-ui.mjs","s":200,"ms":0}
+# {"t":"2026-10-01T07:22:23.702Z","id":"be3b0aa0","env":"local","m":"GET","p":"/talent-ui.mjs","s":200,"ms":0}
+# {"t":"2026-10-01T07:22:23.703Z","id":"5e0fd894","env":"local","m":"GET","p":"/procurement-extras-ui.mjs","s":200,"ms":0}
+# {"t":"2026-10-01T07:22:23.703Z","id":"0fdaaa20","env":"local","m":"GET","p":"/campaigns-ui.mjs","s":200,"ms":0}
+# {"t":"2026-10-01T07:22:23.703Z","id":"c41ed477","env":"local","m":"GET","p":"/ai-ui.mjs","s":200,"ms":0}
+# {"t":"2026-10-01T07:22:23.704Z","id":"5a507907","env":"local","m":"GET","p":"/centres-ui.mjs","s":200,"ms":0}
+# {"t":"2026-10-01T07:22:23.704Z","id":"b0cbe016","env":"local","m":"GET","p":"/inbox-ui.mjs","s":200,"ms":0}
+# {"t":"2026-10-01T07:22:23.706Z","id":"ab9df495","env":"local","m":"GET","p":"/service-cards-ui.mjs","s":200,"ms":1}
+# {"t":"2026-10-01T07:22:23.707Z","id":"7efb85cd","env":"local","m":"GET","p":"/compliance-ui.mjs","s":200,"ms":1}
+# {"t":"2026-10-01T07:22:23.708Z","id":"69f6600d","env":"local","m":"GET","p":"/expenses-ui.mjs","s":200,"ms":1}
+# {"t":"2026-10-01T07:22:23.708Z","id":"8f2fb5f0","env":"local","m":"GET","p":"/assets-ui.mjs","s":200,"ms":0}
+# {"t":"2026-10-01T07:22:23.708Z","id":"6eb63591","env":"local","m":"GET","p":"/agency-ui.mjs","s":200,"ms":0}
+# {"t":"2026-10-01T07:22:23.709Z","id":"a375292f","env":"local","m":"GET","p":"/reports-ui.mjs","s":200,"ms":0}
+# {"t":"2026-10-01T07:22:23.709Z","id":"60712929","env":"local","m":"GET","p":"/bank-reconciliation-ui.mjs","s":200,"ms":0}
+# {"t":"2026-10-01T07:22:23.711Z","id":"95705fb3","env":"local","m":"GET","p":"/billing-recurring-ui.mjs","s":200,"ms":0}
+# {"t":"2026-10-01T07:22:23.711Z","id":"68564680","env":"local","m":"GET","p":"/cash-close-ui.mjs","s":200,"ms":0}
+# {"t":"2026-10-01T07:22:23.712Z","id":"96573f21","env":"local","m":"GET","p":"/contracts-register-ui.mjs","s":200,"ms":0}
+# {"t":"2026-10-01T07:22:23.714Z","id":"105002e9","env":"local","m":"GET","p":"/engagement-ui.mjs","s":200,"ms":0}
+# {"t":"2026-10-01T07:22:23.717Z","id":"149ca63a","env":"local","m":"GET","p":"/feedback-ui.mjs","s":200,"ms":1}
+# {"t":"2026-10-01T07:22:23.718Z","id":"6860cdde","env":"local","m":"GET","p":"/governance-ui.mjs","s":200,"ms":0}
+# {"t":"2026-10-01T07:22:23.719Z","id":"5f9ef7ab","env":"local","m":"GET","p":"/home-ui.mjs","s":200,"ms":0}
+# {"t":"2026-10-01T07:22:23.720Z","id":"f40ecaf8","env":"local","m":"GET","p":"/expiry-ui.mjs","s":200,"ms":0}
+# {"t":"2026-10-01T07:22:23.722Z","id":"c9d071ff","env":"local","m":"GET","p":"/influencers-ui.mjs","s":200,"ms":0}
+# {"t":"2026-10-01T07:22:23.724Z","id":"a6156d30","env":"local","m":"GET","p":"/leave-benefits-ui.mjs","s":200,"ms":0}
+# {"t":"2026-10-01T07:22:23.729Z","id":"01e6e190","env":"local","m":"GET","p":"/benefits-portal-ui.mjs","s":200,"ms":1}
+# {"t":"2026-10-01T07:22:23.729Z","id":"94dcd7de","env":"local","m":"GET","p":"/letters-ui.mjs","s":200,"ms":0}
+# {"t":"2026-10-01T07:22:23.730Z","id":"f667d392","env":"local","m":"GET","p":"/pr-ui.mjs","s":200,"ms":0}
+# {"t":"2026-10-01T07:22:23.730Z","id":"fdd5075e","env":"local","m":"GET","p":"/equipment-ui.mjs","s":200,"ms":0}
+# {"t":"2026-10-01T07:22:23.730Z","id":"2bd6cbc6","env":"local","m":"GET","p":"/privacy-ui.mjs","s":200,"ms":0}
+# {"t":"2026-10-01T07:22:23.731Z","id":"d7723a6b","env":"local","m":"GET","p":"/production-ui.mjs","s":200,"ms":0}
+# {"t":"2026-10-01T07:22:23.733Z","id":"853e67e2","env":"local","m":"GET","p":"/profitability-ui.mjs","s":200,"ms":1}
+# {"t":"2026-10-01T07:22:23.735Z","id":"290e835d","env":"local","m":"GET","p":"/resourcing-ui.mjs","s":200,"ms":1}
+# {"t":"2026-10-01T07:22:23.743Z","id":"77e0525d","env":"local","m":"GET","p":"/review-rounds-ui.mjs","s":200,"ms":1}
+# {"t":"2026-10-01T07:22:23.745Z","id":"f67c8c0a","env":"local","m":"GET","p":"/search-ui.mjs","s":200,"ms":1}
+# {"t":"2026-10-01T07:22:23.746Z","id":"2476652a","env":"local","m":"GET","p":"/tax-returns-ui.mjs","s":200,"ms":0}
+# {"t":"2026-10-01T07:22:23.747Z","id":"2190b1a8","env":"local","m":"GET","p":"/wage-protection-ui.mjs","s":200,"ms":0}
+# {"t":"2026-10-01T07:22:23.748Z","id":"0ffe99df","env":"local","m":"GET","p":"/lifecycle-ui.mjs","s":200,"ms":1}
+# {"t":"2026-10-01T07:22:23.748Z","id":"3262c15e","env":"local","m":"GET","p":"/einvoice-ui.mjs","s":200,"ms":0}
+# {"t":"2026-10-01T07:22:23.748Z","id":"2701a563","env":"local","m":"GET","p":"/intake-settings-ui.mjs","s":200,"ms":0}
+# {"t":"2026-10-01T07:22:23.749Z","id":"11f858db","env":"local","m":"GET","p":"/project-intake-ui.mjs","s":200,"ms":1}
+# {"t":"2026-10-01T07:22:23.749Z","id":"a25785a5","env":"local","m":"GET","p":"/request-transparency-ui.mjs","s":200,"ms":0}
+# {"t":"2026-10-01T07:22:23.749Z","id":"21e8dad2","env":"local","m":"GET","p":"/knowledge-access-ui.mjs","s":200,"ms":0}
+# {"t":"2026-10-01T07:22:23.750Z","id":"51eb405d","env":"local","m":"GET","p":"/pipeline-estimates-ui.mjs","s":200,"ms":1}
+# {"t":"2026-10-01T07:22:23.750Z","id":"f5e179d4","env":"local","m":"GET","p":"/pricing-ui.mjs","s":200,"ms":0}
+# {"t":"2026-10-01T07:22:23.750Z","id":"f0b9b218","env":"local","m":"GET","p":"/platform-ops-ui.mjs","s":200,"ms":0}
+# {"t":"2026-10-01T07:22:23.750Z","id":"a2f5e72a","env":"local","m":"GET","p":"/catalog-quality-ui.mjs","s":200,"ms":0}
+# {"t":"2026-10-01T07:22:23.751Z","id":"4df96b67","env":"local","m":"GET","p":"/hr-cases-comp-ui.mjs","s":200,"ms":0}
+# {"t":"2026-10-01T07:22:23.752Z","id":"99ad6ea2","env":"local","m":"GET","p":"/media-spend-ui.mjs","s":200,"ms":0}
+# {"t":"2026-10-01T07:22:23.753Z","id":"917e6a11","env":"local","m":"GET","p":"/approval-settings-ui.mjs","s":200,"ms":0}
+# {"t":"2026-10-01T07:22:23.755Z","id":"0102db7a","env":"local","m":"GET","p":"/appearance-ui.mjs","s":200,"ms":1}
+# {"t":"2026-10-01T07:22:23.756Z","id":"922eef44","env":"local","m":"GET","p":"/discipline-ui.mjs","s":200,"ms":0}
+# {"t":"2026-10-01T07:22:23.757Z","id":"891d4e1d","env":"local","m":"GET","p":"/notifications-ui.mjs","s":200,"ms":0}
+# {"t":"2026-10-01T07:22:23.759Z","id":"a995a3cf","env":"local","m":"GET","p":"/my-requests-ui.mjs","s":200,"ms":1}
+# {"t":"2026-10-01T07:22:23.760Z","id":"d84e5c0b","env":"local","m":"GET","p":"/profile-ui.mjs","s":200,"ms":0}
+# {"t":"2026-10-01T07:22:23.761Z","id":"a937ae64","env":"local","m":"GET","p":"/payroll-rules-ui.mjs","s":200,"ms":0}
+# {"t":"2026-10-01T07:22:23.762Z","id":"d8e1350a","env":"local","m":"GET","p":"/payroll-insurance-ui.mjs","s":200,"ms":0}
+# {"t":"2026-10-01T07:22:23.762Z","id":"30bff69c","env":"local","m":"GET","p":"/hr-policies-ui.mjs","s":200,"ms":0}
+# {"t":"2026-10-01T07:22:23.763Z","id":"24affc33","env":"local","m":"GET","p":"/forms-ui.mjs","s":200,"ms":1}
+# {"t":"2026-10-01T07:22:23.763Z","id":"9bbaf0fe","env":"local","m":"GET","p":"/finance-grants-ui.mjs","s":200,"ms":0}
+# {"t":"2026-10-01T07:22:23.763Z","id":"7f0c8659","env":"local","m":"GET","p":"/secondment-benefits-ui.mjs","s":200,"ms":0}
+# {"t":"2026-10-01T07:22:23.764Z","id":"e12e1146","env":"local","m":"GET","p":"/policy-library-ui.mjs","s":200,"ms":1}
+# {"t":"2026-10-01T07:22:23.764Z","id":"35645983","env":"local","m":"GET","p":"/policy-assistant-ui.mjs","s":200,"ms":0}
+# {"t":"2026-10-01T07:22:23.764Z","id":"60aa29be","env":"local","m":"GET","p":"/epmo-ui.mjs","s":200,"ms":0}
+# {"t":"2026-10-01T07:22:23.764Z","id":"3ead7c86","env":"local","m":"GET","p":"/definitions-ui.mjs","s":200,"ms":0}
+# {"t":"2026-10-01T07:22:23.765Z","id":"2c6eb8b8","env":"local","m":"GET","p":"/permissions-matrix-ui.mjs","s":200,"ms":0}
+# {"t":"2026-10-01T07:22:23.765Z","id":"9387442e","env":"local","m":"GET","p":"/project-participation-ui.mjs","s":200,"ms":0}
+# {"t":"2026-10-01T07:22:23.765Z","id":"d1eb2c07","env":"local","m":"GET","p":"/project-spine-ui.mjs","s":200,"ms":0}
+# {"t":"2026-10-01T07:22:23.766Z","id":"947a7892","env":"local","m":"GET","p":"/finance-exceptions-ui.mjs","s":200,"ms":0}
+# {"t":"2026-10-01T07:22:23.767Z","id":"7a546ca3","env":"local","m":"GET","p":"/options-ui.mjs","s":200,"ms":0}
+# {"t":"2026-10-01T07:22:23.768Z","id":"54fec90c","env":"local","m":"GET","p":"/department-escalation-ui.mjs","s":200,"ms":0}
+# {"t":"2026-10-01T07:22:23.769Z","id":"6da80a15","env":"local","m":"GET","p":"/module-services.mjs","s":200,"ms":0}
+# {"t":"2026-10-01T07:22:23.771Z","id":"8670a25b","env":"local","m":"GET","p":"/depth-scene.mjs","s":200,"ms":1}
+# {"t":"2026-10-01T07:22:23.773Z","id":"11c8606d","env":"local","m":"GET","p":"/signature.css","s":200,"ms":1}
+# {"t":"2026-10-01T07:22:23.773Z","id":"386a8efa","env":"local","m":"GET","p":"/style.css","s":200,"ms":0}
+# {"t":"2026-10-01T07:22:23.774Z","id":"dc3894a9","env":"local","m":"GET","p":"/journey.css","s":200,"ms":0}
+# {"t":"2026-10-01T07:22:23.775Z","id":"76a77559","env":"local","m":"GET","p":"/athar.css","s":200,"ms":1}
+# {"t":"2026-10-01T07:22:23.775Z","id":"c19cebf7","env":"local","m":"GET","p":"/hr-design.css","s":200,"ms":0}
+# {"t":"2026-10-01T07:22:23.776Z","id":"7055e0d7","env":"local","m":"GET","p":"/depth.css","s":200,"ms":0}
+# {"t":"2026-10-01T07:22:23.777Z","id":"b954ee8f","env":"local","m":"GET","p":"/classic.css","s":200,"ms":1}
+# {"t":"2026-10-01T07:22:23.778Z","id":"d8f11edb","env":"local","m":"GET","p":"/riwaq.css","s":200,"ms":1}
+# {"t":"2026-10-01T07:22:23.778Z","id":"1f988b02","env":"local","m":"GET","p":"/yawm.css","s":200,"ms":0}
+# {"t":"2026-10-01T07:22:23.779Z","id":"3f3e08b5","env":"local","m":"GET","p":"/markaz.css","s":200,"ms":0}
+# {"t":"2026-10-01T07:22:23.779Z","id":"c2837bed","env":"local","m":"GET","p":"/studio.css","s":200,"ms":0}
+# {"t":"2026-10-01T07:22:23.780Z","id":"196eb2fa","env":"local","m":"GET","p":"/page-editor.css","s":200,"ms":0}
+# {"t":"2026-10-01T07:22:23.780Z","id":"94477b62","env":"local","m":"GET","p":"/journey.mjs","s":200,"ms":0}
+# {"t":"2026-10-01T07:22:23.781Z","id":"9b3f36d8","env":"local","m":"GET","p":"/app.mjs","s":200,"ms":0}
+# {"t":"2026-10-01T07:22:23.781Z","id":"7d130a42","env":"local","m":"GET","p":"/signature.mjs","s":200,"ms":0}
+# {"t":"2026-10-01T07:22:23.783Z","id":"2abe70b4","env":"local","m":"GET","p":"/interact.mjs","s":200,"ms":1}
+# Subtest: every module and stylesheet the interface imports is actually served
+ok 493 - every module and stylesheet the interface imports is actually served
+  ---
+  duration_ms: 4083.748167
+  type: 'test'
+  ...
+# (node:90700) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: synthetic month: September 2026 runs end to end through the real paths — sales, procurement, advances, expenses, bank import with grouped and split matches and a posted fee, a zero-difference reconciliation, a green close, a controlled reopen, a dated adjustment and a re-close — and proves itself
+ok 494 - synthetic month: September 2026 runs end to end through the real paths — sales, procurement, advances, expenses, bank import with grouped and split matches and a posted fee, a zero-difference reconciliation, a green close, a controlled reopen, a dated adjustment and a re-close — and proves itself
+  ---
+  duration_ms: 4765.488667
+  type: 'test'
+  ...
+# (node:90701) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: trace: a record inside a grouped match shows the bank line that carried it, and a record settled by two lines shows both
+ok 495 - trace: a record inside a grouped match shows the bank line that carried it, and a record settled by two lines shows both
+  ---
+  duration_ms: 4097.719625
+  type: 'test'
+  ...
+# Subtest: trace: a classified bank line is its own bank step, and a manual journal on the bank account shows the line it was matched to
+ok 496 - trace: a classified bank line is its own bank step, and a manual journal on the bank account shows the line it was matched to
+  ---
+  duration_ms: 3605.973833
+  type: 'test'
+  ...
+# Subtest: trace: another tenant traces nothing — neither the grouped record nor the classified line
+ok 497 - trace: another tenant traces nothing — neither the grouped record nor the classified line
+  ---
+  duration_ms: 3362.912917
+  type: 'test'
+  ...
+# Subtest: trace: an invoice shows every statement line that carried its cash — both lines of a split receipt, and the line of the on-account receipt its allocation drew on
+ok 498 - trace: an invoice shows every statement line that carried its cash — both lines of a split receipt, and the line of the on-account receipt its allocation drew on
+  ---
+  duration_ms: 3608.043458
+  type: 'test'
+  ...
+# Subtest: TRACE: all 220 original rows and acceptance criteria match the workbook and evidence
+ok 499 - TRACE: all 220 original rows and acceptance criteria match the workbook and evidence
+  ---
+  duration_ms: 2885.384666
+  type: 'test'
+  ...
+# Subtest: TRACE: changing acceptance or declaring partial work complete is rejected
+ok 500 - TRACE: changing acceptance or declaring partial work complete is rejected
+  ---
+  duration_ms: 19.05625
+  type: 'test'
+  ...
+# (node:90705) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: golden: every operational screen renders to the same HTML for four seeded personas
+ok 501 - golden: every operational screen renders to the same HTML for four seeded personas
+  ---
+  duration_ms: 8330.769666
+  type: 'test'
+  ...
+# Subtest: golden: moving the SQL wall clock a day forward moves no screen hash
+ok 502 - golden: moving the SQL wall clock a day forward moves no screen hash
+  ---
+  duration_ms: 11072.573708
+  type: 'test'
+  ...
+# Subtest: golden: the normaliser hides random identifiers but stays sensitive to order, count and text
+ok 503 - golden: the normaliser hides random identifiers but stays sensitive to order, count and text
+  ---
+  duration_ms: 0.381625
+  type: 'test'
+  ...
+# Subtest: golden: the page-editor trigger is outside every seeded persona’s screen, and appears only for a holder of the configure capability
+ok 504 - golden: the page-editor trigger is outside every seeded persona’s screen, and appears only for a holder of the configure capability
+  ---
+  duration_ms: 3722.191958
+  type: 'test'
+  ...
+# (node:90740) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: the wage file format is data the establishment account dictates: the recorder never confirms it, a confirmed definition is replaced by a new revision, and no column lives in the code
+ok 505 - the wage file format is data the establishment account dictates: the recorder never confirms it, a confirmed definition is replaced by a new revision, and no column lives in the code
+  ---
+  duration_ms: 3768.594583
+  type: 'test'
+  ...
+# Subtest: pre-export checks catch before the upload what would be rejected after it, and tell apart what blocks the file from what only warns
+ok 506 - pre-export checks catch before the upload what would be rejected after it, and tell apart what blocks the file from what only warns
+  ---
+  duration_ms: 3564.966667
+  type: 'test'
+  ...
+# Subtest: the manual upload is an admission a second person records once, because the platform neither uploads the file nor reads the authority reply
+ok 507 - the manual upload is an admission a second person records once, because the platform neither uploads the file nor reads the authority reply
+  ---
+  duration_ms: 3315.530625
+  type: 'test'
+  ...
+# Subtest: the file is assembled from the definition alone: fixed widths, the declared delimiter, and cells a spreadsheet cannot read as formulas
+ok 508 - the file is assembled from the definition alone: fixed widths, the declared delimiter, and cells a spreadsheet cannot read as formulas
+  ---
+  duration_ms: 0.351125
+  type: 'test'
+  ...
+# (node:90743) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: EXECUTIVE: the board reports aggregates only, and stays closed to accounts without a leadership role
+ok 509 - EXECUTIVE: the board reports aggregates only, and stays closed to accounts without a leadership role
+  ---
+  duration_ms: 3711.942
+  type: 'test'
+  ...
+# Subtest: ORG: the chart shows each unit’s approver, escalation and size
+ok 510 - ORG: the chart shows each unit’s approver, escalation and size
+  ---
+  duration_ms: 3448.510333
+  type: 'test'
+  ...
+# Subtest: WORK: personal tasks belong to one person only, and the board gathers every kind of work
+ok 511 - WORK: personal tasks belong to one person only, and the board gathers every kind of work
+  ---
+  duration_ms: 3737.428333
+  type: 'test'
+  ...
+1..511
+# tests 511
+# suites 0
+# pass 511
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 326575.063833
